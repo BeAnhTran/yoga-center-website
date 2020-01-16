@@ -18,6 +18,10 @@ from django.urls import path, include
 from django.conf.urls import url
 
 urlpatterns = [
+    # index page
+    path('', include('core.urls')),
+    # admin site
     path('admin/', admin.site.urls),
+    # accounts
     url(r'^accounts/', include('allauth.urls')),
 ]
