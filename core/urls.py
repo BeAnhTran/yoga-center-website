@@ -2,6 +2,8 @@ from django.urls import include, path
 
 from .views import core, trainees, trainers
 
+app_name = 'core'
+
 urlpatterns = [
     path('', core.home, name='home'),
     path('accounts/signup/', core.SignUpView.as_view(), name='account_signup'),

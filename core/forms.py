@@ -34,7 +34,6 @@ class TraineeSignupForm(SignupForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            'date',
             Row(
                 Column('username', css_class='form-group col-md-6 mb-0'),
                 Column('email', css_class='form-group col-md-6 mb-0'),

@@ -1,0 +1,36 @@
+.btn-student {
+    color: #fff;
+    background-color: #fb3958;
+    border-color: #fb3958;
+  }
+  
+  .btn-student:hover,
+  .btn-student:active {
+    color: #fff;
+    background-color: #e60a2f;
+    border-color: #e60a2f;
+  }
+  
+  .btn-teacher {
+    color: #fff;
+    background-color: #ffc838;
+    border-color: #ffc838;
+  }
+  
+  .btn-teacher:hover,
+  .btn-teacher:active {
+    color: #fff;
+    background-color: #e7a807;
+    border-color: #e7a807;
+  }
+
+  .img-logo-sign-up{
+      max-width: 325px;
+  }
+
+  .title-type-signup{
+	padding-bottom: 15px;
+    font-family: 'Clicker Script';
+    border-bottom: 1.5px solid #e60a2f;
+    font-weight: 700;
+  }

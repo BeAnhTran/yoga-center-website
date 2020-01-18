@@ -1,8 +1,26 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block specified_css %}
+<link rel="stylesheet" href="{% static 'css/core/sign_up.css'%}">
+{% endblock %}
 {% block content %}
-  <h2>Sign up for a free account</h2>
-  <p class="lead">Select below the type of account you want to create</p>
-  <a href="{% url 'trainee_signup' %}" class="btn btn-student btn-lg" role="button">I'm a trainee</a>
-  <a href="{% url 'trainer_signup' %}" class="btn btn-teacher btn-lg" role="button">I'm a trainer</a>
+<div class="container card mt-5">
+  <div class="row justify-content-center">
+    <div class="card-body">
+      <div class="row text-center">
+        <div class="col-md-6">
+          <img src="{% static 'imgs/logo-2.png'%}" class="img-fluid img-logo-sign-up" alt="logo">
+        </div>
+        <div class="col-md-6">
+          <h2 class="mb-2">
+            Sign up for a free account
+          </h2>
+          <p class="lead">Select below the type of account you want to create</p>
+          <a href="{% url 'core:trainee_signup' %}" class="btn btn-student btn-lg" role="button">I'm a trainee</a>
+          <a href="{% url 'core:trainer_signup' %}" class="btn btn-teacher btn-lg" role="button">I'm a trainer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

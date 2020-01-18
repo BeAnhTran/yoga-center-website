@@ -336,7 +336,6 @@ ol {
 ---------------------*/
 
 .header-section {
-	position: absolute;
 	width: 100%;
 	top: 0;
 	left: 0;
@@ -417,12 +416,13 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .header-bottom {
-	padding: 25px 80px 0;
+	padding: 20px 80px 20px;
+	background: linear-gradient(145deg, #125688 0%, #343a40 100%);
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
 	.header-bottom {
-		padding: 15px 30px 0;
+		padding: 15px 30px 15px;
 	}
 }
 
@@ -593,7 +593,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	display: none;
 	position: absolute;
 	width: 100%;
-	top: 13px;
+	top: 40px;
 	background: transparent;
 	z-index: 99;
 }
@@ -618,7 +618,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .slicknav_btn {
 	position: relative;
-	top: -15px;
+	top: -35px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2609,6 +2609,10 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	padding-top: 70px;
 }
 
+/* .footer-section .container{
+	border-top: 1px solid #e6e6e6;
+} */
+
 .footer-widget {
 	margin-bottom: 30px;
 }
@@ -4332,4 +4336,9 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	padding-top: 5px;
 	font-weight: 700;
 	font-family: 'Clicker Script', cursive;
+}
+
+.asteriskField{
+	color: red;
+	font-weight: 700;
 }
