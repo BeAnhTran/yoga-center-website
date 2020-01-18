@@ -20,6 +20,7 @@ from django.conf.urls import url
 urlpatterns = [
     # index page
     path('', include('core.urls')),
+    path('dashboard/', include('dashboard.urls')),
     # admin site
     path('admin/', admin.site.urls),
     # accounts

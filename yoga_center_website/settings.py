@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'languages',
     'crispy_forms',
     'core',
+    'dashboard',
 ]
 
 MIDDLEWARE = [

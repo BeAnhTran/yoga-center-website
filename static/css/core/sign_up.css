@@ -34,3 +34,10 @@
     border-bottom: 1.5px solid #e60a2f;
     font-weight: 700;
   }
+
+  .sign-up-choose {
+    background: linear-gradient(90deg, #12568800 0%, #125688 100%);
+    padding-top: 3rem;
+    justify-content: center;
+    border-radius: 0.5rem;
+}

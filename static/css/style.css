@@ -416,13 +416,13 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .header-bottom {
-	padding: 20px 80px 20px;
+	padding: 10px 80px 10px;
 	background: linear-gradient(145deg, #125688 0%, #343a40 100%);
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
 	.header-bottom {
-		padding: 15px 30px 15px;
+		padding: 10px 30px 10px;
 	}
 }
 
