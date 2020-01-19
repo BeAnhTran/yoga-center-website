@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+
 <header class="header-section">
     <div class="header-top">
         <div class="row m-0">
@@ -15,10 +17,19 @@
             <div class="col-md-6 text-left text-md-right p-0">
                 <div class="header-info">
                     <i class="material-icons">language</i>
-                    <select id="language" class="language-select">
-                        <option data-display="EN" value="0">EN</option>
-                        <option data-display="VI" value="1">VI</option>
-                    </select>
+                    <form id="form-translations" action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                        <select
+                        id="language" name="language" class="language-select"> {% get_current_language as LANGUAGE_CODE %} {% get_available_languages as LANGUAGES %} {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                        selected{% endif %}> {{ language.code }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <input class="d-none" type="submit" value="Go"/>
+                    </form>
                 </div>
                 <div class="header-info">
                     <a class="btn btn-sm btn-default header-info-link" href="{% url 'account_login' %}">Login</a>
@@ -43,7 +54,7 @@
         </div>
         <div class="container">
             <ul class="main-menu">
-                <li><a href="{% url 'core:home' %}" class="active">Home</a></li>
+                <li><a href="{% url 'core:home' %}" class="active">{% trans 'Home' %}</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="classes.html">Classes</a>
                     <ul class="sub-menu">
