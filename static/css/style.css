@@ -1,13 +1,9 @@
 /* =================================
 ------------------------------------
-  Ahana | Yoga HTML Template
+  Lotus Yoga
   Version: 1.0
  ------------------------------------
  ====================================*/
-
-/*----------------------------------------*/
-/* Template default CSS
-/*----------------------------------------*/
 
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i|Playfair+Display:400,400i,700,700i&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
@@ -373,8 +369,8 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	display: -webkit-inline-box;
 	display: -ms-inline-flexbox;
 	display: inline-flex;
-	margin-right: 30px;
-	padding: 14px 0;
+	margin-right: 15px;
+	padding: 5px 0;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -411,13 +407,13 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .site-logo:hover{
-    font-size: 35px;
+    font-size: 28px;
     color: whitesmoke;
 }
 
 .header-bottom {
-	padding: 10px 80px 10px;
-	background: linear-gradient(145deg, #125688 0%, #343a40 100%);
+	padding: 5px 80px 5px;
+	background: linear-gradient(145deg, #dc354596 0%, #343a40 100%);
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
@@ -503,7 +499,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .main-menu li>a {
 	display: block;
 	padding-bottom: 5px;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
 	text-transform: uppercase;
 	color: #fff;
@@ -618,14 +614,14 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .slicknav_btn {
 	position: relative;
-	top: -35px;
+	top: -45px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.slicknav_btn {
 		position: relative;
-		top: 0;
-		right: 102px;
+		top: -15px;
+		right: 0;
 	}
 }
 
@@ -4341,4 +4337,16 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .asteriskField{
 	color: red;
 	font-weight: 700;
+}
+
+.img-profile{
+	max-width: 25px;
+}
+
+.dropdown.no-arrow .dropdown-toggle::after {
+	display: none;
+}
+
+#user_infoDropdown{
+	color: #212529;
 }

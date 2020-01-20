@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,8 +67,12 @@
   </div>
   <!-- Search model end -->
 
+  <!-- Logout Modal-->
+  {% include 'dashboard/logout_model.html' %}
+
   <!--====== Javascripts & Jquery ======-->
   <script src="{% static 'js/vendor/jquery.min.js'%}"></script>
+  <script src="{% static 'js/popper.min.js'%}"></script>
   <script src="{% static 'js/vendor/bootstrap/bootstrap.min.js'%}"></script>
   <script src="{% static 'js/jquery.slicknav.min.js'%}"></script>
   <script src="{% static 'js/owl.carousel.min.js'%}"></script>
