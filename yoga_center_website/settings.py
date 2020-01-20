@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'languages',
     'crispy_forms',
     'core',
-    'dashboard',
     'courses',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -135,6 +135,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+STATIC_ROOT = []
 
 SITE_ID = 1
 

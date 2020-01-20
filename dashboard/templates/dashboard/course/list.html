@@ -1,0 +1,65 @@
+{% extends 'dashboard/layout/base.html' %}
+{% load static %}
+{% block specified_css %}
+<link href="{% static 'css/dashboard/course/list.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between">
+    <h1 class="h3 mb-0 text-gray-800">Courses</h1>
+    <a href="{% url 'dashboard:new_course'%}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-plus-square fa-sm text-white-50"></i> Create New</a>
+</div>
+<hr>
+<!-- Content Row -->
+{% if not courses %}
+<p class="text-danger">No courses yet.</p>
+{% else %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Description</th>
+                        <th>Type</th class="col-2">
+                        <th>Action</th class="col-2">
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{ course.id }}</td>
+                        <td>{{ course.name|title }}</td>
+                        <td>
+                            {% if course.image %}
+                            <img class="img img-fluid img-thumbnail course-img" src="{{ course.image.url }}"
+                                alt="{{ course.name }}">
+                            {% else %}
+                            <img class="img img-fluid img-thumbnail course-img"
+                                src="{% static 'imgs/course/default_course.jpg'%}" alt="{{ course.name }}">
+                            {% endif %}
+                        </td>
+                        <td>{{ course.description }}</td>
+                        <td>
+                            {{ course.course_type }}
+                        </td>
+                        <td><i class="fa fa-close"></i></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
