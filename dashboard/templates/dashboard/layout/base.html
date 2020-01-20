@@ -74,11 +74,7 @@
 
     <script src="{% static 'js/dashboard/admin.js' %}"></script>
 
-    <!-- Page level plugins -->
-    <script src="{% static 'js/chart.js/Chart.min.js' %}"></script>
-    <!-- Page level custom scripts -->
-    <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
-    <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+    {% block specified_js %} {% endblock %}
 </body>
 
 </html>

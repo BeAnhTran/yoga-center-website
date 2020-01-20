@@ -47,7 +47,13 @@
                         <td>
                             {{ course.course_type }}
                         </td>
-                        <td><i class="fa fa-close"></i></td>
+                        <td>
+                            <a href="{% url 'dashboard:update_course' course.slug %}"><i class="fas fa-edit"></i></a>
+                            <a href="javascript:;" class="delete-course"><i class="fas fa-trash"></i></a>
+                            <form class="d-none" action="{% url 'dashboard:delete_course' course.id %}" method="post">{% csrf_token %}
+                                <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -61,5 +67,14 @@
 </div>
 
 {% endif %}
+
+{% endblock %}
+
+{% block specified_js %}
+<script type="text/javascript">
+    $('.delete-course').click(function(){
+        $(this).siblings('form').children('input[type=submit]').click();
+    });
+</script>
 
 {% endblock %}
