@@ -34,3 +34,24 @@ class CourseForm(forms.ModelForm):
             raise ValidationError('A course with this name already exists.')
 
         return name
+
+
+class CourseEditForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update(
+            {'autofocus': 'autofocus', 'placeholder': 'Name'})
+        self.fields['description'].widget.attrs.update(
+            {'placeholder': 'Description'})
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'name',
+            'course_type',
+            'description',
+            'image',
+            Submit('submit', 'Save', css_class='btn btn-success')
+        )
+
+    class Meta:
+        model = Course
+        exclude = ['slug', 'created_at', 'updated_at']

@@ -2,11 +2,11 @@ from functools import wraps
 from django.shortcuts import render, redirect
 
 
-def trainee_required(function):
+def staff_required(function):
     @wraps(function)
     def wrap(request, *args, **kwargs):
 
-        if request.user.is_active and request.user.is_trainee:
+        if request.user.is_active and request.user.is_staff:
             pass
         else:
             return redirect('core:error_401')
@@ -16,11 +16,11 @@ def trainee_required(function):
     return wrap
 
 
-def trainer_required(function):
+def admin_required(function):
     @wraps(function)
     def wrap(request, *args, **kwargs):
 
-        if request.user.is_active and request.user.is_trainer:
+        if request.user.is_active and request.user.is_staff and request.user.is_superuser:
             pass
         else:
             return redirect('core:error_401')
