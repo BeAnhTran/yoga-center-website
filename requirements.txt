@@ -9,6 +9,7 @@ defusedxml==0.6.0
 Django==3.0.2
 django-allauth==0.41.0
 django-countries==5.5
+django-crispy-forms==1.8.1
 django-language-field==0.0.3
 idna==2.8
 isort==4.3.21
@@ -18,6 +19,7 @@ oauthlib==3.1.0
 Pillow==7.0.0
 pycodestyle==2.5.0
 pylint==2.4.4
+python-dotenv==0.10.5
 python3-openid==3.1.0
 pytz==2019.3
 requests==2.22.0
