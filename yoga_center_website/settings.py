@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'core',
     'courses',
+    'classes',
     'dashboard',
 ]
 
