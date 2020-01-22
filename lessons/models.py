@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from classes.models import YogaClass
+from rooms.models import Room
 
 ACTIVE_STATE = 0
 INACTIVE_STATE = 1
@@ -12,6 +13,8 @@ STATE_CHOICES = (
 
 
 class Lesson(models.Model):
+    room = models.ForeignKey(
+        Room, on_delete=models.PROTECT, related_name='rooms')
     yogaclass = models.ForeignKey(
         YogaClass, on_delete=models.CASCADE, related_name='classes')
     state = models.IntegerField(choices=STATE_CHOICES,

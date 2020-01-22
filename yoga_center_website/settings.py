@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'courses',
     'classes',
     'lessons',
+    'rooms',
     'dashboard',
 ]
 
