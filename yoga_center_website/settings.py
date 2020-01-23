@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django_countries',
     'languages',
     'crispy_forms',
-    'core',
+    'core.apps.CoreConfig',
     'courses',
     'classes',
     'lessons',

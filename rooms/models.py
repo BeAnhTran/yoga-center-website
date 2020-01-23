@@ -19,3 +19,6 @@ class Room(models.Model):
                                 default=ACTIVE_STATE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
