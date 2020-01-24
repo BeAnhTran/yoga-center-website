@@ -1,0 +1,72 @@
+{% extends 'dashboard/layout/base.html' %}
+{% load static %}
+{% block specified_css %}
+<link href="{% static 'fullcalendar-4.3.1/packages/core/main.css' %}" rel='stylesheet' />
+<link href="{% static 'fullcalendar-4.3.1/packages/daygrid/main.css'%}" rel='stylesheet' />
+<link href="{% static 'fullcalendar-4.3.1/packages/timegrid/main.css' %}" rel='stylesheet' />
+<link href="{% static 'fullcalendar-4.3.1/packages/list/main.css' %}" rel='stylesheet' />
+<script src="{% static 'fullcalendar-4.3.1/packages/core/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/interaction/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/daygrid/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/timegrid/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/list/main.js' %}"></script>
+{% endblock %}
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between">
+    <p class="text-gray-800">{{ room.name }}</p>
+</div>
+<div class="container-fluid">
+    <div id='calendar'></div>
+</div>
+{% endblock %}
+
+{% block specified_js %}
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            },
+            defaultDate: Date.now(),
+            navLinks: true, // can click day/week names to navigate views
+            // businessHours: true, // display business hours
+            editable: true,
+            events: function (fetchInfo, successCallback, failureCallback) {
+                $.ajax({
+                    url: "{% url 'dashboard:room_lessons' room.id %}",
+                    success: function (data) {
+                        console.log(data);
+                        var events = [];
+                        for (var i = 0; i < data.length; i++) {
+                            var _d = data[i]['fields']['day'];
+                            var _st = data[i]['fields']['start_time'];
+                            var _et = data[i]['fields']['end_time'];
+                            var _start_time = _d + ' ' + _st;
+                            var _end_time = _d + ' ' + _et;
+                            var start_time = new Date(_start_time);
+                            var end_time = new Date(_end_time);
+
+                            events.push({
+                                // title
+                                start: start_time,
+                                end: end_time,
+                                overlap: false,
+                                color: '#fb3958'
+                            })
+                        }
+                        successCallback(events);
+                    }
+                });
+            },
+        });
+        calendar.render();
+    });
+
+</script>
+{% endblock %}

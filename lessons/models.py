@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from classes.models import YogaClass
 from rooms.models import Room
+import time
 
 ACTIVE_STATE = 0
 INACTIVE_STATE = 1
@@ -14,9 +15,9 @@ STATE_CHOICES = (
 
 class Lesson(models.Model):
     room = models.ForeignKey(
-        Room, on_delete=models.PROTECT, related_name='rooms')
+        Room, on_delete=models.PROTECT, related_name='lessons')
     yogaclass = models.ForeignKey(
-        YogaClass, on_delete=models.CASCADE, related_name='classes')
+        YogaClass, on_delete=models.CASCADE, related_name='lessons')
     state = models.IntegerField(choices=STATE_CHOICES,
                                 default=ACTIVE_STATE)
     day = models.DateField(help_text=_('Day of the event'))
@@ -26,3 +27,6 @@ class Lesson(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+    def __str__(self):
+        return self.yogaclass.name + '-' + self.room.name + '-' + self.start_time.strftime('%H:%M')
