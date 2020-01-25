@@ -55,3 +55,6 @@ class YogaClass(models.Model):
         if not self.id:
             self.slug = slugify(self.name)
         super(YogaClass, self).save(*args, **kwargs)
+    
+    def natural_key(self):
+        return (self.name)

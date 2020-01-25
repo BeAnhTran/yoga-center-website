@@ -1,7 +1,7 @@
 from django.urls import include, path
 from django.conf.urls import url
 
-from .views import index, course, room
+from .views import index, course, room, lesson
 
 app_name = 'dashboard'
 
@@ -19,4 +19,5 @@ urlpatterns = [
     path('rooms/<int:pk>/', room.RoomDetailView.as_view(), name='room_detail'),
     path('rooms/<int:pk>/lessons/',
          room.get_lessons, name='room_lessons'),
+    path('lessons/detail/json/', lesson.detail_json, name='lesson_detail_json'),
 ]
