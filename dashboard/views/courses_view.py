@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect,reverse
 from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views import View
-from ..forms import course
+from ..forms import courses_form
 from django.utils.decorators import method_decorator
 from ..decorators import admin_required
 from django.views.generic.list import ListView
@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 @method_decorator([login_required, admin_required], name='dispatch')
 class CourseListView(ListView):
     model = Course
-    template_name = 'dashboard/course/list.html'
+    template_name = 'dashboard/courses/list.html'
     context_object_name = 'courses'
     ordering = ['-created_at']
     paginate_by = 5
@@ -25,20 +25,20 @@ class CourseListView(ListView):
 
 @method_decorator([login_required, admin_required], name='dispatch')
 class CourseNewView(View):
-    template_name = 'dashboard/course/new.html'
+    template_name = 'dashboard/courses/new.html'
 
     def get(self, request):
-        form = course.CourseForm()
+        form = courses_form.CourseForm()
         context = {'form': form}
         return render(request, self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):
-        form = course.CourseForm(request.POST, request.FILES)
+        form = courses_form.CourseForm(request.POST, request.FILES)
         context = {'form': form}
 
         if form.is_valid():
             form.save()
-            return redirect('dashboard:list_course')
+            return redirect('dashboard:courses-list')
 
         return render(request, self.template_name, context=context)
 
@@ -46,15 +46,15 @@ class CourseNewView(View):
 @method_decorator([login_required, admin_required], name='dispatch')
 class CourseEditView(UpdateView):
     model = Course
-    template_name = 'dashboard/course/edit.html'
+    template_name = 'dashboard/courses/edit.html'
     slug_field = 'slug'
-    form_class = course.CourseEditForm
+    form_class = courses_form.CourseEditForm
 
     def get_success_url(self):
-            return reverse('dashboard:list_course', kwargs={})
+            return reverse('dashboard:courses-list', kwargs={})
 
 
 @method_decorator([login_required, admin_required], name='dispatch')
 class CourseDeleteView(DeleteView):
     model = Course
-    success_url = reverse_lazy('dashboard:list_course')
+    success_url = reverse_lazy('dashboard:courses-list')

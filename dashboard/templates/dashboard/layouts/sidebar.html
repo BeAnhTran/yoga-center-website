@@ -27,7 +27,7 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'dashboard:list_course'%}">
+        <a class="nav-link" href="{% url 'dashboard:courses-list'%}">
             <i class="fas fa-fw fa-window-restore"></i>
             <span>
                 {% trans 'Courses' %}
@@ -42,7 +42,14 @@
             </span>
         </a>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard:rooms-list' %}">
+            <i class="fab fa-fw fa-buromobelexperte"></i>
+            <span>
+                {% trans 'Rooms' %}
+            </span>
+        </a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">

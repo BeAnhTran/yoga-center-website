@@ -23,7 +23,7 @@ from django.core import serializers
 @method_decorator([login_required, admin_required], name='dispatch')
 class RoomListView(ListView):
     model = Room
-    template_name = 'dashboard/room/list.html'
+    template_name = 'dashboard/rooms/list.html'
     context_object_name = 'rooms'
     ordering = ['name']
     paginate_by = 5
@@ -31,7 +31,7 @@ class RoomListView(ListView):
 
 class RoomDetailView(DetailView):
     model = Room
-    template_name = 'dashboard/room/detail.html'
+    template_name = 'dashboard/rooms/detail.html'
     context_object_name = 'room'
 
 

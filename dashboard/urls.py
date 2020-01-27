@@ -1,23 +1,25 @@
 from django.urls import include, path
 from django.conf.urls import url
 
-from .views import index, course, room, lesson
+from .views import dashboard_view, courses_view, rooms_view, lessons_view
 
 app_name = 'dashboard'
 
 urlpatterns = [
-    path('', index.index, name='index'),
+    # DASHBOARD
+    path('', dashboard_view.index, name='index'),
     # COURSE
-    path('courses/', course.CourseListView.as_view(), name='list_course'),
-    path('courses/new/', course.CourseNewView.as_view(), name='new_course'),
+    path('courses/', courses_view.CourseListView.as_view(), name='courses-list'),
+    path('courses/new/', courses_view.CourseNewView.as_view(), name='courses-new'),
     url(r'^courses/edit/(?P<slug>[\w-]+)/$',
-        course.CourseEditView.as_view(), name='update_course'),
+        courses_view.CourseEditView.as_view(), name='courses-update'),
     path('courses/<int:pk>/delete/',
-         course.CourseDeleteView.as_view(), name='delete_course'),
+         courses_view.CourseDeleteView.as_view(), name='courses-delete'),
     # ROOMS
-    path('rooms/', room.RoomListView.as_view(), name='list_room'),
-    path('rooms/<int:pk>/', room.RoomDetailView.as_view(), name='room_detail'),
+    path('rooms/', rooms_view.RoomListView.as_view(), name='rooms-list'),
+    path('rooms/<int:pk>/', rooms_view.RoomDetailView.as_view(), name='rooms-detail'),
     path('rooms/<int:pk>/lessons/',
-         room.get_lessons, name='room_lessons'),
-    path('lessons/detail/json/', lesson.detail_json, name='lesson_detail_json'),
+         rooms_view.get_lessons, name='rooms-get-lessons'),
+    # LESSONS
+    path('lessons/detail/json/', lessons_view.detail_json, name='lessons-detail-json'),
 ]

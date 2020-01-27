@@ -1,4 +1,4 @@
-{% extends 'dashboard/layout/base.html' %}
+{% extends 'dashboard/layouts/base.html' %}
 {% load static %}
 {% block specified_css %}
 <link href="{% static 'css/dashboard/course/list.css' %}" rel="stylesheet">
@@ -7,7 +7,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between">
     <h1 class="h3 mb-0 text-gray-800">Courses</h1>
-    <a href="{% url 'dashboard:new_course'%}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+    <a href="{% url 'dashboard:courses-new'%}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> Create New</a>
 </div>
 <hr>
@@ -15,7 +15,8 @@
 {% if not courses %}
 <p class="text-danger">No courses yet.</p>
 {% else %}
-<div class="container-fluid mb-5">
+<div class
+="container-fluid mb-5">
     <div class="row">
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -48,9 +49,9 @@
                             {{ course.course_type }}
                         </td>
                         <td>
-                            <a href="{% url 'dashboard:update_course' course.slug %}"><i class="fas fa-edit"></i></a>
+                            <a href="{% url 'dashboard:courses-update' course.slug %}"><i class="fas fa-edit"></i></a>
                             <a href="javascript:;" class="delete-course"><i class="fas fa-trash"></i></a>
-                            <form class="d-none" action="{% url 'dashboard:delete_course' course.id %}" method="post">{% csrf_token %}
+                            <form class="d-none" action="{% url 'dashboard:courses-delete' course.id %}" method="post">{% csrf_token %}
                                 <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
                             </form>
                         </td>

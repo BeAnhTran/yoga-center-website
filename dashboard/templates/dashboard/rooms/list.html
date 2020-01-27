@@ -1,4 +1,4 @@
-{% extends 'dashboard/layout/base.html' %}
+{% extends 'dashboard/layouts/base.html' %}
 {% load static %}
 {% block specified_css %}
 {% endblock %}
@@ -37,7 +37,7 @@
                         <td>{{ room.get_state_display }}</td>
                         <td>{{ room.max_people }}</td>
                         <td>
-                            <a href="{% url 'dashboard:room_detail' room.id %}"><i class="fas fa-eye"></i></a>
+                            <a href="{% url 'dashboard:rooms-detail' room.id %}"><i class="fas fa-eye"></i></a>
                             <a href="javascript:;"><i class="fas fa-edit"></i></a>
                             <a href="javascript:;" class="delete-room"><i class="fas fa-trash"></i></a>
                         </td>

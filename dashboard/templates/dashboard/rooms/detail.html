@@ -1,4 +1,4 @@
-{% extends 'dashboard/layout/base.html' %}
+{% extends 'dashboard/layouts/base.html' %}
 {% load static %}
 {% load i18n %}
 
@@ -87,7 +87,7 @@
             },
             events: function (fetchInfo, successCallback, failureCallback) {
                 $.ajax({
-                    url: "{% url 'dashboard:room_lessons' room.id %}",
+                    url: "{% url 'dashboard:rooms-get-lessons' room.id %}",
                     type: 'GET',
                     data: {
                         startStr: fetchInfo.startStr,
@@ -121,7 +121,7 @@
             },
             eventClick: function (info) {
                 $.ajax({
-                    url: "{% url 'dashboard:lesson_detail_json' %}",
+                    url: "{% url 'dashboard:lessons-detail-json' %}",
                     method: 'post',
                     data: {
                         'lesson_id': info.event.id,
