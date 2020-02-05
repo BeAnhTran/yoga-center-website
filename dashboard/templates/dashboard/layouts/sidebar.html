@@ -14,7 +14,7 @@
     <li class="nav-item active">
         <a class="nav-link" href="{% url 'dashboard:index'%}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span>{% trans 'Dashboard' %}</span></a>
     </li>
 
     <!-- Divider -->
@@ -22,7 +22,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Course - Class
+        {% trans 'Courses' %} - {% trans 'Classes' %} - {% trans 'Rooms' %}
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -35,7 +35,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="javascript:;">
+        <a class="nav-link" href="{% url 'dashboard:classes-list' %}">
             <i class="fas fa-fw fa-braille"></i>
             <span>
                 {% trans 'Classes' %}

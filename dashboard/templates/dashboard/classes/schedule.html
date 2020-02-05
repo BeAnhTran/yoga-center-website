@@ -15,8 +15,16 @@
 <script src="{% static 'fullcalendar-4.3.1/packages/list/main.js' %}"></script>
 {% endblock %}
 {% block content %}
-<h1 class="text-danger text-center mt-3">{{ room.name }}</h1>
-<div class="container-fluid">
+<div class="container-fluid mt-3 p-0">
+    <a class="btn btn-sm btn-primary" href="{{request.META.HTTP_REFERER}}">
+        <i class="fas fa-fw fa-arrow-left"></i>{% trans 'back' %}
+    </a>
+    <a class="btn btn-sm btn-success float-right" href="javascript:;">
+        <i class="fas fa-fw fa-plus-square fa-sm text-white-50"></i>{% trans 'create new lesson' %}
+    </a>
+</div>
+<h1 class="text-danger text-center">{{ yogaclass.name }}</h1>
+<div class="container-fluid mb-3">
     <div id='calendar'></div>
 </div>
 <button id="btn-modal" type="button" class="d-none btn btn-primary" data-toggle="modal" data-target="#myModal">
@@ -35,11 +43,11 @@
                     <tbody>
                         <tr>
                             <th>{% trans 'Room' %}</th>
-                            <td>{{ room.name }}</td>
+                            <td class="yoga-room">room</td>
                         </tr>
                         <tr>
                             <th>{% trans 'Class' %}</th>
-                            <td class="yoga-class">yoga class</td>
+                            <td class="yoga-class">{{ yogaclass.name }}</td>
                         </tr>
                         <tr>
                             <th>{% trans 'Date' %}</th>
@@ -87,7 +95,7 @@
             },
             events: function (fetchInfo, successCallback, failureCallback) {
                 $.ajax({
-                    url: "{% url 'dashboard:rooms-get-lessons' room.id %}",
+                    url: "{% url 'dashboard:classes-get-lessons' yogaclass.id %}",
                     type: 'GET',
                     data: {
                         startStr: fetchInfo.startStr,
@@ -128,7 +136,6 @@
                         'csrfmiddlewaretoken': '{{ csrf_token }}'
                     }
                 }).done(function (data) {
-                    console.log(data);
                     var d = new Date(data[0]['fields']['day']);
                     var lesson_day = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
                     var start_time = data[0]['fields']['start_time'].split(':', 2).join(":");
@@ -146,7 +153,7 @@
 
                 if (!confirm("Are you sure about this change?")) {
                     info.revert();
-                }else{
+                } else {
                     console.log('cc');
                 }
             }

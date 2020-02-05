@@ -1301,3 +1301,7 @@ body {
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
 }
+
+.fa-clock-o:before {
+  content: "\f017"; 
+}

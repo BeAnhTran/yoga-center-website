@@ -1,0 +1,92 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block specified_css %}
+<link href="{% static 'css/dashboard/course/list.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between">
+    <h1 class="h3 mb-0 text-gray-800">{% trans 'Classes' %}</h1>
+    <a href="{% url 'dashboard:classes-new' %}" class="btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
+</div>
+<hr>
+<!-- Content Row -->
+{% if not classes %}
+<p class="text-danger">{% trans 'No classes yet' %}</p>
+{% else %}
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for class in classes %}
+                    <tr>
+                        <td>{{ class.id }}</td>
+                        <td>{{ class.name|title }}</td>
+                        <td>
+                            {% if class.image %}
+                            <img class="img img-fluid img-thumbnail class-img" src="{{ class.image.url }}"
+                                alt="{{ class.name }}">
+                            {% else %}
+                            <img class="img img-fluid img-thumbnail class-img"
+                                src="{% static 'imgs/class/default_class.jpg'%}" alt="{{ class.name }}">
+                            {% endif %}
+                        </td>
+                        <td>{{ class.description }}</td>
+                        <td>
+                            <div class="dropdown text-center">
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{% url 'dashboard:classes-detail' class.id %}"><i
+                                            class="fas fa-eye"></i> {% trans 'action_show' %}</a>
+                                    <a class="dropdown-item" href="{% url 'dashboard:classes-update' class.slug %}"><i
+                                            class="fas fa-edit"></i> {% trans 'action_edit' %}</a>
+                                    <a class="dropdown-item delete-class" href="javascript:;"><i
+                                            class="fas fa-trash"></i> {% trans 'action_delete' %}</a>
+                                    <form class="d-none" action="{% url 'dashboard:classes-delete' class.id %}"
+                                        method="post">
+                                        {% csrf_token %}
+                                        <input type="submit" onclick="return confirm('Are you sure?');"
+                                            value="Confirm">
+                                    </form>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block specified_js %}
+<script type="text/javascript">
+    $('.delete-class').click(function () {
+        $(this).siblings('form').children('input[type=submit]').click();
+    });
+</script>
+
+{% endblock %}

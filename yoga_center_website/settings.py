@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_countries',
     'languages',
     'crispy_forms',
+    'tempus_dominus',
     'core.apps.CoreConfig',
     'courses',
     'classes',
@@ -118,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGES = [ ('en', 'EN'), ('vi', 'VI'), ]
+LANGUAGES = [('en', 'EN'), ('vi', 'VI'), ]
 
 LANGUAGE_CODE = 'en'
 
@@ -164,4 +165,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = '/'
 
-LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale'), ]
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale'), ]
+
+TEMPUS_DOMINUS_LOCALIZE = True
+
+FORMAT_MODULE_PATH = 'yoga_center_website.formats'
