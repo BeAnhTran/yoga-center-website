@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-05 22:33+0700\n"
+"POT-Creation-Date: 2020-02-06 23:48+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,7 +139,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:47
+#: .\dashboard\forms\classes_form.py:47 .\dashboard\forms\lesssons_form.py:47
 msgid "Save"
 msgstr ""
 
@@ -156,8 +156,12 @@ msgstr "Ngày kết thúc phải sau ngày bắt đầu"
 msgid "wrong_start_date"
 msgstr "Thời gian bắt đầu không hợp lệ"
 
+#: .\dashboard\forms\lesssons_form.py:60
+msgid "error_end_time_must_be_greater_than_start_time"
+msgstr "Thời gian kết thúc phải sau thời gian bắt đầu"
+
 #: .\dashboard\templates\dashboard\classes\edit.html:12
-#: .\dashboard\templates\dashboard\classes\schedule.html:20
+#: .\dashboard\templates\dashboard\classes\schedule.html:21
 #: .\dashboard\templates\dashboard\classes\show.html:21
 msgid "back"
 msgstr "quay lại"
@@ -192,44 +196,49 @@ msgid "action_show"
 msgstr "Xem"
 
 #: .\dashboard\templates\dashboard\classes\list.html:56
+msgid "action_view_schedule"
+msgstr "Xem Lịch học"
+
+#: .\dashboard\templates\dashboard\classes\list.html:58
 msgid "action_edit"
 msgstr "Sửa"
 
-#: .\dashboard\templates\dashboard\classes\list.html:58
+#: .\dashboard\templates\dashboard\classes\list.html:60
 msgid "action_delete"
 msgstr "Xóa"
 
 #: .\dashboard\templates\dashboard\classes\new.html:8
-#: .\dashboard\templates\dashboard\classes\schedule.html:49
+#: .\dashboard\templates\dashboard\classes\schedule.html:52
 #: .\dashboard\templates\dashboard\rooms\detail.html:41
 msgid "Class"
 msgstr "Lớp"
 
-#: .\dashboard\templates\dashboard\classes\schedule.html:23
+#: .\dashboard\templates\dashboard\classes\schedule.html:25
+#: .\dashboard\templates\dashboard\classes\schedule.html:79
 msgid "create new lesson"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\classes\schedule.html:38
+#: .\dashboard\templates\dashboard\classes\schedule.html:41
 #: .\dashboard\templates\dashboard\rooms\detail.html:30
 msgid "Detail Info"
 msgstr "Thông tin chi tiết"
 
-#: .\dashboard\templates\dashboard\classes\schedule.html:45
+#: .\dashboard\templates\dashboard\classes\schedule.html:48
 #: .\dashboard\templates\dashboard\rooms\detail.html:37
 msgid "Room"
 msgstr "Phòng tập"
 
-#: .\dashboard\templates\dashboard\classes\schedule.html:53
+#: .\dashboard\templates\dashboard\classes\schedule.html:56
 #: .\dashboard\templates\dashboard\rooms\detail.html:45
 msgid "Date"
 msgstr "Ngày"
 
-#: .\dashboard\templates\dashboard\classes\schedule.html:57
+#: .\dashboard\templates\dashboard\classes\schedule.html:60
 #: .\dashboard\templates\dashboard\rooms\detail.html:49
 msgid "Start Time"
 msgstr "Giờ bắt đầu"
 
-#: .\dashboard\templates\dashboard\classes\schedule.html:61
+#: .\dashboard\templates\dashboard\classes\schedule.html:64
 #: .\dashboard\templates\dashboard\rooms\detail.html:53
 msgid "End Time"
 msgstr "Giờ kết thúc"

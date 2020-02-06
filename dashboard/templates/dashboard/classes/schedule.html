@@ -1,6 +1,7 @@
 {% extends 'dashboard/layouts/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block specified_css %}
 <link href="{% static 'fullcalendar-4.3.1/packages/core/main.css' %}" rel='stylesheet' />
@@ -19,7 +20,8 @@
     <a class="btn btn-sm btn-primary" href="{{request.META.HTTP_REFERER}}">
         <i class="fas fa-fw fa-arrow-left"></i>{% trans 'back' %}
     </a>
-    <a class="btn btn-sm btn-success float-right" href="javascript:;">
+    <a type="button" class="btn btn-sm btn-success float-right" href="javascript:;" data-toggle="modal"
+        data-target="#modal_create_lesson">
         <i class="fas fa-fw fa-plus-square fa-sm text-white-50"></i>{% trans 'create new lesson' %}
     </a>
 </div>
@@ -27,19 +29,20 @@
 <div class="container-fluid mb-3">
     <div id='calendar'></div>
 </div>
-<button id="btn-modal" type="button" class="d-none btn btn-primary" data-toggle="modal" data-target="#myModal">
+<button id="btn-modal" type="button" class="d-none btn btn-primary" data-toggle="modal"
+    data-target="#model_detail_lesson">
     Open modal
 </button>
 <!-- The Modal -->
-<div class="modal fade" id="myModal">
+<div class="modal fade" id="model_detail_lesson">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header border-none">
                 <h5 class="modal-title text-center">{% trans 'Detail Info' %}</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <table class="table table-borderless table-dark table-hover">
+                <table class="table table-borderless table-light table-hover">
                     <tbody>
                         <tr>
                             <th>{% trans 'Room' %}</th>
@@ -67,11 +70,27 @@
         </div>
     </div>
 </div>
+
+<!-- The Modal -->
+<div class="modal" id="modal_create_lesson">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-none">
+                <h4 class="modal-title">{% trans 'create new lesson' %}</h4>
+                <button id="btn_modal_create_lesson" type="button" class="btn btn-sm btn-danger"
+                    data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                {% crispy lesson_form %}
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block specified_js %}
 <script>
-
     document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -87,6 +106,20 @@
             editable: true,
             firstDay: 1,
             allDaySlot: false,
+            minTime: '05:00:00',
+            maxTime: '22:30:00',
+            businessHours: [
+                {
+                    daysOfWeek: [1, 2, 3, 4, 5, 6], // Monday, Tuesday, Wednesday, Thursday, Friday
+                    startTime: '05:00',
+                    endTime: '22:00'
+                },
+                {
+                    daysOfWeek: [0], // Sunday
+                    startTime: '05:00',
+                    endTime: '11:30'
+                }
+            ],
             titleFormat: {
                 month: 'numeric',
                 year: 'numeric',
@@ -137,7 +170,8 @@
                     }
                 }).done(function (data) {
                     var d = new Date(data[0]['fields']['day']);
-                    var lesson_day = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    var lesson_day = d.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options);
                     var start_time = data[0]['fields']['start_time'].split(':', 2).join(":");
                     var end_time = data[0]['fields']['end_time'].split(':', 2).join(":");
 
@@ -159,7 +193,33 @@
             }
         });
         calendar.render();
+        $('#form_new_lesson').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'dashboard:classes-create-new-lesson' yogaclass.id %}",
+                data: $(this).serialize() + '&yogaclass=' + "{{yogaclass.id}}",
+                beforeSend: function () {
+                    $('.invalid-feedback').remove();
+                    $("span[id^=" + 'error_1_id_' + "]").remove();
+                }
+            }).done(function (data) {
+                $('#modal_create_lesson').modal('hide')
+                $('#form_new_lesson').trigger("reset");
+                calendar.refetchEvents();
+            }).fail(function (err) {
+                errors = JSON.parse(err.responseText);
+                $.each(errors, function (key, value) {
+                    objStr = "#id_" + key;
+                    htmlError = '<span id="error_1_id_' + key + '" class="invalid-feedback">';
+                    htmlError += '<strong>' + value[0]['message'] + '</strong></span>';
+                    $(htmlError).insertAfter($(objStr));
+                    $(objStr).addClass('is-invalid');
+                });
+            });
+        });
     });
+
 
 </script>
 {% endblock %}

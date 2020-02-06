@@ -7,16 +7,13 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
 from django.utils.decorators import method_decorator
-from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from ..decorators import admin_required
 
 from classes.models import YogaClass
-from ..forms import classes_form
+from ..forms import classes_form, lesssons_form
 
 from datetime import datetime
-from django.http import JsonResponse
-from django.core.serializers import serialize
 from django.core import serializers
 from django.urls import reverse_lazy
 
@@ -60,6 +57,11 @@ class ClassScheduleView(DetailView):
     template_name = 'dashboard/classes/schedule.html'
     context_object_name = 'yogaclass'
 
+    def get_context_data(self, **kwargs):
+        context = super(ClassScheduleView, self).get_context_data(**kwargs)
+        context['lesson_form'] = lesssons_form.LessonForm()
+        return context
+
 
 class ClassEditView(UpdateView):
     model = YogaClass
@@ -69,6 +71,12 @@ class ClassEditView(UpdateView):
 
     def get_success_url(self):
             return reverse('dashboard:classes-list', kwargs={})
+
+
+@method_decorator([login_required, admin_required], name='dispatch')
+class ClassDeleteView(DeleteView):
+    model = YogaClass
+    success_url = reverse_lazy('dashboard:classes-list')
 
 
 def get_lessons(request, pk):
@@ -82,7 +90,11 @@ def get_lessons(request, pk):
     return HttpResponse(data, content_type="application/json")
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
-class ClassDeleteView(DeleteView):
-    model = YogaClass
-    success_url = reverse_lazy('dashboard:classes-list')
+def create_lessons(request, pk):
+    form = lesssons_form.LessonForm(request.POST, request.FILES)
+    if form.is_valid():
+        lesson = form.save()
+        data = serializers.serialize(
+            'json', [lesson], use_natural_foreign_keys=True)
+        return HttpResponse(data, content_type="application/json")
+    return HttpResponse(form.errors.as_json(), status=400)
