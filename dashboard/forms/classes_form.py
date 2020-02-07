@@ -9,6 +9,7 @@ from classes.models import YogaClass
 from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 from datetime import datetime
 from django.utils.formats import get_format
+from django.utils import formats
 
 
 class ClassForm(forms.ModelForm):
@@ -17,8 +18,13 @@ class ClassForm(forms.ModelForm):
         self.fields['name'].widget.attrs.update(
             {'placeholder': _('Name')})
         self.fields['description'].widget.attrs.update(
-            {'placeholder': _('Description')})
+            {
+                'placeholder': _('Description'),
+                'rows': 3,
+                'columns': 10,
+            })
         self.fields['start_at'] = forms.DateField(
+            label=_('start_at').capitalize(),
             widget=DatePicker(
                 options={
                     'useCurrent': True,
@@ -26,11 +32,13 @@ class ClassForm(forms.ModelForm):
                 attrs={
                     'icon_toggle': True,
                     'input_group': False,
+                    'placeholder': formats.date_format(datetime.now(), use_l10n=True)
                 }
             ),
         )
         self.fields['end_at'] = forms.DateField(
             required=False,
+            label=_('end_at').capitalize(),
             widget=DatePicker(
                 options={
                     'useCurrent': True,
@@ -38,13 +46,50 @@ class ClassForm(forms.ModelForm):
                 attrs={
                     'icon_toggle': True,
                     'input_group': False,
+                    'placeholder': _('end_at').capitalize()
                 }
             ),
         )
         self.fields['end_at'].required = False
+        self.fields['price_per_lesson'].widget.attrs.update({
+            'placeholder': _('price_per_lesson').capitalize()
+        })
+        self.fields['price_per_month'].widget.attrs.update({
+            'placeholder': _('price_per_month').capitalize()
+        })
+        self.fields['price_course'].widget.attrs.update({
+            'placeholder': _('price_course').capitalize()
+        })
+        self.fields['max_people'].widget.attrs.update({
+            'placeholder': _('max_people').capitalize()
+        })
         self.helper = FormHelper()
-        self.helper.add_input(
-            Submit('submit', _('Save'), css_class='btn btn-success'))
+        self.helper.layout = Layout(
+            Row(
+                Column('course', css_class='form-group col-md-6 mb-0'),
+                Column('level', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            'name',
+            'description',
+            Row(
+                Column('image', css_class='form-group col-md-4 mb-0'),
+                Column('max_people', css_class='form-group col-md-4 mb-0'),
+                Column('state', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('price_per_lesson', css_class='form-group col-md-4 mb-0'),
+                Column('price_per_month', css_class='form-group col-md-4 mb-0'),
+                Column('price_course', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('start_at', css_class='form-group col-md-6 mb-0'),
+                Column('end_at', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', _('Save'), css_class='btn-success'))
 
         # Focus on form field whenever error occurred
         errorList = list(self.errors)
@@ -58,7 +103,6 @@ class ClassForm(forms.ModelForm):
 
     class Meta:
         model = YogaClass
-        # localized_fields = ('start_at',)
         exclude = ['slug', 'created_at', 'updated_at']
 
     def clean_name(self):
@@ -80,6 +124,7 @@ class ClassForm(forms.ModelForm):
                 raise forms.ValidationError(
                     _('error_end_at_must_be_greater_than_start_at'))
         return end_at
+
 
 class ClassNewForm(ClassForm):
     def clean_start_at(self):

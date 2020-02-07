@@ -22,3 +22,6 @@ class Room(models.Model):
 
     def __str__(self):
         return self.name
+
+    def natural_key(self):
+        return (self.name)

@@ -27,3 +27,6 @@ def detail_json(request):
     data = serializers.serialize(
         'json', [lesson], use_natural_foreign_keys=True)
     return HttpResponse(data, content_type="application/json")
+
+def LessonEditView(UpdateView):
+    pass

@@ -4,7 +4,12 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container card mt-5 mb-5">
+<div class="container-fluid p-0">
+    <a class="btn btn-sm btn-primary" href="{{request.META.HTTP_REFERER}}">
+        <i class="fas fa-fw fa-arrow-left"></i>{% trans 'back' as t_back %} {{ t_back|title }}
+    </a>
+</div>
+<div class="container card mt-3 mb-5">
     <h5 class="ml-3 mt-3 text-success">{% trans 'Create New' %} {% trans 'Class' %}</h5>
     <hr class="mt-0 mb-0">
     <div class="card-body">

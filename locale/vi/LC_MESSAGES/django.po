@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-07 11:02+0700\n"
+"POT-Creation-Date: 2020-02-07 14:31+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,7 +63,7 @@ msgid "image"
 msgstr "hình ảnh"
 
 #: .\classes\models.py:35 .\dashboard\templates\dashboard\classes\show.html:56
-#: .\dashboard\templates\dashboard\rooms\list.html:31
+#: .\dashboard\templates\dashboard\rooms\list.html:31 .\lessons\models.py:22
 msgid "state"
 msgstr "trạng thái"
 
@@ -93,10 +93,11 @@ msgid "start_at"
 msgstr "thời gian bắt đầu"
 
 #: .\classes\models.py:48 .\dashboard\templates\dashboard\classes\show.html:48
+#: .\lessons\models.py:35
 msgid "end_at"
 msgstr "thời gian kết thúc"
 
-#: .\classes\models.py:50
+#: .\classes\models.py:50 .\lessons\models.py:33
 msgid "created_at"
 msgstr "thời gian tạo"
 
@@ -147,7 +148,7 @@ msgstr "Tên"
 msgid "Description"
 msgstr "Mô tả"
 
-#: .\dashboard\forms\classes_form.py:47 .\dashboard\forms\lesssons_form.py:47
+#: .\dashboard\forms\classes_form.py:47 .\dashboard\forms\lesssons_form.py:58
 msgid "Save"
 msgstr "Lưu"
 
@@ -163,7 +164,11 @@ msgstr "Ngày kết thúc phải sau ngày bắt đầu"
 msgid "wrong_start_date"
 msgstr "Thời gian bắt đầu không hợp lệ"
 
-#: .\dashboard\forms\lesssons_form.py:60
+#: .\dashboard\forms\lesssons_form.py:43 .\lessons\models.py:30
+msgid "notes"
+msgstr "ghi chú"
+
+#: .\dashboard\forms\lesssons_form.py:71
 msgid "error_end_time_must_be_greater_than_start_time"
 msgstr "Thời gian kết thúc phải sau thời gian bắt đầu"
 
@@ -211,8 +216,10 @@ msgid "Image"
 msgstr "Hình ảnh"
 
 #: .\dashboard\templates\dashboard\classes\list.html:34
-msgid "Action"
-msgstr "Hoạt động"
+#: .\dashboard\templates\dashboard\courses\list.html:34
+#: .\dashboard\templates\dashboard\rooms\list.html:33
+msgid "action"
+msgstr "hành động"
 
 #: .\dashboard\templates\dashboard\classes\list.html:61
 msgid "action_show"
@@ -293,11 +300,6 @@ msgstr "Không có %(value)s"
 msgid "type"
 msgstr "loại"
 
-#: .\dashboard\templates\dashboard\courses\list.html:34
-#: .\dashboard\templates\dashboard\rooms\list.html:33
-msgid "action"
-msgstr "hành động"
-
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:18
 msgid "Dashboard"
 msgstr "Bảng điều khiển"
@@ -329,7 +331,7 @@ msgstr "Đăng xuất"
 msgid "Room List"
 msgstr "Danh sách phòng tập"
 
-#: .\dashboard\templates\dashboard\rooms\list.html:18
+#: .\dashboard\templates\dashboard\rooms\list.html:18 .\lessons\models.py:18
 msgid "room"
 msgstr "phòng tập"
 
@@ -337,19 +339,37 @@ msgstr "phòng tập"
 msgid "location"
 msgstr "vị trí"
 
-#: .\lessons\models.py:23
+#: .\lessons\models.py:20
+#, fuzzy
+#| msgid "Class"
+msgid "yogaclass"
+msgstr "Lớp"
+
+#: .\lessons\models.py:24
 msgid "Day of the event"
 msgstr "Ngày của sự kiện"
 
 #: .\lessons\models.py:24
+msgid "day"
+msgstr "ngày"
+
+#: .\lessons\models.py:26
 msgid "Starting time"
 msgstr "Thời gian bắt đầu"
 
-#: .\lessons\models.py:25
+#: .\lessons\models.py:26
+msgid "start_time"
+msgstr "thời gian bắt đầu"
+
+#: .\lessons\models.py:28
 msgid "Final time"
 msgstr "Thời gian kết thúc"
 
-#: .\lessons\models.py:26
+#: .\lessons\models.py:28
+msgid "end_time"
+msgstr "thời gian kết thúc"
+
+#: .\lessons\models.py:30
 msgid "Notes"
 msgstr "Ghi chú"
 
@@ -33514,6 +33534,9 @@ msgstr ""
 #: .\venv\Lib\site-packages\languages\languages.py:8119
 msgid "Zuojiang Zhuang"
 msgstr ""
+
+#~ msgid "Action"
+#~ msgstr "Hoạt động"
 
 #, python-format
 #~ msgid ""

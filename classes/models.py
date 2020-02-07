@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 from courses.models import Course
+from core.models import Trainer
 
 ACTIVE_STATE = 0
 INACTIVE_STATE = 1
@@ -25,6 +26,8 @@ LEVEL_CHOICES = (
 class YogaClass(models.Model):
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name='classes', verbose_name=_('course'))
+    form_trainer = models.ForeignKey(
+        Trainer, on_delete=models.SET_NULL, related_name='classes', verbose_name=_('form_trainer'), blank=True, null=True)
     name = models.CharField(max_length=120, verbose_name=_('name'))
     slug = models.SlugField(max_length=150, unique=True,
                             verbose_name=_('slug'))

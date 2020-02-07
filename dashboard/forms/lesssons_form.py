@@ -3,27 +3,39 @@ from django.db import transaction
 from django.utils.translation import gettext as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
-from tempus_dominus.widgets import DatePicker, TimePicker
+from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 from lessons.models import Lesson
 
+import datetime
+from django.utils import formats
 
 class LessonForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['day'] = forms.DateField(
-            widget=DatePicker(),
+            label=_('day').capitalize(),
+            widget=DatePicker(options={
+                'useCurrent': True,
+            },attrs={
+                'placeholder': formats.date_format(datetime.datetime.now(), use_l10n=True)
+            }),
         )
         self.fields['start_time'] = forms.TimeField(
+            label=_('start_time').capitalize(),
             widget=TimePicker(options={
-                'disabledHours': [0, 1, 2, 3, 4, 23],
-                'format': 'HH:mm'
+                'useCurrent': True,
+                'format': 'HH:mm',
+            }, attrs={
+                'placeholder': datetime.datetime.now().strftime("%H:%M")
             }),
         )
         self.fields['end_time'] = forms.TimeField(
+            label=_('end_time').capitalize(),
             required=False,
             widget=TimePicker(options={
-                'disabledHours': [0, 1, 2, 3, 4, 23],
-                'format': 'HH:mm'
+                'format': 'HH:mm',
+            },attrs={
+                'placeholder': datetime.datetime.now().strftime("%H:%M") 
             }),
         )
         self.helper = FormHelper()
@@ -31,6 +43,8 @@ class LessonForm(forms.ModelForm):
         self.helper.form_id = 'form_new_lesson'
         self.fields['notes'].widget.attrs['rows'] = 2
         self.fields['notes'].widget.attrs['columns'] = 10
+        self.fields['notes'].widget.attrs['placeholder'] = _('notes')
+        
         self.helper.layout = Layout(
             'room',
             Row(

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-07 11:00+0700\n"
+"POT-Creation-Date: 2020-02-07 14:31+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,7 +63,7 @@ msgid "image"
 msgstr ""
 
 #: .\classes\models.py:35 .\dashboard\templates\dashboard\classes\show.html:56
-#: .\dashboard\templates\dashboard\rooms\list.html:31
+#: .\dashboard\templates\dashboard\rooms\list.html:31 .\lessons\models.py:22
 msgid "state"
 msgstr ""
 
@@ -93,10 +93,11 @@ msgid "start_at"
 msgstr "start at"
 
 #: .\classes\models.py:48 .\dashboard\templates\dashboard\classes\show.html:48
+#: .\lessons\models.py:35
 msgid "end_at"
 msgstr "end at"
 
-#: .\classes\models.py:50
+#: .\classes\models.py:50 .\lessons\models.py:33
 msgid "created_at"
 msgstr "created at"
 
@@ -143,7 +144,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:47 .\dashboard\forms\lesssons_form.py:47
+#: .\dashboard\forms\classes_form.py:47 .\dashboard\forms\lesssons_form.py:58
 msgid "Save"
 msgstr ""
 
@@ -159,7 +160,11 @@ msgstr "End date must be greater than start date"
 msgid "wrong_start_date"
 msgstr "Wrong start date"
 
-#: .\dashboard\forms\lesssons_form.py:60
+#: .\dashboard\forms\lesssons_form.py:43 .\lessons\models.py:30
+msgid "notes"
+msgstr ""
+
+#: .\dashboard\forms\lesssons_form.py:71
 msgid "error_end_time_must_be_greater_than_start_time"
 msgstr "End time must be greater than start time"
 
@@ -207,8 +212,12 @@ msgid "Image"
 msgstr ""
 
 #: .\dashboard\templates\dashboard\classes\list.html:34
-msgid "Action"
-msgstr ""
+#: .\dashboard\templates\dashboard\courses\list.html:34
+#: .\dashboard\templates\dashboard\rooms\list.html:33
+#, fuzzy
+#| msgid "action_show"
+msgid "action"
+msgstr "view"
 
 #: .\dashboard\templates\dashboard\classes\list.html:61
 msgid "action_show"
@@ -289,13 +298,6 @@ msgstr ""
 msgid "type"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\courses\list.html:34
-#: .\dashboard\templates\dashboard\rooms\list.html:33
-#, fuzzy
-#| msgid "action_show"
-msgid "action"
-msgstr "view"
-
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:18
 msgid "Dashboard"
 msgstr ""
@@ -327,7 +329,7 @@ msgstr ""
 msgid "Room List"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\rooms\list.html:18
+#: .\dashboard\templates\dashboard\rooms\list.html:18 .\lessons\models.py:18
 msgid "room"
 msgstr ""
 
@@ -335,19 +337,39 @@ msgstr ""
 msgid "location"
 msgstr ""
 
-#: .\lessons\models.py:23
+#: .\lessons\models.py:20
+msgid "yogaclass"
+msgstr ""
+
+#: .\lessons\models.py:24
 msgid "Day of the event"
 msgstr ""
 
 #: .\lessons\models.py:24
-msgid "Starting time"
-msgstr ""
-
-#: .\lessons\models.py:25
-msgid "Final time"
+msgid "day"
 msgstr ""
 
 #: .\lessons\models.py:26
+msgid "Starting time"
+msgstr ""
+
+#: .\lessons\models.py:26
+#, fuzzy
+#| msgid "start_at"
+msgid "start_time"
+msgstr "start at"
+
+#: .\lessons\models.py:28
+msgid "Final time"
+msgstr ""
+
+#: .\lessons\models.py:28
+#, fuzzy
+#| msgid "end_at"
+msgid "end_time"
+msgstr "end at"
+
+#: .\lessons\models.py:30
 msgid "Notes"
 msgstr ""
 
