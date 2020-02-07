@@ -453,6 +453,10 @@ body {
     background: linear-gradient(145deg, #fb3958 0%, #ffc838 100%);
 }
 
+.bg-dark-custom{
+  background: #2E353D;
+}
+
 .topbar .navbar-search {
   width: 25rem;
 }
