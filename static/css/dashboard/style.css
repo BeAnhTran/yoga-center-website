@@ -1319,3 +1319,7 @@ body {
 .fa-clock-o:before {
   content: "\f017"; 
 }
+
+.table td, .table th {
+  padding: .5rem;
+}
