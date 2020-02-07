@@ -18,11 +18,12 @@
 {% block content %}
 <div class="container-fluid mt-3 p-0">
     <a class="btn btn-sm btn-primary" href="{{request.META.HTTP_REFERER}}">
-        <i class="fas fa-fw fa-arrow-left"></i>{% trans 'back' %}
+        <i class="fas fa-fw fa-arrow-left"></i>{% trans 'back' as back %} {{ back|title }}
     </a>
     <a type="button" class="btn btn-sm btn-success float-right" href="javascript:;" data-toggle="modal"
         data-target="#modal_create_lesson">
-        <i class="fas fa-fw fa-plus-square fa-sm text-white-50"></i>{% trans 'create new lesson' %}
+        <i class="fas fa-fw fa-plus-square fa-sm text-white-50"></i>{% trans 'create new lesson' as create_new_lesson %}
+        {{ create_new_lesson|title }}
     </a>
 </div>
 <h1 class="text-danger text-center">{{ yogaclass.name }}</h1>

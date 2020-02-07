@@ -26,7 +26,8 @@ class YogaClass(models.Model):
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name='classes', verbose_name=_('course'))
     name = models.CharField(max_length=120, verbose_name=_('name'))
-    slug = models.SlugField(max_length=150, unique=True, verbose_name=_('slug'))
+    slug = models.SlugField(max_length=150, unique=True,
+                            verbose_name=_('slug'))
     description = models.TextField(verbose_name=_('description'))
     image = models.ImageField(
         upload_to='class', blank=True, null=True, verbose_name=_('image'))
@@ -34,14 +35,21 @@ class YogaClass(models.Model):
                                 default=INACTIVE_STATE, verbose_name=_('state'))
     level = models.IntegerField(choices=LEVEL_CHOICES,
                                 default=BASIC_LEVEL, verbose_name=_('level'))
-    price_per_lesson = models.FloatField(blank=True, null=True, verbose_name=_('price_per_lesson'))
-    price_per_month = models.FloatField(blank=True, null=True, verbose_name=_('price_per_month'))
-    price_course = models.FloatField(blank=True, null=True, verbose_name=_('price_course'))
-    max_people = models.IntegerField(blank=True, null=True, verbose_name=_('max_people'))
-    start_at = models.DateField(blank=True, null=True, verbose_name=_('start_at'))
+    price_per_lesson = models.FloatField(
+        blank=True, null=True, verbose_name=_('price_per_lesson'))
+    price_per_month = models.FloatField(
+        blank=True, null=True, verbose_name=_('price_per_month'))
+    price_course = models.FloatField(
+        blank=True, null=True, verbose_name=_('price_course'))
+    max_people = models.IntegerField(
+        blank=True, null=True, verbose_name=_('max_people'))
+    start_at = models.DateField(
+        blank=True, null=True, verbose_name=_('start_at'))
     end_at = models.DateField(blank=True, null=True, verbose_name=_('end_at'))
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created_at'))
-    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True, verbose_name=_('updated_at'))
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name=_('created_at'))
+    updated_at = models.DateTimeField(
+        auto_now=True, blank=True, null=True, verbose_name=_('updated_at'))
 
     def __str__(self):
         return self.name
@@ -57,3 +65,8 @@ class YogaClass(models.Model):
 
     def natural_key(self):
         return (self.name)
+
+    def is_active(self):
+        if self.state == ACTIVE_STATE:
+            return True
+        return False

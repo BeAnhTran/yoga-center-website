@@ -1,14 +1,17 @@
 {% extends 'dashboard/layouts/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load dashboard_extras %}
+
 {% block specified_css %}
-<link href="{% static 'css/dashboard/course/list.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dashboard/classes/list.css' %}" rel="stylesheet">
 {% endblock %}
+
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between">
-    <h1 class="h3 mb-0 text-gray-800">{% trans 'Classes' %}</h1>
-    <a href="{% url 'dashboard:classes-new' %}" class="btn btn-sm btn-primary shadow-sm"><i
+    <h1 class="h3 mb-0">{% trans 'Class List' %}</h1>
+    <a href="{% url 'dashboard:classes-new' %}" class="btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
 </div>
 <hr>
@@ -20,13 +23,15 @@
     <div class="row">
         <div class="table-responsive">
             <table class="table table-bordered">
-                <thead class="thead-dark">
+                <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Description</th>
-                        <th>Action</th>
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Course' %}</th>
+                        <th>{% trans 'State' %}</th>
+                        <th>{% trans 'Image' %}</th>
+                        <th>{% trans 'Description' %}</th>
+                        <th>{% trans 'Action' %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,7 +39,9 @@
                     <tr>
                         <td>{{ class.id }}</td>
                         <td>{{ class.name|title }}</td>
-                        <td>
+                        <td>{{ class.course }}</td>
+                        <td class="text-center">{{ class|display_state }}</td>
+                        <td class="text-center">
                             {% if class.image %}
                             <img class="img img-fluid img-thumbnail class-img" src="{{ class.image.url }}"
                                 alt="{{ class.name }}">
@@ -53,7 +60,8 @@
                                     <a class="dropdown-item" href="{% url 'dashboard:classes-detail' class.id %}"><i
                                             class="fas fa-fw fa-eye"></i> {% trans 'action_show' %}</a>
                                     <a class="dropdown-item" href="{% url 'dashboard:classes-schedule' class.id %}"><i
-                                            class="fas fa-fw fa-calendar-alt"></i> {% trans 'action_view_schedule' %}</a>
+                                            class="fas fa-fw fa-calendar-alt"></i>
+                                        {% trans 'action_view_schedule' %}</a>
                                     <a class="dropdown-item" href="{% url 'dashboard:classes-update' class.slug %}"><i
                                             class="fas fa-fw fa-edit"></i> {% trans 'action_edit' %}</a>
                                     <a class="dropdown-item delete-class" href="javascript:;"><i
@@ -85,9 +93,13 @@
 
 {% block specified_js %}
 <script type="text/javascript">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
     $('.delete-class').click(function () {
         $(this).siblings('form').children('input[type=submit]').click();
     });
 </script>
+
 
 {% endblock %}

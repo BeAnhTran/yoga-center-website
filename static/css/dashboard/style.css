@@ -189,6 +189,10 @@ body {
   .sidebar .sidebar-brand .sidebar-brand-text {
     display: none;
   }
+
+  .sidebar .sidebar-brand .sidebar-brand-text-2 {
+    display: inline;
+  }
   
   .sidebar hr.sidebar-divider {
     margin: 0 1rem 1rem;
@@ -259,6 +263,9 @@ body {
     .sidebar .sidebar-brand .sidebar-brand-text {
       display: inline;
     }
+    .sidebar .sidebar-brand .sidebar-brand-text-2 {
+      display: none;
+    }
     .sidebar .sidebar-heading {
       text-align: left;
     }
@@ -313,6 +320,9 @@ body {
     }
     .sidebar.toggled .sidebar-brand .sidebar-brand-text {
       display: none;
+    }
+    .sidebar.toggled .sidebar-brand .sidebar-brand-text-2 {
+      display: inline;
     }
     .sidebar.toggled .sidebar-heading {
       text-align: center;

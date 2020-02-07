@@ -1,0 +1,7 @@
+.class-img{
+    max-width: 75px;
+}
+
+.table td, .table th {
+    padding: .5rem;
+}
