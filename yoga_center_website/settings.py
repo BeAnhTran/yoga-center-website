@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'languages',
     'crispy_forms',
     'tempus_dominus',
+
     'core.apps.CoreConfig',
     'courses',
     'classes',

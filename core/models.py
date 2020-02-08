@@ -38,6 +38,8 @@ class User(AbstractUser):
         upload_to='profile', default='profile/default.png')
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
+    def full_name(self):
+        return self.first_name + ' ' + self.last_name
 
 class Certificate(models.Model):
     name = models.CharField(max_length=255)
@@ -65,6 +67,9 @@ class Trainer(models.Model):
     graduate_school = models.CharField(blank=True, null=True, max_length=255)
     company_name = models.CharField(blank=True, null=True, max_length=255)
 
+    def __str__(self):
+        full_name = self.user.full_name() 
+        return full_name 
 
 class Staff(models.Model):
     user = models.OneToOneField(

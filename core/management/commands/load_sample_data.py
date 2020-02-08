@@ -4,7 +4,7 @@ except ImportError:
     from django.core.management.base import BaseCommand
 
 from django.db import transaction
-
+from faker import Faker
 
 class Command(BaseCommand):
     help = "Load some sample data into the db"
@@ -21,6 +21,8 @@ class Command(BaseCommand):
         from lessons.models import Lesson
         from core.models import User, Trainer
 
+        fake = Faker()
+
         print("Create trainers")
         num_users = User.objects.count()
         if num_users == 0:
@@ -29,6 +31,8 @@ class Command(BaseCommand):
             data = {
                 'username': 'trainer' + str(i),
                 'email': 'trainer' + str(i) + '@trainer.com',
+                'first_name': fake.first_name(),
+                'last_name': fake.last_name()
             }
             trainer = User(**data)
             trainer.set_password('truong77')

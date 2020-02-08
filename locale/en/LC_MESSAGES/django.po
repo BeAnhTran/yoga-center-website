@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-07 14:31+0700\n"
+"POT-Creation-Date: 2020-02-08 14:27+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,98 +18,108 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\classes\models.py:10 .\lessons\models.py:11 .\rooms\models.py:8
+#: .\classes\models.py:11 .\lessons\models.py:12 .\rooms\models.py:8
 msgid "Active"
 msgstr ""
 
-#: .\classes\models.py:11 .\lessons\models.py:12 .\rooms\models.py:9
+#: .\classes\models.py:12 .\lessons\models.py:13 .\rooms\models.py:9
 msgid "Inactive"
 msgstr ""
 
-#: .\classes\models.py:19
+#: .\classes\models.py:20
 msgid "Basic Level"
 msgstr "Basic Level"
 
-#: .\classes\models.py:20
+#: .\classes\models.py:21
 msgid "Intermediate Level"
 msgstr "Intermediate Level"
 
-#: .\classes\models.py:21
+#: .\classes\models.py:22
 msgid "Advanced Level"
 msgstr "Advanced Level"
 
-#: .\classes\models.py:27 .\dashboard\templates\dashboard\classes\show.html:32
+#: .\classes\models.py:28 .\dashboard\templates\dashboard\classes\show.html:32
 #: .\dashboard\templates\dashboard\courses\list.html:19
 msgid "course"
 msgstr ""
 
-#: .\classes\models.py:28 .\dashboard\templates\dashboard\courses\list.html:30
+#: .\classes\models.py:30 .\dashboard\templates\dashboard\classes\list.html:31
+msgid "form_trainer"
+msgstr "form trainer"
+
+#: .\classes\models.py:31 .\dashboard\templates\dashboard\courses\list.html:30
 #: .\dashboard\templates\dashboard\rooms\list.html:29
 msgid "name"
 msgstr ""
 
-#: .\classes\models.py:30
+#: .\classes\models.py:33
 msgid "slug"
 msgstr ""
 
-#: .\classes\models.py:31 .\dashboard\templates\dashboard\classes\show.html:36
+#: .\classes\models.py:34 .\dashboard\templates\dashboard\classes\show.html:36
 #: .\dashboard\templates\dashboard\courses\list.html:32
 msgid "description"
 msgstr ""
 
-#: .\classes\models.py:33 .\dashboard\templates\dashboard\classes\show.html:77
+#: .\classes\models.py:36 .\dashboard\templates\dashboard\classes\show.html:77
 #: .\dashboard\templates\dashboard\courses\list.html:31
 msgid "image"
 msgstr ""
 
-#: .\classes\models.py:35 .\dashboard\templates\dashboard\classes\show.html:56
-#: .\dashboard\templates\dashboard\rooms\list.html:31 .\lessons\models.py:22
+#: .\classes\models.py:38 .\dashboard\templates\dashboard\classes\show.html:56
+#: .\dashboard\templates\dashboard\rooms\list.html:31 .\lessons\models.py:25
 msgid "state"
 msgstr ""
 
-#: .\classes\models.py:37 .\dashboard\templates\dashboard\classes\show.html:65
+#: .\classes\models.py:40 .\dashboard\templates\dashboard\classes\show.html:65
 msgid "level"
 msgstr ""
 
-#: .\classes\models.py:39 .\dashboard\templates\dashboard\classes\show.html:86
+#: .\classes\models.py:42 .\dashboard\forms\classes_form.py:55
+#: .\dashboard\templates\dashboard\classes\show.html:86
 msgid "price_per_lesson"
 msgstr "price per lesson"
 
-#: .\classes\models.py:41 .\dashboard\templates\dashboard\classes\show.html:94
+#: .\classes\models.py:44 .\dashboard\forms\classes_form.py:58
+#: .\dashboard\templates\dashboard\classes\show.html:94
 msgid "price_per_month"
 msgstr "price per month"
 
-#: .\classes\models.py:43 .\dashboard\templates\dashboard\classes\show.html:102
+#: .\classes\models.py:46 .\dashboard\forms\classes_form.py:61
+#: .\dashboard\templates\dashboard\classes\show.html:102
 msgid "price_course"
 msgstr "price of course"
 
-#: .\classes\models.py:45 .\dashboard\templates\dashboard\classes\show.html:69
+#: .\classes\models.py:48 .\dashboard\forms\classes_form.py:64
+#: .\dashboard\templates\dashboard\classes\show.html:69
 #: .\dashboard\templates\dashboard\rooms\list.html:32
 msgid "max_people"
 msgstr "max people"
 
-#: .\classes\models.py:47 .\dashboard\templates\dashboard\classes\show.html:40
+#: .\classes\models.py:50 .\dashboard\forms\classes_form.py:27
+#: .\dashboard\templates\dashboard\classes\show.html:40
 msgid "start_at"
 msgstr "start at"
 
-#: .\classes\models.py:48 .\dashboard\templates\dashboard\classes\show.html:48
-#: .\lessons\models.py:35
+#: .\classes\models.py:51 .\dashboard\forms\classes_form.py:41
+#: .\dashboard\forms\classes_form.py:49
+#: .\dashboard\templates\dashboard\classes\show.html:48 .\lessons\models.py:38
 msgid "end_at"
 msgstr "end at"
 
-#: .\classes\models.py:50 .\lessons\models.py:33
+#: .\classes\models.py:53 .\lessons\models.py:36
 msgid "created_at"
 msgstr "created at"
 
-#: .\classes\models.py:52
+#: .\classes\models.py:55
 msgid "updated_at"
 msgstr "updated at"
 
-#: .\classes\models.py:59
+#: .\classes\models.py:62
 msgid "Yoga Class"
 msgstr ""
 
-#: .\classes\models.py:60
+#: .\classes\models.py:63
 msgid "Yoga Classes"
 msgstr ""
 
@@ -134,42 +144,59 @@ msgstr ""
 msgid "Training Course"
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:18
+#: .\dashboard\forms\classes_form.py:19
 #: .\dashboard\templates\dashboard\classes\list.html:29
 msgid "Name"
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:20
-#: .\dashboard\templates\dashboard\classes\list.html:33
+#: .\dashboard\forms\classes_form.py:22
+#: .\dashboard\templates\dashboard\classes\list.html:34
 msgid "Description"
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:47 .\dashboard\forms\lesssons_form.py:58
+#: .\dashboard\forms\classes_form.py:92 .\dashboard\forms\lesssons_form.py:61
 msgid "Save"
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:70 .\dashboard\forms\classes_form.py:102
+#: .\dashboard\forms\classes_form.py:114 .\dashboard\forms\classes_form.py:147
 msgid "A class with this name already exists."
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:81
+#: .\dashboard\forms\classes_form.py:125
 msgid "error_end_at_must_be_greater_than_start_at"
 msgstr "End date must be greater than start date"
 
-#: .\dashboard\forms\classes_form.py:89
+#: .\dashboard\forms\classes_form.py:134
 msgid "wrong_start_date"
 msgstr "Wrong start date"
 
-#: .\dashboard\forms\lesssons_form.py:43 .\lessons\models.py:30
+#: .\dashboard\forms\lesssons_form.py:16 .\lessons\models.py:27
+msgid "day"
+msgstr ""
+
+#: .\dashboard\forms\lesssons_form.py:24 .\lessons\models.py:29
+#, fuzzy
+#| msgid "start_at"
+msgid "start_time"
+msgstr "start at"
+
+#: .\dashboard\forms\lesssons_form.py:33 .\lessons\models.py:31
+#, fuzzy
+#| msgid "end_at"
+msgid "end_time"
+msgstr "end at"
+
+#: .\dashboard\forms\lesssons_form.py:46 .\lessons\models.py:33
 msgid "notes"
 msgstr ""
 
-#: .\dashboard\forms\lesssons_form.py:71
+#: .\dashboard\forms\lesssons_form.py:74
 msgid "error_end_time_must_be_greater_than_start_time"
 msgstr "End time must be greater than start time"
 
 #: .\dashboard\templates\dashboard\classes\edit.html:12
-#: .\dashboard\templates\dashboard\classes\schedule.html:21
+#: .\dashboard\templates\dashboard\classes\new.html:9
+#: .\dashboard\templates\dashboard\classes\schedule.html:23
 #: .\dashboard\templates\dashboard\classes\show.html:21
 msgid "back"
 msgstr ""
@@ -188,7 +215,7 @@ msgid "Class List"
 msgstr ""
 
 #: .\dashboard\templates\dashboard\classes\list.html:15
-#: .\dashboard\templates\dashboard\classes\new.html:8
+#: .\dashboard\templates\dashboard\classes\new.html:13
 #: .\dashboard\templates\dashboard\courses\list.html:13
 #: .\dashboard\templates\dashboard\rooms\list.html:12
 msgid "Create New"
@@ -202,16 +229,16 @@ msgstr ""
 msgid "Course"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\classes\list.html:31
+#: .\dashboard\templates\dashboard\classes\list.html:32
 msgid "State"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\classes\list.html:32
+#: .\dashboard\templates\dashboard\classes\list.html:33
 #: .\venv\Lib\site-packages\django\db\models\fields\files.py:360
 msgid "Image"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\classes\list.html:34
+#: .\dashboard\templates\dashboard\classes\list.html:35
 #: .\dashboard\templates\dashboard\courses\list.html:34
 #: .\dashboard\templates\dashboard\rooms\list.html:33
 #, fuzzy
@@ -219,62 +246,7 @@ msgstr ""
 msgid "action"
 msgstr "view"
 
-#: .\dashboard\templates\dashboard\classes\list.html:61
-msgid "action_show"
-msgstr "view"
-
-#: .\dashboard\templates\dashboard\classes\list.html:64
-msgid "action_view_schedule"
-msgstr "View Schedule"
-
-#: .\dashboard\templates\dashboard\classes\list.html:66
-msgid "action_edit"
-msgstr "edit"
-
-#: .\dashboard\templates\dashboard\classes\list.html:68
-msgid "action_delete"
-msgstr "delete"
-
-#: .\dashboard\templates\dashboard\classes\new.html:8
-#: .\dashboard\templates\dashboard\classes\schedule.html:53
-#: .\dashboard\templates\dashboard\rooms\detail.html:41
-msgid "Class"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\schedule.html:25
-#: .\dashboard\templates\dashboard\classes\schedule.html:80
-msgid "create new lesson"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\schedule.html:42
-#: .\dashboard\templates\dashboard\rooms\detail.html:30
-msgid "Detail Info"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\schedule.html:49
-#: .\dashboard\templates\dashboard\rooms\detail.html:37
-msgid "Room"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\schedule.html:57
-#: .\dashboard\templates\dashboard\rooms\detail.html:45
-msgid "Date"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\schedule.html:61
-#: .\dashboard\templates\dashboard\rooms\detail.html:49
-msgid "Start Time"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\schedule.html:65
-#: .\dashboard\templates\dashboard\rooms\detail.html:53
-msgid "End Time"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\show.html:24
-msgid "edit"
-msgstr ""
-
+#: .\dashboard\templates\dashboard\classes\list.html:48
 #: .\dashboard\templates\dashboard\classes\show.html:44
 #: .\dashboard\templates\dashboard\classes\show.html:52
 #: .\dashboard\templates\dashboard\classes\show.html:73
@@ -282,6 +254,62 @@ msgstr ""
 #: .\dashboard\templates\dashboard\classes\show.html:98
 #: .\dashboard\templates\dashboard\classes\show.html:106
 msgid "have not updated yet"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\list.html:70
+msgid "action_show"
+msgstr "view"
+
+#: .\dashboard\templates\dashboard\classes\list.html:73
+msgid "action_view_schedule"
+msgstr "View Schedule"
+
+#: .\dashboard\templates\dashboard\classes\list.html:75
+msgid "action_edit"
+msgstr "edit"
+
+#: .\dashboard\templates\dashboard\classes\list.html:77
+msgid "action_delete"
+msgstr "delete"
+
+#: .\dashboard\templates\dashboard\classes\new.html:13
+#: .\dashboard\templates\dashboard\classes\schedule.html:55
+#: .\dashboard\templates\dashboard\rooms\detail.html:41
+msgid "Class"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:27
+#: .\dashboard\templates\dashboard\classes\schedule.html:82
+msgid "create new lesson"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:44
+#: .\dashboard\templates\dashboard\rooms\detail.html:30
+msgid "Detail Info"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:51
+#: .\dashboard\templates\dashboard\rooms\detail.html:37
+msgid "Room"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:59
+#: .\dashboard\templates\dashboard\rooms\detail.html:45
+msgid "Date"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:63
+#: .\dashboard\templates\dashboard\rooms\detail.html:49
+msgid "Start Time"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:67
+#: .\dashboard\templates\dashboard\rooms\detail.html:53
+msgid "End Time"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\show.html:24
+msgid "edit"
 msgstr ""
 
 #: .\dashboard\templates\dashboard\courses\list.html:11
@@ -329,7 +357,7 @@ msgstr ""
 msgid "Room List"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\rooms\list.html:18 .\lessons\models.py:18
+#: .\dashboard\templates\dashboard\rooms\list.html:18 .\lessons\models.py:21
 msgid "room"
 msgstr ""
 
@@ -337,43 +365,31 @@ msgstr ""
 msgid "location"
 msgstr ""
 
-#: .\lessons\models.py:20
+#: .\lessons\models.py:19
 msgid "yogaclass"
 msgstr ""
 
-#: .\lessons\models.py:24
+#: .\lessons\models.py:23
+msgid "trainer"
+msgstr ""
+
+#: .\lessons\models.py:27
 msgid "Day of the event"
 msgstr ""
 
-#: .\lessons\models.py:24
-msgid "day"
-msgstr ""
-
-#: .\lessons\models.py:26
+#: .\lessons\models.py:29
 msgid "Starting time"
 msgstr ""
 
-#: .\lessons\models.py:26
-#, fuzzy
-#| msgid "start_at"
-msgid "start_time"
-msgstr "start at"
-
-#: .\lessons\models.py:28
+#: .\lessons\models.py:31
 msgid "Final time"
 msgstr ""
 
-#: .\lessons\models.py:28
-#, fuzzy
-#| msgid "end_at"
-msgid "end_time"
-msgstr "end at"
-
-#: .\lessons\models.py:30
+#: .\lessons\models.py:33
 msgid "Notes"
 msgstr ""
 
-#: .\templates\account\login.html:8 .\templates\account\login.html:27
+#: .\templates\account\login.html:9 .\templates\account\login.html:28
 #: .\templates\account\login.html:38
 msgid "Sign In"
 msgstr ""
