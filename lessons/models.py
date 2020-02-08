@@ -41,3 +41,10 @@ class Lesson(models.Model):
         if self.room:
             return self.yogaclass.name + '-' + self.room.name + '-' + self.start_time.strftime('%H:%M')
         return self.yogaclass.name + '-' + self.start_time.strftime('%H:%M')
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            if not self.trainer:
+                self.trainer = self.yogaclass.form_trainer
+        
+        super(Lesson, self).save(*args, **kwargs)

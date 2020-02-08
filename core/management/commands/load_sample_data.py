@@ -3,10 +3,13 @@ try:
 except ImportError:
     from django.core.management.base import BaseCommand
 
+from django.db import transaction
+
 
 class Command(BaseCommand):
     help = "Load some sample data into the db"
 
+    @transaction.atomic
     def handle(self, **options):
         from datetime import datetime, date, timedelta
         from django.utils import timezone
@@ -16,72 +19,71 @@ class Command(BaseCommand):
         from classes.models import YogaClass
         from courses.models import Course
         from lessons.models import Lesson
-        today = timezone.now()
+        from core.models import User, Trainer
 
+        print("Create trainers")
+        num_users = User.objects.count()
+        if num_users == 0:
+            num_users = 1
+        for i in range(num_users, num_users + 3):
+            data = {
+                'username': 'trainer' + str(i),
+                'email': 'trainer' + str(i) + '@trainer.com',
+            }
+            trainer = User(**data)
+            trainer.set_password('truong77')
+            trainer.is_active = True
+            trainer.is_staff = False
+            trainer.is_trainer = True
+            trainer.is_superuser = False
+            trainer.save()
+            Trainer.objects.create(user=trainer)
+
+        today = timezone.now()
         print("Create some course")
-        data = {
-            'name': 'Course 1',
-            'slug': 'course-1',
-            'description': 'description 1'
-        }
-        course1 = Course(**data)
-        course1.save()
-        data = {
-            'name': 'Course 2',
-            'slug': 'course-2',
-            'description': 'description 2'
-        }
-        course2 = Course(**data)
-        course2.save()
+        num_courses = Course.objects.count()
+        if num_courses == 0:
+            num_courses = 1
+        for i in range(num_courses, num_courses + 3):
+            data = {
+                'name': 'Course ' + str(i),
+                'description': 'description ' + str(i)
+            }
+            course = Course(**data)
+            course.save()
 
         print("Create some classes")
+        trainer1 = Trainer.objects.first()
+        course1 = Course.objects.first()
         course1.classes.create(
             name='Yoga 1',
             slug='yoga-1',
             description='description class 1',
             price_per_lesson=50000,
             price_per_month=600000,
-            start_at=today
+            start_at=today,
+            form_trainer=trainer1
         )
 
         print("Create some rooms")
-        data = {
-            "name": "Room 1",
-            "location": "Floor 1",
-            "description": "",
-            "max_people": 10,
-            "state": 0,
-            "created_at": today,
-            "updated_at": today
-        }
-        room1 = Room(**data)
-        room1.save()
-
-        data = {
-            "name": "Room 2",
-            "location": "Floor 2",
-            "description": "",
-            "max_people": 12,
-            "state": 0,
-            "created_at": today,
-            "updated_at": today
-        }
-        room2 = Room(**data)
-        room2.save()
-
-        data = {
-            "name": "Room 3",
-            "location": "Floor 1",
-            "description": "",
-            "max_people": 15,
-            "state": 0,
-            "created_at": today,
-            "updated_at": today
-        }
-        room3 = Room(**data)
-        room3.save()
+        num_rooms = Room.objects.count()
+        if num_rooms == 0:
+            num_rooms = 1
+        for i in range(num_rooms, num_rooms + 3):
+            data = {
+                "name": "Room " + str(i),
+                "location": "Floor " + str(i),
+                "description": "Description room " + str(i),
+                "max_people": 10 + i,
+                "state": 0,
+                "created_at": today,
+                "updated_at": today
+            }
+            room = Room(**data)
+            room.save()
 
         print("Create some lessons")
+        room1 = Room.objects.first()
         data = {
             "room_id": room1.id,
             "yogaclass_id": YogaClass.objects.first().id,
