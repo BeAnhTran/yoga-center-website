@@ -59,7 +59,10 @@ class ClassScheduleView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ClassScheduleView, self).get_context_data(**kwargs)
-        context['lesson_form'] = lesssons_form.LessonForm()
+        lesson_form = lesssons_form.LessonForm()
+        if self.object.form_trainer:
+            lesson_form.fields['trainer'].initial = self.object.form_trainer
+        context['lesson_form'] = lesson_form
         return context
 
 

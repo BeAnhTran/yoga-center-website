@@ -215,26 +215,56 @@
                 url: "{% url 'dashboard:classes-create-new-lesson' yogaclass.id %}",
                 data: $(this).serialize() + '&yogaclass=' + "{{yogaclass.id}}",
                 beforeSend: function () {
+                    $('input.is-invalid').removeClass('is-invalid');
                     $('.invalid-feedback').remove();
                     $("span[id^=" + 'error_1_id_' + "]").remove();
                 }
             }).done(function (data) {
-                $('#modal_create_lesson').modal('hide')
+                $('#modal_create_lesson').modal('hide');
                 $('#form_new_lesson').trigger("reset");
+                Swal.fire(
+                    "{% trans 'done' as t_done %}{{ t_done|title }}",
+                    "{% trans 'create successfully' as t_create_successfully %}{{ t_create_successfully |title }}",
+                    'success'
+                );
                 calendar.refetchEvents();
             }).fail(function (err) {
+                $('input.is-invalid').removeClass('is-invalid');
+                $('.invalid-feedback').remove();
+                $("span[id^=" + 'error_1_id_' + "]").remove();
                 errors = JSON.parse(err.responseText);
                 $.each(errors, function (key, value) {
-                    objStr = "#id_" + key;
-                    htmlError = '<span id="error_1_id_' + key + '" class="invalid-feedback">';
-                    htmlError += '<strong>' + value[0]['message'] + '</strong></span>';
-                    $(htmlError).insertAfter($(objStr));
-                    $(objStr).addClass('is-invalid');
+                    if (key != '__all__') {
+                        objStr = "#id_" + key;
+                        htmlError = '<span id="error_1_id_' + key + '" class="invalid-feedback">';
+                        htmlError += '<strong>' + value[0]['message'] + '</strong></span>';
+                        $(htmlError).insertAfter($(objStr));
+                        $(objStr).addClass('is-invalid');
+                    } else {
+                        Swal.fire(
+                            "{% trans 'error' as t_error %}{{ t_error|title }}",
+                            value[0]['message'],
+                            'error'
+                        )
+                    }
                 });
             });
         });
     });
-
-
+    $("#id_start_time").on("change.datetimepicker", function ({ date, oldDate }) {
+        if (date != null && date._i != undefined) {
+            console.log(date);
+            var d1 = new Date(date._d);
+            var d2 = new Date(d1);
+            d2.setMinutes(d1.getMinutes() + 75);
+            var hr = d2.getHours();
+            var min = d2.getMinutes();
+            if (min < 10) {
+                min = "0" + min;
+            }
+            _time_d2 = hr + ':' + min;
+            $('#id_end_time').val(_time_d2);
+        }
+    });
 </script>
 {% endblock %}
