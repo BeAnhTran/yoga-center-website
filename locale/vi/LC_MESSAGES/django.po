@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-08 14:28+0700\n"
+"POT-Creation-Date: 2020-02-09 15:10+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,14 +116,10 @@ msgid "updated_at"
 msgstr "thời gian cập nhật"
 
 #: .\classes\models.py:62
-#, fuzzy
-#| msgid "Class"
 msgid "Yoga Class"
 msgstr "Lớp"
 
 #: .\classes\models.py:63
-#, fuzzy
-#| msgid "Classes"
 msgid "Yoga Classes"
 msgstr "Lớp học"
 
@@ -158,7 +154,7 @@ msgstr "Tên"
 msgid "Description"
 msgstr "Mô tả"
 
-#: .\dashboard\forms\classes_form.py:92 .\dashboard\forms\lesssons_form.py:61
+#: .\dashboard\forms\classes_form.py:92 .\dashboard\forms\lesssons_form.py:75
 msgid "Save"
 msgstr "Lưu"
 
@@ -174,25 +170,29 @@ msgstr "Ngày kết thúc phải sau ngày bắt đầu"
 msgid "wrong_start_date"
 msgstr "Thời gian bắt đầu không hợp lệ"
 
-#: .\dashboard\forms\lesssons_form.py:16 .\lessons\models.py:27
+#: .\dashboard\forms\lesssons_form.py:26 .\lessons\models.py:27
 msgid "day"
 msgstr "ngày"
 
-#: .\dashboard\forms\lesssons_form.py:24 .\lessons\models.py:29
+#: .\dashboard\forms\lesssons_form.py:34 .\lessons\models.py:29
 msgid "start_time"
 msgstr "thời gian bắt đầu"
 
-#: .\dashboard\forms\lesssons_form.py:33 .\lessons\models.py:31
+#: .\dashboard\forms\lesssons_form.py:43 .\lessons\models.py:31
 msgid "end_time"
 msgstr "thời gian kết thúc"
 
-#: .\dashboard\forms\lesssons_form.py:46 .\lessons\models.py:33
+#: .\dashboard\forms\lesssons_form.py:56 .\lessons\models.py:33
 msgid "notes"
 msgstr "ghi chú"
 
-#: .\dashboard\forms\lesssons_form.py:74
+#: .\dashboard\forms\lesssons_form.py:88
 msgid "error_end_time_must_be_greater_than_start_time"
 msgstr "Thời gian kết thúc phải sau thời gian bắt đầu"
+
+#: .\dashboard\forms\lesssons_form.py:104
+msgid "overlap_time"
+msgstr "thời gian đã bị trùng"
 
 #: .\dashboard\templates\dashboard\classes\edit.html:12
 #: .\dashboard\templates\dashboard\classes\new.html:9
@@ -306,6 +306,18 @@ msgstr "Giờ bắt đầu"
 msgid "End Time"
 msgstr "Giờ kết thúc"
 
+#: .\dashboard\templates\dashboard\classes\schedule.html:226
+msgid "done"
+msgstr "hoàn thành"
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:227
+msgid "create successfully"
+msgstr "tạo thành công"
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:245
+msgid "error"
+msgstr "lỗi"
+
 #: .\dashboard\templates\dashboard\classes\show.html:24
 msgid "edit"
 msgstr "sửa"
@@ -324,24 +336,53 @@ msgstr "Không có %(value)s"
 msgid "type"
 msgstr "loại"
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:18
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:15
 msgid "Dashboard"
 msgstr "Bảng điều khiển"
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:26
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:34
-msgid "Courses"
-msgstr "Khóa học"
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:23
+msgid "users"
+msgstr "người sử dụng"
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:26
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:30
+msgid "trainees"
+msgstr "học viên"
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:36
+msgid "trainers"
+msgstr "huấn luyện viên"
+
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:42
-msgid "Classes"
-msgstr "Lớp học"
+msgid "staffs"
+msgstr "nhân viên"
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:26
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:50
-msgid "Rooms"
-msgstr "Phòng tập"
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:48
+msgid "admin"
+msgstr "admin"
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:60
+msgid "courses"
+msgstr "khóa học"
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:69
+msgid "classes"
+msgstr "lớp học"
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:78
+msgid "lessons"
+msgstr "buổi tập"
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:88
+msgid "cards"
+msgstr "thẻ tập"
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:101
+msgid "card types"
+msgstr "loại thẻ"
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:113
+msgid "rooms"
+msgstr "phòng tập"
 
 #: .\dashboard\templates\dashboard\layouts\topbar.html:14
 msgid "Search for"
@@ -364,8 +405,6 @@ msgid "location"
 msgstr "vị trí"
 
 #: .\lessons\models.py:19
-#, fuzzy
-#| msgid "Class"
 msgid "yogaclass"
 msgstr "Lớp"
 
@@ -33550,6 +33589,12 @@ msgstr ""
 #: .\venv\Lib\site-packages\languages\languages.py:8119
 msgid "Zuojiang Zhuang"
 msgstr ""
+
+#~ msgid "Courses"
+#~ msgstr "Khóa học"
+
+#~ msgid "Rooms"
+#~ msgstr "Phòng tập"
 
 #~ msgid "Action"
 #~ msgstr "Hoạt động"

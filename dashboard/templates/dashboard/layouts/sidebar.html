@@ -1,68 +1,129 @@
 {% load i18n %}
 
 <ul class="navbar-nav bg-dark-custom sidebar sidebar-dark accordion" id="accordionSidebar">
-
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-text mx-3">Lotus <span class="flaticon-lotus"></span> Yoga</div>
         <div class="sidebar-brand-text-2 mx-3"><span class="flaticon-lotus"></span></div>
     </a>
 
-    <!-- Divider -->
     <hr class="sidebar-divider my-0">
-
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
         <a class="nav-link" href="{% url 'dashboard:index'%}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>{% trans 'Dashboard' %}</span></a>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        {% trans 'Courses' %} - {% trans 'Classes' %} - {% trans 'Rooms' %}
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
+    <hr class="sidebar-divider my-0">
+    <!-- Nav Item - Users -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true"
+            aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-users"></i>
+            <span>{% trans 'users' as t_users %}{{ t_users|capfirst}}</span>
+        </a>
+        <div id="collapseUser" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white pb-2 collapse-inner rounded">
+                <a class="collapse-item" href="javascript:;">
+                    <i class="fas fa-fw fa-user-ninja"></i>
+                    <span>
+                        {% trans 'trainees' as t_trainees %} {{ t_trainees|capfirst }}
+                    </span>
+                </a>
+                <a class="collapse-item" href="javascript:;">
+                    <i class="fas fa-fw fa-user-graduate"></i>
+                    <span>
+                        {% trans 'trainers' as t_trainers %} {{ t_trainers|capfirst }}
+                    </span>
+                </a>
+                <a class="collapse-item" href="javascript:;">
+                    <i class="fas fa-fw fa-user-tie"></i>
+                    <span>
+                        {% trans 'staffs' as t_staffs %} {{ t_staffs|capfirst }}
+                    </span>
+                </a>
+                <a class="collapse-item" href="javascript:;">
+                    <i class="fas fa-fw fa-user-cog"></i>
+                    <span>
+                        {% trans 'admin' as t_admin %}{{ t_admin|capfirst }}
+                    </span>
+                </a>
+            </div>
+        </div>
+    </li>
+    <hr class="sidebar-divider my-0">
+    <!-- Nav Item - Courses -->
     <li class="nav-item">
         <a class="nav-link" href="{% url 'dashboard:courses-list'%}">
             <i class="fas fa-fw fa-window-restore"></i>
             <span>
-                {% trans 'Courses' %}
+                {% trans 'courses' as t_courses %} {{ t_courses|capfirst }}
             </span>
         </a>
     </li>
+    <!-- Nav Item - Classes -->
     <li class="nav-item">
         <a class="nav-link" href="{% url 'dashboard:classes-list' %}">
             <i class="fas fa-fw fa-braille"></i>
             <span>
-                {% trans 'Classes' %}
+                {% trans 'classes' as t_classes %} {{ t_classes|capfirst }}
             </span>
         </a>
     </li>
+    <!-- Nav Item - Lessons -->
+    <li class="nav-item">
+        <a class="nav-link" href="javascript:;">
+            <i class="fab fa-leanpub"></i>
+            <span>
+                {% trans 'lessons' as t_lessons %} {{ t_lessons|capfirst }}
+            </span>
+        </a>
+    </li>
+    <hr class="sidebar-divider my-0">
+    <!-- Nav Item - Card Types - Cards -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCards" aria-expanded="true"
+            aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-id-card"></i>
+            <span>{% trans 'cards' as t_cards %} {{ t_cards|capfirst }}</span>
+        </a>
+        <div id="collapseCards" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white pb-2 collapse-inner rounded">
+                <a class="collapse-item" href="utilities-color.html">
+                    <i class="fas fa-fw fa-id-card-alt"></i>
+                    <span>
+                        {{ t_cards|capfirst }}
+                    </span>
+                </a>
+                <a class="collapse-item" href="utilities-border.html">
+                    <i class="fas fa-fw fa-vr-cardboard"></i>
+                    <span>
+                        {% trans 'card types' as t_card_types %} {{ t_card_types|title }}
+                    </span>
+                </a>
+            </div>
+        </div>
+    </li>
+    <hr class="sidebar-divider my-0">
+    <!-- Nav Item - Rooms -->
     <li class="nav-item">
         <a class="nav-link" href="{% url 'dashboard:rooms-list' %}">
             <i class="fab fa-fw fa-buromobelexperte"></i>
             <span>
-                {% trans 'Rooms' %}
+                {% trans 'rooms' as t_rooms %} {{ t_rooms|capfirst }}
             </span>
         </a>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Nav Item - Utilities Collapse Menu -->
+    <hr class="sidebar-divider my-0">
+    <!-- Nav Item - Template -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2"
             aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Template</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
             <div class="bg-white pb-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
                 <a class="collapse-item" href="utilities-color.html">Colors</a>
@@ -76,8 +137,6 @@
             </div>
         </div>
     </li>
-
-
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

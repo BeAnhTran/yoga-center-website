@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-08 14:27+0700\n"
+"POT-Creation-Date: 2020-02-09 15:05+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -154,7 +154,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:92 .\dashboard\forms\lesssons_form.py:61
+#: .\dashboard\forms\classes_form.py:92 .\dashboard\forms\lesssons_form.py:75
 msgid "Save"
 msgstr ""
 
@@ -170,29 +170,33 @@ msgstr "End date must be greater than start date"
 msgid "wrong_start_date"
 msgstr "Wrong start date"
 
-#: .\dashboard\forms\lesssons_form.py:16 .\lessons\models.py:27
+#: .\dashboard\forms\lesssons_form.py:26 .\lessons\models.py:27
 msgid "day"
 msgstr ""
 
-#: .\dashboard\forms\lesssons_form.py:24 .\lessons\models.py:29
+#: .\dashboard\forms\lesssons_form.py:34 .\lessons\models.py:29
 #, fuzzy
 #| msgid "start_at"
 msgid "start_time"
 msgstr "start at"
 
-#: .\dashboard\forms\lesssons_form.py:33 .\lessons\models.py:31
+#: .\dashboard\forms\lesssons_form.py:43 .\lessons\models.py:31
 #, fuzzy
 #| msgid "end_at"
 msgid "end_time"
 msgstr "end at"
 
-#: .\dashboard\forms\lesssons_form.py:46 .\lessons\models.py:33
+#: .\dashboard\forms\lesssons_form.py:56 .\lessons\models.py:33
 msgid "notes"
 msgstr ""
 
-#: .\dashboard\forms\lesssons_form.py:74
+#: .\dashboard\forms\lesssons_form.py:88
 msgid "error_end_time_must_be_greater_than_start_time"
 msgstr "End time must be greater than start time"
+
+#: .\dashboard\forms\lesssons_form.py:104
+msgid "overlap_time"
+msgstr "overlap time"
 
 #: .\dashboard\templates\dashboard\classes\edit.html:12
 #: .\dashboard\templates\dashboard\classes\new.html:9
@@ -308,6 +312,18 @@ msgstr ""
 msgid "End Time"
 msgstr ""
 
+#: .\dashboard\templates\dashboard\classes\schedule.html:226
+msgid "done"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:227
+msgid "create successfully"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:245
+msgid "error"
+msgstr ""
+
 #: .\dashboard\templates\dashboard\classes\show.html:24
 msgid "edit"
 msgstr ""
@@ -326,23 +342,58 @@ msgstr ""
 msgid "type"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:18
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:15
 msgid "Dashboard"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:26
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:34
-msgid "Courses"
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:23
+msgid "users"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:26
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:30
+#, fuzzy
+#| msgid "form_trainer"
+msgid "trainees"
+msgstr "form trainer"
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:36
+#, fuzzy
+#| msgid "form_trainer"
+msgid "trainers"
+msgstr "form trainer"
+
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:42
-msgid "Classes"
+msgid "staffs"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:26
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:50
-msgid "Rooms"
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:48
+msgid "admin"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:60
+#, fuzzy
+#| msgid "price_course"
+msgid "courses"
+msgstr "price of course"
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:69
+msgid "classes"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:78
+msgid "lessons"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:88
+msgid "cards"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:101
+msgid "card types"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:113
+msgid "rooms"
 msgstr ""
 
 #: .\dashboard\templates\dashboard\layouts\topbar.html:14
