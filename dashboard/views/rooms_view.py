@@ -29,17 +29,21 @@ class RoomListView(ListView):
     paginate_by = 5
 
 
+@method_decorator([login_required, admin_required], name='dispatch')
 class RoomDetailView(DetailView):
     model = Room
     template_name = 'dashboard/rooms/detail.html'
     context_object_name = 'room'
 
 
+@login_required
+@admin_required
 def get_lessons(request, pk):
     start_date = datetime.fromisoformat(request.GET['startStr'])
     end_date = datetime.fromisoformat(request.GET['endStr'])
 
     room = Room.objects.get(pk=pk)
     lessons = room.lessons.filter(day__range=[start_date, end_date])
-    data = serializers.serialize('json', lessons, use_natural_foreign_keys=True)
+    data = serializers.serialize(
+        'json', lessons, use_natural_foreign_keys=True)
     return HttpResponse(data, content_type="application/json")
