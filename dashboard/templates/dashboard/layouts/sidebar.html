@@ -89,13 +89,13 @@
         </a>
         <div id="collapseCards" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white pb-2 collapse-inner rounded">
-                <a class="collapse-item" href="utilities-color.html">
+                <a class="collapse-item" href="{% url 'dashboard:cards-list' %}">
                     <i class="fas fa-fw fa-id-card-alt"></i>
                     <span>
                         {{ t_cards|capfirst }}
                     </span>
                 </a>
-                <a class="collapse-item" href="utilities-border.html">
+                <a class="collapse-item" href="{% url 'dashboard:card-types-list' %}">
                     <i class="fas fa-fw fa-vr-cardboard"></i>
                     <span>
                         {% trans 'card types' as t_card_types %} {{ t_card_types|title }}

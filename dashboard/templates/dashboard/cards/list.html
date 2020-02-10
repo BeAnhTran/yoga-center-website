@@ -3,23 +3,20 @@
 {% load i18n %}
 {% load dashboard_extras %}
 
-{% block specified_css %}
-<link href="{% static 'css/dashboard/classes/list.css' %}" rel="stylesheet">
-{% endblock %}
 
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between">
-    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Class List' %}</h1>
-    <a href="{% url 'dashboard:classes-new' %}" class="btn btn-sm btn-success shadow-sm"><i
+    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Card List' %}</h1>
+    <a href="javascript:;" class="btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
 </div>
 <hr>
 <!-- Content Row -->
-{% if not classes %}
+{% if not cards %}
 <p class="text-danger">
-    {% trans 'class' as trans_class %}
-    {% blocktrans with value=trans_class %}No {{ value }} yet{% endblocktrans %}
+    {% trans 'card' as trans_card %}
+    {% blocktrans with value=trans_card %}No {{ value }} yet{% endblocktrans %}
 </p>
 {% else %}
 <div class="container-fluid mb-5">
@@ -47,7 +44,7 @@
                         <td>
                             {% if class.form_trainer %}
                             {{ class.form_trainer }}
-                            {% else %}
+                            {% else %} 
                             {% trans 'have not updated yet' as t_formtrainer %}
                             {{ t_formtrainer|capfirst }}
                             {% endif %}
@@ -100,18 +97,5 @@
 </div>
 
 {% endif %}
-
-{% endblock %}
-
-{% block specified_js %}
-<script type="text/javascript">
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-    $('.delete-class').click(function () {
-        $(this).siblings('form').children('input[type=submit]').click();
-    });
-</script>
-
 
 {% endblock %}

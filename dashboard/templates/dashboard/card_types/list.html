@@ -1,0 +1,53 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load dashboard_extras %}
+
+
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between">
+    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small>
+        {% trans 'card type list' as t_card_type_list %} {{ t_card_type_list|capfirst }}</h1>
+    <a href="javascript:;" class="btn btn-sm btn-success shadow-sm"><i
+            class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
+</div>
+<hr>
+{% if not card_types %}
+<p class="text-danger">
+    {% trans 'card types' as trans_card_types %}
+    {% blocktrans with value=trans_card_types %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Description' %}</th>
+                        <th>{% trans 'multiplier' as t_multiplier %} {{ t_multiplier|capfirst }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for card_type in card_types %}
+                    <tr>
+                        <td>{{ card_type.id }}</td>
+                        <td>{{ card_type.name|title }}</td>
+                        <td>{{ card_type.description }}</td>
+                        <td>{{ card_type.multiplier }}</td>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
