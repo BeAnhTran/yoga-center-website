@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 17:34+0700\n"
+"POT-Creation-Date: 2020-02-11 17:46+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,6 +76,7 @@ msgid "updated_at"
 msgstr "thời gian cập nhật"
 
 #: .\cards\models.py:40 .\templates\registration\signup.html:33
+#: .\templates\registration\trainee_signup_form.html:15
 msgid "trainee"
 msgstr "học viên"
 
@@ -726,6 +727,11 @@ msgstr "Đăng kí một tài khoản miễn phí"
 #: .\templates\registration\signup.html:30
 msgid "Select below the type of account you want to create"
 msgstr "Chọn loại tài khoản mà bạn muốn đăng kí"
+
+#: .\templates\registration\trainee_signup_form.html:16
+#, python-format
+msgid "Sign up as %(value)s"
+msgstr "Đăng kí tài khoản %(value)s"
 
 #: .\venv\Lib\site-packages\crispy_forms\tests\test_form_helper.py:142
 #: .\venv\Lib\site-packages\crispy_forms\tests\test_form_helper.py:152

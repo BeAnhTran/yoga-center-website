@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 17:33+0700\n"
+"POT-Creation-Date: 2020-02-11 17:45+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,6 +76,7 @@ msgid "updated_at"
 msgstr "updated at"
 
 #: .\cards\models.py:40 .\templates\registration\signup.html:33
+#: .\templates\registration\trainee_signup_form.html:15
 #, fuzzy
 #| msgid "form_trainer"
 msgid "trainee"
@@ -759,6 +760,11 @@ msgstr ""
 
 #: .\templates\registration\signup.html:30
 msgid "Select below the type of account you want to create"
+msgstr ""
+
+#: .\templates\registration\trainee_signup_form.html:16
+#, python-format
+msgid "Sign up as %(value)s"
 msgstr ""
 
 #: .\venv\Lib\site-packages\crispy_forms\tests\test_form_helper.py:142
