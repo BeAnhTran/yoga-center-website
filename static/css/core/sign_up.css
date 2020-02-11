@@ -13,15 +13,15 @@
   
   .btn-teacher {
     color: #fff;
-    background-color: #ffc838;
-    border-color: #ffc838;
+    background-color: #3e206d;
+    border-color: #3e206d;
   }
   
   .btn-teacher:hover,
   .btn-teacher:active {
     color: #fff;
-    background-color: #e7a807;
-    border-color: #e7a807;
+    background-color: #916dd5;
+    border-color: #916dd5;
   }
 
   .img-logo-sign-up{
@@ -36,7 +36,7 @@
   }
 
   .sign-up-choose {
-    background: linear-gradient(90deg, #12568800 0%, #125688 100%);
+    background: linear-gradient(90deg, #12568800 0%, rgba(105, 88, 129, 0.51) 100%);
     padding-top: 3rem;
     justify-content: center;
     border-radius: 0.5rem;

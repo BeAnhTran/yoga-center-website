@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+
 
 <footer class="footer-section">
     <div class="container">
@@ -17,29 +19,35 @@
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="footer-widget pl-0 pl-lg-5">
-                    <h2 class="fw-title">Connect & Sharing</h2>
+                    <h2 class="fw-title">{% trans 'Connect & Sharing' %}</h2>
                     <ul>
-                        <li><a href="#">Gallery</a></li>
-                        <li><a href="#">Community Event</a></li>
+                        <li><a href="javascript:;">{% trans 'Gallery' %}</a></li>
+                        <li><a href="javascript:;">{% trans 'Community Event' %}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-2 col-sm-6">
                 <div class="footer-widget">
-                    <h2 class="fw-title">About Us</h2>
+                    <h2 class="fw-title">{% trans 'About Us' %}</h2>
                     <ul>
-                        <li><a href="#">Introduce</a></li>
-                        <li><a href="#">Our Mission</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="javascript:;">{% trans 'Introduce' %}</a></li>
+                        <li><a href="javascript:;">{% trans 'Our Mission' %}</a></li>
+                        <li><a href="javascript:;">{% trans 'Contact Us' %}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-4 col-sm-6">
                 <div class="footer-widget pl-0 pl-lg-5">
-                    <h2 class="fw-title">Open time</h2>
+                    <h2 class="fw-title">{% trans 'Open time' %}</h2>
                     <ul>
-                        <li><i class="material-icons">alarm_on</i>Mon - Fri: 6:30am - 07:45pm</li>
-                        <li><i class="material-icons">alarm_on</i>Sat - Sun: 8:30am - 05:45pm</li>
+                        {% trans 'monday'  as t_monday%}
+                        {% trans 'friday' as t_friday %}
+                        {% trans 'saturday' as t_saturday %}
+                        {% trans 'sunday' as t_sunday %}
+                        <li><i class="material-icons">alarm_on</i>{{ t_monday|capfirst }} - {{ t_friday|capfirst }}: 6:30am -
+                            07:45pm</li>
+                        <li><i class="material-icons">alarm_on</i>{{ t_saturday|capfirst }} - {{ t_sunday|capfirst }}: 8:30am
+                            - 05:45pm</li>
                     </ul>
                 </div>
             </div>
@@ -48,10 +56,10 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="javascript:;"><i class="fab fa-facebook"></i></a>
+                        <a href="javascript:;"><i class="fab fa-instagram"></i></a>
+                        <a href="javascript:;"><i class="fab fa-twitter"></i></a>
+                        <a href="javascript:;"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
                 <div class="col-md-8 text-md-right">

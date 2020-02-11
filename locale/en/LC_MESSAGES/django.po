@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 16:58+0700\n"
+"POT-Creation-Date: 2020-02-11 17:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,7 +75,7 @@ msgstr "created at"
 msgid "updated_at"
 msgstr "updated at"
 
-#: .\cards\models.py:40
+#: .\cards\models.py:40 .\templates\registration\signup.html:33
 #, fuzzy
 #| msgid "form_trainer"
 msgid "trainee"
@@ -258,7 +258,7 @@ msgstr "form trainer"
 msgid "Filter by Day"
 msgstr ""
 
-#: .\classes\templates\classes\list.html:119
+#: .\classes\templates\classes\list.html:119 .\templates\layouts\footer.html:43
 msgid "monday"
 msgstr ""
 
@@ -274,15 +274,15 @@ msgstr ""
 msgid "thurstday"
 msgstr ""
 
-#: .\classes\templates\classes\list.html:137
+#: .\classes\templates\classes\list.html:137 .\templates\layouts\footer.html:44
 msgid "friday"
 msgstr ""
 
-#: .\classes\templates\classes\list.html:141
+#: .\classes\templates\classes\list.html:141 .\templates\layouts\footer.html:45
 msgid "saturday"
 msgstr ""
 
-#: .\classes\templates\classes\list.html:145
+#: .\classes\templates\classes\list.html:145 .\templates\layouts\footer.html:46
 msgid "sunday"
 msgstr ""
 
@@ -626,7 +626,7 @@ msgstr ""
 msgid "yogaclass"
 msgstr ""
 
-#: .\lessons\models.py:23
+#: .\lessons\models.py:23 .\templates\registration\signup.html:35
 msgid "trainer"
 msgstr ""
 
@@ -659,6 +659,40 @@ msgstr ""
 msgid "Sign Up"
 msgstr ""
 
+#: .\templates\layouts\footer.html:22
+msgid "Connect & Sharing"
+msgstr ""
+
+#: .\templates\layouts\footer.html:24
+msgid "Gallery"
+msgstr ""
+
+#: .\templates\layouts\footer.html:25
+msgid "Community Event"
+msgstr ""
+
+#: .\templates\layouts\footer.html:31
+msgid "About Us"
+msgstr ""
+
+#: .\templates\layouts\footer.html:33
+msgid "Introduce"
+msgstr ""
+
+#: .\templates\layouts\footer.html:34
+msgid "Our Mission"
+msgstr ""
+
+#: .\templates\layouts\footer.html:35
+msgid "Contact Us"
+msgstr ""
+
+#: .\templates\layouts\footer.html:41
+#, fuzzy
+#| msgid "end_at"
+msgid "Open time"
+msgstr "end at"
+
 #: .\templates\layouts\header.html:50
 msgid "profile"
 msgstr ""
@@ -675,7 +709,7 @@ msgstr ""
 msgid "login"
 msgstr ""
 
-#: .\templates\layouts\header.html:71
+#: .\templates\layouts\header.html:71 .\templates\registration\signup.html:13
 msgid "register"
 msgstr ""
 
@@ -717,6 +751,14 @@ msgstr ""
 
 #: .\templates\layouts\header.html:107
 msgid "Shop"
+msgstr ""
+
+#: .\templates\registration\signup.html:27
+msgid "Sign up for a free account"
+msgstr ""
+
+#: .\templates\registration\signup.html:30
+msgid "Select below the type of account you want to create"
 msgstr ""
 
 #: .\venv\Lib\site-packages\crispy_forms\tests\test_form_helper.py:142

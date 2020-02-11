@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+
 {% block specified_css %}
 <link rel="stylesheet" href="{% static 'css/core/sign_up.css'%}">
 {% endblock %}
 {% block content %}
+<section class="page-top-section set-bg" data-setbg="{% static 'imgs/page-top-bg.jpg'%}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 m-auto text-white">
+        <h2>{% trans 'register'%}</h2>
+      </div>
+    </div>
+  </div>
+</section>
 <div class="container card mt-5">
   <div class="row justify-content-center">
     <div class="card-body">
@@ -13,11 +24,15 @@
         </div>
         <div class="col-md-6 sign-up-choose">
           <h2 class="mb-2">
-            Sign up for a free account
+            {% trans 'Sign up for a free account' %}
           </h2>
-          <p class="lead">Select below the type of account you want to create</p>
-          <a href="{% url 'core:trainee_signup' %}" class="btn btn-student btn-lg" role="button">I'm a trainee</a>
-          <a href="{% url 'core:trainer_signup' %}" class="btn btn-teacher btn-lg" role="button">I'm a trainer</a>
+          <p class="lead">
+            {% trans 'Select below the type of account you want to create'%}
+          </p>
+          <a href="{% url 'core:trainee_signup' %}" class="btn btn-student btn-lg"
+            role="button">{% trans 'trainee' as t_trainee %}{{t_trainee|upper}}</a>
+          <a href="{% url 'core:trainer_signup' %}" class="btn btn-teacher btn-lg"
+            role="button">{% trans 'trainer' as t_trainer %}{{ t_trainer|upper }}</a>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 17:01+0700\n"
+"POT-Creation-Date: 2020-02-11 17:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,15 +75,11 @@ msgstr "thời gian tạo"
 msgid "updated_at"
 msgstr "thời gian cập nhật"
 
-#: .\cards\models.py:40
-#, fuzzy
-#| msgid "trainees"
+#: .\cards\models.py:40 .\templates\registration\signup.html:33
 msgid "trainee"
 msgstr "học viên"
 
 #: .\cards\models.py:42
-#, fuzzy
-#| msgid "card types"
 msgid "card type"
 msgstr "loại thẻ"
 
@@ -221,8 +217,6 @@ msgid "newest"
 msgstr "mới nhất"
 
 #: .\classes\templates\classes\list.html:78
-#, fuzzy
-#| msgid "Trainers"
 msgid "Yoga Trainer"
 msgstr "Huấn luyện viên"
 
@@ -250,7 +244,7 @@ msgstr "Chọn HLV"
 msgid "Filter by Day"
 msgstr "Lọc theo ngày"
 
-#: .\classes\templates\classes\list.html:119
+#: .\classes\templates\classes\list.html:119 .\templates\layouts\footer.html:43
 msgid "monday"
 msgstr "thứ 2"
 
@@ -266,15 +260,15 @@ msgstr "thứ 4"
 msgid "thurstday"
 msgstr "thứ 5"
 
-#: .\classes\templates\classes\list.html:137
+#: .\classes\templates\classes\list.html:137 .\templates\layouts\footer.html:44
 msgid "friday"
 msgstr "thứ 6"
 
-#: .\classes\templates\classes\list.html:141
+#: .\classes\templates\classes\list.html:141 .\templates\layouts\footer.html:45
 msgid "saturday"
 msgstr "thứ 7"
 
-#: .\classes\templates\classes\list.html:145
+#: .\classes\templates\classes\list.html:145 .\templates\layouts\footer.html:46
 msgid "sunday"
 msgstr "chủ nhật"
 
@@ -604,7 +598,7 @@ msgstr "vị trí"
 msgid "yogaclass"
 msgstr "Lớp"
 
-#: .\lessons\models.py:23
+#: .\lessons\models.py:23 .\templates\registration\signup.html:35
 msgid "trainer"
 msgstr "huấn luyện viên"
 
@@ -637,6 +631,38 @@ msgstr "Quên mật khẩu?"
 msgid "Sign Up"
 msgstr "Đăng kí"
 
+#: .\templates\layouts\footer.html:22
+msgid "Connect & Sharing"
+msgstr "Kết nối"
+
+#: .\templates\layouts\footer.html:24
+msgid "Gallery"
+msgstr "Bộ sưu tập"
+
+#: .\templates\layouts\footer.html:25
+msgid "Community Event"
+msgstr "Hoạt động"
+
+#: .\templates\layouts\footer.html:31
+msgid "About Us"
+msgstr "Về chúng tôi"
+
+#: .\templates\layouts\footer.html:33
+msgid "Introduce"
+msgstr "Giới thiệu"
+
+#: .\templates\layouts\footer.html:34
+msgid "Our Mission"
+msgstr "Sứ mệnh"
+
+#: .\templates\layouts\footer.html:35
+msgid "Contact Us"
+msgstr "Liên hệ"
+
+#: .\templates\layouts\footer.html:41
+msgid "Open time"
+msgstr "Giờ làm việc"
+
 #: .\templates\layouts\header.html:50
 msgid "profile"
 msgstr "trang cá nhân"
@@ -653,7 +679,7 @@ msgstr "đăng xuất"
 msgid "login"
 msgstr "đăng nhập"
 
-#: .\templates\layouts\header.html:71
+#: .\templates\layouts\header.html:71 .\templates\registration\signup.html:13
 msgid "register"
 msgstr "đăng kí"
 
@@ -692,6 +718,14 @@ msgstr "Bài viết"
 #: .\templates\layouts\header.html:107
 msgid "Shop"
 msgstr "Cửa hàng"
+
+#: .\templates\registration\signup.html:27
+msgid "Sign up for a free account"
+msgstr "Đăng kí một tài khoản miễn phí"
+
+#: .\templates\registration\signup.html:30
+msgid "Select below the type of account you want to create"
+msgstr "Chọn loại tài khoản mà bạn muốn đăng kí"
 
 #: .\venv\Lib\site-packages\crispy_forms\tests\test_form_helper.py:142
 #: .\venv\Lib\site-packages\crispy_forms\tests\test_form_helper.py:152
