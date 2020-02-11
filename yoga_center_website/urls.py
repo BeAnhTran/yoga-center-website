@@ -27,6 +27,8 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     # index page
     path('', include('core.urls')),
+    path('courses/', include('courses.urls')),
+    path('classes/', include('classes.urls')),
     path('dashboard/', include('dashboard.urls')),
     # admin site
     path('admin/', admin.site.urls),

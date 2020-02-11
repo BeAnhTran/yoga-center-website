@@ -1,0 +1,111 @@
+{% load static %}
+{% load i18n %}
+
+<header class="header-section">
+    <div class="header-top">
+        <div class="row m-0">
+            <div class="col-md-6 d-none d-md-block p-0">
+                <div class="header-info">
+                    <i class="material-icons">map</i>
+                    <p>140 Đường A4 - Tân Bình</p>
+                </div>
+                <div class="header-info">
+                    <i class="material-icons">phone</i>
+                    <p>(965) 436 3274</p>
+                </div>
+            </div>
+            <div class="col-md-6 text-left text-md-right p-0">
+                <div class="header-info">
+                    <i class="material-icons">language</i>
+                    <form id="form-translations" action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                        <select id="language" name="language" class="language-select">
+                            {% get_current_language as LANGUAGE_CODE %} {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                            <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}
+                                selected{% endif %}> {{ language.code }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <input class="d-none" type="submit" value="Go" />
+                    </form>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="header-info">
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="javascript:;" id="user_infoDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <span
+                                class="mr-2 d-none d-lg-inline">{{ user.get_full_name|default:user.username|capfirst }}</span>
+                            <img class="img-profile rounded-circle"
+                                src="https://scontent.fdad2-1.fna.fbcdn.net/v/t1.0-9/59819452_522053294866587_1382161011754139648_n.jpg?_nc_cat=110&_nc_eui2=AeF9fd7MwEQfUTL8-CnUBThJBJV7HPbJv240wiZv4iCxy3RfkLoh2J-hXwf2kIQa8sEaEHRRm741DA6mb3aapHu32eak0Su8Mw2TQH8y8hKe4A&_nc_ohc=oYK6M0fVYrAAX-GxwXD&_nc_ht=scontent.fdad2-1.fna&oh=171922378600e76d57576db05799e580&oe=5EA82CA6">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="user_infoDropdown">
+                            <a class="dropdown-item" href="javascript:;">
+                                <i class="fa fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                {% trans 'profile' as t_profile  %} {{ t_profile|capfirst }}
+                            </a>
+                            <a class="dropdown-item" href="javascript:;">
+                                <i class="fa fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                {% trans 'activity log' as t_activity_log %} {{ t_activity_log|capfirst }}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                {% trans 'logout' as t_logout %} {{ t_logout|capfirst }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="header-info">
+                    <a class="btn btn-sm btn-default header-info-link"
+                        href="{% url 'account_login' %}">{% trans 'login' as t_login %}{{ t_login|capfirst }}</a>
+                </div>
+                <div class="header-info">
+                    <a class="btn btn-sm btn-default header-info-link"
+                        href="{% url 'core:account_signup' %}">{% trans 'register' as t_register %}
+                        {{ t_register|capfirst }} </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <a href="{% url 'core:home' %}" class="site-logo">
+            Lotus <span class="flaticon-lotus"></span> Yoga
+        </a>
+        <div class="hb-right">
+            <div class="hb-switch" id="search-switch">
+                <img src="{% static 'imgs/icons/search.png' %}" alt="">
+            </div>
+            <div class="hb-switch" id="infor-switch">
+                <img src="{% static 'imgs/icons/bars.png' %}" alt="">
+            </div>
+        </div>
+        <div class="container">
+            <ul class="main-menu">
+                <li><a href="{% url 'core:home' %}" class="active">{% trans 'Home' %}</a></li>
+                <li><a href="javascript:;">{% trans 'About us' %}</a>
+                    <ul class="sub-menu">
+                        <li><a href="javascript:;">{% trans 'Trainers' %}</a></li>
+                        <li><a href="javascript:;">{% trans 'Contact' %}</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;">{% trans 'Courses'%} - {% trans 'Classes'%}</a>
+                    <ul class="sub-menu">
+                        <li><a href="{% url 'courses:list' %}">{% trans 'Courses' %}</a></li>
+                        <li><a href="{% url 'classes:list' %}">{% trans 'Classes' %}</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;">{% trans 'Schedule' %}</a></li>
+                <li><a href="javascript:;">{% trans 'Blog'%}</a></li>
+                <li><a href="javascript:;">{% trans 'Shop'%}</a></li>
+            </ul>
+        </div>
+    </div>
+</header>

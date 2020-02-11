@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-10 11:42+0700\n"
+"POT-Creation-Date: 2020-02-11 17:01+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr "hình thức sử dụng"
 msgid "min lessons required"
 msgstr "số buổi đăng kí tối thiểu"
 
-#: .\cards\models.py:29 .\dashboard\templates\dashboard\card_types\list.html:29
+#: .\cards\models.py:29 .\dashboard\templates\dashboard\card_types\list.html:30
 msgid "multiplier"
 msgstr "hệ số nhân"
 
@@ -133,7 +133,8 @@ msgstr "HLV chủ nhiệm"
 msgid "slug"
 msgstr ""
 
-#: .\classes\models.py:36 .\dashboard\templates\dashboard\classes\show.html:77
+#: .\classes\models.py:36 .\core\models.py:37
+#: .\dashboard\templates\dashboard\classes\show.html:77
 #: .\dashboard\templates\dashboard\courses\list.html:31
 msgid "image"
 msgstr "hình ảnh"
@@ -176,6 +177,111 @@ msgstr "Lớp"
 msgid "Yoga Classes"
 msgstr "Lớp học"
 
+#: .\classes\templates\classes\list.html:8
+#: .\classes\templates\classes\list.html:30
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:69
+msgid "classes"
+msgstr "lớp học"
+
+#: .\classes\templates\classes\list.html:9
+#: .\courses\templates\courses\list.html:9
+#: .\dashboard\templates\dashboard\card_types\list.html:18
+#: .\dashboard\templates\dashboard\cards\list.html:19
+#: .\dashboard\templates\dashboard\classes\list.html:22
+#: .\dashboard\templates\dashboard\courses\list.html:20
+#: .\dashboard\templates\dashboard\rooms\list.html:19
+#, python-format
+msgid "No %(value)s yet"
+msgstr "Không có %(value)s"
+
+#: .\classes\templates\classes\list.html:16
+msgid "Our Classes"
+msgstr "Lớp học của chúng tôi"
+
+#: .\classes\templates\classes\list.html:17
+msgid "just find a class for yourself"
+msgstr "Hãy tìm lớp học phù hợp cho bạn"
+
+#: .\classes\templates\classes\list.html:31
+#: .\courses\templates\courses\list.html:27
+#, python-format
+msgid "Showing %(value1)s of %(value2)s %(value3)s"
+msgstr "Hiển thị %(value1)s / %(value2)s %(value3)s"
+
+#: .\classes\templates\classes\list.html:38
+msgid "default sorting"
+msgstr "sắp xếp"
+
+#: .\classes\templates\classes\list.html:41
+msgid "oldest"
+msgstr "cũ nhất"
+
+#: .\classes\templates\classes\list.html:42
+msgid "newest"
+msgstr "mới nhất"
+
+#: .\classes\templates\classes\list.html:78
+#, fuzzy
+#| msgid "Trainers"
+msgid "Yoga Trainer"
+msgstr "Huấn luyện viên"
+
+#: .\classes\templates\classes\list.html:81
+msgid "book now"
+msgstr "đăng kí"
+
+#: .\classes\templates\classes\list.html:92
+msgid "Search Classes"
+msgstr "Tìm kiếm lớp học"
+
+#: .\classes\templates\classes\list.html:95
+msgid "choose course"
+msgstr "chọn khóa học"
+
+#: .\classes\templates\classes\list.html:102
+msgid "Choose Level"
+msgstr "Chọn cấp độ"
+
+#: .\classes\templates\classes\list.html:109
+msgid "Choose Trainer"
+msgstr "Chọn HLV"
+
+#: .\classes\templates\classes\list.html:115
+msgid "Filter by Day"
+msgstr "Lọc theo ngày"
+
+#: .\classes\templates\classes\list.html:119
+msgid "monday"
+msgstr "thứ 2"
+
+#: .\classes\templates\classes\list.html:123
+msgid "tuesday"
+msgstr "thứ 3"
+
+#: .\classes\templates\classes\list.html:127
+msgid "wednesday"
+msgstr "thứ 4"
+
+#: .\classes\templates\classes\list.html:131
+msgid "thurstday"
+msgstr "thứ 5"
+
+#: .\classes\templates\classes\list.html:137
+msgid "friday"
+msgstr "thứ 6"
+
+#: .\classes\templates\classes\list.html:141
+msgid "saturday"
+msgstr "thứ 7"
+
+#: .\classes\templates\classes\list.html:145
+msgid "sunday"
+msgstr "chủ nhật"
+
+#: .\classes\templates\classes\list.html:149
+msgid "Filter now"
+msgstr "Lọc"
+
 #: .\core\models.py:17 .\venv\Lib\site-packages\languages\languages.py:4098
 #: .\venv\Lib\site-packages\languages\languages.py:4119
 msgid "Male"
@@ -197,15 +303,38 @@ msgstr "Khóa luyện tập"
 msgid "Training Course"
 msgstr "Khóa huấn luyện"
 
+#: .\courses\templates\courses\list.html:8
+#: .\courses\templates\courses\list.html:26
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:60
+msgid "courses"
+msgstr "khóa học"
+
+#: .\courses\templates\courses\list.html:16
+msgid "Our Courses"
+msgstr "Khóa học của chúng tôi"
+
+#: .\courses\templates\courses\list.html:17
+msgid "just find a course for yourself"
+msgstr "Hãy tìm khóa học phù hợp cho bạn"
+
+#: .\courses\templates\courses\list.html:52
+msgid "detail"
+msgstr "chi tiết"
+
+#: .\courses\templates\courses\list.html:54
+#: .\courses\templates\courses\show.html:26
+msgid "view classes"
+msgstr "xem lớp học"
+
 #: .\dashboard\forms\classes_form.py:19
-#: .\dashboard\templates\dashboard\card_types\list.html:27
+#: .\dashboard\templates\dashboard\card_types\list.html:28
 #: .\dashboard\templates\dashboard\cards\list.html:29
 #: .\dashboard\templates\dashboard\classes\list.html:32
 msgid "Name"
 msgstr "Tên"
 
 #: .\dashboard\forms\classes_form.py:22
-#: .\dashboard\templates\dashboard\card_types\list.html:28
+#: .\dashboard\templates\dashboard\card_types\list.html:29
 #: .\dashboard\templates\dashboard\cards\list.html:34
 #: .\dashboard\templates\dashboard\classes\list.html:37
 msgid "Description"
@@ -251,11 +380,11 @@ msgstr "Thời gian kết thúc phải sau thời gian bắt đầu"
 msgid "overlap_time"
 msgstr "thời gian đã bị trùng"
 
-#: .\dashboard\templates\dashboard\card_types\list.html:9
+#: .\dashboard\templates\dashboard\card_types\list.html:10
 msgid "card type list"
 msgstr "danh sách loại thẻ"
 
-#: .\dashboard\templates\dashboard\card_types\list.html:11
+#: .\dashboard\templates\dashboard\card_types\list.html:12
 #: .\dashboard\templates\dashboard\cards\list.html:12
 #: .\dashboard\templates\dashboard\classes\list.html:15
 #: .\dashboard\templates\dashboard\classes\new.html:13
@@ -264,19 +393,10 @@ msgstr "danh sách loại thẻ"
 msgid "Create New"
 msgstr "Tạo mới"
 
-#: .\dashboard\templates\dashboard\card_types\list.html:16
+#: .\dashboard\templates\dashboard\card_types\list.html:17
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:101
 msgid "card types"
 msgstr "loại thẻ"
-
-#: .\dashboard\templates\dashboard\card_types\list.html:17
-#: .\dashboard\templates\dashboard\cards\list.html:19
-#: .\dashboard\templates\dashboard\classes\list.html:22
-#: .\dashboard\templates\dashboard\courses\list.html:20
-#: .\dashboard\templates\dashboard\rooms\list.html:19
-#, python-format
-msgid "No %(value)s yet"
-msgstr "Không có %(value)s"
 
 #: .\dashboard\templates\dashboard\cards\list.html:10
 msgid "Card List"
@@ -448,14 +568,6 @@ msgstr "nhân viên"
 msgid "admin"
 msgstr "admin"
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:60
-msgid "courses"
-msgstr "khóa học"
-
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:69
-msgid "classes"
-msgstr "lớp học"
-
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:78
 msgid "lessons"
 msgstr "buổi tập"
@@ -525,9 +637,61 @@ msgstr "Quên mật khẩu?"
 msgid "Sign Up"
 msgstr "Đăng kí"
 
-#: .\templates\layout\header.html:93
+#: .\templates\layouts\header.html:50
+msgid "profile"
+msgstr "trang cá nhân"
+
+#: .\templates\layouts\header.html:54
+msgid "activity log"
+msgstr "lịch sử hoạt động"
+
+#: .\templates\layouts\header.html:59
+msgid "logout"
+msgstr "đăng xuất"
+
+#: .\templates\layouts\header.html:67
+msgid "login"
+msgstr "đăng nhập"
+
+#: .\templates\layouts\header.html:71
+msgid "register"
+msgstr "đăng kí"
+
+#: .\templates\layouts\header.html:92
 msgid "Home"
 msgstr "Trang chủ"
+
+#: .\templates\layouts\header.html:93
+msgid "About us"
+msgstr "Về chúng tôi"
+
+#: .\templates\layouts\header.html:95
+msgid "Trainers"
+msgstr "Huấn luyện viên"
+
+#: .\templates\layouts\header.html:96
+msgid "Contact"
+msgstr "Liên hệ"
+
+#: .\templates\layouts\header.html:99 .\templates\layouts\header.html:101
+msgid "Courses"
+msgstr "Khóa học"
+
+#: .\templates\layouts\header.html:99 .\templates\layouts\header.html:102
+msgid "Classes"
+msgstr "Lớp học"
+
+#: .\templates\layouts\header.html:105
+msgid "Schedule"
+msgstr "Lịch học"
+
+#: .\templates\layouts\header.html:106
+msgid "Blog"
+msgstr "Bài viết"
+
+#: .\templates\layouts\header.html:107
+msgid "Shop"
+msgstr "Cửa hàng"
 
 #: .\venv\Lib\site-packages\crispy_forms\tests\test_form_helper.py:142
 #: .\venv\Lib\site-packages\crispy_forms\tests\test_form_helper.py:152
@@ -33674,6 +33838,18 @@ msgstr ""
 msgid "Zuojiang Zhuang"
 msgstr ""
 
+#~ msgid "map"
+#~ msgstr "bản đồ"
+
+#~ msgid "phone"
+#~ msgstr "điện thoại"
+
+#~ msgid "language"
+#~ msgstr "ngôn ngữ"
+
+#~ msgid "settings"
+#~ msgstr "cấu hình"
+
 #~ msgid "For Course"
 #~ msgstr "Áp dụng cho khóa học"
 
@@ -33684,9 +33860,6 @@ msgstr ""
 #~| msgid "card types"
 #~ msgid "cardtype"
 #~ msgstr "loại thẻ"
-
-#~ msgid "Courses"
-#~ msgstr "Khóa học"
 
 #~ msgid "Rooms"
 #~ msgstr "Phòng tập"

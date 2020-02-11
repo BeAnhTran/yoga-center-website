@@ -34,8 +34,7 @@ class User(AbstractUser):
                                  default=GENDER_NOT_SPECIFIED)
     country = CountryField(blank=True)
     language = LanguageField(blank=True, null=True, max_length=55)
-    image = models.ImageField(
-        upload_to='profile', default='profile/default.png')
+    image = models.ImageField(upload_to='profile', blank=True, null=True, verbose_name=_('image'))
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def full_name(self):

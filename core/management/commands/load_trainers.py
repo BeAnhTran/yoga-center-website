@@ -12,13 +12,16 @@ class Command(BaseCommand):
     @transaction.atomic
     def handle(self, **options):
         from core.models import User, Trainer
-
+        from faker import Faker
+        fake = Faker()
         print("Create trainers")
         num = User.objects.count()
         for i in range(num, num + 3):
             data = {
                 'username': 'trainer' + str(i),
                 'email': 'trainer' + str(i) + '@trainer.com',
+                'first_name': fake.first_name(),
+                'last_name': fake.last_name()
             }
             trainer = User(**data)
             trainer.set_password('truong77')

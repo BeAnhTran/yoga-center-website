@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-10 11:42+0700\n"
+"POT-Creation-Date: 2020-02-11 16:58+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,7 +58,7 @@ msgstr ""
 msgid "min lessons required"
 msgstr ""
 
-#: .\cards\models.py:29 .\dashboard\templates\dashboard\card_types\list.html:29
+#: .\cards\models.py:29 .\dashboard\templates\dashboard\card_types\list.html:30
 msgid "multiplier"
 msgstr ""
 
@@ -131,7 +131,8 @@ msgstr "form trainer"
 msgid "slug"
 msgstr ""
 
-#: .\classes\models.py:36 .\dashboard\templates\dashboard\classes\show.html:77
+#: .\classes\models.py:36 .\core\models.py:37
+#: .\dashboard\templates\dashboard\classes\show.html:77
 #: .\dashboard\templates\dashboard\courses\list.html:31
 msgid "image"
 msgstr ""
@@ -174,6 +175,121 @@ msgstr ""
 msgid "Yoga Classes"
 msgstr ""
 
+#: .\classes\templates\classes\list.html:8
+#: .\classes\templates\classes\list.html:30
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:69
+msgid "classes"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:9
+#: .\courses\templates\courses\list.html:9
+#: .\dashboard\templates\dashboard\card_types\list.html:18
+#: .\dashboard\templates\dashboard\cards\list.html:19
+#: .\dashboard\templates\dashboard\classes\list.html:22
+#: .\dashboard\templates\dashboard\courses\list.html:20
+#: .\dashboard\templates\dashboard\rooms\list.html:19
+#, python-format
+msgid "No %(value)s yet"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:16
+#, fuzzy
+#| msgid "price_course"
+msgid "Our Classes"
+msgstr "price of course"
+
+#: .\classes\templates\classes\list.html:17
+msgid "just find a class for yourself"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:31
+#: .\courses\templates\courses\list.html:27
+#, python-format
+msgid "Showing %(value1)s of %(value2)s %(value3)s"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:38
+msgid "default sorting"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:41
+msgid "oldest"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:42
+msgid "newest"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:78
+#, fuzzy
+#| msgid "form_trainer"
+msgid "Yoga Trainer"
+msgstr "form trainer"
+
+#: .\classes\templates\classes\list.html:81
+msgid "book now"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:92
+#, fuzzy
+#| msgid "price_course"
+msgid "Search Classes"
+msgstr "price of course"
+
+#: .\classes\templates\classes\list.html:95
+#, fuzzy
+#| msgid "price_course"
+msgid "choose course"
+msgstr "price of course"
+
+#: .\classes\templates\classes\list.html:102
+#, fuzzy
+#| msgid "Basic Level"
+msgid "Choose Level"
+msgstr "Basic Level"
+
+#: .\classes\templates\classes\list.html:109
+#, fuzzy
+#| msgid "form_trainer"
+msgid "Choose Trainer"
+msgstr "form trainer"
+
+#: .\classes\templates\classes\list.html:115
+msgid "Filter by Day"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:119
+msgid "monday"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:123
+msgid "tuesday"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:127
+msgid "wednesday"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:131
+msgid "thurstday"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:137
+msgid "friday"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:141
+msgid "saturday"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:145
+msgid "sunday"
+msgstr ""
+
+#: .\classes\templates\classes\list.html:149
+msgid "Filter now"
+msgstr ""
+
 #: .\core\models.py:17 .\venv\Lib\site-packages\languages\languages.py:4098
 #: .\venv\Lib\site-packages\languages\languages.py:4119
 msgid "Male"
@@ -195,15 +311,42 @@ msgstr ""
 msgid "Training Course"
 msgstr ""
 
+#: .\courses\templates\courses\list.html:8
+#: .\courses\templates\courses\list.html:26
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:60
+#, fuzzy
+#| msgid "price_course"
+msgid "courses"
+msgstr "price of course"
+
+#: .\courses\templates\courses\list.html:16
+#, fuzzy
+#| msgid "price_course"
+msgid "Our Courses"
+msgstr "price of course"
+
+#: .\courses\templates\courses\list.html:17
+msgid "just find a course for yourself"
+msgstr ""
+
+#: .\courses\templates\courses\list.html:52
+msgid "detail"
+msgstr ""
+
+#: .\courses\templates\courses\list.html:54
+#: .\courses\templates\courses\show.html:26
+msgid "view classes"
+msgstr ""
+
 #: .\dashboard\forms\classes_form.py:19
-#: .\dashboard\templates\dashboard\card_types\list.html:27
+#: .\dashboard\templates\dashboard\card_types\list.html:28
 #: .\dashboard\templates\dashboard\cards\list.html:29
 #: .\dashboard\templates\dashboard\classes\list.html:32
 msgid "Name"
 msgstr ""
 
 #: .\dashboard\forms\classes_form.py:22
-#: .\dashboard\templates\dashboard\card_types\list.html:28
+#: .\dashboard\templates\dashboard\card_types\list.html:29
 #: .\dashboard\templates\dashboard\cards\list.html:34
 #: .\dashboard\templates\dashboard\classes\list.html:37
 msgid "Description"
@@ -253,11 +396,11 @@ msgstr "End time must be greater than start time"
 msgid "overlap_time"
 msgstr "overlap time"
 
-#: .\dashboard\templates\dashboard\card_types\list.html:9
+#: .\dashboard\templates\dashboard\card_types\list.html:10
 msgid "card type list"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\card_types\list.html:11
+#: .\dashboard\templates\dashboard\card_types\list.html:12
 #: .\dashboard\templates\dashboard\cards\list.html:12
 #: .\dashboard\templates\dashboard\classes\list.html:15
 #: .\dashboard\templates\dashboard\classes\new.html:13
@@ -266,18 +409,9 @@ msgstr ""
 msgid "Create New"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\card_types\list.html:16
+#: .\dashboard\templates\dashboard\card_types\list.html:17
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:101
 msgid "card types"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\card_types\list.html:17
-#: .\dashboard\templates\dashboard\cards\list.html:19
-#: .\dashboard\templates\dashboard\classes\list.html:22
-#: .\dashboard\templates\dashboard\courses\list.html:20
-#: .\dashboard\templates\dashboard\rooms\list.html:19
-#, python-format
-msgid "No %(value)s yet"
 msgstr ""
 
 #: .\dashboard\templates\dashboard\cards\list.html:10
@@ -456,16 +590,6 @@ msgstr ""
 msgid "admin"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:60
-#, fuzzy
-#| msgid "price_course"
-msgid "courses"
-msgstr "price of course"
-
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:69
-msgid "classes"
-msgstr ""
-
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:78
 msgid "lessons"
 msgstr ""
@@ -535,8 +659,64 @@ msgstr ""
 msgid "Sign Up"
 msgstr ""
 
-#: .\templates\layout\header.html:93
+#: .\templates\layouts\header.html:50
+msgid "profile"
+msgstr ""
+
+#: .\templates\layouts\header.html:54
+msgid "activity log"
+msgstr ""
+
+#: .\templates\layouts\header.html:59
+msgid "logout"
+msgstr ""
+
+#: .\templates\layouts\header.html:67
+msgid "login"
+msgstr ""
+
+#: .\templates\layouts\header.html:71
+msgid "register"
+msgstr ""
+
+#: .\templates\layouts\header.html:92
 msgid "Home"
+msgstr ""
+
+#: .\templates\layouts\header.html:93
+msgid "About us"
+msgstr ""
+
+#: .\templates\layouts\header.html:95
+#, fuzzy
+#| msgid "form_trainer"
+msgid "Trainers"
+msgstr "form trainer"
+
+#: .\templates\layouts\header.html:96
+msgid "Contact"
+msgstr ""
+
+#: .\templates\layouts\header.html:99 .\templates\layouts\header.html:101
+#, fuzzy
+#| msgid "price_course"
+msgid "Courses"
+msgstr "price of course"
+
+#: .\templates\layouts\header.html:99 .\templates\layouts\header.html:102
+msgid "Classes"
+msgstr ""
+
+#: .\templates\layouts\header.html:105
+msgid "Schedule"
+msgstr ""
+
+#: .\templates\layouts\header.html:106
+msgid "Blog"
+msgstr ""
+
+#: .\templates\layouts\header.html:107
+msgid "Shop"
 msgstr ""
 
 #: .\venv\Lib\site-packages\crispy_forms\tests\test_form_helper.py:142

@@ -121,7 +121,7 @@ ol {
 }
 
 .spad {
-	padding-top: 110px;
+	padding-top: 50px;
 	padding-bottom: 105px;
 }
 
@@ -332,6 +332,7 @@ ol {
 ---------------------*/
 
 .header-section {
+	position: absolute;
 	width: 100%;
 	top: 0;
 	left: 0;
@@ -412,13 +413,12 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .header-bottom {
-	padding: 5px 80px 5px;
-	background: linear-gradient(145deg, #dc354596 0%, #343a40 100%);
+	padding: 25px 80px 0;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
 	.header-bottom {
-		padding: 10px 30px 10px;
+		padding: 15px 30px 0;
 	}
 }
 
@@ -512,7 +512,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .main-menu li:hover .sub-menu {
 	visibility: visible;
 	opacity: 1;
-	margin-top: 20px;
+	margin-top: 7px;
 }
 
 .main-menu .sub-menu {
@@ -521,7 +521,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	width: 210px;
 	left: 0;
 	top: 100%;
-	padding: 25px 10px 24px 30px;
+	padding: 25px 10px 24px 10px;
 	visibility: hidden;
 	opacity: 0;
 	margin-top: 50px;
@@ -1494,21 +1494,21 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	margin-top: 15px;
 	margin-bottom: 50px;
 	border-radius: 13px;
-	-webkit-box-shadow: 0px 5px 6px rgba(72, 105, 114, 0.15);
-	box-shadow: 0px 5px 6px rgba(72, 105, 114, 0.15);
+	-webkit-box-shadow: 0px 5px 6px #495057;
+	box-shadow: 0px 5px 6px #495057;
 	-webkit-transition: all 0.4s;
 	-o-transition: all 0.4s;
 	transition: all 0.4s;
 }
 
 .classes-item:hover {
-	-webkit-box-shadow: 0px 12px 32px rgba(72, 105, 114, 0.15);
-	box-shadow: 0px 12px 32px rgba(72, 105, 114, 0.15);
+	-webkit-box-shadow: 0px 12px 32px #54123b;
+	box-shadow: 0px 12px 32px #54123b;
 }
 
 .classes-item .ci-img img {
-	width: 280px;
-	height: 280px;
+	width: 200px;
+	height: 200px;
 	border-radius: 50%;
 	margin: 0 auto 25px;
 }

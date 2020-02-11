@@ -9,11 +9,15 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         from core.models import User
+        from faker import Faker
+        fake = Faker()
 
         print("Create superuser")
         data = {
             'username': 'admin',
             'email': 'admin@admin.com',
+            'first_name': fake.first_name(),
+            'last_name': fake.last_name()
         }
         superuser = User(**data)
         superuser.set_password('truong77')

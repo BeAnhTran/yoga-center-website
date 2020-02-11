@@ -6,6 +6,7 @@ except ImportError:
 from django.db import transaction
 from faker import Faker
 
+
 class Command(BaseCommand):
     help = "Load some sample data into the db"
 
@@ -14,6 +15,8 @@ class Command(BaseCommand):
         from datetime import datetime, date, timedelta
         from django.utils import timezone
         import pytz
+        from faker import Faker
+        fake = Faker()
 
         from rooms.models import Room
         from classes.models import YogaClass
@@ -21,13 +24,23 @@ class Command(BaseCommand):
         from lessons.models import Lesson
         from core.models import User, Trainer
 
-        fake = Faker()
+        print("Create superuser")
+        data = {
+            'username': 'admin',
+            'email': 'admin@admin.com',
+            'first_name': fake.first_name(),
+            'last_name': fake.last_name()
+        }
+        superuser = User(**data)
+        superuser.set_password('truong77')
+        superuser.is_active = True
+        superuser.is_staff = True
+        superuser.is_superuser = True
+        superuser.save()
 
         print("Create trainers")
-        num_users = User.objects.count()
-        if num_users == 0:
-            num_users = 1
-        for i in range(num_users, num_users + 3):
+        num = User.objects.count()
+        for i in range(num, num + 3):
             data = {
                 'username': 'trainer' + str(i),
                 'email': 'trainer' + str(i) + '@trainer.com',
@@ -67,6 +80,17 @@ class Command(BaseCommand):
             price_per_month=600000,
             start_at=today,
             form_trainer=trainer1
+        )
+
+        trainer2 = Trainer.objects.last()
+        course2 = Course.objects.last()
+        course2.classes.create(
+            name='Yoga 2',
+            description='description class 2',
+            price_per_lesson=40000,
+            price_per_month=500000,
+            start_at=today,
+            form_trainer=trainer2
         )
 
         print("Create some rooms")
