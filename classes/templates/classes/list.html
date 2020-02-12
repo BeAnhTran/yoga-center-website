@@ -9,7 +9,7 @@
     {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
 </p>
 {% else %}
-<section class="page-top-section set-bg" data-setbg="{% static 'imgs/page-top-bg.jpg'%}">
+<section class="page-top-section set-bg" data-setbg="{% static 'img/page-top-bg.jpg'%}">
     <div class="container">
         <div class="row">
             <div class="col-lg-7 m-auto text-white">
@@ -49,11 +49,11 @@
                     <div class="col-md-6">
                         <div class="classes-item-warp">
                             <div class="classes-item">
-                                <a href="javascript:;" class="ci-img">
+                                <a href="{% url 'classes:detail' class.slug %}" class="ci-img">
                                     {% if class.image %}
                                     <img src="{{ class.image.url }}" alt="{{class.name}}">
                                     {% else %}
-                                    <img src="{% static 'imgs/class/default.jpg'%}" alt="{{class.name}}">
+                                    <img src="{% static 'img/class/default.jpg'%}" alt="{{class.name}}">
                                     {% endif %}
                                 </a>
                                 <div class="ci-text">
@@ -71,7 +71,7 @@
                                         {% if class.form_trainer.user.image %}
                                         <img src="{{ class.form_trainer.user.image.url }}" alt="{{class.form_trainer}}">
                                         {% else %}
-                                        <img src="{% static 'imgs/user/default.png'%}" alt="{{class.form_trainer}}">
+                                        <img src="{% static 'img/user/default.png'%}" alt="{{class.form_trainer}}">
                                         {% endif %}
                                         <div class="author-text">
                                             <h6>{{ class.form_trainer }}</h6>

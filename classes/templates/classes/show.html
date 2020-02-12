@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<section class="page-top-section set-bg" data-setbg="{% static 'img/page-top-bg.jpg'%}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 m-auto text-white">
+                <h2>{{ class|title }}</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="classes-details-section spad overflow-hidden">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="classes-details">
+                    <div>
+                        {% if class.image %}
+                        <img class="img rounded" src="{{ class.image.url }}" alt="{{class.name}}">
+                        {% else %}
+                        <img class="img rounded" src="{% static 'img/class/default.jpg'%}" alt="{{class.name}}">
+                        {% endif %}
+                    </div>
+                    <hr>
+                    <div class="row mt-3">
+                        <div class="col-lg-8">
+                            <h2>{{ class|title }}</h2>
+                            <div class="cd-meta">
+                                <p><i class="material-icons">alarm_on</i>75 Mins </p>
+                            </div>
+                            <div class="cd-meta">
+                                <p><i class="material-icons">people_outline</i>250 People Registered</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-left text-md-right">
+                            <a href="javascript:;" class="btn btn-sm btn-info">{% trans 'schedule' as t_schedule %}{{t_schedule|upper}}</a>
+                            <a href="javascript:;" class="btn btn-sm btn-success">{% trans 'book now' as t_book_now %}{{t_book_now|upper}}</a>
+                        </div>
+                    </div>
+                    <p>Yoga is the secret of many women in Vietnam and internationally. This is a very popular subject
+                        to bring extremely effective exercises to help improve physique effectively and reduce belly fat
+                        quickly. In order to have a perfect, toned physique, you need to arrange a suitable exercise
+                        regime for yourself as well as a nutritious diet. The following is a series of yoga exercises
+                        that help reduce fat effectively. 5 Moves to increase height for dwarf mushrooms. Exercise
+                        regularly to get the best results.</p>
+                    <div class="row mb-5">
+                        <div class="col-lg-5">
+                            <img src="{% static 'img/classes/classes-details.png' %}" alt="">
+                        </div>
+                        <div class="col-lg-7">
+                            <blockquote>On the other hand, we denounce with righteous indignation and dislike men who
+                                are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by
+                                desire, that they cannot foresee the pain.</blockquote>
+                            <h3>The secret to improving her height to achieve quick results:</h3>
+                            <ul>
+                                <li><i class="material-icons">done_all</i>Combining 30 minutes of practice and 30 jumps
+                                    high</li>
+                                <li><i class="material-icons">done_all</i>Apply scientific nutrition, avoid obesity.
+                                </li>
+                                <li><i class="material-icons">done_all</i>Practice sports regularly</li>
+                                <li><i class="material-icons">done_all</i>Various versions have evolved over the years
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p>Update the trend of 12 yoga exercises to help you lose weight effectively at home, help
+                        strengthen your exercise ability. Besides impacting weight loss effects, it also helps to repel
+                        diseases, enhance the body's resistance. Have a toned body with just 8 steps of yoga every day,
+                        helping to lose weight quickly combined with a reasonable diet.</p>
+                </div>
+                <h3 class="comment-title">{% trans 'Other Classes' %}</h3>
+                <div class="classes-other-slider owl-carousel">
+                    {% for other in others %}
+                    <div class="classes-item">
+                        <div class="ci-img">
+                            {% if other.image %}
+                            <img src="{{ other.image.url }}" alt="{{other.name}}">
+                            {% else %}
+                            <img src="{% static 'img/class/default.jpg'%}" alt="{{other.name}}">
+                            {% endif %}
+                        </div>
+                        <div class="ci-text">
+                            <h4><a href="classes-details.html">{{ other|title }}</a></h4>
+                            <div class="ci-metas">
+                                <div class="ci-meta"><i class="material-icons">event_available</i>Mon, Wed, Fri</div>
+                                <div class="ci-meta"><i class="material-icons">alarm_on</i>06:30pm - 07:45pm</div>
+                            </div>
+                            <p>{{ other.description|capfirst|truncatewords:10 }}</p>
+                        </div>
+                        <div class="ci-bottom">
+                            <div class="ci-author">
+                                {% if other.form_trainer.user.image %}
+                                <img src="{{ other.form_trainer.user.image.url }}" alt="{{other.form_trainer}}">
+                                {% else %}
+                                <img src="{% static 'img/user/default.png'%}" alt="{{other.form_trainer}}">
+                                {% endif %}
+                                <div class="author-text">
+                                    <h6>{{ other.form_trainer|title }}</h6>
+                                    <p>{% trans 'Yoga Trainer' %}</p>
+                                </div>
+                            </div>
+                            <a href="" class="site-btn sb-gradient">{% trans 'book now'%}</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-5 col-sm-8 sidebar">
+                <div class="sb-widget">
+                    <h2 class="sb-title">{% trans 'Detail Information' %}</h2>
+                    <div class="classes-info">
+                        <ul>
+                            <li><i class="material-icons">event_available</i>{{ class.start_at }}</li>
+                            <li><i class="material-icons">done_all</i>Mon, Fri</li>
+                            <li><i class="material-icons">alarm_on</i>06:30pm - 07:45pm</li>
+                            <li><i class="material-icons">person_outline</i>{{ class.form_trainer|title }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sb-widget">
+                    <h2 class="sb-title">{% trans 'About Trainer' %}</h2>
+                    <div class="about-instructor-widget">
+                        {% if class.form_trainer.user.image %}
+                        <img src="{{ class.form_trainer.user.image.url }}" alt="{{class.form_trainer}}">
+                        {% else %}
+                        <img src="{% static 'img/user/default.png' %}" alt="{{class.form_trainer}}">
+                        {% endif %}
+                        <h4>{{ class.form_trainer|title }}</h4>
+                        <h6>{% trans 'Yoga Trainer' %}</h6>
+                        <p>Yoga & Therapy Certificate of Uttarakhand University</p>
+                        <div class="ai-social">
+                            <a href="javascript:;"><i class="fab fa-facebook"></i></a>
+                            <a href="javascript:;"><i class="fab fa-instagram"></i></a>
+                            <a href="javascript:;"><i class="fab fa-twitter"></i></a>
+                            <a href="javascript:;"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -6,6 +6,7 @@ from classes.models import YogaClass, LEVEL_CHOICES
 from courses.models import Course
 from core.models import Trainer
 
+from django.db.models import Q
 
 class YogaClassListView(ListView):
     model = YogaClass
@@ -27,3 +28,8 @@ class YogaClassDetailView(DetailView):
     template_name = 'classes/show.html'
     slug_field = 'slug'
     context_object_name = 'class'
+
+    def get_context_data(self, **kwargs):
+        context = super(YogaClassDetailView, self).get_context_data(**kwargs)
+        context['others'] = set(YogaClass.objects.filter(~Q(pk=self.object.pk)))
+        return context

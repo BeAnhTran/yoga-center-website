@@ -9,7 +9,7 @@
     {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
 </p>
 {% else %}
-<section class="page-top-section set-bg" data-setbg="{% static 'imgs/page-top-bg.jpg'%}">
+<section class="page-top-section set-bg" data-setbg="{% static 'img/page-top-bg.jpg'%}">
     <div class="container">
         <div class="row">
             <div class="col-lg-7 m-auto text-white">
@@ -39,7 +39,7 @@
                         {% if course.image %}
                         <img src="{{ course.image.url }}" alt="{{ course.name }}">
                         {% else %}
-                        <img src="{% static 'imgs/course/default_course.jpg'%}" alt="{{ course.name }}">
+                        <img src="{% static 'img/course/default_course.jpg'%}" alt="{{ course.name }}">
                         {% endif %}
                     </div>
                     <div class="ci-text">
