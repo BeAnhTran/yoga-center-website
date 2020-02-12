@@ -44,13 +44,14 @@ INSTALLED_APPS = [
     'languages',
     'crispy_forms',
     'tempus_dominus',
-
+    'rest_framework',
     'core.apps.CoreConfig',
     'courses',
     'classes',
     'lessons',
     'rooms',
     'cards',
+    'yoga_schedule',
     'dashboard',
 ]
 

@@ -24,11 +24,17 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 
+
 urlpatterns += i18n_patterns(
     # index page
     path('', include('core.urls')),
+    # courses
     path('courses/', include('courses.urls')),
+    # classes
     path('classes/', include('classes.urls')),
+    # schedule
+    path('schedule/', include('yoga_schedule.urls')),
+    # dashboard
     path('dashboard/', include('dashboard.urls')),
     # admin site
     path('admin/', admin.site.urls),
@@ -38,3 +44,9 @@ urlpatterns += i18n_patterns(
            document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# API 
+# support get data when using ajax
+urlpatterns += [
+    path('api/', include('api.urls')),
+]
