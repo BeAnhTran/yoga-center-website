@@ -34,6 +34,8 @@ class CardType(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True, blank=True, null=True, verbose_name=_('updated_at'))
 
+    def __str__(self):
+        return self.name.capitalize()
 
 class Card(models.Model):
     trainee = models.ForeignKey(

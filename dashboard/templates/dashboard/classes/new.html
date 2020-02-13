@@ -10,7 +10,12 @@
     </a>
 </div>
 <div class="container card mt-3 mb-5">
-    <h5 class="ml-3 mt-3 text-success">{% trans 'Create New' %} {% trans 'Class' %}</h5>
+    <h5 class="ml-3 mt-3 text-uppercase">
+        {% trans 'class' as t_trans %}
+        {% blocktrans with value=t_trans trimmed %}
+        Create new {{ value }}
+        {% endblocktrans %}
+    </h5>
     <hr class="mt-0 mb-0">
     <div class="card-body">
         <div class="row justify-content-center">

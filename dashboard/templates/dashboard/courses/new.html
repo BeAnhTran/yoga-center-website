@@ -8,7 +8,12 @@
 
 {% block content %}
 <div class="container card mt-5 mb-5">
-    <h5 class="ml-3 mt-3 text-success">CREATE NEW COURSE</h5>
+    <h5 class="ml-3 mt-3 text-uppercase">
+        {% trans 'course' as t_trans %}
+        {% blocktrans with value=t_trans trimmed %}
+        Create new {{ value }}
+        {% endblocktrans %}
+    </h5>
     <hr>
     <div class="card-body">
         <div class="row justify-content-center">

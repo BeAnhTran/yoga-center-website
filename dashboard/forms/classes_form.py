@@ -1,7 +1,5 @@
 from django import forms
-from django.db import transaction
-from django.utils.translation import gettext as _
-
+from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
@@ -10,9 +8,13 @@ from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 from datetime import datetime
 from django.utils.formats import get_format
 from django.utils import formats
+from cards.models import CardType
 
 
 class ClassForm(forms.ModelForm):
+    card_types = forms.ModelMultipleChoiceField(label=_('Card types'),
+                                                widget=forms.CheckboxSelectMultiple(), queryset=CardType.objects.all())
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update(
@@ -71,6 +73,7 @@ class ClassForm(forms.ModelForm):
                 css_class='form-row'
             ),
             'name',
+            'card_types',
             'description',
             Row(
                 Column('image', css_class='form-group col-md-4 mb-0'),

@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'tempus_dominus',
     'rest_framework',
+    'formtools',
+
     'core.apps.CoreConfig',
     'courses',
     'classes',

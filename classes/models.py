@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 from courses.models import Course
 from core.models import Trainer
+from cards.models import CardType
 
 ACTIVE_STATE = 0
 INACTIVE_STATE = 1
@@ -28,6 +29,8 @@ class YogaClass(models.Model):
         Course, on_delete=models.CASCADE, related_name='classes', verbose_name=_('course'))
     form_trainer = models.ForeignKey(
         Trainer, on_delete=models.SET_NULL, related_name='classes', verbose_name=_('form_trainer'), blank=True, null=True)
+    card_types = models.ManyToManyField(
+        CardType, related_name='classes', verbose_name=_('card types'))
     name = models.CharField(max_length=120, verbose_name=_('name'))
     slug = models.SlugField(max_length=150, unique=True,
                             verbose_name=_('slug'))
