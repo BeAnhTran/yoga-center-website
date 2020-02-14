@@ -48,23 +48,24 @@ class ClassForm(forms.ModelForm):
                 attrs={
                     'icon_toggle': True,
                     'input_group': False,
-                    'placeholder': _('end_at').capitalize()
+                    'placeholder': _('end_at')
                 }
             ),
         )
         self.fields['end_at'].required = False
         self.fields['price_per_lesson'].widget.attrs.update({
-            'placeholder': _('price_per_lesson').capitalize()
+            'placeholder': _('price_per_lesson')
         })
         self.fields['price_per_month'].widget.attrs.update({
-            'placeholder': _('price_per_month').capitalize()
+            'placeholder': _('price_per_month')
         })
         self.fields['price_course'].widget.attrs.update({
-            'placeholder': _('price_course').capitalize()
+            'placeholder': _('price_course')
         })
         self.fields['max_people'].widget.attrs.update({
-            'placeholder': _('max_people').capitalize()
+            'placeholder': _('max_people')
         })
+        self.fields['level'].required = False
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(

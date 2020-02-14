@@ -5,10 +5,12 @@ from courses.models import Course
 from core.models import Trainer
 from cards.models import CardType
 
-ACTIVE_STATE = 0
+DRAFT_STATE = 0
 INACTIVE_STATE = 1
+ACTIVE_STATE = 2
 
 STATE_CHOICES = (
+    (DRAFT_STATE, _('Draft')),
     (ACTIVE_STATE, _('Active')),
     (INACTIVE_STATE, _('Inactive')),
 )
@@ -38,9 +40,9 @@ class YogaClass(models.Model):
     image = models.ImageField(
         upload_to='class', blank=True, null=True, verbose_name=_('image'))
     state = models.IntegerField(choices=STATE_CHOICES,
-                                default=INACTIVE_STATE, verbose_name=_('state'))
-    level = models.IntegerField(choices=LEVEL_CHOICES,
-                                default=BASIC_LEVEL, verbose_name=_('level'))
+                                default=DRAFT_STATE, verbose_name=_('state'))
+    level = models.IntegerField(
+        choices=LEVEL_CHOICES, null=True, verbose_name=_('level'))
     price_per_lesson = models.FloatField(
         blank=True, null=True, verbose_name=_('price_per_lesson'))
     price_per_month = models.FloatField(

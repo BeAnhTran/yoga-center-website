@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 10:51+0700\n"
+"POT-Creation-Date: 2020-02-14 11:31+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,13 +38,13 @@ msgstr ""
 msgid "For Training Course"
 msgstr ""
 
-#: .\cards\models.py:22 .\classes\models.py:34
+#: .\cards\models.py:22 .\classes\models.py:36
 #: .\dashboard\templates\dashboard\courses\list.html:30
 #: .\dashboard\templates\dashboard\rooms\list.html:29
 msgid "name"
 msgstr ""
 
-#: .\cards\models.py:23 .\classes\models.py:37
+#: .\cards\models.py:23 .\classes\models.py:39
 #: .\dashboard\templates\dashboard\classes\show.html:36
 #: .\dashboard\templates\dashboard\courses\list.html:32
 msgid "description"
@@ -66,12 +66,12 @@ msgstr ""
 msgid "for longtime trainee only"
 msgstr ""
 
-#: .\cards\models.py:33 .\cards\models.py:48 .\classes\models.py:56
+#: .\cards\models.py:33 .\cards\models.py:48 .\classes\models.py:58
 #: .\lessons\models.py:36
 msgid "created_at"
 msgstr "created at"
 
-#: .\cards\models.py:35 .\cards\models.py:50 .\classes\models.py:58
+#: .\cards\models.py:35 .\cards\models.py:50 .\classes\models.py:60
 msgid "updated_at"
 msgstr "updated at"
 
@@ -86,100 +86,104 @@ msgstr "form trainer"
 msgid "card type"
 msgstr ""
 
-#: .\cards\models.py:45 .\classes\models.py:53
+#: .\cards\models.py:45 .\classes\models.py:55
 #: .\dashboard\forms\classes_form.py:29
 #: .\dashboard\templates\dashboard\classes\show.html:40
 msgid "start_at"
 msgstr "start at"
 
-#: .\cards\models.py:46 .\classes\models.py:54
+#: .\cards\models.py:46 .\classes\models.py:56
 #: .\dashboard\forms\classes_form.py:43 .\dashboard\forms\classes_form.py:51
 #: .\dashboard\templates\dashboard\classes\show.html:48 .\lessons\models.py:38
 msgid "end_at"
 msgstr "end at"
 
-#: .\classes\models.py:12 .\lessons\models.py:12 .\rooms\models.py:8
+#: .\classes\models.py:13
+msgid "Draft"
+msgstr ""
+
+#: .\classes\models.py:14 .\lessons\models.py:12 .\rooms\models.py:8
 msgid "Active"
 msgstr ""
 
-#: .\classes\models.py:13 .\lessons\models.py:13 .\rooms\models.py:9
+#: .\classes\models.py:15 .\lessons\models.py:13 .\rooms\models.py:9
 msgid "Inactive"
 msgstr ""
 
-#: .\classes\models.py:21
+#: .\classes\models.py:23
 msgid "Basic Level"
 msgstr "Basic Level"
 
-#: .\classes\models.py:22
+#: .\classes\models.py:24
 msgid "Intermediate Level"
 msgstr "Intermediate Level"
 
-#: .\classes\models.py:23
+#: .\classes\models.py:25
 msgid "Advanced Level"
 msgstr "Advanced Level"
 
-#: .\classes\models.py:29 .\dashboard\templates\dashboard\classes\show.html:32
+#: .\classes\models.py:31 .\dashboard\templates\dashboard\classes\show.html:32
 #: .\dashboard\templates\dashboard\courses\list.html:19
 #: .\dashboard\templates\dashboard\courses\new.html:12
 msgid "course"
 msgstr ""
 
-#: .\classes\models.py:31 .\dashboard\templates\dashboard\cards\list.html:31
+#: .\classes\models.py:33 .\dashboard\templates\dashboard\cards\list.html:31
 #: .\dashboard\templates\dashboard\classes\list.html:34
 msgid "form_trainer"
 msgstr "form trainer"
 
-#: .\classes\models.py:33
+#: .\classes\models.py:35
 #: .\dashboard\templates\dashboard\card_types\list.html:17
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:101
 msgid "card types"
 msgstr ""
 
-#: .\classes\models.py:36
+#: .\classes\models.py:38
 msgid "slug"
 msgstr ""
 
-#: .\classes\models.py:39 .\core\models.py:37
+#: .\classes\models.py:41 .\core\models.py:37
 #: .\dashboard\templates\dashboard\classes\show.html:77
 #: .\dashboard\templates\dashboard\courses\list.html:31
 msgid "image"
 msgstr ""
 
-#: .\classes\models.py:41 .\dashboard\templates\dashboard\classes\show.html:56
+#: .\classes\models.py:43 .\dashboard\templates\dashboard\classes\show.html:56
 #: .\dashboard\templates\dashboard\rooms\list.html:31 .\lessons\models.py:25
 msgid "state"
 msgstr ""
 
-#: .\classes\models.py:43 .\dashboard\templates\dashboard\classes\show.html:65
+#: .\classes\models.py:45 .\dashboard\templates\dashboard\classes\show.html:65
 msgid "level"
 msgstr ""
 
-#: .\classes\models.py:45 .\dashboard\forms\classes_form.py:57
+#: .\classes\models.py:47 .\dashboard\forms\classes_form.py:57
 #: .\dashboard\templates\dashboard\classes\show.html:86
 msgid "price_per_lesson"
 msgstr "price per lesson"
 
-#: .\classes\models.py:47 .\dashboard\forms\classes_form.py:60
+#: .\classes\models.py:49 .\dashboard\forms\classes_form.py:60
 #: .\dashboard\templates\dashboard\classes\show.html:94
 msgid "price_per_month"
 msgstr "price per month"
 
-#: .\classes\models.py:49 .\dashboard\forms\classes_form.py:63
+#: .\classes\models.py:51 .\dashboard\forms\classes_form.py:63
 #: .\dashboard\templates\dashboard\classes\show.html:102
 msgid "price_course"
 msgstr "price of course"
 
-#: .\classes\models.py:51 .\dashboard\forms\classes_form.py:66
+#: .\classes\models.py:53 .\dashboard\forms\classes_form.py:66
 #: .\dashboard\templates\dashboard\classes\show.html:69
 #: .\dashboard\templates\dashboard\rooms\list.html:32
 msgid "max_people"
 msgstr "max people"
 
-#: .\classes\models.py:65
+#: .\classes\models.py:67
 msgid "Yoga Class"
 msgstr ""
 
-#: .\classes\models.py:66
+#: .\classes\models.py:68
 msgid "Yoga Classes"
 msgstr ""
 
@@ -390,19 +394,19 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:95 .\dashboard\forms\lesssons_form.py:75
+#: .\dashboard\forms\classes_form.py:96 .\dashboard\forms\lesssons_form.py:75
 msgid "Save"
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:117 .\dashboard\forms\classes_form.py:150
+#: .\dashboard\forms\classes_form.py:118 .\dashboard\forms\classes_form.py:151
 msgid "A class with this name already exists."
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:128
+#: .\dashboard\forms\classes_form.py:129
 msgid "error_end_at_must_be_greater_than_start_at"
 msgstr "End date must be greater than start date"
 
-#: .\dashboard\forms\classes_form.py:137
+#: .\dashboard\forms\classes_form.py:138
 msgid "wrong_start_date"
 msgstr "Wrong start date"
 

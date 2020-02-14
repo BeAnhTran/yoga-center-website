@@ -26,3 +26,34 @@
     </div>
 </div>
 {% endblock %}
+
+{% block specified_js %}
+<script type="text/javascript">
+    $('select#id_course').change(function (e) {
+        id_course = $(this).val();
+        if (id_course != '') {
+            $.ajax({
+                url: "{% url 'api:card-type-list-for-course' %}",
+                method: 'GET',
+                data: {
+                    id_course: id_course
+                }
+            }).done(function (data) {
+                $("input[id^=" + 'id_card_types' + "]").parent('.custom-checkbox').addClass('d-none');
+                $("input[id^=" + 'id_card_types' + "]").removeClass('checked');
+
+                for (var i = 0; i < data.length; i++) {
+                    var _id = data[i]['id'];
+                    var id = 'input#id_card_types_' + _id;
+                    $(id).parent('.custom-checkbox').removeClass('d-none');
+                }
+            });
+        }else{
+            $("input[id^=" + 'id_card_types' + "]").parent('.custom-checkbox').removeClass('d-none');
+            $("input[id^=" + 'id_card_types' + "]").removeClass('checked');
+        }
+    });
+</script>
+
+
+{% endblock %}

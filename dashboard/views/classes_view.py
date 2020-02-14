@@ -12,6 +12,7 @@ from ..decorators import admin_required
 
 from classes.models import YogaClass
 from ..forms import classes_form, lesssons_form
+from courses.models import (PRACTICE_COURSE, TRAINING_COURSE)
 
 from datetime import datetime
 from django.core import serializers
