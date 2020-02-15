@@ -4,3 +4,7 @@
 .modal-dialog{
     max-width: 768px;
 }
+
+.fc-resizer.fc-end-resizer {
+    display: none !important;
+}

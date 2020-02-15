@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-14 11:31+0700\n"
+"POT-Creation-Date: 2020-02-15 12:31+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgid "for longtime trainee only"
 msgstr ""
 
 #: .\cards\models.py:33 .\cards\models.py:48 .\classes\models.py:58
-#: .\lessons\models.py:36
+#: .\lessons\models.py:42
 msgid "created_at"
 msgstr "created at"
 
@@ -94,7 +94,7 @@ msgstr "start at"
 
 #: .\cards\models.py:46 .\classes\models.py:56
 #: .\dashboard\forms\classes_form.py:43 .\dashboard\forms\classes_form.py:51
-#: .\dashboard\templates\dashboard\classes\show.html:48 .\lessons\models.py:38
+#: .\dashboard\templates\dashboard\classes\show.html:48 .\lessons\models.py:44
 msgid "end_at"
 msgstr "end at"
 
@@ -102,11 +102,11 @@ msgstr "end at"
 msgid "Draft"
 msgstr ""
 
-#: .\classes\models.py:14 .\lessons\models.py:12 .\rooms\models.py:8
+#: .\classes\models.py:14 .\lessons\models.py:17 .\rooms\models.py:8
 msgid "Active"
 msgstr ""
 
-#: .\classes\models.py:15 .\lessons\models.py:13 .\rooms\models.py:9
+#: .\classes\models.py:15 .\lessons\models.py:18 .\rooms\models.py:9
 msgid "Inactive"
 msgstr ""
 
@@ -135,7 +135,7 @@ msgstr "form trainer"
 
 #: .\classes\models.py:35
 #: .\dashboard\templates\dashboard\card_types\list.html:17
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:101
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:107
 msgid "card types"
 msgstr ""
 
@@ -150,7 +150,7 @@ msgid "image"
 msgstr ""
 
 #: .\classes\models.py:43 .\dashboard\templates\dashboard\classes\show.html:56
-#: .\dashboard\templates\dashboard\rooms\list.html:31 .\lessons\models.py:25
+#: .\dashboard\templates\dashboard\rooms\list.html:31 .\lessons\models.py:30
 msgid "state"
 msgstr ""
 
@@ -189,7 +189,7 @@ msgstr ""
 
 #: .\classes\templates\classes\list.html:8
 #: .\classes\templates\classes\list.html:30
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:69
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:75
 msgid "classes"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 
 #: .\courses\templates\courses\list.html:8
 #: .\courses\templates\courses\list.html:26
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:60
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:66
 #, fuzzy
 #| msgid "price_course"
 msgid "courses"
@@ -394,7 +394,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:96 .\dashboard\forms\lesssons_form.py:75
+#: .\dashboard\forms\classes_form.py:96 .\dashboard\forms\lesssons_form.py:86
 msgid "Save"
 msgstr ""
 
@@ -410,33 +410,33 @@ msgstr "End date must be greater than start date"
 msgid "wrong_start_date"
 msgstr "Wrong start date"
 
-#: .\dashboard\forms\lesssons_form.py:26 .\lessons\models.py:27
+#: .\dashboard\forms\lesssons_form.py:27 .\lessons\models.py:32
 msgid "day"
 msgstr ""
 
-#: .\dashboard\forms\lesssons_form.py:34 .\lessons\models.py:29
+#: .\dashboard\forms\lesssons_form.py:35 .\lessons\models.py:34
 #, fuzzy
 #| msgid "start_at"
 msgid "start_time"
 msgstr "start at"
 
-#: .\dashboard\forms\lesssons_form.py:43 .\lessons\models.py:31
+#: .\dashboard\forms\lesssons_form.py:44 .\lessons\models.py:36
 #, fuzzy
 #| msgid "end_at"
 msgid "end_time"
 msgstr "end at"
 
-#: .\dashboard\forms\lesssons_form.py:56 .\lessons\models.py:33
+#: .\dashboard\forms\lesssons_form.py:54 .\lessons\models.py:40
 msgid "notes"
 msgstr ""
 
-#: .\dashboard\forms\lesssons_form.py:88
+#: .\dashboard\forms\lesssons_form.py:59 .\lessons\models.py:38
+msgid "content"
+msgstr ""
+
+#: .\dashboard\forms\lesssons_form.py:99
 msgid "error_end_time_must_be_greater_than_start_time"
 msgstr "End time must be greater than start time"
-
-#: .\dashboard\forms\lesssons_form.py:104
-msgid "overlap_time"
-msgstr "overlap time"
 
 #: .\dashboard\templates\dashboard\card_types\list.html:10
 msgid "card type list"
@@ -540,51 +540,63 @@ msgstr ""
 msgid "Create new %(value)s"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\classes\schedule.html:27
-#: .\dashboard\templates\dashboard\classes\schedule.html:82
+#: .\dashboard\templates\dashboard\classes\schedule.html:26
+#: .\dashboard\templates\dashboard\classes\schedule.html:51
+#: .\dashboard\templates\dashboard\classes\schedule.html:293
 msgid "create new lesson"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\classes\schedule.html:44
+#: .\dashboard\templates\dashboard\classes\schedule.html:61
+#, fuzzy
+#| msgid "action_delete"
+msgid "delete"
+msgstr "delete"
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:64
+#, fuzzy
+#| msgid "updated_at"
+msgid "update"
+msgstr "updated at"
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:169
 #: .\dashboard\templates\dashboard\rooms\detail.html:30
 msgid "Detail Info"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\classes\schedule.html:51
-#: .\dashboard\templates\dashboard\rooms\detail.html:37
-msgid "Room"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\schedule.html:55
-#: .\dashboard\templates\dashboard\rooms\detail.html:41
-msgid "Class"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\schedule.html:59
-#: .\dashboard\templates\dashboard\rooms\detail.html:45
-msgid "Date"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\schedule.html:63
-#: .\dashboard\templates\dashboard\rooms\detail.html:49
-msgid "Start Time"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\schedule.html:67
-#: .\dashboard\templates\dashboard\rooms\detail.html:53
-msgid "End Time"
-msgstr ""
-
-#: .\dashboard\templates\dashboard\classes\schedule.html:226
+#: .\dashboard\templates\dashboard\classes\schedule.html:217
 msgid "done"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\classes\schedule.html:227
+#: .\dashboard\templates\dashboard\classes\schedule.html:218
 msgid "create successfully"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\classes\schedule.html:245
+#: .\dashboard\templates\dashboard\classes\schedule.html:236
 msgid "error"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:247
+msgid "Are you sure?"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:248
+msgid "You wont be able to revert this!"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:253
+msgid "Yes, delete it!"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:254
+msgid "Cancel"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:266
+msgid "Deleted!"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\classes\schedule.html:267
+msgid "It has been deleted successfully"
 msgstr ""
 
 #: .\dashboard\templates\dashboard\classes\show.html:24
@@ -603,39 +615,43 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:23
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:21
+msgid "roll call"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:29
 msgid "users"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:30
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:36
 #, fuzzy
 #| msgid "form_trainer"
 msgid "trainees"
 msgstr "form trainer"
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:36
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:42
 #, fuzzy
 #| msgid "form_trainer"
 msgid "trainers"
 msgstr "form trainer"
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:42
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:48
 msgid "staffs"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:48
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:54
 msgid "admin"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:78
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:84
 msgid "lessons"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:88
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:94
 msgid "cards"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:113
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:119
 msgid "rooms"
 msgstr ""
 
@@ -647,11 +663,31 @@ msgstr ""
 msgid "Sign Out"
 msgstr ""
 
+#: .\dashboard\templates\dashboard\rooms\detail.html:37
+msgid "Room"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\rooms\detail.html:41
+msgid "Class"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\rooms\detail.html:45
+msgid "Date"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\rooms\detail.html:49
+msgid "Start Time"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\rooms\detail.html:53
+msgid "End Time"
+msgstr ""
+
 #: .\dashboard\templates\dashboard\rooms\list.html:10
 msgid "Room List"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\rooms\list.html:18 .\lessons\models.py:21
+#: .\dashboard\templates\dashboard\rooms\list.html:18 .\lessons\models.py:26
 msgid "room"
 msgstr ""
 
@@ -659,40 +695,52 @@ msgstr ""
 msgid "location"
 msgstr ""
 
-#: .\lessons\models.py:19
+#: .\lessons\models.py:24
 msgid "yogaclass"
 msgstr ""
 
-#: .\lessons\models.py:23 .\templates\registration\signup.html:35
+#: .\lessons\models.py:28 .\templates\registration\signup.html:35
 msgid "trainer"
 msgstr ""
 
-#: .\lessons\models.py:27
+#: .\lessons\models.py:32
 msgid "Day of the event"
 msgstr ""
 
-#: .\lessons\models.py:29
+#: .\lessons\models.py:34
 msgid "Starting time"
 msgstr ""
 
-#: .\lessons\models.py:31
+#: .\lessons\models.py:36
 msgid "Final time"
 msgstr ""
 
-#: .\lessons\models.py:33
+#: .\lessons\models.py:38
+msgid "Content"
+msgstr ""
+
+#: .\lessons\models.py:40
 msgid "Notes"
 msgstr ""
 
-#: .\templates\account\login.html:9 .\templates\account\login.html:28
-#: .\templates\account\login.html:38
+#: .\lessons\models.py:71
+msgid "overlap_time"
+msgstr "overlap time"
+
+#: .\templates\account\login.html:9 .\templates\account\login.html:36
+#: .\templates\account\login.html:46
 msgid "Sign In"
 msgstr ""
 
-#: .\templates\account\login.html:42
+#: .\templates\account\login.html:16 .\templates\layouts\header.html:67
+msgid "login"
+msgstr ""
+
+#: .\templates\account\login.html:50
 msgid "Forgot Password?"
 msgstr ""
 
-#: .\templates\account\login.html:45
+#: .\templates\account\login.html:53
 msgid "Sign Up"
 msgstr ""
 
@@ -740,10 +788,6 @@ msgstr ""
 
 #: .\templates\layouts\header.html:59
 msgid "logout"
-msgstr ""
-
-#: .\templates\layouts\header.html:67
-msgid "login"
 msgstr ""
 
 #: .\templates\layouts\header.html:71 .\templates\registration\signup.html:13
