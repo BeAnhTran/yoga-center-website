@@ -11,14 +11,18 @@ STATE_CHOICES = (
 
 
 class Room(models.Model):
-    name = models.CharField(max_length=120)
-    location = models.CharField(max_length=255, null=True, blank=True)
-    description = models.TextField(blank=True, null=True)
-    max_people = models.IntegerField()
+    name = models.CharField(max_length=120, verbose_name=_('name'))
+    location = models.CharField(
+        max_length=255, null=True, blank=True, verbose_name=_('location'))
+    description = models.TextField(
+        blank=True, null=True, verbose_name=_('description'))
+    max_people = models.IntegerField(null=True, verbose_name=_('max people'))
     state = models.IntegerField(choices=STATE_CHOICES,
-                                default=ACTIVE_STATE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+                                default=ACTIVE_STATE, verbose_name=_('state'))
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name=_('created at'))
+    updated_at = models.DateTimeField(
+        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
 
     def __str__(self):
         return self.name

@@ -10,9 +10,9 @@
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between">
-    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Class List' %}</h1>
+    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'class list' %}</h1>
     <a href="{% url 'dashboard:classes-new' %}" class="btn btn-sm btn-success shadow-sm"><i
-            class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
+            class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'create new' %}</a>
 </div>
 <hr>
 <!-- Content Row -->
@@ -29,13 +29,13 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>{% trans 'Name' %}</th>
-                        <th>{% trans 'Course' %}</th>
-                        <th>{% trans 'form_trainer' %}</th>
-                        <th>{% trans 'State' %}</th>
-                        <th>{% trans 'Image' %}</th>
-                        <th>{% trans 'Description' %}</th>
-                        <th>{% trans 'action' as t_action %}{{ t_action|title }}</th>
+                        <th>{% trans 'name' as t_name %}{{ t_name|capfirst }}</th>
+                        <th>{% trans 'course' as t_course %}{{ t_course|capfirst }}</th>
+                        <th>{% trans 'form trainer' as t_form_trainer %}{{ t_form_trainer|capfirst }}</th>
+                        <th>{% trans 'state' as t_state %}{{ t_state|capfirst }}</th>
+                        <th>{% trans 'image' as t_image %}{{ t_image|capfirst }} </th>
+                        <th>{% trans 'description' as t_description %}{{ t_description|capfirst }}</th>
+                        <th>{% trans 'action' as t_action %}{{ t_action|capfirst }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,14 +70,14 @@
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{% url 'dashboard:classes-detail' class.id %}"><i
-                                            class="fas fa-fw fa-eye"></i> {% trans 'action_show' %}</a>
+                                            class="fas fa-fw fa-eye"></i> {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
                                     <a class="dropdown-item" href="{% url 'dashboard:classes-schedule' class.id %}"><i
                                             class="fas fa-fw fa-calendar-alt"></i>
-                                        {% trans 'action_view_schedule' %}</a>
+                                        {% trans 'schedule' %}</a>
                                     <a class="dropdown-item" href="{% url 'dashboard:classes-update' class.slug %}"><i
-                                            class="fas fa-fw fa-edit"></i> {% trans 'action_edit' %}</a>
+                                            class="fas fa-fw fa-edit"></i> {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
                                     <a class="dropdown-item delete-class" href="javascript:;"><i
-                                            class="fas fa-fw fa-trash"></i> {% trans 'action_delete' %}</a>
+                                            class="fas fa-fw fa-trash"></i> {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
                                     <form class="d-none" action="{% url 'dashboard:classes-delete' class.id %}"
                                         method="post">
                                         {% csrf_token %}

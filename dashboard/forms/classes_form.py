@@ -26,7 +26,7 @@ class ClassForm(forms.ModelForm):
                 'columns': 10,
             })
         self.fields['start_at'] = forms.DateField(
-            label=_('start_at').capitalize(),
+            label=_('start at').capitalize(),
             widget=DatePicker(
                 options={
                     'useCurrent': True,
@@ -40,7 +40,7 @@ class ClassForm(forms.ModelForm):
         )
         self.fields['end_at'] = forms.DateField(
             required=False,
-            label=_('end_at').capitalize(),
+            label=_('end at').capitalize(),
             widget=DatePicker(
                 options={
                     'useCurrent': True,
@@ -48,22 +48,22 @@ class ClassForm(forms.ModelForm):
                 attrs={
                     'icon_toggle': True,
                     'input_group': False,
-                    'placeholder': _('end_at')
+                    'placeholder': _('end at')
                 }
             ),
         )
         self.fields['end_at'].required = False
         self.fields['price_per_lesson'].widget.attrs.update({
-            'placeholder': _('price_per_lesson')
+            'placeholder': _('price per lesson')
         })
         self.fields['price_per_month'].widget.attrs.update({
-            'placeholder': _('price_per_month')
+            'placeholder': _('price per month')
         })
         self.fields['price_course'].widget.attrs.update({
-            'placeholder': _('price_course')
+            'placeholder': _('price course')
         })
         self.fields['max_people'].widget.attrs.update({
-            'placeholder': _('max_people')
+            'placeholder': _('max people')
         })
         self.fields['level'].required = False
         self.helper = FormHelper()
@@ -126,7 +126,7 @@ class ClassForm(forms.ModelForm):
             start_at = cleaned_data['start_at']
             if end_at < start_at:
                 raise forms.ValidationError(
-                    _('error_end_at_must_be_greater_than_start_at'))
+                    _('End at must be greater than Start at'))
         return end_at
 
 
@@ -135,7 +135,7 @@ class ClassNewForm(ClassForm):
         cleaned_data = super(ClassForm, self).clean()
         start_at = cleaned_data['start_at']
         if start_at < datetime.now().date():
-            raise forms.ValidationError(_('wrong_start_date'))
+            raise forms.ValidationError(_('wrong start date'))
         return start_at
 
 

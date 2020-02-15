@@ -30,9 +30,9 @@ class CardType(models.Model):
     for_longtime_trainee_only = models.BooleanField(
         default=False, verbose_name=_('for longtime trainee only'))
     created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name=_('created_at'))
+        auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
-        auto_now=True, blank=True, null=True, verbose_name=_('updated_at'))
+        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
 
     def __str__(self):
         return self.name.capitalize()
@@ -42,9 +42,9 @@ class Card(models.Model):
         Trainee, on_delete=models.CASCADE, related_name='cards', verbose_name=_('trainee'))
     card_type = models.ForeignKey(
         CardType, on_delete=models.CASCADE, related_name='cards', verbose_name=_('card type'))
-    start_at = models.DateField(verbose_name=_('start_at'))
-    end_at = models.DateField(verbose_name=_('end_at'))
+    start_at = models.DateField(verbose_name=_('start at'))
+    end_at = models.DateField(verbose_name=_('end at'))
     created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name=_('created_at'))
+        auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
-        auto_now=True, blank=True, null=True, verbose_name=_('updated_at'))
+        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))

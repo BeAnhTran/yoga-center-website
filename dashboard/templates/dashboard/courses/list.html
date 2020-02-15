@@ -27,18 +27,18 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>{% trans 'name' as t_name %}{{ t_name|title }}</th>
-                        <th>{% trans 'image' as t_image %}{{ t_image|title }}</th>
-                        <th>{% trans 'description' as t_description %}{{ t_description|title }}</th>
-                        <th>{% trans 'type' as t_type %}{{ t_type|title }}</th>
-                        <th>{% trans 'action' as t_action %}{{ t_action|title }}</th>
+                        <th>{% trans 'name' as t_name %}{{ t_name|capfirst }}</th>
+                        <th>{% trans 'image' as t_image %}{{ t_image|capfirst }}</th>
+                        <th>{% trans 'description' as t_description %}{{ t_description|capfirst }}</th>
+                        <th>{% trans 'type' as t_type %}{{ t_type|capfirst }}</th>
+                        <th>{% trans 'action' as t_action %}{{ t_action|capfirst }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for course in courses %}
                     <tr>
                         <td>{{ course.id }}</td>
-                        <td>{{ course.name|title }}</td>
+                        <td>{{ course.name|capfirst }}</td>
                         <td>
                             {% if course.image %}
                             <img class="img img-fluid img-thumbnail course-img" src="{{ course.image.url }}"

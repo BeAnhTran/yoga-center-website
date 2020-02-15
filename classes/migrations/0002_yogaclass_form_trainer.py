@@ -9,14 +9,14 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('cards', '0001_initial'),
+        ('classes', '0001_initial'),
         ('core', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='card',
-            name='trainee',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cards', to='core.Trainee', verbose_name='trainee'),
+            model_name='yogaclass',
+            name='form_trainer',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='classes', to='core.Trainer', verbose_name='form trainer'),
         ),
     ]

@@ -30,17 +30,17 @@ class Lesson(models.Model):
     day = models.DateField(help_text=_(
         'Day of the event'), verbose_name=_('day'))
     start_time = models.TimeField(help_text=_(
-        'Starting time'), verbose_name=_('start_time'))
+        'Starting time'), verbose_name=_('start time'))
     end_time = models.TimeField(help_text=_(
-        'Final time'), verbose_name=_('end_time'))
+        'Final time'), verbose_name=_('end time'))
     content = models.TextField(help_text=_(
         'Content'), blank=True, null=True, verbose_name=_('content'))
     notes = models.TextField(help_text=_(
         'Notes'), blank=True, null=True, verbose_name=_('notes'))
     created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name=_('created_at'))
+        auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
-        auto_now=True, blank=True, null=True, verbose_name=_('end_at'))
+        auto_now=True, blank=True, null=True, verbose_name=_('end at'))
 
     def __str__(self):
         if self.room:
@@ -67,7 +67,8 @@ class Lesson(models.Model):
             else:
                 if check2['value'] is False:
                     obj = check2['object']
-            raise ValidationError(_('overlap_time').capitalize() + ': ' + obj.__str__())
+            raise ValidationError(
+                _('overlap time').capitalize() + ': ' + obj.__str__())
 
     def save(self, *args, **kwargs):
         self.full_clean()

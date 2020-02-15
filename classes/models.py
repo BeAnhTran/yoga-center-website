@@ -30,7 +30,7 @@ class YogaClass(models.Model):
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name='classes', verbose_name=_('course'))
     form_trainer = models.ForeignKey(
-        Trainer, on_delete=models.SET_NULL, related_name='classes', verbose_name=_('form_trainer'), blank=True, null=True)
+        Trainer, on_delete=models.SET_NULL, related_name='classes', verbose_name=_('form trainer'), blank=True, null=True)
     card_types = models.ManyToManyField(
         CardType, related_name='classes', verbose_name=_('card types'))
     name = models.CharField(max_length=120, verbose_name=_('name'))
@@ -44,20 +44,20 @@ class YogaClass(models.Model):
     level = models.IntegerField(
         choices=LEVEL_CHOICES, null=True, verbose_name=_('level'))
     price_per_lesson = models.FloatField(
-        blank=True, null=True, verbose_name=_('price_per_lesson'))
+        blank=True, null=True, verbose_name=_('price per lesson'))
     price_per_month = models.FloatField(
-        blank=True, null=True, verbose_name=_('price_per_month'))
+        blank=True, null=True, verbose_name=_('price per month'))
     price_course = models.FloatField(
-        blank=True, null=True, verbose_name=_('price_course'))
+        blank=True, null=True, verbose_name=_('price course'))
     max_people = models.IntegerField(
-        blank=True, null=True, verbose_name=_('max_people'))
+        blank=True, null=True, verbose_name=_('max people'))
     start_at = models.DateField(
-        blank=True, null=True, verbose_name=_('start_at'))
-    end_at = models.DateField(blank=True, null=True, verbose_name=_('end_at'))
+        blank=True, null=True, verbose_name=_('start at'))
+    end_at = models.DateField(blank=True, null=True, verbose_name=_('end at'))
     created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name=_('created_at'))
+        auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
-        auto_now=True, blank=True, null=True, verbose_name=_('updated_at'))
+        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
 
     def __str__(self):
         return self.name

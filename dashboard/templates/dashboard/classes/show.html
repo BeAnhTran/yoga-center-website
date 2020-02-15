@@ -37,7 +37,7 @@
         <p class="card-text">{{ yogaclass.description }}</p>
     </li>
     <li class="list-group-item list-group-item-action">
-        <h5 class="card-title">{% trans "start_at" as start_at %}{{ start_at|upper }}</h5>
+        <h5 class="card-title">{% trans "start at" as start_at %}{{ start_at|upper }}</h5>
         {% if yogaclass.start_at %}
         <p class="card-text">{{ yogaclass.start_at }}</p>
         {% else %}
@@ -45,7 +45,7 @@
         {% endif %}
     </li>
     <li class="list-group-item list-group-item-action">
-        <h5 class="card-title">{% trans "end_at" as end_at %}{{ end_at|upper }}</h5>
+        <h5 class="card-title">{% trans "end at" as end_at %}{{ end_at|upper }}</h5>
         {% if yogaclass.end_at %}
         <p class="card-text">{{ yogaclass.end_at }}</p>
         {% else %}
@@ -66,7 +66,7 @@
         <p class="card-text">{{ yogaclass.get_level_display }}</p>
     </li>
     <li class="list-group-item list-group-item-action">
-        <h5 class="card-title">{% trans "max_people" as max_people %}{{ max_people|upper }}</h5>
+        <h5 class="card-title">{% trans "max people" as max_people %}{{ max_people|upper }}</h5>
         {% if yogaclass.max_people %}
         <p class="card-text">{{ yogaclass.max_people }}</p>
         {% else %}
@@ -83,7 +83,7 @@
         {% endif %}
     </li>
     <li class="list-group-item list-group-item-action">
-        <h5 class="title">{% trans "price_per_lesson" as price_per_lesson %}{{ price_per_lesson|upper }}</h5>
+        <h5 class="title">{% trans "price per lesson" as price_per_lesson %}{{ price_per_lesson|upper }}</h5>
         {% if yogaclass.price_per_lesson %}
         <p class="card-text"> {{ yogaclass.price_per_lesson |stringformat:".0f" }} </p>
         {% else %}
@@ -91,7 +91,7 @@
         {% endif %}
     </li>
     <li class="list-group-item list-group-item-action">
-        <h5 class="title">{% trans "price_per_month" as price_per_month %}{{ price_per_month|upper }}</h5>
+        <h5 class="title">{% trans "price per month" as price_per_month %}{{ price_per_month|upper }}</h5>
         {% if yogaclass.price_per_month %}
         <p class="card-text"> {{ yogaclass.price_per_month |stringformat:".0f" }} </p>
         {% else %}
@@ -99,7 +99,7 @@
         {% endif %}
     </li>
     <li class="list-group-item list-group-item-action">
-        <h5 class="title">{% trans "price_course" as price_course %}{{ price_course|upper }}</h5>
+        <h5 class="title">{% trans "price course" as price_course %}{{ price_course|upper }}</h5>
         {% if yogaclass.price_course %}
         <p class="card-text"> {{ yogaclass.price_course |stringformat:".0f" }} </p>
         {% else %}

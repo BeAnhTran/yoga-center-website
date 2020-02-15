@@ -33,7 +33,7 @@ class LessonForm(forms.ModelForm):
             }),
         )
         self.fields['start_time'] = forms.TimeField(
-            label=_('start_time').capitalize(),
+            label=_('start time').capitalize(),
             widget=TimePicker(options={
                 'useCurrent': True,
                 'format': 'HH:mm',
@@ -42,7 +42,7 @@ class LessonForm(forms.ModelForm):
             }),
         )
         self.fields['end_time'] = forms.TimeField(
-            label=_('end_time').capitalize(),
+            label=_('end time').capitalize(),
             widget=TimePicker(options={
                 'format': 'HH:mm',
             }, attrs={
@@ -102,5 +102,5 @@ class LessonForm(forms.ModelForm):
             start_time = cleaned_data['start_time']
             if end_time < start_time:
                 raise forms.ValidationError(
-                    _('error_end_time_must_be_greater_than_start_time'))
+                    _('End time must be greater than start time'))
         return end_time
