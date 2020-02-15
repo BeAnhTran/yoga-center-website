@@ -62,6 +62,10 @@ card_types_urlpatterns = [
          name='json-card-type-list-for-course'),
 ]
 
+# ROLL CALL
+# roll_calls_urlpatterns = [
+# ]
+
 # DASHBOARD
 urlpatterns = [
     path('', dashboard_view.index, name='index'),
