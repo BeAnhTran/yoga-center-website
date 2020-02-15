@@ -8,4 +8,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 @staff_required
 def index(request):
-    return render(request, 'dashboard/index.html')
+    context = {
+        'active_nav': 'dashboard'
+    }
+    return render(request, 'dashboard/index.html', context=context)

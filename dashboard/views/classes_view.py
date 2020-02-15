@@ -27,13 +27,21 @@ class ClassListView(ListView):
     ordering = ['created_at']
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super(ClassListView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'classes'
+        return context
+
 
 class ClassNewView(View):
     template_name = 'dashboard/classes/new.html'
 
     def get(self, request):
         form = classes_form.ClassNewForm()
-        context = {'form': form}
+        context = {
+            'form': form,
+            'active_nav': 'classes'
+        }
         return render(request, self.template_name, context=context)
 
     def post(self, request, *arg, **kwargs):
@@ -52,6 +60,11 @@ class ClassDetailView(DetailView):
     template_name = 'dashboard/classes/show.html'
     context_object_name = 'yogaclass'
 
+    def get_context_data(self, **kwargs):
+        context = super(ClassDetailView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'classes'
+        return context
+
 
 class ClassScheduleView(DetailView):
     model = YogaClass
@@ -64,6 +77,7 @@ class ClassScheduleView(DetailView):
         if self.object.form_trainer:
             lesson_form.fields['trainer'].initial = self.object.form_trainer
         context['lesson_form'] = lesson_form
+        context['active_nav'] = 'classes'
         return context
 
 
@@ -75,6 +89,11 @@ class ClassEditView(UpdateView):
 
     def get_success_url(self):
             return reverse('dashboard:classes-list', kwargs={})
+
+    def get_context_data(self, **kwargs):
+        context = super(ClassEditView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'classes'
+        return context
 
 
 @method_decorator([login_required, admin_required], name='dispatch')

@@ -28,12 +28,22 @@ class RoomListView(ListView):
     ordering = ['name']
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super(RoomListView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'rooms'
+        return context
+
 
 @method_decorator([login_required, admin_required], name='dispatch')
 class RoomDetailView(DetailView):
     model = Room
     template_name = 'dashboard/rooms/detail.html'
     context_object_name = 'room'
+
+    def get_context_data(self, **kwargs):
+        context = super(RoomDetailView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'rooms'
+        return context
 
 
 @login_required

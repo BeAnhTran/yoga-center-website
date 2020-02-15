@@ -9,7 +9,7 @@
 
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item {% if active_nav == 'dashboard' %}active{% endif %}">
         <a class="nav-link" href="{% url 'dashboard:index'%}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>{% trans 'Dashboard' %}</span></a>
@@ -59,7 +59,7 @@
     </li>
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Courses -->
-    <li class="nav-item">
+    <li class="nav-item {% if active_nav == 'courses' %}active{% endif %}">
         <a class="nav-link" href="{% url 'dashboard:courses-list'%}">
             <i class="fas fa-fw fa-window-restore"></i>
             <span>
@@ -68,7 +68,7 @@
         </a>
     </li>
     <!-- Nav Item - Classes -->
-    <li class="nav-item">
+    <li class="nav-item {% if active_nav == 'classes' %}active{% endif %}">
         <a class="nav-link" href="{% url 'dashboard:classes-list' %}">
             <i class="fas fa-fw fa-braille"></i>
             <span>
@@ -77,7 +77,7 @@
         </a>
     </li>
     <!-- Nav Item - Lessons -->
-    <li class="nav-item">
+    <li class="nav-item {% if active_nav == 'lessons' %}active{% endif %}">
         <a class="nav-link" href="javascript:;">
             <i class="fab fa-leanpub"></i>
             <span>
@@ -87,21 +87,21 @@
     </li>
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Card Types - Cards -->
-    <li class="nav-item">
+    <li class="nav-item {% if show_nav == True %}active{% endif %}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCards" aria-expanded="true"
             aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-id-card"></i>
             <span>{% trans 'cards' as t_cards %} {{ t_cards|capfirst }}</span>
         </a>
-        <div id="collapseCards" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="collapseCards" class="collapse {% if show_nav == True %}show{% endif %}" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white pb-2 collapse-inner rounded">
-                <a class="collapse-item" href="{% url 'dashboard:cards-list' %}">
+                <a class="collapse-item {% if active_nav == 'cards' %}active{% endif %}" href="{% url 'dashboard:cards-list' %}">
                     <i class="fas fa-fw fa-id-card-alt"></i>
                     <span>
                         {{ t_cards|capfirst }}
                     </span>
                 </a>
-                <a class="collapse-item" href="{% url 'dashboard:card-types-list' %}">
+                <a class="collapse-item {% if active_nav == 'card_types' %}active{% endif %}" href="{% url 'dashboard:card-types-list' %}">
                     <i class="fas fa-fw fa-vr-cardboard"></i>
                     <span>
                         {% trans 'card types' as t_card_types %} {{ t_card_types|title }}

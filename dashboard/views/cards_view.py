@@ -17,3 +17,9 @@ class CardListView(ListView):
     context_object_name = 'cards'
     ordering = ['-updated_at']
     paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(CardListView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'cards'
+        context['show_nav'] = True
+        return context

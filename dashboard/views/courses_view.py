@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,reverse
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views import View
@@ -22,6 +22,11 @@ class CourseListView(ListView):
     ordering = ['-created_at']
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super(CourseListView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'courses'
+        return context
+
 
 @method_decorator([login_required, admin_required], name='dispatch')
 class CourseNewView(View):
@@ -29,7 +34,10 @@ class CourseNewView(View):
 
     def get(self, request):
         form = courses_form.CourseForm()
-        context = {'form': form}
+        context = {
+            'form': form,
+            'active_nav': 'courses'
+        }
         return render(request, self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):
@@ -52,6 +60,11 @@ class CourseEditView(UpdateView):
 
     def get_success_url(self):
             return reverse('dashboard:courses-list', kwargs={})
+
+    def get_context_data(self, **kwargs):
+        context = super(CourseEditView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'courses'
+        return context
 
 
 @method_decorator([login_required, admin_required], name='dispatch')

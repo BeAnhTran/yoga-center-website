@@ -23,6 +23,11 @@ class CardTypeListView(ListView):
     ordering = ['created_at']
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super(CardTypeListView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'card_types'
+        context['show_nav'] = True
+        return context
 
 @method_decorator([login_required, admin_required], name='dispatch')
 class get_card_types_for_course(APIView):
