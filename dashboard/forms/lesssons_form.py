@@ -23,6 +23,7 @@ class LessonForm(forms.ModelForm):
         range_time = env('DEFAULT_RANGE_TIME_MINUTES_OF_LESSON')
         now_with_range = now + datetime.timedelta(minutes=range_time)
         self.fields['room'].required = True
+        self.fields['room'].label = _('room').capitalize()
         self.fields['day'] = forms.DateField(
             label=_('day').capitalize(),
             widget=DatePicker(options={
@@ -48,16 +49,21 @@ class LessonForm(forms.ModelForm):
                 'placeholder': now_with_range.strftime("%H:%M")
             }),
         )
+        self.fields['notes'].label = _('notes').capitalize()
         self.fields['notes'].widget.attrs = {
             'rows': 2,
             'columns': 10,
             'placeholder': _('notes')
         }
+        self.fields['content'].label = _('content').capitalize()
         self.fields['content'].widget.attrs = {
             'rows': 2,
             'columns': 10,
             'placeholder': _('content')
         }
+        self.fields['trainer'].label = _('trainer').capitalize()
+        self.fields['state'].label = _('state').capitalize()
+
         self.helper = FormHelper()
         self.helper.form_show_errors = True
         self.helper.form_id = 'form_new_lesson'

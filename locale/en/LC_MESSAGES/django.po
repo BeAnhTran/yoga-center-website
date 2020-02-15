@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-15 12:31+0700\n"
+"POT-Creation-Date: 2020-02-15 17:17+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,7 +149,8 @@ msgstr ""
 msgid "image"
 msgstr ""
 
-#: .\classes\models.py:43 .\dashboard\templates\dashboard\classes\show.html:56
+#: .\classes\models.py:43 .\dashboard\forms\lesssons_form.py:65
+#: .\dashboard\templates\dashboard\classes\show.html:56
 #: .\dashboard\templates\dashboard\rooms\list.html:31 .\lessons\models.py:30
 msgid "state"
 msgstr ""
@@ -394,7 +395,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: .\dashboard\forms\classes_form.py:96 .\dashboard\forms\lesssons_form.py:86
+#: .\dashboard\forms\classes_form.py:96 .\dashboard\forms\lesssons_form.py:92
 msgid "Save"
 msgstr ""
 
@@ -410,31 +411,43 @@ msgstr "End date must be greater than start date"
 msgid "wrong_start_date"
 msgstr "Wrong start date"
 
-#: .\dashboard\forms\lesssons_form.py:27 .\lessons\models.py:32
+#: .\dashboard\forms\lesssons_form.py:26
+#: .\dashboard\templates\dashboard\rooms\list.html:18 .\lessons\models.py:26
+msgid "room"
+msgstr ""
+
+#: .\dashboard\forms\lesssons_form.py:28 .\lessons\models.py:32
 msgid "day"
 msgstr ""
 
-#: .\dashboard\forms\lesssons_form.py:35 .\lessons\models.py:34
+#: .\dashboard\forms\lesssons_form.py:36 .\lessons\models.py:34
 #, fuzzy
 #| msgid "start_at"
 msgid "start_time"
 msgstr "start at"
 
-#: .\dashboard\forms\lesssons_form.py:44 .\lessons\models.py:36
+#: .\dashboard\forms\lesssons_form.py:45 .\lessons\models.py:36
 #, fuzzy
 #| msgid "end_at"
 msgid "end_time"
 msgstr "end at"
 
-#: .\dashboard\forms\lesssons_form.py:54 .\lessons\models.py:40
+#: .\dashboard\forms\lesssons_form.py:52 .\dashboard\forms\lesssons_form.py:56
+#: .\lessons\models.py:40
 msgid "notes"
 msgstr ""
 
-#: .\dashboard\forms\lesssons_form.py:59 .\lessons\models.py:38
+#: .\dashboard\forms\lesssons_form.py:58 .\dashboard\forms\lesssons_form.py:62
+#: .\lessons\models.py:38
 msgid "content"
 msgstr ""
 
-#: .\dashboard\forms\lesssons_form.py:99
+#: .\dashboard\forms\lesssons_form.py:64 .\lessons\models.py:28
+#: .\templates\registration\signup.html:35
+msgid "trainer"
+msgstr ""
+
+#: .\dashboard\forms\lesssons_form.py:105
 msgid "error_end_time_must_be_greater_than_start_time"
 msgstr "End time must be greater than start time"
 
@@ -687,20 +700,12 @@ msgstr ""
 msgid "Room List"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\rooms\list.html:18 .\lessons\models.py:26
-msgid "room"
-msgstr ""
-
 #: .\dashboard\templates\dashboard\rooms\list.html:30
 msgid "location"
 msgstr ""
 
 #: .\lessons\models.py:24
 msgid "yogaclass"
-msgstr ""
-
-#: .\lessons\models.py:28 .\templates\registration\signup.html:35
-msgid "trainer"
 msgstr ""
 
 #: .\lessons\models.py:32

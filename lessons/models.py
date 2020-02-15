@@ -5,7 +5,6 @@ from rooms.models import Room
 from core.models import Trainer
 import time
 from django.core.exceptions import ValidationError
-from django.utils.translation import gettext as _
 from lessons.utils import check_overlap_in_list_lesson
 from django.db.models import Q
 
