@@ -58,6 +58,7 @@
                 day: 'numeric',
                 weekday: 'long'
             },
+            timeGridEventMinHeight: 100,
             locale: "{{ request.LANGUAGE_CODE }}",
             allDaySlot: false,
             minTime: '05:00',
@@ -65,7 +66,7 @@
             // contentHeight: 768,
             resources: function (fetchInfo, successCallback, failureCallback) {
                 $.ajax({
-                    url: "{% url 'api:rooms-list' %}",
+                    url: "{% url 'rooms:json-list' %}",
                     type: 'GET'
                 }).done(function (data) {
                     var resources = [];
@@ -80,19 +81,16 @@
                 });
             },
             events: function (fetchInfo, successCallback, failureCallback) {
-                console.log(fetchInfo);
                 $.ajax({
-                    url: "{% url 'api:lessons-list-in-range-time' %}",
+                    url: "{% url 'lessons:json-list-in-range-time' %}",
                     type: 'GET',
                     data: {
                         startStr: fetchInfo.startStr,
                         endStr: fetchInfo.endStr
                     },
                     success: function (data) {
-                        console.log(data);
                         var events = [];
                         for (var i = 0; i < data.length; i++) {
-                            console.log(data[i]);
                             var _d = data[i]['day'];
                             var _st = data[i]['start_time'];
                             var _et = data[i]['end_time'];
@@ -103,7 +101,7 @@
 
                             events.push({
                                 id: data[i]['pk'],
-                                title: data[i]['yogaclass'],
+                                title: data[i]['yogaclass']['name'],
                                 start: start_time,
                                 end: end_time,
                                 url: 'javascript:;',
@@ -111,7 +109,7 @@
                                 allDaySlot: false,
                                 imageClassUrl: 'https://picsum.photos/200/300?random=1',
                                 imageTrainerUrl: 'https://picsum.photos/200/300?random=2',
-                                resourceId: data[i]['room']
+                                resourceId: data[i]['room']['id']
                             })
                         }
                         successCallback(events);

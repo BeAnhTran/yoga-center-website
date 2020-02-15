@@ -32,6 +32,10 @@ urlpatterns += i18n_patterns(
     path('courses/', include('courses.urls')),
     # classes
     path('classes/', include('classes.urls')),
+    # rooms
+    path('rooms/', include('rooms.urls')),
+    # lessons
+    path('lessons/', include('lessons.urls')),
     # schedule
     path('schedule/', include('yoga_schedule.urls')),
     # dashboard
@@ -44,9 +48,3 @@ urlpatterns += i18n_patterns(
            document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-# API 
-# support get data when using ajax
-urlpatterns += [
-    path('api/', include('api.urls')),
-]

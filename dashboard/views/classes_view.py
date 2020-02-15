@@ -24,7 +24,7 @@ class ClassListView(ListView):
     model = YogaClass
     template_name = 'dashboard/classes/list.html'
     context_object_name = 'classes'
-    ordering = ['-updated_at']
+    ordering = ['created_at']
     paginate_by = 5
 
 

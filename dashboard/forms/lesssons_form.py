@@ -22,6 +22,7 @@ class LessonForm(forms.ModelForm):
         now = datetime.datetime.now()
         range_time = env('DEFAULT_RANGE_TIME_MINUTES_OF_LESSON')
         now_with_range = now + datetime.timedelta(minutes=range_time)
+        self.fields['room'].required = True
         self.fields['day'] = forms.DateField(
             label=_('day').capitalize(),
             widget=DatePicker(options={
@@ -41,19 +42,25 @@ class LessonForm(forms.ModelForm):
         )
         self.fields['end_time'] = forms.TimeField(
             label=_('end_time').capitalize(),
-            required=False,
             widget=TimePicker(options={
                 'format': 'HH:mm',
             }, attrs={
                 'placeholder': now_with_range.strftime("%H:%M")
             }),
         )
+        self.fields['notes'].widget.attrs = {
+            'rows': 2,
+            'columns': 10,
+            'placeholder': _('notes')
+        }
+        self.fields['content'].widget.attrs = {
+            'rows': 2,
+            'columns': 10,
+            'placeholder': _('content')
+        }
         self.helper = FormHelper()
         self.helper.form_show_errors = True
         self.helper.form_id = 'form_new_lesson'
-        self.fields['notes'].widget.attrs['rows'] = 2
-        self.fields['notes'].widget.attrs['columns'] = 10
-        self.fields['notes'].widget.attrs['placeholder'] = _('notes')
 
         self.helper.layout = Layout(
             Row(
@@ -71,7 +78,11 @@ class LessonForm(forms.ModelForm):
                 Column('end_time', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            'notes',
+            Row(
+                Column('content', css_class='form-group col-md-6 mb-0'),
+                Column('notes', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
             Submit('submit', _('Save'), css_class='btn-success'))
 
     class Meta:
@@ -87,19 +98,3 @@ class LessonForm(forms.ModelForm):
                 raise forms.ValidationError(
                     _('error_end_time_must_be_greater_than_start_time'))
         return end_time
-
-    def clean(self):
-        cleaned_data = self.cleaned_data
-        if all(v in cleaned_data for v in ['start_time', 'end_time']):
-            start_time = cleaned_data['start_time']
-            end_time = cleaned_data['end_time']
-            room = cleaned_data['room']
-            if all(v is not None for v in [start_time, end_time]):
-                room_lessons = room.lessons.filter(day=cleaned_data['day'])
-                if room_lessons:
-                    check = check_overlap_in_list_lesson(
-                        start_time, end_time, room_lessons)
-                    if check is False:
-                        raise forms.ValidationError(
-                            _('overlap_time'))
-        return cleaned_data

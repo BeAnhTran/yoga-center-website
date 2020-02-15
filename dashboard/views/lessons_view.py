@@ -1,32 +1,38 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.http import HttpResponse
-from django.urls import reverse_lazy
+from django.http import HttpResponse, Http404
 
-from django.contrib.admin.views.decorators import staff_member_required
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import user_passes_test, login_required
-from ..decorators import admin_required
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
-from django.views.generic.list import ListView
-from django.views.generic.edit import UpdateView, DeleteView
-from django.views.generic.detail import DetailView
+from dashboard.forms.lesssons_form import LessonForm
 
 from lessons.models import Lesson
-
-from datetime import datetime
-from django.http import JsonResponse
-from django.core.serializers import serialize
-from django.core import serializers
-
-from lessons.models import Lesson
+from lessons.serializers.lesson_serializer import LessonSerializer
 
 
-def detail_json(request):
-    lesson_id = request.POST['lesson_id']
-    lesson = Lesson.objects.get(pk=lesson_id)
-    data = serializers.serialize(
-        'json', [lesson], use_natural_foreign_keys=True)
-    return HttpResponse(data, content_type="application/json")
+class LessonDetailApiView(APIView):
+    def get_object(self, pk):
+        try:
+            return Lesson.objects.get(pk=pk)
+        except Lesson.DoesNotExist:
+            raise Http404
 
-def LessonEditView(UpdateView):
-    pass
+    def get(self, request, pk, format=None):
+        lesson = self.get_object(pk)
+        serializer = LessonSerializer(lesson)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        instance = self.get_object(pk)
+        form = LessonForm(request.POST, request.FILES, instance=instance)
+        if form.is_valid():
+            lesson = form.save()
+            serializer = LessonSerializer(lesson)
+            return Response(serializer.data)
+        print(form.errors.as_json())
+        return HttpResponse(form.errors.as_json(), status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        lesson = self.get_object(pk)
+        lesson.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -33,7 +33,7 @@
         id_course = $(this).val();
         if (id_course != '') {
             $.ajax({
-                url: "{% url 'api:card-type-list-for-course' %}",
+                url: "{% url 'dashboard:json-card-type-list-for-course' %}",
                 method: 'GET',
                 data: {
                     id_course: id_course
