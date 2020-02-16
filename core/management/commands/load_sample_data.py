@@ -6,15 +6,18 @@ except ImportError:
 from django.db import transaction
 from faker import Faker
 from getenv import env
+from datetime import datetime, date, timedelta
+from django.utils import timezone
+import pytz
+import random
+
 from rooms.models import Room
 from classes.models import (YogaClass, BASIC_LEVEL, INTERMEDIATE_LEVEL)
 from courses.models import (Course, TRAINING_COURSE, PRACTICE_COURSE)
 from lessons.models import Lesson
 from core.models import User, Trainer, Trainee, Staff
-
-from datetime import datetime, date, timedelta
-from django.utils import timezone
-import pytz
+from cards.models import (CardType, FOR_FULL_MONTH, FOR_CONSECUTIVE_LESSONS,
+                          FOR_NON_CONSECUTIVE_LESSONS, FOR_TRIAL, FOR_TRAINING_COURSE)
 
 
 class Command(BaseCommand):
@@ -113,13 +116,73 @@ class Command(BaseCommand):
                 'username': 'trainee' + str(i),
                 'email': 'trainee' + str(i) + '@trainee.com',
                 'first_name': fake.first_name(),
-                'last_name': fake.last_name()
+                'last_name': fake.last_name(),
+                'address': fake.address(),
+                'birth_day': fake.date_of_birth(tzinfo=None, minimum_age=15, maximum_age=70),
+                'phone_number': fake.phone_number(),
+                'gender': random.randint(0, 2),
+                'image': fake.image_url()
             }
             trainee = User(**data)
             trainee.set_password('truong77')
             trainee.is_trainee = False
             trainee.save()
             Trainee.objects.create(user=trainee)
+
+        # ====================================
+        # CREATE CARD TYPE
+        # ====================================
+        print("==================")
+        print("CREATE CARD TYPES")
+        print("CREATE <FOR FULL MONTH> CARD TYPE")
+        data_for_full_month = {
+            'name': 'học theo tháng',
+            'description': 'Áp dụng cho học viên muốn học tất cả các buổi trong tháng',
+            'form_of_using': FOR_FULL_MONTH
+        }
+        full_month_card_type = CardType(**data_for_full_month)
+        full_month_card_type.save()
+
+        print("CREATE <FOR CONSECUTIVE LESSONS> CARD TYPE")
+        data_for_consecutive_lessons = {
+            'name': 'học theo buổi với số buổi liên tiếp',
+            'description': 'Áp dụng cho học viên muốn học theo buổi với số buổi đăng kí liên tiếp nhau trong một khoảng thời gian xác định.',
+            'form_of_using': FOR_CONSECUTIVE_LESSONS
+        }
+        consecutive_lessons_card_type = CardType(
+            **data_for_consecutive_lessons)
+        consecutive_lessons_card_type.save()
+        print("CREATE <FOR NON CONSECUTIVE LESSONS> CARD TYPE")
+        data_for_non_consecutive_lessons = {
+            'name': 'học theo buổi với số buổi không liên tiếp',
+            'description': 'Áp dụng cho học viên muốn học theo buổi với số buổi đăng kí không liên tiếp nhau',
+            'form_of_using': FOR_NON_CONSECUTIVE_LESSONS,
+            'multiplier': env('DEFAULT_MULTIPLIER_FOR_NON_CONSECUTIVE_LESSONS')
+        }
+        non_consecutive_lessons_card_type = CardType(
+            **data_for_non_consecutive_lessons)
+        non_consecutive_lessons_card_type.save()
+        print("CREATE <FOR TRIAL> CARD TYPE")
+        data_for_trial = {
+            'name': 'học thử',
+            'description': 'Áp dụng cho học viên muốn học thử',
+            'form_of_using': FOR_TRIAL,
+            'multiplier': env('DEFAULT_MULTIPLIER_FOR_TRIAL')
+        }
+
+        trial_card_type = CardType(
+            **data_for_trial)
+        trial_card_type.save()
+        print("CREATE <FOR TRAINING COURSE> CARD TYPE")
+        data_for_training_course = {
+            'name': 'học theo khóa đào tạo',
+            'description': 'Áp dụng cho học viên học khóa học đào tạo',
+            'form_of_using': FOR_TRAINING_COURSE
+        }
+
+        training_course_card_type = CardType(
+            **data_for_training_course)
+        training_course_card_type.save()
 
         # ====================================
         # CREATE COURSE
@@ -222,6 +285,12 @@ class Command(BaseCommand):
             form_trainer=trainer1,
             level=BASIC_LEVEL
         )
+        hatha_yoga_class1.card_types.add(
+            full_month_card_type,
+            consecutive_lessons_card_type,
+            non_consecutive_lessons_card_type,
+            trial_card_type
+        )
 
         print("CREATE HATHA YOGA 2 - BASIC")
         id_trainer2 = trainer1.pk + 1
@@ -236,6 +305,13 @@ class Command(BaseCommand):
             level=BASIC_LEVEL
         )
 
+        hatha_yoga_class2.card_types.add(
+            full_month_card_type,
+            consecutive_lessons_card_type,
+            non_consecutive_lessons_card_type,
+            trial_card_type
+        )
+
         print("CREATE HATHA YOGA 3 - BASIC")
         id_trainer3 = trainer1.pk + 2
         trainer3 = Trainer.objects.get(pk=id_trainer3)
@@ -247,6 +323,12 @@ class Command(BaseCommand):
             start_at=today,
             form_trainer=trainer2,
             level=BASIC_LEVEL
+        )
+        hatha_yoga_class3.card_types.add(
+            full_month_card_type,
+            consecutive_lessons_card_type,
+            non_consecutive_lessons_card_type,
+            trial_card_type
         )
 
         print("CREATE HATHA YOGA - INTERMEDIATE")
@@ -261,6 +343,12 @@ class Command(BaseCommand):
             form_trainer=trainer2,
             level=INTERMEDIATE_LEVEL
         )
+        hatha_yoga_imtermediate_class.card_types.add(
+            full_month_card_type,
+            consecutive_lessons_card_type,
+            non_consecutive_lessons_card_type,
+            trial_card_type
+        )
 
         print("CREATE TRAINING YOGA TRAINER CLASS")
         id_trainer5 = trainer1.pk + 4
@@ -273,7 +361,9 @@ class Command(BaseCommand):
             start_at=today,
             form_trainer=trainer5
         )
-
+        training_class.card_types.add(
+            training_course_card_type
+        )
         # ====================================
         # CREATE LESSON
         # ====================================
@@ -285,7 +375,8 @@ class Command(BaseCommand):
         ######## Mon - Wed - Fri - (05:00 - 06:15) #######
         room_1 = Room.objects.first()
         t1_hatha_1_basic = '05:00'
-        t2_hatha_1_basic = (datetime.strptime(t1_hatha_1_basic, '%H:%M') + timedelta(minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
+        t2_hatha_1_basic = (datetime.strptime(t1_hatha_1_basic, '%H:%M') + timedelta(
+            minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
 
         hatha_yoga_class1.lessons.create(**{
             "room_id": room_1.id,

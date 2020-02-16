@@ -30,7 +30,7 @@ class User(AbstractUser):
         regex=r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$', message="Phone number must be valid")
     phone_number = models.CharField(
         validators=[phone_regex], max_length=17, blank=True, null=True, verbose_name=_('phone number'))
-    birth_day = models.DateTimeField(
+    birth_day = models.DateField(
         blank=True, null=True, verbose_name=_('birth day'))
     address = models.CharField(
         max_length=255, blank=True, null=True, verbose_name=_('address'))
