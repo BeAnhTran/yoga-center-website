@@ -2,7 +2,7 @@ from django.urls import include, path
 from django.conf.urls import url
 
 from .views import (dashboard_view, courses_view, rooms_view,
-                    lessons_view, classes_view, cards_view, card_types_view)
+                    lessons_view, classes_view, cards_view, card_types_view, trainees_view)
 
 app_name = 'dashboard'
 
@@ -62,9 +62,10 @@ card_types_urlpatterns = [
          name='json-card-type-list-for-course'),
 ]
 
-# ROLL CALL
-# roll_calls_urlpatterns = [
-# ]
+# TRAINEESL
+trainees_urlpatterns = [
+    path('', trainees_view.TraineeListView.as_view(), name='trainees-list')
+]
 
 # DASHBOARD
 urlpatterns = [
@@ -75,4 +76,5 @@ urlpatterns = [
     path('rooms/', include(rooms_urlpatterns)),
     path('cards/', include(cards_urlpatterns)),
     path('card-types/', include(card_types_urlpatterns)),
+    path('trainees/', include(trainees_urlpatterns)),
 ]

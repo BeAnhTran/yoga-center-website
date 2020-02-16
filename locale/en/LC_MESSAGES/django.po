@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-15 21:31+0700\n"
+"POT-Creation-Date: 2020-02-16 15:30+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,8 @@ msgstr ""
 #: .\dashboard\templates\dashboard\cards\list.html:29
 #: .\dashboard\templates\dashboard\classes\list.html:32
 #: .\dashboard\templates\dashboard\courses\list.html:30
-#: .\dashboard\templates\dashboard\rooms\list.html:29 .\rooms\models.py:14
+#: .\dashboard\templates\dashboard\rooms\list.html:29
+#: .\dashboard\templates\dashboard\trainees\list.html:33 .\rooms\models.py:14
 msgid "name"
 msgstr ""
 
@@ -84,7 +85,8 @@ msgstr ""
 msgid "updated at"
 msgstr ""
 
-#: .\cards\models.py:42 .\templates\registration\signup.html:33
+#: .\cards\models.py:42 .\dashboard\templates\dashboard\trainees\list.html:13
+#: .\templates\registration\signup.html:33
 #: .\templates\registration\trainee_signup_form.html:15
 msgid "trainee"
 msgstr ""
@@ -132,6 +134,7 @@ msgstr ""
 #: .\classes\models.py:31 .\dashboard\templates\dashboard\cards\list.html:30
 #: .\dashboard\templates\dashboard\classes\list.html:33
 #: .\dashboard\templates\dashboard\classes\show.html:32
+#: .\dashboard\templates\dashboard\courses\edit.html:12
 #: .\dashboard\templates\dashboard\courses\list.html:19
 #: .\dashboard\templates\dashboard\courses\new.html:12
 msgid "course"
@@ -144,7 +147,7 @@ msgstr ""
 
 #: .\classes\models.py:35
 #: .\dashboard\templates\dashboard\card_types\list.html:17
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:107
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:112
 msgid "card types"
 msgstr ""
 
@@ -157,6 +160,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\classes\list.html:36
 #: .\dashboard\templates\dashboard\classes\show.html:77
 #: .\dashboard\templates\dashboard\courses\list.html:31
+#: .\dashboard\templates\dashboard\trainees\list.html:34
 msgid "image"
 msgstr ""
 
@@ -204,7 +208,7 @@ msgstr ""
 
 #: .\classes\templates\classes\list.html:8
 #: .\classes\templates\classes\list.html:30
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:75
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:77
 msgid "classes"
 msgstr ""
 
@@ -215,6 +219,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\classes\list.html:22
 #: .\dashboard\templates\dashboard\courses\list.html:20
 #: .\dashboard\templates\dashboard\rooms\list.html:19
+#: .\dashboard\templates\dashboard\trainees\list.html:23
 #, python-format
 msgid "No %(value)s yet"
 msgstr ""
@@ -428,7 +433,7 @@ msgstr ""
 
 #: .\courses\templates\courses\list.html:8
 #: .\courses\templates\courses\list.html:26
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:66
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:68
 msgid "courses"
 msgstr ""
 
@@ -532,6 +537,7 @@ msgstr ""
 
 #: .\dashboard\templates\dashboard\cards\list.html:12
 #: .\dashboard\templates\dashboard\courses\list.html:13
+#: .\dashboard\templates\dashboard\trainees\list.html:17
 msgid "Create New"
 msgstr ""
 
@@ -543,6 +549,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\classes\list.html:38
 #: .\dashboard\templates\dashboard\courses\list.html:34
 #: .\dashboard\templates\dashboard\rooms\list.html:33
+#: .\dashboard\templates\dashboard\trainees\list.html:35
 msgid "action"
 msgstr ""
 
@@ -608,6 +615,7 @@ msgid "create new lesson"
 msgstr ""
 
 #: .\dashboard\templates\dashboard\classes\schedule.html:64
+#: .\dashboard\templates\dashboard\courses\edit.html:12
 msgid "update"
 msgstr ""
 
@@ -672,31 +680,31 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:36
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:38
 msgid "trainees"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:42
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:44
 msgid "trainers"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:48
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:50
 msgid "staffs"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:54
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:56
 msgid "admin"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:84
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:86
 msgid "lessons"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:94
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:96
 msgid "cards"
 msgstr ""
 
-#: .\dashboard\templates\dashboard\layouts\sidebar.html:119
+#: .\dashboard\templates\dashboard\layouts\sidebar.html:124
 msgid "rooms"
 msgstr ""
 
@@ -730,6 +738,11 @@ msgstr ""
 
 #: .\dashboard\templates\dashboard\rooms\list.html:30 .\rooms\models.py:16
 msgid "location"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\trainees\list.html:14
+#, python-format
+msgid "%(value)s List"
 msgstr ""
 
 #: .\lessons\models.py:23

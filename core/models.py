@@ -67,6 +67,10 @@ class Trainee(models.Model):
     health_condition = models.TextField(
         blank=True, verbose_name=_('health condition'))
 
+    def __str__(self):
+        full_name = self.user.full_name()
+        return full_name
+
 
 class Trainer(models.Model):
     user = models.OneToOneField(
