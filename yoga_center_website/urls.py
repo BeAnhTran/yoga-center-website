@@ -36,6 +36,8 @@ urlpatterns += i18n_patterns(
     path('rooms/', include('rooms.urls')),
     # lessons
     path('lessons/', include('lessons.urls')),
+    # card types
+    path('card-types/', include('card_types.urls')),
     # schedule
     path('schedule/', include('yoga_schedule.urls')),
     # dashboard

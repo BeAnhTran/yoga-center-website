@@ -10,8 +10,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from ..decorators import admin_required
 
-from cards.models import (CardType, FOR_TRAINING_COURSE)
-from cards.serializers.card_type_serializer import CardTypeSerializer
+from card_types.models import (CardType, FOR_TRAINING_COURSE)
+from card_types.serializers import CardTypeSerializer
 from courses.models import (Course, PRACTICE_COURSE, TRAINING_COURSE)
 from django.db.models import Q
 

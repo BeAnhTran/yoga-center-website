@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-16 15:30+0700\n"
+"POT-Creation-Date: 2020-02-17 13:25+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\cards\models.py:13
+#: .\card_types\models.py:9
 msgid "Full Month"
 msgstr "Học theo tháng"
 
-#: .\cards\models.py:14
-msgid "Consecutive Lessons"
-msgstr "Học các buổi liên tiếp"
+#: .\card_types\models.py:10
+msgid "For Some Lessons"
+msgstr "Học theo buổi"
 
-#: .\cards\models.py:15
-msgid "Non Consecutive Lessons"
-msgstr "Học các buổi không liên tiếp"
-
-#: .\cards\models.py:16
+#: .\card_types\models.py:11
 msgid "Trial"
 msgstr "Học thử"
 
-#: .\cards\models.py:17
+#: .\card_types\models.py:12
 msgid "For Training Course"
 msgstr "Khóa huấn luyện"
 
-#: .\cards\models.py:22 .\classes\models.py:36 .\core\models.py:52
+#: .\card_types\models.py:17 .\classes\models.py:35 .\core\models.py:52
 #: .\courses\models.py:16
 #: .\dashboard\templates\dashboard\card_types\list.html:28
 #: .\dashboard\templates\dashboard\cards\list.html:29
@@ -49,7 +45,7 @@ msgstr "Khóa huấn luyện"
 msgid "name"
 msgstr "tên"
 
-#: .\cards\models.py:23 .\classes\models.py:39 .\core\models.py:54
+#: .\card_types\models.py:18 .\classes\models.py:38 .\core\models.py:54
 #: .\courses\models.py:18
 #: .\dashboard\templates\dashboard\card_types\list.html:29
 #: .\dashboard\templates\dashboard\cards\list.html:34
@@ -59,79 +55,94 @@ msgstr "tên"
 msgid "description"
 msgstr "mô tả"
 
-#: .\cards\models.py:25
+#: .\card_types\models.py:20
 msgid "form of using"
 msgstr "hình thức sử dụng"
 
-#: .\cards\models.py:27
+#: .\card_types\models.py:22
 msgid "min lessons required"
 msgstr "số buổi đăng kí tối thiểu"
 
-#: .\cards\models.py:29 .\dashboard\templates\dashboard\card_types\list.html:30
+#: .\card_types\models.py:24
+#: .\dashboard\templates\dashboard\card_types\list.html:30
 msgid "multiplier"
 msgstr "hệ số nhân"
 
-#: .\cards\models.py:31
+#: .\card_types\models.py:26
 msgid "for longtime trainee only"
 msgstr "chỉ áp dụng cho học viên lâu năm"
 
-#: .\cards\models.py:33 .\cards\models.py:48 .\classes\models.py:58
-#: .\courses\models.py:23 .\lessons\models.py:41 .\rooms\models.py:23
+#: .\card_types\models.py:28 .\cards\models.py:19 .\classes\models.py:57
+#: .\courses\models.py:23 .\lessons\models.py:43 .\rooms\models.py:23
 msgid "created at"
 msgstr "thời gian tạo"
 
-#: .\cards\models.py:35 .\cards\models.py:50 .\classes\models.py:60
+#: .\card_types\models.py:30 .\cards\models.py:21 .\classes\models.py:59
 #: .\rooms\models.py:25
 msgid "updated at"
 msgstr "thời gian cập nhật"
 
-#: .\cards\models.py:42 .\dashboard\templates\dashboard\trainees\list.html:13
-#: .\templates\registration\signup.html:33
-#: .\templates\registration\trainee_signup_form.html:15
-msgid "trainee"
-msgstr "học viên"
-
-#: .\cards\models.py:44
-msgid "card type"
-msgstr "loại thẻ"
-
-#: .\cards\models.py:45 .\classes\models.py:55
+#: .\cards\forms.py:17 .\cards\models.py:16 .\classes\models.py:54
 #: .\dashboard\forms\classes_form.py:29
 #: .\dashboard\templates\dashboard\classes\show.html:40
 msgid "start at"
 msgstr "thời gian bắt đầu"
 
-#: .\cards\models.py:46 .\classes\models.py:56 .\courses\models.py:24
-#: .\dashboard\forms\classes_form.py:43 .\dashboard\forms\classes_form.py:51
-#: .\dashboard\templates\dashboard\classes\show.html:48 .\lessons\models.py:43
+#: .\cards\forms.py:25 .\cards\models.py:17 .\classes\models.py:55
+#: .\courses\models.py:24 .\dashboard\forms\classes_form.py:43
+#: .\dashboard\forms\classes_form.py:51
+#: .\dashboard\templates\dashboard\classes\show.html:48 .\lessons\models.py:45
 msgid "end at"
 msgstr "thời gian kết thúc"
 
-#: .\classes\models.py:13
+#: .\cards\forms.py:32
+msgid "Please select a value"
+msgstr "Vui lòng chọn giá trị"
+
+#: .\cards\forms.py:40 .\dashboard\forms\classes_form.py:96
+#: .\dashboard\forms\lesssons_form.py:92
+msgid "Save"
+msgstr "Lưu"
+
+#: .\cards\models.py:11 .\dashboard\templates\dashboard\trainees\list.html:13
+#: .\templates\registration\signup.html:33
+#: .\templates\registration\trainee_signup_form.html:15
+msgid "trainee"
+msgstr "học viên"
+
+#: .\cards\models.py:13
+msgid "card type"
+msgstr "loại thẻ"
+
+#: .\cards\models.py:15
+msgid "yoga class"
+msgstr "Lớp"
+
+#: .\classes\models.py:12
 msgid "Draft"
 msgstr "Bản nháp"
 
-#: .\classes\models.py:14 .\lessons\models.py:16 .\rooms\models.py:8
+#: .\classes\models.py:13 .\lessons\models.py:16 .\rooms\models.py:8
 msgid "Active"
 msgstr "Hoạt động"
 
-#: .\classes\models.py:15 .\lessons\models.py:17 .\rooms\models.py:9
+#: .\classes\models.py:14 .\lessons\models.py:17 .\rooms\models.py:9
 msgid "Inactive"
 msgstr "Tạm dừng"
 
-#: .\classes\models.py:23
+#: .\classes\models.py:22
 msgid "Basic Level"
 msgstr "Cơ bản"
 
-#: .\classes\models.py:24
+#: .\classes\models.py:23
 msgid "Intermediate Level"
 msgstr "Trung cấp"
 
-#: .\classes\models.py:25
+#: .\classes\models.py:24
 msgid "Advanced Level"
 msgstr "Nâng cao"
 
-#: .\classes\models.py:31 .\dashboard\templates\dashboard\cards\list.html:30
+#: .\classes\models.py:30 .\dashboard\templates\dashboard\cards\list.html:30
 #: .\dashboard\templates\dashboard\classes\list.html:33
 #: .\dashboard\templates\dashboard\classes\show.html:32
 #: .\dashboard\templates\dashboard\courses\edit.html:12
@@ -140,71 +151,75 @@ msgstr "Nâng cao"
 msgid "course"
 msgstr "khóa học"
 
-#: .\classes\models.py:33 .\dashboard\templates\dashboard\cards\list.html:31
+#: .\classes\models.py:32 .\dashboard\templates\dashboard\cards\list.html:31
 #: .\dashboard\templates\dashboard\classes\list.html:34
 msgid "form trainer"
 msgstr "HLV chủ nhiệm"
 
-#: .\classes\models.py:35
+#: .\classes\models.py:34
 #: .\dashboard\templates\dashboard\card_types\list.html:17
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:112
 msgid "card types"
 msgstr "loại thẻ"
 
-#: .\classes\models.py:38 .\courses\models.py:17
+#: .\classes\models.py:37 .\courses\models.py:17
 msgid "slug"
 msgstr ""
 
-#: .\classes\models.py:41 .\core\models.py:43 .\core\models.py:56
+#: .\classes\models.py:40 .\core\models.py:43 .\core\models.py:56
 #: .\courses\models.py:20 .\dashboard\templates\dashboard\cards\list.html:33
 #: .\dashboard\templates\dashboard\classes\list.html:36
 #: .\dashboard\templates\dashboard\classes\show.html:77
 #: .\dashboard\templates\dashboard\courses\list.html:31
-#: .\dashboard\templates\dashboard\trainees\list.html:34
+#: .\dashboard\templates\dashboard\trainees\list.html:37
 msgid "image"
 msgstr "hình ảnh"
 
-#: .\classes\models.py:43 .\dashboard\forms\lesssons_form.py:65
+#: .\classes\models.py:42 .\dashboard\forms\lesssons_form.py:65
 #: .\dashboard\templates\dashboard\cards\list.html:32
 #: .\dashboard\templates\dashboard\classes\list.html:35
 #: .\dashboard\templates\dashboard\classes\show.html:56
-#: .\dashboard\templates\dashboard\rooms\list.html:31 .\lessons\models.py:29
+#: .\dashboard\templates\dashboard\rooms\list.html:31 .\lessons\models.py:31
 #: .\rooms\models.py:21
 msgid "state"
 msgstr "trạng thái"
 
-#: .\classes\models.py:45 .\dashboard\templates\dashboard\classes\show.html:65
+#: .\classes\models.py:44 .\dashboard\templates\dashboard\classes\show.html:65
 msgid "level"
 msgstr "cấp độ"
 
-#: .\classes\models.py:47 .\dashboard\forms\classes_form.py:57
+#: .\classes\models.py:46 .\dashboard\forms\classes_form.py:57
 #: .\dashboard\templates\dashboard\classes\show.html:86
 msgid "price per lesson"
 msgstr "giá buổi"
 
-#: .\classes\models.py:49 .\dashboard\forms\classes_form.py:60
+#: .\classes\models.py:48 .\dashboard\forms\classes_form.py:60
 #: .\dashboard\templates\dashboard\classes\show.html:94
 msgid "price per month"
 msgstr "giá tháng"
 
-#: .\classes\models.py:51 .\dashboard\forms\classes_form.py:63
+#: .\classes\models.py:50 .\dashboard\forms\classes_form.py:63
 #: .\dashboard\templates\dashboard\classes\show.html:102
 msgid "price course"
 msgstr "giá khóa"
 
-#: .\classes\models.py:53 .\dashboard\forms\classes_form.py:66
+#: .\classes\models.py:52 .\dashboard\forms\classes_form.py:66
 #: .\dashboard\templates\dashboard\classes\show.html:69
 #: .\dashboard\templates\dashboard\rooms\list.html:32 .\rooms\models.py:19
 msgid "max people"
 msgstr "số người tối đa"
 
-#: .\classes\models.py:67
+#: .\classes\models.py:66
 msgid "Yoga Class"
 msgstr "Lớp"
 
-#: .\classes\models.py:68
+#: .\classes\models.py:67
 msgid "Yoga Classes"
 msgstr "Lớp học"
+
+#: .\classes\templates\classes\enroll.html:28
+msgid "enroll"
+msgstr ""
 
 #: .\classes\templates\classes\list.html:8
 #: .\classes\templates\classes\list.html:30
@@ -371,7 +386,7 @@ msgstr "họ"
 msgid "phone number"
 msgstr "số điện thoại"
 
-#: .\core\models.py:34
+#: .\core\models.py:34 .\dashboard\templates\dashboard\trainees\list.html:35
 msgid "birth day"
 msgstr "ngày sinh"
 
@@ -379,7 +394,7 @@ msgstr "ngày sinh"
 msgid "address"
 msgstr "địa chỉ"
 
-#: .\core\models.py:38
+#: .\core\models.py:38 .\dashboard\templates\dashboard\trainees\list.html:36
 msgid "gender"
 msgstr "giới tính"
 
@@ -399,23 +414,23 @@ msgstr "thời gian cập nhật"
 msgid "health condition"
 msgstr "tình trạng sức khỏe"
 
-#: .\core\models.py:75
+#: .\core\models.py:79
 msgid "yoga teaching experience"
 msgstr "kinh nghiệm dạy yoga"
 
-#: .\core\models.py:78 .\core\models.py:96
+#: .\core\models.py:82 .\core\models.py:100
 msgid "is student"
 msgstr "là sinh viên (học sinh)"
 
-#: .\core\models.py:80 .\core\models.py:98
+#: .\core\models.py:84 .\core\models.py:102
 msgid "graduate school"
 msgstr "trường tốt nghiệp"
 
-#: .\core\models.py:82 .\core\models.py:100
+#: .\core\models.py:86 .\core\models.py:104
 msgid "company name"
 msgstr "tên công ty"
 
-#: .\core\models.py:93
+#: .\core\models.py:97
 msgid "work experience"
 msgstr "kinh nghiệm làm việc"
 
@@ -466,10 +481,6 @@ msgstr "Tên"
 msgid "Description"
 msgstr "Mô tả"
 
-#: .\dashboard\forms\classes_form.py:96 .\dashboard\forms\lesssons_form.py:92
-msgid "Save"
-msgstr "Lưu"
-
 #: .\dashboard\forms\classes_form.py:118 .\dashboard\forms\classes_form.py:151
 msgid "A class with this name already exists."
 msgstr "Tên này đã tồn tại"
@@ -488,31 +499,31 @@ msgstr "Thời gian bắt đầu không hợp lệ"
 msgid "room"
 msgstr "phòng tập"
 
-#: .\dashboard\forms\lesssons_form.py:28 .\lessons\models.py:31
+#: .\dashboard\forms\lesssons_form.py:28 .\lessons\models.py:33
 msgid "day"
 msgstr "ngày"
 
 #: .\dashboard\forms\lesssons_form.py:36
-#: .\dashboard\templates\dashboard\rooms\detail.html:49 .\lessons\models.py:33
+#: .\dashboard\templates\dashboard\rooms\detail.html:49 .\lessons\models.py:35
 msgid "start time"
 msgstr "thời gian bắt đầu"
 
 #: .\dashboard\forms\lesssons_form.py:45
-#: .\dashboard\templates\dashboard\rooms\detail.html:53 .\lessons\models.py:35
+#: .\dashboard\templates\dashboard\rooms\detail.html:53 .\lessons\models.py:37
 msgid "end time"
 msgstr "thời gian kết thúc"
 
 #: .\dashboard\forms\lesssons_form.py:52 .\dashboard\forms\lesssons_form.py:56
-#: .\lessons\models.py:39
+#: .\lessons\models.py:41
 msgid "notes"
 msgstr "ghi chú"
 
 #: .\dashboard\forms\lesssons_form.py:58 .\dashboard\forms\lesssons_form.py:62
-#: .\lessons\models.py:37
+#: .\lessons\models.py:39
 msgid "content"
 msgstr "nội dung"
 
-#: .\dashboard\forms\lesssons_form.py:64 .\lessons\models.py:27
+#: .\dashboard\forms\lesssons_form.py:64 .\lessons\models.py:29
 #: .\templates\registration\signup.html:35
 msgid "trainer"
 msgstr "huấn luyện viên"
@@ -549,7 +560,7 @@ msgstr "thẻ tập"
 #: .\dashboard\templates\dashboard\classes\list.html:38
 #: .\dashboard\templates\dashboard\courses\list.html:34
 #: .\dashboard\templates\dashboard\rooms\list.html:33
-#: .\dashboard\templates\dashboard\trainees\list.html:35
+#: .\dashboard\templates\dashboard\trainees\list.html:38
 msgid "action"
 msgstr "hành động"
 
@@ -566,18 +577,21 @@ msgstr "chưa cập nhật"
 
 #: .\dashboard\templates\dashboard\cards\list.html:70
 #: .\dashboard\templates\dashboard\classes\list.html:73
+#: .\dashboard\templates\dashboard\trainees\list.html:65
 msgid "show"
 msgstr "xem"
 
 #: .\dashboard\templates\dashboard\cards\list.html:75
 #: .\dashboard\templates\dashboard\classes\list.html:78
 #: .\dashboard\templates\dashboard\classes\show.html:24
+#: .\dashboard\templates\dashboard\trainees\list.html:67
 msgid "edit"
 msgstr "sửa"
 
 #: .\dashboard\templates\dashboard\cards\list.html:77
 #: .\dashboard\templates\dashboard\classes\list.html:80
 #: .\dashboard\templates\dashboard\classes\schedule.html:61
+#: .\dashboard\templates\dashboard\trainees\list.html:69
 msgid "delete"
 msgstr "xóa"
 
@@ -745,31 +759,35 @@ msgstr "vị trí"
 msgid "%(value)s List"
 msgstr "Danh sách %(value)s"
 
+#: .\dashboard\templates\dashboard\trainees\list.html:34
+msgid "email"
+msgstr ""
+
 #: .\lessons\models.py:23
 msgid "yogaclass"
 msgstr "Lớp"
 
-#: .\lessons\models.py:31
+#: .\lessons\models.py:33
 msgid "Day of the event"
 msgstr "Ngày của sự kiện"
 
-#: .\lessons\models.py:33
+#: .\lessons\models.py:35
 msgid "Starting time"
 msgstr "Thời gian bắt đầu"
 
-#: .\lessons\models.py:35
+#: .\lessons\models.py:37
 msgid "Final time"
 msgstr "Thời gian kết thúc"
 
-#: .\lessons\models.py:37
+#: .\lessons\models.py:39
 msgid "Content"
 msgstr "Nội dung"
 
-#: .\lessons\models.py:39
+#: .\lessons\models.py:41
 msgid "Notes"
 msgstr "Ghi chú"
 
-#: .\lessons\models.py:71
+#: .\lessons\models.py:73
 msgid "overlap time"
 msgstr "thời gian đã bị trùng"
 
@@ -34036,6 +34054,9 @@ msgstr ""
 #: .\venv\Lib\site-packages\languages\languages.py:8119
 msgid "Zuojiang Zhuang"
 msgstr ""
+
+#~ msgid "Consecutive Lessons"
+#~ msgstr "Học các buổi liên tiếp"
 
 #~ msgid "Room"
 #~ msgstr "Phòng tập"

@@ -12,14 +12,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Room',
+            name='CardType',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=120, verbose_name='name')),
-                ('location', models.CharField(blank=True, max_length=255, null=True, verbose_name='location')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='description')),
-                ('max_people', models.IntegerField(null=True, verbose_name='max people')),
-                ('state', models.IntegerField(choices=[(0, 'Active'), (1, 'Inactive')], default=0, verbose_name='state')),
+                ('description', models.TextField(verbose_name='description')),
+                ('form_of_using', models.IntegerField(choices=[(0, 'Full Month'), (1, 'For Some Lessons'), (2, 'Trial'), (3, 'For Training Course')], default=0, verbose_name='form of using')),
+                ('min_lessons_require', models.IntegerField(blank=True, null=True, verbose_name='min lessons required')),
+                ('multiplier', models.FloatField(null=True, verbose_name='multiplier')),
+                ('for_longtime_trainee_only', models.BooleanField(default=False, verbose_name='for longtime trainee only')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='created at')),
                 ('updated_at', models.DateTimeField(auto_now=True, null=True, verbose_name='updated at')),
             ],

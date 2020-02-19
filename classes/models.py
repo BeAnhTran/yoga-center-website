@@ -3,7 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 from courses.models import Course
 from core.models import Trainer
-from cards.models import CardType
+from classes.templatetags import sexify
+from card_types.models import FOR_TRIAL
 
 DRAFT_STATE = 0
 INACTIVE_STATE = 1
@@ -32,7 +33,7 @@ class YogaClass(models.Model):
     form_trainer = models.ForeignKey(
         Trainer, on_delete=models.SET_NULL, related_name='classes', verbose_name=_('form trainer'), blank=True, null=True)
     card_types = models.ManyToManyField(
-        CardType, related_name='classes', verbose_name=_('card types'))
+        to='card_types.CardType', related_name='classes', verbose_name=_('card types'))
     name = models.CharField(max_length=120, verbose_name=_('name'))
     slug = models.SlugField(max_length=150, unique=True,
                             verbose_name=_('slug'))
@@ -78,3 +79,40 @@ class YogaClass(models.Model):
         if self.state == ACTIVE_STATE:
             return True
         return False
+
+    def get_trial_price(self):
+        list_trial_card_types = self.card_types.filter(form_of_using=FOR_TRIAL)
+        if list_trial_card_types:
+            trial_card_type = list_trial_card_types[0]
+            if trial_card_type.multiplier is not None and trial_card_type.multiplier > 0:
+                if self.price_per_lesson is not None:
+                    price = self.price_per_lesson * trial_card_type.multiplier
+                    return sexify.sexy_number(price)
+                else:
+                    return _('have not updated yet')
+            else:
+                return _('Free')
+
+    def get_price_per_month(self):
+        if self.price_per_month is not None:
+            if self.price_per_month == int(self.price_per_month):
+                self.price_per_month = int(self.price_per_month)
+            return sexify.sexy_number(self.price_per_month)
+        else:
+            return _('have not updated yet')
+
+    def get_price_per_lesson(self):
+        if self.price_per_lesson is not None:
+            if self.price_per_lesson == int(self.price_per_lesson):
+                self.price_per_lesson = int(self.price_per_lesson)
+            return sexify.sexy_number(self.price_per_lesson)
+        else:
+            return _('have not updated yet')
+    
+    def get_price_course(self):
+        if self.price_course is not None:
+            if self.price_course == int(self.price_course):
+                self.price_course = int(self.price_course)
+            return sexify.sexy_number(self.price_course)
+        else:
+            return _('have not updated yet')

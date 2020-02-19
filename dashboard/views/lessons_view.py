@@ -29,7 +29,6 @@ class LessonDetailApiView(APIView):
             lesson = form.save()
             serializer = LessonSerializer(lesson)
             return Response(serializer.data)
-        print(form.errors.as_json())
         return HttpResponse(form.errors.as_json(), status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):

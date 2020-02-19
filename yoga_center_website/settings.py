@@ -54,8 +54,10 @@ INSTALLED_APPS = [
     'lessons',
     'rooms',
     'cards',
+    'card_types',
     'yoga_schedule',
     'dashboard',
+    'roll_calls',
 ]
 
 MIDDLEWARE = [
@@ -195,3 +197,6 @@ LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale'), ]
 TEMPUS_DOMINUS_LOCALIZE = True
 
 FORMAT_MODULE_PATH = 'yoga_center_website.formats'
+
+STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')

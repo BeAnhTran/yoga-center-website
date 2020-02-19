@@ -1,12 +1,41 @@
-from django.shortcuts import render
+import json
+from django.utils.translation import gettext as _
+from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic import View
 
 from classes.models import YogaClass, LEVEL_CHOICES
 from courses.models import Course
 from core.models import Trainer
 
 from django.db.models import Q
+from cards.forms import CardFormForTraineeEnroll
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from lessons.serializers.lesson_serializer import LessonSerializer
+from datetime import datetime
+
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from core.decorators import trainee_required
+
+from django.conf import settings
+import stripe
+
+from formtools.wizard.views import SessionWizardView
+from rest_framework import status
+from django.http import HttpResponse
+from cards.forms import CardPaymentForm
+
+from card_types.models import (CardType,
+                               FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE, FOR_TRIAL)
+
+from classes.templatetags import sexify
+from classes.utils import get_price, get_total_price, isNum
+from django.db import transaction
+
 
 class YogaClassListView(ListView):
     model = YogaClass
@@ -31,5 +60,148 @@ class YogaClassDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(YogaClassDetailView, self).get_context_data(**kwargs)
-        context['others'] = set(YogaClass.objects.filter(~Q(pk=self.object.pk)))
+        context['others'] = set(
+            YogaClass.objects.filter(~Q(pk=self.object.pk)))
         return context
+
+
+@method_decorator([login_required, trainee_required], name='dispatch')
+class YogaClassEnrollView(View):
+    template_name = 'classes/enroll.html'
+
+    def get(self, request, slug):
+        # remove enroll card form when access enroll page
+        if request.session.get('enroll_card_form') is not None:
+            del request.session['enroll_card_form']
+        yoga_class = YogaClass.objects.get(slug=slug)
+        card_type_list = yoga_class.card_types.all()
+        form = CardFormForTraineeEnroll(
+            initial={'card_type_list': card_type_list})
+        context = {
+            'yoga_class': yoga_class,
+            'form': form
+        }
+        return render(request, self.template_name, context=context)
+
+    def post(self, request, *args, **kwargs):
+        yoga_class = YogaClass.objects.get(slug=kwargs['slug'])
+        card_type_list = yoga_class.card_types.all()
+        form = CardFormForTraineeEnroll(request.POST)
+
+        if form.is_valid():
+            # if form is valid
+            # save to session and get it in payment page
+            request.session['enroll_card_form'] = request.POST
+            return HttpResponse({'success': 'success'}, status=status.HTTP_200_OK)
+        return HttpResponse(form.errors.as_json(), status=status.HTTP_400_BAD_REQUEST)
+
+
+class YogaClassGetLessonListView(APIView):
+    # Get List Lesson for specified Yoga Class in range time
+    def get(self, request, slug):
+        obj = YogaClass.objects.get(slug=slug)
+        start_date = datetime.fromisoformat(request.GET['startStr'])
+        end_date = datetime.fromisoformat(request.GET['endStr'])
+        lessons = obj.lessons.filter(day__range=[start_date, end_date])
+        serialized = LessonSerializer(lessons, many=True)
+        return Response(serialized.data)
+
+
+@method_decorator([login_required, trainee_required], name='dispatch')
+class YogaClassEnrollPaymentView(View):
+    template_name = 'payment.html'
+
+    def get(self, request, slug):
+        if request.session.get('enroll_card_form'):
+            yoga_class = YogaClass.objects.get(slug=slug)
+            enroll_card_form = request.session['enroll_card_form']
+            # convert to form to get true datetime format
+            temp = CardFormForTraineeEnroll(enroll_card_form)
+            # get lesson list in range time
+            start = temp.cleaned_data['start_at']
+            end = temp.cleaned_data['end_at']
+            lesson_list = yoga_class.lessons.filter(
+                day__range=[start, end]).order_by('day')
+            # Payment Form
+            form = CardPaymentForm()
+            id_card_type = request.session['enroll_card_form']['card_type']
+            card_type = CardType.objects.get(pk=id_card_type)
+            # get from first lesson
+            start_at = lesson_list.first().day
+            # get from last lesson
+            end_at = lesson_list.last().day
+
+            number_of_lessons = lesson_list.count()
+            price = get_price(yoga_class, card_type)
+            total_price = get_total_price(
+                yoga_class, card_type, number_of_lessons)
+            total_price_display = total_price
+            if isNum(total_price):
+                total_price_display = sexify.sexy_number(total_price)
+            context = {
+                'key': settings.STRIPE_PUBLISHABLE_KEY,
+                'form': form,
+                'yoga_class': yoga_class,
+                'card_type': card_type,
+                'start_at': start_at,
+                'end_at': end_at,
+                'number_of_lessons': number_of_lessons,
+                'lesson_list': lesson_list,
+                'price': price,
+                'total_price_display': total_price_display,
+                'total_price': total_price
+            }
+            return render(request, self.template_name, context=context)
+        else:
+            response_data = {}
+            response_data['message'] = _(
+                'Please enroll a class before payment')
+            return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
+
+    @transaction.atomic
+    def post(self, request, slug):
+        if request.session.get('enroll_card_form'):
+            card_payment_form = CardPaymentForm(request.POST)
+            if card_payment_form.is_valid():
+                try:
+                    print("<Stripe charge>")
+                    stripe.api_key = settings.STRIPE_SECRET_KEY
+                    customer = stripe.Customer.create(
+                        name=request.POST['name'],
+                        email=request.POST['email'],
+                        phone=request.POST['phone'],
+                        source=request.POST['stripeToken']
+                    )
+                    charge = stripe.Charge.create(
+                        amount=request.POST['amount'],
+                        currency='vnd',
+                        description=_('Card Payment'),
+                        customer=customer.id
+                    )
+                    if charge:
+                        yoga_class = YogaClass.objects.get(slug=slug)
+                        enroll_form = CardFormForTraineeEnroll(
+                            request.session['enroll_card_form'])
+                        start = enroll_form.cleaned_data['start_at']
+                        end = enroll_form.cleaned_data['end_at']
+                        lesson_list = yoga_class.lessons.filter(
+                            day__range=[start, end])
+                        if enroll_form.is_valid():
+                            card = enroll_form.save(commit=False)
+                            card.trainee = request.user.trainee
+                            card.yogaclass = yoga_class
+                            card.save()
+                            card.lessons.add(*lesson_list)
+                        return HttpResponse('success', status=status.HTTP_200_OK)
+                except Exception as e:
+                    print("<ERROR>")
+                    print(e)
+                    return HttpResponse(e, status=status.HTTP_400_BAD_REQUEST)
+
+            else:
+                return HttpResponse(card_payment_form.errors.as_json(), status=status.HTTP_400_BAD_REQUEST)
+        else:
+            response_data = {}
+            response_data['message'] = _(
+                'Please enroll a class before payment')
+            return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)

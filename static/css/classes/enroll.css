@@ -1,0 +1,26 @@
+.fc-time{
+    display: none;
+}
+
+.fc-content{
+    text-align: center;
+}
+
+#trial-lesson-listing, #some_lesson_list{
+    min-height: 100px;
+}
+
+#trial-lesson, #div_for_some_lesson_list{
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 0.5em;
+    font-family: 'Times New Roman', Times, serif;
+}
+.a-remove-trial-lesson{
+    color:#000;
+}
+
+#price_table{
+    border-radius: 0.5rem;
+    background: #f1d4d4;
+}

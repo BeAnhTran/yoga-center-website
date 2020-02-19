@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-lg-4 text-left text-md-right">
                             <a href="javascript:;" class="btn btn-sm btn-info">{% trans 'schedule' as t_schedule %}{{t_schedule|upper}}</a>
-                            <a href="javascript:;" class="btn btn-sm btn-success">{% trans 'book now' as t_book_now %}{{t_book_now|upper}}</a>
+                            <a href="{% url 'classes:enroll' class.slug %}" class="btn btn-sm btn-success">{% trans 'book now' as t_book_now %}{{t_book_now|upper}}</a>
                         </div>
                     </div>
                     <p>Yoga is the secret of many women in Vietnam and internationally. This is a very popular subject

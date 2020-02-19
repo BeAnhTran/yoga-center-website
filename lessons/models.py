@@ -2,12 +2,12 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from classes.models import YogaClass
 from rooms.models import Room
-from core.models import Trainer
+from core.models import Trainer, Trainee
 import time
 from django.core.exceptions import ValidationError
 from lessons.utils import check_overlap_in_list_lesson
 from django.db.models import Q
-
+from cards.models import Card
 
 ACTIVE_STATE = 0
 INACTIVE_STATE = 1
@@ -17,12 +17,15 @@ STATE_CHOICES = (
     (INACTIVE_STATE, _('Inactive')),
 )
 
+from datetime import date
 
 class Lesson(models.Model):
     yogaclass = models.ForeignKey(
         YogaClass, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('yogaclass'))
     room = models.ForeignKey(
         Room, on_delete=models.SET_NULL, related_name='lessons', verbose_name=_('room'), blank=True, null=True)
+    cards = models.ManyToManyField(
+        to='cards.Card', through='roll_calls.RollCall', related_name='cards', verbose_name='cards')
     trainer = models.ForeignKey(
         Trainer, on_delete=models.SET_NULL, related_name='lessons', verbose_name=_('trainer'), blank=True, null=True)
     state = models.IntegerField(choices=STATE_CHOICES,
@@ -77,3 +80,9 @@ class Lesson(models.Model):
                 self.trainer = self.yogaclass.form_trainer
 
         super(Lesson, self).save(*args, **kwargs)
+
+    def get_time_and_room_detail(self):
+        result = '(' + self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M') + ')'
+        if self.room:
+            result += ' - ' + self.room.name
+        return result
