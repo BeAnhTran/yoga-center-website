@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'formtools',
 
+    'common',
     'core.apps.CoreConfig',
     'courses',
     'classes',

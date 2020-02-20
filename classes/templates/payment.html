@@ -4,7 +4,9 @@
 {% block specified_css %}
 <script src="https://js.stripe.com/v3/"></script>
 <link href="{% static 'css/payment/style.css' %}" rel='stylesheet' />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" integrity="sha256-JHGEmB629pipTkMag9aMaw32I8zle24p3FpsEeI6oZU=" crossorigin="anonymous" />
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
+  integrity="sha256-JHGEmB629pipTkMag9aMaw32I8zle24p3FpsEeI6oZU=" crossorigin="anonymous" />
 {% endblock %}
 
 {% block content %}
@@ -82,11 +84,23 @@
                     </tr>
                     <tr>
                       <td>{% trans 'price' as t_price %}{{ t_price|capfirst }}</td>
-                      <td>{{ price }} {% trans 'vnd' %}</td>
+                      <td>
+                        {% if total_price > 0 %}
+                        {{ price }} {% trans 'vnd' %}
+                        {% else %}
+                        {{ price }}
+                        {% endif %}
+                      </td>
                     </tr>
                     <tr>
                       <td>{% trans 'total price' as t_total_price %}{{ t_total_price|capfirst }}</td>
-                      <td>{{ total_price_display }} {% trans 'vnd' %}</td>
+                      <td>
+                        {% if total_price > 0 %}
+                        {{ total_price_display }} {% trans 'vnd' %}
+                        {% else %}
+                        {{ total_price_display }}
+                        {% endif %}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -112,7 +126,7 @@
           <form id="payment_form">
             <input type="hidden" name="amount" value="{{ total_price }}">
             <fieldset>
-              <legend class="card-only">{% trans 'Pay with card' %}</legend>
+              <legend class="card-only">{% trans 'Please enter information below' %}</legend>
               <div class="row">
                 <div class="field">
                   <label for="example5-name">{% trans 'name' as t_name %} {{t_name|title}}</label>
@@ -143,6 +157,8 @@
                   {{ form.city }}
                 </div>
               </div>
+              <!-- Payment Card -->
+              {% if total_price > 0 %}
               <div class="row">
                 <div class="field">
                   <label>
@@ -151,10 +167,18 @@
                   <div id="card-element" class="field"></div>
                 </div>
               </div>
+              {% endif %}
+              <!--  -->
               <div class="row">
                 <div class="field">
-                  <button type="submit">{% trans 'Pay' %} <strong id="total_price_payment">{{ total_price }}
-                    </strong>{% trans 'vnd' %}</button>
+                  {% if total_price > 0 %}
+                  <button type="submit">{% trans 'Pay' %} <strong id="total_price_payment">{{ total_price }}</strong>
+                    {% trans 'vnd' %}</button>
+                  {% elif total_price == 0 %}
+                  <button type="submit">{% trans 'Free Register' %} </button>
+                  {% else %}
+                  <button type="submit">{% trans 'Contact for more' %} </button>
+                  {% endif %}
                 </div>
                 <div class="outcome">
                   <div class="error"></div>
@@ -181,7 +205,7 @@
 <script>
   $(function () {
     $(".list-lesson").mCustomScrollbar();
-  
+
     var stripe = Stripe('{{ key }}');
     var elements = stripe.elements();
 
@@ -234,8 +258,8 @@
         address_city: $('input[name=city]').val()
       };
 
-      stripe.createToken(card, billing_details).then(function(result){
-        stripeToken =  result.token.id;
+      stripe.createToken(card, billing_details).then(function (result) {
+        stripeToken = result.token.id;
         data = $('form#payment_form').serialize() + '&stripeToken=' + stripeToken;
         $.ajax({
           headers: {
@@ -244,9 +268,9 @@
           url: "{% url 'classes:enroll-payment' yoga_class.slug %}",
           type: 'POST',
           data: data
-        }).done(function(data){
+        }).done(function (data) {
           console.log(data);
-        }).fail(function(err){
+        }).fail(function (err) {
           console.log(err);
         });
       });

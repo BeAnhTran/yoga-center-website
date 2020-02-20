@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 from courses.models import Course
 from core.models import Trainer
-from classes.templatetags import sexify
+from common.templatetags import sexify
 from card_types.models import FOR_TRIAL
 
 DRAFT_STATE = 0

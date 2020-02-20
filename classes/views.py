@@ -24,7 +24,6 @@ from core.decorators import trainee_required
 from django.conf import settings
 import stripe
 
-from formtools.wizard.views import SessionWizardView
 from rest_framework import status
 from django.http import HttpResponse
 from cards.forms import CardPaymentForm
@@ -32,8 +31,8 @@ from cards.forms import CardPaymentForm
 from card_types.models import (CardType,
                                FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE, FOR_TRIAL)
 
-from classes.templatetags import sexify
-from classes.utils import get_price, get_total_price, isNum
+from common.templatetags import sexify
+from classes.utils import get_price, get_total_price, get_total_price_display
 from django.db import transaction
 
 
@@ -85,11 +84,10 @@ class YogaClassEnrollView(View):
 
     def post(self, request, *args, **kwargs):
         yoga_class = YogaClass.objects.get(slug=kwargs['slug'])
-        card_type_list = yoga_class.card_types.all()
-        form = CardFormForTraineeEnroll(request.POST)
+        form = CardFormForTraineeEnroll(
+            request.POST, initial={'yoga_class': yoga_class})
 
         if form.is_valid():
-            # if form is valid
             # save to session and get it in payment page
             request.session['enroll_card_form'] = request.POST
             return HttpResponse({'success': 'success'}, status=status.HTTP_200_OK)
@@ -117,27 +115,24 @@ class YogaClassEnrollPaymentView(View):
             enroll_card_form = request.session['enroll_card_form']
             # convert to form to get true datetime format
             temp = CardFormForTraineeEnroll(enroll_card_form)
-            # get lesson list in range time
             start = temp.cleaned_data['start_at']
             end = temp.cleaned_data['end_at']
+            # get lesson list in range time
             lesson_list = yoga_class.lessons.filter(
                 day__range=[start, end]).order_by('day')
             # Payment Form
             form = CardPaymentForm()
             id_card_type = request.session['enroll_card_form']['card_type']
             card_type = CardType.objects.get(pk=id_card_type)
-            # get from first lesson
-            start_at = lesson_list.first().day
-            # get from last lesson
-            end_at = lesson_list.last().day
 
+            start_at = lesson_list.first().day
+            end_at = lesson_list.last().day
             number_of_lessons = lesson_list.count()
             price = get_price(yoga_class, card_type)
             total_price = get_total_price(
                 yoga_class, card_type, number_of_lessons)
-            total_price_display = total_price
-            if isNum(total_price):
-                total_price_display = sexify.sexy_number(total_price)
+            total_price_display = get_total_price_display(total_price)
+
             context = {
                 'key': settings.STRIPE_PUBLISHABLE_KEY,
                 'form': form,
@@ -164,7 +159,8 @@ class YogaClassEnrollPaymentView(View):
             card_payment_form = CardPaymentForm(request.POST)
             if card_payment_form.is_valid():
                 try:
-                    print("<Stripe charge>")
+                    # STRIPE CHARGE
+                    print("<STRIPE CHARGE>")
                     stripe.api_key = settings.STRIPE_SECRET_KEY
                     customer = stripe.Customer.create(
                         name=request.POST['name'],
@@ -179,14 +175,17 @@ class YogaClassEnrollPaymentView(View):
                         customer=customer.id
                     )
                     if charge:
+                        # TODO: Create RECEIPT
+
                         yoga_class = YogaClass.objects.get(slug=slug)
                         enroll_form = CardFormForTraineeEnroll(
                             request.session['enroll_card_form'])
-                        start = enroll_form.cleaned_data['start_at']
-                        end = enroll_form.cleaned_data['end_at']
-                        lesson_list = yoga_class.lessons.filter(
-                            day__range=[start, end])
                         if enroll_form.is_valid():
+                            # CREATE CARD
+                            start = enroll_form.cleaned_data['start_at']
+                            end = enroll_form.cleaned_data['end_at']
+                            lesson_list = yoga_class.lessons.filter(
+                                day__range=[start, end])
                             card = enroll_form.save(commit=False)
                             card.trainee = request.user.trainee
                             card.yogaclass = yoga_class

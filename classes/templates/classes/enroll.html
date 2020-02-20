@@ -201,10 +201,12 @@
         $('#div_id_end_at').removeClass('d-none');
         $('#trial-lesson').addClass('d-none');
         $('input#id_start_at').attr('disabled', true);
-        $('input#id_end_at').attr('disabled', true);
+        $('input#id_end_at').attr('readonly', true);
 
         $('#div_id_number_of_months').remove();
         $('#div_for_some_lesson_list').addClass('d-none');
+        $('input#id_start_at').val('');
+        $('input#id_end_at').val('');
         if (id_card_type != '') {
             $('input#id_start_at').val('');
             $('input#id_end_at').val('');
@@ -214,10 +216,10 @@
             $.ajax({
                 url: url
             }).done((data) => {
-                $('input#id_end_at').attr('disabled', false);
+                $('input#id_end_at').removeAttr('readonly');
                 $('#div_id_number_of_months').remove();
                 $('input#form_of_using_card_type').val(data['form_of_using']);
-
+                console.log(data);
                 if (data['form_of_using'] == 0) { // FULL MONTH
                     input_number_str = '<div id="div_id_number_of_months" class="form-group">';
                     input_number_str += '<label for="id_number_of_months" class=" requiredField">';
@@ -229,10 +231,10 @@
                     input_number_str += '</div></div>';
                     $(input_number_str).insertAfter($('#div_id_start_at'));
 
-                    $('input#id_end_at').attr('disabled', true);
+                    $('input#id_end_at').attr('readonly', true);
 
                 } else if (data['form_of_using'] == 1) { // FOR SOME LESSON
-                    $('input#id_end_at').attr('disabled', false);
+                    $('input#id_end_at').removeAttr('readonly');
                     $('#div_for_some_lesson_list').removeClass('d-none');
 
                     console.log('FOR SOME LESSONS');
@@ -243,7 +245,11 @@
 
                     $('#trial-lesson').removeClass('d-none');
                 } else { // FOR FULL MONTH
+                    var _start_at = '{{ yoga_class.lessons.first.day }}';
+                    var _end_at = '{{ yoga_class.lessons.last.day }}';
                     console.log('FOR FULL MONTH');
+                    $('#id_start_at').val(_start_at);
+                    $('#id_end_at').val(_end_at);
                 }
             });
         }

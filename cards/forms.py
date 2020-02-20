@@ -1,5 +1,5 @@
 from django import forms
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, HTML
 from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
@@ -12,7 +12,7 @@ from cards.models import Card
 
 class CardFormForTraineeEnroll(forms.ModelForm):
     start_at = forms.DateField(
-        label=_('start at').capitalize(),
+        label=_('Start at'),
         widget=DatePicker(options={
             'useCurrent': True,
         }, attrs={
@@ -21,12 +21,12 @@ class CardFormForTraineeEnroll(forms.ModelForm):
         }),
     )
     end_at = forms.DateField(
-        label=_('end at').capitalize(),
+        label=_('End at'),
         widget=DatePicker(options={
             'useCurrent': True,
         }, attrs={
             'placeholder': _('Please enter the value'),
-            'disabled': True
+            'readonly': True
         }),
     )
 
@@ -34,7 +34,7 @@ class CardFormForTraineeEnroll(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['card_type'].empty_label = _('Please select a value')
         if kwargs.get('initial') is not None:
-            if kwargs.get('initial').get('card_type') is not None:
+            if kwargs.get('initial').get('card_type_list') is not None:
                 self.fields['card_type'].queryset = kwargs['initial']['card_type_list']
 
         self.helper = FormHelper()
@@ -69,6 +69,8 @@ class CardFormForTraineeEnroll(forms.ModelForm):
         errorList = list(self.errors)
         if errorList:
             for item in errorList:
+                if item == '__all__':
+                    break
                 self.fields[item].widget.attrs.update(
                     {'autofocus': 'autofocus'})
                 break
@@ -78,7 +80,8 @@ class CardFormForTraineeEnroll(forms.ModelForm):
 
     class Meta:
         model = Card
-        exclude = ['created_at', 'updated_at', 'yogaclass', 'trainee', 'lessons']
+        exclude = ['created_at', 'updated_at',
+                   'yogaclass', 'trainee', 'lessons']
 
     def clean_end_at(self):
         cleaned_data = super(CardFormForTraineeEnroll, self).clean()
@@ -89,6 +92,21 @@ class CardFormForTraineeEnroll(forms.ModelForm):
                 raise forms.ValidationError(
                     _('End at must be greater than Start at'))
         return end_at
+
+    def clean(self):
+        cleaned_data = super(CardFormForTraineeEnroll, self).clean()
+        if 'start_at' in cleaned_data and 'end_at' in cleaned_data:
+            start_at = cleaned_data['start_at']
+            end_at = cleaned_data['end_at']
+            if start_at is not None and end_at is not None:
+                    if self.initial.get('yoga_class') is not None:
+                        yoga_class = self.initial.get('yoga_class')
+                        lesson_list = yoga_class.lessons.filter(
+                            day__range=[start_at, end_at])
+                        if not lesson_list:
+                            raise forms.ValidationError(
+                                _('Your range time does not have any lessons'))
+        return cleaned_data
 
 
 class CardPaymentForm(forms.Form):
