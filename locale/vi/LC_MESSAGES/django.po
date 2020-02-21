@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-20 12:56+0700\n"
+"POT-Creation-Date: 2020-02-21 10:27+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\card_invoices\models.py:10
+#: .\dashboard\templates\dashboard\cards\list.html:18 .\roll_calls\models.py:10
+msgid "card"
+msgstr "thẻ tập"
+
+#: .\card_invoices\models.py:12 .\card_types\models.py:18
+#: .\classes\models.py:40 .\core\models.py:54 .\courses\models.py:18
+#: .\dashboard\templates\dashboard\card_types\list.html:29
+#: .\dashboard\templates\dashboard\cards\list.html:34
+#: .\dashboard\templates\dashboard\classes\list.html:37
+#: .\dashboard\templates\dashboard\classes\show.html:36
+#: .\dashboard\templates\dashboard\courses\list.html:32 .\rooms\models.py:18
+msgid "description"
+msgstr "mô tả"
+
+#: .\card_invoices\models.py:14
+msgid "amount"
+msgstr "số tiền"
+
+#: .\card_invoices\models.py:16
+msgid "charge id"
+msgstr "mã giao dịch"
+
+#: .\card_invoices\models.py:18 .\card_types\models.py:28 .\cards\models.py:19
+#: .\classes\models.py:59 .\courses\models.py:23 .\lessons\models.py:44
+#: .\roll_calls\models.py:16 .\rooms\models.py:23
+msgid "created at"
+msgstr "thời gian tạo"
+
+#: .\card_invoices\models.py:20 .\card_types\models.py:30 .\cards\models.py:21
+#: .\classes\models.py:61 .\roll_calls\models.py:18 .\rooms\models.py:25
+msgid "updated at"
+msgstr "thời gian cập nhật"
 
 #: .\card_types\models.py:9
 msgid "Full Month"
@@ -46,16 +80,6 @@ msgstr "Khóa huấn luyện"
 msgid "name"
 msgstr "tên"
 
-#: .\card_types\models.py:18 .\classes\models.py:40 .\core\models.py:54
-#: .\courses\models.py:18
-#: .\dashboard\templates\dashboard\card_types\list.html:29
-#: .\dashboard\templates\dashboard\cards\list.html:34
-#: .\dashboard\templates\dashboard\classes\list.html:37
-#: .\dashboard\templates\dashboard\classes\show.html:36
-#: .\dashboard\templates\dashboard\courses\list.html:32 .\rooms\models.py:18
-msgid "description"
-msgstr "mô tả"
-
 #: .\card_types\models.py:20
 msgid "form of using"
 msgstr "hình thức sử dụng"
@@ -72,17 +96,6 @@ msgstr "hệ số nhân"
 #: .\card_types\models.py:26
 msgid "for longtime trainee only"
 msgstr "chỉ áp dụng cho học viên lâu năm"
-
-#: .\card_types\models.py:28 .\cards\models.py:19 .\classes\models.py:59
-#: .\courses\models.py:23 .\lessons\models.py:44 .\roll_calls\models.py:16
-#: .\rooms\models.py:23
-msgid "created at"
-msgstr "thời gian tạo"
-
-#: .\card_types\models.py:30 .\cards\models.py:21 .\classes\models.py:61
-#: .\roll_calls\models.py:18 .\rooms\models.py:25
-msgid "updated at"
-msgstr "thời gian cập nhật"
 
 #: .\cards\forms.py:15
 msgid "Start at"
@@ -121,27 +134,31 @@ msgstr "Những buổi học của bạn sẽ được hiển thị ở đây"
 msgid "Save"
 msgstr "Lưu"
 
-#: .\cards\forms.py:90 .\dashboard\forms\classes_form.py:129
+#: .\cards\forms.py:93 .\dashboard\forms\classes_form.py:129
 msgid "End at must be greater than Start at"
 msgstr "Thời gian kết thúc phải sau thời gian bắt đầu"
 
-#: .\cards\forms.py:100
+#: .\cards\forms.py:108
+msgid "Your range time does not have any lessons"
+msgstr "Khoảng thời gian bạn chọn không có buổi học phù hợp"
+
+#: .\cards\forms.py:118
 msgid "Grey Tran"
 msgstr ""
 
-#: .\cards\forms.py:109
+#: .\cards\forms.py:127
 msgid "giatruongtran27@gmail.com"
 msgstr ""
 
-#: .\cards\forms.py:118
+#: .\cards\forms.py:136
 msgid "0387 898 797"
 msgstr ""
 
-#: .\cards\forms.py:127
+#: .\cards\forms.py:145
 msgid "140 - Đường A4 - Phường 13 - Quận Tân Bình"
 msgstr "140 - A4 Street - Tan Binh Dictrict"
 
-#: .\cards\forms.py:137
+#: .\cards\forms.py:155
 msgid "Hồ Chí Minh"
 msgstr "Ho Chi Minh City"
 
@@ -461,7 +478,7 @@ msgstr "Huấn luyện viên"
 
 #: .\classes\templates\payment.html:17
 msgid "Payment"
-msgstr ""
+msgstr "Thanh toán"
 
 #: .\classes\templates\payment.html:26
 msgid "Payment Info"
@@ -491,7 +508,7 @@ msgstr "Vui lòng nhập thông tin"
 msgid "phone number"
 msgstr "số điện thoại"
 
-#: .\classes\templates\payment.html:144
+#: .\classes\templates\payment.html:144 .\classes\views.py:216
 #: .\dashboard\templates\dashboard\trainees\list.html:34
 msgid "email"
 msgstr ""
@@ -520,13 +537,29 @@ msgstr "Đăng kí miễn phí"
 msgid "Contact for more"
 msgstr "Giá liên hệ"
 
-#: .\classes\views.py:155 .\classes\views.py:203
+#: .\classes\templates\payment.html:273
+msgid "enroll successfully"
+msgstr "đăng kí thành công"
+
+#: .\classes\templates\payment.html:274
+msgid "Thanks for your register. Please check schedule and prepare to study"
+msgstr "Cảm ơn bạn đã đăng kí. Vui lòng kiểm tra thời khóa biểu và chuẩn bị cho việc học."
+
+#: .\classes\views.py:149 .\classes\views.py:199
 msgid "Please enroll a class before payment"
 msgstr "Vui lòng đăng kí một lớp học trước khi tiến hành thanh toán"
 
-#: .\classes\views.py:175
+#: .\classes\views.py:171
 msgid "Card Payment"
 msgstr "Thanh toán thẻ tập"
+
+#: .\classes\views.py:216
+msgid "with"
+msgstr "với"
+
+#: .\classes\views.py:216
+msgid "paied"
+msgstr "đã thanh toán"
 
 #: .\core\models.py:17 .\venv\Lib\site-packages\languages\languages.py:4098
 #: .\venv\Lib\site-packages\languages\languages.py:4119
@@ -718,10 +751,6 @@ msgstr "Danh sách thẻ tập"
 #: .\dashboard\templates\dashboard\trainees\list.html:17
 msgid "Create New"
 msgstr "Tạo mới"
-
-#: .\dashboard\templates\dashboard\cards\list.html:18 .\roll_calls\models.py:10
-msgid "card"
-msgstr "thẻ tập"
 
 #: .\dashboard\templates\dashboard\cards\list.html:35
 #: .\dashboard\templates\dashboard\classes\list.html:38
@@ -936,14 +965,12 @@ msgid "overlap time"
 msgstr "thời gian đã bị trùng"
 
 #: .\roll_calls\models.py:12
-#, fuzzy
-#| msgid "lessons"
 msgid "lesson"
 msgstr "buổi tập"
 
 #: .\roll_calls\models.py:14
 msgid "studied"
-msgstr ""
+msgstr "đã học"
 
 #: .\templates\account\login.html:9 .\templates\account\login.html:36
 #: .\templates\account\login.html:46

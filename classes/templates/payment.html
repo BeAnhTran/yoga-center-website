@@ -159,34 +159,36 @@
               </div>
               <!-- Payment Card -->
               {% if total_price > 0 %}
-              <div class="row">
-                <div class="field">
-                  <label>
-                    {% trans 'Payment Card' %}
-                  </label>
-                  <div id="card-element" class="field"></div>
-                </div>
-              </div>
-              {% endif %}
-              <!--  -->
-              <div class="row">
-                <div class="field">
-                  {% if total_price > 0 %}
-                  <button type="submit">{% trans 'Pay' %} <strong id="total_price_payment">{{ total_price }}</strong>
-                    {% trans 'vnd' %}</button>
-                  {% elif total_price == 0 %}
-                  <button type="submit">{% trans 'Free Register' %} </button>
-                  {% else %}
-                  <button type="submit">{% trans 'Contact for more' %} </button>
+              <div id="div_payment_card" class="row">
+                {% else %}
+                <div id="div_payment_card" class="row d-none">
                   {% endif %}
-                </div>
-                <div class="outcome">
-                  <div class="error"></div>
-                  <div class="success">
-                    Success! Your Stripe token is <span class="token"></span>
+                  <div class="field">
+                    <label>
+                      {% trans 'Payment Card' %}
+                    </label>
+                    <div id="card-element" class="field"></div>
                   </div>
                 </div>
-              </div>
+                <!--  -->
+                <div class="row">
+                  <div class="field">
+                    {% if total_price > 0 %}
+                    <button type="submit">{% trans 'Pay' %} <strong id="total_price_payment">{{ total_price }}</strong>
+                      {% trans 'vnd' %}</button>
+                    {% elif total_price == 0 %}
+                    <button type="submit">{% trans 'Free Register' %} </button>
+                    {% else %}
+                    <button type="submit">{% trans 'Contact for more' %} </button>
+                    {% endif %}
+                  </div>
+                  <div class="outcome">
+                    <div class="error"></div>
+                    <div class="success">
+                      Success! Your Stripe token is <span class="token"></span>
+                    </div>
+                  </div>
+                </div>
             </fieldset>
           </form>
           <!--  -->
@@ -225,6 +227,7 @@
         },
       }
     });
+
     card.mount('#card-element');
 
     function setOutcome(result) {
@@ -258,23 +261,37 @@
         address_city: $('input[name=city]').val()
       };
 
-      stripe.createToken(card, billing_details).then(function (result) {
-        stripeToken = result.token.id;
-        data = $('form#payment_form').serialize() + '&stripeToken=' + stripeToken;
-        $.ajax({
-          headers: {
-            'X-CSRFTOKEN': '{{ csrf_token }}'
-          },
-          url: "{% url 'classes:enroll-payment' yoga_class.slug %}",
-          type: 'POST',
-          data: data
-        }).done(function (data) {
-          console.log(data);
-        }).fail(function (err) {
-          console.log(err);
+      data = $('form#payment_form').serialize();
+      if ($('#card-element').is(":visible")) {
+        stripe.createToken(card, billing_details).then(function (result) {
+          stripeToken = result.token.id;
+          data += '&stripeToken=' + stripeToken;
+          submit_payment_form(data);
         });
-      });
+      } else {
+        submit_payment_form(data);
+      }
     });
   });
+
+  submit_payment_form = function (data) {
+    $.ajax({
+      headers: {
+        'X-CSRFTOKEN': '{{ csrf_token }}'
+      },
+      url: "{% url 'classes:enroll-payment' yoga_class.slug %}",
+      type: 'POST',
+      data: data
+    }).done(function (data) {
+      Swal.fire(
+        "{% trans 'enroll successfully' as t_enroll_successfully %}{{ t_enroll_successfully|capfirst }}",
+        "{% trans 'Thanks for your register. Please check schedule and prepare to study' %}",
+        'success'
+      );
+    }).fail(function (err) {
+      console.log(err);
+    });
+  }
+
 </script>
 {% endblock %}

@@ -1,3 +1,4 @@
+from common.operations.stripe_operation import StripeOperation
 import json
 from django.utils.translation import gettext as _
 from django.shortcuts import render, redirect
@@ -34,6 +35,7 @@ from card_types.models import (CardType,
 from common.templatetags import sexify
 from classes.utils import get_price, get_total_price, get_total_price_display
 from django.db import transaction
+from common.operations.card_invoice_operation import CardInvoiceOperation
 
 
 class YogaClassListView(ListView):
@@ -69,10 +71,16 @@ class YogaClassEnrollView(View):
     template_name = 'classes/enroll.html'
 
     def get(self, request, slug):
+        yoga_class = YogaClass.objects.get(slug=slug)
+        if self.__is_trainee_of_class(yoga_class, request.user.trainee):
+            response_data = {}
+            response_data['message'] = _(
+                'You have had enrolled into this class')
+            # return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
+            return redirect('classes:detail',slug=slug)
         # remove enroll card form when access enroll page
         if request.session.get('enroll_card_form') is not None:
             del request.session['enroll_card_form']
-        yoga_class = YogaClass.objects.get(slug=slug)
         card_type_list = yoga_class.card_types.all()
         form = CardFormForTraineeEnroll(
             initial={'card_type_list': card_type_list})
@@ -92,6 +100,14 @@ class YogaClassEnrollView(View):
             request.session['enroll_card_form'] = request.POST
             return HttpResponse({'success': 'success'}, status=status.HTTP_200_OK)
         return HttpResponse(form.errors.as_json(), status=status.HTTP_400_BAD_REQUEST)
+
+    def __is_trainee_of_class(self, yoga_class, trainee):
+        cards = yoga_class.cards.filter(trainee=trainee)
+        if cards:
+            card = cards.last()
+            if card.lessons.last().day >= datetime.now().date():
+                return True
+        return False
 
 
 class YogaClassGetLessonListView(APIView):
@@ -113,16 +129,10 @@ class YogaClassEnrollPaymentView(View):
         if request.session.get('enroll_card_form'):
             yoga_class = YogaClass.objects.get(slug=slug)
             enroll_card_form = request.session['enroll_card_form']
-            # convert to form to get true datetime format
-            temp = CardFormForTraineeEnroll(enroll_card_form)
-            start = temp.cleaned_data['start_at']
-            end = temp.cleaned_data['end_at']
-            # get lesson list in range time
-            lesson_list = yoga_class.lessons.filter(
-                day__range=[start, end]).order_by('day')
+            lesson_list = self.__lesson_list(yoga_class, enroll_card_form)
             # Payment Form
             form = CardPaymentForm()
-            id_card_type = request.session['enroll_card_form']['card_type']
+            id_card_type = enroll_card_form['card_type']
             card_type = CardType.objects.get(pk=id_card_type)
 
             start_at = lesson_list.first().day
@@ -151,47 +161,47 @@ class YogaClassEnrollPaymentView(View):
             response_data = {}
             response_data['message'] = _(
                 'Please enroll a class before payment')
-            return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
+            # return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
+            return redirect('classes:enroll',slug=slug)
 
     @transaction.atomic
     def post(self, request, slug):
         if request.session.get('enroll_card_form'):
             card_payment_form = CardPaymentForm(request.POST)
+            description = self.__description(
+                request.POST['name'], request.POST['email'], request.POST['amount'])
             if card_payment_form.is_valid():
                 try:
-                    # STRIPE CHARGE
-                    print("<STRIPE CHARGE>")
-                    stripe.api_key = settings.STRIPE_SECRET_KEY
-                    customer = stripe.Customer.create(
-                        name=request.POST['name'],
-                        email=request.POST['email'],
-                        phone=request.POST['phone'],
-                        source=request.POST['stripeToken']
-                    )
-                    charge = stripe.Charge.create(
-                        amount=request.POST['amount'],
-                        currency='vnd',
-                        description=_('Card Payment'),
-                        customer=customer.id
-                    )
-                    if charge:
-                        # TODO: Create RECEIPT
-
-                        yoga_class = YogaClass.objects.get(slug=slug)
-                        enroll_form = CardFormForTraineeEnroll(
-                            request.session['enroll_card_form'])
-                        if enroll_form.is_valid():
-                            # CREATE CARD
-                            start = enroll_form.cleaned_data['start_at']
-                            end = enroll_form.cleaned_data['end_at']
-                            lesson_list = yoga_class.lessons.filter(
-                                day__range=[start, end])
-                            card = enroll_form.save(commit=False)
-                            card.trainee = request.user.trainee
-                            card.yogaclass = yoga_class
-                            card.save()
-                            card.lessons.add(*lesson_list)
-                        return HttpResponse('success', status=status.HTTP_200_OK)
+                    yoga_class = YogaClass.objects.get(slug=slug)
+                    enroll_form = CardFormForTraineeEnroll(
+                        request.session['enroll_card_form'])
+                    if request.POST.get('stripeToken') and float(request.POST.get('amount')) > 0:
+                        # STRIPE CHARGE
+                        charge = StripeOperation(
+                            request.POST['name'],
+                            request.POST['email'],
+                            request.POST['phone'],
+                            request.POST['amount'],
+                            request.POST['stripeToken'],
+                            _('Card Payment')
+                        ).call()
+                        if charge:
+                            if enroll_form.is_valid():
+                                # CREATE CARD
+                                card = self.__create_card(
+                                    yoga_class, enroll_form, request.user.trainee)
+                                # CREATE CARD INVOICE
+                                CardInvoiceOperation(
+                                    card, description, request.POST['amount'], charge.id).call()
+                    else:
+                        # CREATE CARD
+                        card = self.__create_card(
+                            yoga_class, enroll_form, request.user.trainee)
+                        # CREATE CARD INVOICE
+                        CardInvoiceOperation(
+                            card, description, request.POST['amount']).call()
+                    del request.session['enroll_card_form']
+                    return HttpResponse('success', status=status.HTTP_200_OK)
                 except Exception as e:
                     print("<ERROR>")
                     print(e)
@@ -204,3 +214,29 @@ class YogaClassEnrollPaymentView(View):
             response_data['message'] = _(
                 'Please enroll a class before payment')
             return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
+
+    @transaction.atomic
+    def __create_card(self, yoga_class, enroll_form, trainee):
+        start = enroll_form.cleaned_data['start_at']
+        end = enroll_form.cleaned_data['end_at']
+        lesson_list = yoga_class.lessons.filter(
+            day__range=[start, end])
+        card = enroll_form.save(commit=False)
+        card.trainee = trainee
+        card.yogaclass = yoga_class
+        card.save()
+        card.lessons.add(*lesson_list)
+        return card
+
+    def __description(self, name, email, amount):
+        listStr = [name, _('with'), _('email'), email, _('paied'), str(amount)]
+        result = ' '.join(listStr)
+        return result
+
+    def __lesson_list(self, yoga_class, enroll_card_form):
+        cleaned_data = CardFormForTraineeEnroll(enroll_card_form).cleaned_data
+        start = cleaned_data['start_at']
+        end = cleaned_data['end_at']
+        lesson_list = yoga_class.lessons.filter(
+            day__range=[start, end]).order_by('day')
+        return lesson_list

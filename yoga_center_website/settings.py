@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'cards',
     'card_types',
     'yoga_schedule',
+    'card_invoices',
     'dashboard',
     'roll_calls',
 ]
