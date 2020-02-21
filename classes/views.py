@@ -73,10 +73,6 @@ class YogaClassEnrollView(View):
     def get(self, request, slug):
         yoga_class = YogaClass.objects.get(slug=slug)
         if self.__is_trainee_of_class(yoga_class, request.user.trainee):
-            response_data = {}
-            response_data['message'] = _(
-                'You have had enrolled into this class')
-            # return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
             return redirect('classes:detail',slug=slug)
         # remove enroll card form when access enroll page
         if request.session.get('enroll_card_form') is not None:
@@ -158,10 +154,6 @@ class YogaClassEnrollPaymentView(View):
             }
             return render(request, self.template_name, context=context)
         else:
-            response_data = {}
-            response_data['message'] = _(
-                'Please enroll a class before payment')
-            # return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
             return redirect('classes:enroll',slug=slug)
 
     @transaction.atomic
