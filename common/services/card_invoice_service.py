@@ -2,7 +2,7 @@ from card_invoices.models import CardInvoice
 from django.db import transaction
 
 
-class CardInvoiceOperation:
+class CardInvoiceService:
     def __init__(self, card, description, amount, charge_id=None):
         self.card = card
         self.description = description

@@ -1,4 +1,4 @@
-from common.operations.stripe_operation import StripeOperation
+from common.services.stripe_service import StripeService
 import json
 from django.utils.translation import gettext as _
 from django.shortcuts import render, redirect
@@ -35,8 +35,7 @@ from card_types.models import (CardType,
 from common.templatetags import sexify
 from classes.utils import get_price, get_total_price, get_total_price_display
 from django.db import transaction
-from common.operations.card_invoice_operation import CardInvoiceOperation
-
+from common.services.card_invoice_service import CardInvoiceService
 
 class YogaClassListView(ListView):
     model = YogaClass
@@ -169,7 +168,7 @@ class YogaClassEnrollPaymentView(View):
                         request.session['enroll_card_form'])
                     if request.POST.get('stripeToken') and float(request.POST.get('amount')) > 0:
                         # STRIPE CHARGE
-                        charge = StripeOperation(
+                        charge = StripeService(
                             request.POST['name'],
                             request.POST['email'],
                             request.POST['phone'],
@@ -183,14 +182,14 @@ class YogaClassEnrollPaymentView(View):
                                 card = self.__create_card(
                                     yoga_class, enroll_form, request.user.trainee)
                                 # CREATE CARD INVOICE
-                                CardInvoiceOperation(
+                                CardInvoiceService(
                                     card, description, request.POST['amount'], charge.id).call()
                     else:
                         # CREATE CARD
                         card = self.__create_card(
                             yoga_class, enroll_form, request.user.trainee)
                         # CREATE CARD INVOICE
-                        CardInvoiceOperation(
+                        CardInvoiceService(
                             card, description, request.POST['amount']).call()
                     del request.session['enroll_card_form']
                     return HttpResponse('success', status=status.HTTP_200_OK)

@@ -2,7 +2,7 @@ from django.conf import settings
 import stripe
 
 
-class StripeOperation:
+class StripeService:
   def __init__(self, name, email, phone, amount, stripeToken, description):
     stripe.api_key = settings.STRIPE_SECRET_KEY
     self.name = name
