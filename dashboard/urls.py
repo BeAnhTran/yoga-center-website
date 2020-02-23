@@ -40,8 +40,11 @@ classes_urlpatterns = [
 
 # LESSONS
 lessons_urlpatterns = [
+    path('', lessons_view.LessonListView.as_view(), name='lessons-list'),
     url(r'^(?P<pk>[0-9]+)$', lessons_view.LessonDetailApiView.as_view(),
         name='lessons-detail-json'),
+    url(r'^(?P<pk>[0-9]+)/roll-calls/$', lessons_view.ListRollCallApiView.as_view(),
+        name='lessons-roll-calls'),
 ]
 
 # ROOMS
@@ -87,9 +90,7 @@ admins_urlpatterns = [
 
 # ROLL CALLS
 roll_calls_urlpatterns = [
-    path('', roll_calls_view.RollCallListView.as_view(), name='roll-calls-list'),
-    path('<int:lesson_id>/', roll_calls_view.RollCallLessonDetailView.as_view(),
-         name='roll-calls-lesson-detail'),
+    path('<int:pk>/', roll_calls_view.RollCallDetail.as_view(), name='roll-calls-detail'),
 ]
 
 # DASHBOARD

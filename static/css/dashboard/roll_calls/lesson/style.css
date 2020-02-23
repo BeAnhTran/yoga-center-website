@@ -2,6 +2,10 @@
 }
 
 #studied_roll_calls{
-    min-height: 300px;
+    min-height: 200px;
     border-radius: .25rem;
+}
+
+#count_studied{
+    color:#27496d;
 }

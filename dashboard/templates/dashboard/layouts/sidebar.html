@@ -16,7 +16,7 @@
     </li>
     <hr class="sidebar-divider my-0">
     <li class="nav-item {% if active_nav == 'roll_calls' %}active{% endif %}">
-        <a class="nav-link" href="{% url 'dashboard:roll-calls-list' %}">
+        <a class="nav-link" href="{% url 'dashboard:lessons-list' %}">
             <i class="fas fa-user-check"></i>
             <span>{% trans 'roll call' as t_roll_call %}{{ t_roll_call|title }}</span></a>
     </li>
@@ -75,15 +75,6 @@
             <i class="fas fa-fw fa-braille"></i>
             <span>
                 {% trans 'classes' as t_classes %} {{ t_classes|capfirst }}
-            </span>
-        </a>
-    </li>
-    <!-- Nav Item - Lessons -->
-    <li class="nav-item {% if active_nav == 'lessons' %}active{% endif %}">
-        <a class="nav-link" href="javascript:;">
-            <i class="fab fa-leanpub"></i>
-            <span>
-                {% trans 'lessons' as t_lessons %} {{ t_lessons|capfirst }}
             </span>
         </a>
     </li>

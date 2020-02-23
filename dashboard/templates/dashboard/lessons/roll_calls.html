@@ -1,0 +1,137 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block specified_css %}
+<link href="{% static 'css/dashboard/roll_calls/lesson/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between">
+    <h3 class="text-danger">
+        <small><i class="fab fa-fw fa-leanpub"></i></small>
+        {{ lesson.yogaclass }} - {{ lesson.get_time_and_room_detail }}
+    </h3>
+</div>
+<!-- Content Row -->
+<div class="row">
+    <div class="col-md-8 border-right p-3" id="div_studied_roll_calls">
+        <h5>
+            <i class="fas fa-fw fa-list"></i>
+            {% trans 'trainee' as t_trainee %}
+            {% blocktrans with value=t_trainee trimmed %} {{ value }} List{% endblocktrans %}
+            <span class="float-right badge badge-warning badge-pill">
+                <b id="count_studied">{{ studied_roll_calls.count }}</b><small>&#47;{{ total_count }}</small>
+            </span>
+        </h5>
+        <div id="studied_roll_calls" class="list-group">
+            {% if studied_roll_calls %}
+            {% for r in studied_roll_calls %}
+            <li
+                class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">
+                {{ r.card.trainee }}
+                <a href="javascript:;" class="a-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
+                    <span class="badge badge-danger badge-pill">{% trans 'remove' %}</span>
+                </a>
+            </li>
+            {% endfor %}
+            {% else %}
+            {% trans 'trainee' as t_trainee %}
+            <li id="item_no_trainee"
+                class="list-group-item list-group-item-action list-group-item-danger align-items-center">
+                {% blocktrans with value=t_trainee trimmed %}No {{ value }} yet{% endblocktrans %}
+            </li>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-md-4 p-3 bg-light">
+        <h5><i class="far fa-fw fa-hand-pointer"></i>{% trans 'Select to do a roll call' %}</h5>
+        <div class="list-group" id="un_studied_roll_calls">
+            {% for r in un_studied_roll_calls %}
+            <li
+                class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">
+                {{ r.card.trainee }}
+                <a href="javascript:;" class="a-un-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
+                    <span class="badge badge-success badge-pill">{% trans 'select' %}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block specified_js %}
+<script>
+    $(document).on('click', '.a-un-studied', function () {
+        var roll_call_id = $(this).attr('data-roll-call');
+        var _url = "{% url 'dashboard:roll-calls-detail' 0 %}";
+        url = _url.replace(0, roll_call_id);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'PUT',
+            data: {
+                'studied': true
+            }
+        }).done((data) => {
+            str = '<li class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">';
+            str += data['card']['trainee']['user']['first_name'] + data['card']['trainee']['user']['last_name'];
+            str += '<a href="javascript:;" class="a-studied" data-card="' + data['id'] + '" data-roll-call="' + data['card']['id'] + '">';
+            str += '<span class="badge badge-danger badge-pill">{% trans "remove" %}</span></a></li>';
+            $('#item_no_trainee').hide();
+            $('#studied_roll_calls').append(str);
+            $(this).parent('li.list-group-item').remove();
+            _temp_count = parseInt($('#count_studied').text());
+            count = _temp_count + 1;
+            $('#count_studied').text(count);
+            Swal.fire(
+                '{% trans "done" as t_done %}{{ t_done|capfirst }}',
+                '{% trans "Do the roll call successfully" %}',
+                'success'
+            )
+        }).fail((err) => {
+            console.log(err);
+        });
+    });
+
+    $(document).on('click', '.a-studied', function () {
+        var roll_call_id = $(this).attr('data-roll-call');
+        var _url = "{% url 'dashboard:roll-calls-detail' 0 %}";
+        url = _url.replace(0, roll_call_id);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'PUT',
+            data: {
+                'studied': false
+            }
+        }).done((data) => {
+            str = '<li class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">';
+            str += data['card']['trainee']['user']['first_name'] + data['card']['trainee']['user']['last_name'];
+            str += '<a href="javascript:;" class="a-un-studied" data-card="' + data['id'] + '" data-roll-call="' + data['card']['id'] + '">';
+            str += '<span class="badge badge-success badge-pill">{% trans "select" %}</span></a></li>';
+            $('#un_studied_roll_calls').append(str);
+            $(this).parent('li.list-group-item').remove();
+            if ($('#studied_roll_calls').children('li').last().attr('id') === "item_no_trainee") {
+                $('#item_no_trainee').show();
+            }
+            _temp_count = parseInt($('#count_studied').text());
+            count = _temp_count - 1;
+            $('#count_studied').text(count);
+            Swal.fire(
+                '{% trans "done" %}{{ t_done|capfirst }}',
+                '{% trans "Undo the roll call successfully" %}',
+                'success'
+            )
+        }).fail((err) => {
+            console.log(err);
+        });
+    });
+</script>
+{% endblock %}
