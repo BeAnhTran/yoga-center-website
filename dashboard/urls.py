@@ -1,8 +1,11 @@
 from django.urls import include, path
 from django.conf.urls import url
 
-from .views import (dashboard_view, courses_view, rooms_view,
-                    lessons_view, classes_view, cards_view, card_types_view, trainees_view)
+from .views import (
+    dashboard_view, courses_view, rooms_view,
+    lessons_view, classes_view, cards_view,
+    card_types_view, trainees_view, trainers_view, staffs_view,
+    admins_view)
 
 app_name = 'dashboard'
 
@@ -62,9 +65,24 @@ card_types_urlpatterns = [
          name='json-card-type-list-for-course'),
 ]
 
-# TRAINEESL
+# TRAINEES
 trainees_urlpatterns = [
     path('', trainees_view.TraineeListView.as_view(), name='trainees-list')
+]
+
+# TRAINERS
+trainers_urlpatterns = [
+    path('', trainers_view.TrainerListView.as_view(), name='trainers-list')
+]
+
+# STAFFS
+staffs_urlpatterns = [
+    path('', staffs_view.StaffListView.as_view(), name='staffs-list')
+]
+
+# STAFFS
+admins_urlpatterns = [
+    path('', admins_view.AdminListView.as_view(), name='admins-list')
 ]
 
 # DASHBOARD
@@ -77,4 +95,7 @@ urlpatterns = [
     path('cards/', include(cards_urlpatterns)),
     path('card-types/', include(card_types_urlpatterns)),
     path('trainees/', include(trainees_urlpatterns)),
+    path('trainers/', include(trainers_urlpatterns)),
+    path('staffs/', include(staffs_urlpatterns)),
+    path('admins/', include(admins_urlpatterns)),
 ]

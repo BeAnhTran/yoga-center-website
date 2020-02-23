@@ -6,12 +6,11 @@
 
 {% block content %}
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between">
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
     <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Card List' %}</h1>
     <a href="javascript:;" class="btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
 </div>
-<hr>
 <!-- Content Row -->
 {% if not cards %}
 <p class="text-danger">
@@ -26,60 +25,33 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>{% trans 'name' %}</th>
-                        <th>{% trans 'course' %}</th>
-                        <th>{% trans 'form trainer' %}</th>
-                        <th>{% trans 'state' %}</th>
-                        <th>{% trans 'image' %}</th>
-                        <th>{% trans 'description' %}</th>
+                        <th>{% trans 'trainee' as t_trainee %}{{ t_trainee|capfirst }}</th>
+                        <th>{% trans 'card type' as t_card_type %}{{ t_card_type|capfirst }}</th>
+                        <th>{% trans 'yoga class' as t_yoga_class %}{{ t_yoga_class|capfirst }}</th>
+                        <th>{% trans 'End at' %}</th>
                         <th>{% trans 'action' as t_action %}{{ t_action|title }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for class in classes %}
+                    {% for card in cards %}
                     <tr>
-                        <td>{{ class.id }}</td>
-                        <td>{{ class.name|title }}</td>
-                        <td>{{ class.course }}</td>
-                        <td>
-                            {% if class.form_trainer %}
-                            {{ class.form_trainer }}
-                            {% else %} 
-                            {% trans 'have not updated yet' as t_formtrainer %}
-                            {{ t_formtrainer|capfirst }}
-                            {% endif %}
-                        </td>
-                        <td class="text-center">{{ class|display_state }}</td>
-                        <td class="text-center">
-                            {% if class.image %}
-                            <img class="img img-fluid img-thumbnail class-img" src="{{ class.image.url }}"
-                                alt="{{ class.name }}">
-                            {% else %}
-                            <img class="img img-fluid img-thumbnail class-img"
-                                src="{% static 'img/class/default_class.jpg'%}" alt="{{ class.name }}">
-                            {% endif %}
-                        </td>
-                        <td>{{ class.description }}</td>
+                        <td>{{ card.id }}</td>
+                        <td>{{ card.trainee }}</td>
+                        <td>{{ card.card_type }}</td>
+                        <td>{{ card.yogaclass }}</td>
+                        <td>{{ card.end_at }}</td>
                         <td>
                             <div class="dropdown text-center">
                                 <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown">
                                     <i class="fa fa-bars"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{% url 'dashboard:classes-detail' class.id %}"><i
+                                    <a class="dropdown-item" href="javascript:;"><i
                                             class="fas fa-fw fa-eye"></i> {% trans 'show' %}</a>
-                                    <a class="dropdown-item" href="{% url 'dashboard:classes-schedule' class.id %}"><i
-                                            class="fas fa-fw fa-calendar-alt"></i>
-                                        {% trans 'schedule' %}</a>
-                                    <a class="dropdown-item" href="{% url 'dashboard:classes-update' class.slug %}"><i
+                                    <a class="dropdown-item" href="javascript:;"><i
                                             class="fas fa-fw fa-edit"></i> {% trans 'edit' %}</a>
                                     <a class="dropdown-item delete-class" href="javascript:;"><i
                                             class="fas fa-fw fa-trash"></i> {% trans 'delete' %}</a>
-                                    <form class="d-none" action="{% url 'dashboard:classes-delete' class.id %}"
-                                        method="post">
-                                        {% csrf_token %}
-                                        <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
-                                    </form>
                                 </div>
                             </div>
 

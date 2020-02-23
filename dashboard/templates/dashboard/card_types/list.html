@@ -5,13 +5,12 @@
 
 
 {% block content %}
-<div class="d-sm-flex align-items-center justify-content-between">
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
     <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small>
         {% trans 'card type list' as t_card_type_list %} {{ t_card_type_list|capfirst }}</h1>
     <a href="javascript:;" class="btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'create new' %}</a>
 </div>
-<hr>
 {% if not card_types %}
 <p class="text-danger">
     {% trans 'card types' as trans_card_types %}
@@ -25,8 +24,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>{% trans 'name' %}</th>
-                        <th>{% trans 'description' %}</th>
+                        <th>{% trans 'name' as t_name %}{{ t_name|capfirst }}</th>
+                        <th>{% trans 'description' as t_desc %}{{ t_desc|capfirst }}</th>
                         <th>{% trans 'multiplier' as t_multiplier %} {{ t_multiplier|capfirst }}</th>
                     </tr>
                 </thead>

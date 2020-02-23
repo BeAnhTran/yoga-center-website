@@ -6,12 +6,11 @@
 {% endblock %}
 {% block content %}
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between">
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
     <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'room list' %}</h1>
     <a href="javascript:;" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'create new' %}</a>
 </div>
-<hr>
 <!-- Content Row -->
 {% if not rooms %}
 <p class="text-danger">

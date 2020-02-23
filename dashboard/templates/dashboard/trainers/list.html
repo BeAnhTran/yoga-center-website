@@ -10,16 +10,16 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
     <h1 class="h3 mb-0">
         <small><i class="fas fa-fw fa-list"></i></small>
-        {% trans 'trainee' as t_trainee %}
-        {% blocktrans with value=t_trainee|title trimmed %} {{ value }} List{% endblocktrans %}
+        {% trans 'trainer' as t_trainer %}
+        {% blocktrans with value=t_trainer|title trimmed %} {{ value }} List{% endblocktrans %}
     </h1>
     <a href="{% url 'dashboard:courses-new'%}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
 </div>
 <!-- Content Row -->
-{% if not trainees %}
+{% if not trainers %}
 <p class="text-danger">
-    {% blocktrans with value=t_trainee trimmed %}No {{ value }} yet{% endblocktrans %}
+    {% blocktrans with value=t_trainer trimmed %}No {{ value }} yet{% endblocktrans %}
 </p>
 {% else %}
 <div class="container-fluid mb-5">
@@ -38,20 +38,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for trainee in trainees %}
+                    {% for trainer in trainers %}
                     <tr>
-                        <td>{{ trainee.user.id }}</td>
-                        <td>{{ trainee }}</td>
-                        <td>{{ trainee.user.email }}</td>
-                        <td>{{ trainee.user.birth_day }}</td>
-                        <td>{{ trainee.user.get_gender_display }}</td>
+                        <td>{{ trainer.user.id }}</td>
+                        <td>{{ trainer }}</td>
+                        <td>{{ trainer.user.email }}</td>
+                        <td>{{ trainer.user.birth_day }}</td>
+                        <td>{{ trainer.user.get_gender_display }}</td>
                         <td>
-                            {% if trainee.image %}
-                            <img class="img img-fluid img-thumbnail course-img" src="{{ trainee.user.image.url }}"
-                                alt="{{ trainee.name }}">
+                            {% if trainer.image %}
+                            <img class="img img-fluid img-thumbnail course-img" src="{{ trainer.user.image.url }}"
+                                alt="{{ trainer.name }}">
                             {% else %}
                             <img class="img img-fluid img-thumbnail course-img"
-                                src="{% static 'img/user/default.png'%}" alt="{{ trainee.user.name }}">
+                                src="{% static 'img/user/default.png'%}" alt="{{ trainer.user.name }}">
                             {% endif %}
                         </td>
                         <td>

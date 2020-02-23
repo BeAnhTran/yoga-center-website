@@ -102,3 +102,7 @@ class Staff(models.Model):
         blank=True, null=True, max_length=255, verbose_name=_('graduate school'))
     company_name = models.CharField(
         blank=True, null=True, max_length=255, verbose_name=_('company name'))
+
+    def __str__(self):
+        full_name = self.user.full_name()
+        return full_name

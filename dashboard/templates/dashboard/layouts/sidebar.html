@@ -30,7 +30,7 @@
         </a>
         <div id="collapseUser" class="collapse {% if show_nav_users == True %}show{% endif %}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white pb-2 collapse-inner rounded">
+            <div class="bg-secondary pb-2 collapse-inner rounded">
                 <a class="collapse-item {% if active_nav == 'trainees' %}active{% endif %}"
                     href="{% url 'dashboard:trainees-list' %}">
                     <i class="fas fa-fw fa-user-ninja"></i>
@@ -38,19 +38,19 @@
                         {% trans 'trainees' as t_trainees %} {{ t_trainees|capfirst }}
                     </span>
                 </a>
-                <a class="collapse-item" href="javascript:;">
+                <a class="collapse-item {% if active_nav == 'trainers' %}active{% endif %}" href="{% url 'dashboard:trainers-list' %}">
                     <i class="fas fa-fw fa-user-graduate"></i>
                     <span>
                         {% trans 'trainers' as t_trainers %} {{ t_trainers|capfirst }}
                     </span>
                 </a>
-                <a class="collapse-item" href="javascript:;">
+                <a class="collapse-item {% if active_nav == 'staffs' %}active{% endif %}" href="{% url 'dashboard:staffs-list' %}">
                     <i class="fas fa-fw fa-user-tie"></i>
                     <span>
                         {% trans 'staffs' as t_staffs %} {{ t_staffs|capfirst }}
                     </span>
                 </a>
-                <a class="collapse-item" href="javascript:;">
+                <a class="collapse-item {% if active_nav == 'admins' %}active{% endif %}" href="{% url 'dashboard:admins-list' %}">
                     <i class="fas fa-fw fa-user-cog"></i>
                     <span>
                         {% trans 'admin' as t_admin %}{{ t_admin|capfirst }}
@@ -97,7 +97,7 @@
         </a>
         <div id="collapseCards" class="collapse {% if show_nav == True %}show{% endif %}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white pb-2 collapse-inner rounded">
+            <div class="bg-secondary pb-2 collapse-inner rounded">
                 <a class="collapse-item {% if active_nav == 'cards' %}active{% endif %}"
                     href="{% url 'dashboard:cards-list' %}">
                     <i class="fas fa-fw fa-id-card-alt"></i>
@@ -135,7 +135,7 @@
         </a>
         <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities"
             data-parent="#accordionSidebar">
-            <div class="bg-white pb-2 collapse-inner rounded">
+            <div class="bg-secondary pb-2 collapse-inner rounded">
                 <h6 class="collapse-header">Custom Utilities:</h6>
                 <a class="collapse-item" href="utilities-color.html">Colors</a>
                 <a class="collapse-item" href="utilities-border.html">Borders</a>
