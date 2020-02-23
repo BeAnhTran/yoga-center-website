@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from classes.models import YogaClass
@@ -17,7 +18,6 @@ STATE_CHOICES = (
     (INACTIVE_STATE, _('Inactive')),
 )
 
-from datetime import date
 
 class Lesson(models.Model):
     yogaclass = models.ForeignKey(
@@ -82,7 +82,22 @@ class Lesson(models.Model):
         super(Lesson, self).save(*args, **kwargs)
 
     def get_time_and_room_detail(self):
-        result = '(' + self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M') + ')'
+        result = '(' + self.start_time.strftime('%H:%M') + \
+            ' - ' + self.end_time.strftime('%H:%M') + ')'
         if self.room:
             result += ' - ' + self.room.name
+        return result
+
+    def get_time(self):
+        result = self.start_time.strftime(
+            '%H:%M') + ' - ' + self.end_time.strftime('%H:%M')
+        return result
+
+    def get_studied_trainee(self):
+        return self.roll_calls.filter(studied=True)
+
+    def get_current_studied_trainee(self):
+        studied_number = self.roll_calls.filter(studied=True).count()
+        all_enroll_trainee_number = self.roll_calls.all().count()
+        result = str(studied_number) + '/' + str(all_enroll_trainee_number)
         return result

@@ -5,7 +5,7 @@ from .views import (
     dashboard_view, courses_view, rooms_view,
     lessons_view, classes_view, cards_view,
     card_types_view, trainees_view, trainers_view, staffs_view,
-    admins_view)
+    admins_view, roll_calls_view)
 
 app_name = 'dashboard'
 
@@ -85,6 +85,13 @@ admins_urlpatterns = [
     path('', admins_view.AdminListView.as_view(), name='admins-list')
 ]
 
+# ROLL CALLS
+roll_calls_urlpatterns = [
+    path('', roll_calls_view.RollCallListView.as_view(), name='roll-calls-list'),
+    path('<int:lesson_id>/', roll_calls_view.RollCallLessonDetailView.as_view(),
+         name='roll-calls-lesson-detail'),
+]
+
 # DASHBOARD
 urlpatterns = [
     path('', dashboard_view.index, name='index'),
@@ -98,4 +105,5 @@ urlpatterns = [
     path('trainers/', include(trainers_urlpatterns)),
     path('staffs/', include(staffs_urlpatterns)),
     path('admins/', include(admins_urlpatterns)),
+    path('roll-calls/', include(roll_calls_urlpatterns)),
 ]

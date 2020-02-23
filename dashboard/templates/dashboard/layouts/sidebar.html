@@ -15,8 +15,8 @@
             <span>{% trans 'Dashboard' %}</span></a>
     </li>
     <hr class="sidebar-divider my-0">
-    <li class="nav-item">
-        <a class="nav-link" href="javascript:;">
+    <li class="nav-item {% if active_nav == 'roll_calls' %}active{% endif %}">
+        <a class="nav-link" href="{% url 'dashboard:roll-calls-list' %}">
             <i class="fas fa-user-check"></i>
             <span>{% trans 'roll call' as t_roll_call %}{{ t_roll_call|title }}</span></a>
     </li>
