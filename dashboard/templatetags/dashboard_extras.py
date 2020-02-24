@@ -6,9 +6,27 @@ register = template.Library()
 
 @register.filter
 def display_state(obj):
-    iconStr = '<i class="fas fa-exclamation-circle text-warning"></i>'
+    state = obj.get_state_display()
     if obj.is_active():
-        iconStr = '<i class="fas fa-check-circle text-success"></i>'
-    something = '<a class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" title="%s">%s</a>' % (
-        obj.get_state_display(), iconStr)
-    return mark_safe(something)
+        result = '<span class="badge badge-success badge-pill">%s</span>' % (
+            state)
+    elif obj.is_inactive():
+        result = '<span class="badge badge-danger badge-pill">%s</span>' % (
+            state)
+    else:
+        result = '<span class="badge badge-warning badge-pill">%s</span>' % (
+            state)
+    return mark_safe(result)
+
+
+@register.filter
+def display_course_type(obj):
+    course_type = obj.course_type
+    course_type_display = obj.get_course_type_display()
+    if course_type == 0:
+        result = '<span class="badge badge-success badge-pill">%s</span>' % (
+            course_type_display)
+    else:
+        result = '<span class="badge badge-danger badge-pill">%s</span>' % (
+            course_type_display)
+    return mark_safe(result)

@@ -104,9 +104,6 @@
 
 {% block specified_js %}
 <script type="text/javascript">
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
     $('.delete-class').click(function () {
         $(this).siblings('form').children('input[type=submit]').click();
     });

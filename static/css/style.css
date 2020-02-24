@@ -4340,7 +4340,8 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .img-profile{
-	max-width: 25px;
+	width: 25px;
+	height: 25px;
 }
 
 .dropdown.no-arrow .dropdown-toggle::after {

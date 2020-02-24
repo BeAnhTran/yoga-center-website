@@ -20,7 +20,7 @@
             <i class="fas fa-fw fa-list"></i>
             {% trans 'trainee' as t_trainee %}
             {% blocktrans with value=t_trainee trimmed %} {{ value }} List{% endblocktrans %}
-            <span class="float-right badge badge-warning badge-pill">
+            <span class="float-right badge badge-warning">
                 <b id="count_studied">{{ studied_roll_calls.count }}</b><small>&#47;{{ total_count }}</small>
             </span>
         </h5>
@@ -29,6 +29,7 @@
             {% for r in studied_roll_calls %}
             <li
                 class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">
+                <span class="badge badge-secondary">{{ r.id }}</span>
                 {{ r.card.trainee }}
                 <a href="javascript:;" class="a-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
                     <span class="badge badge-danger badge-pill">{% trans 'remove' %}</span>
@@ -50,6 +51,7 @@
             {% for r in un_studied_roll_calls %}
             <li
                 class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">
+                <span class="badge badge-secondary">{{ r.id }}</span>
                 {{ r.card.trainee }}
                 <a href="javascript:;" class="a-un-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
                     <span class="badge badge-success badge-pill">{% trans 'select' %}</span>
@@ -79,8 +81,9 @@
             }
         }).done((data) => {
             str = '<li class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">';
+            str += '<span class="badge badge-secondary">'+ data['id'] +'</span>';
             str += data['card']['trainee']['user']['first_name'] + data['card']['trainee']['user']['last_name'];
-            str += '<a href="javascript:;" class="a-studied" data-card="' + data['id'] + '" data-roll-call="' + data['card']['id'] + '">';
+            str += '<a href="javascript:;" class="a-studied" data-card="' + data['card']['id'] + '" data-roll-call="' + data['id'] + '">';
             str += '<span class="badge badge-danger badge-pill">{% trans "remove" %}</span></a></li>';
             $('#item_no_trainee').hide();
             $('#studied_roll_calls').append(str);
@@ -113,8 +116,9 @@
             }
         }).done((data) => {
             str = '<li class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">';
+            str += '<span class="badge badge-secondary">'+ data['id'] +'</span>';
             str += data['card']['trainee']['user']['first_name'] + data['card']['trainee']['user']['last_name'];
-            str += '<a href="javascript:;" class="a-un-studied" data-card="' + data['id'] + '" data-roll-call="' + data['card']['id'] + '">';
+            str += '<a href="javascript:;" class="a-un-studied" data-card="' + data['card']['id'] + '" data-roll-call="' + data['id'] + '">';
             str += '<span class="badge badge-success badge-pill">{% trans "select" %}</span></a></li>';
             $('#un_studied_roll_calls').append(str);
             $(this).parent('li.list-group-item').remove();

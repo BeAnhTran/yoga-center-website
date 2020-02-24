@@ -80,6 +80,16 @@ class YogaClass(models.Model):
             return True
         return False
 
+    def is_inactive(self):
+        if self.state == INACTIVE_STATE:
+            return True
+        return False
+
+    def is_draft(self):
+        if self.state == DRAFT_STATE:
+            return True
+        return False
+
     def get_trial_price(self):
         list_trial_card_types = self.card_types.filter(form_of_using=FOR_TRIAL)
         if list_trial_card_types:
@@ -108,7 +118,7 @@ class YogaClass(models.Model):
             return sexify.sexy_number(self.price_per_lesson)
         else:
             return _('have not updated yet')
-    
+
     def get_price_course(self):
         if self.price_course is not None:
             if self.price_course == int(self.price_course):

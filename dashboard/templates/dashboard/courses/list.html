@@ -1,6 +1,7 @@
 {% extends 'dashboard/layouts/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load dashboard_extras %}
 
 {% block specified_css %}
 <link href="{% static 'css/dashboard/courses/list.css' %}" rel="stylesheet">
@@ -49,7 +50,7 @@
                         </td>
                         <td>{{ course.description }}</td>
                         <td>
-                            {{ course.course_type }}
+                            {{ course|display_course_type }}
                         </td>
                         <td>
                             <a href="{% url 'dashboard:courses-update' course.slug %}"><i class="fas fa-edit"></i></a>
