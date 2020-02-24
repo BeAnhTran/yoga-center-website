@@ -93,7 +93,7 @@ class LessonForm(forms.ModelForm):
 
     class Meta:
         model = Lesson
-        exclude = ['created_at', 'updated_at']
+        exclude = ['created_at', 'updated_at', 'cards']
 
     def clean_end_time(self):
         cleaned_data = self.cleaned_data

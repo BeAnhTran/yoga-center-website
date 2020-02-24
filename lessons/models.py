@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from lessons.utils import check_overlap_in_list_lesson
 from django.db.models import Q
 from cards.models import Card
+from django.utils.formats import date_format
 
 ACTIVE_STATE = 0
 INACTIVE_STATE = 1
@@ -47,7 +48,7 @@ class Lesson(models.Model):
 
     def __str__(self):
         if self.room:
-            return self.yogaclass.name + ' - ' + self.room.name + ' (' + self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M') + ')'
+            return self.yogaclass.name + ' - '+ date_format(self.day, format='SHORT_DATE_FORMAT', use_l10n=True) + ' - ' + self.room.name + ' (' + self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M') + ')'
         return self.yogaclass.name + ' - ' + self.start_time.strftime('%H:%M')
 
     def clean(self):

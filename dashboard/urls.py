@@ -33,9 +33,11 @@ classes_urlpatterns = [
          classes_view.ClassDeleteView.as_view(), name='classes-delete'),
     path('<int:pk>/lessons/',
          classes_view.get_lessons, name='classes-get-lessons'),
-    # create lessen for a class
+    # create lesson for a class
     path('<int:pk>/lessons/new/',
          classes_view.create_lessons, name='classes-create-new-lesson'),
+    path('<int:pk>/lessons/new/from-last-week/',
+         classes_view.create_lessons_from_last_time, name='classes-create-new-lesson-from-last-time')
 ]
 
 # LESSONS
@@ -90,7 +92,8 @@ admins_urlpatterns = [
 
 # ROLL CALLS
 roll_calls_urlpatterns = [
-    path('<int:pk>/', roll_calls_view.RollCallDetail.as_view(), name='roll-calls-detail'),
+    path('<int:pk>/', roll_calls_view.RollCallDetail.as_view(),
+         name='roll-calls-detail'),
 ]
 
 # DASHBOARD

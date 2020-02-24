@@ -14,3 +14,13 @@ class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = '__all__'
+
+
+class LessonUpdateScheduleSerializer(serializers.ModelSerializer):
+    room = RoomSerializer()
+    yogaclass = YogaClassSerializer()
+    trainer = TrainerSerializer()
+
+    class Meta:
+        model = Lesson
+        exclude = ('cards', )

@@ -15,17 +15,40 @@
 <script src="{% static 'fullcalendar-4.3.1/packages/timegrid/main.js' %}"></script>
 <script src="{% static 'fullcalendar-4.3.1/packages/list/main.js' %}"></script>
 <link href="{% static 'css/dashboard/classes/schedule.css' %}" rel='stylesheet' />
-
+<style>
+    .fc-view, .fc-view > table {
+        z-index: 0;
+    }
+</style>
 {% endblock %}
 {% block content %}
 <div class="container-fluid mt-3 p-0">
-    <a class="btn btn-sm btn-primary" href="{{request.META.HTTP_REFERER}}">
+    <a class="btn btn-sm btn-outline-primary" href="{{request.META.HTTP_REFERER}}">
         <i class="fas fa-fw fa-arrow-left"></i>{% trans 'back' as back %} {{ back|title }}
     </a>
-    <a id="btn_create_lesson" type="button" class="btn btn-sm btn-success float-right" href="javascript:;">
-        <i class="fas fa-fw fa-plus-square fa-sm text-white-50"></i>{% trans 'create new lesson' as create_new_lesson %}
-        {{ create_new_lesson|title }}
-    </a>
+    <div class="dropdown float-right">
+        <button type="button" class="btn btn-sm btn-outline-success dropdown-toggle" data-toggle="dropdown">
+            <i class="fas fa-fw fa-plus-square fa-sm"></i>{% trans 'create new lesson' as create_new_lesson %}
+            {{ create_new_lesson|title }}
+        </button>
+        <div class="dropdown-menu">
+            <a id="btn_create_one_lesson" type="button" class="dropdown-item badge-success" href="javascript:;">
+                <span class="badge badge-warning">1</span>
+                {% trans 'Create one lesson' as create_one_lesson %}
+                {{ create_one_lesson|title }}
+            </a>
+            <a id="btn_create_lessons_from_last_week" data-type="last_week" class="dropdown-item badge-success btn-create-lessons-from-last-time" href="javascript:;">
+                <span class="badge badge-warning">2</span>
+                {% trans 'Create lessons from last week' as create_lessons_from_last_week %}
+                {{ create_lessons_from_last_week|title }}
+            </a>
+            <a id="btn_create_lessons_from_last_4_weeks" data-type="last_4_weeks" class="dropdown-item badge-success btn-create-lessons-from-last-time" href="javascript:;">
+                <span class="badge badge-warning">3</span>
+                {% trans 'Create lessons from last 4 weeks' as create_lessons_from_last_4_weeks %}
+                {{ create_lessons_from_last_4_weeks|title }}
+            </a>
+        </div>
+    </div>
 </div>
 <h1 class="text-danger text-center">{{ yogaclass.name }}</h1>
 <div class="container-fluid mb-3">
@@ -85,6 +108,7 @@
             locale: "{{ request.LANGUAGE_CODE }}",
             defaultDate: Date.now(),
             editable: true,
+            contentHeight:"auto",
             firstDay: 1,
             allDaySlot: false,
             minTime: '05:00:00',
@@ -262,6 +286,7 @@
                         method: 'DELETE'
                     }).done((data) => {
                         calendar.refetchEvents();
+                        $('#modal_create_lesson').modal('hide');
                         Swal.fire(
                             '{% trans "Deleted!" %}',
                             '{% trans "It has been deleted successfully" %}',
@@ -272,6 +297,37 @@
                     });
                 }
             })
+        });
+
+        $('.btn-create-lessons-from-last-time').click(function(){
+            url = "{% url 'dashboard:classes-create-new-lesson-from-last-time' yogaclass.id %}";
+            let current_date_calendar = calendar.getDate().toDateString();
+            let type = $(this).attr('data-type');
+            $.ajax({
+                url: url,
+                type: 'POST',
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                data: {
+                    'type': type,
+                    'current_date_calendar': current_date_calendar
+                }
+            }).done(function(response){
+                console.log(response);
+                calendar.refetchEvents();
+                Swal.fire(
+                    "{% trans 'done' as t_done %}{{ t_done|title }}",
+                    "{% trans 'create successfully' as t_create_successfully %}{{ t_create_successfully |title }}",
+                    'success'
+                );
+            }).fail(err=>{
+                Swal.fire(
+                    "{% trans 'error' as t_error %}{{ t_error|title }}",
+                    err.responseText,
+                    'error'
+                )
+            });
         });
     });
     $("#id_start_time").on("change.datetimepicker", function ({ date, oldDate }) {
@@ -289,7 +345,7 @@
         }
     });
 
-    $('#btn_create_lesson').click(function () {
+    $('#btn_create_one_lesson').click(function () {
         var title = "{% trans 'create new lesson' as t_create_new_lesson %}{{ t_create_new_lesson|title }}";
         $('#model_title').text(title);
         $('#form_new_lesson').trigger("reset");

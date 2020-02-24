@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from dashboard.forms.lesssons_form import LessonForm
 from lessons.models import Lesson
-from lessons.serializers.lesson_serializer import LessonSerializer
+from lessons.serializers.lesson_serializer import LessonSerializer, LessonUpdateScheduleSerializer
 from ..decorators import admin_required, staff_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -46,7 +46,7 @@ class LessonDetailApiView(APIView):
         form = LessonForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             lesson = form.save()
-            serializer = LessonSerializer(lesson)
+            serializer = LessonUpdateScheduleSerializer(lesson)
             return Response(serializer.data)
         return HttpResponse(form.errors.as_json(), status=status.HTTP_400_BAD_REQUEST)
 
