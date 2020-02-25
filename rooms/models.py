@@ -16,7 +16,7 @@ class Room(models.Model):
         max_length=255, null=True, blank=True, verbose_name=_('location'))
     description = models.TextField(
         blank=True, null=True, verbose_name=_('description'))
-    max_people = models.IntegerField(null=True, verbose_name=_('max people'))
+    max_people = models.IntegerField(verbose_name=_('max people'))
     state = models.IntegerField(choices=STATE_CHOICES,
                                 default=ACTIVE_STATE, verbose_name=_('state'))
     created_at = models.DateTimeField(

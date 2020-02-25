@@ -24,11 +24,11 @@ class Lesson(models.Model):
     yogaclass = models.ForeignKey(
         YogaClass, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('yogaclass'))
     room = models.ForeignKey(
-        Room, on_delete=models.SET_NULL, related_name='lessons', verbose_name=_('room'), blank=True, null=True)
+        Room, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('room'), blank=True, null=True)
     cards = models.ManyToManyField(
         to='cards.Card', through='roll_calls.RollCall', related_name='cards', verbose_name='cards')
     trainer = models.ForeignKey(
-        Trainer, on_delete=models.SET_NULL, related_name='lessons', verbose_name=_('trainer'), blank=True, null=True)
+        Trainer, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('trainer'), blank=True, null=True)
     state = models.IntegerField(choices=STATE_CHOICES,
                                 default=ACTIVE_STATE, verbose_name=_('state'))
     day = models.DateField(help_text=_(
@@ -48,7 +48,7 @@ class Lesson(models.Model):
 
     def __str__(self):
         if self.room:
-            return self.yogaclass.name + ' - '+ date_format(self.day, format='SHORT_DATE_FORMAT', use_l10n=True) + ' - ' + self.room.name + ' (' + self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M') + ')'
+            return self.yogaclass.name + ' - ' + date_format(self.day, format='SHORT_DATE_FORMAT', use_l10n=True) + ' - ' + self.room.name + ' (' + self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M') + ')'
         return self.yogaclass.name + ' - ' + self.start_time.strftime('%H:%M')
 
     def clean(self):
@@ -61,18 +61,26 @@ class Lesson(models.Model):
         else:
             class_lessons_on_day = self.yogaclass.lessons.filter(day=self.day)
             room_lessons_on_day = room.lessons.filter(day=self.day)
+            trainer_lessons_on_day = self.trainer.lessons.filter(day=self.day)
         check1 = check_overlap_in_list_lesson(
             self.start_time, self.end_time, class_lessons_on_day)
         check2 = check_overlap_in_list_lesson(
             self.start_time, self.end_time, room_lessons_on_day)
-        if any(v['value'] is False for v in [check1, check2]):
+        check3 = check_overlap_in_list_lesson(
+            self.start_time, self.end_time, trainer_lessons_on_day)
+        if any(v['value'] is False for v in [check1, check2, check3]):
             if check1['value'] is False:
                 obj = check1['object']
+                raise ValidationError(
+                    _('overlap time').capitalize() + ': ' + obj.__str__())
+            elif check2['value'] is False:
+                obj = check2['object']
+                raise ValidationError(
+                    _('overlap time').capitalize() + ': ' + obj.__str__())
             else:
-                if check2['value'] is False:
-                    obj = check2['object']
-            raise ValidationError(
-                _('overlap time').capitalize() + ': ' + obj.__str__())
+                obj = check3['object']
+                raise ValidationError(
+                    _('overlap time for trainer').capitalize() + ': ' + self.trainer.__str__() + ': ' + obj.__str__())
 
     def save(self, *args, **kwargs):
         self.full_clean()

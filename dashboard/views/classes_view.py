@@ -178,7 +178,7 @@ def create_lessons_from_last_time(request, pk):
                 last_entries = yoga_class.lessons.filter(
                     day__range=[last_start_4_weeks, last_end_week])
                 if not last_entries:
-                    return HttpResponse(_('Last month has no lesson'), status=status.HTTP_400_BAD_REQUEST)
+                    return HttpResponse(_('Last 4 weeks have no lesson'), status=status.HTTP_400_BAD_REQUEST)
                 for last_entry in last_entries:
                     current_entry = last_entry
                     current_entry.pk = None
