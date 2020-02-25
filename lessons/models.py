@@ -24,11 +24,11 @@ class Lesson(models.Model):
     yogaclass = models.ForeignKey(
         YogaClass, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('yogaclass'))
     room = models.ForeignKey(
-        Room, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('room'), blank=True, null=True)
+        Room, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('room'),)
     cards = models.ManyToManyField(
         to='cards.Card', through='roll_calls.RollCall', related_name='cards', verbose_name='cards')
     trainer = models.ForeignKey(
-        Trainer, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('trainer'), blank=True, null=True)
+        Trainer, on_delete=models.SET_NULL, related_name='lessons', verbose_name=_('trainer'), blank=True, null=True)
     state = models.IntegerField(choices=STATE_CHOICES,
                                 default=ACTIVE_STATE, verbose_name=_('state'))
     day = models.DateField(help_text=_(
@@ -61,7 +61,10 @@ class Lesson(models.Model):
         else:
             class_lessons_on_day = self.yogaclass.lessons.filter(day=self.day)
             room_lessons_on_day = room.lessons.filter(day=self.day)
-            trainer_lessons_on_day = self.trainer.lessons.filter(day=self.day)
+            if self.trainer:
+                trainer_lessons_on_day = self.trainer.lessons.filter(day=self.day)
+            else:
+                trainer_lessons_on_day = self.yogaclass.form_trainer.lessons.filter(day=self.day)
         check1 = check_overlap_in_list_lesson(
             self.start_time, self.end_time, class_lessons_on_day)
         check2 = check_overlap_in_list_lesson(

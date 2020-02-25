@@ -14,9 +14,8 @@ class User(AbstractUser):
     GENDER_NOT_SPECIFIED = 2
 
     GENDER_CHOICES = (
-        (GENDER_MALE, _('Male')),
         (GENDER_FEMALE, _('Female')),
-        (GENDER_NOT_SPECIFIED, _('Not specified')),
+        (GENDER_MALE, _('Male')),
     )
     email = models.EmailField(
         blank=False, null=False, max_length=254, verbose_name=_('email address'), unique=True)
@@ -35,7 +34,7 @@ class User(AbstractUser):
     address = models.CharField(
         max_length=255, blank=True, null=True, verbose_name=_('address'))
     gender = models.IntegerField(choices=GENDER_CHOICES,
-                                 default=GENDER_NOT_SPECIFIED, verbose_name=_('gender'))
+                                 default=GENDER_FEMALE, verbose_name=_('gender'))
     country = CountryField(blank=True, verbose_name=_('country'))
     language = LanguageField(blank=True, null=True,
                              max_length=55, verbose_name=_('language'))
