@@ -15,7 +15,7 @@
     </div>
   </div>
 </section>
-<div class="container card mt-5">
+<div id="div_content" class="container card mt-5">
   <div class="row justify-content-center">
     <div class="card-body">
       <div class="row text-center">
@@ -29,7 +29,7 @@
           <p class="lead">
             {% trans 'Select below the type of account you want to create'%}
           </p>
-          <a href="{% url 'core:trainee_signup' %}" class="btn btn-student btn-lg"
+          <a id="register_as_trainee_btn" href="{% url 'core:trainee_signup' %}" class="btn btn-student btn-lg"
             role="button">{% trans 'trainee' as t_trainee %}{{t_trainee|upper}}</a>
           <a href="{% url 'core:trainer_signup' %}" class="btn btn-teacher btn-lg"
             role="button">{% trans 'trainer' as t_trainer %}{{ t_trainer|upper }}</a>
@@ -38,4 +38,12 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block specified_js %}
+<script>
+  $(function(){
+    $('html, body').animate({scrollTop: $('#div_content').offset().top - 100 }, 'slow');
+  });
+</script>
 {% endblock %}
