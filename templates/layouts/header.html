@@ -40,7 +40,7 @@
                             <span
                                 class="mr-2 d-none d-lg-inline">{{ user.get_full_name|default:user.username|capfirst }}</span>
                             <img class="img-profile rounded-circle"
-                                src="https://picsum.photos/200/300">
+                                src="{% static 'img/user/default.png' %}">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
