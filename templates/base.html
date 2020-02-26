@@ -53,6 +53,17 @@
   {% include 'layouts/info_model.html' %}
   <!-- Infor Model end -->
 
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+  {% endfor %}
+  {% endif %}
+
   {% block content %}
   {% endblock %}
 
@@ -78,7 +89,7 @@
   {% include 'dashboard/logout_model.html' %}
 
   <!--====== Javascripts & Jquery ======-->
-  
+
   <script src="{% static 'js/jquery.slicknav.min.js'%}"></script>
   <script src="{% static 'js/owl.carousel.min.js'%}"></script>
   <script src="{% static 'js/jquery.nice-select.min.js'%}"></script>
@@ -88,6 +99,12 @@
   <script src="{% static 'js/translations.js'%}"></script>
 
   {% block specified_js %}{% endblock %}
+
+  <script>
+    $(".alert-dismissible").fadeTo(5000, 500).fadeOut(500, function(){
+      $(".alert-dismissible").alert('close');
+    });
+  </script>
 </body>
 
 </html>

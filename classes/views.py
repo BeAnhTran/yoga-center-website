@@ -36,6 +36,7 @@ from classes.utils import get_price, get_total_price, get_total_price_display
 from django.db import transaction
 from common.services.card_invoice_service import CardInvoiceService
 from common.services.roll_call_service import RollCallService
+from django.contrib import messages
 
 
 class YogaClassListView(ListView):
@@ -73,6 +74,9 @@ class YogaClassEnrollView(View):
     def get(self, request, slug):
         yoga_class = YogaClass.objects.get(slug=slug)
         if self.__is_trainee_of_class(yoga_class, request.user.trainee):
+            messages.success(
+                request,
+                _('Your card is still in use. Please choose extend card only'))
             return redirect('classes:detail', slug=slug)
         # remove enroll card form when access enroll page
         if request.session.get('enroll_card_form') is not None:
