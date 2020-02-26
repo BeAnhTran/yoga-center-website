@@ -94,8 +94,9 @@
 
 {% block specified_js %}
 <script>
-
     document.addEventListener('DOMContentLoaded', function () {
+        $('[data-toggle="tooltip"]').tooltip();   
+
         var Draggable = FullCalendarInteraction.Draggable;
         var containerEl = document.getElementById('trial-lesson');
 
@@ -118,6 +119,7 @@
                         endStr: fetchInfo.endStr
                     },
                     success: function (data) {
+                        console.log('data lesson events', data);
                         var events = [];
                         for (var i = 0; i < data.length; i++) {
                             var _d = data[i]['day'];
@@ -127,6 +129,17 @@
                             var _end_time = _d + ' ' + _et;
                             var start_time = new Date(_start_time);
                             var end_time = new Date(_end_time);
+                            var bg_color = '#0c9463';
+                            var border_color = '#0c9463';
+                            var editable = true;
+                            var title_tooltip = null;
+                            if (data[i]['is_full'] == true) {
+                                console.log("cc");
+                                bg_color = '#ef4339';
+                                border_color = '#ef4339';
+                                editable = false;
+                                title_tooltip="{% trans 'lesson is full' %}";
+                            }
                             events.push({
                                 id: data[i]['id'],
                                 title: _st.split(':', 2).join(":") + ' - ' + _et.split(':', 2).join(":"),
@@ -135,19 +148,21 @@
                                 url: 'javascript:;',
                                 overlap: false,
                                 allDaySlot: false,
-                            })
+                                backgroundColor: bg_color,
+                                borderColor: border_color,
+                                editable: editable,
+                                titleTooltip: title_tooltip
+                            });
                         }
                         successCallback(events);
                     }
                 });
             },
             eventDragStop: function (info) {
-                console.log(info.event);
                 var start_at = new Date(info.event.start);
                 var end_at = new Date(info.event.end);
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 var _date_trial = start_at.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options)
-                console.log();
                 if (isEventOverDiv(info.jsEvent.offsetX, info.jsEvent.offsetY)) {
                     content = "<div id=trial_" + info.event.id + " class='fc-event fc-event-trial'>";
                     content += '(' + info.event.title + ') ' + _date_trial;
@@ -174,7 +189,13 @@
                 if (info != undefined) {
                     info.revert();
                 }
-                alert("cc");
+                console.log("event drop");
+            },
+            eventRender: function (info) {
+                if (info.event.extendedProps.titleTooltip) {
+                    $(info.el).attr('data-toggle',"tooltip"); 
+                    $(info.el).attr('title',info.event.extendedProps.titleTooltip); 
+                }
             }
         });
 
@@ -217,7 +238,6 @@
                 $('input#id_end_at').removeAttr('readonly');
                 $('#div_id_number_of_months').remove();
                 $('input#form_of_using_card_type').val(data['form_of_using']);
-                console.log(data);
                 if (data['form_of_using'] == 0) { // FULL MONTH
                     input_number_str = '<div id="div_id_number_of_months" class="form-group">';
                     input_number_str += '<label for="id_number_of_months" class=" requiredField">';
@@ -235,7 +255,6 @@
                     $('input#id_end_at').removeAttr('readonly');
                     $('#div_for_some_lesson_list').removeClass('d-none');
 
-                    console.log('FOR SOME LESSONS');
                 } else if (data['form_of_using'] == 2) { // TRIAL
                     $('.fc-event-trial').remove();
                     $('#div_id_start_at').addClass('d-none');
@@ -245,7 +264,6 @@
                 } else { // FOR FULL MONTH
                     var _start_at = '{{ yoga_class.lessons.first.day }}';
                     var _end_at = '{{ yoga_class.lessons.last.day }}';
-                    console.log('FOR FULL MONTH');
                     $('#id_start_at').val(_start_at);
                     $('#id_end_at').val(_end_at);
                 }
@@ -258,7 +276,6 @@
     $('input#id_start_at').on("change.datetimepicker", ({ date, oldDate }) => {
         number_of_months = $('#id_number_of_months').val();
         if (date != null && date._i != undefined) {
-            console.log(date);
             if ($('input#form_of_using_card_type').val() == 0) {
                 if (number_of_months != undefined) {
                     var d1 = new Date(date._d);
@@ -321,7 +338,8 @@
             data: {
                 'startStr': start_at,
                 'endStr': end_at,
-                'id_class': '{{yoga_class.id}}'
+                'id_class': '{{yoga_class.id}}',
+                'available_only': 1
             }
         }).done((data) => {
             console.log(data);

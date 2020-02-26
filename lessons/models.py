@@ -11,6 +11,7 @@ from django.db.models import Q
 from cards.models import Card
 from django.utils.formats import date_format
 
+
 ACTIVE_STATE = 0
 INACTIVE_STATE = 1
 
@@ -41,6 +42,7 @@ class Lesson(models.Model):
         'Content'), blank=True, null=True, verbose_name=_('content'))
     notes = models.TextField(help_text=_(
         'Notes'), blank=True, null=True, verbose_name=_('notes'))
+    is_full = models.BooleanField(default=False, verbose_name=_('is full'))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
@@ -53,6 +55,20 @@ class Lesson(models.Model):
 
     def clean(self):
         room = self.room
+        if self.trainer:
+            if self.id:
+                trainer_lessons_on_day = self.trainer.lessons.filter(
+                    day=self.day).exclude(pk=self.id)
+            else:
+                trainer_lessons_on_day = self.trainer.lessons.filter(
+                    day=self.day)
+        else:
+            if self.id:
+                trainer_lessons_on_day = self.yogaclass.form_trainer.lessons.filter(
+                    day=self.day).exclude(pk=self.id)
+            else:
+                trainer_lessons_on_day = self.yogaclass.form_trainer.lessons.filter(
+                    day=self.day)
         if self.id:
             class_lessons_on_day = self.yogaclass.lessons.filter(
                 day=self.day).exclude(pk=self.id)
@@ -61,10 +77,7 @@ class Lesson(models.Model):
         else:
             class_lessons_on_day = self.yogaclass.lessons.filter(day=self.day)
             room_lessons_on_day = room.lessons.filter(day=self.day)
-            if self.trainer:
-                trainer_lessons_on_day = self.trainer.lessons.filter(day=self.day)
-            else:
-                trainer_lessons_on_day = self.yogaclass.form_trainer.lessons.filter(day=self.day)
+
         check1 = check_overlap_in_list_lesson(
             self.start_time, self.end_time, class_lessons_on_day)
         check2 = check_overlap_in_list_lesson(
@@ -90,7 +103,6 @@ class Lesson(models.Model):
         if not self.id:
             if not self.trainer:
                 self.trainer = self.yogaclass.form_trainer
-
         super(Lesson, self).save(*args, **kwargs)
 
     def get_time_and_room_detail(self):
@@ -113,3 +125,14 @@ class Lesson(models.Model):
         all_enroll_trainee_number = self.roll_calls.all().count()
         result = str(studied_number) + '/' + str(all_enroll_trainee_number)
         return result
+
+    def max_people(self):
+        if self.yogaclass.max_people is None:
+            return self.room.max_people
+        else:
+            return min(self.yogaclass.max_people, self.room.max_people)
+
+    def check_is_full(self):
+        if self.roll_calls.all().count() < self.max_people():
+            return False
+        return True

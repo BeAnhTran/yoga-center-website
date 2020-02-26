@@ -17,7 +17,11 @@ from courses.models import (Course, TRAINING_COURSE, PRACTICE_COURSE)
 from lessons.models import Lesson
 from core.models import User, Trainer, Trainee, Staff
 from card_types.models import (CardType, FOR_FULL_MONTH,
-                          FOR_SOME_LESSONS, FOR_TRIAL, FOR_TRAINING_COURSE)
+                               FOR_SOME_LESSONS, FOR_TRIAL, FOR_TRAINING_COURSE)
+from cards.models import Card
+from roll_calls.models import RollCall
+from common.services.card_invoice_service import CardInvoiceService
+from common.services.roll_call_service import RollCallService
 
 
 class Command(BaseCommand):
@@ -258,6 +262,10 @@ class Command(BaseCommand):
             room = Room(**data)
             room.save()
 
+        r = Room.objects.first()
+        r.max_people = 3
+        r.save()
+
         # ====================================
         # CREATE CLASS
         # ====================================
@@ -309,7 +317,7 @@ class Command(BaseCommand):
             price_per_lesson=50000,
             price_per_month=600000,
             start_at=today,
-            form_trainer=trainer2,
+            form_trainer=trainer3,
             level=BASIC_LEVEL
         )
         hatha_yoga_class3.card_types.add(
@@ -327,7 +335,7 @@ class Command(BaseCommand):
             price_per_lesson=50000,
             price_per_month=600000,
             start_at=today,
-            form_trainer=trainer2,
+            form_trainer=trainer4,
             level=INTERMEDIATE_LEVEL
         )
         hatha_yoga_imtermediate_class.card_types.add(
@@ -370,7 +378,7 @@ class Command(BaseCommand):
             "start_time": t1_hatha_1_basic,
             "end_time": t2_hatha_1_basic
         })
-        hatha_yoga_class1.lessons.create(**{
+        lesson_hatha_yoga = hatha_yoga_class1.lessons.create(**{
             "room_id": room_1.id,
             "day": wednesday,
             "start_time": t1_hatha_1_basic,
@@ -487,3 +495,39 @@ class Command(BaseCommand):
             "start_time": t1_training_class,
             "end_time": t2_training_class
         })
+
+        ######## Create trial card and roll call to test #######
+        print("==================")
+        print("CREATE CARD & ROLL CALL")
+        trainee1 = Trainee.objects.last()
+        trainee2_id = trainee1.pk - 1
+        trainee2 = Trainee.objects.get(pk=trainee2_id)
+        trainee3_id = trainee2.pk - 1
+        trainee3 = Trainee.objects.get(pk=trainee3_id)
+
+        card1 = Card.objects.create(**{
+            'trainee': trainee1,
+            'yogaclass': hatha_yoga_class1,
+            'card_type': trial_card_type
+        })
+        # card1.lessons.add(lesson_hatha_yoga)
+        RollCall.objects.create(card=card1, lesson=lesson_hatha_yoga)
+        CardInvoiceService(card1, 'trial card', 0).call()
+
+        card2 = Card.objects.create(**{
+            'trainee': trainee2,
+            'yogaclass': hatha_yoga_class1,
+            'card_type': trial_card_type
+        })
+        # card2.lessons.add(lesson_hatha_yoga)
+        RollCall.objects.create(card=card2, lesson=lesson_hatha_yoga)
+        CardInvoiceService(card2, 'trial card', 0).call()
+
+        card3 = Card.objects.create(**{
+            'trainee': trainee3,
+            'yogaclass': hatha_yoga_class1,
+            'card_type': trial_card_type
+        })
+        RollCall.objects.create(card=card3, lesson=lesson_hatha_yoga)
+        # card3.lessons.add(lesson_hatha_yoga)
+        CardInvoiceService(card3, 'trial card', 0).call()

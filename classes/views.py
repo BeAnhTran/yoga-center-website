@@ -23,7 +23,6 @@ from django.utils.decorators import method_decorator
 from core.decorators import trainee_required
 
 from django.conf import settings
-import stripe
 
 from rest_framework import status
 from django.http import HttpResponse
@@ -36,6 +35,8 @@ from common.templatetags import sexify
 from classes.utils import get_price, get_total_price, get_total_price_display
 from django.db import transaction
 from common.services.card_invoice_service import CardInvoiceService
+from common.services.roll_call_service import RollCallService
+
 
 class YogaClassListView(ListView):
     model = YogaClass
@@ -72,7 +73,7 @@ class YogaClassEnrollView(View):
     def get(self, request, slug):
         yoga_class = YogaClass.objects.get(slug=slug)
         if self.__is_trainee_of_class(yoga_class, request.user.trainee):
-            return redirect('classes:detail',slug=slug)
+            return redirect('classes:detail', slug=slug)
         # remove enroll card form when access enroll page
         if request.session.get('enroll_card_form') is not None:
             del request.session['enroll_card_form']
@@ -124,7 +125,8 @@ class YogaClassEnrollPaymentView(View):
         if request.session.get('enroll_card_form'):
             yoga_class = YogaClass.objects.get(slug=slug)
             enroll_card_form = request.session['enroll_card_form']
-            lesson_list = self.__lesson_list(yoga_class, enroll_card_form)
+            lesson_list = self.__lesson_list_available(
+                yoga_class, enroll_card_form)
             # Payment Form
             form = CardPaymentForm()
             id_card_type = enroll_card_form['card_type']
@@ -153,7 +155,7 @@ class YogaClassEnrollPaymentView(View):
             }
             return render(request, self.template_name, context=context)
         else:
-            return redirect('classes:enroll',slug=slug)
+            return redirect('classes:enroll', slug=slug)
 
     @transaction.atomic
     def post(self, request, slug):
@@ -216,7 +218,7 @@ class YogaClassEnrollPaymentView(View):
         card.trainee = trainee
         card.yogaclass = yoga_class
         card.save()
-        card.lessons.add(*lesson_list)
+        RollCallService(card, lesson_list).call()
         return card
 
     def __description(self, name, email, amount):
@@ -224,10 +226,10 @@ class YogaClassEnrollPaymentView(View):
         result = ' '.join(listStr)
         return result
 
-    def __lesson_list(self, yoga_class, enroll_card_form):
+    def __lesson_list_available(self, yoga_class, enroll_card_form):
         cleaned_data = CardFormForTraineeEnroll(enroll_card_form).cleaned_data
         start = cleaned_data['start_at']
         end = cleaned_data['end_at']
         lesson_list = yoga_class.lessons.filter(
-            day__range=[start, end]).order_by('day')
+            day__range=[start, end], is_full=False).order_by('day')
         return lesson_list
