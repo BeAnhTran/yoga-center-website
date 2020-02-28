@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block specified_css %}
 <link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
@@ -13,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7 m-auto text-white">
-                <h2>Profile</h2>
+                <h2>{% trans 'profile' as t_profile %}{{ t_profile|capfirst }}</h2>
             </div>
         </div>
     </div>
@@ -24,108 +25,39 @@
             <div class="panel panel-default">
                 <div class="form-row">
                     <div class="form-group col-lg-3 text-center">
-                        <img src="{% static 'img/user/default.png' %}" class="img rounded" width="150" height="150" alt="default">
+                        <img src="{% static 'img/user/default.png' %}" class="img rounded" width="150" height="150"
+                            alt="default">
                     </div>
-                    <div class="form-group col-lg-9">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" name="username" id="username" placeholder="johntran17" />
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" id="email" placeholder="johntran17" />
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary">Save</button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="form-row justify-content-center">
-                            <div class="card bg-dark">
-                                <div class="card-body text-center">
-                                    <a href="javascript:;" class="btn btn-light m-1">{% trans 'Card' %}</a>
-                                    <a href="javascript:;" class="btn btn-light m-1">{% trans 'Card Invoice History' %}</a>
-                                    <a href="javascript:;" class="btn btn-light m-1">{% trans 'Shop Invoice History' %}</a>
-                                </div>
-                            </div>
+                    {% crispy form1 %}
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-collapse pt-0">
+                    <div class="card border-0">
+                        <div class="card-body p-2">
+                            <a href="javascript:;" class="btn btn-sm btn-outline-secondary m-1">{% trans 'Card' %}</a>
+                            <a href="javascript:;"
+                                class="btn btn-sm btn-outline-secondary m-1">{% trans 'Card Invoice History' %}</a>
+                            <a href="javascript:;"
+                                class="btn btn-sm btn-outline-secondary m-1">{% trans 'Shop Invoice History' %}</a>
+                            <a href="javascript:;"
+                                class="btn btn-sm btn-outline-secondary m-1">{% trans 'Renew Password' %}</a>
                         </div>
                     </div>
+                    <hr>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading" id="headingOne">
                     <h3>
-                        <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">Basic infomation</a>
+                        <a href="#collapseOne" data-toggle="collapse"
+                            data-parent="#accordion">{% trans 'Basic information' %}</a>
                     </h3>
                 </div>
 
-                <div id="collapseOne" class="panel-collapse collapse in">
+                <div id="collapseOne" class="panel-collapse collapse show">
                     <div class="panel-body">
-                        <form method="POST">
-                            <fieldset>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="first_name" class="form-label">First name</label>
-                                        <input type="text" name="first_name" id="first_name" placeholder="E.g Nguyen" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="last_name" class="form-label">Last name</label>
-                                        <input type="text" name="last_name" id="last_name"
-                                            placeholder="E.g. Kardashian" />
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group-flex">
-                                        <div class="form-radio">
-                                            <label for="gender">Gender</label>
-                                            <div class="form-flex">
-                                                <input type="radio" name="gender" value="male" id="male"
-                                                    checked="checked" />
-                                                <label for="male"><img src="{% static 'img/icon-male.png' %}"
-                                                        alt="Male"></label>
-
-                                                <input type="radio" name="gender" value="female" id="female" />
-                                                <label for="female"><img src="{% static 'img/icon-female.png' %}"
-                                                        alt="Female"></label>
-                                            </div>
-                                        </div>
-                                        <div class="form-date">
-                                            <label for="birth_date" class="form-label">Date of birth</label>
-                                            <div class="form-date-group">
-                                                <div class="form-date-item">
-                                                    <select id="birth_month" name="birth_month"></select>
-                                                </div>
-                                                <div class="form-date-item">
-                                                    <select id="birth_date" name="birth_date"></select>
-                                                </div>
-                                                <div class="form-date-item">
-                                                    <select id="birth_year" name="birth_year"></select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-select">
-                                        <label for="national" class="form-label">Nationality</label>
-                                        <div class="select-group">
-                                            <select name="national" id="national">
-                                                <option value="" data-url='{% static "img/icon-vietnam.png" %}'>
-                                                    Select a value
-                                                </option>
-                                                <option value="Viet Nam" data-url='{% static "img/icon-vietnam.png" %}'>
-                                                    <img src="{% static 'img/icon-vietnam.png' %}" alt=""> Viet Nam
-                                                </option>
-                                                <option value="USA" data-url='{% static "img/icon-usa.png" %}'><img
-                                                        src="{% static 'img/icon-usa.png' %}" alt="">USA</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
+                        {%  crispy form_basic_info %}
                     </div>
                 </div>
             </div>
@@ -133,62 +65,28 @@
             <div class="panel panel-default">
                 <div class="panel-heading" id="headingTwo">
                     <h3>
-                        <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion">Additional infomation</a>
+                        <a href="#collapseTwo" data-toggle="collapse"
+                            data-parent="#accordion">{% trans 'Additional information' %}</a>
                     </h3>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <form method="post">
-                            <fieldset>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="email" class="form-label">Your Email</label>
-                                        <input type="email" name="email" id="email"
-                                            placeholder="E.g. john123@gmail.com" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="phone" class="form-label">Phone Number</label>
-                                        <input type="number" name="phone" id="phone" placeholder="(+ 123 ) 456 789" />
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="city" class="form-label">City</label>
-                                        <input type="text" name="city" id="city" placeholder="Eg. Ha Noi" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="pincode" class="form-label">Pincode</label>
-                                        <input type="number" name="pincode" id="pincode" />
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
+                        {% crispy form_additional_info %}
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading" id="headingThree">
+                <div class="panel-heading" id="headingTwo">
                     <h3>
-                        <a href="#collapseThree" data-toggle="panel-collapse" data-parent="#accordion">Specialities</a>
+                        <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion">
+                            {% trans 'health condition' as t_health_con %}
+                            {{ t_health_con|capfirst }}
+                        </a>
                     </h3>
                 </div>
                 <div id="collapseThree" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <form method="post">
-                            <fieldset>
-                                <div class="form-group">
-                                    <label for="specialities" class="form-label">Tell us your specialities</label>
-                                    <textarea name="specialities" id="specialities"
-                                        placeholder="Eg. I’m very good at UI design ...."></textarea>
-                                </div>
-                            </fieldset>
-                            <div class="form-submit">
-                                <input type="submit" value="Submit" class="au-btn">
-                            </div>
-                        </form>
+                        {% crispy form_health_condition %}
                     </div>
                 </div>
             </div>
@@ -198,8 +96,27 @@
 {% endblock %}
 
 {% block specified_js %}
-<script src="{% static 'vendor/acc-wizard-master/release/acc-wizard.min.js' %}"></script>
-<script src="{% static 'vendor/jquery-steps/jquery.steps.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
+
 <script>
+    $(function () {
+        $('html, body').animate({ scrollTop: $('#accordion').offset().top - 100 }, 'slow');
+    });
+
+    $('form#form_health_condition').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: "{% url 'core:update-health-condition' %}",
+            type: 'POST',
+            data: $(this).serialize()
+        }).done(function (data) {
+            window.location.replace("{% url 'core:profile' %}");
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
 </script>
 {% endblock %}

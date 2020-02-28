@@ -11,6 +11,8 @@ urlpatterns = [
          trainees.TraineeSignUpView.as_view(), name='trainee_signup'),
     path('accounts/signup/trainer/',
          trainers.TrainerSignUpView.as_view(), name='trainer_signup'),
-    path('profile/', profile.index, name='profile'),
+    path('accounts/profile/', profile.ProfileView.as_view(), name='profile'),
+    path('accounts/trainee/update-health-condition',
+         profile.update_health_condition, name='update-health-condition'),
     path('401', errors._401, name='error_401'),
 ]

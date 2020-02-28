@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'django_countries',
-    'languages',
     'crispy_forms',
     'tempus_dominus',
     'rest_framework',

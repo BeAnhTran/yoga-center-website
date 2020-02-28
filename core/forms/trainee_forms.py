@@ -1,13 +1,10 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
-from django.forms.utils import ValidationError
 from allauth.account.forms import SignupForm
-from core.models import User, Trainee, Trainer, Certificate
+from core.models import User, Trainee
 from django_countries.fields import CountryField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
-import datetime
 
 
 class TraineeSignupForm(SignupForm):
@@ -26,7 +23,7 @@ class TraineeSignupForm(SignupForm):
         )
     )
     gender = forms.ChoiceField(
-        choices=User.GENDER_CHOICES, initial=User.GENDER_NOT_SPECIFIED)
+        choices=User.GENDER_CHOICES, initial=User.GENDER_FEMALE)
     address = forms.CharField(max_length=255, label='Address', widget=forms.TextInput(
         attrs={'placeholder': 'Address'}))
 
@@ -82,7 +79,3 @@ class TraineeSignupForm(SignupForm):
             user=user, health_condition=self.cleaned_data.get('health_condition'))
         # You must return the original result.
         return user
-
-
-class TrainerSignupForm(SignupForm):
-    pass

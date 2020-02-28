@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django_countries.fields import CountryField
-from languages.fields import LanguageField
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext_lazy as _
@@ -11,7 +10,6 @@ from django.core.validators import RegexValidator
 class User(AbstractUser):
     GENDER_MALE = 0
     GENDER_FEMALE = 1
-    GENDER_NOT_SPECIFIED = 2
 
     GENDER_CHOICES = (
         (GENDER_FEMALE, _('Female')),
@@ -36,8 +34,8 @@ class User(AbstractUser):
     gender = models.IntegerField(choices=GENDER_CHOICES,
                                  default=GENDER_FEMALE, verbose_name=_('gender'))
     country = CountryField(blank=True, verbose_name=_('country'))
-    language = LanguageField(blank=True, null=True,
-                             max_length=55, verbose_name=_('language'))
+    language = models.CharField(blank=True, null=True,
+                                max_length=255, verbose_name=_('language'))
     image = models.ImageField(
         upload_to='profile', blank=True, null=True, verbose_name=_('image'))
     updated_at = models.DateTimeField(

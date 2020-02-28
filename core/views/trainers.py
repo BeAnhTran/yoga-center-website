@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView, UpdateView
 
 from ..models import User
-from ..forms import TrainerSignupForm
+from core.forms.trainer_forms import TrainerSignupForm
 
 
 class TrainerSignUpView(CreateView):

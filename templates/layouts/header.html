@@ -45,7 +45,7 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="user_infoDropdown">
-                            <a class="dropdown-item" href="javascript:;">
+                            <a class="dropdown-item" href="{% url 'core:profile' %}">
                                 <i class="fa fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {% trans 'profile' as t_profile  %} {{ t_profile|capfirst }}
                             </a>

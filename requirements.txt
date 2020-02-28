@@ -13,7 +13,6 @@ django-crispy-forms==1.8.1
 django-dotenv==1.4.2
 django-formtools==2.2
 django-getenv==1.3.2
-django-language-field==0.0.3
 django-tempus-dominus==5.1.2.13
 djangorestframework==3.11.0
 fake-factory==9999.9.9
