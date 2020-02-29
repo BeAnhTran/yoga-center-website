@@ -407,7 +407,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .header-bottom {
-	padding: 25px 80px 0;
+	padding: 10px 80px 0;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
