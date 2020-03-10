@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block specified_css %}{% endblock %}
+
+{% block content %}
+<section class="page-top-section set-bg" data-setbg="{% static 'img/page-top-bg.jpg'%}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 m-auto text-white">
+                <h2>{% trans 'cards' as t_cards %}{{ t_cards|capfirst }}</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="content_cards" class="container mt-5">
+    <div class="row justify-content-center">
+        {% for card in cards %}
+        <div class="col-lg-4 col-md-4">
+            <div class="blog-item">
+                <a href="javascript:;">
+                {% if card.yogaclass.image %}
+                    <img src="{{ card.yogaclass.image.url }}" alt="{{card.yogaclass}}">
+                {% else %}
+                    <img src="{% static 'img/class/default.jpg'%}" alt="{{card.yogaclass}}">
+                {% endif %}
+                </a>
+                <div class="bi-text">
+                    <h2><a href="javascript:;">{{ card.yogaclass }}</a></h2>
+                    <p class="mb-0">
+                        {% trans 'register at' as t_register_at %}
+                        {{ t_register_at|capfirst }}
+                        <span class="badge badge-success">{{ card.created_at.date }}</span>
+                    </p>
+                    <p>
+                        {% trans 'end at' as t_end_at %}
+                        {{ t_end_at|capfirst }}
+                        <span class="badge badge-danger">{{ card.end_at }}</span>
+                    </p>
+                </div>
+                <div class="bi-footer">
+                    <div class="bi-cata">{{ card.card_type }}</div>
+                    <div class="bi-social">
+                        <a href="{% url 'core:profile-trainee-card-extend' card.id %}">
+                            <span class="badge badge-secondary">{% trans 'Extend' %}</span></span>
+                        </a>
+                        <a href="javascript:;" class="ml-1">
+                            <span class="badge badge-secondary">{% trans 'Refund' %}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block specified_js %}
+<script>
+    $(function () {
+        $('html, body').animate({ scrollTop: $('#content_cards').offset().top }, 'slow');
+    });
+</script>
+{% endblock %}

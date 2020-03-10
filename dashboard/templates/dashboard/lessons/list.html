@@ -29,6 +29,7 @@
                 <thead>
                     <tr>
                         <th>{% trans 'yoga class' as t_class %}{{ t_class|capfirst }}</th>
+                        <th>{% trans 'day' as t_day %}{{ t_day|capfirst }}</th>
                         <th>{% trans 'time' as t_time %}{{ t_time|capfirst }}</th>
                         <th>{% trans 'room' as t_room %}{{ t_room|capfirst }}</th>
                         <th>{% trans 'trainer' as t_trainer %}{{ t_trainer|capfirst }}</th>
@@ -40,6 +41,7 @@
                     {% for lesson in lessons %}
                     <tr>
                         <td>{{ lesson.yogaclass }}</td>
+                        <td>{{ lesson.day }}</td>
                         <td>{{ lesson.get_time }}</td>
                         <td>{{ lesson.room }}</td>
                         <td>{{ lesson.trainer }}</td>

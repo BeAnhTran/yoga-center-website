@@ -14,5 +14,9 @@ urlpatterns = [
     path('accounts/profile/', profile.ProfileView.as_view(), name='profile'),
     path('accounts/trainee/update-health-condition',
          profile.update_health_condition, name='update-health-condition'),
+    path('accounts/cards/', profile.TraineeCardsView.as_view(),
+         name='profile-trainee-cards'),
+    path('accounts/cards/<int:pk>/extend/', profile.TraineeCardExtendView.as_view(),
+         name='profile-trainee-card-extend'),
     path('401', errors._401, name='error_401'),
 ]

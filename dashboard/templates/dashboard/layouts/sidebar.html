@@ -2,7 +2,7 @@
 
 <ul class="navbar-nav bg-dark-custom sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'core:home' %}">
         <div class="sidebar-brand-text mx-3">Lotus <span class="flaticon-lotus"></span> Yoga</div>
         <div class="sidebar-brand-text-2 mx-3"><span class="flaticon-lotus"></span></div>
     </a>
@@ -115,29 +115,6 @@
                 {% trans 'rooms' as t_rooms %} {{ t_rooms|capfirst }}
             </span>
         </a>
-    </li>
-    <hr class="sidebar-divider my-0">
-    <!-- Nav Item - Template -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities2"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Template</span>
-        </a>
-        <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-secondary pb-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
-            </div>
-        </div>
     </li>
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

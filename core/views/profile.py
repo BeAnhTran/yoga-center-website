@@ -13,6 +13,7 @@ from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 from rest_framework.decorators import api_view, renderer_classes
 from django.db import transaction
+from cards.models import Card
 
 
 @method_decorator([login_required], name='dispatch')
@@ -91,3 +92,25 @@ def update_health_condition(request):
         serialized = TraineeSerializer(trainee)
         return Response(serialized.data)
     return HttpResponse(form.errors.as_json(), status=400)
+
+
+@method_decorator([login_required, trainee_required], name='dispatch')
+class TraineeCardsView(View):
+    template_name = 'profile/trainees/cards.html'
+
+    def get(self, request):
+        context = {}
+        cards = request.user.trainee.cards.all()
+        context['cards'] = cards
+        return render(request, self.template_name, context=context)
+
+
+@method_decorator([login_required, trainee_required], name='dispatch')
+class TraineeCardExtendView(View):
+    template_name = 'profile/trainees/card_extend.html'
+
+    def get(self, request, pk):
+        card = Card.objects.get(pk=pk)
+        context = {}
+        context['card'] = card
+        return render(request, self.template_name, context=context)

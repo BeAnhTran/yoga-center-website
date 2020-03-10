@@ -6,12 +6,10 @@ from core.models import Trainer
 from common.templatetags import sexify
 from card_types.models import FOR_TRIAL
 
-DRAFT_STATE = 0
 INACTIVE_STATE = 1
-ACTIVE_STATE = 2
+ACTIVE_STATE = 0
 
 STATE_CHOICES = (
-    (DRAFT_STATE, _('Draft')),
     (ACTIVE_STATE, _('Active')),
     (INACTIVE_STATE, _('Inactive')),
 )
@@ -41,7 +39,7 @@ class YogaClass(models.Model):
     image = models.ImageField(
         upload_to='class', blank=True, null=True, verbose_name=_('image'))
     state = models.IntegerField(choices=STATE_CHOICES,
-                                default=DRAFT_STATE, verbose_name=_('state'))
+                                default=ACTIVE_STATE, verbose_name=_('state'))
     level = models.IntegerField(
         choices=LEVEL_CHOICES, null=True, verbose_name=_('level'))
     price_per_lesson = models.FloatField(
