@@ -17,6 +17,7 @@ class CourseForm(forms.ModelForm):
             'name',
             'course_type',
             'description',
+            'content',
             'image',
             Submit('submit', 'Save', css_class='btn btn-success')
         )
