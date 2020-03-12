@@ -18,7 +18,7 @@ class YogaClass(models.Model):
         blank=True, null=True, verbose_name=_('price per lesson'))
     price_per_month = models.FloatField(
         blank=True, null=True, verbose_name=_('price per month'))
-    price_course = models.FloatField(
+    price_for_training_class = models.FloatField(
         blank=True, null=True, verbose_name=_('price course'))
     max_people = models.IntegerField(
         blank=True, null=True, verbose_name=_('max people'))
