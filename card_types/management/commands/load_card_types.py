@@ -12,7 +12,7 @@ class Command(BaseCommand):
     @transaction.atomic
     def handle(self, **options):
         from getenv import env
-        from cards.models import (
+        from card_types.models import (
             CardType, FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRIAL, FOR_TRAINING_COURSE)
 
         print("Create FOR FULL MONTH card type")
