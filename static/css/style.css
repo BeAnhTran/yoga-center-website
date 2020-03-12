@@ -4360,18 +4360,18 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
 	.content {
-		margin-top: 100px;
+		margin-top: 18px;
 	}
 }
 
-@media only screen and (min-width: 576px) and (max-width: 767px),
+@media only screen and (min-width: 576px) and (max-width: 786px),
 (max-width: 576px) {
 	.content {
-		margin-top: 100px;
+		margin-top: 50px;
 	}
 }
 
-@media (min-width: 768px){
+@media (min-width: 786px) and (max-width: 992px){
 	.content {
 		margin-top: 50px;
 	}
