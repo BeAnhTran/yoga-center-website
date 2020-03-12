@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'tempus_dominus',
     'rest_framework',
     'formtools',
+    'ckeditor',
+    'ckeditor_uploader',
 
     'common',
     'core.apps.CoreConfig',
@@ -201,3 +203,16 @@ FORMAT_MODULE_PATH = 'yoga_center_website.formats'
 
 STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'extraPlugins': ','.join(
+            [
+                'youtube',
+            ]
+        ),
+    },
+}
