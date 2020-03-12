@@ -46,10 +46,10 @@ class User(AbstractUser):
 
 
 class Certificate(models.Model):
-    name = models.CharField(max_length=255, verbose_name=_('name'))
+    title = models.CharField(max_length=255, verbose_name=_('name'))
     description = models.CharField(
         blank=True, null=True, max_length=255, verbose_name=_('description'))
-    image = models.ImageField(upload_to='certificate',
+    image = models.ImageField(upload_to='certificates',
                               blank=True, verbose_name=_('image'))
 
     # Below the mandatory fields for generic relation

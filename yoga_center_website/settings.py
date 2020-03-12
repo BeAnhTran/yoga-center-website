@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'courses',
     'classes',
     'lessons',
+    'lectures',
     'rooms',
     'cards',
     'card_types',

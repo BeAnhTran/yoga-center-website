@@ -14,7 +14,7 @@ class Card(models.Model):
     yogaclass = models.ForeignKey(
         YogaClass, on_delete=models.CASCADE, related_name='cards', verbose_name=_('yoga class'))
     lessons = models.ManyToManyField(
-        to='lessons.Lesson', through='roll_calls.RollCall', related_name='lessons', verbose_name=_('lessons'))
+        to='lessons.Lesson', through='roll_calls.RollCall', related_name='cards', verbose_name=_('lessons'))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(

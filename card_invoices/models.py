@@ -7,7 +7,7 @@ from cards.models import Card
 
 class CardInvoice(models.Model):
     card = models.ForeignKey(
-        Card, on_delete=models.CASCADE, related_name='invoices', verbose_name=_('card'))
+        Card, on_delete=models.CASCADE, related_name='card_invoices', verbose_name=_('card'))
     description = models.TextField(
         null=True, blank=True, verbose_name=_('description'))
     amount = models.FloatField(

@@ -6,7 +6,8 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic import View
 
-from classes.models import YogaClass, LEVEL_CHOICES
+from courses.models import LEVEL_CHOICES
+from classes.models import YogaClass
 from courses.models import Course
 from core.models import Trainer
 

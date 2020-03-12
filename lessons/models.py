@@ -26,31 +26,27 @@ class Lesson(models.Model):
         YogaClass, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('yogaclass'))
     room = models.ForeignKey(
         Room, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('room'),)
-    cards = models.ManyToManyField(
-        to='cards.Card', through='roll_calls.RollCall', related_name='cards', verbose_name='cards')
     trainer = models.ForeignKey(
         Trainer, on_delete=models.SET_NULL, related_name='lessons', verbose_name=_('trainer'), blank=True, null=True)
+    lectures = models.ManyToManyField(
+        to='lectures.Lecture', related_name='lessons', verbose_name='lectures')
     state = models.IntegerField(choices=STATE_CHOICES,
                                 default=ACTIVE_STATE, verbose_name=_('state'))
-    day = models.DateField(help_text=_(
-        'Day of the event'), verbose_name=_('day'))
+    date = models.DateField(verbose_name=_('date'))
     start_time = models.TimeField(help_text=_(
         'Starting time'), verbose_name=_('start time'))
     end_time = models.TimeField(help_text=_(
         'Final time'), verbose_name=_('end time'))
-    content = models.TextField(help_text=_(
-        'Content'), blank=True, null=True, verbose_name=_('content'))
-    notes = models.TextField(help_text=_(
-        'Notes'), blank=True, null=True, verbose_name=_('notes'))
+    notes = models.TextField(blank=True, null=True, verbose_name=_('notes'))
     is_full = models.BooleanField(default=False, verbose_name=_('is full'))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
-        auto_now=True, blank=True, null=True, verbose_name=_('end at'))
+        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
 
     def __str__(self):
         if self.room:
-            return self.yogaclass.name + ' - ' + date_format(self.day, format='SHORT_DATE_FORMAT', use_l10n=True) + ' - ' + self.room.name + ' (' + self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M') + ')'
+            return self.yogaclass.name + ' - ' + date_format(self.date, format='SHORT_DATE_FORMAT', use_l10n=True) + ' - ' + self.room.name + ' (' + self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M') + ')'
         return self.yogaclass.name + ' - ' + self.start_time.strftime('%H:%M')
 
     def clean(self):
@@ -58,25 +54,25 @@ class Lesson(models.Model):
         if self.trainer:
             if self.id:
                 trainer_lessons_on_day = self.trainer.lessons.filter(
-                    day=self.day).exclude(pk=self.id)
+                    date=self.date).exclude(pk=self.id)
             else:
                 trainer_lessons_on_day = self.trainer.lessons.filter(
-                    day=self.day)
+                    date=self.date)
         else:
             if self.id:
                 trainer_lessons_on_day = self.yogaclass.form_trainer.lessons.filter(
-                    day=self.day).exclude(pk=self.id)
+                    date=self.date).exclude(pk=self.id)
             else:
                 trainer_lessons_on_day = self.yogaclass.form_trainer.lessons.filter(
-                    day=self.day)
+                    date=self.date)
         if self.id:
             class_lessons_on_day = self.yogaclass.lessons.filter(
-                day=self.day).exclude(pk=self.id)
+                date=self.date).exclude(pk=self.id)
             room_lessons_on_day = room.lessons.filter(
-                day=self.day).exclude(pk=self.id)
+                date=self.date).exclude(pk=self.id)
         else:
-            class_lessons_on_day = self.yogaclass.lessons.filter(day=self.day)
-            room_lessons_on_day = room.lessons.filter(day=self.day)
+            class_lessons_on_day = self.yogaclass.lessons.filter(date=self.date)
+            room_lessons_on_day = room.lessons.filter(date=self.date)
 
         check1 = check_overlap_in_list_lesson(
             self.start_time, self.end_time, class_lessons_on_day)

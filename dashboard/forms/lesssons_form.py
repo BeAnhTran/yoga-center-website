@@ -24,8 +24,8 @@ class LessonForm(forms.ModelForm):
         now_with_range = now + datetime.timedelta(minutes=range_time)
         self.fields['room'].required = True
         self.fields['room'].label = _('room').capitalize()
-        self.fields['day'] = forms.DateField(
-            label=_('day').capitalize(),
+        self.fields['date'] = forms.DateField(
+            label=_('date').capitalize(),
             widget=DatePicker(options={
                 'useCurrent': True,
             }, attrs={
@@ -55,12 +55,6 @@ class LessonForm(forms.ModelForm):
             'columns': 10,
             'placeholder': _('notes')
         }
-        self.fields['content'].label = _('content').capitalize()
-        self.fields['content'].widget.attrs = {
-            'rows': 2,
-            'columns': 10,
-            'placeholder': _('content')
-        }
         self.fields['trainer'].label = _('trainer').capitalize()
         self.fields['state'].label = _('state').capitalize()
 
@@ -75,7 +69,7 @@ class LessonForm(forms.ModelForm):
                 css_class='form-row'
             ),
             Row(
-                Column('day', css_class='form-group col-md-6 mb-0'),
+                Column('date', css_class='form-group col-md-6 mb-0'),
                 Column('state', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
@@ -84,11 +78,7 @@ class LessonForm(forms.ModelForm):
                 Column('end_time', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            Row(
-                Column('content', css_class='form-group col-md-6 mb-0'),
-                Column('notes', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
+            'notes',
             Submit('submit', _('Save'), css_class='btn-success'))
 
     class Meta:
