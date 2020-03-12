@@ -9,17 +9,7 @@
     {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
 </p>
 {% else %}
-<section class="page-top-section set-bg" data-setbg="{% static 'img/page-top-bg.jpg'%}">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 m-auto text-white">
-                <h2>{% trans 'Our Courses'%}</h2>
-                <p>{% trans 'just find a course for yourself' %}</p>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="container mt-3">
+<div class="container content">
     <div class="row">
         <div class="col-md-6">
             <p>
@@ -32,8 +22,8 @@
     </div>
     <div class="row justify-content-center">
         {% for course in courses %}
-        <div class="col-md-4">
-            <div class="classes-item-warp">
+        <div class="col-md-6 col-lg-4">
+            <a href="{% url 'courses:detail' course.slug %}" class="classes-item-warp">
                 <div class="classes-item">
                     <div class="ci-img">
                         {% if course.image %}
@@ -54,7 +44,7 @@
                         <a href="javasript:;" class="site-btn sb-gradient">{% trans 'view classes' %}</a>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
         {% endfor %}
     </div>

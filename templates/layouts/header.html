@@ -93,14 +93,14 @@
         </div>
         <div class="container">
             <ul class="main-menu">
-                <li><a href="{% url 'core:home' %}" class="active">{% trans 'Home' %}</a></li>
+                <li><a href="{% url 'core:home' %}" class="{% if active_nav == 'home' %}active{% endif %}">{% trans 'Home' %}</a></li>
                 <li><a href="javascript:;">{% trans 'About us' %}</a>
                     <ul class="sub-menu">
                         <li><a href="javascript:;">{% trans 'Trainers' %}</a></li>
                         <li><a href="javascript:;">{% trans 'Contact' %}</a></li>
                     </ul>
                 </li>
-                <li><a href="javascript:;">{% trans 'Courses'%} - {% trans 'Classes'%}</a>
+                <li><a href="{% url 'courses:list' %}" class="{% if active_nav == 'classes' %}active{% endif %}">{% trans 'Classes'%}</a>
                     <ul class="sub-menu bg-gray">
                         <li><a href="{% url 'courses:list' %}">{% trans 'Courses' %}</a></li>
                         <li><a href="{% url 'classes:list' %}">{% trans 'Classes' %}</a></li>

@@ -1613,7 +1613,6 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 }
 
 .classes-item-warp {
-	padding-right: 20px;
 	margin-bottom: 55px;
 }
 
@@ -4353,4 +4352,27 @@ only screen and (min-width: 576px) and (max-width: 767px),
     min-height: 50px;
 	z-index: 99;
 	padding-right: 2.5rem;
+}
+
+.content {
+	margin-top: 18px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+	.content {
+		margin-top: 100px;
+	}
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px),
+(max-width: 576px) {
+	.content {
+		margin-top: 100px;
+	}
+}
+
+@media (min-width: 768px){
+	.content {
+		margin-top: 50px;
+	}
 }
