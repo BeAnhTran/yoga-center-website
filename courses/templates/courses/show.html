@@ -2,36 +2,78 @@
 {% load static %}
 {% load i18n %}
 
+{% block specified_css %}
+<link href="{% static 'css/courses/show.css' %}" rel='stylesheet' />
+{% endblock %}
+
 {% block content %}
 <div class="container content">
     <div class="row">
         <div class="col">
-            <button class="btn btn-sm btn-outline-danger"><span class="flaticon-lotus"></span></button> &frasl; <a href="javascript;;">abc</a>
+            <button class="btn btn-sm btn-outline-danger"><span class="flaticon-lotus"></span></button>
+            &frasl;
+            <a class="text-danger" href="javascript;;">{{ course.name|title }}</a>
         </div>
     </div>
     <div class="row">
         <div class="col-md-9">
                 <div class="classes-preview">
-                    <img src="img/classes/big.jpg" alt="">
+                    {% if course.image %}
+                    <img src="{{ course.image.url }}" alt="{{ course.name }}">
+                    {% else %}
+                    <img src="{% static 'img/course/default_course.jpg'%}" alt="{{ course.name }}">
+                    {% endif %}
                 </div>
                 <div class="row">
                     <div class="col-md-8 col-lg-8">
                         <h2>{{ course.name|title }}</h2>
                     </div>
                     <div class="col-md-4 col-lg-4 text-left text-md-right">
-                        <a class="btn btn-danger"
+                        <a class="site-btn sb-gradient"
                             href="javascript:;">{% trans 'view classes' as t_view_classes %}{{t_view_classes|capfirst}}
                         </a>
                     </div>
                 </div>
                 <p>{{ course.description }}</p>
-                <div class="row mb-5">
-                    <div class="col-lg-5">
-                        <img src="img/classes/classes-details.png" alt="">
-                    </div>
-                </div>
+                <hr>
+                {{ course.content | safe }}
         </div>
-        <div class="col-md-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia eaque soluta, tempore animi deserunt nesciunt omnis eveniet repudiandae rerum accusantium mollitia odio consequatur voluptas ullam libero! Odit delectus molestiae natus!</div>
+        <div class="col-md-3">
+            <div class="sb-widget">
+                <h2 class="sb-title">Thông tin giá thẻ tập</h2>
+                <div class="classes-info">
+                    <ul>
+                        <li><i class="material-icons">done</i>Giá tháng: {{ course.get_price_per_month }} vnđ</li>
+                        <li><i class="material-icons">done</i>Giá buổi: {{ course.get_price_per_month }} vnđ</li>
+                        <li><i class="material-icons">done</i>Giá học thử: Miễn phí</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sb-widget">
+                <h2 class="sb-title">Các lớp học nổi bật</h2>
+                <div class="classes-info">
+                    <ul>
+                        <li>
+                            <a class="text-danger" href="javascript:;">
+                                <i class="material-icons">layers</i>CB-246
+                            </a>
+                        </li>
+                        <li><i class="material-icons">event_available</i>15/02/2020</li>
+                        <li><i class="material-icons">done_all</i>Thứ 2, 4, 6</li>
+                        <li><i class="material-icons">alarm_on</i>06:30pm - 07:45pm</li>
+                        <li>
+                            <a class="text-secondary" href="javascript:;">
+                                <i class="material-icons">person_outline</i>Liên Nhã Trần
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="site-btn site-btn-sm sb-gradient">Chi tiết</a>
+                            <a href="javascript:;" class="site-btn site-btn-sm sb-gradient">Đăng kí</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

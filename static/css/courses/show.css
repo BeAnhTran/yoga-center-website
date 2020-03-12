@@ -1,0 +1,12 @@
+.classes-preview > img{
+    max-width: 250px;
+}
+
+/* buttons */
+
+.site-btn.site-btn-sm {
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+    min-width: 84px;
+    font-weight: 500;
+}
