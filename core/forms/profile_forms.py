@@ -15,14 +15,9 @@ class UsernameEmailForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs = {
-            'placeholder': 'greytran27'
-        }
         self.fields['email'].widget.attrs = {
             'placeholder': 'greytran27@lotus.yoga.com'
         }
-        self.fields['username'].help_text = None
-
         self.helper = FormHelper()
         self.helper.form_show_errors = True
         self.helper.form_id = 'form_username_email'
@@ -30,7 +25,6 @@ class UsernameEmailForm(forms.ModelForm):
         self.helper.layout = Layout(
             'hidden_field',
             Row(
-                Column('username', css_class='col-md-6'),
                 Column('email', css_class='col-md-6'),
             ),
             Row(
@@ -42,7 +36,7 @@ class UsernameEmailForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['email']
 
 
 class BasicInfoForm(forms.ModelForm):

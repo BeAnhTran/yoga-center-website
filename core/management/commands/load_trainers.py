@@ -18,7 +18,6 @@ class Command(BaseCommand):
         num = User.objects.count()
         for i in range(num, num + 3):
             data = {
-                'username': 'trainer' + str(i),
                 'email': 'trainer' + str(i) + '@trainer.com',
                 'first_name': fake.first_name(),
                 'last_name': fake.last_name()

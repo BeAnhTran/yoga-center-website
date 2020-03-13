@@ -5,6 +5,7 @@ from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKe
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
+from django.utils.text import slugify
 
 
 class User(AbstractUser):
@@ -15,14 +16,19 @@ class User(AbstractUser):
         (GENDER_FEMALE, _('Female')),
         (GENDER_MALE, _('Male')),
     )
+    username = None
     email = models.EmailField(
         blank=False, null=False, max_length=254, verbose_name=_('email address'), unique=True)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
     is_trainee = models.BooleanField(
         default=False, verbose_name=_('is trainee'))
     is_trainer = models.BooleanField(
         default=False, verbose_name=_('is trainer'))
     first_name = models.CharField(max_length=255, verbose_name=_('first name'))
     last_name = models.CharField(max_length=255, verbose_name=_('last name'))
+    slug = models.SlugField(max_length=255, unique=True,
+                            verbose_name=_('slug'))
     phone_regex = RegexValidator(
         regex=r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$', message="Phone number must be valid")
     phone_number = models.CharField(
@@ -43,6 +49,14 @@ class User(AbstractUser):
 
     def full_name(self):
         return self.first_name + ' ' + self.last_name
+
+    def save(self, *args, **kwargs):
+        full_name = self.first_name + ' ' + self.last_name
+        self.slug = slugify(full_name)
+        super(User, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.full_name()
 
 
 class Certificate(models.Model):
@@ -85,6 +99,9 @@ class Trainer(models.Model):
     def __str__(self):
         full_name = self.user.full_name()
         return full_name
+
+    def slug(self):
+        return self.user.slug
 
 
 class Staff(models.Model):
