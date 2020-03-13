@@ -30,10 +30,7 @@
                         <th>#</th>
                         <th>{% trans 'name' as t_name %}{{ t_name|capfirst }}</th>
                         <th>{% trans 'course' as t_course %}{{ t_course|capfirst }}</th>
-                        <th>{% trans 'form trainer' as t_form_trainer %}{{ t_form_trainer|capfirst }}</th>
-                        <th>{% trans 'state' as t_state %}{{ t_state|capfirst }}</th>
-                        <th>{% trans 'image' as t_image %}{{ t_image|capfirst }} </th>
-                        <th>{% trans 'description' as t_description %}{{ t_description|capfirst }}</th>
+                        <th>{% trans 'trainer' as t_trainer %}{{ t_trainer|capfirst }}</th>
                         <th>{% trans 'action' as t_action %}{{ t_action|capfirst }}</th>
                     </tr>
                 </thead>
@@ -44,26 +41,15 @@
                         <td>{{ class.name|title }}</td>
                         <td>{{ class.course }}</td>
                         <td>
-                            {% if class.form_trainer %}
-                            {{ class.form_trainer }}
+                            {% if class.trainer %}
+                            {{ class.trainer }}
                             {% else %}
-                            {% trans 'have not updated yet' as t_formtrainer %}
-                            {{ t_formtrainer|capfirst }}
+                            {% trans 'have not updated yet' as t_trainer %}
+                            {{ t_trainer|capfirst }}
                             {% endif %}
                         </td>
-                        <td class="text-center">{{ class|display_state }}</td>
-                        <td class="text-center">
-                            {% if class.image %}
-                            <img class="img img-fluid img-thumbnail class-img" src="{{ class.image.url }}"
-                                alt="{{ class.name }}">
-                            {% else %}
-                            <img class="img img-fluid img-thumbnail class-img"
-                                src="{% static 'img/class/default.jpg'%}" alt="{{ class.name }}">
-                            {% endif %}
-                        </td>
-                        <td>{{ class.description }}</td>
                         <td>
-                            <div class="dropdown text-center">
+                            <div class="dropdown">
                                 <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown">
                                     <i class="fa fa-bars"></i>
                                 </button>

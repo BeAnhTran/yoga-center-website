@@ -12,19 +12,11 @@ from cards.models import CardType
 
 
 class ClassForm(forms.ModelForm):
-    card_types = forms.ModelMultipleChoiceField(label=_('Card types'),
-                                                widget=forms.CheckboxSelectMultiple(), queryset=CardType.objects.all())
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update(
-            {'placeholder': _('Name')})
-        self.fields['description'].widget.attrs.update(
-            {
-                'placeholder': _('Description'),
-                'rows': 3,
-                'columns': 10,
-            })
+            {'placeholder': 'Lớp CB 2-4-6'})
         self.fields['start_at'] = forms.DateField(
             label=_('start at').capitalize(),
             widget=DatePicker(
@@ -48,44 +40,36 @@ class ClassForm(forms.ModelForm):
                 attrs={
                     'icon_toggle': True,
                     'input_group': False,
-                    'placeholder': _('end at')
+                    'placeholder': formats.date_format(datetime.now(), use_l10n=True)
                 }
             ),
         )
         self.fields['end_at'].required = False
         self.fields['price_per_lesson'].widget.attrs.update({
-            'placeholder': _('price per lesson')
+            'placeholder': '50.000'
         })
         self.fields['price_per_month'].widget.attrs.update({
-            'placeholder': _('price per month')
+            'placeholder': '600.000'
         })
-        self.fields['price_course'].widget.attrs.update({
-            'placeholder': _('price course')
+        self.fields['price_for_training_class'].widget.attrs.update({
+            'placeholder': '10.000.000'
         })
         self.fields['max_people'].widget.attrs.update({
-            'placeholder': _('max people')
+            'placeholder': 25
         })
-        self.fields['level'].required = False
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Row(
-                Column('course', css_class='form-group col-md-6 mb-0'),
-                Column('level', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
+            'course',
             'name',
-            'card_types',
-            'description',
             Row(
-                Column('image', css_class='form-group col-md-4 mb-0'),
-                Column('max_people', css_class='form-group col-md-4 mb-0'),
-                Column('state', css_class='form-group col-md-4 mb-0'),
+                Column('trainer', css_class='form-group col-md-6 mb-0'),
+                Column('max_people', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Row(
                 Column('price_per_lesson', css_class='form-group col-md-4 mb-0'),
                 Column('price_per_month', css_class='form-group col-md-4 mb-0'),
-                Column('price_course', css_class='form-group col-md-4 mb-0'),
+                Column('price_for_training_class', css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
             Row(
