@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+	<!-- Trainers Section -->
+	<section class="trainer-details-section spad">
+		<div class="container">
+			<div class="trainer-details">
+				<div class="trainer-info">
+					<div class="td-left">
+                        {% if trainer.user.image %}
+						<img src="{{ trainer.user.image.url }}" alt="{{ trainer }}">
+                        {% else %}
+						<img src="{% static 'img/user/default.png' %}" alt="{{ trainer }}">
+                        {% endif %}
+						<div class="td-social">
+							<a href="javascript:;"><i class="fab fa-facebook"></i></a>
+							<a href="javascript:;"><i class="fab fa-instagram"></i></a>
+							<a href="javascript:;"><i class="fab fa-twitter"></i></a>
+							<a href="javascript:;"><i class="fab fa-linkedin"></i></a>
+						</div>
+					</div>
+					<div class="td-right">
+						<h3>{{ trainer }}</h3>
+						<h6>Huấn luyện viên</h6>
+						<ul>
+							<li><strong>Kinh nghiệm:</strong><p>5 năm</p></li>
+							<li><strong>Email:</strong><p>{{ trainer.user.email }}</p></li>
+							<li><strong>Tiểu sử:</strong><p>Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers.</p></li>
+						</ul>
+						<a href="{% url 'classes:list' %}?trainer={{ trainer.slug }}" class="site-btn sb-gradient">Xem danh sách lớp học</a>
+					</div>
+				</div>
+				<div class="trainer-details-text">
+					<h3>Thành tích</h3>
+					<ul>
+						<li><i class="material-icons">check_circle</i>Gold Medal for International Yoga Championship 2012.</li>
+						<li><i class="material-icons">check_circle</i>Silver Medal of All High Schools Championship and Indian Yoga Club in 2010.</li>
+						<li><i class="material-icons">check_circle</i>Gold Medal for Jharkhand State Yoga Championship in 2007.</li>
+						<li><i class="material-icons">check_circle</i>Gold Medal for East India Yoga Championship in 2005.</li>
+					</ul>
+                </div>
+                <div class="trainer-details-text mt-3">
+					<h3>Hoạt động nổi bật</h3>
+					<div>
+                        Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers
+                        Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers
+                        Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers
+                        Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers
+                        Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers
+                        Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers
+                        Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers
+                        Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers
+                        Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers
+                        Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers
+                        Certification from the National Institute of Sports Medicine (NASM) USA. 25 years of sports training in the United States, Germany, Hong Kong, Malaysia, Singapore, and now Vietnam at California Fitness & Yoga Centers
+                    </div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Trainers Section end -->
+{% endblock %}
+
+{% block specified_js %}
+{% endblock %}

@@ -7,4 +7,7 @@ class SignUpView(TemplateView):
 
 
 def home(request):
-    return render(request, 'core/home.html')
+    context = {
+        'active_nav': 'home'
+    }
+    return render(request, 'core/home.html', context=context)

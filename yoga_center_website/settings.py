@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'card_invoices',
     'dashboard',
     'roll_calls',
+    'trainers',
 ]
 
 MIDDLEWARE = [

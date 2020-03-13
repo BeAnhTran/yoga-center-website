@@ -1980,10 +1980,18 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	}
 }
 
-.trainer-item h4 {
+.trainer-item a.trainer-name {
 	font-weight: 400;
 	font-family: "Playfair Display", serif;
 	margin-bottom: 10px;
+	font-size: 25px;
+	color: #333333;
+	transition: 0.2s;
+}
+
+.trainer-item a.trainer-name:hover{
+	color: #916dd5;
+	font-weight: 500;
 }
 
 .trainer-item h6 {
