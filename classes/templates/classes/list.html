@@ -3,13 +3,6 @@
 {% load i18n %}
 
 {% block content %}
-{% if not classes %}
-<p class="text-danger">
-    {% trans 'classes' as trans_value %}
-    {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
-</p>
-{% else %}
-
 <section class="classes-page-section spad">
     <div class="container">
         <div class="row">
@@ -36,21 +29,34 @@
                     </div>
                 </div>
                 <div class="row">
+                    {% if not classes %}
+                    <div class="col">
+                        <h3 class="text-danger">
+                            {% trans 'classes' as trans_value %}
+                            {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
+                        </h3>
+                    </div>
+                    {% else %}
                     {% for class in classes %}
                     <div class="col-md-6">
                         <div class="classes-item-warp">
                             <div class="classes-item">
                                 <a href="{% url 'classes:detail' class.slug %}" class="ci-img">
-                                    {% if class.image %}
-                                    <img src="{{ class.image.url }}" alt="{{class.name}}">
+                                    {% if class.course.image %}
+                                    <img src="{{ class.course.image.url }}" alt="{{class.name}}">
                                     {% else %}
-                                    <img src="{% static 'img/class/default.jpg'%}" alt="{{class.name}}">
+                                    <img src="{% static 'img/course/default_course.jpg'%}" alt="{{class.name}}">
                                     {% endif %}
                                 </a>
                                 <div class="ci-text">
                                     <h4>{{ class|title }}</h4>
+                                    <h5 class="mb-3">
+                                        <a class="btn btn-outline-success badge-pill" href="{% url 'courses:detail' class.course.slug %}">
+                                            {{ class.course|title }}
+                                        </a>
+                                    </h5>
                                     <div class="ci-metas">
-                                        <div class="ci-meta"><i class="material-icons">event_available</i>Mon, Wed, Fri
+                                        <div class="ci-meta"><i class="material-icons">event_available</i>Thứ 2, 4, 6
                                         </div>
                                         <div class="ci-meta"><i class="material-icons">alarm_on</i>06:30pm - 07:45pm
                                         </div>
@@ -58,51 +64,36 @@
                                     <p>{{ class.description }}</p>
                                 </div>
                                 <div class="ci-bottom">
-                                    <div class="ci-author">
-                                        {% if class.form_trainer.user.image %}
-                                        <img src="{{ class.form_trainer.user.image.url }}" alt="{{class.form_trainer}}">
+                                    <a href="javascript:;" class="ci-author">
+                                        {% if class.trainer.user.image %}
+                                        <img src="{{ class.trainer.user.image.url }}" alt="{{class.trainer}}">
                                         {% else %}
-                                        <img src="{% static 'img/user/default.png'%}" alt="{{class.form_trainer}}">
+                                        <img src="{% static 'img/user/default.png'%}" alt="{{class.trainer}}">
                                         {% endif %}
                                         <div class="author-text">
-                                            <h6>{{ class.form_trainer }}</h6>
+                                            <h6>{{ class.trainer }}</h6>
                                             <p>{% trans 'Yoga Trainer' %}</p>
                                         </div>
-                                    </div>
+                                    </a>
                                     <a href="{% url 'classes:enroll' class.slug %}" class="site-btn sb-gradient">{% trans 'book now'%}</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {% endfor %}
+                    {% endif %}
                 </div>
+                {% if classes %}
                 {% include 'pagination.html' %}
+                {% endif %}
             </div>
             <div class="col-lg-3 col-md-5 col-sm-8 sidebar">
                 <div class="sb-widget">
                     <h2 class="sb-title">{% trans 'Search Classes' %}</h2>
                     <form id="form_filter" action="" method="GET" class="classes-filter">
-                        <select name="course" class="circle-select">
-                            {% trans 'choose course' as t_choose_course %}
-                            <option data-display="{{ t_choose_course|title }}">{{ t_choose_course|title }}</option>
-                            {% for course in courses %}
-                            <option data-display="{{course.name}}" value="{{ course.slug }}">{{ course.name|capfirst }}</option>
-                            {% endfor %}
-                        </select>
-                        <select name="level" class="circle-select">
-                            {% trans 'Choose Level' as t_choose_level %}
-                            <option data-display="{{ t_choose_level|title }}">{{ t_choose_level|title }}</option>
-                            {% for level in levels %}
-                            <option data-display="{{level.1}}" value="{{level.0}}">{{level.1}}</option>
-                            {% endfor %}
-                        </select>
-                        <select name="trainer" class="circle-select">
-                            {% trans 'Choose Trainer' as t_choose_trainer %}
-                            <option data-display="{{ t_choose_trainer }}">{{ t_choose_trainer }}</option>
-                            {% for trainer in trainers %}
-                            <option data-display="{{trainer}}" value="{{trainer.user.username}}">{{trainer}}</option>
-                            {% endfor %}
-                        </select>
+                        {{ form_filter.course }}
+                        {{ form_filter.level }}
+                        {{ form_filter.trainer }}
                         <div class="clearfix"></div>
                         <button type="submit" class="site-btn sb-gradient">{% trans 'Filter now'%}</button>
                     </form>
@@ -111,8 +102,6 @@
         </div>
     </div>
 </section>
-
-{% endif %}
 
 {% endblock %}
 

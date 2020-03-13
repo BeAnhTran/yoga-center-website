@@ -38,6 +38,7 @@ from django.db import transaction
 from common.services.card_invoice_service import CardInvoiceService
 from common.services.roll_call_service import RollCallService
 from django.contrib import messages
+from classes.forms import FilterForm
 
 
 class YogaClassListView(ListView):
@@ -49,10 +50,29 @@ class YogaClassListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(YogaClassListView, self).get_context_data(**kwargs)
-        context['courses'] = Course.objects.all()
-        context['levels'] = LEVEL_CHOICES
-        context['trainers'] = Trainer.objects.all()
+        form_filter = FilterForm()
+        if self.request.GET.get('course'):
+            form_filter.fields['course'].initial = self.request.GET.get(
+                'course')
+        if self.request.GET.get('trainer'):
+            form_filter.fields['trainer'].initial = self.request.GET.get(
+                'trainer')
+        if self.request.GET.get('level'):
+            form_filter.fields['level'].initial = self.request.GET.get('level')
+        context['form_filter'] = form_filter
         return context
+
+    def get_queryset(self):
+        filter_options = {}
+        if self.request.GET.get('course'):
+            filter_options['course__slug'] = self.request.GET.get('course')
+        if self.request.GET.get('trainer'):
+            filter_options['trainer__user__slug'] = self.request.GET.get(
+                'trainer')
+        if self.request.GET.get('level'):
+            filter_options['course__level'] = self.request.GET.get('level')
+        queryset = YogaClass.objects.filter(**filter_options)
+        return queryset
 
 
 class YogaClassDetailView(DetailView):
