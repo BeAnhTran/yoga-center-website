@@ -81,30 +81,30 @@
             <div class="col-lg-3 col-md-5 col-sm-8 sidebar">
                 <div class="sb-widget">
                     <h2 class="sb-title">{% trans 'Search Classes' %}</h2>
-                    <form class="classes-filter">
-                        <select class="circle-select">
+                    <form id="form_filter" action="" method="GET" class="classes-filter">
+                        <select name="course" class="circle-select">
                             {% trans 'choose course' as t_choose_course %}
                             <option data-display="{{ t_choose_course|title }}">{{ t_choose_course|title }}</option>
                             {% for course in courses %}
-                            <option value="{{ course.id }}">{{ course.name|capfirst }}</option>
+                            <option data-display="{{course.name}}" value="{{ course.slug }}">{{ course.name|capfirst }}</option>
                             {% endfor %}
                         </select>
-                        <select class="circle-select">
+                        <select name="level" class="circle-select">
                             {% trans 'Choose Level' as t_choose_level %}
                             <option data-display="{{ t_choose_level|title }}">{{ t_choose_level|title }}</option>
                             {% for level in levels %}
-                            <option value="{{level.0}}">{{level.1}}</option>
+                            <option data-display="{{level.1}}" value="{{level.0}}">{{level.1}}</option>
                             {% endfor %}
                         </select>
-                        <select class="circle-select">
+                        <select name="trainer" class="circle-select">
                             {% trans 'Choose Trainer' as t_choose_trainer %}
                             <option data-display="{{ t_choose_trainer }}">{{ t_choose_trainer }}</option>
                             {% for trainer in trainers %}
-                            <option value="{{trainer.id}}">{{trainer}}</option>
+                            <option data-display="{{trainer}}" value="{{trainer.user.username}}">{{trainer}}</option>
                             {% endfor %}
                         </select>
                         <div class="clearfix"></div>
-                        <button class="site-btn sb-gradient">{% trans 'Filter now'%}</button>
+                        <button type="submit" class="site-btn sb-gradient">{% trans 'Filter now'%}</button>
                     </form>
                 </div>
             </div>
@@ -114,4 +114,7 @@
 
 {% endif %}
 
+{% endblock %}
+
+{% block specified_js %}
 {% endblock %}
