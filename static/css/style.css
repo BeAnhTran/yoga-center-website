@@ -863,7 +863,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	position: relative;
 	min-height: 1080px;
 	height: 100%;
-	padding-top: 150px;
+	padding-top: 50px;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
