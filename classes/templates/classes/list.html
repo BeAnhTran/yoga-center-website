@@ -9,17 +9,8 @@
     {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
 </p>
 {% else %}
-<section class="page-top-section set-bg" data-setbg="{% static 'img/page-top-bg.jpg'%}">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 m-auto text-white">
-                <h2>{% trans 'Our Classes'%}</h2>
-                <p>{% trans 'just find a class for yourself' %}</p>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="classes-page-section spad overflow-hidden">
+
+<section class="classes-page-section spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-9">
@@ -112,39 +103,6 @@
                             <option value="{{trainer.id}}">{{trainer}}</option>
                             {% endfor %}
                         </select>
-                        <h3>{% trans 'Filter by Day'%}</h3>
-                        <div class="cf-cal">
-                            <div class="cf-radio">
-                                <input type="checkbox" name="sc" id="monday">
-                                <label for="monday">{% trans 'monday'%}</label>
-                            </div>
-                            <div class="cf-radio">
-                                <input type="checkbox" name="sc" id="tuesday">
-                                <label for="tuesday">{% trans 'tuesday'%}</label>
-                            </div>
-                            <div class="cf-radio">
-                                <input type="checkbox" name="sc" id="wednesday">
-                                <label for="wednesday">{% trans 'wednesday'%}</label>
-                            </div>
-                            <div class="cf-radio">
-                                <input type="checkbox" name="sc" id="thurstday">
-                                <label for="thurstday">{% trans 'thurstday'%}</label>
-                            </div>
-                        </div>
-                        <div class="cf-cal">
-                            <div class="cf-radio">
-                                <input type="checkbox" name="sc" id="friday">
-                                <label for="friday">{% trans 'friday'%}</label>
-                            </div>
-                            <div class="cf-radio">
-                                <input type="checkbox" name="sc" id="saturday">
-                                <label for="saturday">{% trans 'saturday'%}</label>
-                            </div>
-                            <div class="cf-radio">
-                                <input type="checkbox" name="sc" id="sunday">
-                                <label for="sunday">{% trans 'sunday'%}</label>
-                            </div>
-                        </div>
                         <div class="clearfix"></div>
                         <button class="site-btn sb-gradient">{% trans 'Filter now'%}</button>
                     </form>
