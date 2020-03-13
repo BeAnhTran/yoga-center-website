@@ -106,8 +106,8 @@
                         <li><a href="{% url 'classes:list' %}">{% trans 'Classes' %}</a></li>
                     </ul>
                 </li>
-                <li><a href="{% url 'trainers:list' %}" class="{% if active_nav == 'trainers' %}active{% endif %}" >{% trans 'trainer' %}</a></li>
-                <li><a href="{% url 'yoga_schedule:index' %}">{% trans 'Schedule' %}</a></li>
+                <li><a href="{% url 'trainers:list' %}" class="{% if active_nav == 'trainers' %}active{% endif %}">{% trans 'trainer' %}</a></li>
+                <li><a href="{% url 'yoga_schedule:index' %}" class="{% if active_nav == 'schedule' %}active{% endif %}">{% trans 'Schedule' %}</a></li>
                 <li><a href="javascript:;">{% trans 'Blog'%}</a></li>
                 <li><a href="javascript:;">{% trans 'Shop'%}</a></li>
             </ul>
