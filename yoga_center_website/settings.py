@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'formtools',
     'ckeditor',
     'ckeditor_uploader',
+    'dynamic_formsets',
 
     'common',
     'core.apps.CoreConfig',

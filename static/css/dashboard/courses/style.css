@@ -1,0 +1,33 @@
+legend {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+a.delete-row {
+    border: 1px solid red;
+    color: red;
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+}
+
+a.delete-row:hover{
+    color:white;
+    background-color: red;
+}
+
+a.add-row {
+    border: 1px solid green;
+    border-radius: 5px;
+    padding: 5px;
+    color: green;
+    text-decoration: none;
+}
+
+a.add-row:hover{
+    color:white;
+    background-color: green;
+}

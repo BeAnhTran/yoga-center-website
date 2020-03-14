@@ -1,10 +1,20 @@
 from django import forms
 from django.db import transaction
 from courses.models import Course
+from lectures.models import Lecture
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row, Column
+from crispy_forms.layout import Layout, Submit, Row, Column, Fieldset
 from cards.models import CardType
 from django.utils.translation import ugettext_lazy as _
+from ..forms.lectures_form import LectureInlineForm
+from django.forms.models import inlineformset_factory
+from dashboard.custom_layout_object import Formset
+
+
+LectureFormSet = inlineformset_factory(
+    Course, Lecture, form=LectureInlineForm,
+    fields=['name', 'description'], extra=1, can_delete=True
+)
 
 
 class CourseForm(forms.ModelForm):
@@ -44,6 +54,7 @@ class CourseForm(forms.ModelForm):
                        css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
+            Fieldset(_('Lectures'), Formset('lectures')),
             Submit('submit', 'Save', css_class='btn btn-success')
         )
 
