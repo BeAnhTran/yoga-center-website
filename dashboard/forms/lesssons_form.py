@@ -57,7 +57,7 @@ class LessonForm(forms.ModelForm):
         }
         self.fields['trainer'].label = _('trainer').capitalize()
         self.fields['state'].label = _('state').capitalize()
-
+        self.fields['lectures'].required = False
         self.helper = FormHelper()
         self.helper.form_show_errors = True
         self.helper.form_id = 'form_new_lesson'
@@ -78,7 +78,11 @@ class LessonForm(forms.ModelForm):
                 Column('end_time', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            'notes',
+            Row(
+                Column('lectures', css_class='form-group col-md-6 mb-0'),
+                Column('notes', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
             Submit('submit', _('Save'), css_class='btn-success'))
 
     class Meta:

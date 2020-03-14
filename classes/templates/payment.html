@@ -47,13 +47,13 @@
                 </div>
                 <div class="ci-bottom">
                   <div class="ci-author">
-                    {% if yoga_class.form_trainer.user.image %}
-                    <img src="{{ yoga_class.form_trainer.user.image.url }}" alt="{{yoga_class.form_trainer}}">
+                    {% if yoga_class.trainer.user.image %}
+                    <img src="{{ yoga_class.trainer.user.image.url }}" alt="{{yoga_class.trainer}}">
                     {% else %}
-                    <img src="{% static 'img/user/default.png'%}" alt="{{yoga_class.form_trainer}}">
+                    <img src="{% static 'img/user/default.png'%}" alt="{{yoga_class.trainer}}">
                     {% endif %}
                     <div class="author-text">
-                      <h6>{{ yoga_class.form_trainer }}</h6>
+                      <h6>{{ yoga_class.trainer }}</h6>
                       <p>{% trans 'Yoga Trainer' %}</p>
                     </div>
                   </div>

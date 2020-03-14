@@ -280,7 +280,7 @@ class Command(BaseCommand):
             price_per_lesson=50000,
             price_per_month=600000,
             start_at=today,
-            form_trainer=trainer1,
+            trainer=trainer1,
             level=BASIC_LEVEL
         )
         hatha_yoga_class1.card_types.add(
@@ -298,7 +298,7 @@ class Command(BaseCommand):
             price_per_lesson=50000,
             price_per_month=600000,
             start_at=today,
-            form_trainer=trainer2,
+            trainer=trainer2,
             level=BASIC_LEVEL
         )
 
@@ -317,7 +317,7 @@ class Command(BaseCommand):
             price_per_lesson=50000,
             price_per_month=600000,
             start_at=today,
-            form_trainer=trainer3,
+            trainer=trainer3,
             level=BASIC_LEVEL
         )
         hatha_yoga_class3.card_types.add(
@@ -335,7 +335,7 @@ class Command(BaseCommand):
             price_per_lesson=50000,
             price_per_month=600000,
             start_at=today,
-            form_trainer=trainer4,
+            trainer=trainer4,
             level=INTERMEDIATE_LEVEL
         )
         hatha_yoga_imtermediate_class.card_types.add(
@@ -353,7 +353,7 @@ class Command(BaseCommand):
             price_per_lesson=100000,
             price_course=10000000,
             start_at=today,
-            form_trainer=trainer5
+            trainer=trainer5
         )
         training_class.card_types.add(
             training_course_card_type

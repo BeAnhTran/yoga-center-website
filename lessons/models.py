@@ -60,10 +60,10 @@ class Lesson(models.Model):
                     date=self.date)
         else:
             if self.id:
-                trainer_lessons_on_day = self.yogaclass.form_trainer.lessons.filter(
+                trainer_lessons_on_day = self.yogaclass.trainer.lessons.filter(
                     date=self.date).exclude(pk=self.id)
             else:
-                trainer_lessons_on_day = self.yogaclass.form_trainer.lessons.filter(
+                trainer_lessons_on_day = self.yogaclass.trainer.lessons.filter(
                     date=self.date)
         if self.id:
             class_lessons_on_day = self.yogaclass.lessons.filter(
@@ -98,7 +98,7 @@ class Lesson(models.Model):
         self.full_clean()
         if not self.id:
             if not self.trainer:
-                self.trainer = self.yogaclass.form_trainer
+                self.trainer = self.yogaclass.trainer
         super(Lesson, self).save(*args, **kwargs)
 
     def get_time_and_room_detail(self):

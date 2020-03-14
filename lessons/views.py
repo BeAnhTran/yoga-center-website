@@ -29,7 +29,7 @@ class get_lesson_list_in_range_time(APIView):
 
 def get_lessons(start_date, end_date, id_class=None, available_only=None):
     filter_options = {
-        'day__range': [start_date, end_date]
+        'date__range': [start_date, end_date]
     }
     if available_only is not None:
         filter_options['is_full'] = False

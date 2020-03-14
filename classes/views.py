@@ -140,7 +140,7 @@ class YogaClassGetLessonListView(APIView):
         obj = YogaClass.objects.get(slug=slug)
         start_date = datetime.fromisoformat(request.GET['startStr'])
         end_date = datetime.fromisoformat(request.GET['endStr'])
-        lessons = obj.lessons.filter(day__range=[start_date, end_date])
+        lessons = obj.lessons.filter(date__range=[start_date, end_date])
         serialized = LessonSerializer(lessons, many=True)
         return Response(serialized.data)
 
@@ -242,7 +242,7 @@ class YogaClassEnrollPaymentView(View):
         start = enroll_form.cleaned_data['start_at']
         end = enroll_form.cleaned_data['end_at']
         lesson_list = yoga_class.lessons.filter(
-            day__range=[start, end])
+            date__range=[start, end])
         card = enroll_form.save(commit=False)
         card.trainee = trainee
         card.yogaclass = yoga_class
@@ -260,5 +260,5 @@ class YogaClassEnrollPaymentView(View):
         start = cleaned_data['start_at']
         end = cleaned_data['end_at']
         lesson_list = yoga_class.lessons.filter(
-            day__range=[start, end], is_full=False).order_by('day')
+            date__range=[start, end], is_full=False).order_by('day')
         return lesson_list

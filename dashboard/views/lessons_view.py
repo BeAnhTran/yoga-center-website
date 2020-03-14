@@ -20,7 +20,7 @@ class LessonListView(ListView):
     template_name = 'dashboard/lessons/list.html'
     context_object_name = 'lessons'
     paginate_by = 5
-    ordering = ['-day']
+    ordering = ['-date']
 
     def get_context_data(self, **kwargs):
         context = super(LessonListView, self).get_context_data(**kwargs)

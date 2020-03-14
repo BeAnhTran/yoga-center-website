@@ -53,7 +53,7 @@ def get_lessons(request, pk):
     end_date = datetime.fromisoformat(request.GET['endStr'])
 
     room = Room.objects.get(pk=pk)
-    lessons = room.lessons.filter(day__range=[start_date, end_date])
+    lessons = room.lessons.filter(date__range=[start_date, end_date])
     data = serializers.serialize(
         'json', lessons, use_natural_foreign_keys=True)
     return HttpResponse(data, content_type="application/json")

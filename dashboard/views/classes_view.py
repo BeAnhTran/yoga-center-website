@@ -85,8 +85,8 @@ class ClassScheduleView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ClassScheduleView, self).get_context_data(**kwargs)
         lesson_form = lesssons_form.LessonForm()
-        if self.object.form_trainer:
-            lesson_form.fields['trainer'].initial = self.object.form_trainer
+        if self.object.trainer:
+            lesson_form.fields['trainer'].initial = self.object.trainer
         context['lesson_form'] = lesson_form
         context['active_nav'] = 'classes'
         return context
@@ -121,7 +121,7 @@ def get_lessons(request, pk):
     end_date = datetime.fromisoformat(request.GET['endStr'])
 
     yogaclass = YogaClass.objects.get(pk=pk)
-    lessons = yogaclass.lessons.filter(day__range=[start_date, end_date])
+    lessons = yogaclass.lessons.filter(date__range=[start_date, end_date])
     data = serializers.serialize(
         'json', lessons, use_natural_foreign_keys=True)
     return HttpResponse(data, content_type="application/json")
@@ -159,7 +159,7 @@ def create_lessons_from_last_time(request, pk):
                 last_start_week = current_start_week - timedelta(7)
                 last_end_week = last_start_week + timedelta(6)
                 last_entries = yoga_class.lessons.filter(
-                    day__range=[last_start_week, last_end_week])
+                    date__range=[last_start_week, last_end_week])
                 if not last_entries:
                     return HttpResponse(_('Last week has no lesson'), status=status.HTTP_400_BAD_REQUEST)
                 for last_entry in last_entries:
@@ -176,7 +176,7 @@ def create_lessons_from_last_time(request, pk):
                 last_start_4_weeks = current_start_week - timedelta(28)
                 # from (last start 4 weeks) to (last sunday)
                 last_entries = yoga_class.lessons.filter(
-                    day__range=[last_start_4_weeks, last_end_week])
+                    date__range=[last_start_4_weeks, last_end_week])
                 if not last_entries:
                     return HttpResponse(_('Last 4 weeks have no lesson'), status=status.HTTP_400_BAD_REQUEST)
                 for last_entry in last_entries:

@@ -72,6 +72,7 @@
             </span>
         </a>
     </li>
+    <hr class="sidebar-divider my-0">
     <!-- Nav Item - Classes -->
     <li class="nav-item {% if active_nav == 'classes' %}active{% endif %}">
         <a class="nav-link" href="{% url 'dashboard:classes-list' %}">
@@ -119,6 +120,7 @@
             </span>
         </a>
     </li>
+    <hr class="sidebar-divider my-0">
     <!-- Blog -->
     <li class="nav-item {% if show_nav_blog == True %}active{% endif %}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlog" aria-expanded="true"
@@ -147,7 +149,6 @@
             </div>
         </div>
     </li>
-    <hr class="sidebar-divider my-0">
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
