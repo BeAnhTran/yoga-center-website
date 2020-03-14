@@ -3653,7 +3653,7 @@ only screen and (min-width: 992px) and (max-width: 1200px),
 }
 
 .blog-item .bi-text h2 {
-	font-size: 25px;
+	font-size: 20px;
 	margin-bottom: 15px;
 }
 
@@ -4140,7 +4140,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .latest-post-widget .lp-item {
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
 .latest-post-widget .lp-item:last-child {

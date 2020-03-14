@@ -85,30 +85,35 @@
         </a>
         <div class="hb-right">
             <div class="hb-switch" id="search-switch">
-                <img src="{% static 'img/icons/search.png' %}" alt="">
+                <img src="{% static 'img/icons/search.png' %}" alt="lotus yoga">
             </div>
             <div class="hb-switch" id="infor-switch">
-                <img src="{% static 'img/icons/bars.png' %}" alt="">
+                <img src="{% static 'img/icons/bars.png' %}" alt="lotus yoga">
             </div>
         </div>
         <div class="container">
             <ul class="main-menu">
-                <li><a href="{% url 'core:home' %}" class="{% if active_nav == 'home' %}active{% endif %}">{% trans 'Home' %}</a></li>
+                <li><a href="{% url 'core:home' %}"
+                        class="{% if active_nav == 'home' %}active{% endif %}">{% trans 'Home' %}</a></li>
                 <li><a href="javascript:;">{% trans 'About us' %}</a>
                     <ul class="sub-menu">
                         <li><a href="javascript:;">{% trans 'Trainers' %}</a></li>
                         <li><a href="javascript:;">{% trans 'Contact' %}</a></li>
                     </ul>
                 </li>
-                <li><a href="{% url 'courses:list' %}" class="{% if active_nav == 'classes' %}active{% endif %}">{% trans 'Classes'%}</a>
+                <li><a href="{% url 'courses:list' %}"
+                        class="{% if active_nav == 'classes' %}active{% endif %}">{% trans 'Classes'%}</a>
                     <ul class="sub-menu bg-gray">
                         <li><a href="{% url 'courses:list' %}">{% trans 'Courses' %}</a></li>
                         <li><a href="{% url 'classes:list' %}">{% trans 'Classes' %}</a></li>
                     </ul>
                 </li>
-                <li><a href="{% url 'trainers:list' %}" class="{% if active_nav == 'trainers' %}active{% endif %}">{% trans 'trainer' %}</a></li>
-                <li><a href="{% url 'yoga_schedule:index' %}" class="{% if active_nav == 'schedule' %}active{% endif %}">{% trans 'Schedule' %}</a></li>
-                <li><a href="javascript:;">{% trans 'Blog'%}</a></li>
+                <li><a href="{% url 'trainers:list' %}"
+                        class="{% if active_nav == 'trainers' %}active{% endif %}">{% trans 'trainer' %}</a></li>
+                <li><a href="{% url 'yoga_schedule:index' %}"
+                        class="{% if active_nav == 'schedule' %}active{% endif %}">{% trans 'Schedule' %}</a></li>
+                <li><a href="{% url 'blog:list' %}"
+                        class="{% if active_nav == 'blog' %}active{% endif %}">{% trans 'Blog'%}</a></li>
                 <li><a href="javascript:;">{% trans 'Shop'%}</a></li>
             </ul>
         </div>

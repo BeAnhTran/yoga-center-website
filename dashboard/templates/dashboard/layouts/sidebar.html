@@ -38,19 +38,22 @@
                         {% trans 'trainees' as t_trainees %} {{ t_trainees|capfirst }}
                     </span>
                 </a>
-                <a class="collapse-item {% if active_nav == 'trainers' %}active{% endif %}" href="{% url 'dashboard:trainers-list' %}">
+                <a class="collapse-item {% if active_nav == 'trainers' %}active{% endif %}"
+                    href="{% url 'dashboard:trainers-list' %}">
                     <i class="fas fa-fw fa-user-graduate"></i>
                     <span>
                         {% trans 'trainers' as t_trainers %} {{ t_trainers|capfirst }}
                     </span>
                 </a>
-                <a class="collapse-item {% if active_nav == 'staffs' %}active{% endif %}" href="{% url 'dashboard:staffs-list' %}">
+                <a class="collapse-item {% if active_nav == 'staffs' %}active{% endif %}"
+                    href="{% url 'dashboard:staffs-list' %}">
                     <i class="fas fa-fw fa-user-tie"></i>
                     <span>
                         {% trans 'staffs' as t_staffs %} {{ t_staffs|capfirst }}
                     </span>
                 </a>
-                <a class="collapse-item {% if active_nav == 'admins' %}active{% endif %}" href="{% url 'dashboard:admins-list' %}">
+                <a class="collapse-item {% if active_nav == 'admins' %}active{% endif %}"
+                    href="{% url 'dashboard:admins-list' %}">
                     <i class="fas fa-fw fa-user-cog"></i>
                     <span>
                         {% trans 'admin' as t_admin %}{{ t_admin|capfirst }}
@@ -116,6 +119,35 @@
             </span>
         </a>
     </li>
+    <!-- Blog -->
+    <li class="nav-item {% if show_nav_blog == True %}active{% endif %}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlog" aria-expanded="true"
+            aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-blog"></i>
+            <span>{% trans 'blog' as t_blog %} {{ t_blog|capfirst }}</span>
+        </a>
+        <div id="collapseBlog" class="collapse {% if show_nav_blog == True %}show{% endif %}"
+            aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-secondary pb-2 collapse-inner rounded">
+                <a class="collapse-item {% if active_nav == 'blog_categories' %}active{% endif %}"
+                    href="{% url 'dashboard:blog-categories-list' %}">
+                    <i class="fas fa-fw fa-cubes"></i>
+                    <span>
+                        {% trans 'post categories' as t_post_categories %}
+                        {{ t_post_categories|capfirst }}
+                    </span>
+                </a>
+                <a class="collapse-item {% if active_nav == 'blog_posts' %}active{% endif %}"
+                    href="{% url 'dashboard:blog-posts-list' %}">
+                    <i class="fas fa-fw fa-cube"></i>
+                    <span>
+                        {% trans 'post' as t_post %} {{ t_post|title }}
+                    </span>
+                </a>
+            </div>
+        </div>
+    </li>
+    <hr class="sidebar-divider my-0">
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

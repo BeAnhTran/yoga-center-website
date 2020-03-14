@@ -5,7 +5,7 @@ from .views import (
     dashboard_view, courses_view, rooms_view,
     lessons_view, classes_view, cards_view,
     card_types_view, trainees_view, trainers_view, staffs_view,
-    admins_view, roll_calls_view)
+    admins_view, roll_calls_view, blog_view)
 
 app_name = 'dashboard'
 
@@ -96,6 +96,24 @@ roll_calls_urlpatterns = [
          name='roll-calls-detail'),
 ]
 
+# BLOG
+blog_urlpatterns = [
+    # post category
+    path('categories/', blog_view.PostCategoryListView.as_view(),
+         name='blog-categories-list'),
+    path('categories/new/', blog_view.PostCategoryNewView.as_view(),
+         name='blog-categories-new'),
+    path('categories/<slug:slug>/delete/',
+         blog_view.PostCategoryDeleteView.as_view(), name='blog-categories-delete'),
+    # post
+    path('posts/', blog_view.PostListView.as_view(),
+         name='blog-posts-list'),
+    path('posts/new/', blog_view.PostNewView.as_view(),
+         name='blog-posts-new'),
+    path('posts/<slug:slug>/delete/',
+         blog_view.PostDeleteView.as_view(), name='blog-posts-delete'),
+]
+
 # DASHBOARD
 urlpatterns = [
     path('', dashboard_view.index, name='index'),
@@ -110,4 +128,5 @@ urlpatterns = [
     path('staffs/', include(staffs_urlpatterns)),
     path('admins/', include(admins_urlpatterns)),
     path('roll-calls/', include(roll_calls_urlpatterns)),
+    path('blog/', include(blog_urlpatterns)),
 ]

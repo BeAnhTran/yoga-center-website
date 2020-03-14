@@ -1,0 +1,71 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load dashboard_extras %}
+
+{% block specified_css %}
+{% endblock %}
+
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'post category list' %}</h1>
+    <a href="{% url 'dashboard:blog-categories-new' %}" class="btn btn-sm btn-success shadow-sm"><i
+            class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'create new' %}</a>
+</div>
+{% if not categories %}
+<p class="text-danger">
+    {% trans 'post category' as tran_value %}
+    {% blocktrans with value=tran_value %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{% trans 'name' as t_name %}{{ t_name|capfirst }}</th>
+                        <th>{% trans 'action' as t_action %}{{ t_action|capfirst }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.name|title }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary" href="javascript:;"><i class="fas fa-fw fa-eye"></i>
+                                {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
+                            <a class="btn btn-sm btn-outline-warning" href="javascript:;"><i class="fas fa-fw fa-edit"></i>
+                                {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
+                            <a class="btn btn-sm btn-outline-danger delete-post-category" class="delete-class" href="javascript:;"><i class="fas fa-fw fa-trash"></i>
+                                {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
+                            <form class="d-none" action="{% url 'dashboard:blog-categories-delete' category.slug %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block specified_js %}
+<script type="text/javascript">
+    $('.delete-post-category').click(function () {
+        $(this).siblings('form').children('input[type=submit]').click();
+    });
+</script>
+{% endblock %}

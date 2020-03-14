@@ -1,0 +1,75 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load dashboard_extras %}
+
+{% block specified_css %}
+{% endblock %}
+
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'post list' %}</h1>
+    <a href="{% url 'dashboard:blog-posts-new' %}" class="btn btn-sm btn-success shadow-sm"><i
+            class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'create new' %}</a>
+</div>
+{% if not posts %}
+<p class="text-danger">
+    {% trans 'post' as tran_value %}
+    {% blocktrans with value=tran_value %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{% trans 'title' as t_name %}{{ t_name|capfirst }}</th>
+                        <th>{% trans 'status' as t_name %}{{ t_name|capfirst }}</th>
+                        <th>{% trans 'description' as t_name %}{{ t_name|capfirst }}</th>
+                        <th>{% trans 'action' as t_action %}{{ t_action|capfirst }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                    <tr>
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.title|title }}</td>
+                        <td>{{ post.get_status_display }}</td>
+                        <td>{{ post.description|title }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary" href="javascript:;"><i class="fas fa-fw fa-eye"></i>
+                                {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
+                            <a class="btn btn-sm btn-outline-warning" href="javascript:;"><i class="fas fa-fw fa-edit"></i>
+                                {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
+                            <a class="btn btn-sm btn-outline-danger delete-post" class="delete-class" href="javascript:;"><i class="fas fa-fw fa-trash"></i>
+                                {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
+                            <form class="d-none" action="{% url 'dashboard:blog-posts-delete' post.slug %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block specified_js %}
+<script type="text/javascript">
+    $('.delete-post').click(function () {
+        $(this).siblings('form').children('input[type=submit]').click();
+    });
+</script>
+{% endblock %}

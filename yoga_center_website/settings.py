@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'dashboard',
     'roll_calls',
     'trainers',
+    'blog',
 ]
 
 MIDDLEWARE = [

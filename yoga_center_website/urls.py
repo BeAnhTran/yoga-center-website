@@ -42,6 +42,8 @@ urlpatterns += i18n_patterns(
     path('schedule/', include('yoga_schedule.urls')),
     # trainers
     path('trainers/', include('trainers.urls')),
+    # blog
+    path('blog/', include('blog.urls')),
     # dashboard
     path('dashboard/', include('dashboard.urls')),
     # admin site
