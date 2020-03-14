@@ -53,8 +53,8 @@
                             {{ course|display_course_type }}
                         </td>
                         <td>
-                            <a href="{% url 'dashboard:courses-update' course.slug %}"><i class="fas fa-edit"></i></a>
-                            <a href="javascript:;" class="delete-course"><i class="fas fa-trash"></i></a>
+                            <a class="btn btn-sm btn-outline-warning" href="{% url 'dashboard:courses-update' course.slug %}"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-sm btn-outline-danger" href="javascript:;" class="delete-course"><i class="fas fa-trash"></i></a>
                             <form class="d-none" action="{% url 'dashboard:courses-delete' course.id %}" method="post">
                                 {% csrf_token %}
                                 <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
