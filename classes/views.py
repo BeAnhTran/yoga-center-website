@@ -60,6 +60,7 @@ class YogaClassListView(ListView):
         if self.request.GET.get('level'):
             form_filter.fields['level'].initial = self.request.GET.get('level')
         context['form_filter'] = form_filter
+        context['active_nav'] = 'classes'
         return context
 
     def get_queryset(self):
@@ -83,6 +84,7 @@ class YogaClassDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(YogaClassDetailView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'classes'
         context['others'] = set(
             YogaClass.objects.filter(~Q(pk=self.object.pk)))
         return context
@@ -107,7 +109,8 @@ class YogaClassEnrollView(View):
             initial={'card_type_list': card_type_list})
         context = {
             'yoga_class': yoga_class,
-            'form': form
+            'form': form,
+            'active_nav': 'classes'
         }
         return render(request, self.template_name, context=context)
 
@@ -176,7 +179,8 @@ class YogaClassEnrollPaymentView(View):
                 'lesson_list': lesson_list,
                 'price': price,
                 'total_price_display': total_price_display,
-                'total_price': total_price
+                'total_price': total_price,
+                'active_nav': 'classes'
             }
             return render(request, self.template_name, context=context)
         else:
