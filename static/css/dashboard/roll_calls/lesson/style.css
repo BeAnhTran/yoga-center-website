@@ -1,11 +1,15 @@
-#div_studied_roll_calls{
+#studied_roll_calls{
+    min-height: 250px;
 }
 
-#studied_roll_calls{
-    min-height: 200px;
-    border-radius: .25rem;
+#un_studied_roll_calls{
+    min-height: 211px;
 }
 
 #count_studied{
     color:#27496d;
+}
+
+.title-card-header{
+    height: 55px;
 }

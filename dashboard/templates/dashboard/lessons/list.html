@@ -17,17 +17,31 @@
     </h1>
 </div>
 <!-- Content Row -->
-{% if not lessons %}
-<p class="text-danger">
-    {% blocktrans with value=t_lesson trimmed %}No {{ value }} yet{% endblocktrans %}
-</p>
-{% else %}
-<div class="container-fluid mb-5">
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col p-0 text-center">
+            <a id="btn_backward_date" class="btn btn-sm btn-secondary float-left" href="{% url 'dashboard:lessons-list' %}?year={{backward_date|date:'Y'}}&month={{backward_date|date:'m' }}&day={{backward_date|date:'d'}}">
+                <i class="fa fa-fw fa-backward"></i>
+            </a>
+            <a class="text-danger"><b>{{ current_date|date:'D' }} - {{ current_date|date }}</b></a>
+            <a id="btn_forward_date" class="btn btn-sm btn-secondary float-right" href="{% url 'dashboard:lessons-list' %}?year={{forward_date|date:'Y'}}&month={{forward_date|date:'m' }}&day={{forward_date|date:'d'}}">
+                <i class="fa fa-fw fa-forward"></i>
+            </a>
+        </div>
+    </div>
     <div class="row">
+        {% if not lessons %}
+        <div class="" style="height: 200px;">
+            <strong class="text-danger">
+                {% blocktrans with value=t_lesson trimmed %}No {{ value }} yet{% endblocktrans %}
+            </strong>
+        </div>
+        {% else %}
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>{% trans 'yoga class' as t_class %}{{ t_class|capfirst }}</th>
                         <th>{% trans 'date' as t_date %}{{ t_date|capfirst }}</th>
                         <th>{% trans 'time' as t_time %}{{ t_time|capfirst }}</th>
@@ -40,6 +54,7 @@
                 <tbody>
                     {% for lesson in lessons %}
                     <tr>
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ lesson.yogaclass }}</td>
                         <td>{{ lesson.date }}</td>
                         <td>{{ lesson.get_time }}</td>
@@ -57,10 +72,6 @@
                 </tbody>
             </table>
         </div>
-
-    </div>
-    <div class="row">
-        {% include 'dashboard/pagination.html' %}
     </div>
 </div>
 

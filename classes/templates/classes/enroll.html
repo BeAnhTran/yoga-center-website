@@ -22,19 +22,9 @@
 {% endblock %}
 
 {% block content %}
-<section class="page-top-section set-bg" data-setbg="{% static 'img/page-top-bg.jpg'%}">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 m-auto text-white">
-                <h2>{% trans 'enroll' %}</h2>
-                <p>{{ yoga_class|title }}</p>
-            </div>
-        </div>
-    </div>
-</section>
 <input id="form_of_using_card_type" type="hidden" value="-1">
-<section class="classes-page-section spad overflow-hidden">
-    <div class="container card mt-3 mb-5">
+<section class="classes-page-section spad">
+    <div class="container card">
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-md-4 jumbotron">
@@ -122,7 +112,7 @@
                         console.log('data lesson events', data);
                         var events = [];
                         for (var i = 0; i < data.length; i++) {
-                            var _d = data[i]['day'];
+                            var _d = data[i]['date'];
                             var _st = data[i]['start_time'];
                             var _et = data[i]['end_time'];
                             var _start_time = _d + ' ' + _st;
@@ -347,7 +337,7 @@
             content_li = "";
             for (var i = 0; i < data.length; i++) {
                 content_li += '<li class="list-group-item list-group-item-action list-group-item-info d-flex justify-content-between align-items-center">';
-                content_li += data[i]['day'];
+                content_li += data[i]['date'];
                 content_li += '<a href="javascript:;" class="badge badge-info badge-pill">';
                 content_li += (i + 1).toString();
                 content_li += '</a>';

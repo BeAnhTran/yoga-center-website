@@ -13,6 +13,8 @@ from django.views.generic.list import ListView
 from django.views import View
 from django.shortcuts import render
 from django.db import transaction
+from datetime import datetime, timedelta
+from dateutil import parser
 
 
 @method_decorator([login_required, staff_required], name='dispatch')
@@ -20,12 +22,36 @@ class LessonListView(ListView):
     model = Lesson
     template_name = 'dashboard/lessons/list.html'
     context_object_name = 'lessons'
-    paginate_by = 5
-    ordering = ['-date']
+
+    def get_queryset(self):
+        qs = super(LessonListView, self).get_queryset()
+        now = datetime.today()
+        if self.request.GET.get('day') and self.request.GET.get('month') and self.request.GET.get('year'):
+            d = datetime(
+                int(self.request.GET.get('year')),
+                int(self.request.GET.get('month')),
+                int(self.request.GET.get('day'))
+            )
+            return qs.filter(date=d)
+        return qs.filter(date=now)
 
     def get_context_data(self, **kwargs):
         context = super(LessonListView, self).get_context_data(**kwargs)
         context['active_nav'] = 'roll_calls'
+        if self.request.GET.get('day') and self.request.GET.get('month') and self.request.GET.get('year'):
+            d = datetime(
+                int(self.request.GET.get('year')),
+                int(self.request.GET.get('month')),
+                int(self.request.GET.get('day'))
+            )
+            context['current_date'] = d
+        else:
+            context['current_date'] = datetime.today()
+
+        bw_date = context['current_date'] - timedelta(days=1)
+        fw_date = context['current_date'] + timedelta(days=1)
+        context['backward_date'] = bw_date.date
+        context['forward_date'] = fw_date.date
         return context
 
 
@@ -74,6 +100,6 @@ class ListRollCallApiView(View):
             'un_studied_roll_calls': un_studied_roll_calls,
             'studied_roll_calls': studied_roll_calls,
             'active_nav': 'roll_calls',
-            'total_count':total_count
+            'total_count': total_count
         }
         return render(request, self.template_name, context=context)

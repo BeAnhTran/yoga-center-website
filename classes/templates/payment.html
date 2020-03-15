@@ -10,16 +10,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="page-top-section set-bg" data-setbg="{% static 'img/page-top-bg.jpg'%}">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-7 m-auto text-white">
-        <h2>{% trans 'Payment'%}</h2>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="classes-page-section spad overflow-hidden">
+<section class="classes-page-section spad">
   <div class="container">
     <div class="row">
       <div class="col-lg-8" style="background: lightgrey;">
@@ -43,7 +34,7 @@
                     <div class="ci-meta"><i class="material-icons">alarm_on</i>06:30pm - 07:45pm
                     </div>
                   </div>
-                  <p>{{ yoga_class.description }}</p>
+                  <p>{{ yoga_class.course.description }}</p>
                 </div>
                 <div class="ci-bottom">
                   <div class="ci-author">
@@ -110,7 +101,7 @@
               <ul class="list-group mCustomScrollbar" style="max-height: 150px;">
                 {% for lesson in lesson_list %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                  {{ lesson.day }} - {{ lesson.get_time_and_room_detail }}
+                  {{ lesson.date }} - {{ lesson.get_time_and_room_detail }}
                   <span class="badge badge-primary badge-pill">{{ forloop.counter }}</span>
                 </li>
                 {% endfor %}

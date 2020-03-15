@@ -118,9 +118,7 @@ class Lesson(models.Model):
 
     def get_current_studied_trainee(self):
         studied_number = self.roll_calls.filter(studied=True).count()
-        all_enroll_trainee_number = self.roll_calls.all().count()
-        result = str(studied_number) + '/' + str(all_enroll_trainee_number)
-        return result
+        return studied_number
 
     def max_people(self):
         if self.yogaclass.max_people is None:

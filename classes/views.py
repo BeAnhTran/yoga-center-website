@@ -104,7 +104,7 @@ class YogaClassEnrollView(View):
         # remove enroll card form when access enroll page
         if request.session.get('enroll_card_form') is not None:
             del request.session['enroll_card_form']
-        card_type_list = yoga_class.card_types.all()
+        card_type_list = yoga_class.course.card_types.all()
         form = CardFormForTraineeEnroll(
             initial={'card_type_list': card_type_list})
         context = {
@@ -129,7 +129,7 @@ class YogaClassEnrollView(View):
         cards = yoga_class.cards.filter(trainee=trainee)
         if cards:
             card = cards.last()
-            if card.lessons.last().day >= datetime.now().date():
+            if card.lessons.last().date >= datetime.now().date():
                 return True
         return False
 
@@ -160,8 +160,8 @@ class YogaClassEnrollPaymentView(View):
             id_card_type = enroll_card_form['card_type']
             card_type = CardType.objects.get(pk=id_card_type)
 
-            start_at = lesson_list.first().day
-            end_at = lesson_list.last().day
+            start_at = lesson_list.first().date
+            end_at = lesson_list.last().date
             number_of_lessons = lesson_list.count()
             price = get_price(yoga_class, card_type)
             total_price = get_total_price(
@@ -260,5 +260,5 @@ class YogaClassEnrollPaymentView(View):
         start = cleaned_data['start_at']
         end = cleaned_data['end_at']
         lesson_list = yoga_class.lessons.filter(
-            date__range=[start, end], is_full=False).order_by('day')
+            date__range=[start, end], is_full=False).order_by('date')
         return lesson_list

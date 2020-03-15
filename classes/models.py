@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from courses.models import Course
 from core.models import Trainer
 from common.templatetags import sexify
+from card_types.models import FOR_TRIAL
 
 
 class YogaClass(models.Model):
@@ -63,3 +64,17 @@ class YogaClass(models.Model):
             return sexify.sexy_number(self.price_course)
         else:
             return _('have not updated yet')
+
+    def get_trial_price(self):
+        list_trial_card_types = self.course.card_types.filter(
+            form_of_using=FOR_TRIAL)
+        if list_trial_card_types:
+            trial_card_type = list_trial_card_types[0]
+            if trial_card_type.multiplier is not None and trial_card_type.multiplier > 0:
+                if self.price_per_lesson is not None:
+                    price = self.price_per_lesson * trial_card_type.multiplier
+                    return sexify.sexy_number(price)
+                else:
+                    return _('have not updated yet')
+            else:
+                return _('Free')
