@@ -15,7 +15,7 @@ class Command(BaseCommand):
         from faker import Faker
         fake = Faker()
         print("Create Trainees")
-        num = User.objects.count()
+        num = Trainee.objects.count()
         for i in range(num, num + 3):
             data = {
                 'email': 'trainee' + str(i) + '@gmail.com',
