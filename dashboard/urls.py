@@ -94,6 +94,8 @@ admins_urlpatterns = [
 roll_calls_urlpatterns = [
     path('<int:pk>/', roll_calls_view.RollCallDetail.as_view(),
          name='roll-calls-detail'),
+    path('api/make-up-lessons/', roll_calls_view.RollCallListViewApi.as_view(),
+         name='api-roll-calls-list-make-up-lesson'),
 ]
 
 # BLOG

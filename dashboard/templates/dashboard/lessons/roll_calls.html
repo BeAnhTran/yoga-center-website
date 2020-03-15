@@ -3,6 +3,9 @@
 {% load i18n %}
 
 {% block specified_css %}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+
 <link href="{% static 'css/dashboard/roll_calls/lesson/style.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
@@ -52,7 +55,10 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-header bg-white title-card-header">
-                <a class="btn btn-sm btn-outline-secondary" href="javascript:;">Học bù</a>
+                <button id="btn_modal" type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                    data-target="#modal_make_up_lesson">
+                    Học bù
+                </button>
             </div>
             <div class="card-body">
                 <p><i class="far fd-sm fa-fw fa-hand-pointer"></i>{% trans 'Select to do a roll call' %}</p>
@@ -74,9 +80,52 @@
     </div>
 </div>
 
+<!-- The Modal -->
+<div class="modal" id="modal_make_up_lesson">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-none">
+                <h4 id="model_title" class="modal-title">
+                    Thêm người học bù
+                </h4>
+                <button id="btn_modal" type="button" class="btn btn-sm btn-danger" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="" class="was-validated">
+                    <div class="form-group">
+                        <label for="">Học viên</label>
+                        <select id="trainee_card" class="form-control selectpicker" data-live-search="true">
+                            <option value="-1"data-tokens="">Vui lòng chọn</option>
+                            {% for trainee in trainees %}
+                            <option value="{{ trainee.pk }}"
+                                data-tokens="{{trainee.user.first_name|slice:'1' }}{{trainee.user.last_name|slice:'1' }} {{trainee}}">
+                                {{ trainee }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Chọn buổi học muốn thay thế</label>
+                        <div id="lesson_choose">
+                            <span class="badge badge-secondary">
+                                Buổi học hợp lệ để đăng kí học bù được hiển thị ở đây
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-success">Hoàn thành</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block specified_js %}
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+
+
 <script>
     $(document).on('click', '.a-un-studied', function () {
         var roll_call_id = $(this).attr('data-roll-call');
@@ -145,6 +194,50 @@
                 '{% trans "Undo the roll call successfully" %}',
                 'success'
             )
+        }).fail((err) => {
+            console.log(err);
+        });
+    });
+
+    $('#trainee_card').change(function () {
+        var trainee_id = $(this).val();
+        console.log('trainee_id', trainee_id);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: '{% url "dashboard:api-roll-calls-list-make-up-lesson" %}',
+            method: 'GET',
+            data: {
+                'trainee_id': trainee_id,
+                'course_id': '{{ lesson.yogaclass.course.pk }}'
+            },
+            beforeSend: function(){
+                $('#lesson_choose').empty();
+            }
+        }).done((data) => {
+            var str = '';
+            if(data.length > 0){
+                $.each(data, (i, v) => {
+                    var d = new Date(v['lesson']['date']);
+                    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                    var lesson_date = d.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options);
+                    var lesson_start_time = v['lesson']['start_time'].split(':', 2).join(":");
+                    var lesson_end_time = v['lesson']['end_time'].split(':', 2).join(":");
+
+                    str += '<div class="form-check">';
+                    str += '<label class="form-check-label" for="radio' + v['lesson']['id'] + '">';
+                    str += '<input type="radio" class="form-check-input" id="' + v['lesson']['id'] + '" name="optradio" value="' + v['lesson']['id'] + '">';
+                    str += '<span class="badge badge-danger">'+ v['lesson']['yogaclass']['name'] +'</span> ';
+                    str +=  '<span class="badge badge-success"><i class="far fa-fw fa-bell"></i>' + lesson_start_time + '-' + lesson_end_time + '</span> ';
+                    str += '<span class="badge badge-warning"><i class="fas fa-fw fa-calendar-week"></i>' + lesson_date + '</span>';
+                    str += '</label></div>';
+                });
+            }else{
+                str += '<span class="badge badge-danger">Không có buổi học hợp lệ để đăng kí học bù</span>';
+            }
+
+            $('#lesson_choose').append(str);
         }).fail((err) => {
             console.log(err);
         });

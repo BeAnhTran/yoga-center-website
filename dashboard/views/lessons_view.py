@@ -15,6 +15,7 @@ from django.shortcuts import render
 from django.db import transaction
 from datetime import datetime, timedelta
 from dateutil import parser
+from core.models import Trainee
 
 
 @method_decorator([login_required, staff_required], name='dispatch')
@@ -95,11 +96,13 @@ class ListRollCallApiView(View):
         un_studied_roll_calls = lesson.roll_calls.filter(studied=False)
         studied_roll_calls = lesson.roll_calls.filter(studied=True)
         total_count = un_studied_roll_calls.count() + studied_roll_calls.count()
+        trainees = Trainee.objects.all()
         context = {
             'lesson': lesson,
             'un_studied_roll_calls': un_studied_roll_calls,
             'studied_roll_calls': studied_roll_calls,
             'active_nav': 'roll_calls',
-            'total_count': total_count
+            'total_count': total_count,
+            'trainees': trainees
         }
         return render(request, self.template_name, context=context)

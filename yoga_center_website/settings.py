@@ -222,3 +222,5 @@ CKEDITOR_CONFIGS = {
         ),
     },
 }
+
+SECURE_SSL_REDIRECT = False
