@@ -144,8 +144,9 @@
                     },
                     success: function (data) {
                         var events = [];
+                        console.log(data);
                         for (var i = 0; i < data.length; i++) {
-                            var _d = data[i]['fields']['day'];
+                            var _d = data[i]['fields']['date'];
                             var _st = data[i]['fields']['start_time'];
                             var _et = data[i]['fields']['end_time'];
                             var _start_time = _d + ' ' + _st;
@@ -176,20 +177,29 @@
                 var url = _url.replace('0', id);
                 $.ajax({
                     url: url,
-                    method: 'GET'
+                    method: 'GET',
+                    beforeSend: function(){
+                        $('input[type="checkbox"][id^="id_lectures"]').attr('checked', false);
+                    }
                 }).done(function (data) {
                     console.log(data);
-                    var d = new Date(data['day']);
+                    var d = new Date(data['date']);
                     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-                    var lesson_day = d.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options);
+                    var lesson_date = d.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options);
                     var start_time = data['start_time'].split(':', 2).join(":");
                     var end_time = data['end_time'].split(':', 2).join(":");
 
                     $('#id_room').val(data['room']['id']);
                     $('#id_trainer').val(data['trainer']['user']['id']);
-                    $('#id_day').val(lesson_day);
+                    $('#id_notes').val(data['notes']);
+                    $('#id_date').val(lesson_date);
                     $('#id_start_time').val(start_time);
                     $('#id_end_time').val(end_time);
+                    
+                    var lectures = data['lectures'];
+                    $.each(lectures, (i, v)=>{
+                        $('input[type="checkbox"][id^="id_lectures"][value="'+ v +'" ]').attr('checked', true);
+                    });
 
                     $('#hidden_url_put').val(_url.replace('0', data['id']));
 
@@ -354,7 +364,9 @@
         $('#form_new_lesson').trigger("reset");
         $('input#submit-id-submit').removeClass('d-none');
         $('#model_footer_lesson').addClass('d-none');
+        $("#form_new_lesson :input[type=checkbox]").attr("checked", false);
         $("#form_new_lesson :input").prop("disabled", false);
+        
         $('input#hidden_check_method').val('post');
         $('#btn-modal').click();
     });

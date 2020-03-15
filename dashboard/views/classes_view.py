@@ -84,7 +84,10 @@ class ClassScheduleView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ClassScheduleView, self).get_context_data(**kwargs)
-        lesson_form = lesssons_form.LessonForm()
+        lectures = self.object.course.lectures.values_list('pk', 'name')
+        lesson_form = lesssons_form.LessonForm(
+            initial={'lectures': lectures}
+        )
         if self.object.trainer:
             lesson_form.fields['trainer'].initial = self.object.trainer
         context['lesson_form'] = lesson_form
@@ -132,10 +135,12 @@ def get_lessons(request, pk):
 def create_lessons(request, pk):
     form = lesssons_form.LessonForm(request.POST, request.FILES)
     if form.is_valid():
-        lesson = form.save()
-        data = serializers.serialize(
-            'json', [lesson], use_natural_foreign_keys=True)
-        return HttpResponse(data, content_type="application/json")
+        with transaction.atomic():
+            lesson = form.save()
+            lesson.lectures.set(request.POST.getlist('lectures'))
+            data = serializers.serialize(
+                'json', [lesson], use_natural_foreign_keys=True)
+            return HttpResponse(data, content_type="application/json")
     return HttpResponse(form.errors.as_json(), status=400)
 
 

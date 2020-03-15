@@ -23,4 +23,4 @@ class LessonUpdateScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lesson
-        exclude = ('cards', )
+        exclude = ()

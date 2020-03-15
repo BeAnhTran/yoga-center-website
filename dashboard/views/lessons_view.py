@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from django.views import View
 from django.shortcuts import render
+from django.db import transaction
 
 
 @method_decorator([login_required, staff_required], name='dispatch')
@@ -45,9 +46,12 @@ class LessonDetailApiView(APIView):
         instance = self.get_object(pk)
         form = LessonForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
-            lesson = form.save()
-            serializer = LessonUpdateScheduleSerializer(lesson)
-            return Response(serializer.data)
+            with transaction.atomic():
+                lesson = form.save(commit=False)
+                lesson.lectures.set(request.POST.getlist('lectures'))
+                lesson.save()
+                serializer = LessonUpdateScheduleSerializer(lesson)
+                return Response(serializer.data)
         return HttpResponse(form.errors.as_json(), status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):

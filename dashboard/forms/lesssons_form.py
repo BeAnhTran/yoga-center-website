@@ -14,6 +14,7 @@ import datetime
 from django.utils import formats
 
 from lessons.utils import check_overlap_in_list_lesson
+from lectures.models import Lecture
 
 
 class LessonForm(forms.ModelForm):
@@ -57,7 +58,15 @@ class LessonForm(forms.ModelForm):
         }
         self.fields['trainer'].label = _('trainer').capitalize()
         self.fields['state'].label = _('state').capitalize()
-        self.fields['lectures'].required = False
+
+        self.fields['lectures'].label = _('lectures').capitalize()
+        self.fields['lectures'].widget=forms.CheckboxSelectMultiple()
+        self.fields['lectures'].required=False
+
+        if kwargs.get('initial') is not None:
+            if kwargs.get('initial').get('lectures') is not None:
+                self.fields['lectures'].choices = kwargs['initial']['lectures']
+
         self.helper = FormHelper()
         self.helper.form_show_errors = True
         self.helper.form_id = 'form_new_lesson'
