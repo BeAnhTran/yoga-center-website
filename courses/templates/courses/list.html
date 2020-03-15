@@ -23,15 +23,15 @@
     <div class="row justify-content-center">
         {% for course in courses %}
         <div class="col-md-6 col-lg-4">
-            <a href="{% url 'courses:detail' course.slug %}" class="classes-item-warp">
+            <div class="classes-item-warp">
                 <div class="classes-item">
-                    <div class="ci-img">
+                    <a href="{% url 'courses:detail' course.slug %}" class="ci-img">
                         {% if course.image %}
                         <img src="{{ course.image.url }}" alt="{{ course.name }}">
                         {% else %}
                         <img src="{% static 'img/course/default_course.jpg'%}" alt="{{ course.name }}">
                         {% endif %}
-                    </div>
+                    </a>
                     <div class="ci-text">
                         <h4>{{ course.name }}</h4>
                         <p>{{ course.description }}</p>
@@ -44,7 +44,7 @@
                         <a href="javasript:;" class="site-btn sb-gradient">{% trans 'view classes' %}</a>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
         {% endfor %}
     </div>

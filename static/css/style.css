@@ -1538,6 +1538,10 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 	color: #fb3958;
 }
 
+.classes-item p {
+	height: 42px;
+}
+
 .classes-item .ci-meta {
 	display: inline-block;
 	font-size: 14px;
