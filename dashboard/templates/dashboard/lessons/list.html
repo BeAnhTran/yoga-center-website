@@ -47,7 +47,7 @@
                         <td>{{ lesson.trainer }}</td>
                         <td>{{ lesson.get_current_studied_trainee }}</td>
                         <td class="text-center">
-                            <a class="btn btn-sm btn-primary"
+                            <a class="btn btn-sm btn-outline-primary"
                                 href="{% url 'dashboard:lessons-roll-calls' lesson.id %}"><i
                                     class="far fa-hand-pointer"></i>
                                 {% trans 'select' as t_select %}{{ t_select|capfirst }}</a>
