@@ -5,7 +5,7 @@ from .views import (
     dashboard_view, courses_view, rooms_view,
     lessons_view, classes_view, cards_view,
     card_types_view, trainees_view, trainers_view, staffs_view,
-    admins_view, roll_calls_view, blog_view)
+    admins_view, roll_calls_view, blog_view, make_up_lessons_view)
 
 app_name = 'dashboard'
 
@@ -116,6 +116,14 @@ blog_urlpatterns = [
          blog_view.PostDeleteView.as_view(), name='blog-posts-delete'),
 ]
 
+# MAKE UP LESSON
+make_up_lessons_urlpatterns = [
+    path('', make_up_lessons_view.MakeUpLessonListApi.as_view(),
+         name='make-up-lessons-list-api'),
+    path('<int:pk>/roll_call/lessons/<int:lesson_id>/delete/',
+         make_up_lessons_view.delete_make_up_lesson_roll_call, name='make-up-lessons-delete-in-lesson-roll-call'),
+]
+
 # DASHBOARD
 urlpatterns = [
     path('', dashboard_view.index, name='index'),
@@ -131,4 +139,5 @@ urlpatterns = [
     path('admins/', include(admins_urlpatterns)),
     path('roll-calls/', include(roll_calls_urlpatterns)),
     path('blog/', include(blog_urlpatterns)),
+    path('make-up-lessons/', include(make_up_lessons_urlpatterns)),
 ]

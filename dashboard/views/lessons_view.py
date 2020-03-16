@@ -16,6 +16,7 @@ from django.db import transaction
 from datetime import datetime, timedelta
 from dateutil import parser
 from core.models import Trainee
+from make_up_lessons.models import MakeUpLesson
 
 
 @method_decorator([login_required, staff_required], name='dispatch')
@@ -97,12 +98,14 @@ class ListRollCallApiView(View):
         studied_roll_calls = lesson.roll_calls.filter(studied=True)
         total_count = un_studied_roll_calls.count() + studied_roll_calls.count()
         trainees = Trainee.objects.all()
+        make_up_lessons = MakeUpLesson.objects.filter(lesson=lesson)
         context = {
             'lesson': lesson,
             'un_studied_roll_calls': un_studied_roll_calls,
             'studied_roll_calls': studied_roll_calls,
             'active_nav': 'roll_calls',
             'total_count': total_count,
-            'trainees': trainees
+            'trainees': trainees,
+            'make_up_lessons': make_up_lessons
         }
         return render(request, self.template_name, context=context)
