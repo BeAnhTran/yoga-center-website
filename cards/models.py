@@ -21,4 +21,4 @@ class Card(models.Model):
         auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
 
     def end_at(self):
-        return self.lessons.last().day
+        return self.lessons.last().date

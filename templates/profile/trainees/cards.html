@@ -6,25 +6,16 @@
 {% block specified_css %}{% endblock %}
 
 {% block content %}
-<section class="page-top-section set-bg" data-setbg="{% static 'img/page-top-bg.jpg'%}">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 m-auto text-white">
-                <h2>{% trans 'cards' as t_cards %}{{ t_cards|capfirst }}</h2>
-            </div>
-        </div>
-    </div>
-</section>
-<div id="content_cards" class="container mt-5">
+<div id="content_cards" class="spad container">
     <div class="row justify-content-center">
         {% for card in cards %}
-        <div class="col-lg-4 col-md-4">
+        <div class="col-lg-4 col-md-6">
             <div class="blog-item">
                 <a href="javascript:;">
-                {% if card.yogaclass.image %}
-                    <img src="{{ card.yogaclass.image.url }}" alt="{{card.yogaclass}}">
+                {% if card.yogaclass.course.image %}
+                    <img src="{{ card.yogaclass.course.image.url }}" alt="{{card.yogaclass}}">
                 {% else %}
-                    <img src="{% static 'img/class/default.jpg'%}" alt="{{card.yogaclass}}">
+                    <img src="{% static 'img/course/default_course.jpg'%}" alt="{{card.yogaclass}}">
                 {% endif %}
                 </a>
                 <div class="bi-text">

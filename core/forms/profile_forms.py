@@ -25,7 +25,7 @@ class UsernameEmailForm(forms.ModelForm):
         self.helper.layout = Layout(
             'hidden_field',
             Row(
-                Column('email', css_class='col-md-6'),
+                Column('email'),
             ),
             Row(
                 Column(
