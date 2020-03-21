@@ -21,7 +21,7 @@ class UsernameEmailForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_show_errors = True
         self.helper.form_id = 'form_username_email'
-        self.helper.form_class = 'col-md-9'
+        self.helper.form_class = 'col'
         self.helper.layout = Layout(
             'hidden_field',
             Row(

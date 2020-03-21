@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'profile/base.html' %}
 {% load static %}
 {% load i18n %}
 {% load crispy_forms_tags %}
@@ -6,89 +6,66 @@
 {% block specified_css %}
 <link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
 <link rel="stylesheet" href="{% static 'vendor/acc-wizard-master/release/acc-wizard.min.css' %}">
-
 {% endblock %}
 
-{% block content %}
-<div class="container">
-    <div class="acc-wizard">
-        <div class="row mb-3">
-            <div class="col">
-                <button class="btn btn-sm btn-outline-danger badge-pill"><span class="flaticon-lotus"></span></button>
-                ⁄
-                <a class="text-danger" href="javascript:;">{{ user }}</a>
-                ⁄
-                <a class="text-danger" href="javascript:;">Trang cá nhân</a>
+{% block profile_content %}
+<div class="row mb-3">
+    <div class="col">
+        <button class="btn btn-sm btn-outline-danger badge-pill"><span
+                class="flaticon-lotus"></span></button>
+        ⁄
+        <a class="text-danger" href="javascript:;">{{ user }}</a>
+        ⁄
+        <a class="text-danger" href="javascript:;">Trang cá nhân</a>
+    </div>
+</div>
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="form-row">
+            {% crispy form1 %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" id="headingOne">
+            <h3>
+                <a href="#collapseOne" data-toggle="collapse"
+                    data-parent="#accordion">{% trans 'Basic information' %}</a>
+            </h3>
+        </div>
+
+        <div id="collapseOne" class="panel-collapse collapse show">
+            <div class="panel-body">
+                {%  crispy form_basic_info %}
             </div>
         </div>
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="form-row">
-                    <div class="form-group col-lg-3 text-center">
-                        <img src="{% static 'img/user/default.png' %}" class="img rounded" width="150" height="150"
-                            alt="default">
-                    </div>
-                    {% crispy form1 %}
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-collapse pt-0">
-                    <div class="card border-0">
-                        <div class="card-body p-2">
-                            <a href="{% url 'core:profile-trainee-cards' %}" class="btn btn-sm btn-outline-secondary m-1">{% trans 'Card' %}</a>
-                            <a href="javascript:;"
-                                class="btn btn-sm btn-outline-secondary m-1">{% trans 'Card Invoice History' %}</a>
-                            <a href="javascript:;"
-                                class="btn btn-sm btn-outline-secondary m-1">{% trans 'Shop Invoice History' %}</a>
-                            <a href="javascript:;"
-                                class="btn btn-sm btn-outline-secondary m-1">{% trans 'Renew Password' %}</a>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" id="headingOne">
-                    <h3>
-                        <a href="#collapseOne" data-toggle="collapse"
-                            data-parent="#accordion">{% trans 'Basic information' %}</a>
-                    </h3>
-                </div>
+    </div>
 
-                <div id="collapseOne" class="panel-collapse collapse show">
-                    <div class="panel-body">
-                        {%  crispy form_basic_info %}
-                    </div>
-                </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" id="headingTwo">
+            <h3>
+                <a href="#collapseTwo" data-toggle="collapse"
+                    data-parent="#accordion">{% trans 'Additional information' %}</a>
+            </h3>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="panel-body">
+                {% crispy form_additional_info %}
             </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading" id="headingTwo">
-                    <h3>
-                        <a href="#collapseTwo" data-toggle="collapse"
-                            data-parent="#accordion">{% trans 'Additional information' %}</a>
-                    </h3>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        {% crispy form_additional_info %}
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" id="headingTwo">
-                    <h3>
-                        <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion">
-                            {% trans 'health condition' as t_health_con %}
-                            {{ t_health_con|capfirst }}
-                        </a>
-                    </h3>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        {% crispy form_health_condition %}
-                    </div>
-                </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" id="headingTwo">
+            <h3>
+                <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion">
+                    {% trans 'health condition' as t_health_con %}
+                    {{ t_health_con|capfirst }}
+                </a>
+            </h3>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse">
+            <div class="panel-body">
+                {% crispy form_health_condition %}
             </div>
         </div>
     </div>

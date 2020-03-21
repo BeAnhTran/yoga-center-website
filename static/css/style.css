@@ -25,9 +25,9 @@ h1 {
 }
 
 h2 {
-	font-family: "Playfair Display", serif;
 	font-weight: 400;
 	font-size: 36px;
+	font-family: "Playfair Display", serif;
 }
 
 h3 {
@@ -3648,7 +3648,6 @@ only screen and (min-width: 992px) and (max-width: 1200px),
 
 .blog-item img {
 	margin-bottom: 35px;
-	min-width: 100%;
 }
 
 .blog-item .bi-text {
