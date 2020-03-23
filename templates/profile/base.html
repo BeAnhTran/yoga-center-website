@@ -6,12 +6,21 @@
 
 {% block content %}
 <div class="container spad">
+    <div class="row mb-2">
+        <div class="col p-0">
+            <button class="btn btn-sm btn-danger badge-pill"><span
+                    class="flaticon-lotus"></span></button>
+            ⁄
+            <a class="text-danger" href="javascript:;">{{ user }}</a>
+            ⁄
+            <a class="text-danger" href="javascript:;">Trang cá nhân</a>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-lg-3 bg-dark mb-3">
+        <div class="col-lg-3 bg-left mb-3 pb-3 pt-3">
             <!-- Account Sidebar-->
-            <div class="author-card pb-3">
-                <div class="author-card-cover"
-                    style="background-image: url({% static 'img/bg-profile-3.jpg' %});">
+            <div class="author-card">
+                <div class="author-card-cover">
                 </div>
                 <div class="author-card-profile">
                     <div class="author-card-avatar"><img src="{% static 'img/user/default.png' %}"
