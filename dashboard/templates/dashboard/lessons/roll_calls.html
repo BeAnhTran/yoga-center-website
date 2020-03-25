@@ -10,19 +10,28 @@
 {% endblock %}
 {% block content %}
 <!-- Page Heading -->
-<div>
+<div id="head_contain">
     <p>
-        <small><i class="fab fa-fw fa-leanpub"></i></small> {{ lesson.yogaclass }} - {{ lesson.get_time_and_room_detail }}
+        <small><i class="fab fa-fw fa-leanpub"></i></small> {{ lesson.yogaclass }} -
+        {{ lesson.get_time_and_room_detail }}
     </p>
     <p>
         {% trans 'trainer' as t_trainer %}
-        <small><i class="fas fa-fw fa-user-graduate"></i></small> {{ t_trainer|capfirst }}: {{ lesson.trainer }}
+        <small><i class="fas fa-fw fa-user-graduate"></i></small> {{ t_trainer|capfirst }}: <span
+            class="text-danger">{{ lesson.trainer }}</span>
     </p>
-    <div>
-        <a class="btn btn-sm btn-outline-primary" href="javascript:;">
-            Thêm giáo viên dạy thay
-        </a>
+    {% if lesson.substitute_trainer %}
+    <div class="div-substitute-trainer">
+        <i class="fas fa-chalkboard-teacher"></i> Dạy thay bởi: <span
+            class="text-primary">{{ lesson.substitute_trainer }}</span>
+        <a class="text-danger remove-substitute-trainer" href="javascript:;"><i class="fa fa-sm fa-fw fa-times"></i></a>
     </div>
+    {% endif %}
+
+    <button id="btn_modal_substitute_trainer" type="button" class="btn btn-sm btn-outline-secondary {% if lesson.substitute_trainer %}d-none{% endif%}" data-toggle="modal"
+        data-target="#modal_substitute_trainer">
+        Thêm huấn luyện viên dạy thay
+    </button>
 </div>
 <!-- Content Row -->
 <div class="row mt-3">
@@ -36,39 +45,41 @@
             <div class="card-body">
                 <div id="studied_roll_calls" class="list-group">
                     {% if studied_roll_calls %}
-                        {% for r in studied_roll_calls %}
-                        <li
-                            class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">
-                            <span class="badge badge-secondary">{{ r.id }}</span>
-                            {{ r.card.trainee }}
-                            <a href="javascript:;" class="a-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
-                                <span class="badge badge-danger badge-pill">{% trans 'remove' %}</span>
-                            </a>
-                        </li>
-                        {% endfor %}
+                    {% for r in studied_roll_calls %}
+                    <li
+                        class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">
+                        <span class="badge badge-secondary">{{ r.id }}</span>
+                        {{ r.card.trainee }}
+                        <a href="javascript:;" class="a-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
+                            <span class="badge badge-danger badge-pill">{% trans 'remove' %}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
                     {% else %}
-                        {% if make_up_lessons %}
-                            {% for m in make_up_lessons %}
-                                <li class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center">
-                                    <span class="badge badge-secondary">học bù</span>
-                                    {{ m.roll_call.card.trainee }}
-                                    <a href="javascript:;" class="a-make-up-lesson" data-make-up-lessson="{{m.pk}}">
-                                        <span class="badge badge-danger badge-pill">{% trans 'remove' %}</span>
-                                    </a>
-                                    <form class="d-none" action="{% url 'dashboard:make-up-lessons-delete-in-lesson-roll-call' pk=m.pk lesson_id=lesson.pk %}"
-                                        method="post">
-                                        {% csrf_token %}
-                                        <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
-                                    </form>
-                                </li>
-                            {% endfor %}
-                        {% else %}
-                            {% trans 'trainee' as t_trainee %}
-                            <li id="item_no_trainee"
-                                class="list-group-item list-group-item-action list-group-item-danger align-items-center">
-                                {% blocktrans with value=t_trainee trimmed %}No {{ value }} yet{% endblocktrans %}
-                            </li>
-                        {% endif %}
+                    {% if make_up_lessons %}
+                    {% for m in make_up_lessons %}
+                    <li
+                        class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center">
+                        <span class="badge badge-secondary">học bù</span>
+                        {{ m.roll_call.card.trainee }}
+                        <a href="javascript:;" class="a-make-up-lesson" data-make-up-lessson="{{m.pk}}">
+                            <span class="badge badge-danger badge-pill">{% trans 'remove' %}</span>
+                        </a>
+                        <form class="d-none"
+                            action="{% url 'dashboard:make-up-lessons-delete-in-lesson-roll-call' pk=m.pk lesson_id=lesson.pk %}"
+                            method="post">
+                            {% csrf_token %}
+                            <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                        </form>
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    {% trans 'trainee' as t_trainee %}
+                    <li id="item_no_trainee"
+                        class="list-group-item list-group-item-action list-group-item-danger align-items-center">
+                        {% blocktrans with value=t_trainee trimmed %}No {{ value }} yet{% endblocktrans %}
+                    </li>
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>
@@ -86,26 +97,26 @@
                 <p><i class="far fd-sm fa-fw fa-hand-pointer"></i>{% trans 'Select to do a roll call' %}</p>
                 <div class="list-group" id="un_studied_roll_calls">
                     {% for r in un_studied_roll_calls %}
-                        {% if r.make_up_lesson %}
-                        <li
-                            class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center">
-                            <span class="badge badge-secondary">đã học bù</span>
-                            {{ r.card.trainee }}
-                            <a href="javascript:;" class="">
-                                <span class="badge badge-secondary">chi tiết</span>
-                            </a>
-                        </li>
-                        {% else %}
-                        <li
-                            class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">
-                            <span class="badge badge-secondary">{{ r.id }}</span>
-                            {{ r.card.trainee }}
-                            <a href="javascript:;" class="a-un-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
-                                <span class="badge badge-success badge-pill">{% trans 'select' %}</span>
-                            </a>
-                        </li>
-                        {% endif %}
-                    
+                    {% if r.make_up_lesson %}
+                    <li
+                        class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center">
+                        <span class="badge badge-secondary">đã học bù</span>
+                        {{ r.card.trainee }}
+                        <a href="javascript:;" class="">
+                            <span class="badge badge-secondary">chi tiết</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li
+                        class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">
+                        <span class="badge badge-secondary">{{ r.id }}</span>
+                        {{ r.card.trainee }}
+                        <a href="javascript:;" class="a-un-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
+                            <span class="badge badge-success badge-pill">{% trans 'select' %}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
                     {% endfor %}
                 </div>
             </div>
@@ -127,14 +138,14 @@
                 <h4 id="model_title" class="modal-title">
                     Thêm người học bù
                 </h4>
-                <button id="btn_modal_close" type="button" class="btn btn-sm btn-danger" data-dismiss="modal">&times;</button>
+                <button id="btn_modal_close" type="button" class="btn btn-sm btn-danger"
+                    data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="form_make_up">
                     <div class="form-group">
                         <label for="">Học viên</label>
-                        <select name="trainee" id="trainee" class="form-control selectpicker"
-                            data-live-search="true">
+                        <select name="trainee" id="trainee" class="form-control selectpicker" data-live-search="true">
                             <option value="-1" data-tokens="">Vui lòng chọn</option>
                             {% for trainee in trainees %}
                             <option value="{{ trainee.pk }}"
@@ -151,6 +162,39 @@
                                 Buổi học hợp lệ để đăng kí học bù được hiển thị ở đây
                             </span>
                         </div>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-success">Hoàn thành</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Substitute Trainer Modal -->
+<div class="modal" id="modal_substitute_trainer">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-none">
+                <h4 id="model_title" class="modal-title">
+                    Thêm huấn luyện viên dạy thay
+                </h4>
+                <button id="btn_modal_close_substitute_trainer" type="button" class="btn btn-sm btn-danger"
+                    data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form_substitute_trainer">
+                    <div class="form-group">
+                        <label for="">Huấn luyện viên</label>
+                        <select name="sub_trainer" id="sub_trainer" class="form-control selectpicker"
+                            data-live-search="true">
+                            <option value="-1" data-tokens="">Vui lòng chọn</option>
+                            {% for sub_trainer in available_substitute_trainers %}
+                            <option value="{{ sub_trainer.pk }}"
+                                data-tokens="{{sub_trainer.user.first_name|slice:'1' }}{{sub_trainer.user.last_name|slice:'1' }} {{sub_trainer}}">
+                                {{ sub_trainer }}
+                            </option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-sm btn-outline-success">Hoàn thành</button>
                 </form>
@@ -322,18 +366,18 @@
                 var _url = '{% url "dashboard:make-up-lessons-delete-in-lesson-roll-call" pk=0 lesson_id=lesson.pk %}';
                 var url = _url.replace('0', data['roll_call']['id']);
                 //
-                str='<li class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center">';
-                str+='<span class="badge badge-secondary">học bù</span>';
-                str+= data['roll_call']['card']['trainee']['user']['first_name'] + ' ' + data['roll_call']['card']['trainee']['user']['last_name'];
-                str+='<a href="javascript:;" class="a-make-up-lesson" data-make-up-lessson="'+ data['id'] +'">';
-                    str+='<span class="badge badge-danger badge-pill">{% trans "remove" %}</span>';
-                str+='</a>';
-                str+='<form class="d-none" action="'+ url +'" method="post">';
-                str+='{% csrf_token %}';    
-                str+='<input type="submit" onclick="return confirm(\'Are you sure?\');" value="Confirm">';
-                str+='</form></li>';
+                str = '<li class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center">';
+                str += '<span class="badge badge-secondary">học bù</span>';
+                str += data['roll_call']['card']['trainee']['user']['first_name'] + ' ' + data['roll_call']['card']['trainee']['user']['last_name'];
+                str += '<a href="javascript:;" class="a-make-up-lesson" data-make-up-lessson="' + data['id'] + '">';
+                str += '<span class="badge badge-danger badge-pill">{% trans "remove" %}</span>';
+                str += '</a>';
+                str += '<form class="d-none" action="' + url + '" method="post">';
+                str += '{% csrf_token %}';
+                str += '<input type="submit" onclick="return confirm(\'Are you sure?\');" value="Confirm">';
+                str += '</form></li>';
                 // 
-                
+
                 $('#item_no_trainee').hide();
                 $('#studied_roll_calls').append(str);
                 $('form#form_make_up').trigger("reset");
@@ -349,9 +393,71 @@
         }
     });
 
-    $(document).on('click','.a-make-up-lesson', function(){
+    $(document).on('click', '.a-make-up-lesson', function () {
         $(this).siblings('form').children('input[type=submit]').click();
     });
 
+    $(document).on('submit', 'form#form_substitute_trainer', function (e) {
+        e.preventDefault();
+        var sub_trainer = $('#sub_trainer').val();
+        if (sub_trainer == null || parseInt(sub_trainer) == -1) {
+            alert("Vui lòng chọn Huấn luyện viên");
+        } else {
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: "{% url 'dashboard:lessons-substitute-trainer' lesson.pk %}",
+                method: 'POST',
+                data: {
+                    'sub_trainer': sub_trainer
+                },
+            }).done((data) => {
+                str = `
+                    <div class="div-substitute-trainer">
+                    <i class="fas fa-chalkboard-teacher"></i> Dạy thay bởi: <span class="text-primary">`;
+                str+= data['substitute_trainer']['user']['first_name'] + data['substitute_trainer']['user']['last_name']
+                str+= `</span>
+                    <a class="text-danger remove-substitute-trainer" href="javascript:;"><i class="fa fa-sm fa-fw fa-times"></i></a>
+                    </div>`;
+                $('#btn_modal_substitute_trainer').addClass('d-none');
+                $('#head_contain').append(str);
+                $('#btn_modal_close_substitute_trainer').click();
+                Swal.fire(
+                    "{% trans 'done' as t_done %}{{ t_done|title }}",
+                    "Thêm huấn luyện viên dạy thay thành công",
+                    'success'
+                );
+                console.log(data);
+            }).fail((err) => {
+                Swal.fire(
+                    "{% trans 'error' as t_error %}{{ t_error|title }}",
+                    err['responseText'],
+                    'error'
+                )
+            });
+        }
+    });
+
+    $(document).on('click', '.remove-substitute-trainer', function () {
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: "{% url 'dashboard:lessons-substitute-trainer' lesson.pk %}",
+            method: 'DELETE',
+        }).done((data) => {
+            $('.div-substitute-trainer').remove();
+            $('#btn_modal_substitute_trainer').removeClass('d-none');
+            Swal.fire(
+                "{% trans 'done' as t_done %}{{ t_done|title }}",
+                "Xóa huấn luyện viên dạy thay thành công",
+                'success'
+            );
+            console.log(data);
+        }).fail((err) => {
+            console.log(err);
+        });
+    });
 </script>
 {% endblock %}

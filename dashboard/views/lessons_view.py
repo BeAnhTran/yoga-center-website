@@ -15,8 +15,10 @@ from django.shortcuts import render
 from django.db import transaction
 from datetime import datetime, timedelta
 from dateutil import parser
-from core.models import Trainee
+from core.models import Trainee, Trainer
 from make_up_lessons.models import MakeUpLesson
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
 
 @method_decorator([login_required, staff_required], name='dispatch')
@@ -99,6 +101,9 @@ class ListRollCallApiView(View):
         total_count = un_studied_roll_calls.count() + studied_roll_calls.count()
         trainees = Trainee.objects.all()
         make_up_lessons = MakeUpLesson.objects.filter(lesson=lesson)
+        available_substitute_trainers = Trainer.objects.filter(
+            ~Q(pk=lesson.trainer.pk))
+
         context = {
             'lesson': lesson,
             'un_studied_roll_calls': un_studied_roll_calls,
@@ -106,6 +111,37 @@ class ListRollCallApiView(View):
             'active_nav': 'roll_calls',
             'total_count': total_count,
             'trainees': trainees,
-            'make_up_lessons': make_up_lessons
+            'make_up_lessons': make_up_lessons,
+            'available_substitute_trainers': available_substitute_trainers
         }
         return render(request, self.template_name, context=context)
+
+
+@method_decorator([login_required, staff_required], name='dispatch')
+class SubstituteTrainerApi(APIView):
+    def post(self, request, pk, format=None):
+        from lessons.utils import check_overlap_in_list_lesson
+        sub_trainer = get_object_or_404(
+            Trainer, pk=request.POST['sub_trainer'])
+        lesson = get_object_or_404(Lesson, pk=pk)
+        if lesson.substitute_trainer:
+            return Response('Đã có huấn luyện viên dạy bù', status=status.HTTP_400_BAD_REQUEST)
+        sub_trainer_lessons_on_day = sub_trainer.lessons.filter(
+            date=lesson.date)
+        check = check_overlap_in_list_lesson(
+            lesson.start_time, lesson.end_time, sub_trainer_lessons_on_day)
+        if check['value'] is True:
+            return Response('HLV bạn chọn đã bận dạy buổi học khác cùng khung giờ', status=status.HTTP_400_BAD_REQUEST)
+        try:
+            lesson.substitute_trainer = sub_trainer
+            lesson.save()
+            serializer = LessonSerializer(lesson)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        lesson = get_object_or_404(Lesson, pk=pk)
+        lesson.substitute_trainer = None
+        lesson.save()
+        return Response('Xóa thành công', status=status.HTTP_200_OK)

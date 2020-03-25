@@ -10,6 +10,7 @@ class LessonSerializer(serializers.ModelSerializer):
     room = RoomSerializer()
     yogaclass = YogaClassSerializer()
     trainer = TrainerSerializer()
+    substitute_trainer = TrainerSerializer(read_only=True)
 
     class Meta:
         model = Lesson

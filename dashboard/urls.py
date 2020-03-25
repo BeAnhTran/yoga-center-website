@@ -47,6 +47,8 @@ lessons_urlpatterns = [
         name='lessons-detail-json'),
     url(r'^(?P<pk>[0-9]+)/roll-calls/$', lessons_view.ListRollCallApiView.as_view(),
         name='lessons-roll-calls'),
+    url(r'^(?P<pk>[0-9]+)/substitute-trainer/$', lessons_view.SubstituteTrainerApi.as_view(),
+        name='lessons-substitute-trainer'),
 ]
 
 # ROOMS

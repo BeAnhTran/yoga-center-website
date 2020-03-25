@@ -39,6 +39,8 @@ class Lesson(models.Model):
         'Final time'), verbose_name=_('end time'))
     notes = models.TextField(blank=True, null=True, verbose_name=_('notes'))
     is_full = models.BooleanField(default=False, verbose_name=_('is full'))
+    substitute_trainer = models.ForeignKey(
+        Trainer, on_delete=models.SET_NULL, related_name='substitute_lessons', verbose_name=_('substitute trainer'), blank=True, null=True)
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
@@ -81,12 +83,12 @@ class Lesson(models.Model):
             self.start_time, self.end_time, room_lessons_on_day)
         check3 = check_overlap_in_list_lesson(
             self.start_time, self.end_time, trainer_lessons_on_day)
-        if any(v['value'] is False for v in [check1, check2, check3]):
-            if check1['value'] is False:
+        if any(v['value'] is True for v in [check1, check2, check3]):
+            if check1['value'] is True:
                 obj = check1['object']
                 raise ValidationError(
                     _('overlap time').capitalize() + ': ' + obj.__str__())
-            elif check2['value'] is False:
+            elif check2['value'] is True:
                 obj = check2['object']
                 raise ValidationError(
                     _('overlap time').capitalize() + ': ' + obj.__str__())
@@ -131,14 +133,3 @@ class Lesson(models.Model):
         if self.roll_calls.all().count() < self.max_people():
             return False
         return True
-
-
-class SubstituteTrainer(models.Model):
-    lesson = models.ForeignKey(
-        Lesson, on_delete=models.CASCADE, related_name='substitute_teacher', verbose_name=_('lesson'))
-    trainer = models.ForeignKey(
-        Trainer, on_delete=models.CASCADE, related_name='substitute_lesson', verbose_name=_('trainer'))
-    created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name=_('created at'))
-    updated_at = models.DateTimeField(
-        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))

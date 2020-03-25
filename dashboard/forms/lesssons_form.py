@@ -13,7 +13,6 @@ from getenv import env
 import datetime
 from django.utils import formats
 
-from lessons.utils import check_overlap_in_list_lesson
 from lectures.models import Lecture
 
 
