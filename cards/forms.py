@@ -7,7 +7,7 @@ from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 import datetime
 from django.utils import formats
 
-from cards.models import Card
+from cards.models import Card, ExtendCardRequest
 
 
 class CardFormForTraineeEnroll(forms.ModelForm):
@@ -157,3 +157,30 @@ class CardPaymentForm(forms.Form):
             }
         )
     )
+
+
+class ExtendCardRequestForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        now = datetime.datetime.now()
+        self.fields['new_expire_date'] = forms.DateField(
+            label=_('new expire date').capitalize(),
+            widget=DatePicker(options={
+                'useCurrent': True,
+            }, attrs={
+                'placeholder': formats.date_format(now, use_l10n=True)
+            }),
+        )
+        self.fields['reason'].widget.attrs = {
+            'rows': 4
+        }
+        self.helper = FormHelper()
+        self.helper.form_show_errors = True
+        self.helper.form_id = 'form_new_lesson'
+        self.helper.add_input(
+            Submit('submit', _('Save'), css_class='btn-success')
+        )
+
+    class Meta:
+        model = ExtendCardRequest
+        exclude = ['created_at', 'updated_at', 'card', 'state']

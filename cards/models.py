@@ -25,3 +25,25 @@ class Card(models.Model):
 
     def end_at(self):
         return self.lessons.order_by('date').last().date
+
+
+STATE_CHOICES = (
+    ('pending', 'Pending'),
+    ('approve', 'Approve'),
+    ('reject', 'Reject'),
+)
+
+
+class ExtendCardRequest(models.Model):
+    card = models.ForeignKey(
+        Card, on_delete=models.CASCADE, related_name='extend_card_requests', verbose_name=_('card')
+    )
+    new_expire_date = models.DateField(verbose_name=_('new expire date'))
+    reason = models.TextField(verbose_name=_('reason'))
+    state = models.CharField(max_length=20,
+                             choices=STATE_CHOICES,
+                             default='pending')
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name=_('created at'))
+    updated_at = models.DateTimeField(
+        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))

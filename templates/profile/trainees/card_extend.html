@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'profile/base.html' %}
 {% load static %}
 {% load i18n %}
 {% load crispy_forms_tags %}
@@ -17,36 +17,23 @@
 <script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-common/main.js' %}"></script>
 <script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-daygrid/main.js' %}"></script>
 <script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-timegrid/main.js' %} "></script>
+<link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
 <link href="{% static 'css/core/profile/trainees/cards/style.css' %}" rel='stylesheet' />
 
 {% endblock %}
 
-{% block content %}
-<section class="page-top-section set-bg" data-setbg="{% static 'img/page-top-bg.jpg'%}">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 m-auto text-white">
-                <h2>{% trans 'Extend Card' %}</h2>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="classes-page-section spad overflow-hidden">
-    <div class="container card mt-3 mb-5" id="content">
-        <div class="card-body">
+{% block profile_content %}
+    <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-md-4 jumbotron">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                    Incidunt reiciendis omnis a velit numquam molestias quis illum at voluptas distinctio dolorum molestiae vel, 
-                    iusto earum quia ea, quasi, iure mollitia!
+                <div class="col-md-4 bg-grey">
+                    <p class="text-center bg-secondary text-white">GIA HẠN THẺ TẬP</p>
+                    {%  crispy form %}
                 </div>
                 <div class="col-md-8">
                     <div id='calendar'></div>
                 </div>
             </div>
-        </div>
     </div>
-</section>
 
 {% endblock %}
 
@@ -66,10 +53,8 @@
         var calendar = new FullCalendar.Calendar(calendarEl, {
             plugins: ['interaction', 'dayGrid'],
             defaultDate: Date.now(),
-            editable: true,
-            dragRevertDuration: 0,
-            dropAccept: '#do-not-drop',
             locale: "{{ request.LANGUAGE_CODE }}",
+            contentHeight:"auto",
             events: function (fetchInfo, successCallback, failureCallback) {
                 $.ajax({
                     url: "{% url 'classes:get-list-lesson' card.yogaclass.slug %}",
@@ -82,7 +67,7 @@
                         console.log('data lesson events', data);
                         var events = [];
                         for (var i = 0; i < data.length; i++) {
-                            var _d = data[i]['day'];
+                            var _d = data[i]['date'];
                             var _st = data[i]['start_time'];
                             var _et = data[i]['end_time'];
                             var _start_time = _d + ' ' + _st;
@@ -91,7 +76,6 @@
                             var end_time = new Date(_end_time);
                             var bg_color = '#0c9463';
                             var border_color = '#0c9463';
-                            var editable = true;
                             var title_tooltip = null;
                             if (data[i]['is_full'] == true) {
                                 bg_color = '#ef4339';
@@ -115,46 +99,12 @@
                                 allDaySlot: false,
                                 backgroundColor: bg_color,
                                 borderColor: border_color,
-                                editable: editable,
                                 titleTooltip: title_tooltip
                             });
                         }
                         successCallback(events);
                     }
                 });
-            },
-            eventDragStop: function (info) {
-                var start_at = new Date(info.event.start);
-                var end_at = new Date(info.event.end);
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                var _date_trial = start_at.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options)
-                if (isEventOverDiv(info.jsEvent.offsetX, info.jsEvent.offsetY)) {
-                    content = "<div id=trial_" + info.event.id + " class='fc-event fc-event-trial'>";
-                    content += '(' + info.event.title + ') ' + _date_trial;
-                    content += '<a href="javascript:;" class="float-right a-remove-trial-lesson"><i class="fa fa-fw fa-times"></i></a>';
-                    content += "</div>";
-                    // content += info.event
-                    if ($('#trial-lesson-listing').children().length > 0) {
-                        Swal.fire(
-                            "{% trans 'error' as t_error %}{{ t_error|title }}",
-                            "{% trans 'Trial lesson has been added' %}",
-                            'error'
-                        )
-                    } else {
-                        $(content).appendTo('#trial-lesson-listing');
-                        const input_date_options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-                        var date1 = start_at.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', input_date_options);
-                        var date2 = end_at.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', input_date_options);
-                        $('#id_start_at').val(date1);
-                        $('#id_end_at').val(date2);
-                    }
-                }
-            },
-            eventDrop: function (info) {
-                if (info != undefined) {
-                    info.revert();
-                }
-                console.log("event drop");
             },
             eventRender: function (info) {
                 if (info.event.extendedProps.titleTooltip) {

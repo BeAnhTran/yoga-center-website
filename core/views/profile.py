@@ -14,6 +14,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.decorators import api_view, renderer_classes
 from django.db import transaction
 from cards.models import Card
+from cards.forms import ExtendCardRequestForm
 
 
 @method_decorator([login_required], name='dispatch')
@@ -115,7 +116,9 @@ class TraineeCardExtendView(View):
 
     def get(self, request, pk):
         card = Card.objects.get(pk=pk)
+        form = ExtendCardRequestForm()
         context = {}
         context['card'] = card
+        context['form'] = form
         context['sidebar_profile'] = 'cards'
         return render(request, self.template_name, context=context)
