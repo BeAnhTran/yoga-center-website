@@ -11,7 +11,7 @@ class YogaClass(models.Model):
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name='classes', verbose_name=_('course'))
     trainer = models.ForeignKey(
-        Trainer, on_delete=models.CASCADE, related_name='classes', verbose_name=_('trainer'), blank=True, null=True)
+        Trainer, on_delete=models.CASCADE, related_name='classes', verbose_name=_('trainer'))
     name = models.CharField(max_length=120, verbose_name=_('name'))
     slug = models.SlugField(max_length=150, unique=True,
                             verbose_name=_('slug'))

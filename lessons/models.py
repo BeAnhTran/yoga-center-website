@@ -27,7 +27,7 @@ class Lesson(models.Model):
     room = models.ForeignKey(
         Room, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('room'),)
     trainer = models.ForeignKey(
-        Trainer, on_delete=models.SET_NULL, related_name='lessons', verbose_name=_('trainer'), blank=True, null=True)
+        Trainer, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('trainer'))
     lectures = models.ManyToManyField(
         to='lectures.Lecture', related_name='lessons', verbose_name='lectures')
     state = models.IntegerField(choices=STATE_CHOICES,
