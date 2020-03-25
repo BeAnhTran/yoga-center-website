@@ -31,6 +31,8 @@ class ProfileView(View):
         context['form1'] = form1
         context['form_basic_info'] = form_basic_info
         context['form_additional_info'] = form_additional_info
+        context['sidebar_profile'] = 'info'
+
         if request.user.is_trainee:
             form_health_condition = HealthConditionForm(
                 instance=request.user.trainee)
@@ -76,6 +78,7 @@ class ProfileView(View):
             'form_basic_info': form_basic_info,
             'form_additional_info': form_additional_info
         }
+        context['sidebar_profile'] = 'info'
         return render(request, self.template_name, context=context)
 
 
@@ -102,6 +105,7 @@ class TraineeCardsView(View):
         context = {}
         cards = request.user.trainee.cards.all()
         context['cards'] = cards
+        context['sidebar_profile'] = 'cards'
         return render(request, self.template_name, context=context)
 
 
@@ -113,4 +117,5 @@ class TraineeCardExtendView(View):
         card = Card.objects.get(pk=pk)
         context = {}
         context['card'] = card
+        context['sidebar_profile'] = 'cards'
         return render(request, self.template_name, context=context)

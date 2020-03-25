@@ -20,5 +20,8 @@ class Card(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
 
+    def start_at(self):
+        return self.lessons.order_by('date').first().date
+
     def end_at(self):
-        return self.lessons.last().date
+        return self.lessons.order_by('date').last().date
