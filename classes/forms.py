@@ -1,18 +1,5 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row, Column
-
-from classes.models import YogaClass
-from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
-from datetime import datetime
-from django.utils.formats import get_format
-from django.utils import formats
-from courses.models import LEVEL_CHOICES
-from courses.models import Course
-from core.models import Trainer
-from django.db.models import Value as V
-from django.db.models.functions import Concat
 
 
 class FilterForm(forms.Form):
@@ -26,8 +13,6 @@ class FilterForm(forms.Form):
         (ADVANCED_LEVEL, _('Advanced Level')),
     )
 
-    QUERY_COURSE = []
-    QUERY_TRAINER = []
     level = forms.ChoiceField(
         widget=forms.Select(attrs={'class': 'circle-select'}),
         choices=LEVEL_CHOICES,
@@ -35,10 +20,16 @@ class FilterForm(forms.Form):
     course = forms.ChoiceField(
         widget=forms.Select(
             attrs={'class': 'circle-select'}),
-        choices=QUERY_COURSE,
         required=False)
     trainer = forms.ChoiceField(
         widget=forms.Select(
             attrs={'class': 'circle-select'}),
-        choices=QUERY_TRAINER,
         required=False)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if kwargs.get('initial') is not None:
+            if kwargs.get('initial').get('query_course') is not None:
+                self.fields['course'].choices = kwargs['initial']['query_course']
+            if kwargs.get('initial').get('query_trainer') is not None:
+                self.fields['trainer'].choices = kwargs['initial']['query_trainer']

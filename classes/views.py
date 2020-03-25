@@ -39,6 +39,8 @@ from common.services.card_invoice_service import CardInvoiceService
 from common.services.roll_call_service import RollCallService
 from django.contrib import messages
 from classes.forms import FilterForm
+from django.db.models import Value as V
+from django.db.models.functions import Concat
 
 
 class YogaClassListView(ListView):
@@ -49,8 +51,18 @@ class YogaClassListView(ListView):
     paginate_by = 5
 
     def get_context_data(self, **kwargs):
+        query_course = list(((None, 'Chọn khóa học'),)) + \
+            list(Course.objects.values_list('slug', 'name'))
+        query_trainer = list(((None, 'Chọn huấn luyện viên'),)) + list(Trainer.objects.annotate(
+            full_name=Concat('user__first_name', V(' '), 'user__last_name')).values_list('user__slug', 'full_name'))
+
         context = super(YogaClassListView, self).get_context_data(**kwargs)
-        form_filter = FilterForm()
+        form_filter = FilterForm(
+            initial={
+                'query_course': query_course,
+                'query_trainer': query_trainer
+            }
+        )
         if self.request.GET.get('course'):
             form_filter.fields['course'].initial = self.request.GET.get(
                 'course')

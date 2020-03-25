@@ -13,7 +13,7 @@ from django.utils.formats import date_format
 
 
 ACTIVE_STATE = 0
-INACTIVE_STATE = 1
+INACTIVE_STATE = 2
 
 STATE_CHOICES = (
     (ACTIVE_STATE, _('Active')),
@@ -71,7 +71,8 @@ class Lesson(models.Model):
             room_lessons_on_day = room.lessons.filter(
                 date=self.date).exclude(pk=self.id)
         else:
-            class_lessons_on_day = self.yogaclass.lessons.filter(date=self.date)
+            class_lessons_on_day = self.yogaclass.lessons.filter(
+                date=self.date)
             room_lessons_on_day = room.lessons.filter(date=self.date)
 
         check1 = check_overlap_in_list_lesson(
@@ -130,3 +131,14 @@ class Lesson(models.Model):
         if self.roll_calls.all().count() < self.max_people():
             return False
         return True
+
+
+class SubstituteTrainer(models.Model):
+    lesson = models.ForeignKey(
+        Lesson, on_delete=models.CASCADE, related_name='substitute_teacher', verbose_name=_('lesson'))
+    trainer = models.ForeignKey(
+        Trainer, on_delete=models.CASCADE, related_name='substitute_lesson', verbose_name=_('trainer'))
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name=_('created at'))
+    updated_at = models.DateTimeField(
+        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))

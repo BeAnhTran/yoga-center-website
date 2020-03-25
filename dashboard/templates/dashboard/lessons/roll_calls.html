@@ -10,11 +10,19 @@
 {% endblock %}
 {% block content %}
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between">
-    <h5>
-        <small><i class="fab fa-fw fa-leanpub"></i></small>
-        {{ lesson.yogaclass }} - {{ lesson.get_time_and_room_detail }}
-    </h5>
+<div>
+    <p>
+        <small><i class="fab fa-fw fa-leanpub"></i></small> {{ lesson.yogaclass }} - {{ lesson.get_time_and_room_detail }}
+    </p>
+    <p>
+        {% trans 'trainer' as t_trainer %}
+        <small><i class="fas fa-fw fa-user-graduate"></i></small> {{ t_trainer|capfirst }}: {{ lesson.trainer }}
+    </p>
+    <div>
+        <a class="btn btn-sm btn-outline-primary" href="javascript:;">
+            Thêm giáo viên dạy thay
+        </a>
+    </div>
 </div>
 <!-- Content Row -->
 <div class="row mt-3">
@@ -104,6 +112,11 @@
 
         </div>
     </div>
+</div>
+<div class="mt-3">
+    <a class="btn btn-sm btn-outline-primary" href="{{request.META.HTTP_REFERER}}">
+        <i class="fas fa-fw fa-arrow-left"></i>
+    </a>
 </div>
 
 <!-- The Modal -->

@@ -691,7 +691,7 @@ msgstr "phòng tập"
 #: .\dashboard\templates\dashboard\lessons\list.html:32
 #: .\dashboard\templates\dashboard\rooms\detail.html:45 .\lessons\models.py:35
 msgid "date"
-msgstr "cập nhật"
+msgstr "ngày"
 
 #: .\dashboard\forms\lesssons_form.py:37
 #: .\dashboard\templates\dashboard\rooms\detail.html:49 .\lessons\models.py:37
