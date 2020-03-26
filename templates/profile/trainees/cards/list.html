@@ -6,7 +6,10 @@
 {% block specified_css %}
 <link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/profile/trainees/cards/style.css' %}">
+{% endblock %}
 
+{% block header_path %}
+    <a class="text-danger" href="{% url 'core:profile-trainee-cards' %}">Thẻ tập</a>
 {% endblock %}
 
 {% block profile_content %}
@@ -61,13 +64,16 @@
     </div>
     <div class="card-footer">
         <div class="float-right">
-            <a class="btn btn-sm btn-outline-secondary" href="{% url 'core:profile-trainee-card-extend' card.id %}">
+            <a class="btn btn-sm btn-secondary" href="{% url 'core:profile-trainee-cards-detail' card.id %}">
+                {% trans 'Detail' %}
+            </a>
+            <a class="btn btn-sm btn-secondary" href="{% url 'core:profile-trainee-card-extend' card.id %}">
                 {% trans 'Extend' %}
             </a>
-            <a class="btn btn-sm btn-outline-secondary" href="javascript:;" class="ml-1">
+            <a class="btn btn-sm btn-secondary" href="javascript:;" class="ml-1">
                 {% trans 'Refund' %}
             </a>
-            <a class="btn btn-sm btn-outline-secondary" href="javascript:;" class="ml-1">
+            <a class="btn btn-sm btn-secondary" href="javascript:;" class="ml-1">
                 {% trans 'Payment History' %}
             </a>
         </div>
@@ -78,9 +84,4 @@
 {% endblock %}
 
 {% block specified_js %}
-<script>
-    $(function () {
-        $('html, body').animate({ scrollTop: $('#content_cards').offset().top }, 'slow');
-    });
-</script>
 {% endblock %}

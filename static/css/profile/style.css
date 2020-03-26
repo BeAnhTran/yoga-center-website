@@ -65,7 +65,6 @@ input, textarea {
   
   .form-control{
     height: calc(2.25em + .75rem + 2px);
-    border: 1px solid transparent;
     background-color: #f8f8f8;
     padding: 13px 20px;
   }
@@ -155,7 +154,7 @@ input, textarea {
     box-shadow: 0 12px 20px 1px rgba(64, 64, 64, .11);
   }
 
-  .list-group-item i {
+  .list-group-item-custom i {
     display: inline-block;
     margin-top: -1px;
     margin-right: 8px;
@@ -163,41 +162,39 @@ input, textarea {
     vertical-align: middle;
 }
 
-.list-group-item.active:not(.disabled) {
+.list-group-item-custom.active:not(.disabled) {
     border-color: #e7e7e7;
     background: #fff;
     color: #fb3958;
-    cursor: default;
-    pointer-events: none;
+    cursor: pointer;
 }
-.list-group-flush:last-child .list-group-item:last-child {
+.list-group-flush:last-child .list-group-item-custom:last-child {
     border-bottom: 0;
 }
 
-.list-group-flush .list-group-item {
+.list-group-flush .list-group-item-custom {
     border-right: 0 !important;
     border-left: 0 !important;
 }
 
-.list-group-flush .list-group-item {
+.list-group-flush .list-group-item-custom {
     border-right: 0;
     border-left: 0;
     border-radius: 0;
 }
-.list-group-item.active {
-    z-index: 2;
+.list-group-item-custom.active {
     color: #fff;
 }
-.list-group-item:last-child {
+.list-group-item-custom:last-child {
     margin-bottom: 0;
     border-bottom-right-radius: .25rem;
     border-bottom-left-radius: .25rem;
 }
-a.list-group-item, .list-group-item-action {
+a.list-group-item-custom, .list-group-item-custom-action {
     color: #404040;
     font-weight: 600;
 }
-.list-group-item {
+.list-group-item-custom {
     padding-top: 16px;
     padding-bottom: 16px;
     -webkit-transition: all .3s;
@@ -208,7 +205,7 @@ a.list-group-item, .list-group-item-action {
     font-size: 14px;
     text-decoration: none;
 }
-.list-group-item {
+.list-group-item-custom {
     position: relative;
     display: block;
     margin-bottom: -1px;
@@ -216,16 +213,16 @@ a.list-group-item, .list-group-item-action {
     border: 1px solid rgba(0,0,0,0.125);
     font-weight: 600;
 }
-.list-group-item.active:not(.disabled)::before {
+.list-group-item-custom.active:not(.disabled)::before {
     background-color: #fb3958;
 }
 
-.list-group-item::before {
+.list-group-item-custom::before {
     display: block;
     position: absolute;
     top: 0;
     left: 0;
-    width: 5px;
+    width: 3px;
     height: 100%;
     background-color: transparent;
     content: '';

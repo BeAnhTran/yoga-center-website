@@ -8,6 +8,11 @@
 <link rel="stylesheet" href="{% static 'vendor/acc-wizard-master/release/acc-wizard.min.css' %}">
 {% endblock %}
 
+{% block header_path %}
+    <a class="text-danger" href="javascript:;">Thông tin cá nhân</a>
+{% endblock %}
+
+
 {% block profile_content %}
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
@@ -19,7 +24,7 @@
     <div class="panel panel-default">
         <div class="panel-heading" id="headingOne">
             <h3>
-                <a href="#collapseOne" data-toggle="collapse"
+                <a class="text-secondary" href="#collapseOne" data-toggle="collapse"
                     data-parent="#accordion">{% trans 'Basic information' %}</a>
             </h3>
         </div>
@@ -34,7 +39,7 @@
     <div class="panel panel-default">
         <div class="panel-heading" id="headingTwo">
             <h3>
-                <a href="#collapseTwo" data-toggle="collapse"
+                <a class="text-secondary" href="#collapseTwo" data-toggle="collapse"
                     data-parent="#accordion">{% trans 'Additional information' %}</a>
             </h3>
         </div>
@@ -47,7 +52,7 @@
     <div class="panel panel-default">
         <div class="panel-heading" id="headingTwo">
             <h3>
-                <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion">
+                <a class="text-secondary" href="#collapseThree" data-toggle="collapse" data-parent="#accordion">
                     {% trans 'health condition' as t_health_con %}
                     {{ t_health_con|capfirst }}
                 </a>

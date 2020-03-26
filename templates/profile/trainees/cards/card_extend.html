@@ -19,7 +19,14 @@
 <script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-timegrid/main.js' %} "></script>
 <link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
 <link href="{% static 'css/core/profile/trainees/cards/style.css' %}" rel='stylesheet' />
+{% endblock %}
 
+{% block header_path %}
+    <a class="text-danger" href="{% url 'core:profile-trainee-cards' %}">Thẻ tập</a>
+    ⁄
+    <a class="text-danger" href="javascript:;">{{ card.yogaclass }} - {{ card.card_type }}</a>
+    ⁄
+    <a class="text-danger" href="javascript:;">Gia hạn</a>
 {% endblock %}
 
 {% block profile_content %}

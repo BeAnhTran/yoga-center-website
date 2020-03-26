@@ -26,6 +26,12 @@ class Card(models.Model):
     def end_at(self):
         return self.lessons.order_by('date').last().date
 
+    def total_lesson(self):
+        return self.lessons.count()
+
+    def number_of_studied_lesson(self):
+        return self.roll_calls.filter(studied=True).count()
+
 
 STATE_CHOICES = (
     ('pending', 'Pending'),

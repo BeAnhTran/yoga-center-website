@@ -96,29 +96,3 @@ def update_health_condition(request):
         serialized = TraineeSerializer(trainee)
         return Response(serialized.data)
     return HttpResponse(form.errors.as_json(), status=400)
-
-
-@method_decorator([login_required, trainee_required], name='dispatch')
-class TraineeCardsView(View):
-    template_name = 'profile/trainees/cards.html'
-
-    def get(self, request):
-        context = {}
-        cards = request.user.trainee.cards.all()
-        context['cards'] = cards
-        context['sidebar_profile'] = 'cards'
-        return render(request, self.template_name, context=context)
-
-
-@method_decorator([login_required, trainee_required], name='dispatch')
-class TraineeCardExtendView(View):
-    template_name = 'profile/trainees/card_extend.html'
-
-    def get(self, request, pk):
-        card = Card.objects.get(pk=pk)
-        form = ExtendCardRequestForm()
-        context = {}
-        context['card'] = card
-        context['form'] = form
-        context['sidebar_profile'] = 'cards'
-        return render(request, self.template_name, context=context)
