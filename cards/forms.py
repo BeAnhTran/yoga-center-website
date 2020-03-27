@@ -168,7 +168,7 @@ class ExtendCardRequestForm(forms.ModelForm):
             widget=DatePicker(options={
                 'useCurrent': True,
             }, attrs={
-                'placeholder': formats.date_format(now, use_l10n=True)
+                'placeholder': 'Vui lòng chọn ngày'
             }),
         )
         self.fields['reason'].widget.attrs = {
@@ -176,11 +176,22 @@ class ExtendCardRequestForm(forms.ModelForm):
         }
         self.helper = FormHelper()
         self.helper.form_show_errors = True
-        self.helper.form_id = 'form_new_lesson'
-        self.helper.add_input(
-            Submit('submit', _('Save'), css_class='btn-success')
-        )
+        self.helper.form_id = 'form_new_extend_card_request'
+        self.helper.layout = Layout(
+            'new_expire_date',
+            'reason',
+            HTML("""
+                <div id='extend_lesson' class="mt-3 mb-3 d-none">
+                    <h4 class="mb-1">{}</h4>
+                    <p>{}</p>
+                    <div id='extend_lesson_list'>
+                    </div>
+                </div>
+            """.format(
+                _('Extend Lesson'),
+                _('Lessons will be added to your card'))),
+            Submit('submit', _('Save'), css_class='btn-success'))
 
     class Meta:
         model = ExtendCardRequest
-        exclude = ['created_at', 'updated_at', 'card', 'state']
+        exclude = ['created_at', 'updated_at', 'state', 'card']

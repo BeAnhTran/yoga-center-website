@@ -1,4 +1,6 @@
 from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
+
 from django.utils.translation import ugettext_lazy as _
 
 from core.models import Trainee
@@ -45,7 +47,7 @@ class ExtendCardRequest(models.Model):
         Card, on_delete=models.CASCADE, related_name='extend_card_requests', verbose_name=_('card')
     )
     new_expire_date = models.DateField(verbose_name=_('new expire date'))
-    reason = models.TextField(verbose_name=_('reason'))
+    reason = RichTextUploadingField(verbose_name=_('reason'))
     state = models.CharField(max_length=20,
                              choices=STATE_CHOICES,
                              default='pending')

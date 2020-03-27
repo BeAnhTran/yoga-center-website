@@ -214,13 +214,14 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full',
+        'width': '100%',
+        'height': '200px',
         'extraPlugins': ','.join(
             [
                 'youtube',
             ]
-        ),
-    },
+        )
+    }
 }
 
 SECURE_SSL_REDIRECT = False

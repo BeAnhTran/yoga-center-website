@@ -5,7 +5,7 @@ from lessons.models import Lesson
 from lessons.serializers.lesson_serializer import LessonSerializer
 from datetime import datetime
 from classes.models import YogaClass
-
+from lessons.models import ACTIVE_STATE
 # Get lessons between startTime and endTime
 # Response to schedule
 
@@ -29,13 +29,14 @@ class get_lesson_list_in_range_time(APIView):
 
 def get_lessons(start_date, end_date, id_class=None, available_only=None):
     filter_options = {
-        'date__range': [start_date, end_date]
+        'state': ACTIVE_STATE,
+        'date__range': [start_date, end_date],
     }
     if available_only is not None:
         filter_options['is_full'] = False
 
     if id_class is not None:
         yoga_class = YogaClass.objects.get(pk=id_class)
-        return yoga_class.lessons.filter(**filter_options)
+        return yoga_class.lessons.filter(**filter_options).order_by('date')
     else:
-        return Lesson.objects.filter(**filter_options)
+        return Lesson.objects.filter(**filter_options).order_by('date')

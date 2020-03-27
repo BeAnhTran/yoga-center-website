@@ -102,7 +102,7 @@
             </h3>
         </div>
 
-        <div id="collapseCardInvoice" class="panel-collapse collapse">
+        <div id="collapseCardInvoice" class="panel-collapse collapse show">
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-sm table-bordered">
@@ -141,7 +141,7 @@
             </h3>
         </div>
 
-        <div id="collapseCardExtendRequest" class="panel-collapse collapse">
+        <div id="collapseCardExtendRequest" class="panel-collapse collapse show">
             <div class="panel-body">
                 {% if card.extend_card_requests.all.count > 0 %}
                 <div class="table-responsive">
@@ -150,19 +150,47 @@
                             <tr class="d-flex">
                                 <th class="col-1">Mã số</th>
                                 <th class="col-3">Thời gian hết hạn mới</th>
-                                <th class="col-3">Lí do</th>
                                 <th class="col-2">Trạng thái</th>
                                 <th class="col-3">Ngày tạo</th>
+                                <th class="col-3">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for extend in card.extend_card_requests.all %}
                             <tr class="d-flex">
                                 <td class="col-1">{{ extend.pk }}</td>
-                                <td class="col-3">{{ extend.new_expire_date }} vnđ</td>
-                                <td class="col-3">{{ extend.reason }}</td>
-                                <td class="col-2">{{ extend.state }}</td>
-                                <td class="col-3">{{ extend.created_at }}</td>
+                                <td class="col-3">{{ extend.new_expire_date }}</td>
+                                <td class="col-2">
+                                    {% if extend.state == 'pending' %}
+                                    <span class="badge badge-pill badge-warning">
+                                        {{ extend.state }}
+                                    </span>
+                                    {% elif extend.state == 'approve' %}
+                                    <span class="badge badge-pill badge-success">
+                                        {{ extend.state }}
+                                    </span>
+                                    {% else %}
+                                    <span class="badge badge-pill badge-secondary">
+                                        {{ extend.state }}
+                                    </span>
+                                    {% endif %}
+                                </td>
+                                <td class="col-3">{{ extend.created_at.date }}</td>
+                                <td class="col-3">
+                                    <a class="btn btn-sm btn-outline-primary" href="javascript:;"><i
+                                            class="fas fa-fw fa-eye"></i>
+                                        {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
+                                    <a class="btn btn-sm btn-outline-warning" href="javascript:;"><i
+                                            class="fas fa-fw fa-edit"></i>
+                                        {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
+                                    <a class="btn btn-sm btn-outline-danger delete-class" href="javascript:;"><i
+                                            class="fas fa-fw fa-trash"></i>
+                                        {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
+                                    <form class="d-none" action="javascript:;" method="post">
+                                        {% csrf_token %}
+                                        <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                                    </form>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -195,4 +223,10 @@
 {% endblock %}
 
 {% block specified_js %}
+<script>
+    $(function () {
+        $('html, body').animate({ scrollTop: $('#{{focus}}').offset().top - 100 }, 'slow');
+    });
+</script>
+
 {% endblock %}
