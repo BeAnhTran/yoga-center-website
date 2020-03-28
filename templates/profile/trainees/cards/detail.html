@@ -177,19 +177,25 @@
                                 </td>
                                 <td class="col-3">{{ extend.created_at.date }}</td>
                                 <td class="col-3">
-                                    <a class="btn btn-sm btn-outline-primary" href="javascript:;"><i
+                                    <a class="btn btn-sm btn-outline-primary"
+                                        href="{% url 'core:profile-trainee-card-extend-request-detail' card.pk extend.pk %}"><i
                                             class="fas fa-fw fa-eye"></i>
                                         {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
-                                    <a class="btn btn-sm btn-outline-warning" href="javascript:;"><i
+                                    {% if extend.state == 'pending' %}
+                                    <a class="btn btn-sm btn-outline-warning"
+                                        href="{% url 'core:profile-trainee-card-extend-request-edit' extend.card.pk extend.pk %}"><i
                                             class="fas fa-fw fa-edit"></i>
                                         {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
-                                    <a class="btn btn-sm btn-outline-danger delete-class" href="javascript:;"><i
-                                            class="fas fa-fw fa-trash"></i>
+                                    <a class="btn btn-sm btn-outline-danger delete-extend-card-request"
+                                        href="javascript:;"><i class="fas fa-fw fa-trash"></i>
                                         {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
-                                    <form class="d-none" action="javascript:;" method="post">
+                                    <form class="d-none"
+                                        action="{% url 'core:profile-trainee-card-extend-request-delete' extend.card.pk extend.pk %}"
+                                        method="post">
                                         {% csrf_token %}
                                         <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
                                     </form>
+                                    {% endif %}
                                 </td>
                             </tr>
                             {% endfor %}
@@ -226,6 +232,9 @@
 <script>
     $(function () {
         $('html, body').animate({ scrollTop: $('#{{focus}}').offset().top - 100 }, 'slow');
+    });
+    $('.delete-extend-card-request').click(function () {
+        $(this).siblings('form').children('input[type=submit]').click();
     });
 </script>
 
