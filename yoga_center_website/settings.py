@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'trainers',
     'blog',
     'make_up_lessons',
+    'refunds',
 ]
 
 MIDDLEWARE = [

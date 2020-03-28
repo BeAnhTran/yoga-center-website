@@ -40,6 +40,7 @@ class TraineeCardDetailView(View):
         return render(request, self.template_name, context=context)
 
 
+# EXTEND CARD REQUEST
 @method_decorator([login_required, trainee_required], name='dispatch')
 class TraineeCardExtendView(View):
     template_name = 'profile/trainees/cards/card_extends/new.html'
@@ -120,3 +121,6 @@ def detele_extend_card_request(request, card_id, pk):
     obj.delete()
     messages.success(request, 'Xóa yêu cầu gia hạn thành công')
     return redirect(reverse('core:profile-trainee-cards-detail', args={card.pk}) + '?focus=collapseCardExtendRequest')
+
+
+# REFUND
