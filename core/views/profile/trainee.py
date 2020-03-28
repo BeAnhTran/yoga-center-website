@@ -12,6 +12,10 @@ from django.contrib import messages
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.http import Http404
+from refunds.forms import RefundForm
+from django.db.models import Value as V
+from django.db.models.functions import Concat
+from django.db.models import CharField
 
 
 @method_decorator([login_required, trainee_required], name='dispatch')
@@ -124,3 +128,48 @@ def detele_extend_card_request(request, card_id, pk):
 
 
 # REFUND
+@method_decorator([login_required, trainee_required], name='dispatch')
+class RefundNewView(View):
+    template_name = 'profile/trainees/cards/refunds/new.html'
+
+    def get(self, request, pk):
+        card = Card.objects.get(pk=pk)
+        query_choices = list()
+        for lesson in card.lessons.all():
+            query_choices += ((lesson.pk, lesson),)
+        form = RefundForm(
+            initial={
+                'registered_lessons': query_choices
+            }
+        )
+        form.fields['card'].initial = card
+        context = {}
+        context['card'] = card
+        context['form'] = form
+        context['sidebar_profile'] = 'cards'
+        return render(request, self.template_name, context=context)
+
+    def post(self, request, pk):
+        card = Card.objects.get(pk=pk)
+        query_choices = list()
+        for lesson in card.lessons.all():
+            query_choices += ((lesson.pk, lesson),)
+        form = RefundForm(
+            request.POST, request.FILES,
+            initial={
+                'registered_lessons': query_choices
+            }
+        )
+        if form.is_valid():
+            with transaction.atomic():
+                form.save()
+                messages.success(request, _(
+                    'Create refund card request successfully'))
+                return redirect(reverse('core:profile-trainee-cards-detail', args={card.pk}) + '?focus=collapseCardRefundRequest')
+
+        context = {
+            'card': card,
+            'form': form,
+            'sidebar_profile': 'cards'
+        }
+        return render(request, self.template_name, context=context)

@@ -2,7 +2,7 @@ from django.urls import include, path
 
 from .views import core, trainees, trainers, errors
 from core.views.profile import index, trainee
-
+from roll_calls.views import GetRollCallListApiView
 
 app_name = 'core'
 
@@ -20,13 +20,22 @@ urlpatterns = [
          name='profile-trainee-cards'),
     path('accounts/cards/<int:pk>/', trainee.TraineeCardDetailView.as_view(),
          name='profile-trainee-cards-detail'),
+
+    # get Roll Call List for CARD, render to FullCalendar
+    path('accounts/cards/<int:pk>/roll-call-list', GetRollCallListApiView.as_view(),
+         name='profile-trainee-cards-roll-call-list'),
+
     path('accounts/cards/<int:pk>/extend/', trainee.TraineeCardExtendView.as_view(),
          name='profile-trainee-card-extend'),
     path('accounts/cards/<int:card_id>/extend-card-request/<int:pk>/', trainee.ExtendCardRequestDetailView.as_view(),
          name='profile-trainee-card-extend-request-detail'),
-     path('accounts/cards/<int:card_id>/extend-card-request/<int:pk>/edit', trainee.ExtendCardRequestEditView.as_view(),
+    path('accounts/cards/<int:card_id>/extend-card-request/<int:pk>/edit', trainee.ExtendCardRequestEditView.as_view(),
          name='profile-trainee-card-extend-request-edit'),
-     path('accounts/cards/<int:card_id>/extend-card-request/<int:pk>/delete', trainee.detele_extend_card_request,
+    path('accounts/cards/<int:card_id>/extend-card-request/<int:pk>/delete', trainee.detele_extend_card_request,
          name='profile-trainee-card-extend-request-delete'),
+
+    path('accounts/cards/<int:pk>/refunds/new/', trainee.RefundNewView.as_view(),
+         name='profile-trainee-card-refunds-new'),
+
     path('401', errors._401, name='error_401'),
 ]

@@ -2,6 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% load crispy_forms_tags %}
+{% load sexify %}
 
 {% block specified_css %}
 <link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
@@ -220,7 +221,70 @@
 
         <div id="collapseCardRefundRequest" class="panel-collapse collapse show">
             <div class="panel-body">
+                {% if card.refunds.all.count > 0 %}
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr class="d-flex">
+                                <th class="col-1">Mã số</th>
+                                <th class="col-2">Số buổi</th>
+                                <th class="col-2">Số tiền</th>
+                                <th class="col-2">Trạng thái</th>
+                                <th class="col-2">Ngày tạo</th>
+                                <th class="col-3">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for refund in card.refunds.all %}
+                            <tr class="d-flex">
+                                <td class="col-1">{{ refund.pk }}</td>
+                                <td class="col-2">{{ refund.lessons.all.count }}</td>
+                                <td class="col-2">{{ refund.amount | sexy_number }}</td>
+                                <td class="col-2">
+                                    {% if refund.state == 'pending' %}
+                                    <span class="badge badge-pill badge-warning">
+                                        {{ refund.state }}
+                                    </span>
+                                    {% elif refund.state == 'approve' %}
+                                    <span class="badge badge-pill badge-success">
+                                        {{ refund.state }}
+                                    </span>
+                                    {% else %}
+                                    <span class="badge badge-pill badge-secondary">
+                                        {{ refund.state }}
+                                    </span>
+                                    {% endif %}
+                                </td>
+                                <td class="col-2">{{ refund.created_at.date }}</td>
+                                <td class="col-3">
+                                    <a class="btn btn-sm btn-outline-primary"
+                                        href="javascript:;"><i
+                                            class="fas fa-fw fa-eye"></i>
+                                        {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
+                                    {% if refund.state == 'pending' %}
+                                    <a class="btn btn-sm btn-outline-warning"
+                                        href="javascript:;"><i
+                                            class="fas fa-fw fa-edit"></i>
+                                        {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
+                                    <a class="btn btn-sm btn-outline-danger delete-extend-card-request"
+                                        href="javascript:;"><i class="fas fa-fw fa-trash"></i>
+                                        {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
+                                    <form class="d-none"
+                                        action="javascript:;"
+                                        method="post">
+                                        {% csrf_token %}
+                                        <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                                    </form>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
                 <p class="text-danger">Không có yêu cầu hoàn tiền nào</p>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -5,7 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from core.models import Trainee
 from classes.models import YogaClass
-from card_types.models import CardType
+from card_types.models import CardType, FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE
+from common.templatetags import sexify
 
 
 class Card(models.Model):
@@ -33,6 +34,11 @@ class Card(models.Model):
 
     def number_of_studied_lesson(self):
         return self.roll_calls.filter(studied=True).count()
+
+    def price_of_one_lesson(self):
+        total_price = self.card_invoices.last().amount
+        result = total_price / self.total_lesson()
+        return result
 
 
 STATE_CHOICES = (

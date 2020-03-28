@@ -162,7 +162,6 @@ class CardPaymentForm(forms.Form):
 class ExtendCardRequestForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        now = datetime.datetime.now()
         self.fields['new_expire_date'] = forms.DateField(
             label=_('new expire date').capitalize(),
             widget=DatePicker(options={
