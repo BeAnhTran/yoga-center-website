@@ -1,35 +1,41 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy as _
 
 
 class Product(models.Model):
     category = models.ForeignKey(
-        'shop.ProductCategory', on_delete=models.CASCADE)
-    title = models.CharField(max_length=150)
+        'shop.ProductCategory', on_delete=models.CASCADE, verbose_name=_('category'))
+    name = models.CharField(max_length=150, verbose_name=_('name'))
     slug = models.SlugField(max_length=175, unique=True)
-    description = models.CharField(max_length=255)
-    content = RichTextUploadingField()
-    image = models.ImageField(upload_to='posts/', null=True)
-    price = models.FloatField()
-    promotion_price = models.FloatField(null=True, blank=True)
-    amount = models.IntegerField()
+    description = models.CharField(
+        max_length=255, verbose_name=_('description'))
+    content = RichTextUploadingField(verbose_name=_('content'))
+    image = models.ImageField(
+        upload_to='products/', null=True, verbose_name=_('image'))
+    price = models.FloatField(verbose_name=_('price'))
+    promotion_price = models.FloatField(
+        null=True, blank=True, verbose_name=_('promotion price'))
+    quantity = models.IntegerField(verbose_name=_('quantity'))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return self.name
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(self.name)
         super(Product, self).save(*args, **kwargs)
 
 
 class ProductCategory(models.Model):
-    name = models.CharField(max_length=150, unique=True)
-    slug = models.SlugField(max_length=175, unique=True)
+    name = models.CharField(max_length=150, unique=True,
+                            verbose_name=_('name'))
+    slug = models.SlugField(max_length=175, unique=True,
+                            verbose_name=_('slug'))
     parent = models.ForeignKey('self', null=True, blank=True,
-                               related_name='children', on_delete=models.CASCADE)
+                               related_name='children', on_delete=models.CASCADE, verbose_name=_('parent category'))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

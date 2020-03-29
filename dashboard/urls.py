@@ -5,7 +5,7 @@ from .views import (
     dashboard_view, courses_view, rooms_view,
     lessons_view, classes_view, cards_view,
     card_types_view, trainees_view, trainers_view, staffs_view,
-    admins_view, roll_calls_view, blog_view, make_up_lessons_view)
+    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view)
 
 app_name = 'dashboard'
 
@@ -126,6 +126,24 @@ make_up_lessons_urlpatterns = [
          make_up_lessons_view.delete_make_up_lesson_roll_call, name='make-up-lessons-delete-in-lesson-roll-call'),
 ]
 
+# SHOP
+shop_urlpatterns = [
+    # product category
+    path('categories/', shop_view.ProductCategoryListView.as_view(),
+         name='shop-categories-list'),
+    path('categories/new/', shop_view.ProductCategoryNewView.as_view(),
+         name='shop-categories-new'),
+    path('categories/<slug:slug>/delete/',
+         shop_view.ProductCategoryDeleteView.as_view(), name='shop-categories-delete'),
+
+    # product
+    path('products/', shop_view.ProductListView.as_view(),
+         name='shop-products-list'),
+    path('products/new/', shop_view.ProductNewView.as_view(),
+         name='shop-products-new'),
+]
+
+
 # DASHBOARD
 urlpatterns = [
     path('', dashboard_view.index, name='index'),
@@ -141,5 +159,6 @@ urlpatterns = [
     path('admins/', include(admins_urlpatterns)),
     path('roll-calls/', include(roll_calls_urlpatterns)),
     path('blog/', include(blog_urlpatterns)),
+    path('shop/', include(shop_urlpatterns)),
     path('make-up-lessons/', include(make_up_lessons_urlpatterns)),
 ]

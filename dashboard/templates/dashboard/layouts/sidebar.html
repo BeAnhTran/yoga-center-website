@@ -122,17 +122,16 @@
     </li>
     <hr class="sidebar-divider my-0">
     <!-- Request -->
-    <li class="nav-item {% if show_nav_request == True %}active{% endif %}">   
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRequest" aria-expanded="true"
-            aria-controls="collapseUtilities">
+    <li class="nav-item {% if show_nav_request == True %}active{% endif %}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRequest"
+            aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-mail-bulk"></i>
             <span>{% trans 'request' as t_request %} {{ t_request|capfirst }}</span>
         </a>
         <div id="collapseRequest" class="collapse {% if show_nav_request == True %}show{% endif %}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-secondary pb-2 collapse-inner rounded">
-                <a class="collapse-item {% if active_nav == 'entend_requests' %}active{% endif %}"
-                    href="javascript:;">
+                <a class="collapse-item {% if active_nav == 'entend_requests' %}active{% endif %}" href="javascript:;">
                     <i class="fas fa-expand-alt"></i>
                     <span>
                         {% trans 'extend card request' as t_extend_card_request %}
@@ -142,7 +141,7 @@
                 <a class="collapse-item {% if active_nav == 'refund_requests' %}active{% endif %}" href="javascript:;">
                     <i class="fas fa-retweet"></i>
                     <span>
-                        {% trans 'refund request' as t_refund_request %} {{ t_refund_request|title }}
+                        {% trans 'refund request' as t_refund_request %} {{ t_refund_request|capfirst }}
                     </span>
                 </a>
             </div>
@@ -179,7 +178,7 @@
     </li>
     <hr class="sidebar-divider my-0">
     <!-- Shop -->
-    <li class="nav-item {% if show_nav_shop == True %}active{% endif %}">   
+    <li class="nav-item {% if show_nav_shop == True %}active{% endif %}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseShop" aria-expanded="true"
             aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-store"></i>
@@ -189,23 +188,24 @@
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-secondary pb-2 collapse-inner rounded">
                 <a class="collapse-item {% if active_nav == 'product_categories' %}active{% endif %}"
-                    href="javascript:;">
+                    href="{% url 'dashboard:shop-categories-list' %}">
                     <i class="fab fa-fw fa-accusoft"></i>
                     <span>
                         {% trans 'product categories' as t_product_categories %}
                         {{ t_product_categories|capfirst }}
                     </span>
                 </a>
-                <a class="collapse-item {% if active_nav == 'products' %}active{% endif %}" href="javascript:;">
+                <a class="collapse-item {% if active_nav == 'products' %}active{% endif %}"
+                    href="{% url 'dashboard:shop-products-list' %}">
                     <i class="fab fa-fw fa-product-hunt"></i>
                     <span>
-                        {% trans 'products' as t_products %} {{ t_products|title }}
+                        {% trans 'products' as t_products %} {{ t_products|capfirst }}
                     </span>
                 </a>
                 <a class="collapse-item {% if active_nav == 'cart' %}active{% endif %}" href="javascript:;">
                     <i class="fas fa-cart-plus"></i>
                     <span>
-                        {% trans 'carts' as t_cart %} {{ t_cart|title }}
+                        {% trans 'carts' as t_cart %} {{ t_cart|capfirst }}
                     </span>
                 </a>
             </div>
