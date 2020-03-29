@@ -109,7 +109,8 @@
                         class="{% if active_nav == 'schedule' %}active{% endif %}">{% trans 'Schedule' %}</a></li>
                 <li><a href="{% url 'blog:list' %}"
                         class="{% if active_nav == 'blog' %}active{% endif %}">{% trans 'Blog'%}</a></li>
-                <li><a href="javascript:;">{% trans 'Shop'%}</a></li>
+                <li><a href="{% url 'shop:index' %}"
+                        class="{% if active_nav == 'shop' %}active{% endif %}">{% trans 'Shop'%}</a></li>
             </ul>
         </div>
     </div>
