@@ -25,6 +25,7 @@ urlpatterns = [
     path('accounts/cards/<int:pk>/roll-call-list', GetRollCallListApiView.as_view(),
          name='profile-trainee-cards-roll-call-list'),
 
+    # EXTEND CARD REQUEST
     path('accounts/cards/<int:pk>/extend/', trainee.TraineeCardExtendView.as_view(),
          name='profile-trainee-card-extend'),
     path('accounts/cards/<int:card_id>/extend-card-request/<int:pk>/', trainee.ExtendCardRequestDetailView.as_view(),
@@ -34,8 +35,15 @@ urlpatterns = [
     path('accounts/cards/<int:card_id>/extend-card-request/<int:pk>/delete', trainee.detele_extend_card_request,
          name='profile-trainee-card-extend-request-delete'),
 
+    # REFUND REQUEST
     path('accounts/cards/<int:pk>/refunds/new/', trainee.RefundNewView.as_view(),
          name='profile-trainee-card-refunds-new'),
+    path('accounts/cards/<int:card_id>/refunds/<int:pk>/', trainee.RefundDetailView.as_view(),
+         name='profile-trainee-card-refunds-detail'),
+    path('accounts/cards/<int:card_id>/refunds/<int:pk>/edit', trainee.RefundEditView.as_view(),
+         name='profile-trainee-card-refunds-edit'),
+    path('accounts/cards/<int:card_id>/refunds/<int:pk>/delete', trainee.detele_refund_request,
+         name='profile-trainee-card-refunds-delete'),
 
     path('401', errors._401, name='error_401'),
 ]
