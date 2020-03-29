@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'blog',
     'make_up_lessons',
     'refunds',
+    'shop',
 ]
 
 MIDDLEWARE = [
