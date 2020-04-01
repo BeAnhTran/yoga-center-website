@@ -7,7 +7,7 @@ from .views import (
     card_types_view, trainees_view, trainers_view, staffs_view,
     admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view)
 
-from .views.requests import extend_card_requests_view
+from .views.requests import extend_card_requests_view, refund_requests_view
 
 app_name = 'dashboard'
 
@@ -151,6 +151,12 @@ extend_card_requests_urlpatterns = [
          name='extend-card-requests-list'),
 ]
 
+# Refund Request
+refund_requests_urlpatterns = [
+    path('', refund_requests_view.RefundRequestListView.as_view(),
+         name='refund-requests-list'),
+]
+
 
 # DASHBOARD
 urlpatterns = [
@@ -170,4 +176,5 @@ urlpatterns = [
     path('shop/', include(shop_urlpatterns)),
     path('make-up-lessons/', include(make_up_lessons_urlpatterns)),
     path('extend-card-requests/', include(extend_card_requests_urlpatterns)),
+    path('refund-requests/', include(refund_requests_urlpatterns)),
 ]

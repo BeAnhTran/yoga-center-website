@@ -138,7 +138,7 @@
                         {{ t_extend_card_request|capfirst }}
                     </span>
                 </a>
-                <a class="collapse-item {% if active_nav == 'refund_requests' %}active{% endif %}" href="javascript:;">
+                <a class="collapse-item {% if active_nav == 'refund_requests' %}active{% endif %}" href="{% url 'dashboard:refund-requests-list' %}">
                     <i class="fas fa-retweet"></i>
                     <span>
                         {% trans 'refund request' as t_refund_request %} {{ t_refund_request|capfirst }}
