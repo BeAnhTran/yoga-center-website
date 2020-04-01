@@ -252,8 +252,8 @@
 
                     $('#trial-lesson').removeClass('d-none');
                 } else { // FOR FULL MONTH
-                    var _start_at = '{{ yoga_class.lessons.first.day }}';
-                    var _end_at = '{{ yoga_class.lessons.last.day }}';
+                    var _start_at = '{{ yoga_class.lessons.first.date }}';
+                    var _end_at = '{{ yoga_class.lessons.last.date }}';
                     $('#id_start_at').val(_start_at);
                     $('#id_end_at').val(_end_at);
                 }

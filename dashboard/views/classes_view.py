@@ -170,7 +170,7 @@ def create_lessons_from_last_time(request, pk):
                 for last_entry in last_entries:
                     current_entry = last_entry
                     current_entry.pk = None
-                    current_entry.day = current_entry.day + timedelta(7)
+                    current_entry.date = current_entry.date + timedelta(7)
                     current_entry.save()
                     current_entries.append(current_entry)
             else:
@@ -187,12 +187,12 @@ def create_lessons_from_last_time(request, pk):
                 for last_entry in last_entries:
                     current_entry = last_entry
                     current_entry.pk = None
-                    current_entry.day = current_entry.day + timedelta(28)
+                    current_entry.date = current_entry.date + timedelta(28)
                     current_entry.save()
                     current_entries.append(current_entry)
             serialized = LessonSerializer(current_entries, many=True)
             return Response(serialized.data)
         except Exception as e:
-            return HttpResponse(e.messages, status=status.HTTP_400_BAD_REQUEST)
+            return HttpResponse(e, status=status.HTTP_400_BAD_REQUEST)
     response_data['message'] = _('Please add type of create')
     return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)

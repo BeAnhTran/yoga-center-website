@@ -41,10 +41,15 @@ class Card(models.Model):
         return result
 
 
+PENDING_STATE = 0
+APPROVED_STATE = 1
+REJECTED_STATE = 2
+
+
 STATE_CHOICES = (
-    ('pending', 'Pending'),
-    ('approve', 'Approve'),
-    ('reject', 'Reject'),
+    (PENDING_STATE, _('Pending')),
+    (APPROVED_STATE, _('Approved')),
+    (REJECTED_STATE, _('Rejected')),
 )
 
 
@@ -54,9 +59,8 @@ class ExtendCardRequest(models.Model):
     )
     new_expire_date = models.DateField(verbose_name=_('new expire date'))
     reason = RichTextUploadingField(verbose_name=_('reason'))
-    state = models.CharField(max_length=20,
-                             choices=STATE_CHOICES,
-                             default='pending')
+    state = models.IntegerField(choices=STATE_CHOICES,
+                                default=PENDING_STATE, verbose_name=_('state'))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
