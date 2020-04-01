@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-29 21:26+0700\n"
+"POT-Creation-Date: 2020-04-01 11:32+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\courses\list.html:20
 #: .\dashboard\templates\dashboard\lessons\list.html:36
 #: .\dashboard\templates\dashboard\lessons\roll_calls.html:80
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:15
 #: .\dashboard\templates\dashboard\rooms\list.html:18
 #: .\dashboard\templates\dashboard\shop\categories\list.html:19
 #: .\dashboard\templates\dashboard\shop\products\list.html:19
@@ -88,6 +89,7 @@ msgstr ""
 
 #: .\card_invoices\models.py:18 .\card_types\models.py:28 .\cards\models.py:22
 #: .\cards\models.py:61 .\classes\models.py:30 .\courses\models.py:50
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:29
 #: .\lectures\models.py:15 .\lessons\models.py:45
 #: .\make_up_lessons\models.py:14 .\refunds\models.py:27
 #: .\roll_calls\models.py:18 .\rooms\models.py:23
@@ -241,6 +243,7 @@ msgstr ""
 #: .\cards\models.py:14 .\dashboard\templates\dashboard\cards\list.html:28
 #: .\dashboard\templates\dashboard\lessons\roll_calls.html:42
 #: .\dashboard\templates\dashboard\lessons\roll_calls.html:77
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:25
 #: .\dashboard\templates\dashboard\trainees\list.html:13
 #: .\templates\registration\signup.html:33
 #: .\templates\registration\trainee_signup_form.html:15
@@ -249,11 +252,13 @@ msgstr ""
 
 #: .\cards\models.py:16 .\classes\templates\payment.html:61
 #: .\dashboard\templates\dashboard\cards\list.html:29
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:26
 msgid "card type"
 msgstr ""
 
 #: .\cards\models.py:18 .\dashboard\templates\dashboard\cards\list.html:30
 #: .\dashboard\templates\dashboard\lessons\list.html:45
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:27
 msgid "yoga class"
 msgstr ""
 
@@ -749,6 +754,7 @@ msgstr ""
 
 #: .\dashboard\forms\lesssons_form.py:59
 #: .\dashboard\templates\dashboard\classes\show.html:56
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:28
 #: .\dashboard\templates\dashboard\rooms\list.html:30 .\lessons\models.py:34
 #: .\rooms\models.py:21
 msgid "state"
@@ -807,6 +813,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\cards\list.html:32
 #: .\dashboard\templates\dashboard\classes\list.html:34
 #: .\dashboard\templates\dashboard\courses\list.html:34
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:30
 #: .\dashboard\templates\dashboard\rooms\list.html:32
 #: .\dashboard\templates\dashboard\shop\categories\list.html:30
 #: .\dashboard\templates\dashboard\shop\products\list.html:33
@@ -1064,6 +1071,7 @@ msgid "rooms"
 msgstr ""
 
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:129
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:14
 msgid "request"
 msgstr ""
 
@@ -1155,6 +1163,22 @@ msgstr ""
 
 #: .\dashboard\templates\dashboard\logout_model.html:25
 msgid "sign out"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:9
+msgid "Extend card request list"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:50
+msgid "view"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:53
+msgid "approve"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:56
+msgid "reject"
 msgstr ""
 
 #: .\dashboard\templates\dashboard\rooms\list.html:10
@@ -1272,8 +1296,7 @@ msgid "Sign Up"
 msgstr ""
 
 #: .\templates\account\messages\logged_in.txt:3
-#, python-format
-msgid "Successfully signed in as %(user)s."
+msgid "Login successfully"
 msgstr ""
 
 #: .\templates\layouts\footer.html:22

@@ -1,0 +1,77 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load dashboard_extras %}
+
+
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Extend card request list' %}</h1>
+</div>
+
+{% if not requests %}
+<p class="text-danger">
+    {% trans 'request' as trans_value %}
+    {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{% trans 'trainee' as t_trainee %}{{ t_trainee|capfirst }}</th>
+                        <th>{% trans 'card type' as t_card_type %}{{ t_card_type|capfirst }}</th>
+                        <th>{% trans 'yoga class' as t_yoga_class %}{{ t_yoga_class|capfirst }}</th>
+                        <th>{% trans 'state' as t_state %}{{ t_state|capfirst }}</th>
+                        <th>{% trans 'created at' as t_created_at %}{{ t_created_at|capfirst }}</th>
+                        <th>{% trans 'action' as t_action %}{{ t_action|capfirst }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in requests %}
+                    <tr>
+                        <td>{{ request.id }}</td>
+                        <td>{{ request.card.trainee }}</td>
+                        <td>{{ request.card.card_type }}</td>
+                        <td>{{ request.card.yogaclass }}</td>
+                        <td>
+                            <span class="badge badge-pill badge-warning">
+                                {{ request.state }}
+                            </span>
+                        </td>
+                        <td>{{ request.created_at.date }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary"
+                                href="javascript:;"><i
+                                    class="fas fa-fw fa-eye"></i>
+                                {% trans 'view' as t_view %}{{ t_view|capfirst }}</a>
+                            <a class="btn btn-sm btn-success" href="javascript:;">
+                                <i class="fas fa-fw fa-check"></i>
+                                {% trans 'approve' as t_approve %}{{ t_approve|capfirst }}
+                            </a>
+                            <a class="btn btn-sm btn-danger" href="javascript:;">
+                                <i class="fas fa-fw fa-times-circle"></i>{% trans 'reject' as t_reject %}{{ t_reject|capfirst }}
+                            </a>
+                            <form class="d-none" action="javascript:;" method="post">
+                                {% csrf_token %}
+                                <input type="submit" value="Confirm">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}

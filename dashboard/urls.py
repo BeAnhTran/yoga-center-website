@@ -7,6 +7,8 @@ from .views import (
     card_types_view, trainees_view, trainers_view, staffs_view,
     admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view)
 
+from .views.requests import extend_card_requests_view
+
 app_name = 'dashboard'
 
 # COURSE
@@ -143,6 +145,12 @@ shop_urlpatterns = [
          name='shop-products-new'),
 ]
 
+# Extend Card Request
+extend_card_requests_urlpatterns = [
+    path('', extend_card_requests_view.ExtendCardRequestListView.as_view(),
+         name='extend-card-requests-list'),
+]
+
 
 # DASHBOARD
 urlpatterns = [
@@ -161,4 +169,5 @@ urlpatterns = [
     path('blog/', include(blog_urlpatterns)),
     path('shop/', include(shop_urlpatterns)),
     path('make-up-lessons/', include(make_up_lessons_urlpatterns)),
+    path('extend-card-requests/', include(extend_card_requests_urlpatterns)),
 ]
