@@ -10,9 +10,9 @@ APPROVED_STATE = 1
 REJECTED_STATE = 2
 
 STATE_CHOICES = (
-    (PENDING_STATE, _('Pending')),
-    (APPROVED_STATE, _('Approved')),
-    (REJECTED_STATE, _('Rejected')),
+    (PENDING_STATE, _('pending')),
+    (APPROVED_STATE, _('approved')),
+    (REJECTED_STATE, _('rejected')),
 )
 
 

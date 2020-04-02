@@ -38,25 +38,47 @@
                         <td>{{ request.card.card_type }}</td>
                         <td>{{ request.card.yogaclass }}</td>
                         <td>
+                            {% if request.state == 0 %}
                             <span class="badge badge-pill badge-warning">
-                                {{ request.state }}
+                                {{ request.get_state_display }}
                             </span>
+                            {% elif request.state == 1 %}
+                            <span class="badge badge-pill badge-success">
+                                {{ request.get_state_display }}
+                            </span>
+                            {% else %}
+                            <span class="badge badge-pill badge-danger">
+                                {{ request.get_state_display }}
+                            </span>
+                            {% endif %}
                         </td>
                         <td>{{ request.created_at.date }}</td>
                         <td>
-                            <a class="btn btn-sm btn-primary"
-                                href="javascript:;"><i
-                                    class="fas fa-fw fa-eye"></i>
-                                {% trans 'view' as t_view %}{{ t_view|capfirst }}</a>
-                            <a class="btn btn-sm btn-success" href="javascript:;">
+                            <a class="btn btn-sm btn-primary view-detail"
+                                href="{% url 'dashboard:extend-card-requests-detail' request.pk %}">
+                                <i class="fas fa-fw fa-eye"></i>
+                                {% trans 'view' as t_view %}{{ t_view|capfirst }}
+                            </a>
+                            <a class="btn btn-sm btn-success approve-request" href="javascript:;">
                                 <i class="fas fa-fw fa-check-circle"></i>
                                 {% trans 'approve' as t_approve %}{{ t_approve|capfirst }}
                             </a>
-                            <a class="btn btn-sm btn-danger" href="javascript:;">
-                                <i class="fas fa-fw fa-times-circle"></i>{% trans 'reject' as t_reject %}{{ t_reject|capfirst }}
-                            </a>
-                            <form class="d-none" action="javascript:;" method="post">
+                            <form class="d-none approve-form"
+                                action="{% url 'dashboard:extend-card-requests-update-state' request.pk %}"
+                                method="post">
                                 {% csrf_token %}
+                                <input type="text" name="state" value="approve">
+                                <input type="submit" value="Confirm">
+                            </form>
+                            <a class="btn btn-sm btn-danger reject-request" href="javascript:;">
+                                <i class="fas fa-fw fa-times-circle"></i>
+                                {% trans 'reject' as t_reject %}{{ t_reject|capfirst }}
+                            </a>
+                            <form class="d-none reject-form"
+                                action="{% url 'dashboard:extend-card-requests-update-state' request.pk %}"
+                                method="post">
+                                {% csrf_token %}
+                                <input type="text" name="state" value="reject">
                                 <input type="submit" value="Confirm">
                             </form>
                         </td>
@@ -74,4 +96,14 @@
 
 {% endif %}
 
+{% endblock %}
+{% block specified_js %}
+<script type="text/javascript">
+    $('.approve-request').click(function () {
+        $(this).siblings('form.approve-form').children('input[type=submit]').click();
+    });
+    $('.reject-request').click(function () {
+        $(this).siblings('form.reject-form').children('input[type=submit]').click();
+    });
+</script>
 {% endblock %}

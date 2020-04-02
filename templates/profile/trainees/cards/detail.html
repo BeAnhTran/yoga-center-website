@@ -162,17 +162,17 @@
                                 <td class="col-1">{{ extend.pk }}</td>
                                 <td class="col-3">{{ extend.new_expire_date }}</td>
                                 <td class="col-2">
-                                    {% if extend.state == 'pending' %}
+                                    {% if extend.state == 0 %}
                                     <span class="badge badge-pill badge-warning">
-                                        {{ extend.state }}
+                                        {{ extend.get_state_display }}
                                     </span>
-                                    {% elif extend.state == 'approve' %}
+                                    {% elif extend.state == 1 %}
                                     <span class="badge badge-pill badge-success">
-                                        {{ extend.state }}
+                                        {{ extend.get_state_display }}
                                     </span>
                                     {% else %}
                                     <span class="badge badge-pill badge-secondary">
-                                        {{ extend.state }}
+                                        {{ extend.get_state_display }}
                                     </span>
                                     {% endif %}
                                 </td>
@@ -241,17 +241,17 @@
                                 <td class="col-2">{{ refund.lessons.all.count }}</td>
                                 <td class="col-2">{{ refund.amount | sexy_number }}</td>
                                 <td class="col-2">
-                                    {% if refund.state == 'pending' %}
+                                    {% if refund.state == 0 %}
                                     <span class="badge badge-pill badge-warning">
-                                        {{ refund.state }}
+                                        {{ refund.get_state_display }}
                                     </span>
-                                    {% elif refund.state == 'approve' %}
+                                    {% elif refund.state == 1 %}
                                     <span class="badge badge-pill badge-success">
-                                        {{ refund.state }}
+                                        {{ refund.get_state_display }}
                                     </span>
                                     {% else %}
                                     <span class="badge badge-pill badge-secondary">
-                                        {{ refund.state }}
+                                        {{ refund.get_state_display }}
                                     </span>
                                     {% endif %}
                                 </td>

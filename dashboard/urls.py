@@ -149,12 +149,20 @@ shop_urlpatterns = [
 extend_card_requests_urlpatterns = [
     path('', extend_card_requests_view.ExtendCardRequestListView.as_view(),
          name='extend-card-requests-list'),
+    path('<int:pk>/', extend_card_requests_view.ExtendCardRequestDetailView.as_view(),
+         name='extend-card-requests-detail'),
+    path('<int:pk>/update-state/', extend_card_requests_view.updateStateOfExtendCardRequest,
+         name='extend-card-requests-update-state'),
 ]
 
 # Refund Request
 refund_requests_urlpatterns = [
     path('', refund_requests_view.RefundRequestListView.as_view(),
          name='refund-requests-list'),
+    path('<int:pk>/', refund_requests_view.RefundRequestDetailView.as_view(),
+         name='refund-requests-detail'),
+    path('<int:pk>/update-state/', refund_requests_view.updateStateOfRefundRequest,
+         name='refund-requests-update-state'),
 ]
 
 
