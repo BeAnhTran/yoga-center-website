@@ -43,3 +43,17 @@ class ProductCategory(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(ProductCategory, self).save(*args, **kwargs)
+
+
+class Cart(models.Model):
+    products = models.ManyToManyField(Product, through='ProductCart')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class ProductCart(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
