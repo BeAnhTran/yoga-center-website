@@ -5,6 +5,9 @@ from django.shortcuts import get_object_or_404
 from django.http import Http404
 
 from shop.models import Product, ProductCategory
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
 
 
 class IndexView(ListView):
@@ -32,3 +35,24 @@ class ProductDetailView(DetailView):
         context['product_categories'] = product_categories
         context['active_nav'] = 'shop'
         return context
+
+
+class AddToCartApiView(APIView):
+    def post(self, request, pk, format=None):
+        product = get_object_or_404(Product, pk=pk)
+        quantity = 1
+        if request.POST.get('quantity') is not None:
+            quantity = int(request.POST.get('quantity'))
+
+        if request.session.get('cart') is not None:
+            if request.session['cart'].get(str(pk)) is not None:
+                request.session['cart'][str(pk)]['quantity'] += quantity
+            else:
+                request.session['cart'][str(pk)]['quantity'] = quantity
+        else:
+            request.session['cart'] = {}
+            request.session['cart'][str(pk)] = {
+                'slug': product.slug,
+                'quantity': quantity
+            }
+        return Response('Đã thêm vào giỏ hàng', status=status.HTTP_200_OK)

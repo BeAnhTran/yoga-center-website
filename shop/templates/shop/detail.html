@@ -106,5 +106,21 @@
             $('#btn_quantity').text(value);
         }
     });
+    $('.btn-add-to-card').click(function () {
+        var quantity = parseInt($('#btn_quantity').text());
+        data = {
+            'quantity': quantity
+        }
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: "{% url 'shop:add-product-to-cart' object.pk %}",
+            type: 'POST',
+            data: data
+        }).done(function (data) {
+            console.log(data);
+        }).fail(err => console.log(err));
+    });
 </script>
 {% endblock %}
