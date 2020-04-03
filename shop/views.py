@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
@@ -48,7 +49,10 @@ class AddToCartApiView(APIView):
             if request.session['cart'].get(str(pk)) is not None:
                 request.session['cart'][str(pk)]['quantity'] += quantity
             else:
-                request.session['cart'][str(pk)]['quantity'] = quantity
+                request.session['cart'][str(pk)] = {
+                    'slug': product.slug,
+                    'quantity': quantity
+                }
         else:
             request.session['cart'] = {}
             request.session['cart'][str(pk)] = {
@@ -56,3 +60,43 @@ class AddToCartApiView(APIView):
                 'quantity': quantity
             }
         return Response('Đã thêm vào giỏ hàng', status=status.HTTP_200_OK)
+
+
+class ChangeProductCartQuantityApiView(APIView):
+    def post(self, request, pk, format=None):
+        product = get_object_or_404(Product, pk=pk)
+        if product:
+            if request.POST.get('quantity') is not None:
+                quantity = int(request.POST.get('quantity'))
+            else:
+                quantity = 1
+            request.session['cart'][str(pk)]['quantity'] = quantity
+            print(len(request.session['cart']))
+            return Response('Đã thay đổi số sản phẩm trong giỏ hàng', status=status.HTTP_200_OK)
+
+
+class RemoveProductOutOfCartView(View):
+    def post(self, request, pk, format=None):
+        product = get_object_or_404(Product, pk=pk)
+        if product:
+            del request.session['cart'][str(pk)]
+            return redirect('shop:cart')
+
+
+class CartView(View):
+    template_name = 'shop/cart.html'
+
+    def get(self, request):
+        context = {}
+        context['cart'] = []
+        if request.session.get('cart'):
+            cart = request.session.get('cart')
+            for product_id in cart:
+                product = get_object_or_404(Product, pk=product_id)
+                context['cart'].append({
+                    'product': product,
+                    'quantity': cart[str(product_id)]['quantity']
+                })
+        else:
+            context['cart'] = None
+        return render(request, self.template_name, context=context)

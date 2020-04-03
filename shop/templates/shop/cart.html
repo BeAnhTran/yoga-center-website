@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load sexify %}
+
+{% block specified_css %}
+{% block additional_css %}
+<link href="{% static 'css/shop/cart.css' %}" rel="stylesheet">
+{% endblock %}
+{% endblock %}
+
+
+{% block content %}
+<section class="spad">
+    <div class="container">
+        <div class="row mb-3">
+            <a class="text-danger" href="javascript:;">
+                <span class="flaticon-lotus"></span> Giỏ hàng
+            </a>
+        </div>
+        <div class="row">
+            {% if cart is not None %}
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Hình ảnh</th>
+                        <th>Tên</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            <img class="img img-fluid" width="60" src="{{ item.product.image.url }}"
+                                alt="{{ item.product }}">
+                        </td>
+                        <td>{{ item.product }}</td>
+                        <td>{{ item.product.price | sexy_number }} vnđ</td>
+                        <td>
+                            <ul class="list-group list-group-horizontal">
+                                <a class="list-group-item text-secondary btn-sub"
+                                    onclick="sub(this, '{{ item.product.pk }}')" href="javascript:;">
+                                    &#45;
+                                </a>
+                                <a class="list-group-item text-secondary btn-quantity" href="javascript:;">
+                                    {{ item.quantity }}
+                                </a>
+                                <a class="list-group-item text-secondary btn-add"
+                                    onclick="add(this, '{{ item.product.pk }}')" href="javascript:;">
+                                    &#43;
+                                </a>
+                            </ul>
+                        </td>
+                        <td>
+                            <a class="text-danger remove-product" href="javascript:;">Xóa khỏi giỏ hàng</a>
+                            <form class="d-none" method="POST" action="{% url 'shop:remove-product-out-of-cart' item.product.pk %}">
+                                {% csrf_token %}
+                                <input type="submit" value="Confirm">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h3>Không có sản phẩm trong giỏ hàng</h3>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block specified_js %}
+<script>
+    add = function (e, id) {
+        var value = parseInt($(e).siblings('.btn-quantity').text());
+        value += 1;
+        $(e).siblings('.btn-quantity').text(value);
+        change_quantity(id, value);
+    };
+    sub = function (e, id) {
+        var value = parseInt($(e).siblings('.btn-quantity').text());
+        if (value > 1) {
+            value -= 1;
+            $(e).siblings('.btn-quantity').text(value);
+            change_quantity(id, value);
+        }
+    };
+    change_quantity = function (id, quantity) {
+        console.log(id);
+        console.log(quantity);
+        _url = "{% url 'shop:change-product-quantity-in-cart' 0 %}";
+        url = _url.replace('0', id);
+        console.log(url);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            type: 'POST',
+            data: {
+                'quantity': quantity
+            }
+        }).done(data => console.log(data)).fail(err => console.log(err));
+    }
+    $('.remove-product').click(function(){
+        $(this).siblings('form').children('input[type=submit]').click();
+    });
+</script>
+{% endblock %}

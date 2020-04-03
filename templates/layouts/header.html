@@ -33,8 +33,8 @@
                     </form>
                 </div>
                 <div class="header-info">
-                    <a href="javascript:;">
-                        <i class="fas fa-shopping-cart">1</i>
+                    <a href="{% url 'shop:cart' %}">
+                        <i class="fas fa-shopping-cart">{{ request.session.cart|length }}</i>
                     </a>
                 </div>
                 {% if user.is_authenticated %}
