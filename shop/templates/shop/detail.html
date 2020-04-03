@@ -1,0 +1,110 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load sexify %}
+
+{% block additional_css %}
+<link href="{% static 'css/shop/detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block shop_content %}
+<div class="row mb-3">
+    <div class="col">
+        <a class="text-danger" href="javascript:;">
+            <span class="flaticon-lotus"></span> Cửa hàng
+        </a>
+        <a class="text-danger" href="javascript:;">
+            &raquo; {{ object.category }}
+        </a>
+        <a class="text-danger" href="javascript:;">
+            &raquo; {{ object }}
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ object.image.url }}" alt="{{ product }}">
+    </div>
+    <div class="col-md-6">
+        <h3 class="mb-3">{{ object }}</h3>
+        <div>
+            <table id="table_info" class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td>Giá bán</td>
+                        <td>{{ object.price | sexy_number }} vnđ</td>
+                    </tr>
+                    <tr>
+                        <td class="align-middle">Số lượng</td>
+                        <td>
+                            <ul class="list-group list-group-horizontal">
+                                <a id="btn_sub" class="list-group-item text-secondary" href="javascript:;">
+                                    &#45;
+                                </a>
+                                <a id="btn_quantity" class="list-group-item text-secondary" href="javascript:;">
+                                    1
+                                </a>
+                                <a id="btn_add" class="list-group-item text-secondary" href="javascript:;">
+                                    &#43;
+                                </a>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <a class="btn-add-to-card" href="javascript:;">Thêm vào giỏ hàng</a>
+        </div>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#detail_description">Mô tả chi tiết</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#comments">Bình luận</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active container" id="detail_description">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        {{ object.description }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane container" id="comments">
+            Không có bình luận
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block specified_js %}
+<script>
+    $('#btn_add').click(function () {
+        var value = parseInt($('#btn_quantity').text());
+        value += 1;
+        $('#btn_quantity').text(value);
+    });
+    $('#btn_sub').click(function () {
+        var value = parseInt($('#btn_quantity').text());
+        if (value > 1) {
+            value -= 1;
+            $('#btn_quantity').text(value);
+        }
+    });
+</script>
+{% endblock %}

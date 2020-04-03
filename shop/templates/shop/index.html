@@ -1,108 +1,66 @@
-{% extends 'base.html' %}
+{% extends 'shop/base.html' %}
 {% load static %}
 {% load i18n %}
-{% block specified_css %}
+{% load sexify %}
+
+{% block additional_css %}
+    <link href="{% static 'css/shop/style.css' %}" rel="stylesheet">
 {% endblock %}
-{% block content %}
-<section class="blog-details-section spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9">
-                <div class="container">
-                    {% if not products %}
-                    <div class="row">
-                        <div class="col">
-                            <h3 class="text-danger">
-                                {% trans 'products' as trans_value %}
-                                {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
-                            </h3>
-                        </div>
-                    </div>
-                    {% else %}
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>
-                                {% trans 'product' as t_product %}
-                                {% blocktrans with value1=page_obj.object_list.count value2=page_obj.paginator.count value3=t_product trimmed %}
-                                Showing {{ value1 }} of {{ value2 }} {{ value3 }}
-                                {% endblocktrans %}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        {% for product in products %}
-                        <div class="col-lg-6 col-md-6">
-                            <div class="blog-item">
-                                <a href="javascript:;">
-                                    <img src="{{ product.image.url }}" alt="{{ product }}">
-                                </a>
-                                <div class="bi-text">
-                                    <h2><a href="javascript:;">{{ product }}</a></h2>
-                                    <p class="product-desc mCustomScrollbar">
-                                        {{ product.description }}
-                                    </p>
-                                </div>
-                                <div class="bi-footer">
-                                    <a href="javascript:;" class="bi-cata">{{ product.category }}</a>
-                                    <div class="bi-social">
-                                        <a href="javascript:;"><i class="fab fa-facebook"></i></a>
-                                        <a href="javascript:;"><i class="fab fa-instagram"></i></a>
-                                        <a href="javascript:;"><i class="fab fa-twitter"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                    
-                    {% if products %}
-                    {% include 'pagination.html' %}
-                    {% endif %}
-                </div>
+
+{% block shop_content %}
+<div class="row mb-3">
+    <div class="col">
+        <a class="text-danger" href="javascript:;">
+            <span class="flaticon-lotus"></span> Cửa hàng
+        </a>
+    </div>
+</div>
+{% if not products %}
+<div class="row">
+    <div class="col">
+        <h3 class="text-danger">
+            {% trans 'products' as trans_value %}
+            {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
+        </h3>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col-md-6">
+        <p>
+            {% trans 'product' as t_product %}
+            {% blocktrans with value1=page_obj.object_list.count value2=page_obj.paginator.count value3=t_product trimmed %}
+            Showing {{ value1 }} of {{ value2 }} {{ value3 }}
+            {% endblocktrans %}
+        </p>
+    </div>
+</div>
+<div class="row">
+    {% for product in products %}
+    <div class="col-lg-6 col-md-6">
+        <div class="blog-item">
+            <div class="bi-image">
+                <a href="{% url 'shop:product-detail' product.slug %}">
+                    <img class="img img-fluid" src="{{ product.image.url }}" alt="{{ product }}">
+                </a>
             </div>
-            <div class="col-lg-3 col-md-5 col-sm-8 sidebar">
-                <div class="sb-widget">
-                    <form class="search-form">
-                        <input type="text" placeholder="Tìm kiếm">
-                        <button><i class="material-icons">search</i></button>
-                    </form>
-                </div>
-                <div class="sb-widget">
-                    <h2 class="sb-title">Thể loại</h2>
-                    <ul class="sb-list">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                          </li>
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                          </li>
-                          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                          </li>
-                    </ul>
-                </div>
+            <div class="bi-text">
+                <h2><a href="{% url 'shop:product-detail' product.slug %}">{{ product }}</a></h2>
+                <p>
+                    {{ product.price | sexy_number }} vnđ
+                </p>
+            </div>
+            <div class="bi-footer">
+                <a class="float-left text-secondary" href="{% url 'shop:product-detail' product.slug %}">
+                    <i class="fa fa-fw fa-eye"></i> Chi tiết
+                </a>
+                <a class="float-right text-secondary" href="javascript:;">
+                    <i class="fa fa-fw fa-cart-plus"></i> Thêm vào giỏ
+                </a>
             </div>
         </div>
     </div>
-</section>
-{% endblock %}
-
-{% block specified_js %}
+    {% endfor %}
+</div>
+{% endif %}
 {% endblock %}

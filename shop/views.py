@@ -19,3 +19,16 @@ class IndexView(ListView):
         context['product_categories'] = product_categories
         context['active_nav'] = 'shop'
         return context
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'shop/detail.html'
+    slug_field = 'slug'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        product_categories = ProductCategory.objects.all()
+        context['product_categories'] = product_categories
+        context['active_nav'] = 'shop'
+        return context

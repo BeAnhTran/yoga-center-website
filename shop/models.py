@@ -9,9 +9,7 @@ class Product(models.Model):
         'shop.ProductCategory', on_delete=models.CASCADE, verbose_name=_('category'))
     name = models.CharField(max_length=150, verbose_name=_('name'))
     slug = models.SlugField(max_length=175, unique=True)
-    description = models.CharField(
-        max_length=255, verbose_name=_('description'))
-    content = RichTextUploadingField(verbose_name=_('content'))
+    description = RichTextUploadingField(verbose_name=_('description'))
     image = models.ImageField(
         upload_to='products/', null=True, verbose_name=_('image'))
     price = models.FloatField(verbose_name=_('price'))

@@ -1,0 +1,42 @@
+.btn-add-to-card, .btn-add-to-card:hover {
+    border: 1px solid #D10A00;
+    color: white;
+    background: #D10A00;
+    padding: 12px 24px;
+    border-radius: 3px;
+}
+
+.tab-content{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.nav.nav-tabs .nav-item{
+    width: 50%;
+    color: #D10A00;
+}
+
+.nav-tabs .nav-link{
+    color: #D10A00;
+    border-radius: 0;
+    border: none;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #D10A00;
+}
+
+.nav-tabs .nav-link.active {
+    color:white;
+    background-color: #D10A00;
+    border-color: #D10A00 #D10A00 #D10A00;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border-color: #D10A00 #D10A00 #D10A00;
+}
+
+#table_info {
+    background-image: url('/static/img/shop/price-desktop-bg.jpg');
+    margin-bottom: 30px;
+}
