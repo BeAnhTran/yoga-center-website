@@ -7,25 +7,24 @@
     <div class="container">
         <div class="row mb-3">
             <div class="col">
-                <button class="btn btn-sm btn-outline-danger badge-pill"><span class="flaticon-lotus"></span></button>
-                &frasl;
-                <a class="text-danger" href="{% url 'courses:detail' class.course.slug %}">{{ class.course.name|title }}</a>
-                &frasl;
-                <a class="text-danger" href="javascript:;">{{ class.name|title }}</a>
+                <a class="text-danger" href="{% url 'courses:detail' class.course.slug %}"><span
+                        class="flaticon-lotus"></span> {{ class.course.name|title }}</a>
+                <a class="text-danger" href="javascript:;">&raquo; {{ class.name|title }}</a>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-9">
                 <div class="classes-details">
-                    <div>
-                        {% if class.image %}
-                        <img class="img rounded" width="250" src="{{ class.image.url }}" alt="{{class.name}}">
-                        {% else %}
-                        <img class="img rounded" width="250" src="{% static 'img/class/default.jpg'%}" alt="{{class.name}}">
-                        {% endif %}
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {% if class.image %}
+                            <img class="img rounded" width="250" src="{{ class.image.url }}" alt="{{class.name}}">
+                            {% else %}
+                            <img class="img rounded" width="250" src="{% static 'img/class/default.jpg'%}"
+                                alt="{{class.name}}">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
                             <h2>{{ class|title }}</h2>
                             <div class="cd-meta">
                                 <p><i class="material-icons">alarm_on</i>75 Mins </p>
@@ -33,13 +32,20 @@
                             <div class="cd-meta">
                                 <p><i class="material-icons">people_outline</i>25 người đăng kí</p>
                             </div>
-                        </div>
-                        <div class="col-lg-4 text-left text-md-right">
-                            <a href="javascript:;" class="btn btn-sm btn-info">{% trans 'schedule' as t_schedule %}{{t_schedule|upper}}</a>
-                            <a href="{% url 'classes:enroll' class.slug %}" class="btn btn-sm btn-success">{% trans 'book now' as t_book_now %}{{t_book_now|upper}}</a>
+                            <div>
+                                <a href="javascript:;"
+                                class="site-btn sb-gradient">{% trans 'schedule' as t_schedule %}{{t_schedule|upper}}</a>
+                            <a href="{% url 'classes:enroll' class.slug %}"
+                                class="site-btn sb-gradient">{% trans 'book now' as t_book_now %}{{t_book_now|upper}}</a>
+                            </div>
                         </div>
                     </div>
                     <hr>
+                    <div class="row">
+                        <div class="col">
+                            <h2>Mô tả</h2>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             {{ class.course.content | safe }}

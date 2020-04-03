@@ -11,33 +11,32 @@
     <div class="container">
         <div class="row mb-3">
             <div class="col">
-                <button class="btn btn-sm btn-outline-danger badge-pill"><span class="flaticon-lotus"></span></button>
-                &frasl;
-                <a class="text-danger" href="javascript:;">{{ course.name|title }}</a>
+                <a class="text-danger" href="javascript:;"><span class="flaticon-lotus"></span>
+                    {{ course.name|title }}</a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-9">
-                    <div class="classes-preview">
-                        {% if course.image %}
-                        <img src="{{ course.image.url }}" alt="{{ course.name }}">
-                        {% else %}
-                        <img src="{% static 'img/course/default_course.jpg'%}" alt="{{ course.name }}">
-                        {% endif %}
+                <div class="classes-preview">
+                    {% if course.image %}
+                    <img src="{{ course.image.url }}" alt="{{ course.name }}">
+                    {% else %}
+                    <img src="{% static 'img/course/default_course.jpg'%}" alt="{{ course.name }}">
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-lg-8">
+                        <h2>{{ course.name|title }}</h2>
                     </div>
-                    <div class="row">
-                        <div class="col-md-8 col-lg-8">
-                            <h2>{{ course.name|title }}</h2>
-                        </div>
-                        <div class="col-md-4 col-lg-4 text-left text-md-right">
-                            <a class="site-btn sb-gradient"
-                                href="{% url 'classes:list' %}?course={{course.slug}}">{% trans 'view classes' as t_view_classes %}{{t_view_classes|capfirst}}
-                            </a>
-                        </div>
+                    <div class="col-md-4 col-lg-4 text-left text-md-right">
+                        <a class="site-btn sb-gradient"
+                            href="{% url 'classes:list' %}?course={{course.slug}}">{% trans 'view classes' as t_view_classes %}{{t_view_classes|capfirst}}
+                        </a>
                     </div>
-                    <p>{{ course.description }}</p>
-                    <hr>
-                    {{ course.content | safe }}
+                </div>
+                <p>{{ course.description }}</p>
+                <hr>
+                {{ course.content | safe }}
             </div>
             <div class="col-md-3">
                 <div class="sb-widget">

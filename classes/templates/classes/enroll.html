@@ -24,6 +24,16 @@
 {% block content %}
 <input id="form_of_using_card_type" type="hidden" value="-1">
 <section class="classes-page-section spad">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col">
+                <a class="text-danger" href="javascript:;"><span
+                        class="flaticon-lotus"></span> {{ yoga_class.course.name|title }}</a>
+                <a class="text-danger" href="javascript:;">&raquo; {{ yoga_class.name|title }}</a>
+                <a class="text-danger" href="javascript:;">&raquo; {% trans 'Enroll' %}</a>
+            </div>
+        </div>
+    </div>
     <div class="container card">
         <div class="card-body">
             <div class="row justify-content-center">
