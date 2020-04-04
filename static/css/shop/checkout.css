@@ -1,0 +1,33 @@
+#info-right{
+    border: 1px solid rgba(0,0,0,.125);
+    padding: 10px;
+}
+
+.promotion {
+    border: 1px solid transparent;
+    background: #f1f0f1;
+    padding: 10px;
+    color: #727272;
+    margin-top: 15px;
+}
+
+#form_promotion lable{
+    color: #727272;
+    font-size: 0.75rem;
+}
+
+#btn_submit_promotion_code {
+    background-color: #575757;
+    border: 1px solid #575757;
+    color: white;
+    font-weight: 400;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+}
+
+#promotion_code {
+    height: calc(1.5em + .45rem + 2px);
+    padding: .375rem 1.75rem;
+    font-size: 0.85rem;
+}

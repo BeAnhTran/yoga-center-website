@@ -40,7 +40,7 @@
                                 alt="{{ item.product }}">
                         </td>
                         <td>{{ item.product }}</td>
-                        <td>{{ item.product.price | sexy_number }} vnđ</td>
+                        <td>{{ item.product.price | sexy_number }}đ</td>
                         <td>
                             <ul class="list-group list-group-horizontal">
                                 <a class="list-group-item text-secondary btn-sub"
@@ -58,7 +58,8 @@
                         </td>
                         <td>
                             <a class="text-danger remove-product" href="javascript:;">Xóa khỏi giỏ hàng</a>
-                            <form class="d-none" method="POST" action="{% url 'shop:remove-product-out-of-cart' item.product.pk %}">
+                            <form class="d-none" method="POST"
+                                action="{% url 'shop:remove-product-out-of-cart' item.product.pk %}">
                                 {% csrf_token %}
                                 <input type="submit" value="Confirm">
                             </form>
@@ -67,6 +68,12 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <div class="col">
+                <a class="site-btn sb-gradient float-right" href="{% url 'shop:checkout' %}">
+                    <span><i class="fas fa-fw fa-money-check-alt"></i></span>
+                    Tiến hành thanh toán
+                </a>
+            </div>
             {% else %}
             <h3>Không có sản phẩm trong giỏ hàng</h3>
             {% endif %}
@@ -108,7 +115,7 @@
             }
         }).done(data => console.log(data)).fail(err => console.log(err));
     }
-    $('.remove-product').click(function(){
+    $('.remove-product').click(function () {
         $(this).siblings('form').children('input[type=submit]').click();
     });
 </script>

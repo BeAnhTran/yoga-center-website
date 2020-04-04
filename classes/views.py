@@ -27,7 +27,7 @@ from django.conf import settings
 
 from rest_framework import status
 from django.http import HttpResponse
-from cards.forms import CardPaymentForm
+from common.forms.payment_form import PaymentForm
 
 from card_types.models import (CardType,
                                FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE, FOR_TRIAL)
@@ -168,7 +168,7 @@ class YogaClassEnrollPaymentView(View):
             lesson_list = self.__lesson_list_available(
                 yoga_class, enroll_card_form)
             # Payment Form
-            form = CardPaymentForm()
+            form = PaymentForm()
             id_card_type = enroll_card_form['card_type']
             card_type = CardType.objects.get(pk=id_card_type)
 
@@ -201,7 +201,7 @@ class YogaClassEnrollPaymentView(View):
     @transaction.atomic
     def post(self, request, slug):
         if request.session.get('enroll_card_form'):
-            card_payment_form = CardPaymentForm(request.POST)
+            card_payment_form = PaymentForm(request.POST)
             description = self.__description(
                 request.POST['name'], request.POST['email'], request.POST['amount'])
             if card_payment_form.is_valid():

@@ -109,56 +109,6 @@ class CardFormForTraineeEnroll(forms.ModelForm):
         return cleaned_data
 
 
-class CardPaymentForm(forms.Form):
-    name = forms.CharField(
-        max_length=100,
-        required=True,
-        widget=forms.TextInput(
-            attrs={
-                'placeholder':  _('Grey Tran'),
-                'class': 'input',
-                'autofocus': True
-            }
-        ))
-    email = forms.EmailField(
-        required=True,
-        widget=forms.TextInput(
-            attrs={
-                'placeholder':  _('giatruongtran27@gmail.com'),
-                'class': 'input'
-            }
-        ))
-    phone = forms.CharField(
-        max_length=30,
-        required=True,
-        widget=forms.TextInput(
-            attrs={
-                'placeholder':  _('0387 898 797'),
-                'class': 'input'
-            }
-        ))
-    address = forms.CharField(
-        max_length=150,
-        required=True,
-        widget=forms.TextInput(
-            attrs={
-                'placeholder':  _('140 - Đường A4 - Phường 13 - Quận Tân Bình'),
-                'class': 'input'
-            }
-        )
-    )
-    city = forms.CharField(
-        max_length=50,
-        required=True,
-        widget=forms.TextInput(
-            attrs={
-                'placeholder':  _('Hồ Chí Minh'),
-                'class': 'input'
-            }
-        )
-    )
-
-
 class ExtendCardRequestForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

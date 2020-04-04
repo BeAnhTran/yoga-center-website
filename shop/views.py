@@ -10,6 +10,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
+from common.forms.payment_form import PaymentForm
+from django.conf import settings
+
 
 class IndexView(ListView):
     model = Product
@@ -71,7 +77,6 @@ class ChangeProductCartQuantityApiView(APIView):
             else:
                 quantity = 1
             request.session['cart'][str(pk)]['quantity'] = quantity
-            print(len(request.session['cart']))
             return Response('Đã thay đổi số sản phẩm trong giỏ hàng', status=status.HTTP_200_OK)
 
 
@@ -99,4 +104,34 @@ class CartView(View):
                 })
         else:
             context['cart'] = None
+        return render(request, self.template_name, context=context)
+
+
+@method_decorator([login_required], name='dispatch')
+class CheckOutView(View):
+    template_name = 'shop/checkout.html'
+
+    def get(self, request):
+        context = {}
+        # Payment Form
+        payment_form = PaymentForm()
+        context['payment_form'] = payment_form
+        context['key'] = settings.STRIPE_PUBLISHABLE_KEY
+
+        context['cart'] = []
+        total = 0
+        if request.session.get('cart'):
+            cart = request.session.get('cart')
+            for product_id in cart:
+                product = get_object_or_404(Product, pk=product_id)
+                sub_total = product.price * cart[str(product_id)]['quantity']
+                total += sub_total
+                context['cart'].append({
+                    'product': product,
+                    'quantity': cart[str(product_id)]['quantity'],
+                    'sub_total': sub_total
+                })
+        else:
+            context['cart'] = None
+        context['total'] = total
         return render(request, self.template_name, context=context)
