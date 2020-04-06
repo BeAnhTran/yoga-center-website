@@ -3,10 +3,12 @@ from django.views import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
-from django.http import Http404
+from django.http import Http404, HttpResponse
+from django.contrib import messages
 
 from shop.models import Product, ProductCategory
 from rest_framework.response import Response
+
 from rest_framework import status
 from rest_framework.views import APIView
 
@@ -17,6 +19,8 @@ from common.forms.payment_form import PaymentForm
 from django.conf import settings
 from django.db import transaction
 from common.services.stripe_service import StripeService
+from common.services.order_service import OrderService
+from django.utils.translation import gettext as _
 
 
 class IndexView(ListView):
@@ -140,12 +144,53 @@ class CheckOutView(View):
 
     @transaction.atomic
     def post(self, request):
+        context = {}
+        context['cart'] = None
+        total = 0
+        amount = 0
+        promotion = 0
+        if request.session.get('cart'):
+            context['cart'] = []
+            cart = request.session.get('cart')
+            for product_id in cart:
+                product = get_object_or_404(Product, pk=product_id)
+                sub_total = product.price * cart[str(product_id)]['quantity']
+                total += sub_total
+                context['cart'].append({
+                    'product': product,
+                    'quantity': cart[str(product_id)]['quantity'],
+                    'sub_total': sub_total
+                })
+
         payment_form = PaymentForm(request.POST)
-        description = self.__description(
-            request.POST['name'], request.POST['email'], request.POST['amount'])
         if payment_form.is_valid():
-            return False
-        return True
+            try:
+                # amount = total - promotion
+                amount = total - promotion
+                description = self.__description(
+                    request.POST['name'], request.POST['email'], amount)
+                if request.POST.get('stripeToken'):
+                    # STRIPE CHARGE
+                    charge = StripeService(
+                        request.POST['name'],
+                        request.POST['email'],
+                        request.POST['phone'],
+                        int(round(amount)),
+                        request.POST['stripeToken'],
+                        _('Card Payment')
+                    ).call()
+                    if charge:
+                        OrderService(
+                            request.user, context['cart'], description, amount, charge.id).call()
+                        return HttpResponse('success', status=status.HTTP_200_OK)
+
+            except Exception as e:
+                print(e)
+                HttpResponse(e.message, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return HttpResponse(
+                payment_form.errors.as_json(),
+                status=status.HTTP_400_BAD_REQUEST)
 
     def __description(self, name, email, amount):
         listStr = [name, _('with'), _('email'), email, _('paied'), str(amount)]
