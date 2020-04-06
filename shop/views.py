@@ -182,6 +182,7 @@ class CheckOutView(View):
                     if charge:
                         BillService(
                             request.user, context['cart'], description, amount, request.POST['address'], charge.id).call()
+                        del request.session['cart']
                         return HttpResponse('success', status=status.HTTP_200_OK)
 
             except Exception as e:
