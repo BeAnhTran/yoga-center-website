@@ -46,25 +46,27 @@ class ProductCategory(models.Model):
         super(ProductCategory, self).save(*args, **kwargs)
 
 
-class Order(models.Model):
+class Bill(models.Model):
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='orders', verbose_name=_('user'))
-    products = models.ManyToManyField(Product, through='ProductOrder')
+        User, on_delete=models.CASCADE, related_name='bills', verbose_name=_('user'))
+    products = models.ManyToManyField(Product, through='ProductBill')
     description = models.TextField(
         null=True, blank=True, verbose_name=_('description'))
     amount = models.FloatField(
         blank=True, null=True, verbose_name=_('amount'))
-    charge_id = models.CharField(max_length=256, verbose_name=_(
+    charge_id = models.CharField(max_length=255, verbose_name=_(
         'charge id'), null=True, blank=True)
+    shipping_address = models.CharField(max_length=255, verbose_name=_(
+        'shipping address'), null=True, blank=True)
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
         auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
 
 
-class ProductOrder(models.Model):
+class ProductBill(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    bill = models.ForeignKey(Bill, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('created at'))

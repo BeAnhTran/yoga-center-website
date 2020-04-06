@@ -249,7 +249,10 @@
                     "{% trans 'Order products successfully' as t_order_product_successfully %}{{ t_order_product_successfully|capfirst }}",
                     "{% trans 'Please check your order history and email' %}",
                     'success'
-                );
+                ).then((result) => {
+                  // redirect to accounts/bills/
+                  window.location.href = "{% url 'core:accounts-bills' %}";
+                });
             }).fail(function (err) {
                 console.log(err);
             });

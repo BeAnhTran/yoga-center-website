@@ -3,13 +3,14 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block specified_css %}
-<link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
+{% block additional_css %}
 <link rel="stylesheet" href="{% static 'vendor/acc-wizard-master/release/acc-wizard.min.css' %}">
 {% endblock %}
 
 {% block header_path %}
-    <a class="text-danger" href="javascript:;">Thông tin cá nhân</a>
+<a class="text-danger" href="javascript:;">
+    &raquo; Thông tin cá nhân
+</a>
 {% endblock %}
 
 

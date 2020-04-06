@@ -19,7 +19,7 @@ from common.forms.payment_form import PaymentForm
 from django.conf import settings
 from django.db import transaction
 from common.services.stripe_service import StripeService
-from common.services.order_service import OrderService
+from common.services.bill_service import BillService
 from django.utils.translation import gettext as _
 
 
@@ -180,8 +180,8 @@ class CheckOutView(View):
                         _('Card Payment')
                     ).call()
                     if charge:
-                        OrderService(
-                            request.user, context['cart'], description, amount, charge.id).call()
+                        BillService(
+                            request.user, context['cart'], description, amount, request.POST['address'], charge.id).call()
                         return HttpResponse('success', status=status.HTTP_200_OK)
 
             except Exception as e:

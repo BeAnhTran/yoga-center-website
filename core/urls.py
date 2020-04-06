@@ -2,12 +2,17 @@ from django.urls import include, path
 
 from .views import core, trainees, trainers, errors
 from core.views.profile import index, trainee
+from core.views import bills_view
 from roll_calls.views import GetRollCallListApiView
+
 
 app_name = 'core'
 
 urlpatterns = [
     path('', core.home, name='home'),
+
+    path('accounts/bills/', bills_view.BillListView.as_view(), name='accounts-bills'),
+
     path('accounts/signup/', core.SignUpView.as_view(), name='account_signup'),
     path('accounts/signup/trainee/',
          trainees.TraineeSignUpView.as_view(), name='trainee_signup'),
@@ -45,5 +50,5 @@ urlpatterns = [
     path('accounts/cards/<int:card_id>/refunds/<int:pk>/delete', trainee.detele_refund_request,
          name='profile-trainee-card-refunds-delete'),
 
-    path('401', errors._401, name='error_401'),
+    path('error/', errors._401, name='error_401'),
 ]
