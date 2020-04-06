@@ -50,6 +50,7 @@
             </div>
         </div>
     </div>
+    {% if user.is_trainee %}
     <div class="panel panel-default">
         <div class="panel-heading" id="headingTwo">
             <h3>
@@ -65,6 +66,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}
 
