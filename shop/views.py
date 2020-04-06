@@ -15,6 +15,8 @@ from django.contrib.auth.decorators import login_required
 
 from common.forms.payment_form import PaymentForm
 from django.conf import settings
+from django.db import transaction
+from common.services.stripe_service import StripeService
 
 
 class IndexView(ListView):
@@ -135,3 +137,17 @@ class CheckOutView(View):
             context['cart'] = None
         context['total'] = total
         return render(request, self.template_name, context=context)
+
+    @transaction.atomic
+    def post(self, request):
+        payment_form = PaymentForm(request.POST)
+        description = self.__description(
+            request.POST['name'], request.POST['email'], request.POST['amount'])
+        if payment_form.is_valid():
+            return False
+        return True
+
+    def __description(self, name, email, amount):
+        listStr = [name, _('with'), _('email'), email, _('paied'), str(amount)]
+        result = ' '.join(listStr)
+        return result

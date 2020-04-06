@@ -13,8 +13,6 @@ class ProductForm(forms.ModelForm):
             {'placeholder': 'Áo thun'})
         self.fields['description'].widget.attrs.update(
             {'placeholder': 'Áo thun co giãn 4 chiều'})
-        self.fields['content'].widget.attrs.update(
-            {'placeholder': 'Mô tả nội dung chi tiết'})
         self.fields['price'].widget.attrs.update(
             {'placeholder': '200 000'})
         self.fields['promotion_price'].widget.attrs.update(
@@ -27,16 +25,15 @@ class ProductForm(forms.ModelForm):
             'category',
             Row(
                 Column('image', css_class='form-group col-md-6 mb-0'),
-                Column('description', css_class='form-group col-md-6 mb-0'),
+                Column('quantity', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Row(
-                Column('price', css_class='form-group col-md-4 mb-0'),
-                Column('promotion_price', css_class='form-group col-md-4 mb-0'),
-                Column('quantity', css_class='form-group col-md-4 mb-0'),
+                Column('price', css_class='form-group col-md-6 mb-0'),
+                Column('promotion_price', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            'content',
+            'description',
             Submit('submit', _('Save'), css_class='btn-success'))
 
         # Focus on form field whenever error occurred

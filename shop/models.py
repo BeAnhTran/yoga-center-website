@@ -2,6 +2,7 @@ from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
+from core.models import User
 
 
 class Product(models.Model):
@@ -45,15 +46,27 @@ class ProductCategory(models.Model):
         super(ProductCategory, self).save(*args, **kwargs)
 
 
-class Cart(models.Model):
-    products = models.ManyToManyField(Product, through='ProductCart')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+class Order(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='orders', verbose_name=_('user'))
+    products = models.ManyToManyField(Product, through='ProductOrder')
+    description = models.TextField(
+        null=True, blank=True, verbose_name=_('description'))
+    amount = models.FloatField(
+        blank=True, null=True, verbose_name=_('amount'))
+    charge_id = models.CharField(max_length=256, verbose_name=_(
+        'charge id'), null=True, blank=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name=_('created at'))
+    updated_at = models.DateTimeField(
+        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
 
 
-class ProductCart(models.Model):
+class ProductOrder(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name=_('created at'))
+    updated_at = models.DateTimeField(
+        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))

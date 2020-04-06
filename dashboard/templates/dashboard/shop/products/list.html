@@ -29,7 +29,7 @@
                         <th>{% trans 'name' as t_name %}{{ t_name|capfirst }}</th>
                         <th>{% trans 'image' as t_image %}{{ t_image|capfirst }}</th>
                         <th>{% trans 'price' as t_image %}{{ t_image|capfirst }}</th>
-                        <th>{% trans 'description' as t_name %}{{ t_name|capfirst }}</th>
+                        <th>{% trans 'quantity' as t_quantity %}{{ t_quantity|capfirst }}</th>
                         <th>{% trans 'action' as t_action %}{{ t_action|capfirst }}</th>
                     </tr>
                 </thead>
@@ -37,12 +37,12 @@
                     {% for product in products %}
                     <tr>
                         <td>{{ product.id }}</td>
-                        <td>{{ product.name|title }}</td>
+                        <td>{{ product.name }}</td>
                         <td>
                             <img src="{{ product.image.url }}" class="img img-fluid" width="50" alt="{{ product }}">
                         </td>
                         <td>{{ product.price | sexy_number }}</td>
-                        <td>{{ product.description|title }}</td>
+                        <td>{{ product.quantity }}</td>
                         <td>
                             <a class="btn btn-sm btn-outline-primary" href="javascript:;"><i
                                     class="fas fa-fw fa-eye"></i>

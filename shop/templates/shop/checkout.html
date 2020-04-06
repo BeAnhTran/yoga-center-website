@@ -4,7 +4,7 @@
 {% load sexify %}
 
 {% block specified_css %}
-<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'static/stripe/js.stripe.js' %}"></script>
 
 {% block additional_css %}
 <link href="{% static 'css/shop/checkout.css' %}" rel="stylesheet">
@@ -230,15 +230,11 @@
             };
 
             data = $('form#payment_form').serialize();
-            if ($('#card-element').is(":visible")) {
-                stripe.createToken(card, billing_details).then(function (result) {
-                    stripeToken = result.token.id;
-                    data += '&stripeToken=' + stripeToken;
-                    submit_payment_form(data);
-                });
-            } else {
+            stripe.createToken(card, billing_details).then(function (result) {
+                stripeToken = result.token.id;
+                data += '&stripeToken=' + stripeToken;
                 submit_payment_form(data);
-            }
+            });
         });
     });
 
@@ -247,7 +243,7 @@
             headers: {
                 'X-CSRFTOKEN': '{{ csrf_token }}'
             },
-            url: "javascript:;",
+            url: "{% url 'shop:checkout' %}",
             type: 'POST',
             data: data
         }).done(function (data) {
