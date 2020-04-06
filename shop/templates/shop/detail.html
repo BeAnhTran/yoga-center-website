@@ -120,6 +120,14 @@
             data: data
         }).done(function (data) {
             console.log(data);
+            Swal.fire(
+                "{% trans 'Add product to cart successfully' %}",
+                '',
+                'success'
+            ).then((result) => {
+                var obj = jQuery.parseJSON(data);
+                $('#shop_cart_header').text(obj['products_count']);
+            });
         }).fail(err => console.log(err));
     });
 </script>

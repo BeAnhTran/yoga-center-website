@@ -34,7 +34,7 @@
                 </div>
                 <div class="header-info">
                     <a href="{% url 'shop:cart' %}">
-                        <i class="fas fa-shopping-cart">{{ request.session.cart|length }}</i>
+                        <i id="shop_cart_header" class="fas fa-shopping-cart">{{ request.session.cart|length }}</i>
                     </a>
                 </div>
                 {% if user.is_authenticated %}

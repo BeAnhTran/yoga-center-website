@@ -4,7 +4,7 @@
 {% load sexify %}
 
 {% block additional_css %}
-    <link href="{% static 'css/shop/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/shop/style.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block shop_content %}
@@ -54,7 +54,7 @@
                 <a class="float-left text-secondary" href="{% url 'shop:product-detail' product.slug %}">
                     <i class="fa fa-fw fa-eye"></i> Chi tiết
                 </a>
-                <a class="float-right text-secondary" href="javascript:;">
+                <a class="float-right text-secondary add-to-cart" data-pk='{{ product.pk }}' href="javascript:;">
                     <i class="fa fa-fw fa-cart-plus"></i> Thêm vào giỏ
                 </a>
             </div>
@@ -63,4 +63,36 @@
     {% endfor %}
 </div>
 {% endif %}
+{% endblock %}
+
+{% block specified_js %}
+<script>
+    $(function () {
+        $('.add-to-cart').click(function () {
+            var id = $(this).attr('data-pk');
+            var _url = "{% url 'shop:add-product-to-cart' 0 %}";
+            var url = _url.replace('0', id);
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: url,
+                type: 'POST'
+            }).done(function (data) {
+                console.log(data);
+                Swal.fire(
+                    "{% trans 'Add product to cart successfully' %}",
+                    '',
+                    'success'
+                ).then((result) => {
+                    var obj = jQuery.parseJSON(data);
+                    $('#shop_cart_header').text(obj['products_count']);
+                });
+            }).fail(err => console.log(err));
+        });
+    });
+
+
+
+</script>
 {% endblock %}

@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponse
 from django.contrib import messages
+import json
 
 from shop.models import Product, ProductCategory
 from rest_framework.response import Response
@@ -71,7 +72,11 @@ class AddToCartApiView(APIView):
                 'slug': product.slug,
                 'quantity': quantity
             }
-        return Response('Đã thêm vào giỏ hàng', status=status.HTTP_200_OK)
+        response_data = {
+            'message': 'Đã thêm vào giỏ hàng',
+            'products_count': request.session['cart'].__len__()
+        }
+        return Response(json.dumps(response_data), status=status.HTTP_200_OK)
 
 
 class ChangeProductCartQuantityApiView(APIView):
