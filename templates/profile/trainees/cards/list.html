@@ -15,74 +15,79 @@
 {% endblock %}
 
 {% block profile_content %}
-{% for card in cards %}
-<div class="card mb-3">
-    <div class="card-header">{{card.yogaclass}}
-        <a href="javascript:;">
-            <span class="badge badge-danger">{{ card.card_type }}</span>
-        </a>
-        <a class="float-right" href="javascript:;">
-            <span class="badge badge-success">{{ card.yogaclass.course }}</span>
-        </a>
-    </div>
-    <div class="card-body">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <a href="javascript:;">
-                        {% if card.yogaclass.course.image %}
-                        <img width="150" src="{{ card.yogaclass.course.image.url }}" alt="{{card.yogaclass}}">
-                        {% else %}
-                        <img width="150" src="{% static 'img/course/default_course.jpg'%}" alt="{{card.yogaclass}}">
-                        {% endif %}
-                    </a>
-                </div>
-                <div class="col-lg-8">
-                    <table class="table table-borderless">
-                        <tbody>
-                            <tr>
-                                <td>{% trans 'name' as t_name %}{{ t_name|capfirst }}</td>
-                                <td><a href="javascript:;">{{ card.yogaclass }}</a></td>
-                            </tr>
-                            <tr>
-                                <td>{% trans 'trainer' as t_trainer %}{{ t_trainer|capfirst }}</td>
-                                <td><a href="javascript:;">{{ card.yogaclass.trainer }}</a></td>
-                            </tr>
-                            <tr>
-                                {% trans 'start at' as t_start_at %}
-                                <td>{{ t_start_at|capfirst }}</td>
-                                <td>{{ card.start_at }}</td>
-                            </tr>
-                            <tr>
-                                {% trans 'end at' as t_end_at %}
-                                <td>{{ t_end_at|capfirst }}</td>
-                                <td>{{ card.end_at }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+{% if cards %}
+    {% for card in cards %}
+    <div class="card mb-3">
+        <div class="card-header">{{card.yogaclass}}
+            <a href="javascript:;">
+                <span class="badge badge-danger">{{ card.card_type }}</span>
+            </a>
+            <a class="float-right" href="javascript:;">
+                <span class="badge badge-success">{{ card.yogaclass.course }}</span>
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <a href="javascript:;">
+                            {% if card.yogaclass.course.image %}
+                            <img width="150" src="{{ card.yogaclass.course.image.url }}" alt="{{card.yogaclass}}">
+                            {% else %}
+                            <img width="150" src="{% static 'img/course/default_course.jpg'%}" alt="{{card.yogaclass}}">
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="col-lg-8">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>{% trans 'name' as t_name %}{{ t_name|capfirst }}</td>
+                                    <td><a href="javascript:;">{{ card.yogaclass }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans 'trainer' as t_trainer %}{{ t_trainer|capfirst }}</td>
+                                    <td><a href="javascript:;">{{ card.yogaclass.trainer }}</a></td>
+                                </tr>
+                                <tr>
+                                    {% trans 'start at' as t_start_at %}
+                                    <td>{{ t_start_at|capfirst }}</td>
+                                    <td>{{ card.start_at }}</td>
+                                </tr>
+                                <tr>
+                                    {% trans 'end at' as t_end_at %}
+                                    <td>{{ t_end_at|capfirst }}</td>
+                                    <td>{{ card.end_at }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-footer">
-        <div class="float-right">
-            <a class="btn btn-sm btn-secondary" href="{% url 'core:profile-trainee-cards-detail' card.pk %}">
-                {% trans 'Detail' %}
-            </a>
-            <a class="btn btn-sm btn-secondary" href="{% url 'core:profile-trainee-card-extend' card.pk %}">
-                {% trans 'Extend' %}
-            </a>
-            <a class="btn btn-sm btn-secondary" href="{% url 'core:profile-trainee-card-refunds-new' card.pk %}"
-                class="ml-1">
-                {% trans 'Refund' %}
-            </a>
-            <a class="btn btn-sm btn-secondary" href="javascript:;" class="ml-1">
-                {% trans 'Payment History' %}
-            </a>
+        <div class="card-footer">
+            <div class="float-right">
+                <a class="btn btn-sm btn-secondary" href="{% url 'core:profile-trainee-cards-detail' card.pk %}">
+                    {% trans 'Detail' %}
+                </a>
+                <a class="btn btn-sm btn-secondary" href="{% url 'core:profile-trainee-card-extend' card.pk %}">
+                    {% trans 'Extend' %}
+                </a>
+                <a class="btn btn-sm btn-secondary" href="{% url 'core:profile-trainee-card-refunds-new' card.pk %}"
+                    class="ml-1">
+                    {% trans 'Refund' %}
+                </a>
+                <a class="btn btn-sm btn-secondary" href="javascript:;" class="ml-1">
+                    {% trans 'Payment History' %}
+                </a>
+            </div>
         </div>
     </div>
-</div>
-{% endfor%}
+    {% endfor%}
+{% else %}
+<h3 class="text-danger">Không có thẻ tập</h3>
+{% endif %}
+
 
 {% endblock %}
 
