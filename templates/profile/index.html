@@ -90,6 +90,7 @@
             class="panel-collapse collapse {% if focus == 'collapseCertificate' %}show{% endif %}">
             <div class="panel-body">
                 <a id="add_new_certificate" class="float-right text-danger" href="javascript:;" data-toggle="modal" data-target="#modal_certificate"><small><i>tạo mới</i></small></a>
+                {% if certificate_user_obj.certificates.all.count > 0 %}
                 <table class="table table-hover">
                     <thead>
                         <tr class="table-success">
@@ -115,6 +116,9 @@
     
                     </tbody>
                 </table>
+                {% else %}
+                <p><i>Không có chứng chỉ</i></p>
+                {% endif %}
                 
             </div>
         </div>

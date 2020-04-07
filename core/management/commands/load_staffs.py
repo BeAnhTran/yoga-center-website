@@ -11,19 +11,19 @@ class Command(BaseCommand):
 
     @transaction.atomic
     def handle(self, **options):
-        from core.models import User, Trainer
+        from core.models import User, Staff
         from faker import Faker
         fake = Faker()
-        print("Create trainers")
-        num = Trainer.objects.count()
+        print("Create staffs")
+        num = Staff.objects.count()
         for i in range(num, num + 3):
             data = {
-                'email': 'trainer' + str(i) + '@gmail.com',
+                'email': 'staff' + str(i) + '@gmail.com',
                 'first_name': fake.first_name(),
                 'last_name': fake.last_name()
             }
-            trainer = User(**data)
-            trainer.set_password('truong77')
-            trainer.is_trainer = True
-            trainer.save()
-            Trainer.objects.create(user=trainer)
+            staff = User(**data)
+            staff.set_password('truong77')
+            staff.is_staff = True
+            staff.save()
+            Staff.objects.create(user=staff)
