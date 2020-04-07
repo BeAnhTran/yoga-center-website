@@ -11,17 +11,8 @@ input, textarea {
     -webkit-border-radius: 5px;
     -o-border-radius: 5px;
     -ms-border-radius: 5px; }
-    input:focus, textarea:focus {
-      background: none;
-      border: 1px solid #f65300; }
-    input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-      color: #999; }
-    input::-moz-placeholder, textarea::-moz-placeholder {
-      color: #999; }
-    input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-      color: #999; }
-    input:-moz-placeholder, textarea:-moz-placeholder {
-      color: #999; }
+    input.form-control::placeholder, textarea.form-control::placeholder {
+        color: lightgray; }
   
   textarea {
     width: 100%;
@@ -67,6 +58,7 @@ input, textarea {
     height: calc(2.25em + .75rem + 2px);
     background-color: #f8f8f8;
     padding: 13px 20px;
+    color: #000;
   }
 
   .author-card {

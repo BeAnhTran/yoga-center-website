@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, reverse
 from django.views.generic import TemplateView
 from core.forms.profile_forms import UsernameEmailForm, BasicInfoForm, AdditionalInfoForm, HealthConditionForm
 from django.views import View
@@ -76,7 +76,7 @@ class ProfileView(View):
         else:
             form1 = UsernameEmailForm(instance=request.user)
             form1.fields['hidden_field'].initial = 'username_email'
-        context['form1'] = form1
+            context['form1'] = form1
 
         # Basic Info Form
         if request.POST.get('hidden_field') is not None and request.POST.get('hidden_field') == 'basic_info':
@@ -85,26 +85,28 @@ class ProfileView(View):
             if form_basic_info.is_valid():
                 form_basic_info.save()
                 messages.success(request, _('Update successfully'))
-                return redirect('core:profile')
+                return redirect(reverse('core:profile') + '?focus=collapseBasicInfo')
         else:
             form_basic_info = BasicInfoForm(instance=request.user)
             form_basic_info.fields['hidden_field'].initial = 'basic_info'
-        context['form_basic_info'] = form_basic_info
-        context['focus'] = 'collapseBasicInfo'
+            context['form_basic_info'] = form_basic_info
+            context['focus'] = 'collapseBasicInfo'
 
+        # Additional Info Form
         if request.POST.get('hidden_field') is not None and request.POST.get('hidden_field') == 'additional_info':
             form_additional_info = AdditionalInfoForm(
                 request.POST, instance=request.user)
             if form_additional_info.is_valid():
                 form_additional_info.save()
                 messages.success(request, _('Update successfully'))
-                return redirect('core:profile')
+                return redirect(reverse('core:profile') + '?focus=collapseAdditionalInfo')
         else:
             form_additional_info = AdditionalInfoForm(instance=request.user)
             form_additional_info.fields['hidden_field'].initial = 'additional_info'
-        context['form_additional_info'] = form_additional_info
-        context['focus'] = 'collapseAdditionalInfo'
+            context['form_additional_info'] = form_additional_info
+            context['focus'] = 'collapseAdditionalInfo'
 
+        # Certificate Form
         if request.POST.get('hidden_field') is not None and request.POST.get('hidden_field') == 'certificate':
             form_certificate = CertificateForm(request.POST, request.FILES)
             if form_certificate.is_valid():
@@ -117,12 +119,12 @@ class ProfileView(View):
                 user_obj.certificates.create(**form_certificate.cleaned_data)
 
                 messages.success(request, _('Create certificate successfully'))
-                return redirect('core:profile')
+                return redirect(reverse('core:profile') + '?focus=collapseCertificate')
         else:
             form_certificate = CertificateForm()
             form_certificate.fields['hidden_field'].initial = 'certificate'
-        context['form_certificate'] = form_certificate
-        context['focus'] = 'collapseCertificate'
+            context['form_certificate'] = form_certificate
+            context['focus'] = 'collapseCertificate'
 
         # Active Sidebar
         context['sidebar_profile'] = 'info'

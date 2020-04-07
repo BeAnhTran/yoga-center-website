@@ -88,34 +88,50 @@
         </div>
         <div id="collapseCertificate"
             class="panel-collapse collapse {% if focus == 'collapseCertificate' %}show{% endif %}">
-            <a id="add_new_certificate" class="float-right text-danger" href="javascript:;"><small><i>tạo mới</i></small></a>
-            <table class="table table-hover">
-                <thead>
-                    <tr class="table-success">
-                        <th><small>#</small></th>
-                        <th><small>{% trans 'image' as t_img %}{{ t_img|capfirst }}</small></th>
-                        <th><small>{% trans 'name' as t_name %}{{ t_name|capfirst }}</small></th>
-                        <th><small>{% trans 'description' as t_description %}{{ t_description|capfirst }}</small></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for certificate in certificate_user_obj.certificates.all %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>
-                            <img class="img img-fluid" width="50" src="{{ certificate.image.url }}" alt="{{ certificate.name }}">
-                        </td>
-                        <td>{{ certificate.name }}</td>
-                        <td>{{ certificate.description }}</td>
-                        <td><a href="javascript:;">Chỉnh sửa</a></td>
-                    </tr>
-                    {% endfor %}
-
-                </tbody>
-            </table>
             <div class="panel-body">
-                {% crispy form_certificate %}
+                <a id="add_new_certificate" class="float-right text-danger" href="javascript:;" data-toggle="modal" data-target="#modal_certificate"><small><i>tạo mới</i></small></a>
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="table-success">
+                            <th><small>#</small></th>
+                            <th><small>{% trans 'image' as t_img %}{{ t_img|capfirst }}</small></th>
+                            <th><small>{% trans 'name' as t_name %}{{ t_name|capfirst }}</small></th>
+                            <th><small>{% trans 'description' as t_description %}{{ t_description|capfirst }}</small></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for certificate in certificate_user_obj.certificates.all %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                <img class="img img-fluid" width="50" src="{{ certificate.image.url }}" alt="{{ certificate.name }}">
+                            </td>
+                            <td>{{ certificate.name }}</td>
+                            <td>{{ certificate.description }}</td>
+                            <td><a href="javascript:;">Chỉnh sửa</a></td>
+                        </tr>
+                        {% endfor %}
+    
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div class="modal" id="modal_certificate">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-none">
+                    <h3 id="model_title" class="modal-title">Thêm chứng chỉ</h3>
+                    <button id="" type="button" class="btn btn-sm btn-danger"
+                        data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    {% crispy form_certificate %}
+                </div>
             </div>
         </div>
     </div>
