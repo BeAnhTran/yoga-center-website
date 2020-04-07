@@ -15,6 +15,7 @@ from rest_framework.decorators import api_view, renderer_classes
 from django.db import transaction
 from cards.models import Card
 from cards.forms import ExtendCardRequestForm
+from core.forms.certificate_forms import CertificateForm
 
 
 @method_decorator([login_required], name='dispatch')
@@ -24,8 +25,10 @@ class ProfileView(View):
     def get(self, request):
         form1 = UsernameEmailForm(instance=request.user)
         form1.fields['hidden_field'].initial = 'username_email'
+        # Basic Info Form
         form_basic_info = BasicInfoForm(instance=request.user)
         form_basic_info.fields['hidden_field'].initial = 'basic_info'
+        # Additional Info Form
         form_additional_info = AdditionalInfoForm(instance=request.user)
         form_additional_info.fields['hidden_field'].initial = 'additional_info'
         context = {}
@@ -34,14 +37,36 @@ class ProfileView(View):
         context['form_additional_info'] = form_additional_info
         context['sidebar_profile'] = 'info'
 
+        # Health Condition Form (Trainee)
         if request.user.is_trainee:
             form_health_condition = HealthConditionForm(
                 instance=request.user.trainee)
             context['form_health_condition'] = form_health_condition
 
+        # Certificate Form (Trainer | Staff)
+        if request.user.is_trainer or request.user.is_staff:
+            form_certificate = CertificateForm()
+            form_certificate.fields['hidden_field'].initial = 'certificate'
+            context['form_certificate'] = form_certificate
+            # assign certificate_user_obj (Trainer or Staff)
+            if request.user.is_trainer:
+                certificate_user_obj = request.user.trainer
+            else:
+                certificate_user_obj = request.user.staff
+            context['certificate_user_obj'] = certificate_user_obj
+
+        # Focus and scroll
+        if request.GET.get('focus'):
+            context['focus'] = request.GET['focus']
+        else:
+            context['focus'] = ''
+
         return render(request, self.template_name, context=context)
 
     def post(self, request, *arg, **kwargs):
+        context = {}
+        context['focus'] = ''
+        # Email Form
         if request.POST.get('hidden_field') is not None and request.POST.get('hidden_field') == 'username_email':
             form1 = UsernameEmailForm(request.POST, instance=request.user)
             if form1.is_valid():
@@ -51,7 +76,9 @@ class ProfileView(View):
         else:
             form1 = UsernameEmailForm(instance=request.user)
             form1.fields['hidden_field'].initial = 'username_email'
+        context['form1'] = form1
 
+        # Basic Info Form
         if request.POST.get('hidden_field') is not None and request.POST.get('hidden_field') == 'basic_info':
             form_basic_info = BasicInfoForm(
                 request.POST, instance=request.user)
@@ -62,6 +89,8 @@ class ProfileView(View):
         else:
             form_basic_info = BasicInfoForm(instance=request.user)
             form_basic_info.fields['hidden_field'].initial = 'basic_info'
+        context['form_basic_info'] = form_basic_info
+        context['focus'] = 'collapseBasicInfo'
 
         if request.POST.get('hidden_field') is not None and request.POST.get('hidden_field') == 'additional_info':
             form_additional_info = AdditionalInfoForm(
@@ -73,12 +102,29 @@ class ProfileView(View):
         else:
             form_additional_info = AdditionalInfoForm(instance=request.user)
             form_additional_info.fields['hidden_field'].initial = 'additional_info'
+        context['form_additional_info'] = form_additional_info
+        context['focus'] = 'collapseAdditionalInfo'
 
-        context = {
-            'form1': form1,
-            'form_basic_info': form_basic_info,
-            'form_additional_info': form_additional_info
-        }
+        if request.POST.get('hidden_field') is not None and request.POST.get('hidden_field') == 'certificate':
+            form_certificate = CertificateForm(request.POST, request.FILES)
+            if form_certificate.is_valid():
+                # remove hidden field
+                form_certificate.cleaned_data.pop('hidden_field')
+                if request.user.is_trainer:
+                    user_obj = request.user.trainer
+                else:
+                    user_obj = request.user.staff
+                user_obj.certificates.create(**form_certificate.cleaned_data)
+
+                messages.success(request, _('Create certificate successfully'))
+                return redirect('core:profile')
+        else:
+            form_certificate = CertificateForm()
+            form_certificate.fields['hidden_field'].initial = 'certificate'
+        context['form_certificate'] = form_certificate
+        context['focus'] = 'collapseCertificate'
+
+        # Active Sidebar
         context['sidebar_profile'] = 'info'
         return render(request, self.template_name, context=context)
 

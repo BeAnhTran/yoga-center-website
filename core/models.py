@@ -60,7 +60,7 @@ class User(AbstractUser):
 
 
 class Certificate(models.Model):
-    title = models.CharField(max_length=255, verbose_name=_('name'))
+    name = models.CharField(max_length=255, verbose_name=_('name'))
     description = models.CharField(
         blank=True, null=True, max_length=255, verbose_name=_('description'))
     image = models.ImageField(upload_to='certificates',
@@ -86,9 +86,10 @@ class Trainee(models.Model):
 class Trainer(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True, related_name='trainer')
-    yoga_teaching_experience = models.TextField(
+    experience = models.TextField(
         blank=True, verbose_name=_('yoga teaching experience'))
-    yoga_certificates = GenericRelation(Certificate)
+    certificates = GenericRelation(
+        Certificate, related_query_name='trainers', verbose_name=_('certificate'))
     is_student = models.BooleanField(
         default=False, verbose_name=_('is student'))
     graduate_school = models.CharField(
@@ -107,9 +108,10 @@ class Trainer(models.Model):
 class Staff(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True, related_name='staff')
-    work_experience = models.TextField(
+    experience = models.TextField(
         blank=True, verbose_name=_('work experience'))
-    certificates = GenericRelation(Certificate)
+    certificates = GenericRelation(
+        Certificate, related_query_name='staffs', verbose_name=_('certificate'))
     is_student = models.BooleanField(
         default=False, verbose_name=_('is student'))
     graduate_school = models.CharField(

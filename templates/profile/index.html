@@ -20,17 +20,23 @@
         <div class="form-row">
             {% crispy form1 %}
         </div>
+        <div class="form-row">
+            <div class="col">
+                <a class="site-btn sb-gradient" href="javascript:;">Đổi mật khẩu mới</a>
+            </div>
+        </div>
     </div>
 
     <div class="panel panel-default">
         <div class="panel-heading" id="headingOne">
             <h3>
-                <a class="text-secondary" href="#collapseOne" data-toggle="collapse"
+                <a class="text-secondary" href="#collapseBasicInfo" data-toggle="collapse"
                     data-parent="#accordion">{% trans 'Basic information' %}</a>
             </h3>
         </div>
 
-        <div id="collapseOne" class="panel-collapse collapse show">
+        <div id="collapseBasicInfo"
+            class="panel-collapse collapse {% if focus == 'collapseBasicInfo' %}show{% endif %}">
             <div class="panel-body">
                 {%  crispy form_basic_info %}
             </div>
@@ -40,11 +46,12 @@
     <div class="panel panel-default">
         <div class="panel-heading" id="headingTwo">
             <h3>
-                <a class="text-secondary" href="#collapseTwo" data-toggle="collapse"
+                <a class="text-secondary" href="#collapseAdditionalInfo" data-toggle="collapse"
                     data-parent="#accordion">{% trans 'Additional information' %}</a>
             </h3>
         </div>
-        <div id="collapseTwo" class="panel-collapse collapse">
+        <div id="collapseAdditionalInfo"
+            class="panel-collapse collapse {% if focus == 'collapseAdditionalInfo' %}show{% endif %}">
             <div class="panel-body">
                 {% crispy form_additional_info %}
             </div>
@@ -52,21 +59,68 @@
     </div>
     {% if user.is_trainee %}
     <div class="panel panel-default">
-        <div class="panel-heading" id="headingTwo">
+        <div class="panel-heading" id="headingThree">
             <h3>
-                <a class="text-secondary" href="#collapseThree" data-toggle="collapse" data-parent="#accordion">
+                <a class="text-secondary" href="#collapseHealthCondition" data-toggle="collapse"
+                    data-parent="#accordion">
                     {% trans 'health condition' as t_health_con %}
                     {{ t_health_con|capfirst }}
                 </a>
             </h3>
         </div>
-        <div id="collapseThree" class="panel-collapse collapse">
+        <div id="collapseHealthCondition"
+            class="panel-collapse collapse {% if focus == 'collapseHealthCondition' %}show{% endif %}">
             <div class="panel-body">
                 {% crispy form_health_condition %}
             </div>
         </div>
     </div>
     {% endif %}
+
+    {% if user.is_trainer or user.is_staff %}
+    <div class="panel panel-default">
+        <div class="panel-heading" id="headingFour">
+            <h3>
+                <a class="text-secondary" href="#collapseCertificate" data-toggle="collapse" data-parent="#accordion">
+                    Chứng chỉ
+                </a>
+            </h3>
+        </div>
+        <div id="collapseCertificate"
+            class="panel-collapse collapse {% if focus == 'collapseCertificate' %}show{% endif %}">
+            <a id="add_new_certificate" class="float-right text-danger" href="javascript:;"><small><i>tạo mới</i></small></a>
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-success">
+                        <th><small>#</small></th>
+                        <th><small>{% trans 'image' as t_img %}{{ t_img|capfirst }}</small></th>
+                        <th><small>{% trans 'name' as t_name %}{{ t_name|capfirst }}</small></th>
+                        <th><small>{% trans 'description' as t_description %}{{ t_description|capfirst }}</small></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for certificate in certificate_user_obj.certificates.all %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            <img class="img img-fluid" width="50" src="{{ certificate.image.url }}" alt="{{ certificate.name }}">
+                        </td>
+                        <td>{{ certificate.name }}</td>
+                        <td>{{ certificate.description }}</td>
+                        <td><a href="javascript:;">Chỉnh sửa</a></td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            <div class="panel-body">
+                {% crispy form_certificate %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
 </div>
 {% endblock %}
 
@@ -75,7 +129,10 @@
 
 <script>
     $(function () {
-        $('html, body').animate({ scrollTop: $('#accordion').offset().top - 100 }, 'slow');
+        var obj_str = '#{{focus}}';
+        if (obj_str.length > 1) {
+            $('html, body').animate({ scrollTop: $(obj_str).offset().top - 100 }, 'slow');
+        }
     });
 
     $('form#form_health_condition').submit(function (e) {
