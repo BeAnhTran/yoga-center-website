@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from ..decorators import admin_required
 
-from shop.models import Product, ProductCategory
+from shop.models import Product, ProductCategory, Bill
 from dashboard.forms import product_categories_form, products_form
 
 
@@ -116,3 +116,22 @@ class ProductNewView(View):
             return redirect('dashboard:shop-products-list')
 
         return render(request, self.template_name, context=context)
+
+
+#******************
+# BILLS
+#******************
+
+@method_decorator([login_required, admin_required], name='dispatch')
+class BillListView(ListView):
+    model = Bill
+    template_name = 'dashboard/shop/bills.html'
+    context_object_name = 'bills'
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(BillListView,
+                        self).get_context_data(**kwargs)
+        context['active_nav'] = 'bills'
+        context['show_nav_shop'] = True
+        return context

@@ -202,10 +202,10 @@
                         {% trans 'products' as t_products %} {{ t_products|capfirst }}
                     </span>
                 </a>
-                <a class="collapse-item {% if active_nav == 'cart' %}active{% endif %}" href="javascript:;">
-                    <i class="fas fa-cart-plus"></i>
+                <a class="collapse-item {% if active_nav == 'bills' %}active{% endif %}" href="{% url 'dashboard:shop-bills-list' %}">
+                    <i class="fas fa-fw fa-file-invoice-dollar"></i>
                     <span>
-                        {% trans 'carts' as t_cart %} {{ t_cart|capfirst }}
+                        {% trans 'bills' as t_bills %} {{ t_bills|capfirst }}
                     </span>
                 </a>
             </div>
