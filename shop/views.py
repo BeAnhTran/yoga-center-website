@@ -195,7 +195,7 @@ class CheckOutView(View):
                         subject = 'Hóa đơn mua hàng'
                         html_message = render_to_string('shop/mails/checkout_mail.html', {'cart': context['cart'], 'total': total, 'host': request.get_host})
                         plain_message = strip_tags(html_message)
-                        from_email = '<lotus.yoga@gmail.com>'
+                        from_email = 'LotusYoga.com <lotus.yoga@gmail.com>'
                         to = request.POST['email']
                         mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
                         del request.session['cart']
