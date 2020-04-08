@@ -243,8 +243,14 @@
                 },
                 url: "{% url 'shop:checkout' %}",
                 type: 'POST',
-                data: data
+                data: data,
+                beforeSend: function(){
+                    $(".loader").fadeIn();
+	                $("#preloder").delay(200).fadeIn("slow");
+                }
             }).done(function (data) {
+                $(".loader").fadeOut();
+	            $("#preloder").delay(400).fadeOut("slow");
                 Swal.fire(
                     "{% trans 'Order products successfully' as t_order_product_successfully %}{{ t_order_product_successfully|capfirst }}",
                     "{% trans 'Please check your order history and email' %}",
