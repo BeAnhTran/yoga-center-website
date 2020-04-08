@@ -23,6 +23,10 @@ from common.services.stripe_service import StripeService
 from common.services.bill_service import BillService
 from django.utils.translation import gettext as _
 
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 
 class IndexView(ListView):
     model = Product
@@ -187,6 +191,13 @@ class CheckOutView(View):
                     if charge:
                         BillService(
                             request.user, context['cart'], description, amount, request.POST['address'], charge.id).call()
+                        # Send mail
+                        subject = 'Hóa đơn mua hàng'
+                        html_message = render_to_string('shop/mails/checkout_mail.html', {'cart': context['cart'], 'total': total, 'host': request.get_host})
+                        plain_message = strip_tags(html_message)
+                        from_email = '<lotus.yoga@gmail.com>'
+                        to = request.POST['email']
+                        mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
                         del request.session['cart']
                         return HttpResponse('success', status=status.HTTP_200_OK)
 

@@ -1,0 +1,58 @@
+{% load sexify %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div class="container">
+        <h3 style="color:red;">Cảm ơn bạn đã mua sản phẩm của cửa hàng</h3>
+        <h5>Danh sách sản phẩm</h5>
+        <div class="row">
+            <table
+                style="font-family: arial, sans-serif; border-collapse: collapse; width: 100%;;">
+                <thead style="display: table-header-group; border-color: inherit;">
+                    <tr style="display: table-row; vertical-align: inherit; border-color: inherit; ">
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">#</th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>Tên</small></th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>Giá</small></th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>Khuyến mãi</small></th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><small>Số
+                                lượng</small></th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>Thành tiền</small></th>
+                    </tr>
+                </thead>
+                <tbody style="display: table-row-group; border-color: inherit;">
+                    {% for item in cart %}
+                    <tr style="display: table-row; vertical-align: inherit; border-color: inherit; ">
+                        <td
+                            style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            {{ forloop.counter }}</td>
+                        <td
+                            style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            {{ item.product.name }}</td>
+                        <td
+                            style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            {{ item.product.price | sexy_number }}đ</td>
+                        <td
+                            style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>không</small></td>
+                        <td
+                            style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            {{ item.quantity }}</td>
+                        <td
+                            style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            {{ item.sub_total | sexy_number }}đ</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <span style="float: right;">Tổng tiền: <b
+                    style="color: red;font-weight: 600;">{{ total | sexy_number }}đ</b></span>
+        </div>
+    </div>
+</body>
+
+</html>

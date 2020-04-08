@@ -1,4 +1,4 @@
-from shop.models import Bill
+from shop.models import Bill, ProductBill
 from django.db import transaction
 
 
@@ -15,7 +15,12 @@ class BillService:
     def call(self):
         bill = self.__create_bill()
         for item in self.cart:
-            bill.products.add(item['product'])
+            data = {
+                'product': item['product'],
+                'quantity': item['quantity'],
+                'bill': bill
+            }
+            ProductBill.objects.create(**data)
 
     @transaction.atomic
     def __create_bill(self):
