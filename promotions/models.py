@@ -3,6 +3,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from core.models import User
+import uuid
 
 
 class Promotion(models.Model):
@@ -62,7 +63,17 @@ class PromotionType(models.Model):
         Promotion, on_delete=models.CASCADE, related_name='promotion_types', verbose_name=_('promotion'))
     category = models.IntegerField(
         choices=CATEGORY_CHOICES, verbose_name=_('category'))
-    amount = models.FloatField(verbose_name=_('amount'))
+    value = models.FloatField(verbose_name=_('value'))
     unit = models.IntegerField(choices=UNIT_CHOICES, verbose_name=_('unit'))
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class PromotionCode(models.Model):
+    promotion = models.ForeignKey(
+        Promotion, on_delete=models.CASCADE, related_name='codes', verbose_name=_('promotion'))
+    promotion_type = models.ForeignKey(
+        PromotionType, on_delete=models.CASCADE, null=True, related_name='codes', verbose_name=_('promotion type'))
+    value = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

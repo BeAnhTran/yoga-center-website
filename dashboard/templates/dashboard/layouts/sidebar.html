@@ -211,6 +211,16 @@
             </div>
         </div>
     </li>
+    <!-- Promotion -->
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item {% if active_nav == 'promotions' %}active{% endif %}">
+        <a class="nav-link" href="{% url 'dashboard:promotions-list' %}">
+            <i class="fab fa-fw fa-sellcast"></i>
+            <span>
+                {% trans 'promotions' as t_promotions %} {{ t_promotions|capfirst }}
+            </span>
+        </a>
+    </li>
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

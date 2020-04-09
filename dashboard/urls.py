@@ -5,7 +5,7 @@ from .views import (
     dashboard_view, courses_view, rooms_view,
     lessons_view, classes_view, cards_view,
     card_types_view, trainees_view, trainers_view, staffs_view,
-    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view)
+    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view)
 
 from .views.requests import extend_card_requests_view, refund_requests_view
 
@@ -169,6 +169,17 @@ refund_requests_urlpatterns = [
          name='refund-requests-update-state'),
 ]
 
+# PROMOTION
+promotions_urlpatterns = [
+    path('', promotions_view.PromotionListView.as_view(),
+         name='promotions-list'),
+    path('new/', promotions_view.PromotionNewView.as_view(),
+         name='promotions-new'),
+    path('<int:pk>/', promotions_view.PromotionDetailView.as_view(),
+         name='promotions-detail'),
+    path('<int:pk>/delete/', promotions_view.PromotionDeleteView.as_view(),
+         name='promotions-delete'),
+]
 
 # DASHBOARD
 urlpatterns = [
@@ -189,4 +200,5 @@ urlpatterns = [
     path('make-up-lessons/', include(make_up_lessons_urlpatterns)),
     path('extend-card-requests/', include(extend_card_requests_urlpatterns)),
     path('refund-requests/', include(refund_requests_urlpatterns)),
+    path('promotions/', include(promotions_urlpatterns)),
 ]

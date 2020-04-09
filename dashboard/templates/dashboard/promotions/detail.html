@@ -1,0 +1,64 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load dashboard_extras %}
+{% load sexify %}
+
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 mb-0">Thông tin chi tiết</h1>
+</div>
+
+
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-borderless table-hover table-striped">
+                <tbody>
+                    <tr>
+                        <td>Tên</td>
+                        <td>{{ object.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Thời gian bắt đầu</td>
+                        <td>{{ object.start_at }}</td>
+                    </tr>
+                    <tr>
+                        <td>Thời gian kết thúc</td>
+                        <td>{{ object.end_at }}</td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả</td>
+                        <td>{{ object.description | safe }}</td>
+                    </tr>
+                    <tr>
+                        <td>Hình thức khuyến mãi</td>
+                        <td>
+                            <ul class="list-group">
+                                {% for p in object.promotion_types.all %}
+                                    <li class="list-group-item list-group-item-info">
+                                        {{ p.get_category_display }} - {{ p.value | sexy_number }} {{ p.get_unit_display }} 
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ngày tạo</td>
+                        <td>{{ object.created_at.date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        <a class="btn btn-sm btn-primary" href="{{request.META.HTTP_REFERER}}">
+            <i class="fas fa-fw fa-arrow-left"></i>
+        </a>
+    </div>
+</div>
+
+{% endblock %}
+{% block specified_js %}
+{% endblock %}
