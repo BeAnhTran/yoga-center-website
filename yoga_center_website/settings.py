@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'make_up_lessons',
     'refunds',
     'shop',
+    'promotions',
 ]
 
 MIDDLEWARE = [
