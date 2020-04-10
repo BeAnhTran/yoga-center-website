@@ -48,7 +48,7 @@
                                 src="{% static 'img/course/default_course.jpg'%}" alt="{{ course.name }}">
                             {% endif %}
                         </td>
-                        <td>{{ course.description }}</td>
+                        <td>{{ course.description|truncatewords:25 }}</td>
                         <td>
                             {{ course|display_course_type }}
                         </td>

@@ -38,8 +38,12 @@
                     {% for class in classes %}
                     <tr>
                         <td>{{ class.id }}</td>
-                        <td>{{ class.name|title }}</td>
-                        <td>{{ class.course }}</td>
+                        <td>{{ class.name }}</td>
+                        <td>
+                            <span class="badge badge-pill badge-info">
+                                {{ class.course }}
+                            </span>
+                        </td>
                         <td>
                             {% if class.trainer %}
                             {{ class.trainer }}

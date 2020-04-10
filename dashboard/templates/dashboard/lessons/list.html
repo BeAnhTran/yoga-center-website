@@ -43,6 +43,7 @@
                     <tr>
                         <th>#</th>
                         <th><small>{% trans 'yoga class' as t_class %}{{ t_class|capfirst }}</small></th>
+                        <th><small>{% trans 'course' as t_course %}{{ t_course|capfirst }}</small></th>
                         <th><small>{% trans 'date' as t_date %}{{ t_date|capfirst }}</small></th>
                         <th><small>{% trans 'time' as t_time %}{{ t_time|capfirst }}</small></th>
                         <th><small>{% trans 'room' as t_room %}{{ t_room|capfirst }}</small></th>
@@ -56,10 +57,23 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ lesson.yogaclass }}</td>
+                        <td>
+                            <span class="badge badge-pill badge-warning">
+                                {{ lesson.yogaclass.course }}
+                            </span>
+                        </td>
                         <td>{{ lesson.date }}</td>
-                        <td>{{ lesson.get_time }}</td>
+                        <td>
+                            <span class="badge badge-pill badge-info">
+                                {{ lesson.get_time }}
+                            </span>
+                        </td>
                         <td>{{ lesson.room }}</td>
-                        <td>{{ lesson.trainer }}</td>
+                        <td>
+                            <span class="badge badge-pill badge-success">
+                                {{ lesson.trainer }}
+                            </span>
+                        </td>
                         <td>{{ lesson.get_current_studied_trainee }}</td>
                         <td class="text-center">
                             <a class="btn btn-sm btn-outline-primary"
