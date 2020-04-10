@@ -12,8 +12,9 @@ import pytz
 import random
 
 from rooms.models import Room
-from classes.models import (YogaClass, BASIC_LEVEL, INTERMEDIATE_LEVEL)
-from courses.models import (Course, TRAINING_COURSE, PRACTICE_COURSE)
+from classes.models import (YogaClass)
+from courses.models import (Course, TRAINING_COURSE,
+                            PRACTICE_COURSE, BASIC_LEVEL, INTERMEDIATE_LEVEL)
 from lessons.models import Lesson
 from core.models import User, Trainer, Trainee, Staff
 from card_types.models import (CardType, FOR_FULL_MONTH,
@@ -57,7 +58,6 @@ class Command(BaseCommand):
         print("CREATE ADMIN")
 
         data_admin = {
-            'username': 'admin',
             'email': 'admin@admin.com',
             'first_name': fake.first_name(),
             'last_name': fake.last_name()
@@ -75,10 +75,9 @@ class Command(BaseCommand):
         print("CREATE STAFF")
 
         number_of_staff = env('NUMBER_OF_STAFF')
-        for i in range(0, int(number_of_staff)):
+        for i in range(1, int(number_of_staff)):
             data = {
-                'username': 'staff' + str(i),
-                'email': 'staff' + str(i) + '@staff.com',
+                'email': 'staff' + str(i) + '@gmail.com',
                 'first_name': fake.first_name(),
                 'last_name': fake.last_name()
             }
@@ -95,10 +94,9 @@ class Command(BaseCommand):
         print("CREATE TRAINERS")
 
         number_of_trainer = env('NUMBER_OF_TRAINERS')
-        for i in range(0, int(number_of_trainer)):
+        for i in range(1, int(number_of_trainer)):
             data = {
-                'username': 'trainer' + str(i),
-                'email': 'trainer' + str(i) + '@trainer.com',
+                'email': 'trainer' + str(i) + '@gmail.com',
                 'first_name': fake.first_name(),
                 'last_name': fake.last_name()
             }
@@ -115,17 +113,15 @@ class Command(BaseCommand):
         print("CREATE TRAINEES")
 
         number_of_trainee = env('NUMBER_OF_TRAINEES')
-        for i in range(0, int(number_of_trainee)):
+        for i in range(1, int(number_of_trainee)):
             data = {
-                'username': 'trainee' + str(i),
                 'email': 'trainee' + str(i) + '@trainee.com',
                 'first_name': fake.first_name(),
                 'last_name': fake.last_name(),
                 'address': fake.address(),
                 'birth_day': fake.date_of_birth(tzinfo=None, minimum_age=15, maximum_age=70),
                 'phone_number': fake.phone_number(),
-                'gender': random.randint(0, 2),
-                'image': fake.image_url(),
+                'gender': random.randint(0, 2)
             }
             trainee = User(**data)
             trainee.set_password('truong77')
@@ -182,16 +178,42 @@ class Command(BaseCommand):
         # CREATE COURSE
         # ====================================
         print("==================")
-        print("CREATE <HATHA YOGA> COURSES")
+        print("CREATE <HATHA YOGA BASIC LEVEL> COURSES")
 
         hatha_yoga_course_data = {
-            'name': 'Hatha Yoga',
+            'name': 'Hatha Yoga cơ bản',
             'description': '''Hatha Yoga là tiền đề, nền tảng của tất cả các thể loại Yoga khác.
             Hatha Yoga loại Yoga nhẹ nhàng, phù hợp cho người mới bắt đầu hoặc những người đã thành thạo Yoga và muốn thư giãn. 
-            Tập Hatha Yoga bạn sẽ được tập những bài tập thể chất (được gọi chung là tư thế hay asana) nhằm lấy lại sự cân bằng cho cơ thể thông qua các động tác căng, giãn, luyện thở, kỹ thuật thư giãn và thiền'''
+            Tập Hatha Yoga bạn sẽ được tập những bài tập thể chất (được gọi chung là tư thế hay asana) nhằm lấy lại sự cân bằng cho cơ thể thông qua các động tác căng, giãn, luyện thở, kỹ thuật thư giãn và thiền''',
+            'level': BASIC_LEVEL
         }
         hatha_yoga_course = Course(**hatha_yoga_course_data)
         hatha_yoga_course.save()
+
+        hatha_yoga_course.card_types.add(
+            full_month_card_type,
+            some_lessons_card_type,
+            trial_card_type
+        )
+
+        print("==================")
+        print("CREATE <HATHA YOGA INTERMEDIATE LEVEL> COURSES")
+
+        hatha_yoga_intermediate_course_data = {
+            'name': 'Hatha Yoga trung cấp',
+            'description': '''Hatha Yoga là tiền đề, nền tảng của tất cả các thể loại Yoga khác.
+            Hatha Yoga loại Yoga nhẹ nhàng, phù hợp cho người mới bắt đầu hoặc những người đã thành thạo Yoga và muốn thư giãn. 
+            Tập Hatha Yoga bạn sẽ được tập những bài tập thể chất (được gọi chung là tư thế hay asana) nhằm lấy lại sự cân bằng cho cơ thể thông qua các động tác căng, giãn, luyện thở, kỹ thuật thư giãn và thiền''',
+            'level': INTERMEDIATE_LEVEL
+        }
+        hatha_yoga_intermediate_course = Course(**hatha_yoga_intermediate_course_data)
+        hatha_yoga_intermediate_course.save()
+
+        hatha_yoga_intermediate_course.card_types.add(
+            full_month_card_type,
+            some_lessons_card_type,
+            trial_card_type
+        )
 
         print("==================")
         print("CREATE <YOGA DANCE> COURSES")
@@ -242,18 +264,21 @@ class Command(BaseCommand):
             **training_yoga_trainer_course_data)
         training_yoga_trainer_course.save()
 
+        training_yoga_trainer_course.card_types.add(
+            training_course_card_type
+        )
+
         # ====================================
         # CREATE ROOM
         # ====================================
         print("==================")
         print("CREATE ROOMS")
 
-        for i in range(0, int(env('NUMBER_OF_ROOMS'))):
-            idx = str(i+1)
+        for i in range(1, int(env('NUMBER_OF_ROOMS'))):
             data = {
-                "name": "Phòng " + idx,
-                "location": "Lầu " + idx,
-                "description": "Mô tả cho phòng " + idx,
+                "name": "Phòng " + str(i),
+                "location": "Lầu " + str(i),
+                "description": "Mô tả cho phòng " + str(i),
                 "max_people": 10 + i,
                 "state": 0,
                 "created_at": today,
@@ -275,89 +300,57 @@ class Command(BaseCommand):
         print("CREATE HATHA YOGA 1 - BASIC")
         trainer1 = Trainer.objects.first()
         hatha_yoga_class1 = hatha_yoga_course.classes.create(
-            name='Hatha Yoga Cơ bản 1',
-            description='mô tả cho hatha yoga cơ bản 1',
+            name='Lớp 2 - 4 - 6',
             price_per_lesson=50000,
             price_per_month=600000,
             start_at=today,
             trainer=trainer1,
-            level=BASIC_LEVEL
-        )
-        hatha_yoga_class1.card_types.add(
-            full_month_card_type,
-            some_lessons_card_type,
-            trial_card_type
         )
 
         print("CREATE HATHA YOGA 2 - BASIC")
         id_trainer2 = trainer1.pk + 1
         trainer2 = Trainer.objects.get(pk=id_trainer2)
         hatha_yoga_class2 = hatha_yoga_course.classes.create(
-            name='Hatha Yoga Cơ bản 2',
-            description='mô tả cho hatha yoga cơ bản 2',
+            name='Lớp 3 - 5 - 7',
             price_per_lesson=50000,
             price_per_month=600000,
             start_at=today,
             trainer=trainer2,
-            level=BASIC_LEVEL
-        )
-
-        hatha_yoga_class2.card_types.add(
-            full_month_card_type,
-            some_lessons_card_type,
-            trial_card_type
         )
 
         print("CREATE HATHA YOGA 3 - BASIC")
         id_trainer3 = trainer1.pk + 2
         trainer3 = Trainer.objects.get(pk=id_trainer3)
         hatha_yoga_class3 = hatha_yoga_course.classes.create(
-            name='Hatha Yoga Cơ bản 3',
-            description='mô tả cho hatha yoga cơ bản 3',
+            name='Lớp chiều 2 - 4 - 6',
             price_per_lesson=50000,
             price_per_month=600000,
             start_at=today,
             trainer=trainer3,
-            level=BASIC_LEVEL
-        )
-        hatha_yoga_class3.card_types.add(
-            full_month_card_type,
-            some_lessons_card_type,
-            trial_card_type
         )
 
         print("CREATE HATHA YOGA - INTERMEDIATE")
         id_trainer4 = trainer1.pk + 3
         trainer4 = Trainer.objects.get(pk=id_trainer4)
-        hatha_yoga_imtermediate_class = hatha_yoga_course.classes.create(
-            name='Hatha Yoga Trung cấp',
-            description='mô tả cho hatha yoga trung cấp',
+        hatha_yoga_imtermediate_class = hatha_yoga_intermediate_course.classes.create(
+            name='Lớp trung cấp 3 - 5 - 7',
             price_per_lesson=50000,
             price_per_month=600000,
             start_at=today,
             trainer=trainer4,
-            level=INTERMEDIATE_LEVEL
-        )
-        hatha_yoga_imtermediate_class.card_types.add(
-            full_month_card_type,
-            some_lessons_card_type,
-            trial_card_type
         )
 
         print("CREATE TRAINING YOGA TRAINER CLASS")
         id_trainer5 = trainer1.pk + 4
         trainer5 = Trainer.objects.get(pk=id_trainer5)
         training_class = training_yoga_trainer_course.classes.create(
-            name='Đào tạo Huấn Luyện Viên 1',
-            description='mô tả cho lớp đào tạo huấn luyện viên',
+            name='Lớp đào tạo thứ 6 - 7 - CN',
             price_per_lesson=100000,
-            price_course=10000000,
+            price_for_training_class=10000000,
             start_at=today,
             trainer=trainer5
         )
-        training_class.card_types.add(
-            training_course_card_type
-        )
+
         # ====================================
         # CREATE LESSON
         # ====================================
@@ -373,20 +366,23 @@ class Command(BaseCommand):
             minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
 
         hatha_yoga_class1.lessons.create(**{
+            "trainer": hatha_yoga_class1.trainer,
             "room_id": room_1.id,
-            "day": monday,
+            "date": monday,
             "start_time": t1_hatha_1_basic,
             "end_time": t2_hatha_1_basic
         })
         lesson_hatha_yoga = hatha_yoga_class1.lessons.create(**{
+            "trainer": hatha_yoga_class1.trainer,
             "room_id": room_1.id,
-            "day": wednesday,
+            "date": wednesday,
             "start_time": t1_hatha_1_basic,
             "end_time": t2_hatha_1_basic
         })
         hatha_yoga_class1.lessons.create(**{
+            "trainer": hatha_yoga_class1.trainer,
             "room_id": room_1.id,
-            "day": friday,
+            "date": friday,
             "start_time": t1_hatha_1_basic,
             "end_time": t2_hatha_1_basic
         })
@@ -400,20 +396,23 @@ class Command(BaseCommand):
         t2_hatha_2_basic = (datetime.strptime(
             t1_hatha_2_basic, '%H:%M') + timedelta(minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
         hatha_yoga_class2.lessons.create(**{
+            "trainer": hatha_yoga_class2.trainer,
             "room_id": room_2.id,
-            "day": tuesday,
+            "date": tuesday,
             "start_time": t1_hatha_2_basic,
             "end_time": t2_hatha_2_basic
         })
         hatha_yoga_class2.lessons.create(**{
+            "trainer": hatha_yoga_class2.trainer,
             "room_id": room_2.id,
-            "day": thursday,
+            "date": thursday,
             "start_time": t1_hatha_2_basic,
             "end_time": t2_hatha_2_basic
         })
         hatha_yoga_class2.lessons.create(**{
+            "trainer": hatha_yoga_class2.trainer,
             "room_id": room_2.id,
-            "day": saturday,
+            "date": saturday,
             "start_time": t1_hatha_2_basic,
             "end_time": t2_hatha_2_basic
         })
@@ -425,20 +424,23 @@ class Command(BaseCommand):
         t2_hatha_3_basic = (datetime.strptime(
             t1_hatha_3_basic, '%H:%M') + timedelta(minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
         hatha_yoga_class3.lessons.create(**{
+            "trainer": hatha_yoga_class3.trainer,
             "room_id": room_1.id,
-            "day": monday,
+            "date": monday,
             "start_time": t1_hatha_3_basic,
             "end_time": t2_hatha_3_basic
         })
         hatha_yoga_class3.lessons.create(**{
+            "trainer": hatha_yoga_class3.trainer,
             "room_id": room_1.id,
-            "day": wednesday,
+            "date": wednesday,
             "start_time": t1_hatha_3_basic,
             "end_time": t2_hatha_3_basic
         })
         hatha_yoga_class3.lessons.create(**{
+            "trainer": hatha_yoga_class3.trainer,
             "room_id": room_1.id,
-            "day": friday,
+            "date": friday,
             "start_time": t1_hatha_3_basic,
             "end_time": t2_hatha_3_basic
         })
@@ -450,20 +452,23 @@ class Command(BaseCommand):
         t2_hatha_intermediate = (datetime.strptime(
             t1_hatha_intermediate, '%H:%M') + timedelta(minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
         hatha_yoga_imtermediate_class.lessons.create(**{
+            "trainer": hatha_yoga_imtermediate_class.trainer,
             "room_id": room_2.id,
-            "day": tuesday,
+            "date": tuesday,
             "start_time": t1_hatha_intermediate,
             "end_time": t2_hatha_intermediate
         })
         hatha_yoga_imtermediate_class.lessons.create(**{
+            "trainer": hatha_yoga_imtermediate_class.trainer,
             "room_id": room_2.id,
-            "day": thursday,
+            "date": thursday,
             "start_time": t1_hatha_intermediate,
             "end_time": t2_hatha_intermediate
         })
         hatha_yoga_imtermediate_class.lessons.create(**{
+            "trainer": hatha_yoga_imtermediate_class.trainer,
             "room_id": room_2.id,
-            "day": saturday,
+            "date": saturday,
             "start_time": t1_hatha_intermediate,
             "end_time": t2_hatha_intermediate
         })
@@ -478,20 +483,23 @@ class Command(BaseCommand):
         t2_training_class = (datetime.strptime(
             t1_hatha_intermediate, '%H:%M') + timedelta(minutes=default_range_time_for_training_lesson)).strftime("%H:%M")
         training_class.lessons.create(**{
+            "trainer": training_class.trainer,
             "room_id": room_3.id,
-            "day": friday,
+            "date": friday,
             "start_time": t1_training_class,
             "end_time": t2_training_class
         })
         training_class.lessons.create(**{
+            "trainer": training_class.trainer,
             "room_id": room_3.id,
-            "day": saturday,
+            "date": saturday,
             "start_time": t1_training_class,
             "end_time": t2_training_class
         })
         training_class.lessons.create(**{
+            "trainer": training_class.trainer,
             "room_id": room_3.id,
-            "day": sunday,
+            "date": sunday,
             "start_time": t1_training_class,
             "end_time": t2_training_class
         })

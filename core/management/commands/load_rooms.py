@@ -16,12 +16,11 @@ class Command(BaseCommand):
         from faker import Faker
         print("==================")
         print("CREATE ROOMS")
-        for i in range(0, int(env('NUMBER_OF_ROOMS'))):
-            idx = str(i+1)
+        for i in range(1, int(env('NUMBER_OF_ROOMS'))):
             data = {
-                "name": "Phòng " + idx,
-                "location": "Lầu " + idx,
-                "description": "Mô tả cho phòng " + idx,
+                "name": "Phòng " + i,
+                "location": "Lầu " + i,
+                "description": "Mô tả cho phòng " + i,
                 "max_people": 20 + i,
                 "state": 0,
             }
