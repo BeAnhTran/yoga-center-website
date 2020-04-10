@@ -77,6 +77,37 @@ class PromotionDetailView(DetailView):
 
 
 @method_decorator([login_required, admin_required], name='dispatch')
+class PromotionEditView(UpdateView):
+    model = Promotion
+    template_name = 'dashboard/promotions/edit.html'
+    form_class = promotions_form.PromotionEditForm
+
+    def get_success_url(self):
+            return reverse('dashboard:promotions-list', kwargs={})
+
+    def get_context_data(self, **kwargs):
+        context = super(PromotionEditView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'promotions'
+        if self.request.POST:
+            context['promotion_types'] = promotions_form.PromotionTypeFormSet(
+                self.request.POST, instance=self.object)
+        else:
+            context['promotion_types'] = promotions_form.PromotionTypeFormSet(
+                instance=self.object)
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        promotion_types = context['promotion_types']
+        with transaction.atomic():
+            self.object = form.save()
+            if promotion_types.is_valid():
+                promotion_types.instance = self.object
+                promotion_types.save()
+        return super(PromotionEditView, self).form_valid(form)
+
+
+@method_decorator([login_required, admin_required], name='dispatch')
 class PromotionDeleteView(DeleteView):
     model = Promotion
     success_url = reverse_lazy('dashboard:promotions-list')

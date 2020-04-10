@@ -86,3 +86,18 @@ class PromotionForm(forms.ModelForm):
                 raise forms.ValidationError(
                     _('End at must be greater than start at'))
         return end_at
+
+
+class PromotionEditForm(PromotionForm):
+   def clean_name(self):
+        name = self.cleaned_data['name']
+        if 'name' in self.changed_data:
+            from django.utils.text import slugify
+            from django.core.exceptions import ValidationError
+            slug = slugify(name)
+            if Promotion.objects.filter(slug=slug).exists():
+                raise ValidationError(
+                    _('A promotion with this name already exists.'))
+            return name
+        else:
+            return name

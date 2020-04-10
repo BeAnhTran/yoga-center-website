@@ -41,7 +41,7 @@
                             <a class="btn btn-sm btn-outline-primary"
                                 href="{% url 'dashboard:promotions-detail' promotion.pk %}"><i
                                     class="fas fa-fw fa-eye"></i> {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
-                            <a class="btn btn-sm btn-outline-warning" href="javascript:;"><i
+                            <a class="btn btn-sm btn-outline-warning" href="{% url 'dashboard:promotions-edit' promotion.pk %}"><i
                                     class="fas fa-fw fa-edit"></i> {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
                             <a class="btn btn-sm btn-outline-danger delete-promotion" href="javascript:;"><i
                                     class="fas fa-fw fa-trash"></i>
