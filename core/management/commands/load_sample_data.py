@@ -206,7 +206,8 @@ class Command(BaseCommand):
             Tập Hatha Yoga bạn sẽ được tập những bài tập thể chất (được gọi chung là tư thế hay asana) nhằm lấy lại sự cân bằng cho cơ thể thông qua các động tác căng, giãn, luyện thở, kỹ thuật thư giãn và thiền''',
             'level': INTERMEDIATE_LEVEL
         }
-        hatha_yoga_intermediate_course = Course(**hatha_yoga_intermediate_course_data)
+        hatha_yoga_intermediate_course = Course(
+            **hatha_yoga_intermediate_course_data)
         hatha_yoga_intermediate_course.save()
 
         hatha_yoga_intermediate_course.card_types.add(
@@ -365,27 +366,31 @@ class Command(BaseCommand):
         t2_hatha_1_basic = (datetime.strptime(t1_hatha_1_basic, '%H:%M') + timedelta(
             minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
 
-        hatha_yoga_class1.lessons.create(**{
-            "trainer": hatha_yoga_class1.trainer,
-            "room_id": room_1.id,
-            "date": monday,
-            "start_time": t1_hatha_1_basic,
-            "end_time": t2_hatha_1_basic
-        })
-        lesson_hatha_yoga = hatha_yoga_class1.lessons.create(**{
-            "trainer": hatha_yoga_class1.trainer,
-            "room_id": room_1.id,
-            "date": wednesday,
-            "start_time": t1_hatha_1_basic,
-            "end_time": t2_hatha_1_basic
-        })
-        hatha_yoga_class1.lessons.create(**{
-            "trainer": hatha_yoga_class1.trainer,
-            "room_id": room_1.id,
-            "date": friday,
-            "start_time": t1_hatha_1_basic,
-            "end_time": t2_hatha_1_basic
-        })
+        number_of_weeks = int(env('NUMBER_OF_WEEKS_TO_CREATE_LESSON'))
+
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            hatha_yoga_class1.lessons.create(**{
+                "trainer": hatha_yoga_class1.trainer,
+                "room_id": room_1.id,
+                "date": monday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_1_basic,
+                "end_time": t2_hatha_1_basic
+            })
+            hatha_yoga_class1.lessons.create(**{
+                "trainer": hatha_yoga_class1.trainer,
+                "room_id": room_1.id,
+                "date": wednesday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_1_basic,
+                "end_time": t2_hatha_1_basic
+            })
+            hatha_yoga_class1.lessons.create(**{
+                "trainer": hatha_yoga_class1.trainer,
+                "room_id": room_1.id,
+                "date": friday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_1_basic,
+                "end_time": t2_hatha_1_basic
+            })
 
         print("==================")
         print("CREATE <HATHA YOGA 2 - BASIC> Tue - Thurs - Sat - (05:00 - 06:15) LESSONS")
@@ -395,27 +400,29 @@ class Command(BaseCommand):
         t1_hatha_2_basic = '05:00'
         t2_hatha_2_basic = (datetime.strptime(
             t1_hatha_2_basic, '%H:%M') + timedelta(minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
-        hatha_yoga_class2.lessons.create(**{
-            "trainer": hatha_yoga_class2.trainer,
-            "room_id": room_2.id,
-            "date": tuesday,
-            "start_time": t1_hatha_2_basic,
-            "end_time": t2_hatha_2_basic
-        })
-        hatha_yoga_class2.lessons.create(**{
-            "trainer": hatha_yoga_class2.trainer,
-            "room_id": room_2.id,
-            "date": thursday,
-            "start_time": t1_hatha_2_basic,
-            "end_time": t2_hatha_2_basic
-        })
-        hatha_yoga_class2.lessons.create(**{
-            "trainer": hatha_yoga_class2.trainer,
-            "room_id": room_2.id,
-            "date": saturday,
-            "start_time": t1_hatha_2_basic,
-            "end_time": t2_hatha_2_basic
-        })
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            hatha_yoga_class2.lessons.create(**{
+                "trainer": hatha_yoga_class2.trainer,
+                "room_id": room_2.id,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_2_basic,
+                "end_time": t2_hatha_2_basic
+            })
+            hatha_yoga_class2.lessons.create(**{
+                "trainer": hatha_yoga_class2.trainer,
+                "room_id": room_2.id,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_2_basic,
+                "end_time": t2_hatha_2_basic
+            })
+            hatha_yoga_class2.lessons.create(**{
+                "trainer": hatha_yoga_class2.trainer,
+                "room_id": room_2.id,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_2_basic,
+                "end_time": t2_hatha_2_basic
+            })
 
         print("==================")
         print("CREATE <HATHA YOGA 3 - BASIC> Mon - Wed - Fri - (17:00 - 18:15) LESSONS")
@@ -423,27 +430,29 @@ class Command(BaseCommand):
         t1_hatha_3_basic = '17:00'
         t2_hatha_3_basic = (datetime.strptime(
             t1_hatha_3_basic, '%H:%M') + timedelta(minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
-        hatha_yoga_class3.lessons.create(**{
-            "trainer": hatha_yoga_class3.trainer,
-            "room_id": room_1.id,
-            "date": monday,
-            "start_time": t1_hatha_3_basic,
-            "end_time": t2_hatha_3_basic
-        })
-        hatha_yoga_class3.lessons.create(**{
-            "trainer": hatha_yoga_class3.trainer,
-            "room_id": room_1.id,
-            "date": wednesday,
-            "start_time": t1_hatha_3_basic,
-            "end_time": t2_hatha_3_basic
-        })
-        hatha_yoga_class3.lessons.create(**{
-            "trainer": hatha_yoga_class3.trainer,
-            "room_id": room_1.id,
-            "date": friday,
-            "start_time": t1_hatha_3_basic,
-            "end_time": t2_hatha_3_basic
-        })
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            hatha_yoga_class3.lessons.create(**{
+                "trainer": hatha_yoga_class3.trainer,
+                "room_id": room_1.id,
+                "date": monday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_3_basic,
+                "end_time": t2_hatha_3_basic
+            })
+            hatha_yoga_class3.lessons.create(**{
+                "trainer": hatha_yoga_class3.trainer,
+                "room_id": room_1.id,
+                "date": wednesday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_3_basic,
+                "end_time": t2_hatha_3_basic
+            })
+            hatha_yoga_class3.lessons.create(**{
+                "trainer": hatha_yoga_class3.trainer,
+                "room_id": room_1.id,
+                "date": friday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_3_basic,
+                "end_time": t2_hatha_3_basic
+            })
 
         print("==================")
         print("CREATE <HATHA YOGA IMTERMEDIATE> Tue - Thur - Sat - (18:00 - 19:15) LESSONS")
@@ -451,27 +460,29 @@ class Command(BaseCommand):
         t1_hatha_intermediate = '18:00'
         t2_hatha_intermediate = (datetime.strptime(
             t1_hatha_intermediate, '%H:%M') + timedelta(minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
-        hatha_yoga_imtermediate_class.lessons.create(**{
-            "trainer": hatha_yoga_imtermediate_class.trainer,
-            "room_id": room_2.id,
-            "date": tuesday,
-            "start_time": t1_hatha_intermediate,
-            "end_time": t2_hatha_intermediate
-        })
-        hatha_yoga_imtermediate_class.lessons.create(**{
-            "trainer": hatha_yoga_imtermediate_class.trainer,
-            "room_id": room_2.id,
-            "date": thursday,
-            "start_time": t1_hatha_intermediate,
-            "end_time": t2_hatha_intermediate
-        })
-        hatha_yoga_imtermediate_class.lessons.create(**{
-            "trainer": hatha_yoga_imtermediate_class.trainer,
-            "room_id": room_2.id,
-            "date": saturday,
-            "start_time": t1_hatha_intermediate,
-            "end_time": t2_hatha_intermediate
-        })
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            hatha_yoga_imtermediate_class.lessons.create(**{
+                "trainer": hatha_yoga_imtermediate_class.trainer,
+                "room_id": room_2.id,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_intermediate,
+                "end_time": t2_hatha_intermediate
+            })
+            hatha_yoga_imtermediate_class.lessons.create(**{
+                "trainer": hatha_yoga_imtermediate_class.trainer,
+                "room_id": room_2.id,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_intermediate,
+                "end_time": t2_hatha_intermediate
+            })
+            hatha_yoga_imtermediate_class.lessons.create(**{
+                "trainer": hatha_yoga_imtermediate_class.trainer,
+                "room_id": room_2.id,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t1_hatha_intermediate,
+                "end_time": t2_hatha_intermediate
+            })
 
         print("==================")
         print(
@@ -482,60 +493,62 @@ class Command(BaseCommand):
         t1_training_class = '18:00'
         t2_training_class = (datetime.strptime(
             t1_hatha_intermediate, '%H:%M') + timedelta(minutes=default_range_time_for_training_lesson)).strftime("%H:%M")
-        training_class.lessons.create(**{
-            "trainer": training_class.trainer,
-            "room_id": room_3.id,
-            "date": friday,
-            "start_time": t1_training_class,
-            "end_time": t2_training_class
-        })
-        training_class.lessons.create(**{
-            "trainer": training_class.trainer,
-            "room_id": room_3.id,
-            "date": saturday,
-            "start_time": t1_training_class,
-            "end_time": t2_training_class
-        })
-        training_class.lessons.create(**{
-            "trainer": training_class.trainer,
-            "room_id": room_3.id,
-            "date": sunday,
-            "start_time": t1_training_class,
-            "end_time": t2_training_class
-        })
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            training_class.lessons.create(**{
+                "trainer": training_class.trainer,
+                "room_id": room_3.id,
+                "date": friday + timedelta(days=count_weeks),
+                "start_time": t1_training_class,
+                "end_time": t2_training_class
+            })
+            training_class.lessons.create(**{
+                "trainer": training_class.trainer,
+                "room_id": room_3.id,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t1_training_class,
+                "end_time": t2_training_class
+            })
+            training_class.lessons.create(**{
+                "trainer": training_class.trainer,
+                "room_id": room_3.id,
+                "date": sunday + timedelta(days=count_weeks),
+                "start_time": t1_training_class,
+                "end_time": t2_training_class
+            })
 
-        ######## Create trial card and roll call to test #######
-        print("==================")
-        print("CREATE CARD & ROLL CALL")
-        trainee1 = Trainee.objects.last()
-        trainee2_id = trainee1.pk - 1
-        trainee2 = Trainee.objects.get(pk=trainee2_id)
-        trainee3_id = trainee2.pk - 1
-        trainee3 = Trainee.objects.get(pk=trainee3_id)
+        # ######## Create trial card and roll call to test #######
+        # print("==================")
+        # print("CREATE CARD & ROLL CALL")
+        # trainee1 = Trainee.objects.last()
+        # trainee2_id = trainee1.pk - 1
+        # trainee2 = Trainee.objects.get(pk=trainee2_id)
+        # trainee3_id = trainee2.pk - 1
+        # trainee3 = Trainee.objects.get(pk=trainee3_id)
 
-        card1 = Card.objects.create(**{
-            'trainee': trainee1,
-            'yogaclass': hatha_yoga_class1,
-            'card_type': trial_card_type
-        })
-        # card1.lessons.add(lesson_hatha_yoga)
-        RollCall.objects.create(card=card1, lesson=lesson_hatha_yoga)
-        CardInvoiceService(card1, 'trial card', 0).call()
+        # card1 = Card.objects.create(**{
+        #     'trainee': trainee1,
+        #     'yogaclass': hatha_yoga_class1,
+        #     'card_type': trial_card_type
+        # })
+        # # card1.lessons.add(lesson_hatha_yoga)
+        # RollCall.objects.create(card=card1, lesson=lesson_hatha_yoga)
+        # CardInvoiceService(card1, 'trial card', 0).call()
 
-        card2 = Card.objects.create(**{
-            'trainee': trainee2,
-            'yogaclass': hatha_yoga_class1,
-            'card_type': trial_card_type
-        })
-        # card2.lessons.add(lesson_hatha_yoga)
-        RollCall.objects.create(card=card2, lesson=lesson_hatha_yoga)
-        CardInvoiceService(card2, 'trial card', 0).call()
+        # card2 = Card.objects.create(**{
+        #     'trainee': trainee2,
+        #     'yogaclass': hatha_yoga_class1,
+        #     'card_type': trial_card_type
+        # })
+        # # card2.lessons.add(lesson_hatha_yoga)
+        # RollCall.objects.create(card=card2, lesson=lesson_hatha_yoga)
+        # CardInvoiceService(card2, 'trial card', 0).call()
 
-        card3 = Card.objects.create(**{
-            'trainee': trainee3,
-            'yogaclass': hatha_yoga_class1,
-            'card_type': trial_card_type
-        })
-        RollCall.objects.create(card=card3, lesson=lesson_hatha_yoga)
-        # card3.lessons.add(lesson_hatha_yoga)
-        CardInvoiceService(card3, 'trial card', 0).call()
+        # card3 = Card.objects.create(**{
+        #     'trainee': trainee3,
+        #     'yogaclass': hatha_yoga_class1,
+        #     'card_type': trial_card_type
+        # })
+        # RollCall.objects.create(card=card3, lesson=lesson_hatha_yoga)
+        # # card3.lessons.add(lesson_hatha_yoga)
+        # CardInvoiceService(card3, 'trial card', 0).call()

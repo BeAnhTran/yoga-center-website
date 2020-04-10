@@ -109,7 +109,7 @@
                     {% else %}
                     <li
                         class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">
-                        <span class="badge badge-secondary">{{ r.id }}</span>
+                        <span class="badge badge-secondary">{{ r.card.trainee.pk }}</span>
                         {{ r.card.trainee }}
                         <a href="javascript:;" class="a-un-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
                             <span class="badge badge-success badge-pill">{% trans 'select' %}</span>
