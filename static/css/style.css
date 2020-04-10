@@ -1632,7 +1632,7 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 
 .circle-select .current {
 	font-size: 14px;
-	color: #999999;
+	color: #000;
 }
 
 .circle-select .list {
