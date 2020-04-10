@@ -121,7 +121,7 @@ class Command(BaseCommand):
                 'address': fake.address(),
                 'birth_day': fake.date_of_birth(tzinfo=None, minimum_age=15, maximum_age=70),
                 'phone_number': fake.phone_number(),
-                'gender': random.randint(0, 2)
+                'gender': random.randint(0, 1)
             }
             trainee = User(**data)
             trainee.set_password('truong77')
