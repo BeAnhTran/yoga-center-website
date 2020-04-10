@@ -48,7 +48,7 @@ class YogaClassListView(ListView):
     template_name = 'classes/list.html'
     context_object_name = 'classes'
     ordering = ['created_at']
-    paginate_by = 5
+    paginate_by = 4
 
     def get_context_data(self, **kwargs):
         query_course = list(((None, 'Chọn khóa học'),)) + \

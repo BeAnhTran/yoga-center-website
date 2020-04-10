@@ -11,7 +11,7 @@ class TrainerListView(ListView):
     model = Trainer
     template_name = 'trainers/list.html'
     context_object_name = 'trainers'
-    paginate_by = 5
+    paginate_by = 4
 
     def get_context_data(self, **kwargs):
         context = super(TrainerListView, self).get_context_data(**kwargs)
