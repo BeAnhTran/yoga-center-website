@@ -181,6 +181,10 @@ promotions_urlpatterns = [
          name='promotions-delete'),
     path('<int:pk>/edit/', promotions_view.PromotionEditView.as_view(),
          name='promotions-edit'),
+    path('<int:pk>/codes/', promotions_view.PromotionCodeListView.as_view(),
+         name='promotions-codes-list'),
+    path('<int:pk>/codes/new/', promotions_view.createPromotionCode,
+         name='promotions-codes-create'),
 ]
 
 # DASHBOARD

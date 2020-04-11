@@ -38,6 +38,9 @@
                         <td>{{ promotion.start_at }}</td>
                         <td>{{ promotion.end_at }}</td>
                         <td>
+                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'dashboard:promotions-codes-list' promotion.pk %}">
+                                <i class="fas fa-fw fa-barcode"></i> Mã khuyến mãi
+                            </a>
                             <a class="btn btn-sm btn-outline-primary"
                                 href="{% url 'dashboard:promotions-detail' promotion.pk %}"><i
                                     class="fas fa-fw fa-eye"></i> {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
