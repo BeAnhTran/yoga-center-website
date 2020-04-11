@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
 from django.utils.text import slugify
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class User(AbstractUser):
@@ -72,6 +73,34 @@ class Certificate(models.Model):
     content_object = GenericForeignKey()
 
 
+PENDING_STATE = 0
+APPROVED_STATE = 1
+REJECTED_STATE = 2
+
+STATE_CHOICES = (
+    (PENDING_STATE, _('pending')),
+    (APPROVED_STATE, _('approved')),
+    (REJECTED_STATE, _('rejected')),
+)
+
+
+class TemporaryLeaveRequest(models.Model):
+    reason = RichTextUploadingField(verbose_name=_('reason'))
+    state = models.IntegerField(choices=STATE_CHOICES,
+                                default=PENDING_STATE, verbose_name=_('state'))
+    leave_at = models.DateField(verbose_name=_('leave at'))
+    back_at = models.DateField(verbose_name=_('back at'))
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name=_('created at'))
+    updated_at = models.DateTimeField(
+        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
+
+    # Below the mandatory fields for generic relation
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey()
+
+
 class Trainee(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True, related_name='trainee')
@@ -90,6 +119,8 @@ class Trainer(models.Model):
         blank=True, verbose_name=_('yoga teaching experience'))
     certificates = GenericRelation(
         Certificate, related_query_name='trainers', verbose_name=_('certificate'))
+    temporary_leave_requests = GenericRelation(
+        TemporaryLeaveRequest, related_query_name='trainers', verbose_name=_('temporary leave requests'))
     is_student = models.BooleanField(
         default=False, verbose_name=_('is student'))
     graduate_school = models.CharField(
@@ -118,6 +149,8 @@ class Staff(models.Model):
         blank=True, null=True, max_length=255, verbose_name=_('graduate school'))
     company_name = models.CharField(
         blank=True, null=True, max_length=255, verbose_name=_('company name'))
+    temporary_leave_requests = GenericRelation(
+        TemporaryLeaveRequest, related_query_name='staffs', verbose_name=_('temporary leave requests'))
 
     def __str__(self):
         full_name = self.user.full_name()
