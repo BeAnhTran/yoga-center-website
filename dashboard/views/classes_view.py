@@ -88,8 +88,7 @@ class ClassScheduleView(DetailView):
         lesson_form = lesssons_form.LessonForm(
             initial={'lectures': lectures}
         )
-        if self.object.trainer:
-            lesson_form.fields['trainer'].initial = self.object.trainer
+        lesson_form.fields['trainer'].initial = self.object.trainer
         context['lesson_form'] = lesson_form
         context['active_nav'] = 'classes'
         return context

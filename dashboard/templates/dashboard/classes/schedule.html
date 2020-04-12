@@ -53,7 +53,7 @@
         </div>
     </div>
 </div>
-<h1 class="text-danger text-center">{{ yogaclass.name }}</h1>
+<h1 class="text-danger text-center">{{ yogaclass.course }} - {{ yogaclass.name }}</h1>
 <div class="container-fluid mb-3">
     <div id='calendar'></div>
 </div>
@@ -190,7 +190,7 @@
                     var end_time = data['end_time'].split(':', 2).join(":");
 
                     $('#id_room').val(data['room']['id']);
-                    $('#id_trainer').val(data['trainer']['user']['id']);
+                    // $('#id_trainer').val(data['trainer']['user']['id']);
                     $('#id_notes').val(data['notes']);
                     $('#id_date').val(lesson_date);
                     $('#id_start_time').val(start_time);

@@ -9,7 +9,6 @@ from core.serializers.trainer_serializer import TrainerSerializer
 class LessonSerializer(serializers.ModelSerializer):
     room = RoomSerializer()
     yogaclass = YogaClassSerializer()
-    trainer = TrainerSerializer()
     substitute_trainer = TrainerSerializer(read_only=True)
 
     class Meta:
@@ -20,7 +19,6 @@ class LessonSerializer(serializers.ModelSerializer):
 class LessonUpdateScheduleSerializer(serializers.ModelSerializer):
     room = RoomSerializer()
     yogaclass = YogaClassSerializer()
-    trainer = TrainerSerializer()
 
     class Meta:
         model = Lesson

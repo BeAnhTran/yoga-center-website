@@ -51,10 +51,10 @@ class Lesson(models.Model):
 
     def clean(self):
         room = self.room
-
+        trainer = self.yogaclass.trainer
         if self.id:
-            trainer_lessons_on_day = self.yogaclass.trainer.lessons.filter(
-                date=self.date).exclude(pk=self.id)
+            trainer_lessons_on_day = Lesson.objects.filter(
+                date=self.date, yogaclass__trainer=trainer).exclude(pk=self.id)
             class_lessons_on_day = self.yogaclass.lessons.filter(
                 date=self.date).exclude(pk=self.id)
             room_lessons_on_day = room.lessons.filter(
@@ -63,8 +63,8 @@ class Lesson(models.Model):
             class_lessons_on_day = self.yogaclass.lessons.filter(
                 date=self.date)
             room_lessons_on_day = room.lessons.filter(date=self.date)
-            trainer_lessons_on_day = self.yogaclass.trainer.lessons.filter(
-                date=self.date)
+            trainer_lessons_on_day = Lesson.objects.filter(
+                date=self.date, yogaclass__trainer=trainer)
 
         check1 = check_overlap_in_list_lesson(
             self.start_time, self.end_time, class_lessons_on_day)

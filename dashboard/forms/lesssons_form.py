@@ -17,6 +17,8 @@ from lectures.models import Lecture
 
 
 class LessonForm(forms.ModelForm):
+    trainer = forms.CharField()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         now = datetime.datetime.now()
@@ -56,16 +58,19 @@ class LessonForm(forms.ModelForm):
             'placeholder': _('notes')
         }
         self.fields['trainer'].label = _('trainer').capitalize()
+        self.fields['trainer'].required = False
+        self.fields['trainer'].widget.attrs['readonly'] = True
+
         self.fields['state'].label = _('state').capitalize()
 
         self.fields['lectures'].label = _('lectures').capitalize()
-        self.fields['lectures'].widget=forms.CheckboxSelectMultiple()
-        self.fields['lectures'].required=False
+        self.fields['lectures'].widget = forms.CheckboxSelectMultiple()
+        self.fields['lectures'].required = False
 
         if kwargs.get('initial') is not None:
             if kwargs.get('initial').get('lectures') is not None:
                 self.fields['lectures'].choices = kwargs['initial']['lectures']
-
+            
         self.helper = FormHelper()
         self.helper.form_show_errors = True
         self.helper.form_id = 'form_new_lesson'
