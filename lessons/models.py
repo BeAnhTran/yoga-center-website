@@ -26,8 +26,6 @@ class Lesson(models.Model):
         YogaClass, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('yogaclass'))
     room = models.ForeignKey(
         Room, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('room'),)
-    trainer = models.ForeignKey(
-        Trainer, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('trainer'))
     lectures = models.ManyToManyField(
         to='lectures.Lecture', related_name='lessons', verbose_name='lectures')
     state = models.IntegerField(choices=STATE_CHOICES,
@@ -53,21 +51,10 @@ class Lesson(models.Model):
 
     def clean(self):
         room = self.room
-        if self.trainer:
-            if self.id:
-                trainer_lessons_on_day = self.trainer.lessons.filter(
-                    date=self.date).exclude(pk=self.id)
-            else:
-                trainer_lessons_on_day = self.trainer.lessons.filter(
-                    date=self.date)
-        else:
-            if self.id:
-                trainer_lessons_on_day = self.yogaclass.trainer.lessons.filter(
-                    date=self.date).exclude(pk=self.id)
-            else:
-                trainer_lessons_on_day = self.yogaclass.trainer.lessons.filter(
-                    date=self.date)
+
         if self.id:
+            trainer_lessons_on_day = self.yogaclass.trainer.lessons.filter(
+                date=self.date).exclude(pk=self.id)
             class_lessons_on_day = self.yogaclass.lessons.filter(
                 date=self.date).exclude(pk=self.id)
             room_lessons_on_day = room.lessons.filter(
@@ -76,6 +63,8 @@ class Lesson(models.Model):
             class_lessons_on_day = self.yogaclass.lessons.filter(
                 date=self.date)
             room_lessons_on_day = room.lessons.filter(date=self.date)
+            trainer_lessons_on_day = self.yogaclass.trainer.lessons.filter(
+                date=self.date)
 
         check1 = check_overlap_in_list_lesson(
             self.start_time, self.end_time, class_lessons_on_day)
@@ -95,13 +84,10 @@ class Lesson(models.Model):
             else:
                 obj = check3['object']
                 raise ValidationError(
-                    _('overlap time for trainer').capitalize() + ': ' + self.trainer.__str__() + ': ' + obj.__str__())
+                    _('overlap time for trainer').capitalize() + ': ' + self.yogaclass.trainer.__str__() + ': ' + obj.__str__())
 
     def save(self, *args, **kwargs):
         self.full_clean()
-        if not self.id:
-            if not self.trainer:
-                self.trainer = self.yogaclass.trainer
         super(Lesson, self).save(*args, **kwargs)
 
     def get_time_and_room_detail(self):
