@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-11 15:27+0700\n"
+"POT-Creation-Date: 2020-04-12 12:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\courses\list.html:20
 #: .\dashboard\templates\dashboard\lessons\list.html:36
 #: .\dashboard\templates\dashboard\lessons\roll_calls.html:80
+#: .\dashboard\templates\dashboard\promotions\codes\list.html:21
 #: .\dashboard\templates\dashboard\promotions\list.html:17
 #: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:15
 #: .\dashboard\templates\dashboard\requests\refund_requests\list.html:15
@@ -96,6 +97,7 @@ msgstr ""
 #: .\card_invoices\models.py:18 .\card_types\models.py:28 .\cards\models.py:22
 #: .\cards\models.py:65 .\classes\models.py:30 .\core\models.py:94
 #: .\courses\models.py:50
+#: .\dashboard\templates\dashboard\promotions\codes\list.html:33
 #: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:29
 #: .\dashboard\templates\dashboard\requests\refund_requests\list.html:30
 #: .\lectures\models.py:15 .\lessons\models.py:45
@@ -317,7 +319,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\lessons\list.html:50
 #: .\dashboard\templates\dashboard\lessons\roll_calls.html:19
 #: .\dashboard\templates\dashboard\trainers\list.html:13 .\lessons\models.py:30
-#: .\templates\layouts\header.html:112
+#: .\templates\layouts\header.html:111
 #: .\templates\profile\trainees\cards\list.html:49
 #: .\templates\registration\signup.html:35
 #: .\trainers\templates\trainers\list.html:13
@@ -722,9 +724,98 @@ msgstr ""
 msgid "work experience"
 msgstr ""
 
-#: .\core\templates\core\home.html:39 .\core\templates\core\home.html:53
+#: .\core\templates\core\home.html:37
+msgid "Get slim and toned with yoga"
+msgstr ""
+
+#: .\core\templates\core\home.html:38
+msgid "Practice Yoga will help your body become toned, tidy and full of life"
+msgstr ""
+
+#: .\core\templates\core\home.html:39 .\core\templates\core\home.html:54
 #: .\templates\layouts\header.html:80 .\templates\registration\signup.html:13
 msgid "register"
+msgstr ""
+
+#: .\core\templates\core\home.html:52
+msgid "Reduce your stress"
+msgstr ""
+
+#: .\core\templates\core\home.html:53
+msgid "Yoga exercises will help you relax mind and spirit"
+msgstr ""
+
+#: .\core\templates\core\home.html:72
+msgid "Welcome to Lotus Yoga"
+msgstr ""
+
+#: .\core\templates\core\home.html:95
+msgid "Full Rejuvenation"
+msgstr ""
+
+#: .\core\templates\core\home.html:96
+msgid "Cell regeneration and energy source, rejuvenate the whole body"
+msgstr ""
+
+#: .\core\templates\core\home.html:106
+msgid "Extension of Spring"
+msgstr ""
+
+#: .\core\templates\core\home.html:107
+msgid "Yoga helps us prolong life and love life more"
+msgstr ""
+
+#: .\core\templates\core\home.html:117
+msgid "Against Aging"
+msgstr ""
+
+#: .\core\templates\core\home.html:118
+msgid ""
+"Yoga enhances metabolism, creates new cells and comprehensive anti-aging"
+msgstr ""
+
+#: .\core\templates\core\home.html:128
+msgid "Slim Body"
+msgstr ""
+
+#: .\core\templates\core\home.html:129
+msgid "Yoga helps to burn excess fat, creating a slim body"
+msgstr ""
+
+#: .\core\templates\core\home.html:144
+msgid "What we will get?"
+msgstr ""
+
+#: .\core\templates\core\home.html:146
+msgid "Breathing"
+msgstr ""
+
+#: .\core\templates\core\home.html:150
+msgid "Metabolism"
+msgstr ""
+
+#: .\core\templates\core\home.html:154
+msgid "Flexibility"
+msgstr ""
+
+#: .\core\templates\core\home.html:158
+msgid "Strongness"
+msgstr ""
+
+#: .\core\templates\core\home.html:173
+#, fuzzy
+#| msgid "Trainers"
+msgid "Our Trainers"
+msgstr "Trainer"
+
+#: .\core\templates\core\home.html:174 .\core\templates\core\home.html:294
+msgid ""
+"Practice Yoga to perfect physical beauty, take care of your soul and enjoy "
+"life more fully!"
+msgstr ""
+
+#: .\core\templates\core\home.html:293
+msgid "Featured posts"
 msgstr ""
 
 #: .\core\views\profile\index.py:74 .\core\views\profile\index.py:87
@@ -932,7 +1023,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\blog\posts\list.html:43
 #: .\dashboard\templates\dashboard\cards\list.html:50
 #: .\dashboard\templates\dashboard\classes\list.html:57
-#: .\dashboard\templates\dashboard\promotions\list.html:43
+#: .\dashboard\templates\dashboard\promotions\list.html:46
 #: .\dashboard\templates\dashboard\shop\bills.html:47
 #: .\dashboard\templates\dashboard\shop\categories\list.html:41
 #: .\dashboard\templates\dashboard\shop\products\list.html:49
@@ -950,7 +1041,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\cards\list.html:52
 #: .\dashboard\templates\dashboard\classes\list.html:62
 #: .\dashboard\templates\dashboard\classes\show.html:24
-#: .\dashboard\templates\dashboard\promotions\list.html:45
+#: .\dashboard\templates\dashboard\promotions\list.html:48
 #: .\dashboard\templates\dashboard\shop\bills.html:50
 #: .\dashboard\templates\dashboard\shop\categories\list.html:44
 #: .\dashboard\templates\dashboard\shop\products\list.html:52
@@ -968,7 +1059,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\cards\list.html:54
 #: .\dashboard\templates\dashboard\classes\list.html:64
 #: .\dashboard\templates\dashboard\classes\schedule.html:87
-#: .\dashboard\templates\dashboard\promotions\list.html:48
+#: .\dashboard\templates\dashboard\promotions\list.html:51
 #: .\dashboard\templates\dashboard\shop\bills.html:53
 #: .\dashboard\templates\dashboard\shop\categories\list.html:47
 #: .\dashboard\templates\dashboard\shop\products\list.html:55
@@ -988,6 +1079,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\blog\posts\list.html:13
 #: .\dashboard\templates\dashboard\card_types\list.html:12
 #: .\dashboard\templates\dashboard\classes\list.html:15
+#: .\dashboard\templates\dashboard\promotions\codes\list.html:11
 #: .\dashboard\templates\dashboard\promotions\list.html:12
 #: .\dashboard\templates\dashboard\rooms\list.html:12
 #: .\dashboard\templates\dashboard\shop\categories\list.html:14
@@ -1223,6 +1315,7 @@ msgid "bills"
 msgstr ""
 
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:220
+#: .\templates\layouts\header.html:114
 msgid "promotions"
 msgstr ""
 
@@ -1281,6 +1374,10 @@ msgstr ""
 
 #: .\dashboard\templates\dashboard\logout_model.html:25
 msgid "sign out"
+msgstr ""
+
+#: .\dashboard\templates\dashboard\promotions\codes\list.html:20
+msgid "code"
 msgstr ""
 
 #: .\dashboard\templates\dashboard\promotions\list.html:10
@@ -1573,19 +1670,15 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: .\templates\layouts\header.html:103
-msgid "About us"
-msgstr ""
-
-#: .\templates\layouts\header.html:105 .\templates\layouts\header.html:108
+#: .\templates\layouts\header.html:104 .\templates\layouts\header.html:107
 msgid "Classes"
 msgstr ""
 
-#: .\templates\layouts\header.html:107
+#: .\templates\layouts\header.html:106
 msgid "Courses"
 msgstr ""
 
-#: .\templates\layouts\header.html:114
+#: .\templates\layouts\header.html:113
 msgid "Schedule"
 msgstr ""
 
@@ -2872,6 +2965,3 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:409
 msgid "Connect, get help, or contribute"
 msgstr ""
-
-#~ msgid "Trainers"
-#~ msgstr "Trainer"

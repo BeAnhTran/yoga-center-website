@@ -861,7 +861,6 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .hero-section {
 	position: relative;
-	min-height: 1080px;
 	height: 100%;
 	padding-top: 50px;
 }
@@ -1046,11 +1045,11 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .hs-text h2 {
 	text-transform: uppercase;
-	font-size: 50px;
+	font-size: 38px;
 	color: #fff;
 	font-family: "Playfair Display", serif;
 	line-height: 1.3;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 @media (max-width: 576px) {
@@ -1062,7 +1061,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .hs-text p {
 	font-size: 16px;
 	color: #fff;
-	margin-bottom: 60px;
+	margin-bottom: 30px;
 }
 
 @media (max-width: 576px) {
@@ -1119,10 +1118,9 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .hs-style-2 .hs-img {
 	position: relative;
-	left: 150px;
-	top: -15px;
-	max-width: 850px;
+	max-width: 450px;
 }
+
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
 	.hs-style-2 .hs-img {
@@ -1155,8 +1153,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .hs-style-2 .hs-text-warp {
-	padding-top: 50px;
-	padding-left: 170px;
+	padding-left: 100px;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px),
@@ -1181,7 +1178,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .hs-style-3 {
-	padding-top: 160px;
+	padding-top: 10px;
 	position: relative;
 	height: 100%;
 }

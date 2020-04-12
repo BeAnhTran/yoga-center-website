@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-11 15:28+0700\n"
+"POT-Creation-Date: 2020-04-12 12:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,7 @@ msgstr "bài viết"
 #: .\dashboard\templates\dashboard\courses\list.html:20
 #: .\dashboard\templates\dashboard\lessons\list.html:36
 #: .\dashboard\templates\dashboard\lessons\roll_calls.html:80
+#: .\dashboard\templates\dashboard\promotions\codes\list.html:21
 #: .\dashboard\templates\dashboard\promotions\list.html:17
 #: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:15
 #: .\dashboard\templates\dashboard\requests\refund_requests\list.html:15
@@ -96,6 +97,7 @@ msgstr "mã giao dịch"
 #: .\card_invoices\models.py:18 .\card_types\models.py:28 .\cards\models.py:22
 #: .\cards\models.py:65 .\classes\models.py:30 .\core\models.py:94
 #: .\courses\models.py:50
+#: .\dashboard\templates\dashboard\promotions\codes\list.html:33
 #: .\dashboard\templates\dashboard\requests\extend_card_requests\list.html:29
 #: .\dashboard\templates\dashboard\requests\refund_requests\list.html:30
 #: .\lectures\models.py:15 .\lessons\models.py:45
@@ -315,7 +317,7 @@ msgstr "khóa học"
 #: .\dashboard\templates\dashboard\lessons\list.html:50
 #: .\dashboard\templates\dashboard\lessons\roll_calls.html:19
 #: .\dashboard\templates\dashboard\trainers\list.html:13 .\lessons\models.py:30
-#: .\templates\layouts\header.html:112
+#: .\templates\layouts\header.html:111
 #: .\templates\profile\trainees\cards\list.html:49
 #: .\templates\registration\signup.html:35
 #: .\trainers\templates\trainers\list.html:13
@@ -724,10 +726,103 @@ msgstr "tên công ty"
 msgid "work experience"
 msgstr "kinh nghiệm làm việc"
 
-#: .\core\templates\core\home.html:39 .\core\templates\core\home.html:53
+#: .\core\templates\core\home.html:37
+msgid "Get slim and toned with yoga"
+msgstr "Trở nên quyến rũ hơn với cơ thể thon gọn và dẻo dai "
+
+#: .\core\templates\core\home.html:38
+msgid "Practice Yoga will help your body become toned, tidy and full of life"
+msgstr "Tập Yoga sẽ giúp bạn trở nên thon gọn, dẻo dai và tràn đầy sức sống"
+
+#: .\core\templates\core\home.html:39 .\core\templates\core\home.html:54
 #: .\templates\layouts\header.html:80 .\templates\registration\signup.html:13
 msgid "register"
 msgstr "đăng kí"
+
+#: .\core\templates\core\home.html:52
+msgid "Reduce your stress"
+msgstr "Giảm căng thẳng và mệt mỏi"
+
+#: .\core\templates\core\home.html:53
+msgid "Yoga exercises will help you relax mind and spirit"
+msgstr "Các bài tập Yoga sẽ giúp bạn thoải mái đầu óc và tinh thần"
+
+#: .\core\templates\core\home.html:72
+msgid "Welcome to Lotus Yoga"
+msgstr "Chào mừng đến với Lotus Yoga"
+
+#: .\core\templates\core\home.html:95
+msgid "Full Rejuvenation"
+msgstr "Trẻ hóa toàn diện"
+
+#: .\core\templates\core\home.html:96
+msgid "Cell regeneration and energy source, rejuvenate the whole body"
+msgstr "Tái tạo tế bào và nguồn năng lượng, làm trẻ hóa toàn bộ cơ thể"
+
+#: .\core\templates\core\home.html:106
+msgid "Extension of Spring"
+msgstr "Kéo dài tuổi thọ"
+
+#: .\core\templates\core\home.html:107
+msgid "Yoga helps us prolong life and love life more"
+msgstr "Yoga giúp ta kéo dài tuổi thọ và yêu cuộc sống hơn!"
+
+#: .\core\templates\core\home.html:117
+msgid "Against Aging"
+msgstr "Chống lão hóa"
+
+#: .\core\templates\core\home.html:118
+msgid ""
+"Yoga enhances metabolism, creates new cells and comprehensive anti-aging"
+msgstr ""
+"Yoga tăng cường trao đổi chất, tạo ra các tế bào mới và chống lão hóa toàn "
+"diện"
+
+#: .\core\templates\core\home.html:128
+msgid "Slim Body"
+msgstr "Cơ thể thon gọn"
+
+#: .\core\templates\core\home.html:129
+msgid "Yoga helps to burn excess fat, creating a slim body"
+msgstr "Tập Yoga giúp tiêu đốt mỡ thừa, tạo cơ thể thon gọn"
+
+#: .\core\templates\core\home.html:144
+msgid "What we will get?"
+msgstr "Ta sẽ được tăng cường?"
+
+#: .\core\templates\core\home.html:146
+msgid "Breathing"
+msgstr "Hơi thở"
+
+#: .\core\templates\core\home.html:150
+msgid "Metabolism"
+msgstr "Trao đổi chất"
+
+#: .\core\templates\core\home.html:154
+msgid "Flexibility"
+msgstr "Uyển chuyền & dẻo dai"
+
+#: .\core\templates\core\home.html:158
+msgid "Strongness"
+msgstr "Sức khỏe"
+
+#: .\core\templates\core\home.html:173
+#, fuzzy
+#| msgid "Trainers"
+msgid "Our Trainers"
+msgstr "Huấn luyện viên"
+
+#: .\core\templates\core\home.html:174 .\core\templates\core\home.html:294
+msgid ""
+"Practice Yoga to perfect physical beauty, take care of your soul and enjoy "
+"life more fully!"
+msgstr ""
+"Tập Yoga để giúp cơ thể khỏe mạnh, chăm sóc tâm hồn và tận hưởng cuộc sống "
+"đầy đủ hơn."
+
+#: .\core\templates\core\home.html:293
+msgid "Featured posts"
+msgstr "Bài viết nổi bật"
 
 #: .\core\views\profile\index.py:74 .\core\views\profile\index.py:87
 #: .\core\views\profile\index.py:101 .\core\views\profile\index.py:143
@@ -938,7 +1033,7 @@ msgstr "hành động"
 #: .\dashboard\templates\dashboard\blog\posts\list.html:43
 #: .\dashboard\templates\dashboard\cards\list.html:50
 #: .\dashboard\templates\dashboard\classes\list.html:57
-#: .\dashboard\templates\dashboard\promotions\list.html:43
+#: .\dashboard\templates\dashboard\promotions\list.html:46
 #: .\dashboard\templates\dashboard\shop\bills.html:47
 #: .\dashboard\templates\dashboard\shop\categories\list.html:41
 #: .\dashboard\templates\dashboard\shop\products\list.html:49
@@ -956,7 +1051,7 @@ msgstr "xem"
 #: .\dashboard\templates\dashboard\cards\list.html:52
 #: .\dashboard\templates\dashboard\classes\list.html:62
 #: .\dashboard\templates\dashboard\classes\show.html:24
-#: .\dashboard\templates\dashboard\promotions\list.html:45
+#: .\dashboard\templates\dashboard\promotions\list.html:48
 #: .\dashboard\templates\dashboard\shop\bills.html:50
 #: .\dashboard\templates\dashboard\shop\categories\list.html:44
 #: .\dashboard\templates\dashboard\shop\products\list.html:52
@@ -974,7 +1069,7 @@ msgstr "sửa"
 #: .\dashboard\templates\dashboard\cards\list.html:54
 #: .\dashboard\templates\dashboard\classes\list.html:64
 #: .\dashboard\templates\dashboard\classes\schedule.html:87
-#: .\dashboard\templates\dashboard\promotions\list.html:48
+#: .\dashboard\templates\dashboard\promotions\list.html:51
 #: .\dashboard\templates\dashboard\shop\bills.html:53
 #: .\dashboard\templates\dashboard\shop\categories\list.html:47
 #: .\dashboard\templates\dashboard\shop\products\list.html:55
@@ -994,6 +1089,7 @@ msgstr "danh sách loại bài viết"
 #: .\dashboard\templates\dashboard\blog\posts\list.html:13
 #: .\dashboard\templates\dashboard\card_types\list.html:12
 #: .\dashboard\templates\dashboard\classes\list.html:15
+#: .\dashboard\templates\dashboard\promotions\codes\list.html:11
 #: .\dashboard\templates\dashboard\promotions\list.html:12
 #: .\dashboard\templates\dashboard\rooms\list.html:12
 #: .\dashboard\templates\dashboard\shop\categories\list.html:14
@@ -1229,6 +1325,7 @@ msgid "bills"
 msgstr "hóa đơn"
 
 #: .\dashboard\templates\dashboard\layouts\sidebar.html:220
+#: .\templates\layouts\header.html:114
 msgid "promotions"
 msgstr "khuyến mãi"
 
@@ -1286,6 +1383,10 @@ msgstr "Hủy"
 #: .\dashboard\templates\dashboard\logout_model.html:25
 msgid "sign out"
 msgstr "Đăng xuất"
+
+#: .\dashboard\templates\dashboard\promotions\codes\list.html:20
+msgid "code"
+msgstr ""
 
 #: .\dashboard\templates\dashboard\promotions\list.html:10
 msgid "promotion list"
@@ -1575,19 +1676,15 @@ msgstr "đăng nhập"
 msgid "Home"
 msgstr "Trang chủ"
 
-#: .\templates\layouts\header.html:103
-msgid "About us"
-msgstr "Về chúng tôi"
-
-#: .\templates\layouts\header.html:105 .\templates\layouts\header.html:108
+#: .\templates\layouts\header.html:104 .\templates\layouts\header.html:107
 msgid "Classes"
 msgstr "Lớp học"
 
-#: .\templates\layouts\header.html:107
+#: .\templates\layouts\header.html:106
 msgid "Courses"
 msgstr "Khóa học"
 
-#: .\templates\layouts\header.html:114
+#: .\templates\layouts\header.html:113
 msgid "Schedule"
 msgstr "Lịch học"
 
@@ -2877,6 +2974,12 @@ msgstr ""
 msgid "Connect, get help, or contribute"
 msgstr ""
 
+#~ msgid "What we do"
+#~ msgstr "Chúng ta sẽ phải tập luyện những gì?"
+
+#~ msgid "About us"
+#~ msgstr "Về chúng tôi"
+
 #~ msgid "carts"
 #~ msgstr "giỏ hàng"
 
@@ -2963,9 +3066,6 @@ msgstr ""
 
 #~ msgid "Notes"
 #~ msgstr "Ghi chú"
-
-#~ msgid "Trainers"
-#~ msgstr "Huấn luyện viên"
 
 #~ msgid "Contact"
 #~ msgstr "Liên hệ"
