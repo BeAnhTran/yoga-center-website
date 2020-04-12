@@ -100,7 +100,6 @@
             <ul class="main-menu">
                 <li><a href="{% url 'core:home' %}"
                         class="{% if active_nav == 'home' %}active{% endif %}">{% trans 'Home' %}</a></li>
-                <li><a href="javascript:;">{% trans 'About us' %}</a></li>
                 <li><a href="{% url 'courses:list' %}"
                         class="{% if active_nav == 'classes' %}active{% endif %}">{% trans 'Classes'%}</a>
                     <ul class="sub-menu bg-gray">
@@ -112,6 +111,7 @@
                         class="{% if active_nav == 'trainers' %}active{% endif %}">{% trans 'trainer' %}</a></li>
                 <li><a href="{% url 'yoga_schedule:index' %}"
                         class="{% if active_nav == 'schedule' %}active{% endif %}">{% trans 'Schedule' %}</a></li>
+                <li><a href="javascript:;">{% trans 'promotions' %}</a></li>
                 <li><a href="{% url 'blog:list' %}"
                         class="{% if active_nav == 'blog' %}active{% endif %}">{% trans 'Blog'%}</a></li>
                 <li><a href="{% url 'shop:index' %}"

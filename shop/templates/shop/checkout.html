@@ -154,7 +154,7 @@
                                 <td class="float-right">{{ total | sexy_number }}đ</td>
                             </tr>
                             <tr>
-                                <td>Giảm giá:</td>
+                                <td>Khuyến mãi:</td>
                                 <td class="float-right">-0đ</td>
                             </tr>
                             <tr>
@@ -244,28 +244,50 @@
                 url: "{% url 'shop:checkout' %}",
                 type: 'POST',
                 data: data,
-                beforeSend: function(){
+                beforeSend: function () {
                     $(".loader").fadeIn();
-	                $("#preloder").delay(200).fadeIn("slow");
+                    $("#preloder").delay(200).fadeIn("slow");
                 }
             }).done(function (data) {
                 $(".loader").fadeOut();
-	            $("#preloder").delay(400).fadeOut("slow");
+                $("#preloder").delay(400).fadeOut("slow");
                 Swal.fire(
                     "{% trans 'Order products successfully' as t_order_product_successfully %}{{ t_order_product_successfully|capfirst }}",
                     "{% trans 'Please check your order history and email' %}",
                     'success'
                 ).then((result) => {
-                  // redirect to accounts/bills/
-                  window.location.href = "{% url 'core:accounts-bills' %}";
+                    // redirect to accounts/bills/
+                    window.location.href = "{% url 'core:accounts-bills' %}";
                 });
             }).fail(function (err) {
                 console.log(err);
             });
         }
+        $('#form_promotion').submit(function (e) {
+            e.preventDefault();
+            var val = $('#promotion_code').val();
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: "{% url 'promotions:codes-check' %}",
+                type: 'GET',
+                data: {
+                    'code': val
+                },
+                beforeSend: function () {
+                    $(".loader").fadeIn();
+                    $("#preloder").fadeIn("slow");
+                }
+            }).done(function (data) {
+                $(".loader").fadeOut();
+                $("#preloder").fadeOut("slow");
+                console.log(data);
+            }).fail(err => console.log(err));
+        })
     });
 
-    
+
 
 </script>
 {% endblock %}

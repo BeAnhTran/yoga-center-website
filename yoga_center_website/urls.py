@@ -46,6 +46,8 @@ urlpatterns += i18n_patterns(
     path('blog/', include('blog.urls')),
     # shop
     path('shop/', include('shop.urls')),
+    # promotions
+    path('promotions/', include('promotions.urls')),
     # dashboard
     path('dashboard/', include('dashboard.urls')),
     # admin site
