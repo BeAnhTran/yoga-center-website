@@ -19,6 +19,7 @@ from core.models import Trainee, Trainer
 from make_up_lessons.models import MakeUpLesson
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
+from teach.models import TrainerLesson, TAUGHT_STATE, TAUGHT_INSTEAD_STATE
 
 
 @method_decorator([login_required, staff_required], name='dispatch')
@@ -102,7 +103,19 @@ class ListRollCallApiView(View):
         trainees = Trainee.objects.all()
         make_up_lessons = MakeUpLesson.objects.filter(lesson=lesson)
         available_substitute_trainers = Trainer.objects.filter(
-            ~Q(pk=lesson.trainer.pk))
+            ~Q(pk=lesson.yogaclass.trainer.pk))
+
+        try:
+            taught = TrainerLesson.objects.get(
+                lesson=lesson, trainer=lesson.yogaclass.trainer, state=TAUGHT_STATE)
+        except TrainerLesson.DoesNotExist:
+            taught = None
+
+        try:
+            taught_instead = TrainerLesson.objects.get(
+                lesson=lesson, trainer=lesson.substitute_trainer, state=TAUGHT_INSTEAD_STATE)
+        except TrainerLesson.DoesNotExist:
+            taught_instead = None
 
         context = {
             'lesson': lesson,
@@ -112,7 +125,9 @@ class ListRollCallApiView(View):
             'total_count': total_count,
             'trainees': trainees,
             'make_up_lessons': make_up_lessons,
-            'available_substitute_trainers': available_substitute_trainers
+            'available_substitute_trainers': available_substitute_trainers,
+            'taught': taught,
+            'taught_instead': taught_instead
         }
         return render(request, self.template_name, context=context)
 
@@ -126,8 +141,8 @@ class SubstituteTrainerApi(APIView):
         lesson = get_object_or_404(Lesson, pk=pk)
         if lesson.substitute_trainer:
             return Response('Đã có huấn luyện viên dạy bù', status=status.HTTP_400_BAD_REQUEST)
-        sub_trainer_lessons_on_day = sub_trainer.lessons.filter(
-            date=lesson.date)
+        sub_trainer_lessons_on_day = Lesson.objects.filter(
+            date=lesson.date, yogaclass__trainer=sub_trainer)
         check = check_overlap_in_list_lesson(
             lesson.start_time, lesson.end_time, sub_trainer_lessons_on_day)
         if check['value'] is True:

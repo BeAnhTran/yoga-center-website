@@ -11,24 +11,66 @@
 {% block content %}
 <!-- Page Heading -->
 <div id="head_contain">
-    <p>
-        <small><i class="fab fa-fw fa-leanpub"></i></small> {{ lesson.yogaclass }} -
-        {{ lesson.get_time_and_room_detail }}
-    </p>
-    <p>
-        {% trans 'trainer' as t_trainer %}
-        <small><i class="fas fa-fw fa-user-graduate"></i></small> {{ t_trainer|capfirst }}: <span
-            class="text-danger">{{ lesson.trainer }}</span>
-    </p>
+    <div class="row mb-2">
+        <div class="col">
+            <small><i class="fab fa-fw fa-leanpub"></i></small> {{ lesson.yogaclass.course }} - {{ lesson.yogaclass }} -
+            {{ lesson.get_time_and_room_detail }}
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col">
+            {% trans 'trainer' as t_trainer %}
+            <small><i class="fas fa-fw fa-user-graduate"></i></small> {{ t_trainer|capfirst }}:
+            <span class="text-danger">{{ lesson.yogaclass.trainer }}</span>
+            <a id="a_roll_call_for_trainer" class="text-success ml-3" href="javascript:;">
+                {% if taught is not None %}
+                <i class="far fa-fw fa-check-square"></i>
+                <small>đã điểm danh</small>
+                {% else %}
+                <i class="far fa-fw fa-square"></i>
+                <small>điểm danh</small>
+                {% endif %}
+            </a>
+            <form class="d-none" id="roll_call_for_trainer_form"
+                action="{% url 'dashboard:lessons-roll-calls-for-trainer' lesson.pk %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="trainer_id" value="{{ lesson.yogaclass.trainer.pk }}">
+                <input type="submit" value="Confirm">
+            </form>
+        </div>
+    </div>
     {% if lesson.substitute_trainer %}
-    <div class="div-substitute-trainer">
-        <i class="fas fa-chalkboard-teacher"></i> Dạy thay bởi: <span
-            class="text-primary">{{ lesson.substitute_trainer }}</span>
-        <a class="text-danger remove-substitute-trainer" href="javascript:;"><i class="fa fa-sm fa-fw fa-times"></i></a>
+    <div class="row">
+        <div class="col">
+            <div class="div-substitute-trainer">
+                <i class="fas fa-chalkboard-teacher"></i> Dạy thay bởi: <span
+                    class="text-primary">{{ lesson.substitute_trainer }}</span>
+                <a class="text-danger remove-substitute-trainer ml-3" href="javascript:;">
+                    <i class="fas fa-fw fa-user-times"></i>
+                </a>
+                <a id="a_roll_call_for_substitute_trainer" class="text-success ml-3" href="javascript:;">
+                    {% if taught_instead is not None %}
+                        <i class="far fa-fw fa-check-square"></i>
+                        <small>đã điểm danh</small>
+                    {% else %}
+                        <i class="far fa-fw fa-square"></i>
+                        <small>điểm danh</small>
+                    {% endif %}
+                </a>
+                <form class="d-none" id="roll_call_for_substitute_trainer_form"
+                    action="{% url 'dashboard:lessons-roll-calls-for-trainer' lesson.pk %}"
+                    method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="trainer_id" value="{{ lesson.substitute_trainer.pk }}">
+                    <input type="submit" value="Confirm">
+                </form>
+            </div>
+        </div>
     </div>
     {% endif %}
 
-    <button id="btn_modal_substitute_trainer" type="button" class="btn btn-sm btn-outline-secondary {% if lesson.substitute_trainer %}d-none{% endif%}" data-toggle="modal"
+    <button id="btn_modal_substitute_trainer" type="button"
+        class="btn btn-sm btn-outline-secondary {% if lesson.substitute_trainer %}d-none{% endif%}" data-toggle="modal"
         data-target="#modal_substitute_trainer">
         Thêm huấn luyện viên dạy thay
     </button>
@@ -116,7 +158,6 @@
                         </a>
                     </li>
                     {% endif %}
-
                     {% endfor %}
                 </div>
             </div>
@@ -211,6 +252,17 @@
 
 
 <script>
+    $(function () {
+        $('#a_roll_call_for_trainer').click(function () {
+            $(this).siblings('form').children('input[type=submit]').click();
+        });
+    });
+    $(function () {
+        $('#a_roll_call_for_substitute_trainer').click(function () {
+            $(this).siblings('form').children('input[type=submit]').click();
+        });
+    });
+
     $(document).on('click', '.a-un-studied', function () {
         var roll_call_id = $(this).attr('data-roll-call');
         var _url = "{% url 'dashboard:roll-calls-detail' 0 %}";
@@ -416,8 +468,8 @@
                 str = `
                     <div class="div-substitute-trainer">
                     <i class="fas fa-chalkboard-teacher"></i> Dạy thay bởi: <span class="text-primary">`;
-                str+= data['substitute_trainer']['user']['first_name'] + data['substitute_trainer']['user']['last_name']
-                str+= `</span>
+                str += data['substitute_trainer']['user']['first_name'] + data['substitute_trainer']['user']['last_name']
+                str += `</span>
                     <a class="text-danger remove-substitute-trainer" href="javascript:;"><i class="fa fa-sm fa-fw fa-times"></i></a>
                     </div>`;
                 $('#btn_modal_substitute_trainer').addClass('d-none');
@@ -459,5 +511,6 @@
             console.log(err);
         });
     });
+
 </script>
 {% endblock %}

@@ -5,7 +5,7 @@ from .views import (
     dashboard_view, courses_view, rooms_view,
     lessons_view, classes_view, cards_view,
     card_types_view, trainees_view, trainers_view, staffs_view,
-    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view)
+    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view, taught_view)
 
 from .views.requests import extend_card_requests_view, refund_requests_view
 
@@ -51,6 +51,8 @@ lessons_urlpatterns = [
         name='lessons-roll-calls'),
     url(r'^(?P<pk>[0-9]+)/substitute-trainer/$', lessons_view.SubstituteTrainerApi.as_view(),
         name='lessons-substitute-trainer'),
+    url(r'^(?P<lesson_id>[0-9]+)/roll-calls-trainer/$', taught_view.rollCallForTrainer,
+        name='lessons-roll-calls-for-trainer'),
 ]
 
 # ROOMS
