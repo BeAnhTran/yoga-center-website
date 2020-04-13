@@ -109,21 +109,29 @@
                     <table class="table table-sm table-bordered">
                         <thead>
                             <tr class="d-flex">
-                                <th class="col-1">Mã số</th>
-                                <th class="col-1">Số tiền</th>
-                                <th class="col-3">Mô tả</th>
-                                <th class="col-4">Mã thanh toán online</th>
-                                <th class="col-3">Thời gian thanh toán</th>
+                                <th class="col-1"><small>Mã số</small></th>
+                                <th class="col-1"><small>Khuyến mãi</small></th>
+                                <th class="col-1"><small>Số tiền đã thanh toán</small></th>
+                                <th class="col-3"><small>Mô tả</small></th>
+                                <th class="col-4"><small>Mã thanh toán online</small></th>
+                                <th class="col-3"><small>Thời gian thanh toán</small></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for invoice in card.card_invoices.all %}
                             <tr class="d-flex">
-                                <td class="col-1">{{ invoice.pk }}</td>
-                                <td class="col-1">{{ invoice.amount }} vnđ</td>
-                                <td class="col-3">{{ invoice.description }}</td>
-                                <td class="col-4">{{ invoice.charge_id }}</td>
-                                <td class="col-3">{{ invoice.created_at }}</td>
+                                <td class="col-1"><small>{{ invoice.pk }}</small></td>
+                                <td class="col-1"><small>
+                                    {% if invoice.apply_promotion_codes.count > 0 %}
+                                        {{ invoice.apply_promotion_codes.first.promotion_code.promotion_type.full_title }}
+                                    {% else %}
+                                        không
+                                    {% endif  %}
+                                </small></td>
+                                <td class="col-1"><small>{{ invoice.amount | sexy_number }}đ</small></td>
+                                <td class="col-3"><small>{{ invoice.description }}</small></td>
+                                <td class="col-4"><small>{{ invoice.charge_id }}</small></td>
+                                <td class="col-3"><small>{{ invoice.created_at }}</small></td>
                             </tr>
                             {% endfor %}
                         </tbody>

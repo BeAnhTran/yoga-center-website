@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 from core.models import User
 import uuid
 from common.templatetags import sexify
+from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
 
 class Promotion(models.Model):
@@ -80,3 +82,17 @@ class PromotionCode(models.Model):
     value = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class ApplyPromotionCode(models.Model):
+    promotion_code = models.OneToOneField(
+        PromotionCode, on_delete=models.CASCADE, primary_key=True, related_name='apply')
+    # Below the mandatory fields for generic relation
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('content_type', 'object_id')

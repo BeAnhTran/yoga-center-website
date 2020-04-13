@@ -21,7 +21,7 @@
             <div class="cell example example5" id="example-5">
               <!--  -->
               <form id="payment_form">
-                <input type="hidden" name="amount" value="{{ total_price }}">
+                <input type="hidden" name="amount" value="{{ amount|floatformat }}">
                 <fieldset>
                   <legend class="card-only">{% trans 'Please enter information below' %}</legend>
                   <div class="row">
@@ -381,7 +381,10 @@
         "{% trans 'enroll successfully' as t_enroll_successfully %}{{ t_enroll_successfully|capfirst }}",
         "{% trans 'Thanks for your register. Please check schedule and prepare to study' %}",
         'success'
-      );
+      ).then((result) => {
+        // redirect to accounts/bills/
+        window.location.href = "{% url 'core:profile-trainee-cards' %}";
+      });;
     }).fail(function (err) {
       console.log(err);
     });
@@ -422,7 +425,7 @@
           $.each(data['promotion']['promotion_types'], (i, v) => {
             console.log(i);
             console.log(v);
-            $('input[name=promotion-type]').remove();
+            $('.form-check').remove();
             if (promotion_types_count == 1) {
               str += `<div class="form-check">
                       <label class="form-check-label">

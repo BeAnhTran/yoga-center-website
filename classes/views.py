@@ -236,7 +236,14 @@ class YogaClassEnrollPaymentView(View):
                     yoga_class = YogaClass.objects.get(slug=slug)
                     enroll_form = CardFormForTraineeEnroll(
                         request.session['enroll_card_form'])
-                    if request.POST.get('stripeToken') and float(request.POST.get('amount')) > 0:
+                    if request.POST.get('stripeToken') and int(request.POST.get('amount')) > 0:
+                        promotion_type = None
+                        promotion_code = None
+                        if request.session.get('promotion_code') and request.session.get('promotion_type'):
+                            promotion_type = get_object_or_404(
+                                PromotionType, pk=request.session.get('promotion_type'))
+                            promotion_code = get_object_or_404(
+                                PromotionCode, pk=request.session.get('promotion_code'))
                         # STRIPE CHARGE
                         charge = StripeService(
                             request.POST['name'],
@@ -255,6 +262,11 @@ class YogaClassEnrollPaymentView(View):
                                 card_invoice = CardInvoiceService(
                                     card, description, request.POST['amount'], charge.id).call()
                                 # ADD PROMOTION TO CARD INVOICE
+                                if promotion_code is not None and promotion_type is not None:
+                                    promotion_code.promotion_type = promotion_type
+                                    promotion_code.save()
+                                    card_invoice.apply_promotion_codes.create(
+                                        promotion_code=promotion_code)
                     else:
                         # CREATE CARD
                         card = self.__create_card(
@@ -263,6 +275,9 @@ class YogaClassEnrollPaymentView(View):
                         card_invoice = CardInvoiceService(
                             card, description, request.POST['amount']).call()
                     del request.session['enroll_card_form']
+                    del request.session['promotion_code']
+                    del request.session['promotion_type']
+
                     return HttpResponse('success', status=status.HTTP_200_OK)
                 except Exception as e:
                     print("<ERROR>")

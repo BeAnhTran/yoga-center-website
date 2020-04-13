@@ -15,7 +15,14 @@ class CheckCodeApiView(APIView):
         value = request.GET['code']
         try:
             promotion_code = get_object_or_404(PromotionCode, value=value)
+            try:
+                apply = promotion_code.apply
+            except:
+                apply = None
+            if apply is not None:
+                return Response({'detail': 'Mã không hợp lệ hoặc đã sử dụng'}, status=status.HTTP_404_NOT_FOUND)
+            else:
+                serialized = PromotionCodeSerializer(promotion_code)
+                return Response(serialized.data)
         except:
             return Response({'detail': 'Mã không hợp lệ hoặc đã sử dụng'}, status=status.HTTP_404_NOT_FOUND)
-        serialized = PromotionCodeSerializer(promotion_code)
-        return Response(serialized.data)
