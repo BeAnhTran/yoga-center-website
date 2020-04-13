@@ -371,21 +371,18 @@ class Command(BaseCommand):
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
             hatha_yoga_class1.lessons.create(**{
-                "trainer": hatha_yoga_class1.trainer,
                 "room_id": room_1.id,
                 "date": monday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_1_basic,
                 "end_time": t2_hatha_1_basic
             })
             hatha_yoga_class1.lessons.create(**{
-                "trainer": hatha_yoga_class1.trainer,
                 "room_id": room_1.id,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_1_basic,
                 "end_time": t2_hatha_1_basic
             })
             hatha_yoga_class1.lessons.create(**{
-                "trainer": hatha_yoga_class1.trainer,
                 "room_id": room_1.id,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_1_basic,
@@ -403,21 +400,18 @@ class Command(BaseCommand):
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
             hatha_yoga_class2.lessons.create(**{
-                "trainer": hatha_yoga_class2.trainer,
                 "room_id": room_2.id,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_2_basic,
                 "end_time": t2_hatha_2_basic
             })
             hatha_yoga_class2.lessons.create(**{
-                "trainer": hatha_yoga_class2.trainer,
                 "room_id": room_2.id,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_2_basic,
                 "end_time": t2_hatha_2_basic
             })
             hatha_yoga_class2.lessons.create(**{
-                "trainer": hatha_yoga_class2.trainer,
                 "room_id": room_2.id,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_2_basic,
@@ -433,21 +427,18 @@ class Command(BaseCommand):
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
             hatha_yoga_class3.lessons.create(**{
-                "trainer": hatha_yoga_class3.trainer,
                 "room_id": room_1.id,
                 "date": monday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_3_basic,
                 "end_time": t2_hatha_3_basic
             })
             hatha_yoga_class3.lessons.create(**{
-                "trainer": hatha_yoga_class3.trainer,
                 "room_id": room_1.id,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_3_basic,
                 "end_time": t2_hatha_3_basic
             })
             hatha_yoga_class3.lessons.create(**{
-                "trainer": hatha_yoga_class3.trainer,
                 "room_id": room_1.id,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_3_basic,
@@ -463,21 +454,18 @@ class Command(BaseCommand):
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
             hatha_yoga_imtermediate_class.lessons.create(**{
-                "trainer": hatha_yoga_imtermediate_class.trainer,
                 "room_id": room_2.id,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_intermediate,
                 "end_time": t2_hatha_intermediate
             })
             hatha_yoga_imtermediate_class.lessons.create(**{
-                "trainer": hatha_yoga_imtermediate_class.trainer,
                 "room_id": room_2.id,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_intermediate,
                 "end_time": t2_hatha_intermediate
             })
             hatha_yoga_imtermediate_class.lessons.create(**{
-                "trainer": hatha_yoga_imtermediate_class.trainer,
                 "room_id": room_2.id,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t1_hatha_intermediate,
@@ -496,21 +484,18 @@ class Command(BaseCommand):
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
             training_class.lessons.create(**{
-                "trainer": training_class.trainer,
                 "room_id": room_3.id,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t1_training_class,
                 "end_time": t2_training_class
             })
             training_class.lessons.create(**{
-                "trainer": training_class.trainer,
                 "room_id": room_3.id,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t1_training_class,
                 "end_time": t2_training_class
             })
             training_class.lessons.create(**{
-                "trainer": training_class.trainer,
                 "room_id": room_3.id,
                 "date": sunday + timedelta(days=count_weeks),
                 "start_time": t1_training_class,
