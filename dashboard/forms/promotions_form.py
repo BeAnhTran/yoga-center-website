@@ -26,7 +26,7 @@ class PromotionTypeInlineForm(forms.ModelForm):
 
 PromotionTypeFormSet = inlineformset_factory(
     Promotion, PromotionType, form=PromotionTypeInlineForm,
-    fields=['category', 'value', 'unit'], extra=1, can_delete=True
+    fields=['category', 'value'], extra=1, can_delete=True
 )
 
 

@@ -4,12 +4,14 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from core.models import User
 import uuid
+from common.templatetags import sexify
 
 
 class Promotion(models.Model):
     name = models.CharField(max_length=225, verbose_name=_('name'))
     slug = models.SlugField(max_length=255, unique=True)
-    description = RichTextUploadingField(verbose_name=_('description'))
+    description = models.CharField(
+        max_length=255, verbose_name=_('description'))
     image = models.ImageField(
         upload_to='promotions/', null=True, verbose_name=_('image'))
     start_at = models.DateTimeField(
@@ -28,33 +30,20 @@ class Promotion(models.Model):
 
 
 CASH_PROMOTION = 0
-PLUS_TIME_PRACTICE_PROMOTION = 1
-GIFT_PROMOTION = 2
-PERCENT_PROMOTION = 3
+PLUS_LESSON_PRACTICE_PROMOTION = 1
+PLUS_WEEK_PRACTICE_PROMOTION = 2
+PLUS_MONTH_PRACTICE_PROMOTION = 3
+GIFT_PROMOTION = 4
+PERCENT_PROMOTION = 5
 
 
 CATEGORY_CHOICES = (
     (CASH_PROMOTION, _('Cash promotion')),
-    (PLUS_TIME_PRACTICE_PROMOTION, _('Plus time practice promotion')),
+    (PLUS_LESSON_PRACTICE_PROMOTION, _('Plus lesson practice promotion')),
+    (PLUS_WEEK_PRACTICE_PROMOTION, _('Plus week practice promotion')),
+    (PLUS_MONTH_PRACTICE_PROMOTION, _('Plus month practice promotion')),
     (GIFT_PROMOTION, _('Gift promotion')),
     (PERCENT_PROMOTION, _('Percent promotion')),
-)
-
-MONEY_UNIT = 0
-LESSON_UNIT = 1
-WEEK_PRACTICE_UNIT = 2
-MONTH_PRACTICE_UNIT = 3
-PRODUCT_UNIT = 4
-PERCENT_UNIT = 5
-
-
-UNIT_CHOICES = (
-    (MONEY_UNIT, _('Money Unit')),
-    (LESSON_UNIT, _('Lesson Unit')),
-    (WEEK_PRACTICE_UNIT, _('Week practice unit')),
-    (MONTH_PRACTICE_UNIT, _('Month practice unit')),
-    (PRODUCT_UNIT, _('Product unit')),
-    (PERCENT_UNIT, _('Percent unit')),
 )
 
 
@@ -64,9 +53,23 @@ class PromotionType(models.Model):
     category = models.IntegerField(
         choices=CATEGORY_CHOICES, verbose_name=_('category'))
     value = models.FloatField(verbose_name=_('value'))
-    unit = models.IntegerField(choices=UNIT_CHOICES, verbose_name=_('unit'))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def full_title(self):
+        if self.category == CASH_PROMOTION:
+            return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + 'đ'
+        elif self.category == PLUS_LESSON_PRACTICE_PROMOTION:
+            return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + ' buổi tập'
+        elif self.category == PLUS_WEEK_PRACTICE_PROMOTION:
+            return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + ' tuần tập'
+        elif self.category == PLUS_MONTH_PRACTICE_PROMOTION:
+            return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + ' tháng tập'
+        elif self.category == GIFT_PROMOTION:
+            return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + ' món quà'
+        else:
+            return 'Khuyến mãi giảm ' + str(sexify.sexy_number(self.value)) + '%'
 
 
 class PromotionCode(models.Model):

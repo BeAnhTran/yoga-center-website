@@ -1,7 +1,7 @@
 from common.services.stripe_service import StripeService
 import json
 from django.utils.translation import gettext as _
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic import View
@@ -41,6 +41,7 @@ from django.contrib import messages
 from classes.forms import FilterForm
 from django.db.models import Value as V
 from django.db.models.functions import Concat
+from promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION
 
 
 class YogaClassListView(ListView):
@@ -179,6 +180,27 @@ class YogaClassEnrollPaymentView(View):
             total_price = get_total_price(
                 yoga_class, card_type, number_of_lessons)
             total_price_display = get_total_price_display(total_price)
+            # promotion
+            promotion_type = None
+            promotion_code = None
+            promotion_val = 'không'
+            amount = total_price
+            if request.session.get('promotion_code') and request.session.get('promotion_type'):
+                promotion_type = get_object_or_404(
+                    PromotionType, pk=request.session.get('promotion_type'))
+                promotion_code = get_object_or_404(
+                    PromotionCode, pk=request.session.get('promotion_code'))
+                if promotion_type.category == CASH_PROMOTION:
+                    amount -= promotion_type.value
+                    promotion_val = '-' + \
+                        sexify.sexy_number(promotion_type.value) + 'đ'
+                elif promotion_type.category == PERCENT_PROMOTION:
+                    amount -= promotion_type.value*amount
+                    promotion_val = '-' + \
+                        sexify.sexy_number(promotion_type.value*amount) + 'đ'
+                else:
+                    promotion_val = promotion_type.full_title()
+            amount_display = sexify.sexy_number(amount)
 
             context = {
                 'key': settings.STRIPE_PUBLISHABLE_KEY,
@@ -192,7 +214,12 @@ class YogaClassEnrollPaymentView(View):
                 'price': price,
                 'total_price_display': total_price_display,
                 'total_price': total_price,
-                'active_nav': 'classes'
+                'active_nav': 'classes',
+                'promotion_type': promotion_type,
+                'promotion_code': promotion_code,
+                'promotion_val': promotion_val,
+                'amount': amount,
+                'amount_display': amount_display
             }
             return render(request, self.template_name, context=context)
         else:
@@ -225,14 +252,15 @@ class YogaClassEnrollPaymentView(View):
                                 card = self.__create_card(
                                     yoga_class, enroll_form, request.user.trainee)
                                 # CREATE CARD INVOICE
-                                CardInvoiceService(
+                                card_invoice = CardInvoiceService(
                                     card, description, request.POST['amount'], charge.id).call()
+                                # ADD PROMOTION TO CARD INVOICE
                     else:
                         # CREATE CARD
                         card = self.__create_card(
                             yoga_class, enroll_form, request.user.trainee)
                         # CREATE CARD INVOICE
-                        CardInvoiceService(
+                        card_invoice = CardInvoiceService(
                             card, description, request.POST['amount']).call()
                     del request.session['enroll_card_form']
                     return HttpResponse('success', status=status.HTTP_200_OK)
@@ -274,3 +302,16 @@ class YogaClassEnrollPaymentView(View):
         lesson_list = yoga_class.lessons.filter(
             date__range=[start, end], is_full=False).order_by('date')
         return lesson_list
+
+
+@method_decorator([login_required], name='dispatch')
+class UsePromotionCodeView(View):
+    def post(self, request, slug):
+        promotion_code = get_object_or_404(
+            PromotionCode, value=request.POST['promotion-code'])
+        promotion_type = get_object_or_404(
+            PromotionType, pk=request.POST['promotion-type']
+        )
+        request.session['promotion_code'] = promotion_code.pk
+        request.session['promotion_type'] = promotion_type.pk
+        return redirect('classes:enroll-payment', slug=slug)

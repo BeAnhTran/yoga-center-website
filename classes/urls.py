@@ -1,17 +1,19 @@
 from django.urls import include, path
 from django.conf.urls import url
 
-from .views import (YogaClassListView, YogaClassDetailView,
-                    YogaClassEnrollView, YogaClassGetLessonListView, YogaClassEnrollPaymentView)
+from classes import views
 
 app_name = 'classes'
 
 urlpatterns = [
-    path('', YogaClassListView.as_view(), name='list'),
+    path('', views.YogaClassListView.as_view(), name='list'),
     url(r'^(?P<slug>[\w-]+)/$',
-        YogaClassDetailView.as_view(), name='detail'),
-    path('<slug:slug>/enroll/', YogaClassEnrollView.as_view(), name='enroll'),
-    path('<slug:slug>/enroll/payment/', YogaClassEnrollPaymentView.as_view(), name='enroll-payment'),
-    path('<slug:slug>/lessons/', YogaClassGetLessonListView.as_view(),
+        views.YogaClassDetailView.as_view(), name='detail'),
+    path('<slug:slug>/enroll/', views.YogaClassEnrollView.as_view(), name='enroll'),
+    path('<slug:slug>/enroll/payment/',
+         views.YogaClassEnrollPaymentView.as_view(), name='enroll-payment'),
+    path('<slug:slug>/lessons/', views.YogaClassGetLessonListView.as_view(),
          name='get-list-lesson'),
+    path('<slug:slug>/enroll/payment/use-code/', views.UsePromotionCodeView.as_view(),
+         name='use-promotion-code-when-payment'),
 ]
