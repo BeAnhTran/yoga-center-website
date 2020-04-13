@@ -30,6 +30,7 @@
                         <th><small>#</small></th>
                         <th><small>Tên khuyến mãi</small></th>
                         <th><small>Mã code</small></th>
+                        <th><small>Trạng thái</small></th>
                         <th><small>{% trans 'created at' as t_created_at %}{{ t_created_at | capfirst }}</small></th>
                     </tr>
                 </thead>
@@ -39,7 +40,14 @@
                         <td>{{ forloop.counter }}</td>
                         <td>{{ promotion.name }}</td>
                         <td>{{ code.value }}</td>
-                        <td>{{ code.created_at }}</td>
+                        <td>
+                            {% if code.apply != '' %}
+                            <span class="badge badge-pill badge-warning">Đã sử dụng</span>
+                            {% else %}
+                            <span class="badge badge-pill badge-success">Chưa sử dụng</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ code.created_at.date }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
