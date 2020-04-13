@@ -71,7 +71,8 @@
                     <div class="row">
                       <div class="field">
                         {% if total_price > 0 %}
-                        <button type="submit">{% trans 'Pay' %} <strong id="total_price_payment">{{ amount_display }}đ</strong></button>
+                        <button type="submit">{% trans 'Pay' %} <strong
+                            id="total_price_payment">{{ amount_display }}đ</strong></button>
                         {% elif total_price == 0 %}
                         <button type="submit">{% trans 'Free Register' %} </button>
                         {% else %}
@@ -124,29 +125,31 @@
                         <td><small>{{ end_at }}</small></td>
                       </tr>
                       <tr>
-                        <td><small>{% trans 'number of lessons' as t_number_of_lessons %}{{ t_number_of_lessons|capfirst }}</small></td>
+                        <td>
+                          <small>{% trans 'number of lessons' as t_number_of_lessons %}{{ t_number_of_lessons|capfirst }}</small>
+                        </td>
                         <td><small>{{ number_of_lessons }}</small></td>
                       </tr>
                       <tr>
                         <td><small>{% trans 'price' as t_price %}{{ t_price|capfirst }}</small></td>
                         <td><small>
-                          {% if total_price > 0 %}
-                          {{ price }} {% trans 'vnd' %}
-                          {% else %}
-                          {{ price }}
-                          {% endif %}
-                        </small>
+                            {% if total_price > 0 %}
+                            {{ price }} {% trans 'vnd' %}
+                            {% else %}
+                            {{ price }}
+                            {% endif %}
+                          </small>
                         </td>
                       </tr>
                       <tr>
                         <td><small>{% trans 'total price' as t_total_price %}{{ t_total_price|capfirst }}</small></td>
                         <td><small>
-                          {% if total_price > 0 %}
-                          {{ total_price_display }} {% trans 'vnd' %}
-                          {% else %}
-                          {{ total_price_display }}
-                          {% endif %}
-                        </small>
+                            {% if total_price > 0 %}
+                            {{ total_price_display }} {% trans 'vnd' %}
+                            {% else %}
+                            {{ total_price_display }}
+                            {% endif %}
+                          </small>
                         </td>
                       </tr>
                     </tbody>
@@ -194,9 +197,13 @@
               <td class="float-right">{{ total_price | sexy_number }}đ</td>
             </tr>
             <tr>
-              <td><small>Tên KM:</small></td>
+              <td><small>Khuyến mãi:</small></td>
               <td class="float-right">
+                {% if promotion_code %}
                 <small>{{ promotion_code.promotion.name }}</small>
+                {% else %}
+                <small><i>không</i></small>
+                {% endif %}
               </td>
             </tr>
             {% if promotion_type and promotion_code %}
@@ -270,7 +277,8 @@
                 Chọn hình thức khuyến mãi
               </td>
               <td class="col-8" id="td_promotion_types" class="float-right">
-                <form id="promotion_types" method="POST" action="{% url 'classes:use-promotion-code-when-payment' yoga_class.slug %}">
+                <form id="promotion_types" method="POST"
+                  action="{% url 'classes:use-promotion-code-when-payment' yoga_class.slug %}">
                   {% csrf_token %}
                   <input id="input_promotion_code" type="hidden" name="promotion-code">
                   <input type="submit" class="btn btn-sm btn-success mt-1" value="Xác nhận">
