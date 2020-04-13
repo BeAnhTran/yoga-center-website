@@ -19,7 +19,7 @@ from core.models import Trainee, Trainer
 from make_up_lessons.models import MakeUpLesson
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from teach.models import TrainerLesson, TAUGHT_STATE, TAUGHT_INSTEAD_STATE
+from trainer_lessons.models import TrainerLesson, TAUGHT_STATE, TAUGHT_INSTEAD_STATE
 
 
 @method_decorator([login_required, staff_required], name='dispatch')

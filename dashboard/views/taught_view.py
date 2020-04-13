@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from ..decorators import admin_required, staff_required
-from teach.models import TrainerLesson, TAUGHT_STATE, TAUGHT_INSTEAD_STATE
+from trainer_lessons.models import TrainerLesson, TAUGHT_STATE, TAUGHT_INSTEAD_STATE
 from django.db import transaction
 
 

@@ -70,7 +70,7 @@ INSTALLED_APPS = [
     'refunds',
     'shop',
     'promotions',
-    'teach',
+    'trainer_lessons',
 ]
 
 MIDDLEWARE = [
