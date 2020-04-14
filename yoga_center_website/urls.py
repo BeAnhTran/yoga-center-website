@@ -27,29 +27,29 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     # index page
-    path('', include('core.urls')),
+    path('', include('apps.core.urls')),
     # courses
-    path('courses/', include('courses.urls')),
+    path('courses/', include('apps.courses.urls')),
     # classes
-    path('classes/', include('classes.urls')),
+    path('classes/', include('apps.classes.urls')),
     # rooms
-    path('rooms/', include('rooms.urls')),
+    path('rooms/', include('apps.rooms.urls')),
     # lessons
-    path('lessons/', include('lessons.urls')),
+    path('lessons/', include('apps.lessons.urls')),
     # card types
-    path('card-types/', include('card_types.urls')),
+    path('card-types/', include('apps.card_types.urls')),
     # schedule
-    path('schedule/', include('yoga_schedule.urls')),
+    path('schedule/', include('apps.yoga_schedule.urls')),
     # trainers
-    path('trainers/', include('trainers.urls')),
+    path('trainers/', include('apps.trainers.urls')),
     # blog
-    path('blog/', include('blog.urls')),
+    path('blog/', include('apps.blog.urls')),
     # shop
-    path('shop/', include('shop.urls')),
+    path('shop/', include('apps.shop.urls')),
     # promotions
-    path('promotions/', include('promotions.urls')),
+    path('promotions/', include('apps.promotions.urls')),
     # dashboard
-    path('dashboard/', include('dashboard.urls')),
+    path('dashboard/', include('apps.dashboard.urls')),
     # admin site
     path('admin/', admin.site.urls),
     # accounts
