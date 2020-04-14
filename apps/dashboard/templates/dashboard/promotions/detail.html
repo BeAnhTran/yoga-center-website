@@ -37,7 +37,7 @@
                             <ul class="list-group">
                                 {% for p in object.promotion_types.all %}
                                     <li class="list-group-item list-group-item-info">
-                                        {{ p.get_category_display }} - {{ p.value | sexy_number }} {{ p.get_unit_display }} 
+                                        {{ p.get_category_display }}: {{ p.value | sexy_number }} {{ p.product|default_if_none:"" }}
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -51,11 +51,6 @@
             </table>
         </div>
 
-    </div>
-    <div class="row">
-        <a class="btn btn-sm btn-primary" href="{{request.META.HTTP_REFERER}}">
-            <i class="fas fa-fw fa-arrow-left"></i>
-        </a>
     </div>
 </div>
 

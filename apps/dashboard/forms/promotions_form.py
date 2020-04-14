@@ -16,17 +16,21 @@ class PromotionTypeInlineForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['value'].widget.attrs.update(
-            {'placeholder': _('value')}
+            {'placeholder': _('please input value or quantity')}
         )
+        self.fields['product'].required = False
+        self.fields['product'].widget.attrs.update({'class': 'select-product d-none'})
+        self.fields['product'].label = ''
+        self.fields['category'].widget.attrs.update(
+            {'class': 'select-category'})
 
     class Meta:
-        model = PromotionType
         exclude = ['created_at', 'updated_at']
 
 
 PromotionTypeFormSet = inlineformset_factory(
     Promotion, PromotionType, form=PromotionTypeInlineForm,
-    fields=['category', 'value'], extra=1, can_delete=True
+    fields=['category', 'value', 'product'], extra=1, can_delete=True
 )
 
 
@@ -34,6 +38,9 @@ class PromotionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['image'].required = False
+        self.fields['description'].widget.attrs.update(
+            {'placeholder': 'mô tả thông tin khuyến mãi'}
+        )
         self.fields['name'].widget.attrs.update(
             {'placeholder': _('promotion')}
         ),

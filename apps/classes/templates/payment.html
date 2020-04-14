@@ -281,7 +281,7 @@
                   action="{% url 'classes:use-promotion-code-when-payment' yoga_class.slug %}">
                   {% csrf_token %}
                   <input id="input_promotion_code" type="hidden" name="promotion-code">
-                  <input type="submit" class="btn btn-sm btn-success mt-1" value="Xác nhận">
+                  <input type="submit" class="btn btn-success mt-3" value="Xác nhận">
                 </form>
               </td>
             </tr>
@@ -429,11 +429,11 @@
             if (promotion_types_count == 1) {
               str += `<div class="form-check">
                       <label class="form-check-label">
-                      <input type="radio" value="`+ v['id'] + `" class="form-check-input" name="promotion-type" checked>`;
+                      <input data-choose-product="`+ v['choose_product'] + `" type="radio" value="` + v['id'] + `" class="form-check-input" name="promotion-type" checked>`;
             } else {
               str += `<div class="form-check">
                       <label class="form-check-label">
-                      <input type="radio" value="`+ v['id'] + `" class="form-check-input" name="promotion-type">`;
+                      <input data-choose-product="`+ v['choose_product'] + `" type="radio" value="` + v['id'] + `" class="form-check-input" name="promotion-type">`;
             }
             str += v['full_title'];
             str += `</label></div>`;
@@ -454,6 +454,10 @@
         });
       });
     }
-  })
+  });
+  $('#promotion_types').submit(function (e) {
+    e.preventDefault();
+    console.log($('input[name=promotion-type]:checked', '#promotion_types').val());
+  });
 </script>
 {% endblock %}
