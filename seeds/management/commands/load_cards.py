@@ -16,13 +16,13 @@ from apps.classes.models import (YogaClass)
 from apps.courses.models import (Course, TRAINING_COURSE,
                             PRACTICE_COURSE, BASIC_LEVEL, INTERMEDIATE_LEVEL)
 from apps.lessons.models import Lesson
-from apps.core.models import User, Trainer, Trainee, Staff
+from apps.accounts.models import User, Trainer, Trainee, Staff
 from apps.card_types.models import (CardType, FOR_FULL_MONTH,
                                FOR_SOME_LESSONS, FOR_TRIAL, FOR_TRAINING_COURSE)
 from apps.cards.models import Card
 from apps.roll_calls.models import RollCall
-from apps.common.services.card_invoice_service import CardInvoiceService
-from apps.common.services.roll_call_service import RollCallService
+from services.card_invoice_service import CardInvoiceService
+from services.roll_call_service import RollCallService
 from apps.classes.models import YogaClass
 
 

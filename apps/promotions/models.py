@@ -2,7 +2,7 @@ from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
-from apps.core.models import User
+from apps.accounts.models import User
 import uuid
 from apps.common.templatetags import sexify
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey

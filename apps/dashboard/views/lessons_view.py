@@ -15,11 +15,11 @@ from django.shortcuts import render
 from django.db import transaction
 from datetime import datetime, timedelta
 from dateutil import parser
-from apps.core.models import Trainee, Trainer
+from apps.accounts.models import Trainee, Trainer
 from apps.make_up_lessons.models import MakeUpLesson
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
-from apps.trainer_lessons.models import TrainerLesson, TAUGHT_STATE, TAUGHT_INSTEAD_STATE
+from apps.lessons.models import TrainerLesson, TAUGHT_STATE, TAUGHT_INSTEAD_STATE
 
 
 @method_decorator([login_required, staff_required], name='dispatch')

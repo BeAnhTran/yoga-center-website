@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, reverse
-from apps.core.models import Trainer
+from apps.accounts.models import Trainer
 from apps.lessons.models import Lesson
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from ..decorators import admin_required, staff_required
-from apps.trainer_lessons.models import TrainerLesson, TAUGHT_STATE, TAUGHT_INSTEAD_STATE
+from apps.lessons.models import TrainerLesson, TAUGHT_STATE, TAUGHT_INSTEAD_STATE
 from django.db import transaction
 
 

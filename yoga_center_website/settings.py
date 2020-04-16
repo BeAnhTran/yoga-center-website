@@ -51,8 +51,9 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'dynamic_formsets',
 
-    'apps.common',
+    'apps.accounts',
     'apps.core',
+    'apps.home',
     'apps.courses',
     'apps.classes',
     'apps.lessons',
@@ -70,7 +71,7 @@ INSTALLED_APPS = [
     'apps.refunds',
     'apps.shop',
     'apps.promotions',
-    'apps.trainer_lessons',
+    'seeds',
 ]
 
 MIDDLEWARE = [
@@ -184,7 +185,7 @@ STATIC_ROOT = []
 SITE_ID = 1
 
 # Custom Auth User model
-AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True

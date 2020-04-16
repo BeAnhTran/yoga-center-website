@@ -3,7 +3,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 from django.utils.translation import ugettext_lazy as _
 
-from apps.core.models import Trainee
+from apps.accounts.models import Trainee
 from apps.classes.models import YogaClass
 from apps.card_types.models import CardType, FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE
 from apps.common.templatetags import sexify

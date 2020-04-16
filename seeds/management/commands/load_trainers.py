@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
     @transaction.atomic
     def handle(self, **options):
-        from apps.core.models import User, Trainer
+        from apps.accounts.models import User, Trainer
         from faker import Faker
         fake = Faker()
         print("Create trainers")

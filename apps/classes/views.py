@@ -9,7 +9,7 @@ from django.views.generic import View
 from apps.courses.models import LEVEL_CHOICES
 from apps.classes.models import YogaClass
 from apps.courses.models import Course
-from apps.core.models import Trainer
+from apps.accounts.models import Trainer
 
 from django.db.models import Q
 from apps.cards.forms import CardFormForTraineeEnroll

@@ -8,9 +8,8 @@ class Command(BaseCommand):
     help = "Load some sample data into the db"
 
     def handle(self, **options):
-        from apps.core.models import User
+        from apps.accounts.models import User
         from faker import Faker
-        fake = Faker()
 
         print("Create superuser")
         data = {

@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext as _
 from crispy_forms.layout import Layout, Submit, Row, Column, Div, Field
 from crispy_forms.helper import FormHelper
-from apps.core.models import Certificate
+from apps.accounts.models import Certificate
 
 
 class CertificateForm(forms.ModelForm):

@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 from apps.courses.models import Course
-from apps.core.models import Trainer
+from apps.accounts.models import Trainer
 from apps.common.templatetags import sexify
 from apps.card_types.models import FOR_TRIAL
 

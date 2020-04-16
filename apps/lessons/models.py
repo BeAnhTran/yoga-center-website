@@ -3,13 +3,14 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from apps.classes.models import YogaClass
 from apps.rooms.models import Room
-from apps.core.models import Trainer, Trainee
+from apps.accounts.models import Trainer, Trainee
 import time
 from django.core.exceptions import ValidationError
 from apps.lessons.utils import check_overlap_in_list_lesson
 from django.db.models import Q
 from apps.cards.models import Card
 from django.utils.formats import date_format
+from apps.accounts.models import Trainer
 
 
 ACTIVE_STATE = 0
@@ -119,3 +120,25 @@ class Lesson(models.Model):
         if self.roll_calls.all().count() < self.max_people():
             return False
         return True
+
+
+TAUGHT_STATE = 0
+TAUGHT_INSTEAD_STATE = 1
+
+STATE_CHOICES = (
+    (TAUGHT_STATE, _('Taught')),
+    (TAUGHT_INSTEAD_STATE, _('Taught Instead')),
+)
+
+
+class TrainerLesson(models.Model):
+    trainer = models.ForeignKey(
+        Trainer, on_delete=models.CASCADE, related_name='taught', verbose_name=_('trainer'))
+    lesson = models.ForeignKey(
+        Lesson, on_delete=models.CASCADE, related_name='taught', verbose_name=_('lesson'))
+    state = models.IntegerField(choices=STATE_CHOICES,
+                                default=TAUGHT_STATE, verbose_name=_('state'))
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name=_('created at'))
+    updated_at = models.DateTimeField(
+        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))

@@ -3,7 +3,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from ..decorators import admin_required
 
-from apps.core.models import (Staff)
+from apps.accounts.models import (Staff)
 
 
 @method_decorator([login_required, admin_required], name='dispatch')

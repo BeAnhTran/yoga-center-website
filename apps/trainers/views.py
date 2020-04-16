@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 
-from apps.core.models import Trainer
+from apps.accounts.models import Trainer
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 

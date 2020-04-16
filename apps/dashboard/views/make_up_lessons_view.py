@@ -12,7 +12,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from apps.lessons.models import Lesson
 from apps.cards.models import Card
-from apps.core.models import Trainee
+from apps.accounts.models import Trainee
 from django.views import View
 from django.shortcuts import render, redirect, reverse
 

@@ -1,7 +1,7 @@
 from django import forms
 from django.db import transaction
 from allauth.account.forms import SignupForm
-from apps.core.models import User, Trainee
+from apps.accounts.models import User, Trainee
 from django_countries.fields import CountryField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
