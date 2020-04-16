@@ -26,8 +26,10 @@ urlpatterns = [
 
 
 urlpatterns += i18n_patterns(
-    # index page
-    path('', include('apps.core.urls')),
+    # home page
+    path('', include('apps.home.urls')),
+    #
+    path('core/', include('apps.core.urls')),
     # courses
     path('courses/', include('apps.courses.urls')),
     # classes

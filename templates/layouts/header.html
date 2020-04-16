@@ -85,7 +85,7 @@
         </div>
     </div>
     <div class="header-bottom">
-        <a href="{% url 'core:home' %}" class="site-logo">
+        <a href="{% url 'home:index' %}" class="site-logo">
             Lotus <span class="flaticon-lotus"></span> Yoga
         </a>
         <div class="hb-right">
@@ -98,7 +98,7 @@
         </div>
         <div class="container">
             <ul class="main-menu">
-                <li><a href="{% url 'core:home' %}"
+                <li><a href="{% url 'home:index' %}"
                         class="{% if active_nav == 'home' %}active{% endif %}">{% trans 'Home' %}</a></li>
                 <li><a href="{% url 'courses:list' %}"
                         class="{% if active_nav == 'classes' %}active{% endif %}">{% trans 'Classes'%}</a>

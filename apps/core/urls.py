@@ -9,8 +9,6 @@ from apps.roll_calls.views import GetRollCallListApiView
 app_name = 'core'
 
 urlpatterns = [
-    path('', core.home, name='home'),
-
     path('accounts/bills/', bills_view.BillListView.as_view(), name='accounts-bills'),
 
     path('accounts/signup/', core.SignUpView.as_view(), name='account_signup'),
