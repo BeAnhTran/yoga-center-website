@@ -19,8 +19,8 @@ from django.contrib.auth.decorators import login_required
 from apps.common.forms.payment_form import PaymentForm
 from django.conf import settings
 from django.db import transaction
-from apps.common.services.stripe_service import StripeService
-from apps.common.services.bill_service import BillService
+from services.stripe_service import StripeService
+from services.bill_service import BillService
 from django.utils.translation import gettext as _
 
 from django.core import mail

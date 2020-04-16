@@ -1,4 +1,4 @@
-from apps.common.services.stripe_service import StripeService
+from services.stripe_service import StripeService
 import json
 from django.utils.translation import gettext as _
 from django.shortcuts import render, redirect, get_object_or_404
@@ -30,18 +30,18 @@ from django.http import HttpResponse
 from apps.common.forms.payment_form import PaymentForm
 
 from apps.card_types.models import (CardType,
-                               FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE, FOR_TRIAL)
+                                    FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE, FOR_TRIAL)
 
 from apps.common.templatetags import sexify
 from apps.classes.utils import get_price, get_total_price, get_total_price_display
 from django.db import transaction
-from apps.common.services.card_invoice_service import CardInvoiceService
-from apps.common.services.roll_call_service import RollCallService
+from services.card_invoice_service import CardInvoiceService
+from services.roll_call_service import RollCallService
 from django.contrib import messages
 from apps.classes.forms import FilterForm
 from django.db.models import Value as V
 from django.db.models.functions import Concat
-from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION
+from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION
 
 
 class YogaClassListView(ListView):
@@ -199,7 +199,7 @@ class YogaClassEnrollPaymentView(View):
                     promotion_val = '-' + \
                         sexify.sexy_number(promotion_type.value*amount) + 'đ'
                 else:
-                    promotion_val = promotion_type.full_title()
+                    promotion_val = promotion_type.full_title
             amount_display = sexify.sexy_number(amount)
 
             context = {
@@ -265,6 +265,9 @@ class YogaClassEnrollPaymentView(View):
                                 if promotion_code is not None and promotion_type is not None:
                                     promotion_code.promotion_type = promotion_type
                                     promotion_code.save()
+                                    if promotion_type.category == GIFT_PROMOTION:
+                                        promotion_code.promotion_code_products.create(
+                                            product=promotion_type.product, quantity=promotion_type.value)
                                     card_invoice.apply_promotion_codes.create(
                                         promotion_code=promotion_code)
                     else:
@@ -274,9 +277,12 @@ class YogaClassEnrollPaymentView(View):
                         # CREATE CARD INVOICE
                         card_invoice = CardInvoiceService(
                             card, description, request.POST['amount']).call()
-                    del request.session['enroll_card_form']
-                    del request.session['promotion_code']
-                    del request.session['promotion_type']
+                    if request.session.get('enroll_card_form'):
+                        del request.session['enroll_card_form']
+                    if request.session.get('promotion_code'):
+                        del request.session['promotion_code']
+                    if request.session.get('promotion_type'):
+                        del request.session['promotion_type']
 
                     return HttpResponse('success', status=status.HTTP_200_OK)
                 except Exception as e:
