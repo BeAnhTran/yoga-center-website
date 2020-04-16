@@ -29,7 +29,11 @@ urlpatterns += i18n_patterns(
     # home page
     path('', include('apps.home.urls')),
     #
-    path('core/', include('apps.core.urls')),
+    path('accounts/', include('apps.accounts.urls')),
+    # profile
+    path('accounts/profile/', include('apps.profiles.urls')),
+    # errors
+    path('errors/', include('apps.errors.urls')),
     # courses
     path('courses/', include('apps.courses.urls')),
     # classes

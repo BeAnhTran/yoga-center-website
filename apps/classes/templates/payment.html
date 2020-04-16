@@ -383,7 +383,7 @@
         'success'
       ).then((result) => {
         // redirect to accounts/bills/
-        window.location.href = "{% url 'core:profile-trainee-cards' %}";
+        window.location.href = "{% url 'profile:profile-trainee-cards' %}";
       });;
     }).fail(function (err) {
       console.log(err);

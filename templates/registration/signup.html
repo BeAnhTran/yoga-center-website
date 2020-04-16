@@ -29,9 +29,9 @@
           <p class="lead">
             {% trans 'Select below the type of account you want to create'%}
           </p>
-          <a id="register_as_trainee_btn" href="{% url 'core:trainee_signup' %}" class="btn btn-student btn-lg"
+          <a id="register_as_trainee_btn" href="{% url 'accounts:trainee-signup' %}" class="btn btn-student btn-lg"
             role="button">{% trans 'trainee' as t_trainee %}{{t_trainee|upper}}</a>
-          <a href="{% url 'core:trainer_signup' %}" class="btn btn-teacher btn-lg"
+          <a href="{% url 'accounts:trainer-signup' %}" class="btn btn-teacher btn-lg"
             role="button">{% trans 'trainer' as t_trainer %}{{ t_trainer|upper }}</a>
         </div>
       </div>

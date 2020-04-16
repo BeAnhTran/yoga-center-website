@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.utils.decorators import method_decorator
-from apps.core.decorators import trainee_required
+from apps.accounts.decorators import trainee_required
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from apps.cards.models import Card, ExtendCardRequest
@@ -72,7 +72,7 @@ class TraineeCardExtendView(View):
                 card.extend_card_requests.create(**data)
                 messages.success(request, _(
                     'Create extend card request successfully'))
-                return redirect(reverse('core:profile-trainee-cards-detail', args={card.pk}) + '?focus=collapseCardExtendRequest')
+                return redirect(reverse('profile:profile-trainee-cards-detail', args={card.pk}) + '?focus=collapseCardExtendRequest')
 
         context = {
             'card': card,
@@ -109,7 +109,7 @@ class ExtendCardRequestEditView(UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, 'Cập nhật yêu cầu gia hạn thành công')
-        return (reverse('core:profile-trainee-cards-detail', args={self.object.card.pk}) + '?focus=collapseCardExtendRequest')
+        return (reverse('profile:profile-trainee-cards-detail', args={self.object.card.pk}) + '?focus=collapseCardExtendRequest')
 
     def get_context_data(self, **kwargs):
         context = super(ExtendCardRequestEditView,
@@ -125,7 +125,7 @@ def detele_extend_card_request(request, card_id, pk):
     obj = get_object_or_404(ExtendCardRequest, pk=pk, card=card)
     obj.delete()
     messages.success(request, 'Xóa yêu cầu gia hạn thành công')
-    return redirect(reverse('core:profile-trainee-cards-detail', args={card.pk}) + '?focus=collapseCardExtendRequest')
+    return redirect(reverse('profile:profile-trainee-cards-detail', args={card.pk}) + '?focus=collapseCardExtendRequest')
 
 
 # REFUND
@@ -166,7 +166,7 @@ class RefundNewView(View):
                 form.save()
                 messages.success(request, _(
                     'Create refund card request successfully'))
-                return redirect(reverse('core:profile-trainee-cards-detail', args={card.pk}) + '?focus=collapseCardRefundRequest')
+                return redirect(reverse('profile:profile-trainee-cards-detail', args={card.pk}) + '?focus=collapseCardRefundRequest')
 
         context = {
             'card': card,
@@ -203,7 +203,7 @@ class RefundEditView(UpdateView):
 
     def get_success_url(self):
         messages.success(self.request, 'Cập nhật yêu cầu hoàn tiền thành công')
-        return (reverse('core:profile-trainee-cards-detail', args={self.object.card.pk}) + '?focus=collapseCardRefundRequest')
+        return (reverse('profile:profile-trainee-cards-detail', args={self.object.card.pk}) + '?focus=collapseCardRefundRequest')
 
     def get_context_data(self, **kwargs):
         context = super(RefundEditView,
@@ -219,4 +219,4 @@ def detele_refund_request(request, card_id, pk):
     obj = get_object_or_404(Refund, pk=pk, card=card)
     obj.delete()
     messages.success(request, 'Xóa yêu cầu hoàn tiền thành công')
-    return redirect(reverse('core:profile-trainee-cards-detail', args={card.pk}) + '?focus=collapseCardRefundRequest')
+    return redirect(reverse('profile:profile-trainee-cards-detail', args={card.pk}) + '?focus=collapseCardRefundRequest')

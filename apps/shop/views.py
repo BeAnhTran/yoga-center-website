@@ -16,7 +16,7 @@ from rest_framework.views import APIView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
-from apps.common.forms.payment_form import PaymentForm
+from apps.payment.form import PaymentForm
 from django.conf import settings
 from django.db import transaction
 from services.stripe_service import StripeService

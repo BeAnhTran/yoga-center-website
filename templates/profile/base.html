@@ -38,11 +38,11 @@
             </div>
             <div class="wizard">
                 <nav class="list-group list-group-flush">
-                    <a class="list-group-item-custom {% if sidebar_profile == 'info' %} active {% endif %}" href="{% url 'core:profile' %}"><i class="fe-icon-user text-muted"></i>
+                    <a class="list-group-item-custom {% if sidebar_profile == 'info' %} active {% endif %}" href="{% url 'profile:index' %}"><i class="fe-icon-user text-muted"></i>
                         Thông tin cá nhân
                     </a>
                     {% if user.is_trainee %}
-                        <a class="list-group-item-custom {% if sidebar_profile == 'cards' %} active {% endif %}" href="{% url 'core:profile-trainee-cards' %}">
+                        <a class="list-group-item-custom {% if sidebar_profile == 'cards' %} active {% endif %}" href="{% url 'profile:profile-trainee-cards' %}">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                     <div class="d-inline-block">Thẻ tập</div>
@@ -50,7 +50,7 @@
                             </div>
                         </a>
                     {% endif %}
-                    <a class="list-group-item-custom {% if sidebar_profile == 'bills' %} active {% endif %}" href="{% url 'core:accounts-bills' %}">
+                    <a class="list-group-item-custom {% if sidebar_profile == 'bills' %} active {% endif %}" href="{% url 'profile:accounts-bills' %}">
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block">Hóa đơn mua hàng</div>

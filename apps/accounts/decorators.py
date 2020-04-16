@@ -9,7 +9,7 @@ def trainee_required(function):
         if request.user.is_active and request.user.is_trainee:
             pass
         else:
-            return redirect('core:error_401')
+            return redirect('errors:error_401')
 
         return function(request, *args, **kwargs)
 
@@ -23,7 +23,7 @@ def trainer_required(function):
         if request.user.is_active and request.user.is_trainer:
             pass
         else:
-            return redirect('core:error_401')
+            return redirect('errors:error_401')
 
         return function(request, *args, **kwargs)
 

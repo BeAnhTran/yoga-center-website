@@ -257,7 +257,7 @@
                     'success'
                 ).then((result) => {
                     // redirect to accounts/bills/
-                    window.location.href = "{% url 'core:accounts-bills' %}";
+                    window.location.href = "{% url 'profile:accounts-bills' %}";
                 });
             }).fail(function (err) {
                 console.log(err);

@@ -161,11 +161,11 @@
             headers: {
                 'X-CSRFTOKEN': '{{ csrf_token }}'
             },
-            url: "{% url 'core:update-health-condition' %}",
+            url: "{% url 'profile:update-health-condition' %}",
             type: 'POST',
             data: $(this).serialize()
         }).done(function (data) {
-            window.location.replace("{% url 'core:profile' %}");
+            window.location.replace("{% url 'profile:index' %}?focus=collapseHealthCondition");
         }).fail(function (err) {
             console.log(err);
         });

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from apps.cards.models import Card, ExtendCardRequest
-from apps.core.serializers.trainee_serializers import TraineeSerializer
+from apps.accounts.serializers.trainee_serializer import TraineeSerializer
 
 
 class CardSerializer(serializers.ModelSerializer):

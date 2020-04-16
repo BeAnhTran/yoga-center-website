@@ -28,7 +28,7 @@
 {% endblock %}
 
 {% block header_path %}
-<a class="text-danger" href="{% url 'core:profile-trainee-cards' %}">Thẻ tập</a>
+<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">Thẻ tập</a>
 ⁄
 <a class="text-danger" href="javascript:;">{{ object.card.yogaclass }} - {{ object.card.card_type }}</a>
 ⁄
@@ -96,7 +96,7 @@
                 <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
             </form>
             <a class="btn btn-sm btn-warning float-right ml-1"
-                href="{% url 'core:profile-trainee-card-refunds-edit' object.card.pk object.pk %}">
+                href="{% url 'profile:profile-trainee-card-refunds-edit' object.card.pk object.pk %}">
                 <i class="fas fa-fw fa-pen"></i>
             </a>
         </div>

@@ -28,7 +28,7 @@
 {% endblock %}
 
 {% block header_path %}
-<a class="text-danger" href="{% url 'core:profile-trainee-cards' %}">Thẻ tập</a>
+<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">Thẻ tập</a>
 ⁄
 <a class="text-danger" href="javascript:;">{{ object.card.yogaclass }} - {{ object.card.card_type }}</a>
 ⁄
@@ -86,13 +86,13 @@
             <a class="btn btn-sm btn-danger float-right ml-1 delete-extend-card-request" href="javascript:;"><i
                     class="fas fa-fw fa-trash"></i></a>
             <form class="d-none"
-                action="{% url 'core:profile-trainee-card-extend-request-delete' object.card.pk object.pk %}"
+                action="{% url 'profile:profile-trainee-card-extend-request-delete' object.card.pk object.pk %}"
                 method="post">
                 {% csrf_token %}
                 <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
             </form>
             <a class="btn btn-sm btn-warning float-right ml-1"
-                href="{% url 'core:profile-trainee-card-extend-request-edit' object.card.pk object.pk %}">
+                href="{% url 'profile:profile-trainee-card-extend-request-edit' object.card.pk object.pk %}">
                 <i class="fas fa-fw fa-pen"></i>
             </a>
         </div>

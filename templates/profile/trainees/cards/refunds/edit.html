@@ -28,7 +28,7 @@
 {% endblock %}
 
 {% block header_path %}
-<a class="text-danger" href="{% url 'core:profile-trainee-cards' %}">Thẻ tập</a>
+<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">Thẻ tập</a>
 ⁄
 <a class="text-danger" href="javascript:;">{{ object.card.yogaclass }} - {{ object.card.card_type }}</a>
 ⁄
@@ -78,7 +78,7 @@
             contentHeight: "auto",
             events: function (fetchInfo, successCallback, failureCallback) {
                 $.ajax({
-                    url: "{% url 'core:profile-trainee-cards-roll-call-list' object.card.pk %}",
+                    url: "{% url 'profile:profile-trainee-cards-roll-call-list' object.card.pk %}",
                     type: 'GET',
                     data: {
                         startStr: fetchInfo.startStr,

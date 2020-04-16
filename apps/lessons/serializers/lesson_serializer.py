@@ -3,7 +3,7 @@ from apps.lessons.models import Lesson
 
 from apps.rooms.serializers.room_serializer import RoomSerializer
 from apps.classes.serializers.yoga_class_serializer import YogaClassSerializer
-from apps.core.serializers.trainer_serializer import TrainerSerializer
+from apps.accounts.serializers.trainer_serializer import TrainerSerializer
 
 
 class LessonSerializer(serializers.ModelSerializer):

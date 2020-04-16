@@ -49,11 +49,11 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="user_infoDropdown">
-                            <a class="dropdown-item" href="{% url 'core:profile' %}">
+                            <a class="dropdown-item" href="{% url 'profile:index' %}">
                                 <i class="fa fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {% trans 'profile' as t_profile  %} {{ t_profile|capfirst }}
                             </a>
-                            <a class="dropdown-item" href="{% url 'core:profile-trainee-cards' %}">
+                            <a class="dropdown-item" href="{% url 'profile:profile-trainee-cards' %}">
                                 <i class="fas fa-id-card fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {% trans 'card' as t_cards %}
                                 {{ t_cards|capfirst }}
@@ -77,7 +77,7 @@
                 </div>
                 <div class="header-info">
                     <a class="btn btn-sm btn-default header-info-link"
-                        href="{% url 'core:account_signup' %}">{% trans 'register' as t_register %}
+                        href="{% url 'accounts:sign-up' %}">{% trans 'register' as t_register %}
                         {{ t_register|capfirst }} </a>
                 </div>
                 {% endif %}

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from apps.accounts.models import Trainer
-from apps.core.serializers.user_serializer import UserSerializer
+from apps.accounts.serializers.user_serializer import UserSerializer
 
 
 class TrainerSerializer(serializers.ModelSerializer):

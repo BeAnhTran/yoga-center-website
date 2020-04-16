@@ -32,7 +32,6 @@ class TraineeSignupForm(SignupForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
-                Column('username', css_class='form-group col-md-6 mb-0'),
                 Column('email', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),

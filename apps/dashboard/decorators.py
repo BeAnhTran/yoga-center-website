@@ -9,7 +9,7 @@ def staff_required(function):
         if request.user.is_active and request.user.is_staff:
             pass
         else:
-            return redirect('core:error_401')
+            return redirect('errors:error_401')
 
         return function(request, *args, **kwargs)
 
@@ -23,7 +23,7 @@ def admin_required(function):
         if request.user.is_active and request.user.is_staff and request.user.is_superuser:
             pass
         else:
-            return redirect('core:error_401')
+            return redirect('errors:error_401')
 
         return function(request, *args, **kwargs)
 

@@ -21,13 +21,13 @@ from datetime import datetime
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from apps.core.decorators import trainee_required
+from apps.accounts.decorators import trainee_required
 
 from django.conf import settings
 
 from rest_framework import status
 from django.http import HttpResponse
-from apps.common.forms.payment_form import PaymentForm
+from apps.payment.form import PaymentForm
 
 from apps.card_types.models import (CardType,
                                     FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE, FOR_TRIAL)

@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'dynamic_formsets',
 
     'apps.accounts',
-    'apps.core',
+    'apps.common',
+    'apps.profiles',
     'apps.home',
     'apps.courses',
     'apps.classes',
@@ -71,6 +72,7 @@ INSTALLED_APPS = [
     'apps.refunds',
     'apps.shop',
     'apps.promotions',
+    'apps.errors',
     'seeds',
 ]
 
@@ -189,9 +191,8 @@ AUTH_USER_MODEL = 'accounts.User'
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-# ACCOUNT_USERNAME_REQUIRED = False
-
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 # Skip Email Verification

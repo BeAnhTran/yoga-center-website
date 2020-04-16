@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block header_path %}
-<a class="text-danger" href="{% url 'core:profile-trainee-cards' %}">Thẻ tập</a>
+<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">Thẻ tập</a>
 ⁄
 <a class="text-danger" href="javascript:;">{{ card.yogaclass }} - {{ card.card_type }}</a>
 ⁄
@@ -187,19 +187,19 @@
                                 <td class="col-3">{{ extend.created_at.date }}</td>
                                 <td class="col-3">
                                     <a class="btn btn-sm btn-outline-primary"
-                                        href="{% url 'core:profile-trainee-card-extend-request-detail' card.pk extend.pk %}"><i
+                                        href="{% url 'profile:profile-trainee-card-extend-request-detail' card.pk extend.pk %}"><i
                                             class="fas fa-fw fa-eye"></i>
                                         {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
                                     {% if extend.state == 'pending' %}
                                     <a class="btn btn-sm btn-outline-warning"
-                                        href="{% url 'core:profile-trainee-card-extend-request-edit' extend.card.pk extend.pk %}"><i
+                                        href="{% url 'profile:profile-trainee-card-extend-request-edit' extend.card.pk extend.pk %}"><i
                                             class="fas fa-fw fa-edit"></i>
                                         {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
                                     <a class="btn btn-sm btn-outline-danger delete-extend-card-request"
                                         href="javascript:;"><i class="fas fa-fw fa-trash"></i>
                                         {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
                                     <form class="d-none"
-                                        action="{% url 'core:profile-trainee-card-extend-request-delete' extend.card.pk extend.pk %}"
+                                        action="{% url 'profifle:profile-trainee-card-extend-request-delete' extend.card.pk extend.pk %}"
                                         method="post">
                                         {% csrf_token %}
                                         <input type="submit" value="Confirm">
@@ -266,19 +266,19 @@
                                 <td class="col-2">{{ refund.created_at.date }}</td>
                                 <td class="col-3">
                                     <a class="btn btn-sm btn-outline-primary"
-                                        href="{% url 'core:profile-trainee-card-refunds-detail' card.pk refund.pk %}"><i
+                                        href="{% url 'profile:profile-trainee-card-refunds-detail' card.pk refund.pk %}"><i
                                             class="fas fa-fw fa-eye"></i>
                                         {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
                                     {% if refund.state == 'pending' %}
                                     <a class="btn btn-sm btn-outline-warning"
-                                        href="{% url 'core:profile-trainee-card-refunds-edit' card.pk refund.pk %}"><i
+                                        href="{% url 'profile:profile-trainee-card-refunds-edit' card.pk refund.pk %}"><i
                                             class="fas fa-fw fa-edit"></i>
                                         {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
                                     <a class="btn btn-sm btn-outline-danger delete-refund-request"
                                         href="javascript:;"><i class="fas fa-fw fa-trash"></i>
                                         {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
                                     <form class="d-none"
-                                        action="{% url 'core:profile-trainee-card-refunds-delete' card.pk refund.pk %}"
+                                        action="{% url 'profile:profile-trainee-card-refunds-delete' card.pk refund.pk %}"
                                         method="post">
                                         {% csrf_token %}
                                         <input type="submit" value="Confirm">

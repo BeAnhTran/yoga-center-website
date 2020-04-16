@@ -7,7 +7,7 @@ from apps.roll_calls.models import RollCall
 from apps.roll_calls.serializers import RollCallSerializer
 from apps.cards.models import Card
 from django.utils.decorators import method_decorator
-from apps.core.decorators import trainee_required
+from apps.accounts.decorators import trainee_required
 from django.contrib.auth.decorators import login_required
 
 
