@@ -16,7 +16,9 @@ django-dynamic-formsets==0.0.8
 django-formtools==2.2
 django-getenv==1.3.2
 django-js-asset==1.2.2
+django-phonenumber-field==4.0.0
 django-tempus-dominus==5.1.2.13
+django-twilio==0.13.0.post1
 djangorestframework==3.11.0
 fake-factory==9999.9.9
 Faker==4.0.0
@@ -25,8 +27,10 @@ isort==4.3.21
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
 oauthlib==3.1.0
+phonenumbers==8.12.1
 Pillow==7.0.0
 pycodestyle==2.5.0
+PyJWT==1.7.1
 pylint==2.4.4
 python-dateutil==2.8.1
 python3-openid==3.1.0
@@ -37,5 +41,6 @@ six==1.13.0
 sqlparse==0.3.0
 stripe==2.42.0
 text-unidecode==1.3
+twilio==6.38.1
 urllib3==1.25.7
 wrapt==1.11.2

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'dynamic_formsets',
+    'django_twilio',
 
     'apps.accounts',
     'apps.common',
@@ -240,3 +241,8 @@ EMAIL_USE_SLL = False
 EMAIL_PORT = 587
 EMAIL_HOST_USER = env('EMAIL')
 EMAIL_HOST_PASSWORD = env('PASSWORD')
+
+TWILIO_ACCOUNT_SID = env('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = env('TWILIO_AUTH_TOKEN')
+DEFAULT_TO_NUMBER = env('DEFAULT_TO_NUMBER')
+TWILIO_PHONE_NUMBER = env('TWILIO_PHONE_NUMBER')

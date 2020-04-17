@@ -230,7 +230,8 @@
         </table>
         <hr>
         <!--  -->
-        <p class="text-success mb-3"><b>{% trans 'Your Lesson List' %}</b> <span class="badge badge-success">{{ lesson_list.count }}</span></p>
+        <p class="text-success mb-3"><b>{% trans 'Your Lesson List' %}</b> <span
+            class="badge badge-success">{{ lesson_list.count }}</span></p>
         <ul class="list-group mCustomScrollbar mb-5" style="max-height: 150px;">
           {% for lesson in lesson_list %}
           <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -243,7 +244,8 @@
 
         <!-- promotion lessons -->
         {% if promotion_lessons %}
-        <p class="text-info"><b>Buổi học được khuyến mãi</b> <span class="badge badge-info">{{ promotion_lessons.count }}</span></p>
+        <p class="text-info"><b>Buổi học được khuyến mãi</b> <span
+            class="badge badge-info">{{ promotion_lessons.count }}</span></p>
         <ul class="list-group mCustomScrollbar mb-5" style="max-height: 150px;">
           {% for promotion_lesson in promotion_lessons %}
           <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -388,16 +390,23 @@
       },
       url: "{% url 'classes:enroll-payment' yoga_class.slug %}",
       type: 'POST',
-      data: data
+      data: data,
+      beforeSend: function () {
+        $(".loader").fadeIn();
+        $("#preloder").fadeIn();
+      }
     }).done(function (data) {
-      Swal.fire(
-        "{% trans 'enroll successfully' as t_enroll_successfully %}{{ t_enroll_successfully|capfirst }}",
-        "{% trans 'Thanks for your register. Please check schedule and prepare to study' %}",
-        'success'
-      ).then((result) => {
-        // redirect to accounts/bills/
-        window.location.href = "{% url 'profile:profile-trainee-cards' %}";
-      });;
+      $(".loader").fadeOut();
+      $("#preloder").fadeOut(function () {
+        Swal.fire(
+          "{% trans 'enroll successfully' as t_enroll_successfully %}{{ t_enroll_successfully|capfirst }}",
+          "{% trans 'Thanks for your register. Please check schedule and prepare to study' %}",
+          'success'
+        ).then((result) => {
+          // redirect to accounts/bills/
+          window.location.href = "{% url 'profile:profile-trainee-cards' %}";
+        });
+      });
     }).fail(function (err) {
       console.log(err);
     });

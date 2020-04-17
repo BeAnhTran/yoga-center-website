@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from services.sms_service import send_twilio_message
 from services.stripe_service import StripeService
 import json
 from django.utils.translation import gettext as _
@@ -294,7 +296,8 @@ class YogaClassEnrollPaymentView(View):
                             del request.session['promotion_code']
                         if request.session.get('promotion_type'):
                             del request.session['promotion_type']
-
+                        send_twilio_message(
+                            _('Thank you for your register at Lotus Yoga'))
                         return HttpResponse('success', status=status.HTTP_200_OK)
                 except Exception as e:
                     print("<ERROR>")
