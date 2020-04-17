@@ -17,7 +17,8 @@ from apps.cards.forms import CardFormForTraineeEnroll
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from apps.lessons.serializers.lesson_serializer import LessonSerializer
-from datetime import datetime
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -41,7 +42,7 @@ from django.contrib import messages
 from apps.classes.forms import FilterForm
 from django.db.models import Value as V
 from django.db.models.functions import Concat
-from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION
+from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION, PLUS_LESSON_PRACTICE_PROMOTION, PLUS_WEEK_PRACTICE_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
 
 
 class YogaClassListView(ListView):
@@ -170,57 +171,69 @@ class YogaClassEnrollPaymentView(View):
                 yoga_class, enroll_card_form)
             # Payment Form
             form = PaymentForm()
-            id_card_type = enroll_card_form['card_type']
-            card_type = CardType.objects.get(pk=id_card_type)
+            card_type = CardType.objects.get(pk=enroll_card_form['card_type'])
 
-            start_at = lesson_list.first().date
-            end_at = lesson_list.last().date
-            number_of_lessons = lesson_list.count()
+            # price of card when register
             price = get_price(yoga_class, card_type)
             total_price = get_total_price(
-                yoga_class, card_type, number_of_lessons)
+                yoga_class, card_type, lesson_list.count())
             total_price_display = get_total_price_display(total_price)
-            # promotion
-            promotion_type = None
-            promotion_code = None
-            promotion_val = 'không'
-            amount = total_price
-            if request.session.get('promotion_code') and request.session.get('promotion_type'):
-                promotion_type = get_object_or_404(
-                    PromotionType, pk=request.session.get('promotion_type'))
-                promotion_code = get_object_or_404(
-                    PromotionCode, pk=request.session.get('promotion_code'))
-                if promotion_type.category == CASH_PROMOTION:
-                    amount -= promotion_type.value
-                    promotion_val = '-' + \
-                        sexify.sexy_number(promotion_type.value) + 'đ'
-                elif promotion_type.category == PERCENT_PROMOTION:
-                    amount -= promotion_type.value*amount
-                    promotion_val = '-' + \
-                        sexify.sexy_number(promotion_type.value*amount) + 'đ'
-                else:
-                    promotion_val = promotion_type.full_title
-            amount_display = sexify.sexy_number(amount)
-
             context = {
                 'key': settings.STRIPE_PUBLISHABLE_KEY,
                 'form': form,
                 'yoga_class': yoga_class,
                 'card_type': card_type,
-                'start_at': start_at,
-                'end_at': end_at,
-                'number_of_lessons': number_of_lessons,
                 'lesson_list': lesson_list,
                 'price': price,
                 'total_price_display': total_price_display,
                 'total_price': total_price,
-                'active_nav': 'classes',
-                'promotion_type': promotion_type,
-                'promotion_code': promotion_code,
-                'promotion_val': promotion_val,
-                'amount': amount,
-                'amount_display': amount_display
+                'active_nav': 'classes'
             }
+            # PROMOTION
+            promotion_type = None
+            promotion_code = None
+            promotion_val = 'không'
+            amount = total_price
+            if request.session.get('promotion_code') and request.session.get('promotion_type'):
+                # get promotion type
+                promotion_type = get_object_or_404(
+                    PromotionType, pk=request.session.get('promotion_type'))
+                # get promotion code
+                promotion_code = get_object_or_404(
+                    PromotionCode, pk=request.session.get('promotion_code'))
+                value = int(promotion_type.value)
+                if promotion_type.category == CASH_PROMOTION:
+                    amount -= value
+                    promotion_val = '-' + \
+                        sexify.sexy_number(value) + 'đ'
+                elif promotion_type.category == PERCENT_PROMOTION:
+                    amount -= value*amount/100
+                    promotion_val = '-' + \
+                        sexify.sexy_number(value*amount) + 'đ'
+                elif promotion_type.category == PLUS_LESSON_PRACTICE_PROMOTION:
+                    promotion_lessons = yoga_class.lessons.filter(
+                        date__gt=lesson_list.last().date, is_full=False).order_by('date')[:value]
+                    context['promotion_lessons'] = promotion_lessons
+                elif promotion_type.category == PLUS_WEEK_PRACTICE_PROMOTION:
+                    s = lesson_list.last().date
+                    promotion_lessons = yoga_class.lessons.filter(
+                        date__gt=s, date__lte=s + timedelta(days=7*value), is_full=False).order_by('date')
+                    context['promotion_lessons'] = promotion_lessons
+                elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
+                    s = lesson_list.last().date
+                    promotion_lessons = yoga_class.lessons.filter(
+                        date__gt=s, date__lte=s + relativedelta(months=value), is_full=False).order_by('date')
+                    context['promotion_lessons'] = promotion_lessons
+                else:
+                    promotion_val = promotion_type.full_title
+            amount_display = sexify.sexy_number(amount)
+
+            context['promotion_type'] = promotion_type
+            context['promotion_code'] = promotion_code
+            context['promotion_val'] = promotion_val
+            context['amount'] = amount
+            context['amount_display'] = amount_display
+
             return render(request, self.template_name, context=context)
         else:
             return redirect('classes:enroll', slug=slug)
@@ -231,19 +244,13 @@ class YogaClassEnrollPaymentView(View):
             card_payment_form = PaymentForm(request.POST)
             description = self.__description(
                 request.POST['name'], request.POST['email'], request.POST['amount'])
+            charge_id = None
             if card_payment_form.is_valid():
                 try:
                     yoga_class = YogaClass.objects.get(slug=slug)
                     enroll_form = CardFormForTraineeEnroll(
                         request.session['enroll_card_form'])
                     if request.POST.get('stripeToken') and int(request.POST.get('amount')) > 0:
-                        promotion_type = None
-                        promotion_code = None
-                        if request.session.get('promotion_code') and request.session.get('promotion_type'):
-                            promotion_type = get_object_or_404(
-                                PromotionType, pk=request.session.get('promotion_type'))
-                            promotion_code = get_object_or_404(
-                                PromotionCode, pk=request.session.get('promotion_code'))
                         # STRIPE CHARGE
                         charge = StripeService(
                             request.POST['name'],
@@ -254,37 +261,41 @@ class YogaClassEnrollPaymentView(View):
                             _('Card Payment')
                         ).call()
                         if charge:
-                            if enroll_form.is_valid():
-                                # CREATE CARD
-                                card = self.__create_card(
-                                    yoga_class, enroll_form, request.user.trainee)
-                                # CREATE CARD INVOICE
-                                card_invoice = CardInvoiceService(
-                                    card, description, request.POST['amount'], charge.id).call()
-                                # ADD PROMOTION TO CARD INVOICE
-                                if promotion_code is not None and promotion_type is not None:
-                                    promotion_code.promotion_type = promotion_type
-                                    promotion_code.save()
-                                    if promotion_type.category == GIFT_PROMOTION:
-                                        promotion_code.promotion_code_products.create(
-                                            product=promotion_type.product, quantity=promotion_type.value)
-                                    card_invoice.apply_promotion_codes.create(
-                                        promotion_code=promotion_code)
-                    else:
+                            charge_id = charge.id
+
+                    if enroll_form.is_valid():
+                        # PROMOTION
+                        promotion_type = None
+                        promotion_code = None
+                        if request.session.get('promotion_code') and request.session.get('promotion_type'):
+                            promotion_type = get_object_or_404(
+                                PromotionType, pk=request.session.get('promotion_type'))
+                            promotion_code = get_object_or_404(
+                                PromotionCode, pk=request.session.get('promotion_code'))
                         # CREATE CARD
                         card = self.__create_card(
-                            yoga_class, enroll_form, request.user.trainee)
+                            yoga_class, enroll_form, request.user.trainee, promotion_code, promotion_type)
                         # CREATE CARD INVOICE
                         card_invoice = CardInvoiceService(
-                            card, description, request.POST['amount']).call()
-                    if request.session.get('enroll_card_form'):
-                        del request.session['enroll_card_form']
-                    if request.session.get('promotion_code'):
-                        del request.session['promotion_code']
-                    if request.session.get('promotion_type'):
-                        del request.session['promotion_type']
+                            card, description, request.POST['amount'], charge_id).call()
 
-                    return HttpResponse('success', status=status.HTTP_200_OK)
+                        if promotion_code is not None and promotion_type is not None:
+                                promotion_code.promotion_type = promotion_type
+                                promotion_code.save()
+                                if promotion_type.category == GIFT_PROMOTION:
+                                    promotion_code.promotion_code_products.create(
+                                        product=promotion_type.product, quantity=promotion_type.value)
+                                card_invoice.apply_promotion_codes.create(
+                                    promotion_code=promotion_code)
+
+                        if request.session.get('enroll_card_form'):
+                            del request.session['enroll_card_form']
+                        if request.session.get('promotion_code'):
+                            del request.session['promotion_code']
+                        if request.session.get('promotion_type'):
+                            del request.session['promotion_type']
+
+                        return HttpResponse('success', status=status.HTTP_200_OK)
                 except Exception as e:
                     print("<ERROR>")
                     print(e)
@@ -299,11 +310,20 @@ class YogaClassEnrollPaymentView(View):
             return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
 
     @transaction.atomic
-    def __create_card(self, yoga_class, enroll_form, trainee):
+    def __create_card(self, yoga_class, enroll_form, trainee, promotion=None, promotion_type=None):
         start = enroll_form.cleaned_data['start_at']
         end = enroll_form.cleaned_data['end_at']
-        lesson_list = yoga_class.lessons.filter(
-            date__range=[start, end])
+        if promotion is not None and promotion_type is not None:
+            if promotion_type.category == PLUS_LESSON_PRACTICE_PROMOTION:
+                lesson_count = int(promotion_type.value)
+                end = end + timedelta(days=lesson_count)
+            elif promotion_type.category == PLUS_WEEK_PRACTICE_PROMOTION:
+                week_count = int(promotion_type.value)
+                end = end + timedelta(days=7*week_count)
+            elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
+                month_count = int(promotion_type.value)
+                end = end + relativedelta(months=month_count)
+        lesson_list = yoga_class.lessons.filter(date__range=[start, end])
         card = enroll_form.save(commit=False)
         card.trainee = trainee
         card.yogaclass = yoga_class

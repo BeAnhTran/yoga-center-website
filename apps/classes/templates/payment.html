@@ -230,16 +230,29 @@
         </table>
         <hr>
         <!--  -->
-        <p class="text-danger mb-3">{% trans 'Your Lesson List' %}</p>
+        <p class="text-success mb-3"><b>{% trans 'Your Lesson List' %}</b> <span class="badge badge-success">{{ lesson_list.count }}</span></p>
         <ul class="list-group mCustomScrollbar mb-5" style="max-height: 150px;">
           {% for lesson in lesson_list %}
           <li class="list-group-item d-flex justify-content-between align-items-center">
             {{ lesson.date }} - {{ lesson.get_time_and_room_detail }}
-            <span class="badge badge-primary badge-pill">{{ forloop.counter }}</span>
+            <span class="badge badge-success badge-pill">{{ forloop.counter }}</span>
           </li>
           {% endfor %}
         </ul>
         <!--  -->
+
+        <!-- promotion lessons -->
+        {% if promotion_lessons %}
+        <p class="text-info"><b>Buổi học được khuyến mãi</b> <span class="badge badge-info">{{ promotion_lessons.count }}</span></p>
+        <ul class="list-group mCustomScrollbar mb-5" style="max-height: 150px;">
+          {% for promotion_lesson in promotion_lessons %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ promotion_lesson.date }} - {{ promotion_lesson.get_time_and_room_detail }}
+            <span class="badge badge-info badge-pill">{{ forloop.counter }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -392,7 +405,7 @@
 
   $('#form_promotion').submit(function (e) {
     e.preventDefault();
-    var val = $('#promotion_code').val();
+    var val = $('#promotion_code').val().trim();
     if (val.trim() == "") {
       Swal.fire(
         "{% trans 'error' as t_error %}{{ t_error|title }}",
