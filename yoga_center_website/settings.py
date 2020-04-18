@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'apps.shop',
     'apps.promotions',
     'apps.errors',
+    'apps.yoga_stories',
     'seeds',
 ]
 
