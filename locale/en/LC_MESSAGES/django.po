@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-14 22:19+0700\n"
+"POT-Creation-Date: 2020-04-18 16:51+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,226 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\apps\accounts\models.py:17
+msgid "Female"
+msgstr ""
+
+#: .\apps\accounts\models.py:18
+msgid "Male"
+msgstr ""
+
+#: .\apps\accounts\models.py:22
+msgid "email address"
+msgstr ""
+
+#: .\apps\accounts\models.py:26
+msgid "is trainee"
+msgstr ""
+
+#: .\apps\accounts\models.py:28
+msgid "is trainer"
+msgstr ""
+
+#: .\apps\accounts\models.py:29
+msgid "first name"
+msgstr ""
+
+#: .\apps\accounts\models.py:30
+msgid "last name"
+msgstr ""
+
+#: .\apps\accounts\models.py:32 .\apps\classes\models.py:17
+#: .\apps\courses\models.py:33 .\apps\shop\models.py:35
+msgid "slug"
+msgstr ""
+
+#: .\apps\accounts\models.py:36 .\apps\classes\templates\payment.html:35
+#: .\apps\shop\templates\shop\checkout.html:51
+msgid "phone number"
+msgstr ""
+
+#: .\apps\accounts\models.py:38
+#: .\apps\dashboard\templates\dashboard\admins\list.html:34
+#: .\apps\dashboard\templates\dashboard\staffs\list.html:34
+#: .\apps\dashboard\templates\dashboard\trainees\list.html:34
+#: .\apps\dashboard\templates\dashboard\trainers\list.html:34
+#: .\apps\profiles\forms\profile_form.py:60
+msgid "birth day"
+msgstr ""
+
+#: .\apps\accounts\models.py:40 .\apps\classes\templates\payment.html:47
+#: .\apps\shop\templates\shop\checkout.html:65
+msgid "address"
+msgstr ""
+
+#: .\apps\accounts\models.py:42
+#: .\apps\dashboard\templates\dashboard\admins\list.html:35
+#: .\apps\dashboard\templates\dashboard\staffs\list.html:35
+#: .\apps\dashboard\templates\dashboard\trainees\list.html:35
+#: .\apps\dashboard\templates\dashboard\trainers\list.html:35
+msgid "gender"
+msgstr ""
+
+#: .\apps\accounts\models.py:43
+msgid "country"
+msgstr ""
+
+#: .\apps\accounts\models.py:45
+msgid "language"
+msgstr ""
+
+#: .\apps\accounts\models.py:47 .\apps\accounts\models.py:68
+#: .\apps\courses\models.py:38
+#: .\apps\dashboard\templates\dashboard\admins\list.html:36
+#: .\apps\dashboard\templates\dashboard\classes\show.html:77
+#: .\apps\dashboard\templates\dashboard\courses\list.html:31
+#: .\apps\dashboard\templates\dashboard\shop\products\list.html:30
+#: .\apps\dashboard\templates\dashboard\staffs\list.html:36
+#: .\apps\dashboard\templates\dashboard\trainees\list.html:36
+#: .\apps\dashboard\templates\dashboard\trainers\list.html:36
+#: .\apps\promotions\models.py:19 .\apps\shop\models.py:15
+#: .\templates\profile\index.html:98
+msgid "image"
+msgstr ""
+
+#: .\apps\accounts\models.py:49
+msgid "updated_at"
+msgstr "updated at"
+
+#: .\apps\accounts\models.py:64 .\apps\card_types\models.py:17
+#: .\apps\classes\models.py:15 .\apps\classes\templates\payment.html:29
+#: .\apps\courses\models.py:31
+#: .\apps\dashboard\templates\dashboard\admins\list.html:32
+#: .\apps\dashboard\templates\dashboard\blog\categories\list.html:28
+#: .\apps\dashboard\templates\dashboard\card_types\list.html:27
+#: .\apps\dashboard\templates\dashboard\classes\list.html:31
+#: .\apps\dashboard\templates\dashboard\courses\list.html:30
+#: .\apps\dashboard\templates\dashboard\promotions\list.html:27
+#: .\apps\dashboard\templates\dashboard\rooms\list.html:28
+#: .\apps\dashboard\templates\dashboard\shop\categories\list.html:29
+#: .\apps\dashboard\templates\dashboard\shop\products\list.html:29
+#: .\apps\dashboard\templates\dashboard\staffs\list.html:32
+#: .\apps\dashboard\templates\dashboard\trainees\list.html:32
+#: .\apps\dashboard\templates\dashboard\trainers\list.html:32
+#: .\apps\lectures\models.py:12 .\apps\profiles\forms\certificate_form.py:14
+#: .\apps\promotions\models.py:14 .\apps\rooms\models.py:14
+#: .\apps\shop\models.py:11 .\apps\shop\models.py:33
+#: .\apps\shop\templates\shop\checkout.html:43
+#: .\templates\profile\index.html:99
+#: .\templates\profile\trainees\cards\list.html:45
+msgid "name"
+msgstr ""
+
+#: .\apps\accounts\models.py:66 .\apps\card_invoices\models.py:14
+#: .\apps\card_types\models.py:18 .\apps\courses\models.py:35
+#: .\apps\dashboard\templates\dashboard\blog\posts\list.html:30
+#: .\apps\dashboard\templates\dashboard\card_types\list.html:28
+#: .\apps\dashboard\templates\dashboard\classes\show.html:36
+#: .\apps\dashboard\templates\dashboard\courses\list.html:32
+#: .\apps\lectures\models.py:13 .\apps\profiles\forms\certificate_form.py:17
+#: .\apps\promotions\models.py:17 .\apps\rooms\models.py:18
+#: .\apps\shop\models.py:13 .\apps\shop\models.py:54
+#: .\templates\profile\index.html:100
+msgid "description"
+msgstr ""
+
+#: .\apps\accounts\models.py:81 .\apps\refunds\models.py:13
+msgid "pending"
+msgstr ""
+
+#: .\apps\accounts\models.py:82 .\apps\refunds\models.py:14
+msgid "approved"
+msgstr ""
+
+#: .\apps\accounts\models.py:83 .\apps\refunds\models.py:15
+msgid "rejected"
+msgstr ""
+
+#: .\apps\accounts\models.py:88 .\apps\cards\models.py:61
+#: .\apps\refunds\models.py:26
+msgid "reason"
+msgstr ""
+
+#: .\apps\accounts\models.py:90 .\apps\cards\models.py:63
+#: .\apps\dashboard\forms\lesssons_form.py:64
+#: .\apps\dashboard\templates\dashboard\classes\show.html:56
+#: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:28
+#: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:29
+#: .\apps\dashboard\templates\dashboard\rooms\list.html:30
+#: .\apps\lessons\models.py:33 .\apps\lessons\models.py:140
+#: .\apps\refunds\models.py:28 .\apps\rooms\models.py:21
+msgid "state"
+msgstr ""
+
+#: .\apps\accounts\models.py:91
+msgid "leave at"
+msgstr ""
+
+#: .\apps\accounts\models.py:92
+msgid "back at"
+msgstr ""
+
+#: .\apps\accounts\models.py:94 .\apps\card_invoices\models.py:22
+#: .\apps\card_types\models.py:28 .\apps\cards\models.py:22
+#: .\apps\cards\models.py:65 .\apps\classes\models.py:30
+#: .\apps\courses\models.py:50
+#: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:34
+#: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:29
+#: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:30
+#: .\apps\lectures\models.py:15 .\apps\lessons\models.py:44
+#: .\apps\lessons\models.py:142 .\apps\make_up_lessons\models.py:14
+#: .\apps\refunds\models.py:30 .\apps\roll_calls\models.py:18
+#: .\apps\rooms\models.py:23 .\apps\shop\models.py:62 .\apps\shop\models.py:72
+msgid "created at"
+msgstr ""
+
+#: .\apps\accounts\models.py:96 .\apps\card_invoices\models.py:24
+#: .\apps\card_types\models.py:30 .\apps\cards\models.py:24
+#: .\apps\cards\models.py:67 .\apps\classes\models.py:32
+#: .\apps\courses\models.py:52 .\apps\lectures\models.py:17
+#: .\apps\lessons\models.py:46 .\apps\lessons\models.py:144
+#: .\apps\make_up_lessons\models.py:16 .\apps\refunds\models.py:32
+#: .\apps\roll_calls\models.py:20 .\apps\rooms\models.py:25
+#: .\apps\shop\models.py:64 .\apps\shop\models.py:74
+msgid "updated at"
+msgstr ""
+
+#: .\apps\accounts\models.py:108 .\templates\profile\index.html:66
+msgid "health condition"
+msgstr ""
+
+#: .\apps\accounts\models.py:119
+msgid "yoga teaching experience"
+msgstr ""
+
+#: .\apps\accounts\models.py:121 .\apps\accounts\models.py:147
+msgid "certificate"
+msgstr ""
+
+#: .\apps\accounts\models.py:123 .\apps\accounts\models.py:155
+msgid "temporary leave requests"
+msgstr ""
+
+#: .\apps\accounts\models.py:125 .\apps\accounts\models.py:149
+msgid "is student"
+msgstr ""
+
+#: .\apps\accounts\models.py:127 .\apps\accounts\models.py:151
+msgid "graduate school"
+msgstr ""
+
+#: .\apps\accounts\models.py:129 .\apps\accounts\models.py:153
+msgid "company name"
+msgstr ""
+
+#: .\apps\accounts\models.py:131
+msgid "taught lessons"
+msgstr ""
+
+#: .\apps\accounts\models.py:145
+msgid "work experience"
+msgstr ""
 
 #: .\apps\blog\templates\blog\post_list.html:16
 msgid "posts"
@@ -74,19 +294,6 @@ msgstr ""
 msgid "card"
 msgstr ""
 
-#: .\apps\card_invoices\models.py:14 .\apps\card_types\models.py:18
-#: .\apps\core\forms\certificate_forms.py:17 .\apps\core\models.py:66
-#: .\apps\courses\models.py:35
-#: .\apps\dashboard\templates\dashboard\blog\posts\list.html:30
-#: .\apps\dashboard\templates\dashboard\card_types\list.html:28
-#: .\apps\dashboard\templates\dashboard\classes\show.html:36
-#: .\apps\dashboard\templates\dashboard\courses\list.html:32
-#: .\apps\lectures\models.py:13 .\apps\promotions\models.py:17
-#: .\apps\rooms\models.py:18 .\apps\shop\models.py:13 .\apps\shop\models.py:54
-#: .\templates\profile\index.html:100
-msgid "description"
-msgstr ""
-
 #: .\apps\card_invoices\models.py:16
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:28
 #: .\apps\refunds\models.py:25 .\apps\shop\models.py:56
@@ -95,32 +302,6 @@ msgstr ""
 
 #: .\apps\card_invoices\models.py:18 .\apps\shop\models.py:58
 msgid "charge id"
-msgstr ""
-
-#: .\apps\card_invoices\models.py:22 .\apps\card_types\models.py:28
-#: .\apps\cards\models.py:22 .\apps\cards\models.py:65
-#: .\apps\classes\models.py:30 .\apps\core\models.py:94
-#: .\apps\courses\models.py:50
-#: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:34
-#: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:29
-#: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:30
-#: .\apps\lectures\models.py:15 .\apps\lessons\models.py:43
-#: .\apps\make_up_lessons\models.py:14 .\apps\refunds\models.py:30
-#: .\apps\roll_calls\models.py:18 .\apps\rooms\models.py:23
-#: .\apps\shop\models.py:62 .\apps\shop\models.py:72
-#: .\apps\trainer_lessons\models.py:27
-msgid "created at"
-msgstr ""
-
-#: .\apps\card_invoices\models.py:24 .\apps\card_types\models.py:30
-#: .\apps\cards\models.py:24 .\apps\cards\models.py:67
-#: .\apps\classes\models.py:32 .\apps\core\models.py:96
-#: .\apps\courses\models.py:52 .\apps\lectures\models.py:17
-#: .\apps\lessons\models.py:45 .\apps\make_up_lessons\models.py:16
-#: .\apps\refunds\models.py:32 .\apps\roll_calls\models.py:20
-#: .\apps\rooms\models.py:25 .\apps\shop\models.py:64 .\apps\shop\models.py:74
-#: .\apps\trainer_lessons\models.py:29
-msgid "updated at"
 msgstr ""
 
 #: .\apps\card_types\models.py:9
@@ -137,30 +318,6 @@ msgstr ""
 
 #: .\apps\card_types\models.py:12
 msgid "For Training Course"
-msgstr ""
-
-#: .\apps\card_types\models.py:17 .\apps\classes\models.py:15
-#: .\apps\classes\templates\payment.html:29
-#: .\apps\core\forms\certificate_forms.py:14 .\apps\core\models.py:64
-#: .\apps\courses\models.py:31
-#: .\apps\dashboard\templates\dashboard\admins\list.html:32
-#: .\apps\dashboard\templates\dashboard\blog\categories\list.html:28
-#: .\apps\dashboard\templates\dashboard\card_types\list.html:27
-#: .\apps\dashboard\templates\dashboard\classes\list.html:31
-#: .\apps\dashboard\templates\dashboard\courses\list.html:30
-#: .\apps\dashboard\templates\dashboard\promotions\list.html:27
-#: .\apps\dashboard\templates\dashboard\rooms\list.html:28
-#: .\apps\dashboard\templates\dashboard\shop\categories\list.html:29
-#: .\apps\dashboard\templates\dashboard\shop\products\list.html:29
-#: .\apps\dashboard\templates\dashboard\staffs\list.html:32
-#: .\apps\dashboard\templates\dashboard\trainees\list.html:32
-#: .\apps\dashboard\templates\dashboard\trainers\list.html:32
-#: .\apps\lectures\models.py:12 .\apps\promotions\models.py:14
-#: .\apps\rooms\models.py:14 .\apps\shop\models.py:11 .\apps\shop\models.py:33
-#: .\apps\shop\templates\shop\checkout.html:43
-#: .\templates\profile\index.html:99
-#: .\templates\profile\trainees\cards\list.html:45
-msgid "name"
 msgstr ""
 
 #: .\apps\card_types\models.py:20
@@ -216,17 +373,18 @@ msgid "Lessons you choose will be displayed here"
 msgstr ""
 
 #: .\apps\cards\forms.py:66 .\apps\cards\forms.py:142
-#: .\apps\core\forms\certificate_forms.py:27
-#: .\apps\core\forms\profile_forms.py:32 .\apps\core\forms\profile_forms.py:83
-#: .\apps\core\forms\profile_forms.py:116
-#: .\apps\core\forms\profile_forms.py:141
 #: .\apps\dashboard\forms\classes_form.py:80
 #: .\apps\dashboard\forms\lesssons_form.py:99
 #: .\apps\dashboard\forms\post_categories_form.py:19
 #: .\apps\dashboard\forms\posts_form.py:29
 #: .\apps\dashboard\forms\product_categories_form.py:19
 #: .\apps\dashboard\forms\products_form.py:37
-#: .\apps\dashboard\forms\promotions_form.py:81 .\apps\refunds\forms.py:31
+#: .\apps\dashboard\forms\promotions_form.py:81
+#: .\apps\profiles\forms\certificate_form.py:27
+#: .\apps\profiles\forms\profile_form.py:32
+#: .\apps\profiles\forms\profile_form.py:83
+#: .\apps\profiles\forms\profile_form.py:116
+#: .\apps\profiles\forms\profile_form.py:141 .\apps\refunds\forms.py:31
 msgid "Save"
 msgstr ""
 
@@ -294,22 +452,6 @@ msgstr ""
 msgid "Rejected"
 msgstr ""
 
-#: .\apps\cards\models.py:61 .\apps\core\models.py:88
-#: .\apps\refunds\models.py:26
-msgid "reason"
-msgstr ""
-
-#: .\apps\cards\models.py:63 .\apps\core\models.py:90
-#: .\apps\dashboard\forms\lesssons_form.py:64
-#: .\apps\dashboard\templates\dashboard\classes\show.html:56
-#: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:28
-#: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:29
-#: .\apps\dashboard\templates\dashboard\rooms\list.html:30
-#: .\apps\lessons\models.py:32 .\apps\refunds\models.py:28
-#: .\apps\rooms\models.py:21 .\apps\trainer_lessons\models.py:25
-msgid "state"
-msgstr ""
-
 #: .\apps\classes\forms.py:11 .\apps\courses\models.py:22
 msgid "Basic Level"
 msgstr ""
@@ -338,18 +480,12 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:50
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:22
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:13
-#: .\apps\trainer_lessons\models.py:21
-#: .\apps\trainers\templates\trainers\list.html:13
+#: .\apps\lessons\models.py:136 .\apps\trainers\templates\trainers\list.html:13
 #: .\apps\trainers\templates\trainers\list.html:22
 #: .\templates\layouts\header.html:111
 #: .\templates\profile\trainees\cards\list.html:49
 #: .\templates\registration\signup.html:35
 msgid "trainer"
-msgstr ""
-
-#: .\apps\classes\models.py:17 .\apps\core\models.py:32
-#: .\apps\courses\models.py:33 .\apps\shop\models.py:35
-msgid "slug"
 msgstr ""
 
 #: .\apps\classes\models.py:19 .\apps\classes\templates\classes\enroll.html:57
@@ -438,8 +574,8 @@ msgstr ""
 #: .\apps\classes\templates\classes\enroll.html:174
 #: .\apps\classes\templates\classes\enroll.html:305
 #: .\apps\classes\templates\classes\enroll.html:399
-#: .\apps\classes\templates\payment.html:398
-#: .\apps\classes\templates\payment.html:450
+#: .\apps\classes\templates\payment.html:420
+#: .\apps\classes\templates\payment.html:472
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:273
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:339
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:440
@@ -480,7 +616,7 @@ msgstr ""
 #: .\apps\classes\templates\classes\list.html:75
 #: .\apps\classes\templates\classes\show.html:84
 #: .\apps\classes\templates\classes\show.html:120
-#: .\apps\classes\templates\payment.html:167
+#: .\apps\classes\templates\payment.html:167 .\templates\home\index.html:189
 msgid "Yoga Trainer"
 msgstr ""
 
@@ -526,23 +662,13 @@ msgstr ""
 msgid "Please enter information below"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:35 .\apps\core\models.py:36
-#: .\apps\shop\templates\shop\checkout.html:51
-msgid "phone number"
-msgstr ""
-
-#: .\apps\classes\templates\payment.html:41 .\apps\classes\views.py:309
+#: .\apps\classes\templates\payment.html:41 .\apps\classes\views.py:338
 #: .\apps\dashboard\templates\dashboard\admins\list.html:33
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:33
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:33
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:33
 #: .\apps\shop\templates\shop\checkout.html:58 .\apps\shop\views.py:213
 msgid "email"
-msgstr ""
-
-#: .\apps\classes\templates\payment.html:47 .\apps\core\models.py:40
-#: .\apps\shop\templates\shop\checkout.html:65
-msgid "address"
 msgstr ""
 
 #: .\apps\classes\templates\payment.html:53
@@ -586,296 +712,36 @@ msgstr ""
 msgid "Your Lesson List"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:381
+#: .\apps\classes\templates\payment.html:402
 msgid "enroll successfully"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:382
+#: .\apps\classes\templates\payment.html:403
 msgid "Thanks for your register. Please check schedule and prepare to study"
 msgstr ""
 
-#: .\apps\classes\views.py:115
+#: .\apps\classes\views.py:118
 msgid "Your card is still in use. Please choose extend card only"
 msgstr ""
 
-#: .\apps\classes\views.py:254 .\apps\shop\views.py:189
+#: .\apps\classes\views.py:263 .\apps\shop\views.py:189
 msgid "Card Payment"
 msgstr ""
 
-#: .\apps\classes\views.py:292
+#: .\apps\classes\views.py:300
+msgid "Thank you for your register at Lotus Yoga"
+msgstr ""
+
+#: .\apps\classes\views.py:312
 msgid "Please enroll a class before payment"
 msgstr ""
 
-#: .\apps\classes\views.py:309 .\apps\shop\views.py:213
+#: .\apps\classes\views.py:338 .\apps\shop\views.py:213
 msgid "with"
 msgstr ""
 
-#: .\apps\classes\views.py:309 .\apps\shop\views.py:213
+#: .\apps\classes\views.py:338 .\apps\shop\views.py:213
 msgid "paied"
-msgstr ""
-
-#: .\apps\common\forms\payment_form.py:11
-msgid "please input your name"
-msgstr ""
-
-#: .\apps\common\forms\payment_form.py:20
-msgid "please input your email"
-msgstr ""
-
-#: .\apps\common\forms\payment_form.py:29
-msgid "please input your phone"
-msgstr ""
-
-#: .\apps\common\forms\payment_form.py:38
-msgid "please input your address"
-msgstr ""
-
-#: .\apps\common\forms\payment_form.py:48
-msgid "please input your province/city"
-msgstr ""
-
-#: .\apps\core\forms\profile_forms.py:60 .\apps\core\models.py:38
-#: .\apps\dashboard\templates\dashboard\admins\list.html:34
-#: .\apps\dashboard\templates\dashboard\staffs\list.html:34
-#: .\apps\dashboard\templates\dashboard\trainees\list.html:34
-#: .\apps\dashboard\templates\dashboard\trainers\list.html:34
-msgid "birth day"
-msgstr ""
-
-#: .\apps\core\forms\profile_forms.py:131
-msgid "normal health"
-msgstr ""
-
-#: .\apps\core\models.py:17
-msgid "Female"
-msgstr ""
-
-#: .\apps\core\models.py:18
-msgid "Male"
-msgstr ""
-
-#: .\apps\core\models.py:22
-msgid "email address"
-msgstr ""
-
-#: .\apps\core\models.py:26
-msgid "is trainee"
-msgstr ""
-
-#: .\apps\core\models.py:28
-msgid "is trainer"
-msgstr ""
-
-#: .\apps\core\models.py:29
-msgid "first name"
-msgstr ""
-
-#: .\apps\core\models.py:30
-msgid "last name"
-msgstr ""
-
-#: .\apps\core\models.py:42
-#: .\apps\dashboard\templates\dashboard\admins\list.html:35
-#: .\apps\dashboard\templates\dashboard\staffs\list.html:35
-#: .\apps\dashboard\templates\dashboard\trainees\list.html:35
-#: .\apps\dashboard\templates\dashboard\trainers\list.html:35
-msgid "gender"
-msgstr ""
-
-#: .\apps\core\models.py:43
-msgid "country"
-msgstr ""
-
-#: .\apps\core\models.py:45
-msgid "language"
-msgstr ""
-
-#: .\apps\core\models.py:47 .\apps\core\models.py:68
-#: .\apps\courses\models.py:38
-#: .\apps\dashboard\templates\dashboard\admins\list.html:36
-#: .\apps\dashboard\templates\dashboard\classes\show.html:77
-#: .\apps\dashboard\templates\dashboard\courses\list.html:31
-#: .\apps\dashboard\templates\dashboard\shop\products\list.html:30
-#: .\apps\dashboard\templates\dashboard\staffs\list.html:36
-#: .\apps\dashboard\templates\dashboard\trainees\list.html:36
-#: .\apps\dashboard\templates\dashboard\trainers\list.html:36
-#: .\apps\promotions\models.py:19 .\apps\shop\models.py:15
-#: .\templates\profile\index.html:98
-msgid "image"
-msgstr ""
-
-#: .\apps\core\models.py:49
-msgid "updated_at"
-msgstr "updated at"
-
-#: .\apps\core\models.py:81 .\apps\refunds\models.py:13
-msgid "pending"
-msgstr ""
-
-#: .\apps\core\models.py:82 .\apps\refunds\models.py:14
-msgid "approved"
-msgstr ""
-
-#: .\apps\core\models.py:83 .\apps\refunds\models.py:15
-msgid "rejected"
-msgstr ""
-
-#: .\apps\core\models.py:91
-msgid "leave at"
-msgstr ""
-
-#: .\apps\core\models.py:92
-msgid "back at"
-msgstr ""
-
-#: .\apps\core\models.py:108 .\templates\profile\index.html:66
-msgid "health condition"
-msgstr ""
-
-#: .\apps\core\models.py:119
-msgid "yoga teaching experience"
-msgstr ""
-
-#: .\apps\core\models.py:121 .\apps\core\models.py:147
-msgid "certificate"
-msgstr ""
-
-#: .\apps\core\models.py:123 .\apps\core\models.py:155
-msgid "temporary leave requests"
-msgstr ""
-
-#: .\apps\core\models.py:125 .\apps\core\models.py:149
-msgid "is student"
-msgstr ""
-
-#: .\apps\core\models.py:127 .\apps\core\models.py:151
-msgid "graduate school"
-msgstr ""
-
-#: .\apps\core\models.py:129 .\apps\core\models.py:153
-msgid "company name"
-msgstr ""
-
-#: .\apps\core\models.py:131
-msgid "taught lessons"
-msgstr ""
-
-#: .\apps\core\models.py:145
-msgid "work experience"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:37
-msgid "Get slim and toned with yoga"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:38
-msgid "Practice Yoga will help your body become toned, tidy and full of life"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:39
-#: .\apps\core\templates\core\home.html:54 .\templates\layouts\header.html:80
-#: .\templates\registration\signup.html:13
-msgid "register"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:52
-msgid "Reduce your stress"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:53
-msgid "Yoga exercises will help you relax mind and spirit"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:72
-msgid "Welcome to Lotus Yoga"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:95
-msgid "Full Rejuvenation"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:96
-msgid "Cell regeneration and energy source, rejuvenate the whole body"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:106
-msgid "Extension of Spring"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:107
-msgid "Yoga helps us prolong life and love life more"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:117
-msgid "Against Aging"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:118
-msgid ""
-"Yoga enhances metabolism, creates new cells and comprehensive anti-aging"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:128
-msgid "Slim Body"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:129
-msgid "Yoga helps to burn excess fat, creating a slim body"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:144
-msgid "What we will get?"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:146
-msgid "Breathing"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:150
-msgid "Metabolism"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:154
-msgid "Flexibility"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:158
-msgid "Strongness"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:173
-#, fuzzy
-#| msgid "Trainers"
-msgid "Our Trainers"
-msgstr "Trainer"
-
-#: .\apps\core\templates\core\home.html:174
-#: .\apps\core\templates\core\home.html:294
-msgid ""
-"Practice Yoga to perfect physical beauty, take care of your soul and enjoy "
-"life more fully!"
-msgstr ""
-
-#: .\apps\core\templates\core\home.html:293
-msgid "Featured posts"
-msgstr ""
-
-#: .\apps\core\views\profile\index.py:74 .\apps\core\views\profile\index.py:87
-#: .\apps\core\views\profile\index.py:101
-#: .\apps\core\views\profile\index.py:143
-msgid "Update successfully"
-msgstr ""
-
-#: .\apps\core\views\profile\index.py:121
-msgid "Create certificate successfully"
-msgstr ""
-
-#: .\apps\core\views\profile\trainee.py:74
-msgid "Create extend card request successfully"
-msgstr ""
-
-#: .\apps\core\views\profile\trainee.py:168
-msgid "Create refund card request successfully"
 msgstr ""
 
 #: .\apps\courses\models.py:13
@@ -949,33 +815,33 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:49
 #: .\apps\dashboard\templates\dashboard\rooms\detail.html:37
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:17
-#: .\apps\lessons\models.py:28
+#: .\apps\lessons\models.py:29
 msgid "room"
 msgstr ""
 
 #: .\apps\dashboard\forms\lesssons_form.py:30
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:47
 #: .\apps\dashboard\templates\dashboard\rooms\detail.html:45
-#: .\apps\lessons\models.py:33
+#: .\apps\lessons\models.py:34
 msgid "date"
 msgstr ""
 
 #: .\apps\dashboard\forms\lesssons_form.py:38
 #: .\apps\dashboard\forms\promotions_form.py:48
 #: .\apps\dashboard\templates\dashboard\rooms\detail.html:49
-#: .\apps\lessons\models.py:35
+#: .\apps\lessons\models.py:36
 msgid "start time"
 msgstr "start at"
 
 #: .\apps\dashboard\forms\lesssons_form.py:47
 #: .\apps\dashboard\forms\promotions_form.py:58
 #: .\apps\dashboard\templates\dashboard\rooms\detail.html:53
-#: .\apps\lessons\models.py:37
+#: .\apps\lessons\models.py:38
 msgid "end time"
 msgstr "end at"
 
 #: .\apps\dashboard\forms\lesssons_form.py:54
-#: .\apps\dashboard\forms\lesssons_form.py:58 .\apps\lessons\models.py:38
+#: .\apps\dashboard\forms\lesssons_form.py:58 .\apps\lessons\models.py:39
 msgid "notes"
 msgstr ""
 
@@ -1373,7 +1239,7 @@ msgid "Search for"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:13
-#: .\apps\roll_calls\models.py:14 .\apps\trainer_lessons\models.py:23
+#: .\apps\lessons\models.py:138 .\apps\roll_calls\models.py:14
 msgid "lesson"
 msgstr ""
 
@@ -1514,46 +1380,97 @@ msgstr ""
 msgid "Please add type of create"
 msgstr ""
 
-#: .\apps\lessons\models.py:19 .\apps\rooms\models.py:8
+#: .\apps\lessons\models.py:20 .\apps\rooms\models.py:8
 msgid "Active"
 msgstr ""
 
-#: .\apps\lessons\models.py:20 .\apps\rooms\models.py:9
+#: .\apps\lessons\models.py:21 .\apps\rooms\models.py:9
 msgid "Inactive"
 msgstr ""
 
-#: .\apps\lessons\models.py:26
+#: .\apps\lessons\models.py:27
 msgid "yogaclass"
 msgstr ""
 
-#: .\apps\lessons\models.py:35
+#: .\apps\lessons\models.py:36
 msgid "Starting time"
 msgstr ""
 
-#: .\apps\lessons\models.py:37
+#: .\apps\lessons\models.py:38
 msgid "Final time"
 msgstr ""
 
-#: .\apps\lessons\models.py:39
+#: .\apps\lessons\models.py:40
 msgid "is full"
 msgstr ""
 
-#: .\apps\lessons\models.py:41
+#: .\apps\lessons\models.py:42
 msgid "substitute trainer"
 msgstr ""
 
-#: .\apps\lessons\models.py:79 .\apps\lessons\models.py:83
+#: .\apps\lessons\models.py:80 .\apps\lessons\models.py:84
 msgid "overlap time"
 msgstr "overlap time"
 
-#: .\apps\lessons\models.py:87
+#: .\apps\lessons\models.py:88
 #, fuzzy
 #| msgid "overlap time"
 msgid "overlap time for trainer"
 msgstr "overlap time"
 
+#: .\apps\lessons\models.py:129
+msgid "Taught"
+msgstr ""
+
+#: .\apps\lessons\models.py:130
+msgid "Taught Instead"
+msgstr ""
+
 #: .\apps\make_up_lessons\models.py:12 .\apps\roll_calls\models.py:16
 msgid "studied"
+msgstr ""
+
+#: .\apps\payment\form.py:11
+msgid "please input your name"
+msgstr ""
+
+#: .\apps\payment\form.py:20
+msgid "please input your email"
+msgstr ""
+
+#: .\apps\payment\form.py:29
+msgid "please input your phone"
+msgstr ""
+
+#: .\apps\payment\form.py:38
+msgid "please input your address"
+msgstr ""
+
+#: .\apps\payment\form.py:48
+msgid "please input your province/city"
+msgstr ""
+
+#: .\apps\profiles\forms\profile_form.py:131
+msgid "normal health"
+msgstr ""
+
+#: .\apps\profiles\views\profile_trainee_view.py:74
+msgid "Create extend card request successfully"
+msgstr ""
+
+#: .\apps\profiles\views\profile_trainee_view.py:168
+msgid "Create refund card request successfully"
+msgstr ""
+
+#: .\apps\profiles\views\profile_view.py:74
+#: .\apps\profiles\views\profile_view.py:88
+#: .\apps\profiles\views\profile_view.py:103
+#: .\apps\profiles\views\profile_view.py:151
+msgid "Update successfully"
+msgstr ""
+
+#: .\apps\profiles\views\profile_view.py:124
+msgid "Create certificate successfully"
 msgstr ""
 
 #: .\apps\promotions\models.py:44
@@ -1621,14 +1538,6 @@ msgstr ""
 msgid "Add product to cart successfully"
 msgstr ""
 
-#: .\apps\trainer_lessons\models.py:14
-msgid "Taught"
-msgstr ""
-
-#: .\apps\trainer_lessons\models.py:15
-msgid "Taught Instead"
-msgstr ""
-
 #: .\templates\account\login.html:9 .\templates\account\login.html:28
 #: .\templates\account\login.html:38
 msgid "Sign In"
@@ -1644,6 +1553,104 @@ msgstr ""
 
 #: .\templates\account\messages\logged_in.txt:3
 msgid "Login successfully"
+msgstr ""
+
+#: .\templates\home\index.html:37
+msgid "Get slim and toned with yoga"
+msgstr ""
+
+#: .\templates\home\index.html:38
+msgid "Practice Yoga will help your body become toned, tidy and full of life"
+msgstr ""
+
+#: .\templates\home\index.html:39 .\templates\home\index.html:54
+#: .\templates\layouts\header.html:80 .\templates\registration\signup.html:13
+msgid "register"
+msgstr ""
+
+#: .\templates\home\index.html:52
+msgid "Reduce your stress"
+msgstr ""
+
+#: .\templates\home\index.html:53
+msgid "Yoga exercises will help you relax mind and spirit"
+msgstr ""
+
+#: .\templates\home\index.html:72
+msgid "Welcome to Lotus Yoga"
+msgstr ""
+
+#: .\templates\home\index.html:95
+msgid "Full Rejuvenation"
+msgstr ""
+
+#: .\templates\home\index.html:96
+msgid "Cell regeneration and energy source, rejuvenate the whole body"
+msgstr ""
+
+#: .\templates\home\index.html:106
+msgid "Extension of Spring"
+msgstr ""
+
+#: .\templates\home\index.html:107
+msgid "Yoga helps us prolong life and love life more"
+msgstr ""
+
+#: .\templates\home\index.html:117
+msgid "Against Aging"
+msgstr ""
+
+#: .\templates\home\index.html:118
+msgid ""
+"Yoga enhances metabolism, creates new cells and comprehensive anti-aging"
+msgstr ""
+
+#: .\templates\home\index.html:128
+msgid "Slim Body"
+msgstr ""
+
+#: .\templates\home\index.html:129
+msgid "Yoga helps to burn excess fat, creating a slim body"
+msgstr ""
+
+#: .\templates\home\index.html:144
+msgid "What we will get?"
+msgstr ""
+
+#: .\templates\home\index.html:146
+msgid "Breathing"
+msgstr ""
+
+#: .\templates\home\index.html:150
+msgid "Metabolism"
+msgstr ""
+
+#: .\templates\home\index.html:154
+msgid "Flexibility"
+msgstr ""
+
+#: .\templates\home\index.html:158
+msgid "Strongness"
+msgstr ""
+
+#: .\templates\home\index.html:173
+#, fuzzy
+#| msgid "Trainers"
+msgid "Our Trainers"
+msgstr "Trainer"
+
+#: .\templates\home\index.html:174 .\templates\home\index.html:268
+msgid ""
+"Practice Yoga to perfect physical beauty, take care of your soul and enjoy "
+"life more fully!"
+msgstr ""
+
+#: .\templates\home\index.html:211
+msgid "Yoga Stories"
+msgstr ""
+
+#: .\templates\home\index.html:267
+msgid "Featured posts"
 msgstr ""
 
 #: .\templates\layouts\footer.html:22

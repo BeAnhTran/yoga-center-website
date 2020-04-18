@@ -174,60 +174,30 @@
       <p>{% trans 'Practice Yoga to perfect physical beauty, take care of your soul and enjoy life more fully!' %}</p>
     </div>
     <div class="trainer-slider owl-carousel">
+      {% for trainer in trainers %}
       <div class="ts-item">
         <div class="trainer-item">
           <div class="ti-img">
-            <img src="{% static 'img/trainer/1.png'%}" alt="">
+            {% if trainer.user.image %}
+            <img src="{{ trainer.user.image.url }}" alt="{{ trainer }}">
+            {% else %}
+            <img src="{% static 'img/user/default.png'%}" alt="{{ trainer }}">
+            {% endif %}
           </div>
           <div class="ti-text">
-            <h4>Lori Kennedy</h4>
-            <h6>Yoga Trainer</h6>
+            <h4>{{ trainer }}</h4>
+            <h6>{% trans 'Yoga Trainer' %}</h6>
             <p>Yoga & Therapy Certificate of Uttarakhand University Sanskrit</p>
             <div class="ti-social">
-              <a href="#"><i class="fas fa-facebook"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="javascript:;"><i class="fab fa-facebook"></i></a>
+              <a href="javascript:;"><i class="fab fa-instagram"></i></a>
+              <a href="javascript:;"><i class="fab fa-twitter"></i></a>
+              <a href="javascript:;"><i class="fab fa-linkedin"></i></a>
             </div>
           </div>
         </div>
       </div>
-      <div class="ts-item">
-        <div class="trainer-item">
-          <div class="ti-img">
-            <img src="{% static 'img/trainer/2.png'%}" alt="">
-          </div>
-          <div class="ti-text">
-            <h4>Lori Kennedy</h4>
-            <h6>Yoga Trainer</h6>
-            <p>Yoga & Therapy Certificate of Uttarakhand University Sanskrit</p>
-            <div class="ti-social">
-              <a href="#"><i class="fa fa-facebook"></i></a>
-              <a href="#"><i class="fa fa-instagram"></i></a>
-              <a href="#"><i class="fa fa-twitter"></i></a>
-              <a href="#"><i class="fa fa-linkedin"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="ts-item">
-        <div class="trainer-item">
-          <div class="ti-img">
-            <img src="{% static 'img/trainer/3.png'%}" alt="">
-          </div>
-          <div class="ti-text">
-            <h4>Lori Kennedy</h4>
-            <h6>Yoga Trainer</h6>
-            <p>Yoga & Therapy Certificate of Uttarakhand University Sanskrit</p>
-            <div class="ti-social">
-              <a href="#"><i class="fa fa-facebook"></i></a>
-              <a href="#"><i class="fa fa-instagram"></i></a>
-              <a href="#"><i class="fa fa-twitter"></i></a>
-              <a href="#"><i class="fa fa-linkedin"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -236,6 +206,10 @@
 <!-- Review Section -->
 <section class="review-section spad set-bg" data-setbg="{% static 'img/review-bg.jpg' %}">
   <div class="container">
+    <div class="section-title text-center">
+      <img src="{% static 'img/icons/ana-icon.png'%}" alt="">
+      <h2 class="text-white">{% trans 'Yoga Stories' %}</h2>
+    </div>
     <div class="row">
       <div class="col-lg-8 m-auto">
         <div class="review-slider owl-carousel">
