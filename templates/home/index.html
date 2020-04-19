@@ -136,7 +136,8 @@
 <!-- Service Section end -->
 
 <!-- What we do Section -->
-<section class="wwd-section spad set-bg" data-setbg="{% static 'img/bg-da-ngoai-1.jpg'%}" style="background-attachment: fixed;background-size: 100% 100%;">
+<section class="wwd-section spad set-bg" data-setbg="{% static 'img/bg-da-ngoai-1.jpg'%}"
+  style="background-attachment: fixed;background-size: 100% 100%;">
   <div class="container">
     <div class="row">
       <div class="col-xl-6 col-lg-7 ml-auto">
@@ -227,7 +228,8 @@
               <img src="{% static 'img/yoga-stories/2.png'%}" alt="">
             </div>
             <div class="ri-text text-white">
-              <p>Tạm biệt chứng khó thở và giảm 7kg chỉ sau 6 tháng tập luyện Yoga hằng ngày – chìa khoá thanh xuân của người phụ nữ hiện đại.</p>
+              <p>Tạm biệt chứng khó thở và giảm 7kg chỉ sau 6 tháng tập luyện Yoga hằng ngày – chìa khoá thanh xuân của
+                người phụ nữ hiện đại.</p>
               <h4>Thái Ngọc</h4>
             </div>
           </div>
@@ -236,7 +238,8 @@
               <img src="{% static 'img/yoga-stories/3.png'%}" alt="">
             </div>
             <div class="ri-text text-white">
-              <p>Luôn giữ hoà khí trong gia đình và cân bằng tốt áp lực công việc, bí quyết của người phụ nữ ngoài tuổi tứ tuần này là gì?</p>
+              <p>Luôn giữ hoà khí trong gia đình và cân bằng tốt áp lực công việc, bí quyết của người phụ nữ ngoài tuổi
+                tứ tuần này là gì?</p>
               <h4>Duyên Hà</h4>
             </div>
           </div>
@@ -246,6 +249,68 @@
   </div>
 </section>
 <!-- Review Section end -->
+
+<!-- Event Section -->
+<section class="event-section spad">
+  <div class="container">
+    <div class="section-title text-center">
+      <img src="{% static 'img/icons/logo-icon.png' %}" alt="">
+      <h2>Upcoming Events</h2>
+      <p>Practice Yoga to perfect physical beauty, take care of your soul and enjoy life more fully!</p>
+    </div>
+    <div class="row">
+      <div class="col-xl-6">
+        <div class="event-video">
+          <img src="{% static 'img/video.jpg' %}" alt="">
+          <a href="{% static 'video/tong-ket-2019.m4v' %}" class="video-popup"><img
+              src="{% static 'img/icons/play.png' %}" alt=""></a>
+        </div>
+      </div>
+      <div class="col-xl-6">
+        <div class="event-item">
+          <div class="ei-img">
+            <img src="{% static 'img/event/1.jpg' %}" alt="">
+          </div>
+          <div class="ei-text">
+            <h4><a href="#">Lole White Yoga Tour</a></h4>
+            <ul>
+              <li><i class="material-icons">person</i>Kelly Alexander</li>
+              <li><i class="material-icons">event_available</i>15 January, 2019</li>
+              <li><i class="material-icons">map</i>184 Main Collins Street</li>
+            </ul>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="ei-img">
+            <img src="{% static 'img/event/2.jpg' %}" alt="">
+          </div>
+          <div class="ei-text">
+            <h4>Free Yoga Madrid</h4>
+            <ul>
+              <li><i class="material-icons">person</i>Kelly Alexander</li>
+              <li><i class="material-icons">event_available</i>15 January, 2019</li>
+              <li><i class="material-icons">map</i>184 Main Collins Street</li>
+            </ul>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="ei-img">
+            <img src="{% static 'img/event/3.jpg' %}" alt="">
+          </div>
+          <div class="ei-text">
+            <h4>One Love Dallas</h4>
+            <ul>
+              <li><i class="material-icons">person</i>Kelly Alexander</li>
+              <li><i class="material-icons">event_available</i>15 January, 2019</li>
+              <li><i class="material-icons">map</i>184 Main Collins Street</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Event Section end -->
 
 <!-- Blog Section -->
 <section class="about-blog-section spad">
@@ -348,4 +413,13 @@
   </div>
 </div>
 <!-- Gallery Section end -->
+{% endblock %}
+{% block specified_js %}
+<script>
+  $(function () {
+    $('.video-popup').magnificPopup({
+      type: 'iframe'
+    });
+  });
+</script>
 {% endblock %}
