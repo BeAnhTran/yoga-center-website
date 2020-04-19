@@ -1932,7 +1932,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	position: relative;
 	padding: 70px 40px 40px;
 	-webkit-box-shadow: 0px 5px 6px rgba(72, 105, 114, 0.15);
-	box-shadow: 0px 5px 6px rgba(72, 105, 114, 0.15);
+	box-shadow: 0px 5px 6px rgba(72, 105, 114);
 	border-radius: 14px;
 	-webkit-transition: all 0.4s;
 	-o-transition: all 0.4s;
@@ -1965,7 +1965,8 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .trainer-item .ti-img img {
 	width: auto;
-	max-width: 290px;
+	max-width: 245px;
+    height: 297px;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px),
@@ -2041,7 +2042,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .trainer-item:hover {
 	-webkit-box-shadow: 0px 12px 32px rgba(72, 105, 114, 0.15);
-	box-shadow: 0px 12px 32px rgba(72, 105, 114, 0.15);
+	box-shadow: 0px 12px 32px #835e6d;
 }
 
 .trainers-page-section .trainer-item {

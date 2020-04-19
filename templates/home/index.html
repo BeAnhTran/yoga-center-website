@@ -28,7 +28,7 @@
           <div class="row h-100">
             <div class="col-lg-6 h-100 d-none d-lg-flex align-items-xl-end align-items-lg-center p-3">
               <div class="hs-img m-auto">
-                <img src="{% static 'img/hero-slider/2.png' %}" alt="">
+                <img src="/media/seeds/images/bg1.jpg" alt="">
               </div>
             </div>
             <div class="col-lg-6 d-flex">
@@ -69,7 +69,7 @@
   <div class="container-fluid">
     <div class="section-title text-center">
       <img src="{% static 'img/icons/ana-icon.png'%}" alt="">
-      <h2>{% trans 'Welcome to Lotus Yoga' %}</h2>
+      <h2>{% trans 'Welcome to HT Yoga' %}</h2>
     </div>
     <div class="row wwd-section">
       <div class="embed-responsive embed-responsive-16by9" style="height: 500px;">
@@ -136,7 +136,7 @@
 <!-- Service Section end -->
 
 <!-- What we do Section -->
-<section class="wwd-section spad set-bg" data-setbg="{% static 'img/wwd-bg.jpg'%}">
+<section class="wwd-section spad set-bg" data-setbg="{% static 'img/bg-da-ngoai-1.jpg'%}" style="background-attachment: fixed;background-size: 100% 100%;">
   <div class="container">
     <div class="row">
       <div class="col-xl-6 col-lg-7 ml-auto">
@@ -179,9 +179,9 @@
         <div class="trainer-item">
           <div class="ti-img">
             {% if trainer.user.image %}
-            <img src="{{ trainer.user.image.url }}" alt="{{ trainer }}">
+            <img class="img img-thumbnail" src="{{ trainer.user.image.url }}" alt="{{ trainer }}">
             {% else %}
-            <img src="{% static 'img/user/default.png'%}" alt="{{ trainer }}">
+            <img class="img img-thumbnail" src="{% static 'img/user/default.png'%}" alt="{{ trainer }}">
             {% endif %}
           </div>
           <div class="ti-text">
@@ -215,41 +215,29 @@
         <div class="review-slider owl-carousel">
           <div class="review-item">
             <div class="ri-img">
-              <img src="{% static 'img/classes/author/1.jpg'%}" alt="">
+              <img src="{% static 'img/yoga-stories/1.png'%}" alt="">
             </div>
             <div class="ri-text text-white">
-              <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and
-                demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee
-                the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty
-                through weakness.</p>
-              <h4>Denise Thomas</h4>
-              <h6>Designer</h6>
+              <p>Tập Yoga thấy ngủ được, tinh thần sảng khoái, thân hình thon gọn, yêu đời hơn, tự tin hơn trước</p>
+              <h4>Thúy Nguyễn</h4>
             </div>
           </div>
           <div class="review-item">
             <div class="ri-img">
-              <img src="{% static 'img/classes/author/2.jpg'%}" alt="">
+              <img src="{% static 'img/yoga-stories/2.png'%}" alt="">
             </div>
             <div class="ri-text text-white">
-              <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and
-                demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee
-                the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty
-                through weakness.</p>
-              <h4>Denise Thomas</h4>
-              <h6>Designer</h6>
+              <p>Tạm biệt chứng khó thở và giảm 7kg chỉ sau 6 tháng tập luyện Yoga hằng ngày – chìa khoá thanh xuân của người phụ nữ hiện đại.</p>
+              <h4>Thái Ngọc</h4>
             </div>
           </div>
           <div class="review-item">
             <div class="ri-img">
-              <img src="{% static 'img/classes/author/3.jpg'%}" alt="">
+              <img src="{% static 'img/yoga-stories/3.png'%}" alt="">
             </div>
             <div class="ri-text text-white">
-              <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and
-                demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee
-                the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty
-                through weakness.</p>
-              <h4>Denise Thomas</h4>
-              <h6>Designer</h6>
+              <p>Luôn giữ hoà khí trong gia đình và cân bằng tốt áp lực công việc, bí quyết của người phụ nữ ngoài tuổi tứ tuần này là gì?</p>
+              <h4>Duyên Hà</h4>
             </div>
           </div>
         </div>
@@ -319,42 +307,42 @@
       <img src="{% static 'img/gallery/1.jpg'%}" alt="">
       <div class="gs-hover">
         <i class="fab fa-instagram"></i>
-        <p>lotus.yoga</p>
+        <p>ht.yoga</p>
       </div>
     </div>
     <div class="gs-item">
       <img src="{% static 'img/gallery/2.jpg'%}" alt="">
       <div class="gs-hover">
         <i class="fab fa-instagram"></i>
-        <p>lotus.yoga</p>
+        <p>ht.yoga</p>
       </div>
     </div>
     <div class="gs-item">
       <img src="{% static 'img/gallery/3.jpg'%}" alt="">
       <div class="gs-hover">
         <i class="fab fa-instagram"></i>
-        <p>lotus.yoga</p>
+        <p>ht.yoga</p>
       </div>
     </div>
     <div class="gs-item">
       <img src="{% static 'img/gallery/4.jpg'%}" alt="">
       <div class="gs-hover">
         <i class="fab fa-instagram"></i>
-        <p>lotus.yoga</p>
+        <p>ht.yoga</p>
       </div>
     </div>
     <div class="gs-item">
       <img src="{% static 'img/gallery/5.jpg'%}" alt="">
       <div class="gs-hover">
         <i class="fab fa-instagram"></i>
-        <p>lotus.yoga</p>
+        <p>ht.yoga</p>
       </div>
     </div>
     <div class="gs-item">
       <img src="{% static 'img/gallery/6.jpg'%}" alt="">
       <div class="gs-hover">
         <i class="fab fa-instagram"></i>
-        <p>lotus.yoga</p>
+        <p>ht.yoga</p>
       </div>
     </div>
   </div>

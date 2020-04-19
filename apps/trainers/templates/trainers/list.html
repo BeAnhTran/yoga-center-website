@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block specified_css %}
+<link rel="stylesheet" href="{% static 'css/trainers/style.css'%}">
+{% endblock %}
+
 {% load i18n %}
 
 {% block content %}
@@ -33,9 +37,9 @@
                             <div class="ti-img">
                                 <a href="{% url 'trainers:detail' trainer.slug %}">
                                     {% if trainer.user.image %}
-                                    <img src="{{ trainer.user.image.url }}" alt="{{ trainer }}">
+                                    <img class="img img-thumbnail" src="{{ trainer.user.image.url }}" alt="{{ trainer }}">
                                     {% else %}
-                                    <img src="{% static 'img/user/default.png' %}" alt="{{ trainer }}">
+                                    <img class="img img-thumbnail" src="{% static 'img/user/default.png' %}" alt="{{ trainer }}">
                                     {% endif %}
                                 </a>
                             </div>
