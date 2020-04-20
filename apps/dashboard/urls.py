@@ -5,7 +5,7 @@ from .views import (
     dashboard_view, courses_view, rooms_view,
     lessons_view, classes_view, cards_view,
     card_types_view, trainees_view, trainers_view, staffs_view,
-    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view, taught_view)
+    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view, taught_view, gallery_view)
 
 from .views.requests import extend_card_requests_view, refund_requests_view
 
@@ -189,6 +189,17 @@ promotions_urlpatterns = [
          name='promotions-codes-create'),
 ]
 
+# GALLERY
+gallery_urlpatterns = [
+    path('', gallery_view.GalleryListView.as_view(),
+         name='gallery-list'),
+    path('new/', gallery_view.GalleryNewView.as_view(), name='gallery-new'),
+    path('<int:pk>/', gallery_view.GalleryEditView.as_view(),
+         name='gallery-edit'),
+    path('<int:pk>/delete/', gallery_view.GalleryDeleteView.as_view(),
+         name='gallery-delete'),
+]
+
 # DASHBOARD
 urlpatterns = [
     path('', dashboard_view.index, name='index'),
@@ -209,4 +220,5 @@ urlpatterns = [
     path('extend-card-requests/', include(extend_card_requests_urlpatterns)),
     path('refund-requests/', include(refund_requests_urlpatterns)),
     path('promotions/', include(promotions_urlpatterns)),
+    path('gallery/', include(gallery_urlpatterns)),
 ]

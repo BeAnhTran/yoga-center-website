@@ -365,54 +365,23 @@
 </section>
 <!-- Blog Section end -->
 
+{% if gallery %}
 <!-- Gallery Section -->
 <div class="gallery-section">
   <div class="gallery-slider owl-carousel">
+    {% for gallery_image in gallery.images.all %}
     <div class="gs-item">
-      <img src="{% static 'img/gallery/1.jpg'%}" alt="">
+      <img class="img" width="317" height="317" src="{{ gallery_image.image.url }}" alt="{{gallery.title}}">
       <div class="gs-hover">
         <i class="fab fa-instagram"></i>
         <p>ht.yoga</p>
       </div>
     </div>
-    <div class="gs-item">
-      <img src="{% static 'img/gallery/2.jpg'%}" alt="">
-      <div class="gs-hover">
-        <i class="fab fa-instagram"></i>
-        <p>ht.yoga</p>
-      </div>
-    </div>
-    <div class="gs-item">
-      <img src="{% static 'img/gallery/3.jpg'%}" alt="">
-      <div class="gs-hover">
-        <i class="fab fa-instagram"></i>
-        <p>ht.yoga</p>
-      </div>
-    </div>
-    <div class="gs-item">
-      <img src="{% static 'img/gallery/4.jpg'%}" alt="">
-      <div class="gs-hover">
-        <i class="fab fa-instagram"></i>
-        <p>ht.yoga</p>
-      </div>
-    </div>
-    <div class="gs-item">
-      <img src="{% static 'img/gallery/5.jpg'%}" alt="">
-      <div class="gs-hover">
-        <i class="fab fa-instagram"></i>
-        <p>ht.yoga</p>
-      </div>
-    </div>
-    <div class="gs-item">
-      <img src="{% static 'img/gallery/6.jpg'%}" alt="">
-      <div class="gs-hover">
-        <i class="fab fa-instagram"></i>
-        <p>ht.yoga</p>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
 <!-- Gallery Section end -->
+{% endif %}
 {% endblock %}
 {% block specified_js %}
 <script>
