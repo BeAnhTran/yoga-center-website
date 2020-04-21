@@ -231,6 +231,16 @@
             </span>
         </a>
     </li>
+    <hr class="sidebar-divider my-0">
+    <!-- Nav Item - Events -->
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard:events-list' %}">
+            <i class="fas fa-fw fa-heartbeat"></i>
+            <span>
+                {% trans 'events' as t_events %} {{ t_events|capfirst }}
+            </span>
+        </a>
+    </li>
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

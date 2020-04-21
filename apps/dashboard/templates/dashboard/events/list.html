@@ -1,0 +1,80 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load dashboard_extras %}
+
+{% block specified_css %}
+<link href="{% static 'css/dashboard/courses/list.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Event List'%}</h1>
+    <a href="{% url 'dashboard:events-new' %}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+            class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
+</div>
+<!-- Content Row -->
+{% if not events %}
+<p class="text-danger">
+    {% trans 'event' as trans_val %}
+    {% blocktrans with value=trans_val %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th><small>{% trans 'name' as t_name %}{{ t_name|capfirst }}</small></th>
+                        <th><small>{% trans 'image' as t_image %}{{ t_image|capfirst }}</small></th>
+                        <th><small>{% trans 'action' as t_action %}{{ t_action|capfirst }}</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in events %}
+                    <tr>
+                        <td>{{ event.pk }}</td>
+                        <td>{{ event.name|capfirst }}</td>
+                        <td>
+                            {% if event.image %}
+                            <img class="img img-fluid img-thumbnail course-img" src="{{ event.image.url }}"
+                                alt="{{ event.name }}">
+                            {% else %}
+                            <img class="img img-fluid img-thumbnail course-img"
+                                src="{% static 'img/event/default.jpg'%}" alt="{{ event.name }}">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-warning" href="javascript:;"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-sm btn-outline-danger delete-event" href="javascript:;"><i class="fas fa-trash"></i></a>
+                            <form class="d-none" action="{% url 'dashboard:events-delete' event.pk %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block specified_js %}
+<script type="text/javascript">
+    $('.delete-event').click(function () {
+        $(this).siblings('form').children('input[type=submit]').click();
+    });
+</script>
+
+{% endblock %}
