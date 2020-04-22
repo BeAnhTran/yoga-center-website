@@ -255,8 +255,8 @@
   <div class="container">
     <div class="section-title text-center">
       <img src="{% static 'img/icons/logo-icon.png' %}" alt="">
-      <h2>Upcoming Events</h2>
-      <p>Practice Yoga to perfect physical beauty, take care of your soul and enjoy life more fully!</p>
+      <h2>{% trans 'Upcoming Events' %}</h2>
+      <p>{% trans 'Practice Yoga to perfect physical beauty, take care of your soul and enjoy life more fully!' %}</p>
     </div>
     <div class="row">
       <div class="col-xl-6">
@@ -271,9 +271,9 @@
         <div class="event-item">
           <div class="ei-img">
             {% if event.image %}
-            <img src="{{ event.image.url }}" alt="{{ event }}">
+            <img src="{{ event.image.url }}" height="186" alt="{{ event }}">
             {% else %}
-            <img src="{% static 'img/event/default.jpg' %}" height="222" height="186" alt="{{ event }}">
+            <img src="{% static 'img/event/default.jpg' %}" height="186" alt="{{ event }}">
             {% endif %}
           </div>
           <div class="ei-text">
@@ -353,25 +353,25 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="singup-text">
-						<h3>Sign Up Now</h3>
+						<h3>{% trans 'Sign Up Now' %}</h3>
 					</div>
 					<form class="singup-form">
 						<div class="row">
 							<div class="col-md-6">
-								<input type="text" placeholder="First Name">
+								<input type="text" placeholder="{% trans 'first name' as t_f %}{{ t_f|capfirst }}">
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="Last Name">
+								<input type="text" placeholder="{% trans 'last name' as t_l %}{{ t_l|capfirst }}">
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="Your Email">
+								<input type="text" placeholder="{% trans 'email' as t_email %}{{ t_email|capfirst }}">
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="Phone Number">
+								<input type="text" placeholder="{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}">
 							</div>
 							<div class="col-md-12">
-								<textarea placeholder="Message"></textarea>
-								<a href="#" class="site-btn sb-gradient">Get started</a>
+								<textarea placeholder="{% trans 'health condition' as t_health %}{{ t_health|capfirst }}"></textarea>
+								<a href="javascript:;" class="site-btn sb-gradient">{% trans 'Get started' %}</a>
 							</div>
 						</div>
 					</form>
