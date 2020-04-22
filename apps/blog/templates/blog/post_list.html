@@ -2,6 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% block specified_css %}
+<link href="{% static 'css/blog/posts/list.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
 <section class="blog-details-section spad">
@@ -44,11 +45,6 @@
                                 </div>
                                 <div class="bi-footer">
                                     <a href="javascript:;" class="bi-cata">{{ post.category }}</a>
-                                    <div class="bi-social">
-                                        <a href="javascript:;"><i class="fab fa-facebook"></i></a>
-                                        <a href="javascript:;"><i class="fab fa-instagram"></i></a>
-                                        <a href="javascript:;"><i class="fab fa-twitter"></i></a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

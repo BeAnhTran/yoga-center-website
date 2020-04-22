@@ -2,6 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% block specified_css %}
+<link href="{% static 'css/blog/posts/detail.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
 <section class="blog-details-section spad">
@@ -27,8 +28,8 @@
                         {{ post.description }}
                     </blockquote>
                     <div class="row">
-                        <div class="col">
-                            {{ post.content | safe}}
+                        <div class="container">
+                        {{ post.content | safe}}
                         </div>
                     </div>
                     <div class="row">

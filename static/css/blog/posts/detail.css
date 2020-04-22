@@ -1,0 +1,12 @@
+.blog-details ul {
+    list-style: oriya;
+    padding: 20px;
+}
+
+.blog-details ul li {
+    color: #000;
+}
+
+.blog-details p {
+    color: #000;
+}

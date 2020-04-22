@@ -34,7 +34,7 @@
                     </a>
                     <div class="ci-text">
                         <h4>{{ course.name }}</h4>
-                        <p>{{ course.description }}</p>
+                        <p class="ci-desc" style="height: 75px;">{{ course.description| truncatewords:25  }}</p>
                     </div>
                     <div class="ci-bottom">
                         <div class="ci-author">
