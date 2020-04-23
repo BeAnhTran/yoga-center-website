@@ -223,13 +223,50 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'width': '100%',
+        'toolbar': 'CMS',
+        'toolbar_CMS': [
+            {
+                'name': 'basicstyles',
+                'groups': ['basicstyles', 'cleanup'],
+                'items': ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat']
+            },
+            {
+                'name': 'paragraph',
+                'groups': ['list', 'indent', 'blocks'],
+                'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']
+            },
+            {
+                'name': 'links',
+                'items': ['Link', 'Unlink']
+            },
+            {
+                'name': 'insert',
+                'items': ['Image', 'HorizontalRule', 'Table', 'Iframe', ]
+            },
+            {
+                'name': 'colors',
+                'items': ['TextColor', 'BGColor']
+            },
+            {
+                'name': 'insert',
+                'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']
+            },
+            {
+                'name': 'youtube',
+                'items': ['Youtube', ]
+            },
+            {
+                'name': 'tools',
+                'items': ['Maximize', 'ShowBlocks']
+            },
+            {
+                'name': 'styles',
+                'items': ['Styles', 'Format', 'Font', 'FontSize']
+            },
+        ],
         'height': '200px',
-        'extraPlugins': ','.join(
-            [
-                'youtube',
-            ]
-        )
+        'width': '100%',
+        'extraPlugins': 'youtube',
     }
 }
 
