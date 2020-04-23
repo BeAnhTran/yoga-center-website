@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 11:37+0700\n"
+"POT-Creation-Date: 2020-04-23 17:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,11 +38,11 @@ msgstr "là học viên"
 msgid "is trainer"
 msgstr "là huấn luyện viên"
 
-#: .\apps\accounts\models.py:29 .\templates\home\index.html:336
+#: .\apps\accounts\models.py:29 .\templates\home\index.html:328
 msgid "first name"
 msgstr "tên"
 
-#: .\apps\accounts\models.py:30 .\templates\home\index.html:339
+#: .\apps\accounts\models.py:30 .\templates\home\index.html:331
 msgid "last name"
 msgstr "họ"
 
@@ -53,7 +53,7 @@ msgid "slug"
 msgstr ""
 
 #: .\apps\accounts\models.py:36 .\apps\classes\templates\payment.html:35
-#: .\apps\shop\templates\shop\checkout.html:51 .\templates\home\index.html:345
+#: .\apps\shop\templates\shop\checkout.html:51 .\templates\home\index.html:337
 msgid "phone number"
 msgstr "số điện thoại"
 
@@ -209,7 +209,7 @@ msgstr "thời gian tạo"
 msgid "updated at"
 msgstr "thời gian cập nhật"
 
-#: .\apps\accounts\models.py:108 .\templates\home\index.html:348
+#: .\apps\accounts\models.py:108 .\templates\home\index.html:340
 #: .\templates\profile\index.html:66
 msgid "health condition"
 msgstr "tình trạng sức khỏe"
@@ -626,7 +626,7 @@ msgstr "mới nhất"
 #: .\apps\classes\templates\classes\list.html:75
 #: .\apps\classes\templates\classes\show.html:84
 #: .\apps\classes\templates\classes\show.html:120
-#: .\apps\classes\templates\payment.html:167 .\templates\home\index.html:190
+#: .\apps\classes\templates\payment.html:167 .\templates\home\index.html:182
 msgid "Yoga Trainer"
 msgstr "Huấn luyện viên"
 
@@ -678,7 +678,7 @@ msgstr "Vui lòng nhập thông tin"
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:33
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:33
 #: .\apps\shop\templates\shop\checkout.html:58 .\apps\shop\views.py:213
-#: .\templates\home\index.html:342
+#: .\templates\home\index.html:334
 msgid "email"
 msgstr ""
 
@@ -1619,92 +1619,104 @@ msgstr "Đăng kí"
 msgid "Login successfully"
 msgstr "Đăng nhập thành công"
 
-#: .\templates\home\index.html:37
+#: .\templates\base.html:107
+msgid "Feedback"
+msgstr "Góp ý & phản hồi"
+
+#: .\templates\base.html:111
+msgid "Donate"
+msgstr "Ủng hộ tùy tâm"
+
+#: .\templates\base.html:115
+msgid "FAQ"
+msgstr "Câu hỏi thường gặp"
+
+#: .\templates\home\index.html:29
 msgid "Get slim and toned with yoga"
 msgstr "Trở nên quyến rũ hơn với cơ thể thon gọn và dẻo dai "
 
-#: .\templates\home\index.html:38
+#: .\templates\home\index.html:30
 msgid "Practice Yoga will help your body become toned, tidy and full of life"
 msgstr "Tập Yoga sẽ giúp bạn trở nên thon gọn, dẻo dai và tràn đầy sức sống"
 
-#: .\templates\home\index.html:39 .\templates\home\index.html:54
+#: .\templates\home\index.html:31 .\templates\home\index.html:46
 #: .\templates\layouts\header.html:80 .\templates\registration\signup.html:13
 msgid "register"
 msgstr "đăng kí"
 
-#: .\templates\home\index.html:52
+#: .\templates\home\index.html:44
 msgid "Reduce your stress"
 msgstr "Giảm căng thẳng và mệt mỏi"
 
-#: .\templates\home\index.html:53
+#: .\templates\home\index.html:45
 msgid "Yoga exercises will help you relax mind and spirit"
 msgstr "Các bài tập Yoga sẽ giúp bạn thoải mái đầu óc và tinh thần"
 
-#: .\templates\home\index.html:72
+#: .\templates\home\index.html:64
 msgid "Welcome to HT Yoga"
 msgstr "Chào mừng đến với HT Yoga"
 
-#: .\templates\home\index.html:95
+#: .\templates\home\index.html:87
 msgid "Full Rejuvenation"
 msgstr "Trẻ hóa toàn diện"
 
-#: .\templates\home\index.html:96
+#: .\templates\home\index.html:88
 msgid "Cell regeneration and energy source, rejuvenate the whole body"
 msgstr "Tái tạo tế bào và nguồn năng lượng, làm trẻ hóa toàn bộ cơ thể"
 
-#: .\templates\home\index.html:106
+#: .\templates\home\index.html:98
 msgid "Extension of Spring"
 msgstr "Kéo dài tuổi thọ"
 
-#: .\templates\home\index.html:107
+#: .\templates\home\index.html:99
 msgid "Yoga helps us prolong life and love life more"
 msgstr "Yoga giúp ta kéo dài tuổi thọ và yêu cuộc sống hơn!"
 
-#: .\templates\home\index.html:117
+#: .\templates\home\index.html:109
 msgid "Against Aging"
 msgstr "Chống lão hóa"
 
-#: .\templates\home\index.html:118
+#: .\templates\home\index.html:110
 msgid ""
 "Yoga enhances metabolism, creates new cells and comprehensive anti-aging"
 msgstr ""
 "Yoga tăng cường trao đổi chất, tạo ra các tế bào mới và chống lão hóa toàn "
 "diện"
 
-#: .\templates\home\index.html:128
+#: .\templates\home\index.html:120
 msgid "Slim Body"
 msgstr "Cơ thể thon gọn"
 
-#: .\templates\home\index.html:129
+#: .\templates\home\index.html:121
 msgid "Yoga helps to burn excess fat, creating a slim body"
 msgstr "Tập Yoga giúp tiêu đốt mỡ thừa, tạo cơ thể thon gọn"
 
-#: .\templates\home\index.html:145
+#: .\templates\home\index.html:137
 msgid "What we will get?"
 msgstr "Ta sẽ được tăng cường?"
 
-#: .\templates\home\index.html:147
+#: .\templates\home\index.html:139
 msgid "Breathing"
 msgstr "Hơi thở"
 
-#: .\templates\home\index.html:151
+#: .\templates\home\index.html:143
 msgid "Metabolism"
 msgstr "Trao đổi chất"
 
-#: .\templates\home\index.html:155
+#: .\templates\home\index.html:147
 msgid "Flexibility"
 msgstr "Uyển chuyền & dẻo dai"
 
-#: .\templates\home\index.html:159
+#: .\templates\home\index.html:151
 msgid "Strongness"
 msgstr "Sức khỏe"
 
-#: .\templates\home\index.html:174
+#: .\templates\home\index.html:166
 msgid "Our Trainers"
 msgstr "Huấn luyện viên"
 
-#: .\templates\home\index.html:175 .\templates\home\index.html:259
-#: .\templates\home\index.html:300
+#: .\templates\home\index.html:167 .\templates\home\index.html:251
+#: .\templates\home\index.html:292
 msgid ""
 "Practice Yoga to perfect physical beauty, take care of your soul and enjoy "
 "life more fully!"
@@ -1712,23 +1724,23 @@ msgstr ""
 "Tập Yoga để giúp cơ thể khỏe mạnh, chăm sóc tâm hồn và tận hưởng cuộc sống "
 "đầy đủ hơn."
 
-#: .\templates\home\index.html:212
+#: .\templates\home\index.html:204
 msgid "Yoga Stories"
 msgstr "Câu chuyện Yoga"
 
-#: .\templates\home\index.html:258
+#: .\templates\home\index.html:250
 msgid "Upcoming Events"
 msgstr "Sự kiện"
 
-#: .\templates\home\index.html:299
+#: .\templates\home\index.html:291
 msgid "Featured posts"
 msgstr "Bài viết nổi bật"
 
-#: .\templates\home\index.html:331
+#: .\templates\home\index.html:323
 msgid "Sign Up Now"
 msgstr "Đăng kí ngay"
 
-#: .\templates\home\index.html:349
+#: .\templates\home\index.html:341
 msgid "Get started"
 msgstr "Bắt đầu"
 

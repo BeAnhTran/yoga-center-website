@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 11:37+0700\n"
+"POT-Creation-Date: 2020-04-23 17:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,11 +38,11 @@ msgstr ""
 msgid "is trainer"
 msgstr ""
 
-#: .\apps\accounts\models.py:29 .\templates\home\index.html:336
+#: .\apps\accounts\models.py:29 .\templates\home\index.html:328
 msgid "first name"
 msgstr ""
 
-#: .\apps\accounts\models.py:30 .\templates\home\index.html:339
+#: .\apps\accounts\models.py:30 .\templates\home\index.html:331
 msgid "last name"
 msgstr ""
 
@@ -53,7 +53,7 @@ msgid "slug"
 msgstr ""
 
 #: .\apps\accounts\models.py:36 .\apps\classes\templates\payment.html:35
-#: .\apps\shop\templates\shop\checkout.html:51 .\templates\home\index.html:345
+#: .\apps\shop\templates\shop\checkout.html:51 .\templates\home\index.html:337
 msgid "phone number"
 msgstr ""
 
@@ -209,7 +209,7 @@ msgstr ""
 msgid "updated at"
 msgstr ""
 
-#: .\apps\accounts\models.py:108 .\templates\home\index.html:348
+#: .\apps\accounts\models.py:108 .\templates\home\index.html:340
 #: .\templates\profile\index.html:66
 msgid "health condition"
 msgstr ""
@@ -628,7 +628,7 @@ msgstr ""
 #: .\apps\classes\templates\classes\list.html:75
 #: .\apps\classes\templates\classes\show.html:84
 #: .\apps\classes\templates\classes\show.html:120
-#: .\apps\classes\templates\payment.html:167 .\templates\home\index.html:190
+#: .\apps\classes\templates\payment.html:167 .\templates\home\index.html:182
 msgid "Yoga Trainer"
 msgstr ""
 
@@ -680,7 +680,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:33
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:33
 #: .\apps\shop\templates\shop\checkout.html:58 .\apps\shop\views.py:213
-#: .\templates\home\index.html:342
+#: .\templates\home\index.html:334
 msgid "email"
 msgstr ""
 
@@ -1613,114 +1613,126 @@ msgstr ""
 msgid "Login successfully"
 msgstr ""
 
-#: .\templates\home\index.html:37
+#: .\templates\base.html:107
+msgid "Feedback"
+msgstr ""
+
+#: .\templates\base.html:111
+msgid "Donate"
+msgstr ""
+
+#: .\templates\base.html:115
+msgid "FAQ"
+msgstr ""
+
+#: .\templates\home\index.html:29
 msgid "Get slim and toned with yoga"
 msgstr ""
 
-#: .\templates\home\index.html:38
+#: .\templates\home\index.html:30
 msgid "Practice Yoga will help your body become toned, tidy and full of life"
 msgstr ""
 
-#: .\templates\home\index.html:39 .\templates\home\index.html:54
+#: .\templates\home\index.html:31 .\templates\home\index.html:46
 #: .\templates\layouts\header.html:80 .\templates\registration\signup.html:13
 msgid "register"
 msgstr ""
 
-#: .\templates\home\index.html:52
+#: .\templates\home\index.html:44
 msgid "Reduce your stress"
 msgstr ""
 
-#: .\templates\home\index.html:53
+#: .\templates\home\index.html:45
 msgid "Yoga exercises will help you relax mind and spirit"
 msgstr ""
 
-#: .\templates\home\index.html:72
+#: .\templates\home\index.html:64
 msgid "Welcome to HT Yoga"
 msgstr ""
 
-#: .\templates\home\index.html:95
+#: .\templates\home\index.html:87
 msgid "Full Rejuvenation"
 msgstr ""
 
-#: .\templates\home\index.html:96
+#: .\templates\home\index.html:88
 msgid "Cell regeneration and energy source, rejuvenate the whole body"
 msgstr ""
 
-#: .\templates\home\index.html:106
+#: .\templates\home\index.html:98
 msgid "Extension of Spring"
 msgstr ""
 
-#: .\templates\home\index.html:107
+#: .\templates\home\index.html:99
 msgid "Yoga helps us prolong life and love life more"
 msgstr ""
 
-#: .\templates\home\index.html:117
+#: .\templates\home\index.html:109
 msgid "Against Aging"
 msgstr ""
 
-#: .\templates\home\index.html:118
+#: .\templates\home\index.html:110
 msgid ""
 "Yoga enhances metabolism, creates new cells and comprehensive anti-aging"
 msgstr ""
 
-#: .\templates\home\index.html:128
+#: .\templates\home\index.html:120
 msgid "Slim Body"
 msgstr ""
 
-#: .\templates\home\index.html:129
+#: .\templates\home\index.html:121
 msgid "Yoga helps to burn excess fat, creating a slim body"
 msgstr ""
 
-#: .\templates\home\index.html:145
+#: .\templates\home\index.html:137
 msgid "What we will get?"
 msgstr ""
 
-#: .\templates\home\index.html:147
+#: .\templates\home\index.html:139
 msgid "Breathing"
 msgstr ""
 
-#: .\templates\home\index.html:151
+#: .\templates\home\index.html:143
 msgid "Metabolism"
 msgstr ""
 
-#: .\templates\home\index.html:155
+#: .\templates\home\index.html:147
 msgid "Flexibility"
 msgstr ""
 
-#: .\templates\home\index.html:159
+#: .\templates\home\index.html:151
 msgid "Strongness"
 msgstr ""
 
-#: .\templates\home\index.html:174
+#: .\templates\home\index.html:166
 #, fuzzy
 #| msgid "Trainers"
 msgid "Our Trainers"
 msgstr "Trainer"
 
-#: .\templates\home\index.html:175 .\templates\home\index.html:259
-#: .\templates\home\index.html:300
+#: .\templates\home\index.html:167 .\templates\home\index.html:251
+#: .\templates\home\index.html:292
 msgid ""
 "Practice Yoga to perfect physical beauty, take care of your soul and enjoy "
 "life more fully!"
 msgstr ""
 
-#: .\templates\home\index.html:212
+#: .\templates\home\index.html:204
 msgid "Yoga Stories"
 msgstr ""
 
-#: .\templates\home\index.html:258
+#: .\templates\home\index.html:250
 msgid "Upcoming Events"
 msgstr ""
 
-#: .\templates\home\index.html:299
+#: .\templates\home\index.html:291
 msgid "Featured posts"
 msgstr ""
 
-#: .\templates\home\index.html:331
+#: .\templates\home\index.html:323
 msgid "Sign Up Now"
 msgstr ""
 
-#: .\templates\home\index.html:349
+#: .\templates\home\index.html:341
 msgid "Get started"
 msgstr ""
 
