@@ -89,6 +89,17 @@
   <!-- Logout Modal-->
   {% include 'dashboard/logout_model.html' %}
 
+  <div class="call-now-button ui-draggable ui-draggable-handle" id="draggable">
+    <div>
+      <p class="call-text"> Hotline: 0932.999.979 </p>
+      <a href="tel:0932999979" id="quickcallbutton" title="Call Now">
+      <div class="quick-alo-ph-circle active"></div>
+      <div class="quick-alo-ph-circle-fill active"></div>
+      <div class="quick-alo-ph-img-circle shake"></div>
+      </a>
+    </div>
+  </div>
+
   <!--====== Javascripts & Jquery ======-->
 
   <script src="{% static 'js/jquery.slicknav.min.js'%}"></script>
