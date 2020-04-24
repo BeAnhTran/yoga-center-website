@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-24 16:14+0700\n"
+"POT-Creation-Date: 2020-04-24 17:21+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,11 +38,13 @@ msgstr "là học viên"
 msgid "is trainer"
 msgstr "là huấn luyện viên"
 
-#: .\apps\accounts\models.py:29 .\templates\home\index.html:328
+#: .\apps\accounts\models.py:29 .\apps\faq\templates\faq\list.html:54
+#: .\templates\home\index.html:328
 msgid "first name"
 msgstr "tên"
 
-#: .\apps\accounts\models.py:30 .\templates\home\index.html:331
+#: .\apps\accounts\models.py:30 .\apps\faq\templates\faq\list.html:57
+#: .\templates\home\index.html:331
 msgid "last name"
 msgstr "họ"
 
@@ -53,6 +55,7 @@ msgid "slug"
 msgstr ""
 
 #: .\apps\accounts\models.py:36 .\apps\classes\templates\payment.html:35
+#: .\apps\faq\templates\faq\list.html:63
 #: .\apps\shop\templates\shop\checkout.html:51 .\templates\home\index.html:337
 msgid "phone number"
 msgstr "số điện thoại"
@@ -276,6 +279,7 @@ msgstr "bài viết"
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:22
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:22
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:22
+#: .\apps\faq\templates\faq\list.html:13
 #: .\apps\shop\templates\shop\index.html:23
 #: .\apps\trainers\templates\trainers\list.html:18
 #, python-format
@@ -292,6 +296,7 @@ msgstr "bài viết"
 #: .\apps\blog\templates\blog\post_list.html:27
 #: .\apps\classes\templates\classes\list.html:15
 #: .\apps\courses\templates\courses\list.html:17
+#: .\apps\faq\templates\faq\list.html:21
 #: .\apps\shop\templates\shop\index.html:32
 #: .\apps\trainers\templates\trainers\list.html:27
 #, python-format
@@ -679,6 +684,7 @@ msgstr "Vui lòng nhập thông tin"
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:33
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:33
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:33
+#: .\apps\faq\templates\faq\list.html:60
 #: .\apps\shop\templates\shop\checkout.html:58 .\apps\shop\views.py:213
 #: .\templates\home\index.html:334
 msgid "email"
@@ -1212,6 +1218,7 @@ msgstr "sự kiện"
 #: .\apps\dashboard\templates\dashboard\faq\edit.html:13
 #: .\apps\dashboard\templates\dashboard\faq\list.html:19
 #: .\apps\dashboard\templates\dashboard\faq\new.html:13
+#: .\apps\faq\templates\faq\list.html:12 .\apps\faq\templates\faq\list.html:20
 msgid "faq"
 msgstr "câu hỏi thường gặp"
 
@@ -1220,6 +1227,7 @@ msgid "FAQ List"
 msgstr "Danh sách câu hỏi thường gặp"
 
 #: .\apps\dashboard\templates\dashboard\faq\list.html:30 .\apps\faq\models.py:7
+#: .\apps\faq\templates\faq\list.html:66
 msgid "question"
 msgstr "câu hỏi"
 
@@ -1478,6 +1486,14 @@ msgstr "Vui lòng thêm loại để tạo"
 #: .\apps\faq\models.py:8
 msgid "answer"
 msgstr "câu trả lời"
+
+#: .\apps\faq\templates\faq\list.html:49
+msgid "Ask a question"
+msgstr "Đặt câu hỏi"
+
+#: .\apps\faq\templates\faq\list.html:67
+msgid "Submit"
+msgstr "Gửi"
 
 #: .\apps\lessons\models.py:20 .\apps\rooms\models.py:8
 msgid "Active"

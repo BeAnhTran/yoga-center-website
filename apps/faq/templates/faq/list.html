@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block specified_css %}
+<link href="{% static 'css/faq/style.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<section class="page-top-section bg-faq">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 m-auto text-white">
+          <h2>{% trans 'FAQ'%}</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% if not faqs %}
+<p class="text-danger">
+    {% trans 'faq' as trans_value %}
+    {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container content">
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                {% trans 'faq' as trans_value %}
+                {% blocktrans with value1=page_obj.object_list.count value2=page_obj.paginator.count value3=trans_value trimmed %}
+                Showing {{ value1 }} of {{ value2 }} {{ value3 }}
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+    {% for faq in faqs %}
+    <div class="row mb-3">
+        <div class="col">
+            <h3 class="mb-3">
+                {{ forloop.counter }}. {{ faq.question }}
+            </h3>
+            <div class="answer">
+                {{ faq.answer | safe }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% include 'pagination.html' %}
+</div>
+<hr>
+	<!-- Sign up Section -->
+	<section class="signup-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="singup-text">
+						<h3>{% trans 'Ask a question' %}</h3>
+					</div>
+					<form class="singup-form">
+						<div class="row">
+							<div class="col-md-6">
+								<input type="text" placeholder="{% trans 'first name' as t_f %}{{ t_f|capfirst }}">
+							</div>
+							<div class="col-md-6">
+								<input type="text" placeholder="{% trans 'last name' as t_l %}{{ t_l|capfirst }}">
+							</div>
+							<div class="col-md-6">
+								<input type="text" placeholder="{% trans 'email' as t_email %}{{ t_email|capfirst }}">
+							</div>
+							<div class="col-md-6">
+								<input type="text" placeholder="{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}">
+							</div>
+							<div class="col-md-12">
+								<textarea placeholder="{% trans 'question' as t_question %}{{ t_question|capfirst }}"></textarea>
+								<a href="javascript:;" class="site-btn sb-gradient">{% trans 'Submit' %}</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Sign up Section end -->
+
+{% endif %}
+
+{% endblock %}
