@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 17:33+0700\n"
+"POT-Creation-Date: 2020-04-24 16:14+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -261,6 +261,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\classes\list.html:21
 #: .\apps\dashboard\templates\dashboard\courses\list.html:20
 #: .\apps\dashboard\templates\dashboard\events\list.html:20
+#: .\apps\dashboard\templates\dashboard\faq\list.html:20
 #: .\apps\dashboard\templates\dashboard\gallery\list.html:20
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:36
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:122
@@ -385,6 +386,7 @@ msgstr ""
 #: .\apps\cards\forms.py:66 .\apps\cards\forms.py:142
 #: .\apps\dashboard\forms\classes_form.py:80
 #: .\apps\dashboard\forms\events_form.py:38
+#: .\apps\dashboard\forms\faq_form.py:18
 #: .\apps\dashboard\forms\lesssons_form.py:99
 #: .\apps\dashboard\forms\post_categories_form.py:19
 #: .\apps\dashboard\forms\posts_form.py:29
@@ -828,6 +830,10 @@ msgstr ""
 msgid "A event with this name already exists."
 msgstr ""
 
+#: .\apps\dashboard\forms\faq_form.py:13
+msgid "please input your question"
+msgstr ""
+
 #: .\apps\dashboard\forms\gallery_form.py:23
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:28
 #: .\apps\dashboard\templates\dashboard\gallery\list.html:30
@@ -942,6 +948,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\cards\list.html:12
 #: .\apps\dashboard\templates\dashboard\courses\list.html:14
 #: .\apps\dashboard\templates\dashboard\events\list.html:14
+#: .\apps\dashboard\templates\dashboard\faq\list.html:14
 #: .\apps\dashboard\templates\dashboard\gallery\list.html:14
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:17
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:17
@@ -956,6 +963,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\classes\list.html:34
 #: .\apps\dashboard\templates\dashboard\courses\list.html:34
 #: .\apps\dashboard\templates\dashboard\events\list.html:32
+#: .\apps\dashboard\templates\dashboard\faq\list.html:31
 #: .\apps\dashboard\templates\dashboard\gallery\list.html:31
 #: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:30
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:31
@@ -1057,6 +1065,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\classes\new.html:15
 #: .\apps\dashboard\templates\dashboard\courses\new.html:14
 #: .\apps\dashboard\templates\dashboard\events\new.html:15
+#: .\apps\dashboard\templates\dashboard\faq\new.html:14
 #: .\apps\dashboard\templates\dashboard\gallery\new.html:14
 #: .\apps\dashboard\templates\dashboard\promotions\new.html:12
 #: .\apps\dashboard\templates\dashboard\shop\categories\new.html:15
@@ -1115,6 +1124,7 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:90
 #: .\apps\dashboard\templates\dashboard\courses\edit.html:13
+#: .\apps\dashboard\templates\dashboard\faq\edit.html:13
 #: .\apps\dashboard\templates\dashboard\gallery\edit.html:13
 #: .\apps\dashboard\templates\dashboard\promotions\edit.html:13
 msgid "update"
@@ -1187,6 +1197,20 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\events\list.html:19
 #: .\apps\dashboard\templates\dashboard\events\new.html:14
 msgid "event"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\faq\edit.html:13
+#: .\apps\dashboard\templates\dashboard\faq\list.html:19
+#: .\apps\dashboard\templates\dashboard\faq\new.html:13
+msgid "faq"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\faq\list.html:12
+msgid "FAQ List"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\faq\list.html:30 .\apps\faq\models.py:7
+msgid "question"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\formset.html:31
@@ -1290,6 +1314,11 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:240
 msgid "events"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:250
+#: .\templates\base.html:115
+msgid "FAQ"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\layouts\topbar.html:13
@@ -1436,6 +1465,10 @@ msgstr ""
 
 #: .\apps\dashboard\views\classes_view.py:196
 msgid "Please add type of create"
+msgstr ""
+
+#: .\apps\faq\models.py:8
+msgid "answer"
 msgstr ""
 
 #: .\apps\lessons\models.py:20 .\apps\rooms\models.py:8
@@ -1619,10 +1652,6 @@ msgstr ""
 
 #: .\templates\base.html:111
 msgid "Donate"
-msgstr ""
-
-#: .\templates\base.html:115
-msgid "FAQ"
 msgstr ""
 
 #: .\templates\home\index.html:29
