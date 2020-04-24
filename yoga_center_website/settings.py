@@ -264,6 +264,10 @@ CKEDITOR_CONFIGS = {
                 'name': 'styles',
                 'items': ['Styles', 'Format', 'Font', 'FontSize']
             },
+            {
+                'name': 'document',
+                'items': ['Source']
+            },
         ],
         'height': '200px',
         'width': '100%',

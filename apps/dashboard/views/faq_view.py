@@ -20,7 +20,7 @@ class FAQListView(ListView):
     template_name = 'dashboard/faq/list.html'
     context_object_name = 'faqs'
     ordering = ['created_at']
-    paginate_by = 5
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(FAQListView, self).get_context_data(**kwargs)
