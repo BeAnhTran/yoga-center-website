@@ -4531,6 +4531,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 /* ICON BAR */
 
 .icon-bar {
+	z-index: 9999;
 	position: fixed;
 	top: 50%;
 	-webkit-transform: translateY(-50%);
