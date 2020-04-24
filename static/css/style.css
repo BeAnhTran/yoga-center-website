@@ -683,8 +683,8 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .infor-model {
 	margin-left: auto;
-	padding: 20px 73px;
-	width: 525px;
+	padding: 15px 30px;
+    width: 545px;
 	height: 100%;
 	text-align: center;
 	background: #fff;
@@ -715,13 +715,13 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .infor-close {
-	position: absolute;
-	right: 70px;
-	top: 55px;
-	font-size: 23px;
-	color: #9999;
-	cursor: pointer;
-	padding: 5px;
+    position: absolute;
+    right: 45px;
+    top: 20px;
+    font-size: 23px;
+    color: #999;
+    cursor: pointer;
+    padding: 5px;
 }
 
 @media (max-width: 576px) {
@@ -2488,7 +2488,6 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .singup-text {
-	padding-right: 50px;
 	margin-bottom: 40px;
 }
 

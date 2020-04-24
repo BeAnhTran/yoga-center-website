@@ -79,7 +79,7 @@
     <div class="h-100 d-flex align-items-center justify-content-center">
       <div class="search-close-switch"><i class="material-icons">close</i></div>
       <form class="search-moderl-form">
-        <input type="text" id="search-input" placeholder="Search">
+        <input type="text" id="search-input" placeholder="{% trans 'Search' %}">
         <button><img src="{% static 'img/icons/search-2.png'%}" alt=""></button>
       </form>
     </div>
@@ -103,7 +103,7 @@
   <div class="icon-bar">
     <a target="_blank" href="https://www.facebook.com/CLB-Yoga-Huong-Tre-479934325379747/" class="facebook"><i class="fab fa-sm fa-facebook"></i></a> 
     <a target="_blank" href="https://www.youtube.com/channel/UCKEKFt8623RUF-7Phxtnn-A" class="youtube"><i class="fab fa-sm fa-youtube"></i></a>
-    <a target="_blank" href="javascript:;" class="feedback">
+    <a href="javascript:;" class="feedback" id="icon_bar_feedback">
       <span class="tooltiptext">{% trans 'Feedback' %}</span>
       <i class="far fa-sm fa-comment-dots"></i>
     </a>
@@ -132,6 +132,9 @@
   <script>
     $(".alert-dismissible").fadeTo(3000, 500).fadeOut(500, function () {
       $(".alert-dismissible").alert('close');
+    });
+    $('#icon_bar_feedback').click(function(){
+      $('#infor-switch').click();
     });
   </script>
 

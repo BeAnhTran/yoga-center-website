@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <div class="infor-model-warp">
     <div class="infor-model d-flex align-items-center">
@@ -6,76 +7,41 @@
             <i class="material-icons">close</i>
         </div>
         <div class="infor-middle">
-            <a href="#" class="infor-logo">
-                Lotus <span class="flaticon-lotus"></span> Yoga
-            </a>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-            <div class="insta-img/">
-                <div class="insta-item">
-                    <div class="insta-img">
-                        <img src="{% static 'img/infor/1.jpg' %}" alt="">
-                        <div class="insta-hover">
-                            <i class="fa fa-instagram"></i>
-                            <p>lotus.yoga</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="insta-item">
-                    <div class="insta-img">
-                        <img src="{% static 'img/infor/2.jpg' %}" alt="">
-                        <div class="insta-hover">
-                            <i class="fa fa-instagram"></i>
-                            <p>lotus.yoga</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="insta-item">
-                    <div class="insta-img">
-                        <img src="{% static 'img/infor/3.jpg' %}" alt="">
-                        <div class="insta-hover">
-                            <i class="fa fa-instagram"></i>
-                            <p>lotus.yoga</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="insta-item">
-                    <div class="insta-img">
-                        <img src="{% static 'img/infor/4.jpg' %}" alt="">
-                        <div class="insta-hover">
-                            <i class="fa fa-instagram"></i>
-                            <p>lotus.yoga</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="insta-item">
-                    <div class="insta-img">
-                        <img src="{% static 'img/infor/5.jpg' %}" alt="">
-                        <div class="insta-hover">
-                            <i class="fa fa-instagram"></i>
-                            <p>lotus.yoga</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="insta-item">
-                    <div class="insta-img">
-                        <img src="{% static 'img/infor/6.jpg' %}" alt="">
-                        <div class="insta-hover">
-                            <i class="fa fa-instagram"></i>
-                            <p>lotus.yoga</p>
-                        </div>
-                    </div>
+		<div class="container-fluid">
+            <div class="row">
+                <div class="col text-center">
+                    <a class="about-widget-title" href="javascript:;">HT <span class="flaticon-lotus"></span> Yoga</a>
+                    <p style="font-family: 'Playfair Display', serif;"><small>Tâm an vạn sự an</small></p>
                 </div>
             </div>
-            <form class="infor-form">
-                <input type="text" placeholder="Your Email">
-                <button><img src="{% static 'img/icons/send.png' %}" alt=""></button>
-            </form>
-            <div class="insta-social">
-                <a href="#"><i class="fa fa-linkedin"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
-                <a href="#"><i class="fa fa-facebook"></i></a>
-            </div>
+			<div class="row">
+				<div class="col">
+					<div class="singup-text">
+						<h3>{% trans 'Feedback' %}</h3>
+					</div>
+					<form class="singup-form">
+						<div class="row">
+							<div class="col-md-6">
+								<input type="text" placeholder="{% trans 'first name' as t_f %}{{ t_f|capfirst }}">
+							</div>
+							<div class="col-md-6">
+								<input type="text" placeholder="{% trans 'last name' as t_l %}{{ t_l|capfirst }}">
+							</div>
+							<div class="col-md-6">
+								<input type="text" placeholder="{% trans 'email' as t_email %}{{ t_email|capfirst }}">
+							</div>
+							<div class="col-md-6">
+								<input type="text" placeholder="{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}">
+							</div>
+							<div class="col-md-12">
+								<textarea placeholder="{% trans 'Feedback' as t_feedback %}{{ t_feedback }}"></textarea>
+								<a href="javascript:;" class="site-btn sb-gradient">{% trans 'Submit' %}</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
         </div>
     </div>
 </div>
