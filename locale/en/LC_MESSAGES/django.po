@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-24 17:21+0700\n"
+"POT-Creation-Date: 2020-04-24 21:54+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,13 +38,15 @@ msgstr ""
 msgid "is trainer"
 msgstr ""
 
-#: .\apps\accounts\models.py:29 .\apps\faq\templates\faq\list.html:54
-#: .\templates\home\index.html:328
+#: .\apps\accounts\models.py:29 .\apps\faq\templates\faq\list.html:65
+#: .\apps\questions\models.py:6 .\templates\home\index.html:328
+#: .\templates\layouts\info_model.html:25
 msgid "first name"
 msgstr ""
 
-#: .\apps\accounts\models.py:30 .\apps\faq\templates\faq\list.html:57
-#: .\templates\home\index.html:331
+#: .\apps\accounts\models.py:30 .\apps\faq\templates\faq\list.html:68
+#: .\apps\questions\models.py:7 .\templates\home\index.html:331
+#: .\templates\layouts\info_model.html:28
 msgid "last name"
 msgstr ""
 
@@ -55,8 +57,9 @@ msgid "slug"
 msgstr ""
 
 #: .\apps\accounts\models.py:36 .\apps\classes\templates\payment.html:35
-#: .\apps\faq\templates\faq\list.html:63
+#: .\apps\faq\templates\faq\list.html:74 .\apps\questions\models.py:10
 #: .\apps\shop\templates\shop\checkout.html:51 .\templates\home\index.html:337
+#: .\templates\layouts\info_model.html:34
 msgid "phone number"
 msgstr ""
 
@@ -194,9 +197,9 @@ msgstr ""
 #: .\apps\events\models.py:19 .\apps\gallery\models.py:10
 #: .\apps\gallery\models.py:28 .\apps\lectures\models.py:15
 #: .\apps\lessons\models.py:44 .\apps\lessons\models.py:142
-#: .\apps\make_up_lessons\models.py:14 .\apps\refunds\models.py:30
-#: .\apps\roll_calls\models.py:18 .\apps\rooms\models.py:23
-#: .\apps\shop\models.py:62 .\apps\shop\models.py:72
+#: .\apps\make_up_lessons\models.py:14 .\apps\questions\models.py:13
+#: .\apps\refunds\models.py:30 .\apps\roll_calls\models.py:18
+#: .\apps\rooms\models.py:23 .\apps\shop\models.py:62 .\apps\shop\models.py:72
 msgid "created at"
 msgstr ""
 
@@ -207,8 +210,9 @@ msgstr ""
 #: .\apps\gallery\models.py:12 .\apps\gallery\models.py:30
 #: .\apps\lectures\models.py:17 .\apps\lessons\models.py:46
 #: .\apps\lessons\models.py:144 .\apps\make_up_lessons\models.py:16
-#: .\apps\refunds\models.py:32 .\apps\roll_calls\models.py:20
-#: .\apps\rooms\models.py:25 .\apps\shop\models.py:64 .\apps\shop\models.py:74
+#: .\apps\questions\models.py:15 .\apps\refunds\models.py:32
+#: .\apps\roll_calls\models.py:20 .\apps\rooms\models.py:25
+#: .\apps\shop\models.py:64 .\apps\shop\models.py:74
 msgid "updated at"
 msgstr ""
 
@@ -279,7 +283,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:22
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:22
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:22
-#: .\apps\faq\templates\faq\list.html:13
+#: .\apps\faq\templates\faq\list.html:24
 #: .\apps\shop\templates\shop\index.html:23
 #: .\apps\trainers\templates\trainers\list.html:18
 #, python-format
@@ -296,7 +300,7 @@ msgstr ""
 #: .\apps\blog\templates\blog\post_list.html:27
 #: .\apps\classes\templates\classes\list.html:15
 #: .\apps\courses\templates\courses\list.html:17
-#: .\apps\faq\templates\faq\list.html:21
+#: .\apps\faq\templates\faq\list.html:32
 #: .\apps\shop\templates\shop\index.html:32
 #: .\apps\trainers\templates\trainers\list.html:27
 #, python-format
@@ -686,9 +690,9 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:33
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:33
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:33
-#: .\apps\faq\templates\faq\list.html:60
+#: .\apps\faq\templates\faq\list.html:71 .\apps\questions\models.py:8
 #: .\apps\shop\templates\shop\checkout.html:58 .\apps\shop\views.py:213
-#: .\templates\home\index.html:334
+#: .\templates\home\index.html:334 .\templates\layouts\info_model.html:31
 msgid "email"
 msgstr ""
 
@@ -780,6 +784,7 @@ msgid "card types"
 msgstr ""
 
 #: .\apps\courses\models.py:36 .\apps\events\models.py:13
+#: .\apps\questions\models.py:11
 msgid "content"
 msgstr ""
 
@@ -1208,7 +1213,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\faq\edit.html:13
 #: .\apps\dashboard\templates\dashboard\faq\list.html:19
 #: .\apps\dashboard\templates\dashboard\faq\new.html:13
-#: .\apps\faq\templates\faq\list.html:12 .\apps\faq\templates\faq\list.html:20
+#: .\apps\faq\templates\faq\list.html:23 .\apps\faq\templates\faq\list.html:31
 msgid "faq"
 msgstr ""
 
@@ -1217,7 +1222,7 @@ msgid "FAQ List"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\faq\list.html:30 .\apps\faq\models.py:7
-#: .\apps\faq\templates\faq\list.html:66
+#: .\apps\faq\templates\faq\list.html:77
 msgid "question"
 msgstr ""
 
@@ -1325,8 +1330,18 @@ msgid "events"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:250
-#: .\templates\base.html:115
+#: .\apps\faq\templates\faq\list.html:15 .\templates\base.html:115
 msgid "FAQ"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:259
+#: .\templates\base.html:107 .\templates\layouts\info_model.html:20
+#: .\templates\layouts\info_model.html:37
+msgid "Feedback"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:268
+msgid "Question of User"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\layouts\topbar.html:13
@@ -1479,11 +1494,11 @@ msgstr ""
 msgid "answer"
 msgstr ""
 
-#: .\apps\faq\templates\faq\list.html:49
+#: .\apps\faq\templates\faq\list.html:60
 msgid "Ask a question"
 msgstr ""
 
-#: .\apps\faq\templates\faq\list.html:67
+#: .\apps\faq\templates\faq\list.html:78 .\templates\layouts\info_model.html:38
 msgid "Submit"
 msgstr ""
 
@@ -1662,8 +1677,8 @@ msgstr ""
 msgid "Login successfully"
 msgstr ""
 
-#: .\templates\base.html:107
-msgid "Feedback"
+#: .\templates\base.html:82
+msgid "Search"
 msgstr ""
 
 #: .\templates\base.html:111

@@ -5,7 +5,7 @@ from .views import (
     dashboard_view, courses_view, rooms_view,
     lessons_view, classes_view, cards_view,
     card_types_view, trainees_view, trainers_view, staffs_view,
-    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view, taught_view, gallery_view, events_view, faq_view)
+    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view, taught_view, gallery_view, events_view, faq_view, questions_view)
 
 from .views.requests import extend_card_requests_view, refund_requests_view
 
@@ -222,6 +222,12 @@ faq_urlpatterns = [
          name='faq-delete'),
 ]
 
+# Question (of user)
+questions_urlpatterns = [
+    path('', questions_view.QuestionListView.as_view(),
+         name='questions-list'),
+]
+
 # DASHBOARD
 urlpatterns = [
     path('', dashboard_view.index, name='index'),
@@ -245,4 +251,5 @@ urlpatterns = [
     path('gallery/', include(gallery_urlpatterns)),
     path('events/', include(events_urlpatterns)),
     path('faq/', include(faq_urlpatterns)),
+    path('questions/', include(questions_urlpatterns)),
 ]

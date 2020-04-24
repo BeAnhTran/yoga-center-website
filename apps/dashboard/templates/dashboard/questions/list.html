@@ -1,0 +1,61 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load dashboard_extras %}
+
+{% block specified_css %}
+<link href="{% static 'css/dashboard/courses/list.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Question List'%}</h1>
+</div>
+<!-- Content Row -->
+{% if not questions %}
+<p class="text-danger">
+    {% trans 'question' as trans_val %}
+    {% blocktrans with value=trans_val %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th><small>{% trans 'question' as t_question %}{{ t_question|capfirst }}</small></th>
+                        <th><small>{% trans 'created at' as t_created_at %}{{ t_created_at|capfirst }}</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for question in questions %}
+                    <tr>
+                        <td>{{ question.pk }}</td>
+                        <td>{{ question.content }}</td>
+                        <td>{{ question.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block specified_js %}
+<script type="text/javascript">
+    $('.delete-faq').click(function () {
+        $(this).siblings('form').children('input[type=submit]').click();
+    });
+</script>
+
+{% endblock %}
