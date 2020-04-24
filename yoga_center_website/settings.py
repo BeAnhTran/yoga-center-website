@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     'apps.errors',
     'apps.gallery',
     'apps.events',
+    'apps.faq',
     'seeds',
 ]
 
