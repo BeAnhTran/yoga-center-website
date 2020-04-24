@@ -257,7 +257,7 @@
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Feedback -->
     <li class="nav-item {% if active_nav == 'feedback' %}active{% endif %}">
-        <a class="nav-link" href="javascript:;">
+        <a class="nav-link" href="{% url 'dashboard:feedback-list' %}">
             <i class="fab fa-fw fa-rocketchat"></i>
             <span>
                 {% trans 'Feedback' %}

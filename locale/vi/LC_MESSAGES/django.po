@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-24 21:55+0700\n"
+"POT-Creation-Date: 2020-04-24 22:30+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,14 +39,14 @@ msgid "is trainer"
 msgstr "là huấn luyện viên"
 
 #: .\apps\accounts\models.py:29 .\apps\faq\templates\faq\list.html:65
-#: .\apps\questions\models.py:6 .\templates\home\index.html:328
-#: .\templates\layouts\info_model.html:25
+#: .\apps\feedback\models.py:6 .\apps\questions\models.py:6
+#: .\templates\home\index.html:328 .\templates\layouts\info_model.html:25
 msgid "first name"
 msgstr "tên"
 
 #: .\apps\accounts\models.py:30 .\apps\faq\templates\faq\list.html:68
-#: .\apps\questions\models.py:7 .\templates\home\index.html:331
-#: .\templates\layouts\info_model.html:28
+#: .\apps\feedback\models.py:7 .\apps\questions\models.py:7
+#: .\templates\home\index.html:331 .\templates\layouts\info_model.html:28
 msgid "last name"
 msgstr "họ"
 
@@ -57,9 +57,9 @@ msgid "slug"
 msgstr ""
 
 #: .\apps\accounts\models.py:36 .\apps\classes\templates\payment.html:35
-#: .\apps\faq\templates\faq\list.html:74 .\apps\questions\models.py:10
-#: .\apps\shop\templates\shop\checkout.html:51 .\templates\home\index.html:337
-#: .\templates\layouts\info_model.html:34
+#: .\apps\faq\templates\faq\list.html:74 .\apps\feedback\models.py:10
+#: .\apps\questions\models.py:10 .\apps\shop\templates\shop\checkout.html:51
+#: .\templates\home\index.html:337 .\templates\layouts\info_model.html:34
 msgid "phone number"
 msgstr "số điện thoại"
 
@@ -191,15 +191,18 @@ msgstr "thời gian quay lại"
 #: .\apps\card_types\models.py:28 .\apps\cards\models.py:22
 #: .\apps\cards\models.py:65 .\apps\classes\models.py:30
 #: .\apps\courses\models.py:50
+#: .\apps\dashboard\templates\dashboard\feedback\list.html:29
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:34
+#: .\apps\dashboard\templates\dashboard\questions\list.html:29
 #: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:29
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:30
-#: .\apps\events\models.py:19 .\apps\gallery\models.py:10
-#: .\apps\gallery\models.py:28 .\apps\lectures\models.py:15
-#: .\apps\lessons\models.py:44 .\apps\lessons\models.py:142
-#: .\apps\make_up_lessons\models.py:14 .\apps\questions\models.py:13
-#: .\apps\refunds\models.py:30 .\apps\roll_calls\models.py:18
-#: .\apps\rooms\models.py:23 .\apps\shop\models.py:62 .\apps\shop\models.py:72
+#: .\apps\events\models.py:19 .\apps\feedback\models.py:13
+#: .\apps\gallery\models.py:10 .\apps\gallery\models.py:28
+#: .\apps\lectures\models.py:15 .\apps\lessons\models.py:44
+#: .\apps\lessons\models.py:142 .\apps\make_up_lessons\models.py:14
+#: .\apps\questions\models.py:13 .\apps\refunds\models.py:30
+#: .\apps\roll_calls\models.py:18 .\apps\rooms\models.py:23
+#: .\apps\shop\models.py:62 .\apps\shop\models.py:72
 msgid "created at"
 msgstr "thời gian tạo"
 
@@ -207,12 +210,12 @@ msgstr "thời gian tạo"
 #: .\apps\card_types\models.py:30 .\apps\cards\models.py:24
 #: .\apps\cards\models.py:67 .\apps\classes\models.py:32
 #: .\apps\courses\models.py:52 .\apps\events\models.py:21
-#: .\apps\gallery\models.py:12 .\apps\gallery\models.py:30
-#: .\apps\lectures\models.py:17 .\apps\lessons\models.py:46
-#: .\apps\lessons\models.py:144 .\apps\make_up_lessons\models.py:16
-#: .\apps\questions\models.py:15 .\apps\refunds\models.py:32
-#: .\apps\roll_calls\models.py:20 .\apps\rooms\models.py:25
-#: .\apps\shop\models.py:64 .\apps\shop\models.py:74
+#: .\apps\feedback\models.py:15 .\apps\gallery\models.py:12
+#: .\apps\gallery\models.py:30 .\apps\lectures\models.py:17
+#: .\apps\lessons\models.py:46 .\apps\lessons\models.py:144
+#: .\apps\make_up_lessons\models.py:16 .\apps\questions\models.py:15
+#: .\apps\refunds\models.py:32 .\apps\roll_calls\models.py:20
+#: .\apps\rooms\models.py:25 .\apps\shop\models.py:64 .\apps\shop\models.py:74
 msgid "updated at"
 msgstr "thời gian cập nhật"
 
@@ -269,11 +272,13 @@ msgstr "bài viết"
 #: .\apps\dashboard\templates\dashboard\courses\list.html:20
 #: .\apps\dashboard\templates\dashboard\events\list.html:20
 #: .\apps\dashboard\templates\dashboard\faq\list.html:20
+#: .\apps\dashboard\templates\dashboard\feedback\list.html:18
 #: .\apps\dashboard\templates\dashboard\gallery\list.html:20
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:36
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:122
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:21
 #: .\apps\dashboard\templates\dashboard\promotions\list.html:17
+#: .\apps\dashboard\templates\dashboard\questions\list.html:18
 #: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:15
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:15
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:18
@@ -293,7 +298,7 @@ msgstr "Không có %(value)s"
 #: .\apps\blog\templates\blog\post_list.html:26
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:17
 #: .\apps\dashboard\templates\dashboard\blog\posts\new.html:14
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:173
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:175
 msgid "post"
 msgstr "bài viết"
 
@@ -688,9 +693,10 @@ msgstr "Vui lòng nhập thông tin"
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:33
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:33
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:33
-#: .\apps\faq\templates\faq\list.html:71 .\apps\questions\models.py:8
-#: .\apps\shop\templates\shop\checkout.html:58 .\apps\shop\views.py:213
-#: .\templates\home\index.html:334 .\templates\layouts\info_model.html:31
+#: .\apps\faq\templates\faq\list.html:71 .\apps\feedback\models.py:8
+#: .\apps\questions\models.py:8 .\apps\shop\templates\shop\checkout.html:58
+#: .\apps\shop\views.py:213 .\templates\home\index.html:334
+#: .\templates\layouts\info_model.html:31
 msgid "email"
 msgstr ""
 
@@ -783,7 +789,9 @@ msgstr "Khóa huấn luyện"
 msgid "card types"
 msgstr "loại thẻ"
 
-#: .\apps\courses\models.py:36 .\apps\events\models.py:13
+#: .\apps\courses\models.py:36
+#: .\apps\dashboard\templates\dashboard\feedback\list.html:28
+#: .\apps\events\models.py:13 .\apps\feedback\models.py:11
 #: .\apps\questions\models.py:11
 msgid "content"
 msgstr "nội dung"
@@ -1231,10 +1239,23 @@ msgstr "câu hỏi thường gặp"
 msgid "FAQ List"
 msgstr "Danh sách câu hỏi thường gặp"
 
-#: .\apps\dashboard\templates\dashboard\faq\list.html:30 .\apps\faq\models.py:7
-#: .\apps\faq\templates\faq\list.html:77
+#: .\apps\dashboard\templates\dashboard\faq\list.html:30
+#: .\apps\dashboard\templates\dashboard\questions\list.html:17
+#: .\apps\dashboard\templates\dashboard\questions\list.html:28
+#: .\apps\faq\models.py:7 .\apps\faq\templates\faq\list.html:77
 msgid "question"
 msgstr "câu hỏi"
+
+#: .\apps\dashboard\templates\dashboard\feedback\list.html:12
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:263
+#: .\templates\base.html:107 .\templates\layouts\info_model.html:20
+#: .\templates\layouts\info_model.html:37
+msgid "Feedback"
+msgstr "Góp ý & phản hồi"
+
+#: .\apps\dashboard\templates\dashboard\feedback\list.html:17
+msgid "feedback"
+msgstr "góp ý & phản hồi"
 
 #: .\apps\dashboard\templates\dashboard\formset.html:31
 msgid "add another"
@@ -1251,7 +1272,7 @@ msgstr "xóa"
 #: .\apps\dashboard\templates\dashboard\gallery\edit.html:13
 #: .\apps\dashboard\templates\dashboard\gallery\list.html:19
 #: .\apps\dashboard\templates\dashboard\gallery\new.html:13
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:230
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:233
 msgid "gallery"
 msgstr "bộ sưu tập"
 
@@ -1297,60 +1318,54 @@ msgstr "phòng tập"
 msgid "request"
 msgstr "yêu cầu"
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:137
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:138
 msgid "extend card request"
 msgstr "yêu cầu gia hạn"
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:144
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:146
 msgid "refund request"
 msgstr "yêu cầu hoàn tiền"
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:156
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:158
 msgid "blog"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:165
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:167
 msgid "post categories"
 msgstr "loại bài viết"
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:185
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:187
 msgid "shop"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:194
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:196
 msgid "product categories"
 msgstr "loại sản phẩm"
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:202
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:204
 #: .\apps\shop\templates\shop\index.html:22
 msgid "products"
 msgstr "sản phẩm"
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:208
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:211
 msgid "bills"
 msgstr "hóa đơn"
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:220
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:223
 #: .\templates\layouts\header.html:114
 msgid "promotions"
 msgstr "khuyến mãi"
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:240
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:243
 msgid "events"
 msgstr "sự kiện"
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:250
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:253
 #: .\apps\faq\templates\faq\list.html:15 .\templates\base.html:115
 msgid "FAQ"
 msgstr "Câu hỏi thường gặp"
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:259
-#: .\templates\base.html:107 .\templates\layouts\info_model.html:20
-#: .\templates\layouts\info_model.html:37
-msgid "Feedback"
-msgstr "Góp ý & phản hồi"
-
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:268
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:273
 msgid "Question of User"
 msgstr "Câu hỏi của người dùng"
 
@@ -1423,6 +1438,12 @@ msgstr "Danh sách khuyến mãi"
 #: .\apps\promotions\models.py:60 .\apps\shop\templates\shop\index.html:31
 msgid "product"
 msgstr "sản phẩm"
+
+#: .\apps\dashboard\templates\dashboard\questions\list.html:12
+#, fuzzy
+#| msgid "Lesson List"
+msgid "Question List"
+msgstr "Danh sách buổi tập"
 
 #: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:9
 msgid "Extend card request list"

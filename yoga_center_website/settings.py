@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'apps.events',
     'apps.faq',
     'apps.questions',
+    'apps.feedback',
     'seeds',
 ]
 

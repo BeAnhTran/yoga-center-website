@@ -9,12 +9,12 @@
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
-    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Question List'%}</h1>
+    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Feedback'%}</h1>
 </div>
 <!-- Content Row -->
-{% if not questions %}
+{% if not feedbacks %}
 <p class="text-danger">
-    {% trans 'question' as trans_val %}
+    {% trans 'feedback' as trans_val %}
     {% blocktrans with value=trans_val %}No {{ value }} yet{% endblocktrans %}
 </p>
 {% else %}
@@ -25,16 +25,16 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th><small>{% trans 'question' as t_question %}{{ t_question|capfirst }}</small></th>
+                        <th><small>{% trans 'content' as t_content %}{{ t_content|capfirst }}</small></th>
                         <th><small>{% trans 'created at' as t_created_at %}{{ t_created_at|capfirst }}</small></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for question in questions %}
+                    {% for feedback in feedbacks %}
                     <tr>
-                        <td>{{ question.pk }}</td>
-                        <td>{{ question.content }}</td>
-                        <td>{{ question.created_at }}</td>
+                        <td>{{ feedback.pk }}</td>
+                        <td>{{ feedback.content }}</td>
+                        <td>{{ feedback.created_at }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

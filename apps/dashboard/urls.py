@@ -5,7 +5,7 @@ from .views import (
     dashboard_view, courses_view, rooms_view,
     lessons_view, classes_view, cards_view,
     card_types_view, trainees_view, trainers_view, staffs_view,
-    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view, taught_view, gallery_view, events_view, faq_view, questions_view)
+    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view, taught_view, gallery_view, events_view, faq_view, questions_view, feedback_view)
 
 from .views.requests import extend_card_requests_view, refund_requests_view
 
@@ -228,6 +228,12 @@ questions_urlpatterns = [
          name='questions-list'),
 ]
 
+# Feedback
+feedback_urlpatterns = [
+    path('', feedback_view.FeedbackListView.as_view(),
+         name='feedback-list'),
+]
+
 # DASHBOARD
 urlpatterns = [
     path('', dashboard_view.index, name='index'),
@@ -252,4 +258,5 @@ urlpatterns = [
     path('events/', include(events_urlpatterns)),
     path('faq/', include(faq_urlpatterns)),
     path('questions/', include(questions_urlpatterns)),
+    path('feedback/', include(feedback_urlpatterns)),
 ]
