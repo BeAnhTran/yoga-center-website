@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block specified_css %}
 <link href="{% static 'css/faq/style.css' %}" rel="stylesheet">
@@ -39,7 +40,7 @@
     <div class="row mb-3">
         <div class="col">
             <h3 class="mb-3">
-                {{ forloop.counter }}. {{ faq.question }}
+                {{ faq.pk }}. {{ faq.question }}
             </h3>
             <div class="answer">
                 {{ faq.answer | safe }}
@@ -59,26 +60,27 @@
 					<div class="singup-text">
 						<h3>{% trans 'Ask a question' %}</h3>
 					</div>
-					<form class="singup-form">
+                    <form action="" method="POST" class="singup-form">
+                        {% csrf_token %}
 						<div class="row">
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'first name' as t_f %}{{ t_f|capfirst }}">
+								{{ form.first_name }}
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'last name' as t_l %}{{ t_l|capfirst }}">
+								{{ form.last_name }}
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'email' as t_email %}{{ t_email|capfirst }}">
+                                {{ form.email }}
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}">
+                                {{ form.phone_number }}
 							</div>
 							<div class="col-md-12">
-								<textarea placeholder="{% trans 'question' as t_question %}{{ t_question|capfirst }}"></textarea>
-								<a href="javascript:;" class="site-btn sb-gradient">{% trans 'Submit' %}</a>
+                                {{ form.content }}
+								<button type="submit" class="site-btn sb-gradient">{% trans 'Submit' %}</button>
 							</div>
 						</div>
-					</form>
+                    </form>
 				</div>
 			</div>
 		</div>

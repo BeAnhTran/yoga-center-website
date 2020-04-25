@@ -26,6 +26,10 @@
                     <tr>
                         <th>#</th>
                         <th><small>{% trans 'question' as t_question %}{{ t_question|capfirst }}</small></th>
+                        <th><small>{% trans 'email' as t_email %}{{ t_email|capfirst }}</small></th>
+                        <th><small>{% trans 'first name' as t_first_name %}{{ t_first_name|capfirst }}</small></th>
+                        <th><small>{% trans 'last name' as t_last_name %}{{ t_last_name|capfirst }}</small></th>
+                        <th><small>{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}</small></th>
                         <th><small>{% trans 'created at' as t_created_at %}{{ t_created_at|capfirst }}</small></th>
                     </tr>
                 </thead>
@@ -34,6 +38,10 @@
                     <tr>
                         <td>{{ question.pk }}</td>
                         <td>{{ question.content }}</td>
+                        <td>{{ question.email }}</td>
+                        <td>{{ question.first_name }}</td>
+                        <td>{{ question.last_name }}</td>
+                        <td>{{ question.phone_number |default_if_none:"" }}</td>
                         <td>{{ question.created_at }}</td>
                     </tr>
                     {% endfor %}
