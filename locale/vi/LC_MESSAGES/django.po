@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-25 11:50+0700\n"
+"POT-Creation-Date: 2020-04-25 17:14+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,14 +41,14 @@ msgstr "là huấn luyện viên"
 #: .\apps\accounts\models.py:29
 #: .\apps\dashboard\templates\dashboard\questions\list.html:30
 #: .\apps\feedback\models.py:6 .\apps\questions\models.py:6
-#: .\templates\home\index.html:328 .\templates\layouts\info_model.html:25
+#: .\templates\home\index.html:328 .\templates\layouts\info_model.html:26
 msgid "first name"
 msgstr "tên"
 
 #: .\apps\accounts\models.py:30
 #: .\apps\dashboard\templates\dashboard\questions\list.html:31
 #: .\apps\feedback\models.py:7 .\apps\questions\models.py:7
-#: .\templates\home\index.html:331 .\templates\layouts\info_model.html:28
+#: .\templates\home\index.html:331 .\templates\layouts\info_model.html:29
 msgid "last name"
 msgstr "họ"
 
@@ -62,7 +62,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\questions\list.html:32
 #: .\apps\feedback\models.py:10 .\apps\questions\models.py:10
 #: .\apps\shop\templates\shop\checkout.html:51 .\templates\home\index.html:337
-#: .\templates\layouts\info_model.html:34
+#: .\templates\layouts\info_model.html:35
 msgid "phone number"
 msgstr "số điện thoại"
 
@@ -609,6 +609,7 @@ msgstr "buổi tập đã đủ số lượng"
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:339
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:440
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:486
+#: .\templates\base.html:172
 msgid "error"
 msgstr "lỗi"
 
@@ -699,7 +700,7 @@ msgstr "Vui lòng nhập thông tin"
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:33
 #: .\apps\feedback\models.py:8 .\apps\questions\models.py:8
 #: .\apps\shop\templates\shop\checkout.html:58 .\apps\shop\views.py:213
-#: .\templates\home\index.html:334 .\templates\layouts\info_model.html:31
+#: .\templates\home\index.html:334 .\templates\layouts\info_model.html:32
 msgid "email"
 msgstr ""
 
@@ -1174,6 +1175,7 @@ msgstr "Thông tin chi tiết"
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:414
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:479
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:505
+#: .\templates\base.html:160
 msgid "done"
 msgstr "hoàn thành"
 
@@ -1251,8 +1253,8 @@ msgstr "câu hỏi"
 
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:12
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:263
-#: .\templates\base.html:107 .\templates\layouts\info_model.html:20
-#: .\templates\layouts\info_model.html:37
+#: .\templates\base.html:109 .\templates\layouts\info_model.html:20
+#: .\templates\layouts\info_model.html:38
 msgid "Feedback"
 msgstr "Góp ý & phản hồi"
 
@@ -1364,7 +1366,7 @@ msgid "events"
 msgstr "sự kiện"
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:253
-#: .\apps\faq\templates\faq\list.html:16 .\templates\base.html:115
+#: .\apps\faq\templates\faq\list.html:16 .\templates\base.html:117
 msgid "FAQ"
 msgstr "Câu hỏi thường gặp"
 
@@ -1528,7 +1530,7 @@ msgstr "câu trả lời"
 msgid "Ask a question"
 msgstr "Đặt câu hỏi"
 
-#: .\apps\faq\templates\faq\list.html:80 .\templates\layouts\info_model.html:38
+#: .\apps\faq\templates\faq\list.html:80 .\templates\layouts\info_model.html:39
 msgid "Submit"
 msgstr "Gửi"
 
@@ -1735,9 +1737,17 @@ msgstr "Đăng nhập thành công"
 msgid "Search"
 msgstr "Tìm kiếm"
 
-#: .\templates\base.html:111
+#: .\templates\base.html:113
 msgid "Donate"
 msgstr "Ủng hộ tùy tâm"
+
+#: .\templates\base.html:161
+msgid "Send feedback successfully"
+msgstr "Gửi feedback thành công"
+
+#: .\templates\base.html:173
+msgid "There are some error. Please try again!"
+msgstr "Đã xảy ra lỗi. Vui lòng thử lại"
 
 #: .\templates\home\index.html:29
 msgid "Get slim and toned with yoga"

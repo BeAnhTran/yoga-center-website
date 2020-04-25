@@ -56,6 +56,8 @@ urlpatterns += i18n_patterns(
     path('promotions/', include('apps.promotions.urls')),
     # FAQ
     path('faq/', include('apps.faq.urls')),
+    # Feedback
+    path('feedback/', include('apps.feedback.urls')),
     # dashboard
     path('dashboard/', include('apps.dashboard.urls')),
     # admin site

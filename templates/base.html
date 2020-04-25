@@ -93,16 +93,18 @@
     <div>
       <p class="call-text"> Hotline: 0932.999.979 </p>
       <a href="tel:0932999979" id="quickcallbutton" title="Call Now">
-      <div class="quick-alo-ph-circle active"></div>
-      <div class="quick-alo-ph-circle-fill active"></div>
-      <div class="quick-alo-ph-img-circle shake"></div>
+        <div class="quick-alo-ph-circle active"></div>
+        <div class="quick-alo-ph-circle-fill active"></div>
+        <div class="quick-alo-ph-img-circle shake"></div>
       </a>
     </div>
   </div>
 
   <div class="icon-bar">
-    <a target="_blank" href="https://www.facebook.com/CLB-Yoga-Huong-Tre-479934325379747/" class="facebook"><i class="fab fa-sm fa-facebook"></i></a> 
-    <a target="_blank" href="https://www.youtube.com/channel/UCKEKFt8623RUF-7Phxtnn-A" class="youtube"><i class="fab fa-sm fa-youtube"></i></a>
+    <a target="_blank" href="https://www.facebook.com/CLB-Yoga-Huong-Tre-479934325379747/" class="facebook"><i
+        class="fab fa-sm fa-facebook"></i></a>
+    <a target="_blank" href="https://www.youtube.com/channel/UCKEKFt8623RUF-7Phxtnn-A" class="youtube"><i
+        class="fab fa-sm fa-youtube"></i></a>
     <a href="javascript:;" class="feedback" id="icon_bar_feedback">
       <span class="tooltiptext">{% trans 'Feedback' %}</span>
       <i class="far fa-sm fa-comment-dots"></i>
@@ -133,8 +135,46 @@
     $(".alert-dismissible").fadeTo(3000, 500).fadeOut(500, function () {
       $(".alert-dismissible").alert('close');
     });
-    $('#icon_bar_feedback').click(function(){
+    $('#icon_bar_feedback').click(function () {
       $('#infor-switch').click();
+    });
+    $('#form_feedback').submit(function (e) {
+      e.preventDefault();
+      $.ajax({
+        headers: {
+          'X-CSRFTOKEN': '{{ csrf_token }}'
+        },
+        url: "{% url 'feedback:create' %}",
+        type: 'POST',
+        data: $(this).serialize(),
+        beforeSend: function () {
+          $(".loader").fadeIn();
+          $("#preloder").fadeIn();
+        }
+      }).done(function (data) {
+        console.log("Success", data);
+        $(".loader").fadeOut();
+        $("#preloder").fadeOut(function () {
+          $('.infor-close').click();
+          Swal.fire(
+            "{% trans 'done' as t_done %}{{ t_done|title }}",
+            "{% trans 'Send feedback successfully' %}",
+            'success'
+          );
+          $('#form_feedback').trigger("reset");
+        });
+      }).fail(function (err) {
+        console.log("Err", err);
+        $(".loader").fadeOut();
+        $("#preloder").fadeOut(function () {
+          $('.infor-close').click();
+          Swal.fire(
+            "{% trans 'error' as t_error %}{{ t_error|title }}",
+            "{% trans 'There are some error. Please try again!' %}",
+            'error'
+          );
+        });
+      });
     });
   </script>
 

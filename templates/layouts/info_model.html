@@ -19,23 +19,24 @@
 					<div class="singup-text">
 						<h3>{% trans 'Feedback' %}</h3>
 					</div>
-					<form class="singup-form">
+					<form id="form_feedback" action="{% url 'feedback:create' %}" method="POST" class="singup-form">
+						{% csrf_token %}
 						<div class="row">
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'first name' as t_f %}{{ t_f|capfirst }}">
+								<input type="text" name="first_name" placeholder="{% trans 'first name' as t_f %}{{ t_f|capfirst }}" required>
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'last name' as t_l %}{{ t_l|capfirst }}">
+								<input type="text" name="last_name" placeholder="{% trans 'last name' as t_l %}{{ t_l|capfirst }}" required>
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'email' as t_email %}{{ t_email|capfirst }}">
+								<input type="email" name="email" placeholder="{% trans 'email' as t_email %}{{ t_email|capfirst }}" required>
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}">
+								<input type="text" name="phone_number" placeholder="{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}">
 							</div>
 							<div class="col-md-12">
-								<textarea placeholder="{% trans 'Feedback' as t_feedback %}{{ t_feedback }}"></textarea>
-								<a href="javascript:;" class="site-btn sb-gradient">{% trans 'Submit' %}</a>
+								<textarea name="content" placeholder="{% trans 'Feedback' as t_feedback %}{{ t_feedback }}" required></textarea>
+								<button id="a_submit_feedback" type="submit" class="site-btn sb-gradient">{% trans 'Submit' %}</button>
 							</div>
 						</div>
 					</form>
