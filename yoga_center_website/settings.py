@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'apps.faq',
     'apps.questions',
     'apps.feedback',
+    'apps.donations',
     'seeds',
 ]
 

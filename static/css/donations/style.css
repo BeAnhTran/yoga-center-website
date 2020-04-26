@@ -1,0 +1,54 @@
+.bg-donations{
+    background: url("../../img/donate-background.jpg") 100% 100%;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.page-top-section:after {
+    background: linear-gradient(145deg, #12568861 45%, #fb3958 100%);
+}
+
+img {
+    margin: 5px;
+}
+
+.scale {
+    transform: scaleY(1.05);
+    padding-top: 5px; 
+}
+
+.flex-column {
+    max-width: 260px;
+}
+
+blockquote {
+	margin-left: 55px;
+	margin-top: 40px;
+	font-style: italic;
+	font-size: 16px;
+	color: #666666;
+	padding-right: 20px;
+	line-height: 1.8;
+	position: relative;
+	margin-bottom: 25px;
+}
+
+@media (max-width: 576px) {
+	blockquote {
+		margin-left: 30px;
+	}
+}
+
+blockquote:after {
+	position: absolute;
+	content: "";
+	width: 62px;
+	height: 52px;
+	left: -30px;
+	top: -12px;
+	background: url("../../img/icons/quota-2.png") no-repeat scroll 0 0/cover;
+}
+
+.example.example5 {
+	background-color: #212529;
+}
