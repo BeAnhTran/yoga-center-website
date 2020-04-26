@@ -2,14 +2,18 @@
 {% load static %}
 {% load i18n %}
 
+{% block specified_css %}
+<link href="{% static 'css/classes/show.css' %}" rel='stylesheet' />
+{% endblock %}
+
 {% block content %}
 <section class="classes-details-section spad">
     <div class="container">
         <div class="row mb-3">
             <div class="col">
                 <a class="text-danger" href="{% url 'courses:detail' class.course.slug %}"><span
-                        class="flaticon-lotus"></span> {{ class.course.name|title }}</a>
-                <a class="text-danger" href="javascript:;">&raquo; {{ class.name|title }}</a>
+                        class="flaticon-lotus"></span> {{ class.course.name }}</a>
+                <a class="text-danger" href="javascript:;">&raquo; {{ class.name }}</a>
             </div>
         </div>
         <div class="row">
@@ -25,12 +29,12 @@
                             {% endif %}
                         </div>
                         <div class="col-md-8">
-                            <h2>{{ class|title }}</h2>
+                            <h2 style="font-family: serif;">{{ class }}</h2>
                             <div class="cd-meta">
-                                <p><i class="material-icons">alarm_on</i>75 Mins </p>
+                                <p><i class="material-icons">alarm_on</i>75 phút</p>
                             </div>
                             <div class="cd-meta">
-                                <p><i class="material-icons">people_outline</i>25 người đăng kí</p>
+                                <p><i class="material-icons">people_outline</i>{{ class.cards.all.count }} người đăng kí</p>
                             </div>
                             <div>
                                 <a href="javascript:;"
@@ -40,15 +44,56 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
                     <div class="row">
                         <div class="col">
-                            <h2>Mô tả</h2>
+                            <h2 class="mt-3 text-secondary">{{ class.course }}</h2>
                         </div>
+                        <blockquote>
+                            {{ class.course.description }}
+                        </blockquote>
                     </div>
                     <div class="row">
                         <div class="col">
-                            {{ class.course.content | safe }}
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#detail">Thông tin chi tiết</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#lectures">Bài học</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="detail">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col content">
+                                            {{ class.course.content | safe }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="lectures">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col content">
+                                            {% if class.course.lectures.all.count > 0 %}
+                                                <ul class="list-group list-group-flush">
+                                                    {% for lecture in class.course.lectures.all %}
+                                                    <li class="list-group-item">{{ lecture }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% else %}
+                                                <h3>Chưa cập nhật</h3>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,7 +110,7 @@
                             {% endif %}
                         </div>
                         <div class="ci-text">
-                            <h4><a href="classes-details.html">{{ other|title }}</a></h4>
+                            <h4 style="font-family: serif;"><a href="classes-details.html">{{ other }}</a></h4>
                             <div class="ci-metas">
                                 <div class="ci-meta"><i class="material-icons">event_available</i>Mon, Wed, Fri</div>
                                 <div class="ci-meta"><i class="material-icons">alarm_on</i>06:30pm - 07:45pm</div>
@@ -98,10 +143,10 @@
                         <ul>
                             <li><i class="material-icons">event_available</i>{{ class.start_at }}</li>
                             <li><i class="material-icons">done_all</i>Thứ 2, 4, 6</li>
-                            <li><i class="material-icons">alarm_on</i>06:30pm - 07:45pm</li>
+                            <li><i class="material-icons">alarm_on</i>{{ class.lessons.first.start_time }} - {{ class.lessons.first.end_time }}</li>
                             <li>
                                 <a href="javascript:;">
-                                    <i class="material-icons">person_outline</i>{{ class.trainer|title }}
+                                    <i class="material-icons">person_outline</i>{{ class.trainer }}
                                 </a>
                             </li>
                         </ul>
@@ -119,7 +164,7 @@
                             <h4>{{ class.trainer|title }}</h4>
                             <h6>{% trans 'Yoga Trainer' %}</h6>
                         </a>
-                        <p>Yoga & Therapy Certificate of Uttarakhand University</p>
+                        <p>{{ class.trainer.certificates.first|default_if_none:'' }}</p>
                         <div class="ai-social">
                             <a href="javascript:;"><i class="fab fa-facebook"></i></a>
                             <a href="javascript:;"><i class="fab fa-instagram"></i></a>
