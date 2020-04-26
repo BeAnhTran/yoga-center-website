@@ -10,3 +10,64 @@
     min-width: 84px;
     font-weight: 500;
 }
+
+.content h1, h2, h3, h4, h5, h6 {
+   margin-bottom: .5rem;
+}
+
+.tab-content{
+    padding: 0 15px 25px 15px;
+}
+
+.nav.nav-tabs .nav-item{
+    width: 50%;
+    color: #fb3958;
+}
+
+.nav-tabs .nav-link{
+    color: #fb3958;
+    border-radius: 0;
+    border: none;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #fb3958;
+}
+
+.nav-tabs .nav-link.active {
+    color:white;
+    background: linear-gradient(145deg, #fb3958 0%, #fdb07d 100%);
+    border-color: #fb3958 #fb3958 #fb3958;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border-color: #fb3958 #fb3958 #fb3958;
+}
+
+blockquote {
+	margin-left: 55px;
+	margin-top: 40px;
+	font-style: italic;
+	font-size: 16px;
+	color: #666666;
+	padding-right: 20px;
+	line-height: 1.8;
+	position: relative;
+	margin-bottom: 25px;
+}
+
+@media (max-width: 576px) {
+	blockquote {
+		margin-left: 30px;
+	}
+}
+
+blockquote:after {
+	position: absolute;
+	content: "";
+	width: 62px;
+	height: 52px;
+	left: -30px;
+	top: -12px;
+	background: url("../../img/icons/quota-2.png") no-repeat scroll 0 0/cover;
+}

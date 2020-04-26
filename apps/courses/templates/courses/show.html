@@ -34,9 +34,53 @@
                         </a>
                     </div>
                 </div>
-                <p>{{ course.description }}</p>
-                <hr>
-                {{ course.content | safe }}
+                <blockquote>
+                    {{ course.description }}
+                </blockquote>
+                <div class="row">
+                    <div class="col">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#detail">Thông tin chi tiết</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#lectures">Bài học</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="detail">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col content">
+                                        {{ course.content | safe }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="lectures">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col content">
+                                        {% if course.lectures.all.count > 0 %}
+                                            <ul class="list-group list-group-flush">
+                                                {% for lecture in course.lectures.all %}
+                                                <li class="list-group-item">{{ lecture }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% else %}
+                                            <h3>Chưa cập nhật</h3>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-3">
                 <div class="sb-widget">
