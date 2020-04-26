@@ -1,7 +1,11 @@
 .trainer-item .ti-img img {
-    height: 304px;
+    height: 300px;
 }
 
 .img-thumbnail {
     border-radius: .75rem;
+}
+
+.ti-certificate-des{
+    height: 50px;
 }

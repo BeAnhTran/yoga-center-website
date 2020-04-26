@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
 from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.fields import RichTextField
 
 
 class User(AbstractUser):
@@ -65,12 +66,15 @@ class Certificate(models.Model):
     description = models.CharField(
         blank=True, null=True, max_length=255, verbose_name=_('description'))
     image = models.ImageField(upload_to='certificates',
-                              blank=True, verbose_name=_('image'))
+                              blank=True, null=True, verbose_name=_('image'))
 
     # Below the mandatory fields for generic relation
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()
+
+    def __str__(self):
+        return self.name
 
 
 PENDING_STATE = 0
@@ -115,8 +119,12 @@ class Trainee(models.Model):
 class Trainer(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True, related_name='trainer')
-    experience = models.TextField(
-        blank=True, verbose_name=_('yoga teaching experience'))
+    introduction = models.TextField(
+        null=True, blank=True, verbose_name=_('introduction'))
+    experience = RichTextField(
+        blank=True, null=True, verbose_name=_('experience'))
+    achievements = RichTextUploadingField(
+        null=True, blank=True, verbose_name=_('achievements'))
     certificates = GenericRelation(
         Certificate, related_query_name='trainers', verbose_name=_('certificate'))
     temporary_leave_requests = GenericRelation(
@@ -141,8 +149,7 @@ class Trainer(models.Model):
 class Staff(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True, related_name='staff')
-    experience = models.TextField(
-        blank=True, verbose_name=_('work experience'))
+    experience = RichTextField(blank=True, verbose_name=_('experience'))
     certificates = GenericRelation(
         Certificate, related_query_name='staffs', verbose_name=_('certificate'))
     is_student = models.BooleanField(

@@ -4699,3 +4699,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	visibility: visible;
 	opacity: 1;
   }
+
+.text-cyan-custom-1{
+	color: #067560 !important;
+}
