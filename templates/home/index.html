@@ -178,8 +178,11 @@
 					</div>
 					<div class="ci-bottom">
 						<div class="ci-author">
+							<div class="author-text">
+								<a href="{% url 'classes:list' %}?course={{course.slug}}" class="site-btn sb-gradient pl-2 pr-2">Danh sách lớp học</a>
+							</div>
 						</div>
-						<a href="" class="site-btn sb-gradient">{% trans 'view detail' %}</a>
+						<a href="" class="site-btn sb-gradient">{% trans 'detail' %}</a>
 					</div>
         </div>
         {% endfor %}
@@ -384,7 +387,7 @@
   <div class="gallery-slider owl-carousel">
     {% for gallery_image in gallery.images.all %}
     <div class="gs-item">
-      <img class="img" width="317" height="317" src="{{ gallery_image.image.url }}" alt="{{gallery.title}}">
+      <img class="img" width="225" height="225" src="{{ gallery_image.image.url }}" alt="{{gallery.title}}">
       <div class="gs-hover">
         <i class="fab fa-instagram"></i>
         <p>ht.yoga</p>

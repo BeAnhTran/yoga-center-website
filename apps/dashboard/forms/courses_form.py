@@ -13,7 +13,7 @@ from apps.dashboard.custom_layout_object import Formset
 
 LectureFormSet = inlineformset_factory(
     Course, Lecture, form=LectureInlineForm,
-    fields=['name', 'description'], extra=1, can_delete=True
+    fields=['name'], extra=1, can_delete=True
 )
 
 

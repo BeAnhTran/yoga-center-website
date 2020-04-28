@@ -56,26 +56,42 @@
                         <div class="tab-pane active" id="detail">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col content">
-                                        {{ course.content | safe }}
+                                    <div class="content">
+                                        {% if course.content %}
+                                            {{ course.content | safe }}
+                                        {% else %}
+                                            <h3>Chưa cập nhật</h3>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="lectures">
                             <div class="container">
-                                <div class="row">
-                                    <div class="col content">
-                                        {% if course.lectures.all.count > 0 %}
-                                            <ul class="list-group list-group-flush">
-                                                {% for lecture in course.lectures.all %}
-                                                <li class="list-group-item">{{ lecture }}</li>
-                                                {% endfor %}
-                                            </ul>
-                                        {% else %}
-                                            <h3>Chưa cập nhật</h3>
-                                        {% endif %}
-                                    </div>
+                                <div class="row pt-3">
+                                    {% if course.lectures.all.count > 0 %}
+                                        <!--  -->
+                                        <div class="panel-group" id="accordion">
+                                            {% for lecture in course.lectures.all %}
+                                            <div class="panel panel-default mb-3">
+                                                <div class="panel-heading" id="heading{{lecture.pk}}">
+                                                    <h3>
+                                                        <a class="text-secondary" href="#collapseLecture{{lecture.pk}}" data-toggle="collapse"
+                                                            data-parent="#accordion">{{forloop.counter}}. {{ lecture }}</a>
+                                                    </h3>
+                                                </div>
+                                                <div id="collapseLecture{{lecture.pk}}"
+                                                    class="panel-collapse collapse {% if forloop.first %}show{% endif %}">
+                                                    <div class="panel-body lecture-des">
+                                                        {{ lecture.description | safe }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <h3>Chưa cập nhật</h3>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -93,6 +109,7 @@
                         </ul>
                     </div>
                 </div>
+                {% if classes.all.count > 0 %}
                 <div class="sb-widget">
                     <h2 class="sb-title">Các lớp học nổi bật</h2>
                     {% for c in classes %}
@@ -127,6 +144,7 @@
                     </div>
                     {% endfor %}
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -51,17 +51,25 @@
                                 <div class="ci-text">
                                     <h4>{{ class }}</h4>
                                     <h5 class="mb-3">
-                                        <a class="btn btn-outline-success badge-pill" href="{% url 'courses:detail' class.course.slug %}">
+                                        <a class="btn btn-danger badge-pill" href="{% url 'courses:detail' class.course.slug %}">
                                             {{ class.course }}
                                         </a>
                                     </h5>
                                     <div class="ci-metas">
-                                        <div class="ci-meta"><i class="material-icons">event_available</i>Thứ 2, 4, 6
+                                        <div class="ci-meta">
+                                            <i class="material-icons">event_available</i>
+                                            {% for lesson_in_week in class.get_first_week %}
+                                                {% if forloop.last %}
+                                                    {{ lesson_in_week.date|date:"D" }}
+                                                {% else %}
+                                                    {{ lesson_in_week.date|date:"D" }} - 
+                                                {% endif %}
+                                            {% endfor %}
                                         </div>
-                                        <div class="ci-meta"><i class="material-icons">alarm_on</i>06:30pm - 07:45pm
+                                        <div class="ci-meta"><i class="material-icons">alarm_on</i>{{ class.lessons.first.start_time }} - {{ class.lessons.first.end_time }}
                                         </div>
                                     </div>
-                                    <p>{{ class.description }}</p>
+                                    <p>{{ class.course.description|truncatewords:20 }}</p>
                                 </div>
                                 <div class="ci-bottom">
                                     <a href="javascript:;" class="ci-author">

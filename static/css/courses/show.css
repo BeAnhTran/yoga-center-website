@@ -71,3 +71,10 @@ blockquote:after {
 	top: -12px;
 	background: url("../../img/icons/quota-2.png") no-repeat scroll 0 0/cover;
 }
+
+.lecture-des ul {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+	padding-inline-start: 40px;
+	list-style-type: circle;
+}

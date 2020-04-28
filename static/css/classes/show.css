@@ -54,3 +54,9 @@
     margin-bottom: 45px;
 }
 
+.lecture-des ul {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+	padding-inline-start: 40px;
+	list-style-type: circle;
+}

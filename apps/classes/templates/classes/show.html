@@ -24,8 +24,7 @@
                             {% if class.image %}
                             <img class="img rounded" width="250" src="{{ class.image.url }}" alt="{{class.name}}">
                             {% else %}
-                            <img class="img rounded" width="250" src="{% static 'img/class/default.jpg'%}"
-                                alt="{{class.name}}">
+                            <img class="img rounded" width="250" src="{{ class.course.image.url }}" alt="{{class}}">
                             {% endif %}
                         </div>
                         <div class="col-md-8">
@@ -71,7 +70,7 @@
                             <div class="tab-pane active" id="detail">
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col content">
+                                        <div class="content">
                                             {{ class.course.content | safe }}
                                         </div>
                                     </div>
@@ -79,18 +78,30 @@
                             </div>
                             <div class="tab-pane" id="lectures">
                                 <div class="container">
-                                    <div class="row">
-                                        <div class="col content">
-                                            {% if class.course.lectures.all.count > 0 %}
-                                                <ul class="list-group list-group-flush">
-                                                    {% for lecture in class.course.lectures.all %}
-                                                    <li class="list-group-item">{{ lecture }}</li>
-                                                    {% endfor %}
-                                                </ul>
-                                            {% else %}
-                                                <h3>Chưa cập nhật</h3>
-                                            {% endif %}
-                                        </div>
+                                    <div class="row pt-3">
+                                        {% if class.course.lectures.all.count > 0 %}
+                                            <!--  -->
+                                            <div class="panel-group" id="accordion">
+                                                {% for lecture in class.course.lectures.all %}
+                                                <div class="panel panel-default mb-3">
+                                                    <div class="panel-heading" id="heading{{lecture.pk}}">
+                                                        <h3>
+                                                            <a class="text-secondary" href="#collapseLecture{{lecture.pk}}" data-toggle="collapse"
+                                                                data-parent="#accordion">{{forloop.counter}}. {{ lecture }}</a>
+                                                        </h3>
+                                                    </div>
+                                                    <div id="collapseLecture{{lecture.pk}}"
+                                                        class="panel-collapse collapse {% if forloop.first %}show{% endif %}">
+                                                        <div class="panel-body lecture-des">
+                                                            {{ lecture.description | safe }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            <h3>Chưa cập nhật</h3>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -106,16 +117,25 @@
                             {% if other.image %}
                             <img src="{{ other.image.url }}" alt="{{other.name}}">
                             {% else %}
-                            <img src="{% static 'img/class/default.jpg'%}" alt="{{other.name}}">
+                            <img src="{{ other.course.image.url }}" alt="{{other.name}}">
                             {% endif %}
                         </div>
                         <div class="ci-text">
                             <h4 style="font-family: serif;"><a href="classes-details.html">{{ other }}</a></h4>
                             <div class="ci-metas">
-                                <div class="ci-meta"><i class="material-icons">event_available</i>Mon, Wed, Fri</div>
-                                <div class="ci-meta"><i class="material-icons">alarm_on</i>06:30pm - 07:45pm</div>
+                                <div class="ci-meta">
+                                    <i class="material-icons">event_available</i>
+                                    {% for lesson_in_week in other.get_first_week %}
+                                        {% if forloop.last %}
+                                            {{ lesson_in_week.date|date:"D" }}
+                                        {% else %}
+                                            {{ lesson_in_week.date|date:"D" }} - 
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="ci-meta"><i class="material-icons">alarm_on</i>{{ other.lessons.first.start_time }} - {{ other.lessons.first.end_time }}</div>
                             </div>
-                            <p>{{ other.description|capfirst|truncatewords:10 }}</p>
+                            <p>{{ other.course.description|truncatewords:20 }}</p>
                         </div>
                         <div class="ci-bottom">
                             <div class="ci-author">
@@ -142,10 +162,18 @@
                     <div class="classes-info">
                         <ul>
                             <li><i class="material-icons">event_available</i>{{ class.start_at }}</li>
-                            <li><i class="material-icons">done_all</i>Thứ 2, 4, 6</li>
+                            <li><i class="material-icons">done_all</i>
+                                {% for lesson_in_week in class.get_first_week %}
+                                    {% if forloop.last %}
+                                        {{ lesson_in_week.date|date:"D" }}
+                                    {% else %}
+                                        {{ lesson_in_week.date|date:"D" }} - 
+                                    {% endif %}
+                                {% endfor %}
+                            </li>
                             <li><i class="material-icons">alarm_on</i>{{ class.lessons.first.start_time }} - {{ class.lessons.first.end_time }}</li>
                             <li>
-                                <a href="javascript:;">
+                                <a href="{% url 'trainers:detail' class.trainer.slug %}">
                                     <i class="material-icons">person_outline</i>{{ class.trainer }}
                                 </a>
                             </li>
@@ -155,7 +183,7 @@
                 <div class="sb-widget">
                     <h2 class="sb-title">{% trans 'About Trainer' %}</h2>
                     <div class="about-instructor-widget">
-                        <a href="javascript:;">
+                        <a href="{% url 'trainers:detail' class.trainer.slug %}">
                             {% if class.trainer.user.image %}
                             <img src="{{ class.trainer.user.image.url }}" alt="{{class.trainer}}">
                             {% else %}

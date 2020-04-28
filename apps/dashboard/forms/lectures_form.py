@@ -7,8 +7,6 @@ class LectureInlineForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update(
             {'autofocus': 'autofocus', 'placeholder': 'tên bài tập'})
-        self.fields['description'].widget.attrs.update(
-            {'placeholder': 'mô tả nội dung cho bài tập'})
 
     class Meta:
         model = Lecture
