@@ -95,27 +95,37 @@
                 </div>
                 <div class="sb-widget">
                     <h2 class="sb-title">Các lớp học nổi bật</h2>
+                    {% for c in classes %}
                     <div class="classes-info">
                         <ul>
                             <li>
                                 <a class="text-danger" href="javascript:;">
-                                    <i class="material-icons">layers</i>CB-246
+                                    <i class="material-icons">layers</i>{{ c }}
                                 </a>
                             </li>
-                            <li><i class="material-icons">event_available</i>15/02/2020</li>
-                            <li><i class="material-icons">done_all</i>Thứ 2, 4, 6</li>
-                            <li><i class="material-icons">alarm_on</i>06:30pm - 07:45pm</li>
-                            <li>
-                                <a class="text-secondary" href="javascript:;">
-                                    <i class="material-icons">person_outline</i>Liên Nhã Trần
+                            <li><i class="material-icons">event_available</i>{{ c.start_at }}</li>
+                            <li><i class="material-icons">done_all</i>
+                                {% for lesson_in_week in c.get_first_week %}
+                                    {% if forloop.last %}
+                                        {{ lesson_in_week.date|date:"D" }}
+                                    {% else %}
+                                        {{ lesson_in_week.date|date:"D" }} - 
+                                    {% endif %}
+                                {% endfor %}
+                            </li>
+                            <li><i class="material-icons">alarm_on</i>{{ c.lessons.first.start_time }} - {{ c.lessons.first.end_time }}</li>
+                            <li>    
+                                <a class="text-info" href="{% url 'trainers:detail' c.trainer.slug %}">
+                                    <i class="material-icons">person_outline</i>{{ c.trainer }}
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:;" class="site-btn site-btn-sm sb-gradient">Chi tiết</a>
-                                <a href="javascript:;" class="site-btn site-btn-sm sb-gradient">Đăng kí</a>
+                                <a href="{% url 'classes:detail' c.slug %}" class="site-btn site-btn-sm sb-gradient">Chi tiết</a>
+                                <a href="{% url 'classes:enroll' c.slug %}" class="site-btn site-btn-sm sb-gradient">Đăng kí</a>
                             </li>
                         </ul>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

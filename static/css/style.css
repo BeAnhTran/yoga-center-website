@@ -4703,3 +4703,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .text-cyan-custom-1{
 	color: #067560 !important;
 }
+
+.course-des{
+	height: 110px !important;
+}

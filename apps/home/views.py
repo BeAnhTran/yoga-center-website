@@ -3,6 +3,7 @@ from apps.accounts.models import Trainer
 from apps.gallery.models import Gallery
 from apps.events.models import Event
 from apps.blog.models import Post
+from apps.courses.models import Course
 
 
 def home(request):
@@ -10,11 +11,13 @@ def home(request):
     gallery = Gallery.objects.first()
     events = Event.objects.all()[:3]
     posts = Post.objects.all()[:3]
+    courses = Course.objects.all()
     context = {
         'active_nav': 'home',
         'trainers': trainers,
         'gallery': gallery,
         'events': events,
         'posts': posts,
+        'courses': courses,
     }
     return render(request, 'home/index.html', context=context)

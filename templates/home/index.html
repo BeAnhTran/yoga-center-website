@@ -158,6 +158,36 @@
 </section>
 <!-- What we do Section end -->
 
+	<!-- Course Section -->
+	<section class="classes-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<img src="{% static 'img/icons/logo-icon.png' %}" alt="">
+				<h2>{% trans 'Popular Course' %}</h2>
+        <p>{% trans 'Practice Yoga to perfect physical beauty, take care of your soul and enjoy life more fully!' %}</p>
+			</div>
+			<div class="classes-slider owl-carousel">
+        {% for course in courses %}
+				<div class="classes-item">
+					<div class="ci-img">
+						<img src="{{ course.image.url }}" alt="{{course}}">
+					</div>
+					<div class="ci-text">
+						<h4><a href="{% url 'courses:detail' course.slug %}">{{ course }}</a></h4>
+						<p class="course-des">{{ course.description|truncatewords:50 }}</p>
+					</div>
+					<div class="ci-bottom">
+						<div class="ci-author">
+						</div>
+						<a href="" class="site-btn sb-gradient">{% trans 'view detail' %}</a>
+					</div>
+        </div>
+        {% endfor %}
+			</div>
+		</div>
+	</section>
+	<!-- Course Section end -->
+
 <!-- Trainer Section -->
 <section class="trainer-section overflow-hidden spad">
   <div class="container">
@@ -178,7 +208,7 @@
             {% endif %}
           </div>
           <div class="ti-text">
-            <h4>{{ trainer }}</h4>
+            <a href="{% url 'trainers:detail' trainer.slug %}"><h4>{{ trainer }}</h4></a>
             <h6>{% trans 'Yoga Trainer' %}</h6>
             <p>Yoga & Therapy Certificate of Uttarakhand University Sanskrit</p>
             <div class="ti-social">
