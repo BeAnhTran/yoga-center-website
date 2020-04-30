@@ -1,13 +1,15 @@
 {% load static %}
 {% load i18n %}
+{% load settings_extras %}
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <title>HT Yoga</title>
+  <title>Yoga Hương Tre</title>
   <meta charset="UTF-8">
-  <meta name="description" content="HT Yoga">
+  <meta name="description" content="Yoga Hương Tre">
   <meta name="keywords" content="yoga, html">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="{% static 'img/favicon.png'%}">
@@ -90,8 +92,8 @@
 
   <div class="call-now-button ui-draggable ui-draggable-handle" id="draggable">
     <div>
-      <p class="call-text"> Hotline: 0932.999.979 </p>
-      <a href="tel:0932999979" id="quickcallbutton" title="Call Now">
+      <p class="call-text"> Hotline: 0932.190.999 </p>
+      <a href="tel:0932190999" id="quickcallbutton" title="Call Now">
         <div class="quick-alo-ph-circle active"></div>
         <div class="quick-alo-ph-circle-fill active"></div>
         <div class="quick-alo-ph-img-circle shake"></div>
@@ -102,7 +104,7 @@
   <div class="icon-bar">
     <a target="_blank" href="https://www.facebook.com/CLB-Yoga-Huong-Tre-479934325379747/" class="facebook"><i
         class="fab fa-sm fa-facebook"></i></a>
-    <a target="_blank" href="https://www.youtube.com/channel/UCKEKFt8623RUF-7Phxtnn-A" class="youtube"><i
+    <a target="_blank" href='{% settings_value "YOGA_HUONG_TRE_YOUTUBE_LINK" %}' class="youtube"><i
         class="fab fa-sm fa-youtube"></i></a>
     <a href="javascript:;" class="feedback" id="icon_bar_feedback">
       <span class="tooltiptext">{% trans 'Feedback' %}</span>
