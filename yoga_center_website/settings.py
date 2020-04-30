@@ -26,7 +26,7 @@ SECRET_KEY = '0sd=iuk$&h6r26msa=b+v%a2#tqm_8#8s#8g!!0_n1!4jk(x%@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yoga-huong-tre.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['yogahuongtre.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
