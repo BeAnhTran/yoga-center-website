@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import dj_database_url
 import os
 from getenv import env
 
@@ -142,8 +143,9 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # env link
-YOGA_HUONG_TRE_YOUTUBE_LINK = env('YOGA_HUONG_TRE_YOUTUBE_LINK')
+YOGA_HUONG_TRE_YOUTUBE_URL = env('YOGA_HUONG_TRE_YOUTUBE_URL')
+YOGA_HUONG_TRE_FACEBOOK_URL = env('YOGA_HUONG_TRE_FACEBOOK_URL')
+YOGA_HUONG_TAWK_TO_API_URL = env('YOGA_HUONG_TAWK_TO_API_URL')
 
-import dj_database_url
-prod_db  =  dj_database_url.config(conn_max_age=500)
+prod_db = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
