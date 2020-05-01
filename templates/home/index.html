@@ -182,7 +182,7 @@
 								<a href="{% url 'classes:list' %}?course={{course.slug}}" class="site-btn sb-gradient pl-2 pr-2">Danh sách lớp học</a>
 							</div>
 						</div>
-						<a href="" class="site-btn sb-gradient">{% trans 'detail' %}</a>
+						<a href="{% url 'courses:detail' course.slug %}" class="site-btn sb-gradient">{% trans 'detail' %}</a>
 					</div>
         </div>
         {% endfor %}
@@ -213,7 +213,7 @@
           <div class="ti-text">
             <a href="{% url 'trainers:detail' trainer.slug %}"><h4>{{ trainer }}</h4></a>
             <h6>{% trans 'Yoga Trainer' %}</h6>
-            <p>Yoga & Therapy Certificate of Uttarakhand University Sanskrit</p>
+            <p>{{ trainer.certificates.first }}</p>
             <div class="ti-social">
               <a href="javascript:;"><i class="fab fa-facebook"></i></a>
               <a href="javascript:;"><i class="fab fa-instagram"></i></a>
