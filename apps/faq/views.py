@@ -12,7 +12,6 @@ class FAQListView(FormMixin, ListView):
     template_name = 'faq/list.html'
     context_object_name = 'faqs'
     ordering = ['created_at']
-    paginate_by = 10
     form_class = QuestionForm
 
     def get(self, request, *args, **kwargs):

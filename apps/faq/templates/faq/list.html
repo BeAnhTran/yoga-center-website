@@ -26,21 +26,11 @@
 </p>
 {% else %}
 <div class="container content">
-    <div class="row">
-        <div class="col-md-6">
-            <p>
-                {% trans 'faq' as trans_value %}
-                {% blocktrans with value1=page_obj.object_list.count value2=page_obj.paginator.count value3=trans_value trimmed %}
-                Showing {{ value1 }} of {{ value2 }} {{ value3 }}
-                {% endblocktrans %}
-            </p>
-        </div>
-    </div>
     {% for faq in faqs %}
     <div class="row mb-3">
         <div class="col">
             <h3 class="mb-3">
-                {{ faq.pk }}. {{ faq.question }}
+                {{ forloop.counter }}. {{ faq.question }}
             </h3>
             <div class="answer">
                 {{ faq.answer | safe }}
@@ -48,8 +38,6 @@
         </div>
     </div>
     {% endfor %}
-
-    {% include 'pagination.html' %}
 </div>
 <hr>
 	<!-- Ask question -->
