@@ -172,7 +172,7 @@ class Command(BaseCommand):
         print("Create <PRENATAL YOGA> COURSES")
         prenatal_yoga_course_data = {
             'name': 'Yoga cho bà bầu',
-            'description': '''Là loại hình Yoga đặc biệt dành riêng cho các bà bầu hoặc phụ nữ chuẩn bị mang thai,...  Với các động tác an toàn và kỹ năng thở hoàn toàn tập trung vào phần xương chậu, chân và lưng dưới giúp nâng cao sự dẻo dai của các cơ hỗ trợ nâng đỡ phần bụng ngày một to ra''',
+            'description': '''Là loại hình đặc biệt dành riêng cho các bà bầu hoặc phụ nữ chuẩn bị mang thai,... Với các động tác và kỹ năng thở tập trung vào phần xương chậu, chân và lưng dưới giúp hỗ trợ nâng đỡ phần bụng ngày một to ra''',
             'image': 'seeds/images/courses/yoga_bau.jpg',
             'price_per_lesson': 50000,
             'price_per_month': 600000,
