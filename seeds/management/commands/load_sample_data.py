@@ -647,7 +647,6 @@ class Command(BaseCommand):
                 'last_name': fake.last_name(),
                 'address': fake.address(),
                 'birth_day': fake.date_of_birth(tzinfo=None, minimum_age=15, maximum_age=70),
-                'phone_number': fake.phone_number(),
                 'gender': random.randint(0, 1)
             }
             trainee = User(**data)
