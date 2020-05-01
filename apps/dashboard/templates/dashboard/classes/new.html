@@ -1,0 +1,59 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <a class="btn btn-sm btn-outline-primary" href="{{request.META.HTTP_REFERER}}">
+        <i class="fas fa-fw fa-arrow-left"></i>
+    </a>
+</div>
+<div class="container-fluid card mt-3 mb-5">
+    <h5 class="ml-3 mt-3 text-uppercase">
+        {% trans 'class' as t_trans %}
+        {% blocktrans with value=t_trans trimmed %}
+        Create new {{ value }}
+        {% endblocktrans %}
+    </h5>
+    <hr class="mt-0 mb-0">
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                {% crispy form %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block specified_js %}
+<script type="text/javascript">
+    $('select#id_course').change(function (e) {
+        id_course = $(this).val();
+        if (id_course != '') {
+            $.ajax({
+                url: "{% url 'dashboard:json-card-type-list-for-course' %}",
+                method: 'GET',
+                data: {
+                    id_course: id_course
+                }
+            }).done(function (data) {
+                $("input[id^=" + 'id_card_types' + "]").parent('.custom-checkbox').addClass('d-none');
+                $("input[id^=" + 'id_card_types' + "]").removeClass('checked');
+
+                for (var i = 0; i < data.length; i++) {
+                    var _id = data[i]['id'];
+                    var id = 'input#id_card_types_' + _id;
+                    $(id).parent('.custom-checkbox').removeClass('d-none');
+                }
+            });
+        }else{
+            $("input[id^=" + 'id_card_types' + "]").parent('.custom-checkbox').removeClass('d-none');
+            $("input[id^=" + 'id_card_types' + "]").removeClass('checked');
+        }
+    });
+</script>
+
+
+{% endblock %}

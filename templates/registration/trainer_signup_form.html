@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Sign up as a Trainer</h2>
+      {% crispy form %}
+    </div>
+  </div>
+{% endblock %}

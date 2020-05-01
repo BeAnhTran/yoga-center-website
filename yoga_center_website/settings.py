@@ -38,7 +38,50 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'django_countries',
+    'crispy_forms',
+    'tempus_dominus',
+    'rest_framework',
+    'formtools',
+    'ckeditor',
+    'ckeditor_uploader',
+    'dynamic_formsets',
+    'django_twilio',
+
+    'apps.accounts',
+    'apps.common',
+    'apps.profiles',
     'apps.home',
+    'apps.courses',
+    'apps.classes',
+    'apps.lessons',
+    'apps.lectures',
+    'apps.rooms',
+    'apps.cards',
+    'apps.card_types',
+    'apps.yoga_schedule',
+    'apps.card_invoices',
+    'apps.dashboard',
+    'apps.roll_calls',
+    'apps.trainers',
+    'apps.blog',
+    'apps.make_up_lessons',
+    'apps.refunds',
+    'apps.shop',
+    'apps.promotions',
+    'apps.errors',
+    'apps.gallery',
+    'apps.events',
+    'apps.faq',
+    'apps.questions',
+    'apps.feedback',
+    'apps.donations',
+    'seeds',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +167,7 @@ USE_TZ = True
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale'), ]
 
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -143,6 +187,105 @@ STATICFILES_DIRS = [
 
 #  Add configuration for static files storage using whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+SITE_ID = 1
+
+# Custom Auth User model
+AUTH_USER_MODEL = 'accounts.User'
+
+
+# Custom Auth User model
+AUTH_USER_MODEL = 'accounts.User'
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+# Skip Email Verification
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+# CRISPY
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL = '/'
+
+TEMPUS_DOMINUS_LOCALIZE = True
+
+FORMAT_MODULE_PATH = 'yoga_center_website.formats'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'CMS',
+        'toolbar_CMS': [
+            {
+                'name': 'basicstyles',
+                'groups': ['basicstyles', 'cleanup'],
+                'items': ['Bold', 'Italic', 'Underline', '-', 'RemoveFormat']
+            },
+            {
+                'name': 'paragraph',
+                'groups': ['list', 'indent', 'blocks'],
+                'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']
+            },
+            {
+                'name': 'links',
+                'items': ['Link', 'Unlink']
+            },
+            {
+                'name': 'insert',
+                'items': ['Image', 'HorizontalRule', 'Table', 'Iframe', ]
+            },
+            {
+                'name': 'colors',
+                'items': ['TextColor', 'BGColor']
+            },
+            {
+                'name': 'insert',
+                'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']
+            },
+            {
+                'name': 'youtube',
+                'items': ['Youtube', ]
+            },
+            {
+                'name': 'tools',
+                'items': ['Maximize', 'ShowBlocks']
+            },
+            {
+                'name': 'styles',
+                'items': ['Styles', 'Format', 'Font', 'FontSize']
+            },
+            {
+                'name': 'document',
+                'items': ['Source']
+            },
+        ],
+        'height': '200px',
+        'width': '100%',
+        'extraPlugins': 'youtube',
+    }
+}
+
+SESSION_SAVE_EVERY_REQUEST = True
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_USE_SLL = False
+EMAIL_PORT = 587
+EMAIL_HOST_USER = env('EMAIL')
+EMAIL_HOST_PASSWORD = env('PASSWORD')
+
+TWILIO_ACCOUNT_SID = env('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = env('TWILIO_AUTH_TOKEN')
+DEFAULT_TO_NUMBER = env('DEFAULT_TO_NUMBER')
+TWILIO_PHONE_NUMBER = env('TWILIO_PHONE_NUMBER')
+
+STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
 
 # env link
 YOGA_HUONG_TRE_YOUTUBE_URL = env('YOGA_HUONG_TRE_YOUTUBE_URL')

@@ -1,0 +1,293 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load sexify %}
+
+{% block specified_css %}
+<script src="https://js.stripe.com/v3/"></script>
+
+{% block additional_css %}
+<link href="{% static 'css/shop/checkout.css' %}" rel="stylesheet">
+<link href="{% static 'css/payment/style.css' %}" rel='stylesheet' />
+
+{% endblock %}
+{% endblock %}
+
+
+{% block content %}
+<section class="spad">
+    <div class="container">
+        <div class="row mb-3">
+            <a class="text-danger" href="javascript:;">
+                <span class="flaticon-lotus"></span> Thanh toán giỏ hàng
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 mb-5">
+                <div class="row mb-3">
+                    <div class="col">
+                        <h3>THÔNG TIN THANH TOÁN</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="cell example example5" id="example-5">
+                            <form id="payment_form">
+                                <input type="hidden" name="amount" value="{{ total_price }}">
+                                <fieldset>
+                                    <legend class="card-only">
+                                        {% trans 'Please enter information below' %}
+                                    </legend>
+                                    <div class="row">
+                                        <div class="field">
+                                            <label for="example5-name">{% trans 'name' as t_name %}
+                                                {{t_name|title}}</label>
+                                            {{ payment_form.name }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="field">
+                                            <label
+                                                for="example5-phone">{% trans 'phone number' as t_phone %}{{ t_phone|title }}</label>
+                                            {{ payment_form.phone }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="field">
+                                            <label
+                                                for="example5-email">{% trans 'email' as t_email %}{{ t_email|title }}</label>
+                                            {{ payment_form.email }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="field">
+                                            <label
+                                                for="example5-address">{% trans 'address' as t_addr %}{{ t_addr|title }}</label>
+                                            {{ payment_form.address }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="field">
+                                            <label
+                                                for="example5-address">{% trans 'city' as t_city %}{{ t_city|title }}</label>
+                                            {{ payment_form.city }}
+                                        </div>
+                                    </div>
+                                    <!-- Payment Card -->
+                                    <div id="div_payment_card" class="row">
+                                        <div class="field">
+                                            <label>
+                                                {% trans 'Payment Card' %}
+                                            </label>
+                                            <div id="card-element" class="field"></div>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <div class="row">
+                                        <div class="field">
+                                            <button type="submit">{% trans 'Pay' %}</button>
+                                        </div>
+                                        <div class="outcome">
+                                            <div class="error"></div>
+                                            <div class="success">
+                                                Success! Your Stripe token is <span class="token"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row mb-3">
+                    <div class="col">
+                        <h3>GIỎ HÀNG</h3>
+                    </div>
+                    <div class="col">
+                        <a class="text-danger float-right" href="{% url 'shop:cart' %}">
+                            <small><i>Chỉnh sửa giỏ hàng</i></small></a>
+                    </div>
+                </div>
+                {% if cart is not None %}
+                <div id="info-right">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            {% for item in cart %}
+                            <div class="row mb-2">
+                                <div class="col-3">
+                                    <img class="img img-fluid img-thumbnail" src="{{ item.product.image.url }}"
+                                        alt="{{ item.product }}">
+                                </div>
+                                <div class="col-9">
+                                    <p><a class="text-secondary" href="javascript:;">{{ item.product }}</a></p>
+                                    <p>
+                                        {{ item.product.price | sexy_number }}đ x {{ item.quantity }} =
+                                        <b>{{ item.sub_total | sexy_number }}đ</b>
+                                    </p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </li>
+                    </ul>
+
+                    <div class="promotion">
+                        <form id="form_promotion" class="form-group">
+                            <label for="promotion_code"><small>Bạn có Mã khuyến mãi không?</small></label>
+                            <div class="row">
+                                <div class="col-8">
+                                    <input id="promotion_code" type="text" class="form-control"
+                                        placeholder="Nhập mã tại đây">
+                                </div>
+                                <div class="col">
+                                    <button id="btn_submit_promotion_code" type="submit">ÁP DỤNG</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <hr>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <td>Tạm tính:</td>
+                                <td class="float-right">{{ total | sexy_number }}đ</td>
+                            </tr>
+                            <tr>
+                                <td>Khuyến mãi:</td>
+                                <td class="float-right">-0đ</td>
+                            </tr>
+                            <tr>
+                                <td>Thành tiền:</td>
+                                <td class="float-right"><b class="text-danger">{{ total | sexy_number }}đ</b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <h3>Không có sản phẩm trong giỏ hàng</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block specified_js %}
+<script>
+    $(function () {
+        var stripe = Stripe('{{ key }}');
+        var elements = stripe.elements();
+
+        var card = elements.create('card', {
+            hidePostalCode: true,
+            style: {
+                base: {
+                    iconColor: '#F99A52',
+                    color: '#32315E',
+                    lineHeight: '48px',
+                    fontWeight: 400,
+                    fontFamily: '"Open Sans", "Helvetica Neue", "Helvetica", sans-serif',
+                    fontSize: '15px',
+                    '::placeholder': {
+                        color: '#CFD7DF',
+                    }
+                },
+            }
+        });
+
+        card.mount('#card-element');
+
+        function setOutcome(result) {
+            var successElement = document.querySelector('.success');
+            var errorElement = document.querySelector('.error');
+            successElement.classList.remove('visible');
+            errorElement.classList.remove('visible');
+
+            if (result.token) {
+                // Use the token to create a charge or a customer
+                // https://stripe.com/docs/charges
+                successElement.querySelector('.token').textContent = result.token.id;
+                successElement.classList.add('visible');
+            } else if (result.error) {
+                errorElement.textContent = result.error.message;
+                errorElement.classList.add('visible');
+            }
+        }
+
+        card.on('change', function (event) {
+            setOutcome(event);
+        });
+
+        $('#payment_form').submit(function (e) {
+            e.preventDefault();
+            var billing_details = {
+                name: $('input[name=name]').val(),
+                email: $('input[name=email]').val(),
+                phone: $('input[name=phone]').val(),
+                address_line1: $('input[name=address]').val(),
+                address_city: $('input[name=city]').val()
+            };
+
+            data = $('form#payment_form').serialize();
+            stripe.createToken(card, billing_details).then(function (result) {
+                stripeToken = result.token.id;
+                data += '&stripeToken=' + stripeToken;
+                submit_payment_form(data);
+            });
+        });
+        submit_payment_form = function (data) {
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: "{% url 'shop:checkout' %}",
+                type: 'POST',
+                data: data,
+                beforeSend: function () {
+                    $(".loader").fadeIn();
+                    $("#preloder").delay(200).fadeIn("slow");
+                }
+            }).done(function (data) {
+                $(".loader").fadeOut();
+                $("#preloder").delay(400).fadeOut("slow");
+                Swal.fire(
+                    "{% trans 'Order products successfully' as t_order_product_successfully %}{{ t_order_product_successfully|capfirst }}",
+                    "{% trans 'Please check your order history and email' %}",
+                    'success'
+                ).then((result) => {
+                    // redirect to accounts/bills/
+                    window.location.href = "{% url 'profile:accounts-bills' %}";
+                });
+            }).fail(function (err) {
+                console.log(err);
+            });
+        }
+        $('#form_promotion').submit(function (e) {
+            e.preventDefault();
+            var val = $('#promotion_code').val();
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: "{% url 'promotions:codes-check' %}",
+                type: 'GET',
+                data: {
+                    'code': val
+                },
+                beforeSend: function () {
+                    $(".loader").fadeIn();
+                    $("#preloder").fadeIn("slow");
+                }
+            }).done(function (data) {
+                $(".loader").fadeOut();
+                $("#preloder").fadeOut("slow");
+                console.log(data);
+            }).fail(err => console.log(err));
+        })
+    });
+
+
+
+</script>
+{% endblock %}

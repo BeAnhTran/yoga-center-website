@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block specified_css %}
+<link href="{% static 'css/faq/style.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<section class="page-top-section bg-faq">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 m-auto text-white">
+          <h2>{% trans 'FAQ'%}</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% if not faqs %}
+<p class="text-danger">
+    {% trans 'faq' as trans_value %}
+    {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container content">
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                {% trans 'faq' as trans_value %}
+                {% blocktrans with value1=page_obj.object_list.count value2=page_obj.paginator.count value3=trans_value trimmed %}
+                Showing {{ value1 }} of {{ value2 }} {{ value3 }}
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+    {% for faq in faqs %}
+    <div class="row mb-3">
+        <div class="col">
+            <h3 class="mb-3">
+                {{ faq.pk }}. {{ faq.question }}
+            </h3>
+            <div class="answer">
+                {{ faq.answer | safe }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% include 'pagination.html' %}
+</div>
+<hr>
+	<!-- Ask question -->
+	<section class="signup-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="singup-text">
+						<h3>{% trans 'Ask a question' %}</h3>
+					</div>
+                    <form action="" method="POST" class="singup-form">
+                        {% csrf_token %}
+						<div class="row">
+							<div class="col-md-6">
+								{{ form.first_name }}
+							</div>
+							<div class="col-md-6">
+								{{ form.last_name }}
+							</div>
+							<div class="col-md-6">
+                                {{ form.email }}
+							</div>
+							<div class="col-md-6">
+                                {{ form.phone_number }}
+							</div>
+							<div class="col-md-12">
+                                {{ form.content }}
+								<button type="submit" class="site-btn sb-gradient">{% trans 'Submit' %}</button>
+							</div>
+						</div>
+                    </form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Ask question Section end -->
+
+{% endif %}
+
+{% endblock %}

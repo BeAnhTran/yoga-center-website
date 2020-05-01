@@ -1,0 +1,79 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load dashboard_extras %}
+
+
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small>
+        {% trans 'promotion list' as t_promotion_list %} {{ t_promotion_list|capfirst }}</h1>
+    <a href="{% url 'dashboard:promotions-new' %}" class="btn btn-sm btn-success shadow-sm"><i
+            class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'create new' %}</a>
+</div>
+{% if not promotions %}
+<p class="text-danger">
+    {% trans 'promotion' as trans_val %}
+    {% blocktrans with value=trans_val %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th><small>{% trans 'name' as t_name %}{{ t_name|capfirst }}</small></th>
+                        <th><small>{% trans 'start at' as t_start %}{{ t_start|capfirst }}</small></th>
+                        <th><small>{% trans 'end at' as t_end %}{{ t_end|capfirst }}</small></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for promotion in promotions %}
+                    <tr>
+                        <td>{{ promotion.pk }}</td>
+                        <td>{{ promotion.name }}</td>
+                        <td>{{ promotion.start_at }}</td>
+                        <td>{{ promotion.end_at }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'dashboard:promotions-codes-list' promotion.pk %}">
+                                <i class="fas fa-fw fa-barcode"></i> Mã khuyến mãi
+                            </a>
+                            <a class="btn btn-sm btn-outline-primary"
+                                href="{% url 'dashboard:promotions-detail' promotion.pk %}"><i
+                                    class="fas fa-fw fa-eye"></i> {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
+                            <a class="btn btn-sm btn-outline-warning" href="{% url 'dashboard:promotions-edit' promotion.pk %}"><i
+                                    class="fas fa-fw fa-edit"></i> {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
+                            <a class="btn btn-sm btn-outline-danger delete-promotion" href="javascript:;"><i
+                                    class="fas fa-fw fa-trash"></i>
+                                {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
+                            <form class="d-none" action="{% url 'dashboard:promotions-delete' promotion.pk %}"
+                                method="post">
+                                {% csrf_token %}
+                                <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block specified_js %}
+<script type="text/javascript">
+    $('.delete-promotion').click(function () {
+        $(this).siblings('form').children('input[type=submit]').click();
+    });
+</script>
+{% endblock %}

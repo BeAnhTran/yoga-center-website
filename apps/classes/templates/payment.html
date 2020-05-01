@@ -1,0 +1,481 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load sexify %}
+{% block specified_css %}
+<script src="https://js.stripe.com/v3/"></script>
+<link href="{% static 'css/payment/style.css' %}" rel='stylesheet' />
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
+  integrity="sha256-JHGEmB629pipTkMag9aMaw32I8zle24p3FpsEeI6oZU=" crossorigin="anonymous" />
+{% endblock %}
+
+{% block content %}
+<section class="classes-page-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8" style="background: lightgrey;">
+        <h3 class="mt-3 mb-3">{% trans 'Payment Info' %}</h3>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="cell example example5" id="example-5">
+              <!--  -->
+              <form id="payment_form">
+                <input type="hidden" name="amount" value="{{ amount|floatformat }}">
+                <fieldset>
+                  <legend class="card-only">{% trans 'Please enter information below' %}</legend>
+                  <div class="row">
+                    <div class="field">
+                      <label for="example5-name">{% trans 'name' as t_name %} {{t_name|title}}</label>
+                      {{ form.name }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="field">
+                      <label for="example5-phone">{% trans 'phone number' as t_phone %}{{ t_phone|title }}</label>
+                      {{ form.phone }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="field">
+                      <label for="example5-email">{% trans 'email' as t_email %}{{ t_email|title }}</label>
+                      {{ form.email }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="field">
+                      <label for="example5-address">{% trans 'address' as t_addr %}{{ t_addr|title }}</label>
+                      {{ form.address }}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="field">
+                      <label for="example5-address">{% trans 'city' as t_city %}{{ t_city|title }}</label>
+                      {{ form.city }}
+                    </div>
+                  </div>
+                  <!-- Payment Card -->
+                  {% if total_price > 0 %}
+                  <div id="div_payment_card" class="row">
+                    {% else %}
+                    <div id="div_payment_card" class="row d-none">
+                      {% endif %}
+                      <div class="field">
+                        <label>
+                          {% trans 'Payment Card' %}
+                        </label>
+                        <div id="card-element" class="field"></div>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="row">
+                      <div class="field">
+                        {% if total_price > 0 %}
+                        <button type="submit">{% trans 'Pay' %} <strong
+                            id="total_price_payment">{{ amount_display }}đ</strong></button>
+                        {% elif total_price == 0 %}
+                        <button type="submit">{% trans 'Free Register' %} </button>
+                        {% else %}
+                        <button type="submit">{% trans 'Contact for more' %} </button>
+                        {% endif %}
+                      </div>
+                      <div class="outcome">
+                        <div class="error"></div>
+                        <div class="success">
+                          Success! Your Stripe token is <span class="token"></span>
+                        </div>
+                      </div>
+                    </div>
+                </fieldset>
+              </form>
+              <!--  -->
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="classes-item-warp">
+              <div class="classes-item">
+                <a href="{% url 'classes:detail' yoga_class.slug %}" class="ci-img">
+                  {% if yoga_class.image %}
+                  <img width="50" src="{{ yoga_class.image.url }}" alt="{{yoga_class.name}}">
+                  {% else %}
+                  <img width="50" src="{% static 'img/class/default.jpg'%}" alt="{{yoga_class.name}}">
+                  {% endif %}
+                </a>
+                <div class="ci-text">
+                  <h4>{{ yoga_class.name }}</h4>
+                  <p><span class="badge badge-pill badge-warning">{{ yoga_class.course }}</span></p>
+                  <div class="ci-metas">
+                    <div class="ci-meta"><i class="material-icons">event_available</i>Mon, Wed, Fri
+                    </div>
+                    <div class="ci-meta"><i class="material-icons">alarm_on</i>06:30pm - 07:45pm
+                    </div>
+                  </div>
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr>
+                        <td><small>{% trans 'card type' as t_card_type %}{{ t_card_type|capfirst }}</small></td>
+                        <td><small>{{ card_type }}</small></td>
+                      </tr>
+                      <tr>
+                        <td><small>{% trans 'start at' as t_start_at %}{{ t_start_at|capfirst }}</small></td>
+                        <td><small>{{ start_at }}</small></td>
+                      </tr>
+                      <tr>
+                        <td><small>{% trans 'end at' as t_end_at %}{{ t_end_at|capfirst }}</small></td>
+                        <td><small>{{ end_at }}</small></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <small>{% trans 'number of lessons' as t_number_of_lessons %}{{ t_number_of_lessons|capfirst }}</small>
+                        </td>
+                        <td><small>{{ number_of_lessons }}</small></td>
+                      </tr>
+                      <tr>
+                        <td><small>{% trans 'price' as t_price %}{{ t_price|capfirst }}</small></td>
+                        <td><small>
+                            {% if total_price > 0 %}
+                            {{ price }} {% trans 'vnd' %}
+                            {% else %}
+                            {{ price }}
+                            {% endif %}
+                          </small>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><small>{% trans 'total price' as t_total_price %}{{ t_total_price|capfirst }}</small></td>
+                        <td><small>
+                            {% if total_price > 0 %}
+                            {{ total_price_display }} {% trans 'vnd' %}
+                            {% else %}
+                            {{ total_price_display }}
+                            {% endif %}
+                          </small>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="ci-bottom">
+                  <div class="ci-author">
+                    {% if yoga_class.trainer.user.image %}
+                    <img src="{{ yoga_class.trainer.user.image.url }}" alt="{{yoga_class.trainer}}">
+                    {% else %}
+                    <img src="{% static 'img/user/default.png'%}" alt="{{yoga_class.trainer}}">
+                    {% endif %}
+                    <div class="author-text">
+                      <h6>{{ yoga_class.trainer }}</h6>
+                      <p>{% trans 'Yoga Trainer' %}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="promotion">
+          <form id="form_promotion" class="form-group">
+            <label for="promotion_code"><small>Bạn có Mã khuyến mãi không?</small></label>
+            <div class="row">
+              <div class="col-8">
+                <input id="promotion_code" type="text" class="form-control" placeholder="Nhập mã tại đây">
+              </div>
+              <div class="col">
+                <button id="btn_submit_promotion_code" type="submit">ÁP DỤNG</button>
+              </div>
+            </div>
+          </form>
+          <div>
+            <label><small><i>Lưu ý: Chỉ áp dụng 1 mã cho 1 lần thanh toán</i></small></label>
+          </div>
+        </div>
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td><small>Tạm tính:</small></td>
+              <td class="float-right">{{ total_price | sexy_number }}đ</td>
+            </tr>
+            <tr>
+              <td><small>Khuyến mãi:</small></td>
+              <td class="float-right">
+                {% if promotion_code %}
+                <small>{{ promotion_code.promotion.name }}</small>
+                {% else %}
+                <small><i>không</i></small>
+                {% endif %}
+              </td>
+            </tr>
+            {% if promotion_type and promotion_code %}
+            <tr>
+              <td><small>Mã KM:</small></td>
+              <td class="float-right">
+                <span class="badge badge-warning">
+                  <small>{{ promotion_code.value }}</small>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td><small>Hình thức KM:</small></td>
+              <td class="float-right">
+                <small>{{ promotion_type.full_title }}</small>
+              </td>
+            </tr>
+            {% endif %}
+            <tr>
+              <td><small>Thành tiền:</small></td>
+              <td class="float-right"><b class="text-danger">{{ amount | sexy_number }}đ</b></td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <!--  -->
+        <p class="text-success mb-3"><b>{% trans 'Your Lesson List' %}</b> <span
+            class="badge badge-success">{{ lesson_list.count }}</span></p>
+        <ul class="list-group mCustomScrollbar mb-5" style="max-height: 150px;">
+          {% for lesson in lesson_list %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ lesson.date }} - {{ lesson.get_time_and_room_detail }}
+            <span class="badge badge-success badge-pill">{{ forloop.counter }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        <!--  -->
+
+        <!-- promotion lessons -->
+        {% if promotion_lessons %}
+        <p class="text-info"><b>Buổi học được khuyến mãi</b> <span
+            class="badge badge-info">{{ promotion_lessons.count }}</span></p>
+        <ul class="list-group mCustomScrollbar mb-5" style="max-height: 150px;">
+          {% for promotion_lesson in promotion_lessons %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ promotion_lesson.date }} - {{ promotion_lesson.get_time_and_room_detail }}
+            <span class="badge badge-info badge-pill">{{ forloop.counter }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<button id="btn_modal" type="button" class="d-none btn btn-primary" data-toggle="modal"
+  data-target="#modal_check_promotion">
+  Open modal
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="modal_check_promotion">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-none">
+        <h4 id="model_title" class="modal-title">
+          Thông tin khuyến mãi
+        </h4>
+        <button id="btn_modal_create_lesson" type="button" class="btn btn-sm btn-danger"
+          data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-borderless">
+          <tbody>
+            <tr class="row">
+              <td class="col-4">Tên khuyến mãi:</td>
+              <td class="col-8" id="promotion_name" class="float-right">tên khuyến mãi</td>
+            </tr>
+            <tr class="row">
+              <td class="col-4">Mô tả</td>
+              <td class="col-8" id="promotion_description" class="float-right">mô tả</td>
+            </tr>
+            <tr class="row">
+              <td class="col-4">
+                Chọn hình thức khuyến mãi
+              </td>
+              <td class="col-8" id="td_promotion_types" class="float-right">
+                <form id="promotion_types" method="POST"
+                  action="{% url 'classes:use-promotion-code-when-payment' yoga_class.slug %}">
+                  {% csrf_token %}
+                  <input id="input_promotion_code" type="hidden" name="promotion-code">
+                  <input type="submit" class="btn btn-success mt-3" value="Xác nhận">
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block specified_js %}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"
+  integrity="sha256-/YAntTqXy9V4LoXFkI5WPDl3ZwP/knn1BljmMJJ7QWc=" crossorigin="anonymous"></script>
+
+<script>
+  $(function () {
+    $(".list-lesson").mCustomScrollbar();
+
+    var stripe = Stripe('{{ key }}');
+    var elements = stripe.elements();
+
+    var card = elements.create('card', {
+      hidePostalCode: true,
+      style: {
+        base: {
+          iconColor: '#F99A52',
+          color: '#32315E',
+          lineHeight: '48px',
+          fontWeight: 400,
+          fontFamily: '"Open Sans", "Helvetica Neue", "Helvetica", sans-serif',
+          fontSize: '15px',
+          '::placeholder': {
+            color: '#CFD7DF',
+          }
+        },
+      }
+    });
+
+    card.mount('#card-element');
+
+    function setOutcome(result) {
+      var successElement = document.querySelector('.success');
+      var errorElement = document.querySelector('.error');
+      successElement.classList.remove('visible');
+      errorElement.classList.remove('visible');
+
+      if (result.token) {
+        // Use the token to create a charge or a customer
+        // https://stripe.com/docs/charges
+        successElement.querySelector('.token').textContent = result.token.id;
+        successElement.classList.add('visible');
+      } else if (result.error) {
+        errorElement.textContent = result.error.message;
+        errorElement.classList.add('visible');
+      }
+    }
+
+    card.on('change', function (event) {
+      setOutcome(event);
+    });
+
+    $('form#payment_form').submit(function (e) {
+      e.preventDefault();
+      var billing_details = {
+        name: $('input[name=name]').val(),
+        email: $('input#id_email').val(),
+        phone: $('input[name=phone]').val(),
+        address_line1: $('input[name=address]').val(),
+        address_city: $('input[name=city]').val()
+      };
+
+      data = $('form#payment_form').serialize();
+      if ($('#card-element').is(":visible")) {
+        stripe.createToken(card, billing_details).then(function (result) {
+          stripeToken = result.token.id;
+          data += '&stripeToken=' + stripeToken;
+          submit_payment_form(data);
+        });
+      } else {
+        submit_payment_form(data);
+      }
+    });
+  });
+
+  submit_payment_form = function (data) {
+    $.ajax({
+      headers: {
+        'X-CSRFTOKEN': '{{ csrf_token }}'
+      },
+      url: "{% url 'classes:enroll-payment' yoga_class.slug %}",
+      type: 'POST',
+      data: data,
+      beforeSend: function () {
+        $(".loader").fadeIn();
+        $("#preloder").fadeIn();
+      }
+    }).done(function (data) {
+      $(".loader").fadeOut();
+      $("#preloder").fadeOut(function () {
+        Swal.fire(
+          "{% trans 'enroll successfully' as t_enroll_successfully %}{{ t_enroll_successfully|capfirst }}",
+          "{% trans 'Thanks for your register. Please check schedule and prepare to study' %}",
+          'success'
+        ).then((result) => {
+          // redirect to accounts/bills/
+          window.location.href = "{% url 'profile:profile-trainee-cards' %}";
+        });
+      });
+    }).fail(function (err) {
+      console.log(err);
+    });
+  }
+
+  $('#form_promotion').submit(function (e) {
+    e.preventDefault();
+    var val = $('#promotion_code').val().trim();
+    if (val.trim() == "") {
+      Swal.fire(
+        "{% trans 'error' as t_error %}{{ t_error|title }}",
+        'Vui lòng nhập giá trị',
+        'error'
+      );
+    } else {
+      $.ajax({
+        headers: {
+          'X-CSRFTOKEN': '{{ csrf_token }}'
+        },
+        url: "{% url 'promotions:codes-check' %}",
+        type: 'GET',
+        data: {
+          'code': val
+        },
+        beforeSend: function () {
+          $(".loader").fadeIn();
+          $("#preloder").fadeIn();
+        }
+      }).done(function (data) {
+        console.log(data);
+        $(".loader").fadeOut();
+        $("#preloder").fadeOut(function () {
+          $('#input_promotion_code').val(data['value']);
+          $('#promotion_name').text(data['promotion']['name']);
+          $('#promotion_description').text(data['promotion']['description']);
+          var str = '';
+          var promotion_types_count = data['promotion']['promotion_types'].length;
+          $.each(data['promotion']['promotion_types'], (i, v) => {
+            console.log(i);
+            console.log(v);
+            $('.form-check').remove();
+            if (promotion_types_count == 1) {
+              str += `<div class="form-check">
+                      <label class="form-check-label">
+                      <input data-choose-product="`+ v['choose_product'] + `" type="radio" value="` + v['id'] + `" class="form-check-input" name="promotion-type" checked>`;
+            } else {
+              str += `<div class="form-check">
+                      <label class="form-check-label">
+                      <input data-choose-product="`+ v['choose_product'] + `" type="radio" value="` + v['id'] + `" class="form-check-input" name="promotion-type">`;
+            }
+            str += v['full_title'];
+            str += `</label></div>`;
+          });
+          $('#promotion_types').prepend(str);
+          $('#btn_modal').click();
+        });
+
+      }).fail(function (err) {
+        console.log(err);
+        $(".loader").fadeOut();
+        $("#preloder").fadeOut(function () {
+          Swal.fire(
+            "{% trans 'error' as t_error %}{{ t_error|title }}",
+            err.responseJSON.detail,
+            'error'
+          );
+        });
+      });
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'profile/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load sexify %}
+
+{% block header_path %}
+<a class="text-danger" href="javascript:;">
+    &raquo; Đơn hàng
+</a>
+{% endblock %}
+
+{% block profile_content %}
+
+{% if bills.count > 0 %}
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th><small>STT</small></th>
+        <th><small>Mã số</small></th>
+        <th><small>Số lượng sản phẩm</small></th>
+        <th><small>Khuyến mãi</small></th>
+        <th><small>Thành tiền</small></th>
+        <th><small>Ngày tạo</small></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for bill in bills %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ bill.pk }}</td>
+            <td>{{ bill.products.all.count }}</td>
+            <td><small class="text-danger">không</small></td>
+            <td>{{ bill.amount | sexy_number }}đ</td>
+            <td>{{ bill.created_at.date }}</td>
+            <td>
+                <a class="text-success" href="javascript:;"><small>Xem chi tiết</small></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+<h3 class="text-danger">Không có hóa đơn mua hàng nào</h3>
+{% endif %}
+
+{% endblock %}
+{% block specified_js %}
+{% endblock %}

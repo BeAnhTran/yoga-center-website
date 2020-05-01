@@ -1,0 +1,98 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load sexify %}
+
+{% block additional_css %}
+<link href="{% static 'css/shop/style.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block shop_content %}
+<div class="row mb-3">
+    <div class="col">
+        <a class="text-danger" href="javascript:;">
+            <span class="flaticon-lotus"></span> Cửa hàng
+        </a>
+    </div>
+</div>
+{% if not products %}
+<div class="row">
+    <div class="col">
+        <h3 class="text-danger">
+            {% trans 'products' as trans_value %}
+            {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
+        </h3>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col-md-6">
+        <p>
+            {% trans 'product' as t_product %}
+            {% blocktrans with value1=page_obj.object_list.count value2=page_obj.paginator.count value3=t_product trimmed %}
+            Showing {{ value1 }} of {{ value2 }} {{ value3 }}
+            {% endblocktrans %}
+        </p>
+    </div>
+</div>
+<div class="row">
+    {% for product in products %}
+    <div class="col-lg-6 col-md-6">
+        <div class="blog-item">
+            <div class="bi-image">
+                <a href="{% url 'shop:product-detail' product.slug %}">
+                    <img class="img img-fluid" src="{{ product.image.url }}" alt="{{ product }}">
+                </a>
+            </div>
+            <div class="bi-text">
+                <h2><a href="{% url 'shop:product-detail' product.slug %}">{{ product }}</a></h2>
+                <p>
+                    {{ product.price | sexy_number }}đ
+                </p>
+            </div>
+            <div class="bi-footer">
+                <a class="float-left text-secondary" href="{% url 'shop:product-detail' product.slug %}">
+                    <i class="fa fa-fw fa-eye"></i> Chi tiết
+                </a>
+                <a class="float-right text-secondary add-to-cart" data-pk='{{ product.pk }}' href="javascript:;">
+                    <i class="fa fa-fw fa-cart-plus"></i> Thêm vào giỏ
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block specified_js %}
+<script>
+    $(function () {
+        $('.add-to-cart').click(function () {
+            var id = $(this).attr('data-pk');
+            var _url = "{% url 'shop:add-product-to-cart' 0 %}";
+            var url = _url.replace('0', id);
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: url,
+                type: 'POST'
+            }).done(function (data) {
+                console.log(data);
+                Swal.fire(
+                    "{% trans 'Add product to cart successfully' %}",
+                    '',
+                    'success'
+                ).then((result) => {
+                    var obj = jQuery.parseJSON(data);
+                    $('#shop_cart_header').text(obj['products_count']);
+                });
+            }).fail(err => console.log(err));
+        });
+    });
+
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+{% if not courses %}
+<p class="text-danger">
+    {% trans 'courses' as trans_value %}
+    {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container content">
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                {% trans 'courses' as t_courses %}
+                {% blocktrans with value1=page_obj.object_list.count value2=page_obj.paginator.count value3=t_courses trimmed %}
+                Showing {{ value1 }} of {{ value2 }} {{ value3 }}
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        {% for course in courses %}
+        <div class="col-md-6 col-lg-4">
+            <div class="classes-item-warp">
+                <div class="classes-item">
+                    <a href="{% url 'courses:detail' course.slug %}" class="ci-img">
+                        {% if course.image %}
+                        <img src="{{ course.image.url }}" alt="{{ course.name }}">
+                        {% else %}
+                        <img src="{% static 'img/course/default_course.jpg'%}" alt="{{ course.name }}">
+                        {% endif %}
+                    </a>
+                    <div class="ci-text">
+                        <h4>{{ course.name }}</h4>
+                        <p class="ci-desc" style="height: 75px;">{{ course.description| truncatewords:25  }}</p>
+                    </div>
+                    <div class="ci-bottom">
+                        <div class="ci-author">
+                            <a href="{% url 'courses:detail' course.slug %}"
+                                class="site-btn sb-gradient">{% trans 'detail' %}</a>
+                        </div>
+                        <a href="javasript:;" class="site-btn sb-gradient">{% trans 'view classes' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% include 'pagination.html' %}
+</div>
+
+{% endif %}
+
+{% endblock %}

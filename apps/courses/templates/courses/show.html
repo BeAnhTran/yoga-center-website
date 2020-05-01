@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block specified_css %}
+<link href="{% static 'css/courses/show.css' %}" rel='stylesheet' />
+{% endblock %}
+
+{% block content %}
+<section class="classes-details-section spad">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col">
+                <a class="text-danger" href="javascript:;"><span class="flaticon-lotus"></span>
+                    {{ course.name|title }}</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="classes-preview">
+                    {% if course.image %}
+                    <img src="{{ course.image.url }}" alt="{{ course.name }}">
+                    {% else %}
+                    <img src="{% static 'img/course/default_course.jpg'%}" alt="{{ course.name }}">
+                    {% endif %}
+                </div>
+                <div class="row mt-3 mb-3">
+                    <div class="col-md-8 col-lg-8">
+                        <h2>{{ course.name|title }}</h2>
+                    </div>
+                    <div class="col-md-4 col-lg-4 text-left text-md-right">
+                        <a class="site-btn sb-gradient"
+                            href="{% url 'classes:list' %}?course={{course.slug}}">{% trans 'view classes' as t_view_classes %}{{t_view_classes|capfirst}}
+                        </a>
+                    </div>
+                </div>
+                <blockquote>
+                    {{ course.description }}
+                </blockquote>
+                <div class="row">
+                    <div class="col">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#detail">Thông tin chi tiết</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#lectures">Bài học</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="detail">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="content">
+                                        {% if course.content %}
+                                            {{ course.content | safe }}
+                                        {% else %}
+                                            <h3>Chưa cập nhật</h3>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="lectures">
+                            <div class="container">
+                                <div class="row pt-3">
+                                    {% if course.lectures.all.count > 0 %}
+                                        <!--  -->
+                                        <div class="panel-group" id="accordion">
+                                            {% for lecture in course.lectures.all %}
+                                            <div class="panel panel-default mb-3">
+                                                <div class="panel-heading" id="heading{{lecture.pk}}">
+                                                    <h3>
+                                                        <a class="text-secondary" href="#collapseLecture{{lecture.pk}}" data-toggle="collapse"
+                                                            data-parent="#accordion">{{forloop.counter}}. {{ lecture }}</a>
+                                                    </h3>
+                                                </div>
+                                                <div id="collapseLecture{{lecture.pk}}"
+                                                    class="panel-collapse collapse {% if forloop.first %}show{% endif %}">
+                                                    <div class="panel-body lecture-des">
+                                                        {{ lecture.description | safe }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <h3>Chưa cập nhật</h3>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="sb-widget">
+                    <h2 class="sb-title">Thông tin giá thẻ tập</h2>
+                    <div class="classes-info">
+                        <ul>
+                            <li><i class="material-icons">done</i>Giá tháng: {{ course.get_price_per_month }}đ</li>
+                            <li><i class="material-icons">done</i>Giá buổi: {{ course.get_price_per_month }}đ</li>
+                            <li><i class="material-icons">done</i>Giá học thử: Miễn phí</li>
+                        </ul>
+                    </div>
+                </div>
+                {% if classes.all.count > 0 %}
+                <div class="sb-widget">
+                    <h2 class="sb-title">Các lớp học nổi bật</h2>
+                    {% for c in classes %}
+                    <div class="classes-info">
+                        <ul>
+                            <li>
+                                <a class="text-danger" href="javascript:;">
+                                    <i class="material-icons">layers</i>{{ c }}
+                                </a>
+                            </li>
+                            <li><i class="material-icons">event_available</i>{{ c.start_at }}</li>
+                            <li><i class="material-icons">done_all</i>
+                                {% for lesson_in_week in c.get_first_week %}
+                                    {% if forloop.last %}
+                                        {{ lesson_in_week.date|date:"D" }}
+                                    {% else %}
+                                        {{ lesson_in_week.date|date:"D" }} - 
+                                    {% endif %}
+                                {% endfor %}
+                            </li>
+                            <li><i class="material-icons">alarm_on</i>{{ c.lessons.first.start_time }} - {{ c.lessons.first.end_time }}</li>
+                            <li>    
+                                <a class="text-info" href="{% url 'trainers:detail' c.trainer.slug %}">
+                                    <i class="material-icons">person_outline</i>{{ c.trainer }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'classes:detail' c.slug %}" class="site-btn site-btn-sm sb-gradient">Chi tiết</a>
+                                <a href="{% url 'classes:enroll' c.slug %}" class="site-btn site-btn-sm sb-gradient">Đăng kí</a>
+                            </li>
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

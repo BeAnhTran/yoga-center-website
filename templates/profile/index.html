@@ -1,0 +1,174 @@
+{% extends 'profile/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'vendor/acc-wizard-master/release/acc-wizard.min.css' %}">
+{% endblock %}
+
+{% block header_path %}
+<a class="text-danger" href="javascript:;">
+    &raquo; Thông tin cá nhân
+</a>
+{% endblock %}
+
+
+{% block profile_content %}
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="form-row">
+            {% crispy form1 %}
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <a class="site-btn sb-gradient" href="javascript:;">Đổi mật khẩu mới</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" id="headingOne">
+            <h3>
+                <a class="text-secondary" href="#collapseBasicInfo" data-toggle="collapse"
+                    data-parent="#accordion">{% trans 'Basic information' %}</a>
+            </h3>
+        </div>
+
+        <div id="collapseBasicInfo"
+            class="panel-collapse collapse {% if focus == 'collapseBasicInfo' %}show{% endif %}">
+            <div class="panel-body">
+                {%  crispy form_basic_info %}
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" id="headingTwo">
+            <h3>
+                <a class="text-secondary" href="#collapseAdditionalInfo" data-toggle="collapse"
+                    data-parent="#accordion">{% trans 'Additional information' %}</a>
+            </h3>
+        </div>
+        <div id="collapseAdditionalInfo"
+            class="panel-collapse collapse {% if focus == 'collapseAdditionalInfo' %}show{% endif %}">
+            <div class="panel-body">
+                {% crispy form_additional_info %}
+            </div>
+        </div>
+    </div>
+    {% if user.is_trainee %}
+    <div class="panel panel-default">
+        <div class="panel-heading" id="headingThree">
+            <h3>
+                <a class="text-secondary" href="#collapseHealthCondition" data-toggle="collapse"
+                    data-parent="#accordion">
+                    {% trans 'health condition' as t_health_con %}
+                    {{ t_health_con|capfirst }}
+                </a>
+            </h3>
+        </div>
+        <div id="collapseHealthCondition"
+            class="panel-collapse collapse {% if focus == 'collapseHealthCondition' %}show{% endif %}">
+            <div class="panel-body">
+                {% crispy form_health_condition %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if user.is_trainer or user.is_staff %}
+    <div class="panel panel-default">
+        <div class="panel-heading" id="headingFour">
+            <h3>
+                <a class="text-secondary" href="#collapseCertificate" data-toggle="collapse" data-parent="#accordion">
+                    Chứng chỉ
+                </a>
+            </h3>
+        </div>
+        <div id="collapseCertificate"
+            class="panel-collapse collapse {% if focus == 'collapseCertificate' %}show{% endif %}">
+            <div class="panel-body">
+                <a id="add_new_certificate" class="float-right text-danger" href="javascript:;" data-toggle="modal" data-target="#modal_certificate"><small><i>tạo mới</i></small></a>
+                {% if certificate_user_obj.certificates.all.count > 0 %}
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="table-success">
+                            <th><small>#</small></th>
+                            <th><small>{% trans 'image' as t_img %}{{ t_img|capfirst }}</small></th>
+                            <th><small>{% trans 'name' as t_name %}{{ t_name|capfirst }}</small></th>
+                            <th><small>{% trans 'description' as t_description %}{{ t_description|capfirst }}</small></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for certificate in certificate_user_obj.certificates.all %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                <img class="img img-fluid" width="50" src="{{ certificate.image.url }}" alt="{{ certificate.name }}">
+                            </td>
+                            <td>{{ certificate.name }}</td>
+                            <td>{{ certificate.description }}</td>
+                            <td><a href="javascript:;">Chỉnh sửa</a></td>
+                        </tr>
+                        {% endfor %}
+    
+                    </tbody>
+                </table>
+                {% else %}
+                <p><i>Không có chứng chỉ</i></p>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div class="modal" id="modal_certificate">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-none">
+                    <h3 id="model_title" class="modal-title">Thêm chứng chỉ</h3>
+                    <button id="" type="button" class="btn btn-sm btn-danger"
+                        data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    {% crispy form_certificate %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block specified_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
+
+<script>
+    $(function () {
+        var obj_str = '#{{focus}}';
+        if (obj_str.length > 1) {
+            $('html, body').animate({ scrollTop: $(obj_str).offset().top - 100 }, 'slow');
+        }
+    });
+
+    $('form#form_health_condition').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: "{% url 'profile:update-health-condition' %}",
+            type: 'POST',
+            data: $(this).serialize()
+        }).done(function (data) {
+            window.location.replace("{% url 'profile:index' %}?focus=collapseHealthCondition");
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+</script>
+{% endblock %}

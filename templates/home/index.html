@@ -166,7 +166,26 @@
 				<h2>{% trans 'Popular Course' %}</h2>
         <p>{% trans 'Practice Yoga to perfect physical beauty, take care of your soul and enjoy life more fully!' %}</p>
 			</div>
-			<div class="classes-slider owl-carousel"
+			<div class="classes-slider owl-carousel">
+        {% for course in courses %}
+				<div class="classes-item">
+					<div class="ci-img">
+						<img src="{{ course.image.url }}" alt="{{course}}">
+					</div>
+					<div class="ci-text">
+						<h4><a href="{% url 'courses:detail' course.slug %}">{{ course }}</a></h4>
+						<p class="course-des">{{ course.description|truncatewords:50 }}</p>
+					</div>
+					<div class="ci-bottom">
+						<div class="ci-author">
+							<div class="author-text">
+								<a href="{% url 'classes:list' %}?course={{course.slug}}" class="site-btn sb-gradient pl-2 pr-2">Danh sách lớp học</a>
+							</div>
+						</div>
+						<a href="" class="site-btn sb-gradient">{% trans 'detail' %}</a>
+					</div>
+        </div>
+        {% endfor %}
 			</div>
 		</div>
 	</section>
@@ -181,7 +200,30 @@
       <p>{% trans 'Practice Yoga to perfect physical beauty, take care of your soul and enjoy life more fully!' %}</p>
     </div>
     <div class="trainer-slider owl-carousel">
-
+      {% for trainer in trainers %}
+      <div class="ts-item">
+        <div class="trainer-item">
+          <div class="ti-img">
+            {% if trainer.user.image %}
+            <img class="img img-thumbnail" src="{{ trainer.user.image.url }}" alt="{{ trainer }}">
+            {% else %}
+            <img class="img img-thumbnail" src="{% static 'img/user/default.png'%}" alt="{{ trainer }}">
+            {% endif %}
+          </div>
+          <div class="ti-text">
+            <a href="{% url 'trainers:detail' trainer.slug %}"><h4>{{ trainer }}</h4></a>
+            <h6>{% trans 'Yoga Trainer' %}</h6>
+            <p>Yoga & Therapy Certificate of Uttarakhand University Sanskrit</p>
+            <div class="ti-social">
+              <a href="javascript:;"><i class="fab fa-facebook"></i></a>
+              <a href="javascript:;"><i class="fab fa-instagram"></i></a>
+              <a href="javascript:;"><i class="fab fa-twitter"></i></a>
+              <a href="javascript:;"><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -250,7 +292,24 @@
         </div>
       </div>
       <div class="col-xl-6">
-
+        {% for event in events %}
+        <div class="event-item">
+          <div class="ei-img">
+            {% if event.image %}
+            <img src="{{ event.image.url }}" height="186" alt="{{ event }}">
+            {% else %}
+            <img src="{% static 'img/event/default.jpg' %}" height="186" alt="{{ event }}">
+            {% endif %}
+          </div>
+          <div class="ei-text">
+            <h4><a href="javascript:;">{{ event.name }}</a></h4>
+            <ul>
+              <li><i class="material-icons">event_available</i>{{ event.start_at }}</li>
+              <li><i class="material-icons">map</i>{{ event.location }}</li>
+            </ul>
+          </div>
+        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -266,7 +325,20 @@
       <p>{% trans 'Practice Yoga to perfect physical beauty, take care of your soul and enjoy life more fully!' %}</p>
     </div>
     <div class="row">
-
+      {% for post in posts %}
+      <div class="col-lg-4 col-md-6">
+        <div class="blog-item" style="background-color: white;">
+          <img height="277" src="{{ post.image.url }}" alt="{{post}}">
+          <div class="bi-text">
+            <h2><a href="{% url 'blog:detail' post.slug %}">{{ post }}</a></h2>
+            <p>{{ post.description }}</p>
+          </div>
+          <div class="bi-footer">
+            <div class="bi-cata">{{ post.category }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -309,7 +381,23 @@
 	</section>
 	<!-- Sign up Section end -->
 
-
+{% if gallery %}
+<!-- Gallery Section -->
+<div class="gallery-section">
+  <div class="gallery-slider owl-carousel">
+    {% for gallery_image in gallery.images.all %}
+    <div class="gs-item">
+      <img class="img" width="225" height="225" src="{{ gallery_image.image.url }}" alt="{{gallery.title}}">
+      <div class="gs-hover">
+        <i class="fab fa-instagram"></i>
+        <p>ht.yoga</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<!-- Gallery Section end -->
+{% endif %}
 {% endblock %}
 {% block specified_js %}
 <script>

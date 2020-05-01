@@ -1,0 +1,114 @@
+{% extends 'profile/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block specified_css %}
+<link href="{% static 'fullcalendar-4.3.1/packages/core/main.css' %}" rel='stylesheet' />
+<link href="{% static 'fullcalendar-4.3.1/packages/daygrid/main.css'%}" rel='stylesheet' />
+<link href="{% static 'fullcalendar-4.3.1/packages/timegrid/main.css' %}" rel='stylesheet' />
+<link href="{% static 'fullcalendar-4.3.1/packages/list/main.css' %}" rel='stylesheet' />
+<script src="{% static 'fullcalendar-4.3.1/packages/core/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/core/locales-all.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/interaction/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/daygrid/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/timegrid/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/list/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-common/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-daygrid/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-timegrid/main.js' %} "></script>
+<link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
+<link href="{% static 'css/core/profile/trainees/cards/style.css' %}" rel='stylesheet' />
+
+<style>
+    .fc-event {
+        font-size: 0.55em;
+    }
+</style>
+{% endblock %}
+
+{% block header_path %}
+<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">Thẻ tập</a>
+⁄
+<a class="text-danger" href="javascript:;">{{ object.card.yogaclass }} - {{ object.card.card_type }}</a>
+⁄
+<a class="text-danger" href="javascript:;">Hoàn tiền</a>
+⁄
+<a class="text-danger" href="javascript:;">{{ object.pk }}</a>
+⁄
+<a class="text-danger" href="javascript:;">Xem</a>
+{% endblock %}
+
+{% block profile_content %}
+<div class="container-fluid">
+    <table class="table table-striped table-borderless">
+        <tbody>
+            <tr>
+                <td>Mã số</td>
+                <td>{{ object.pk }}</td>
+            </tr>
+            <tr>
+                <td>Số buổi gia hạn</td>
+                <td>
+                    <div class="list-group">
+                        {% for lesson in object.lessons.all %}
+                            <a href="javascript:;" class="list-group-item list-group-item-action list-group-item-success">
+                                {{ lesson }}
+                            </a>
+                        {% endfor %}
+                      </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Số tiền</td>
+                <td>{{ object.amount }}</td>
+            </tr>
+            <tr>
+                <td>Trạng thái</td>
+                <td>
+                    <span class="badge badge-warning">
+                        {{ object.state }}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>Lí do</td>
+                <td>{{ object.reason|safe }}</td>
+            </tr>
+            <tr>
+                <td>Ngày tạo</td>
+                <td>{{ object.created_at.date }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-sm btn-primary" href="{{request.META.HTTP_REFERER}}">
+                <i class="fas fa-fw fa-arrow-left"></i>
+            </a>
+            <a class="btn btn-sm btn-danger float-right ml-1 delete-extend-card-request" href="javascript:;"><i
+                    class="fas fa-fw fa-trash"></i></a>
+            <form class="d-none"
+                action="javascript:;"
+                method="post">
+                {% csrf_token %}
+                <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+            </form>
+            <a class="btn btn-sm btn-warning float-right ml-1"
+                href="{% url 'profile:profile-trainee-card-refunds-edit' object.card.pk object.pk %}">
+                <i class="fas fa-fw fa-pen"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block specified_js %}
+<script>
+    $('.delete-extend-card-request').click(function () {
+        $(this).siblings('form').children('input[type=submit]').click();
+    });
+</script>
+{% endblock %}

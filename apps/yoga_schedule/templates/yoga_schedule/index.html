@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block specified_css %}
+<link href="{% static 'fullcalendar-4.3.1/packages/core/main.css' %}" rel='stylesheet' />
+<link href="{% static 'fullcalendar-4.3.1/packages/daygrid/main.css'%}" rel='stylesheet' />
+<link href="{% static 'fullcalendar-4.3.1/packages/timegrid/main.css' %}" rel='stylesheet' />
+<link href="{% static 'fullcalendar-4.3.1/packages/list/main.css' %}" rel='stylesheet' />
+<script src="{% static 'fullcalendar-4.3.1/packages/core/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/core/locales-all.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/interaction/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/daygrid/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/timegrid/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages/list/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-common/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-daygrid/main.js' %}"></script>
+<script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-timegrid/main.js' %} "></script>
+<link href="{% static 'css/yoga_schedule/style.css' %}" rel='stylesheet' />
+
+{% endblock %}
+
+{% block content %}
+<section class="spad">
+    <div class="container">
+        <div id='calendar'></div>
+    </div>
+</section>
+{% endblock %}
+
+{% block specified_js %}
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['interaction', 'resourceDayGrid', 'resourceTimeGrid'],
+            defaultView: 'resourceTimeGridDay',
+            defaultDate: Date.now(),
+            selectable: true,
+            contentHeight:"auto",
+            header: {
+                left: 'prev, next',
+                center: 'title',
+                right: 'today'
+            },
+            titleFormat: {
+                month: 'numeric',
+                year: 'numeric',
+                day: 'numeric',
+                weekday: 'long'
+            },
+            locale: "{{ request.LANGUAGE_CODE }}",
+            allDaySlot: false,
+            minTime: '05:00',
+            maxTime: '22:00',
+            // contentHeight: 768,
+            resources: function (fetchInfo, successCallback, failureCallback) {
+                $.ajax({
+                    url: "{% url 'rooms:json-list' %}",
+                    type: 'GET'
+                }).done(function (data) {
+                    var resources = [];
+                    for (var i = 0; i < data.length; i++) {
+                        resources.push({
+                            id: data[i]['id'],
+                            title: data[i]['name'],
+                            eventColor: "#" + ((1 << 24) * Math.random() | 0).toString(16)
+                        })
+                    }
+                    successCallback(resources);
+                });
+            },
+            events: function (fetchInfo, successCallback, failureCallback) {
+                $.ajax({
+                    url: "{% url 'lessons:json-list-in-range-time' %}",
+                    type: 'GET',
+                    data: {
+                        startStr: fetchInfo.startStr,
+                        endStr: fetchInfo.endStr
+                    },
+                    success: function (data) {
+                        var events = [];
+                        for (var i = 0; i < data.length; i++) {
+                            var _d = data[i]['date'];
+                            var _st = data[i]['start_time'];
+                            var _et = data[i]['end_time'];
+                            var _start_time = _d + ' ' + _st;
+                            var _end_time = _d + ' ' + _et;
+                            var start_time = new Date(_start_time);
+                            var end_time = new Date(_end_time);
+
+                            events.push({
+                                id: data[i]['pk'],
+                                title: data[i]['yogaclass']['name'],
+                                start: start_time,
+                                end: end_time,
+                                url: 'javascript:;',
+                                overlap: false,
+                                allDaySlot: false,
+                                imageClassUrl: '{% static "img/class/default.jpg" %}',
+                                imageTrainerUrl: '{% static "img/user/default.png" %}',
+                                resourceId: data[i]['room']['id']
+                            })
+                        }
+                        successCallback(events);
+                    }
+                });
+            },
+            eventClick: function (info) {
+                alert(info);
+            },
+            eventRender: function (info) {
+                if (info.event.extendedProps.imageClassUrl) {
+                    $(info.el).find("div.fc-time").prepend("<img class='img rounded-circle p-1' src='" + info.event.extendedProps.imageClassUrl + "' width='25' height='25'>");
+                }
+                if (info.event.extendedProps.imageTrainerUrl) {
+                    $(info.el).find("div.fc-time").append("<img class='img rounded-circle p-1' src='" + info.event.extendedProps.imageTrainerUrl + "' width='25' height='25'>");
+                }
+            }
+        });
+        calendar.render();
+    });
+
+</script>
+{% endblock %}

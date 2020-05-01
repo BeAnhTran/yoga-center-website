@@ -11,7 +11,7 @@
                 </div>
                 <div class="header-info">
                     <i class="material-icons">phone</i>
-                    <p>0932 190 999</p>
+                    <p>0932 999 979</p>
                 </div>
             </div>
             <div class="col-md-6 text-left text-md-right p-0">
@@ -33,7 +33,7 @@
                     </form>
                 </div>
                 <div class="header-info">
-                    <a href="javascript:;">
+                    <a href="{% url 'shop:cart' %}">
                         <i id="shop_cart_header" class="fas fa-shopping-cart">{{ request.session.cart|length }}</i>
                     </a>
                 </div>
@@ -49,11 +49,11 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="user_infoDropdown">
-                            <a class="dropdown-item" href="javascript:;">
+                            <a class="dropdown-item" href="{% url 'profile:index' %}">
                                 <i class="fa fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {% trans 'profile' as t_profile  %} {{ t_profile|capfirst }}
                             </a>
-                            <a class="dropdown-item" href="javascript:;">
+                            <a class="dropdown-item" href="{% url 'profile:profile-trainee-cards' %}">
                                 <i class="fas fa-id-card fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {% trans 'card' as t_cards %}
                                 {{ t_cards|capfirst }}
@@ -73,11 +73,11 @@
                 {% else %}
                 <div class="header-info">
                     <a class="btn btn-sm btn-default header-info-link"
-                        href="javascript:;">{% trans 'login' as t_login %}{{ t_login|capfirst }}</a>
+                        href="{% url 'account_login' %}">{% trans 'login' as t_login %}{{ t_login|capfirst }}</a>
                 </div>
                 <div class="header-info">
                     <a class="btn btn-sm btn-default header-info-link"
-                        href="javascript:;">{% trans 'register' as t_register %}
+                        href="{% url 'accounts:sign-up' %}">{% trans 'register' as t_register %}
                         {{ t_register|capfirst }} </a>
                 </div>
                 {% endif %}
@@ -86,7 +86,7 @@
     </div>
     <div class="header-bottom">
         <a href="{% url 'home:index' %}" class="site-logo">
-            HT <span class="flaticon-lotus"></span> Yoga
+            Yoga <span class="flaticon-lotus"></span> Hương Tre
         </a>
         <div class="hb-right">
             <div class="hb-switch" id="search-switch">
@@ -100,21 +100,21 @@
             <ul class="main-menu">
                 <li><a href="{% url 'home:index' %}"
                         class="{% if active_nav == 'home' %}active{% endif %}">{% trans 'Home' %}</a></li>
-                <li><a href="javascript:;"
+                <li><a href="{% url 'courses:list' %}"
                         class="{% if active_nav == 'classes' %}active{% endif %}">{% trans 'Classes'%}</a>
                     <ul class="sub-menu bg-gray">
-                        <li><a href="javascript:;">{% trans 'Courses' %}</a></li>
-                        <li><a href="javascript:;">{% trans 'Classes' %}</a></li>
+                        <li><a href="{% url 'courses:list' %}">{% trans 'Courses' %}</a></li>
+                        <li><a href="{% url 'classes:list' %}">{% trans 'Classes' %}</a></li>
                     </ul>
                 </li>
-                <li><a href="javascript:;"
+                <li><a href="{% url 'trainers:list' %}"
                         class="{% if active_nav == 'trainers' %}active{% endif %}">{% trans 'trainer' %}</a></li>
-                <li><a href="javascript:;"
+                <li><a href="{% url 'yoga_schedule:index' %}"
                         class="{% if active_nav == 'schedule' %}active{% endif %}">{% trans 'Schedule' %}</a></li>
                 <li><a href="javascript:;">{% trans 'promotions' %}</a></li>
-                <li><a href="javascript:;"
+                <li><a href="{% url 'blog:list' %}"
                         class="{% if active_nav == 'blog' %}active{% endif %}">{% trans 'Blog'%}</a></li>
-                <li><a href="javascript:;"
+                <li><a href="{% url 'shop:index' %}"
                         class="{% if active_nav == 'shop' %}active{% endif %}">{% trans 'Shop'%}</a></li>
             </ul>
         </div>

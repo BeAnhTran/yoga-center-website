@@ -1,0 +1,516 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block specified_css %}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="{% static 'vendor/bootstrap-select/bootstrap-select.min.css' %}">
+
+<link href="{% static 'css/dashboard/roll_calls/lesson/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- Page Heading -->
+<div id="head_contain">
+    <div class="row mb-2">
+        <div class="col">
+            <small><i class="fab fa-fw fa-leanpub"></i></small> {{ lesson.yogaclass.course }} - {{ lesson.yogaclass }} -
+            {{ lesson.get_time_and_room_detail }}
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col">
+            {% trans 'trainer' as t_trainer %}
+            <small><i class="fas fa-fw fa-user-graduate"></i></small> {{ t_trainer|capfirst }}:
+            <span class="text-danger">{{ lesson.yogaclass.trainer }}</span>
+            <a id="a_roll_call_for_trainer" class="text-success ml-3" href="javascript:;">
+                {% if taught is not None %}
+                <i class="far fa-fw fa-check-square"></i>
+                <small>đã điểm danh</small>
+                {% else %}
+                <i class="far fa-fw fa-square"></i>
+                <small>điểm danh</small>
+                {% endif %}
+            </a>
+            <form class="d-none" id="roll_call_for_trainer_form"
+                action="{% url 'dashboard:lessons-roll-calls-for-trainer' lesson.pk %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="trainer_id" value="{{ lesson.yogaclass.trainer.pk }}">
+                <input type="submit" value="Confirm">
+            </form>
+        </div>
+    </div>
+    {% if lesson.substitute_trainer %}
+    <div class="row">
+        <div class="col">
+            <div class="div-substitute-trainer">
+                <i class="fas fa-chalkboard-teacher"></i> Dạy thay bởi: <span
+                    class="text-primary">{{ lesson.substitute_trainer }}</span>
+                <a class="text-danger remove-substitute-trainer ml-3" href="javascript:;">
+                    <i class="fas fa-fw fa-user-times"></i>
+                </a>
+                <a id="a_roll_call_for_substitute_trainer" class="text-success ml-3" href="javascript:;">
+                    {% if taught_instead is not None %}
+                        <i class="far fa-fw fa-check-square"></i>
+                        <small>đã điểm danh</small>
+                    {% else %}
+                        <i class="far fa-fw fa-square"></i>
+                        <small>điểm danh</small>
+                    {% endif %}
+                </a>
+                <form class="d-none" id="roll_call_for_substitute_trainer_form"
+                    action="{% url 'dashboard:lessons-roll-calls-for-trainer' lesson.pk %}"
+                    method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="trainer_id" value="{{ lesson.substitute_trainer.pk }}">
+                    <input type="submit" value="Confirm">
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <button id="btn_modal_substitute_trainer" type="button"
+        class="btn btn-sm btn-outline-secondary {% if lesson.substitute_trainer %}d-none{% endif%}" data-toggle="modal"
+        data-target="#modal_substitute_trainer">
+        Thêm huấn luyện viên dạy thay
+    </button>
+</div>
+<!-- Content Row -->
+<div class="row mt-3">
+    <div class="col-md-8" id="div_studied_roll_calls">
+        <div class="card">
+            <div class="card-header bg-white title-card-header">
+                <i class="fas fa-fw fa-list"></i>
+                {% trans 'trainee' as t_trainee %}
+                {% blocktrans with value=t_trainee trimmed %} {{ value }} List{% endblocktrans %}
+            </div>
+            <div class="card-body">
+                <div id="studied_roll_calls" class="list-group">
+                    {% if studied_roll_calls %}
+                    {% for r in studied_roll_calls %}
+                    <li
+                        class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">
+                        <span class="badge badge-secondary">{{ r.id }}</span>
+                        {{ r.card.trainee }}
+                        <a href="javascript:;" class="a-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
+                            <span class="badge badge-danger badge-pill">{% trans 'remove' %}</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    {% if make_up_lessons %}
+                    {% for m in make_up_lessons %}
+                    <li
+                        class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center">
+                        <span class="badge badge-secondary">học bù</span>
+                        {{ m.roll_call.card.trainee }}
+                        <a href="javascript:;" class="a-make-up-lesson" data-make-up-lessson="{{m.pk}}">
+                            <span class="badge badge-danger badge-pill">{% trans 'remove' %}</span>
+                        </a>
+                        <form class="d-none"
+                            action="{% url 'dashboard:make-up-lessons-delete-in-lesson-roll-call' pk=m.pk lesson_id=lesson.pk %}"
+                            method="post">
+                            {% csrf_token %}
+                            <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                        </form>
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    {% trans 'trainee' as t_trainee %}
+                    <li id="item_no_trainee"
+                        class="list-group-item list-group-item-action list-group-item-danger align-items-center">
+                        {% blocktrans with value=t_trainee trimmed %}No {{ value }} yet{% endblocktrans %}
+                    </li>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-white title-card-header">
+                <button id="btn_modal" type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+                    data-target="#modal_make_up_lesson">
+                    Học bù
+                </button>
+            </div>
+            <div class="card-body">
+                <p><i class="far fd-sm fa-fw fa-hand-pointer"></i>{% trans 'Select to do a roll call' %}</p>
+                <div class="list-group" id="un_studied_roll_calls">
+                    {% for r in un_studied_roll_calls %}
+                    {% if r.make_up_lesson %}
+                    <li
+                        class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center">
+                        <span class="badge badge-secondary">đã học bù</span>
+                        {{ r.card.trainee }}
+                        <a href="javascript:;" class="">
+                            <span class="badge badge-secondary">chi tiết</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li
+                        class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">
+                        <span class="badge badge-secondary">{{ r.card.trainee.pk }}</span>
+                        {{ r.card.trainee }}
+                        <a href="javascript:;" class="a-un-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
+                            <span class="badge badge-success badge-pill">{% trans 'select' %}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="mt-3">
+    <a class="btn btn-sm btn-outline-primary" href="{{request.META.HTTP_REFERER}}">
+        <i class="fas fa-fw fa-arrow-left"></i>
+    </a>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="modal_make_up_lesson">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-none">
+                <h4 id="model_title" class="modal-title">
+                    Thêm người học bù
+                </h4>
+                <button id="btn_modal_close" type="button" class="btn btn-sm btn-danger"
+                    data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form_make_up">
+                    <div class="form-group">
+                        <label for="">Học viên</label>
+                        <select name="trainee" id="trainee" class="form-control selectpicker" data-live-search="true">
+                            <option value="-1" data-tokens="">Vui lòng chọn</option>
+                            {% for trainee in trainees %}
+                            <option value="{{ trainee.pk }}"
+                                data-tokens="{{trainee.user.first_name|slice:'1' }}{{trainee.user.last_name|slice:'1' }} {{trainee}}">
+                                {{ trainee }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Chọn buổi học muốn thay thế</label>
+                        <div id="lesson_choose">
+                            <span class="badge badge-secondary">
+                                Buổi học hợp lệ để đăng kí học bù được hiển thị ở đây
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-success">Hoàn thành</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Substitute Trainer Modal -->
+<div class="modal" id="modal_substitute_trainer">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-none">
+                <h4 id="model_title" class="modal-title">
+                    Thêm huấn luyện viên dạy thay
+                </h4>
+                <button id="btn_modal_close_substitute_trainer" type="button" class="btn btn-sm btn-danger"
+                    data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form_substitute_trainer">
+                    <div class="form-group">
+                        <label for="">Huấn luyện viên</label>
+                        <select name="sub_trainer" id="sub_trainer" class="form-control selectpicker"
+                            data-live-search="true">
+                            <option value="-1" data-tokens="">Vui lòng chọn</option>
+                            {% for sub_trainer in available_substitute_trainers %}
+                            <option value="{{ sub_trainer.pk }}"
+                                data-tokens="{{sub_trainer.user.first_name|slice:'1' }}{{sub_trainer.user.last_name|slice:'1' }} {{sub_trainer}}">
+                                {{ sub_trainer }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-success">Hoàn thành</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block specified_js %}
+<!-- Latest compiled and minified JavaScript -->
+<script src="{% static 'vendor/bootstrap-select/bootstrap-select.min.js' %} "></script>
+
+
+<script>
+    $(function () {
+        $('#a_roll_call_for_trainer').click(function () {
+            $(this).siblings('form').children('input[type=submit]').click();
+        });
+    });
+    $(function () {
+        $('#a_roll_call_for_substitute_trainer').click(function () {
+            $(this).siblings('form').children('input[type=submit]').click();
+        });
+    });
+
+    $(document).on('click', '.a-un-studied', function () {
+        var roll_call_id = $(this).attr('data-roll-call');
+        var _url = "{% url 'dashboard:roll-calls-detail' 0 %}";
+        url = _url.replace(0, roll_call_id);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'PUT',
+            data: {
+                'studied': true
+            }
+        }).done((data) => {
+            str = '<li class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">';
+            str += '<span class="badge badge-secondary">' + data['id'] + '</span>';
+            str += data['card']['trainee']['user']['first_name'] + data['card']['trainee']['user']['last_name'];
+            str += '<a href="javascript:;" class="a-studied" data-card="' + data['card']['id'] + '" data-roll-call="' + data['id'] + '">';
+            str += '<span class="badge badge-danger badge-pill">{% trans "remove" %}</span></a></li>';
+            $('#item_no_trainee').hide();
+            $('#studied_roll_calls').append(str);
+            $(this).parent('li.list-group-item').remove();
+            _temp_count = parseInt($('#count_studied').text());
+            count = _temp_count + 1;
+            $('#count_studied').text(count);
+            Swal.fire(
+                '{% trans "done" as t_done %}{{ t_done|capfirst }}',
+                '{% trans "Do the roll call successfully" %}',
+                'success'
+            )
+        }).fail((err) => {
+            console.log(err);
+        });
+    });
+
+    $(document).on('click', '.a-studied', function () {
+        var roll_call_id = $(this).attr('data-roll-call');
+        var _url = "{% url 'dashboard:roll-calls-detail' 0 %}";
+        url = _url.replace(0, roll_call_id);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'PUT',
+            data: {
+                'studied': false
+            }
+        }).done((data) => {
+            str = '<li class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">';
+            str += '<span class="badge badge-secondary">' + data['id'] + '</span>';
+            str += data['card']['trainee']['user']['first_name'] + data['card']['trainee']['user']['last_name'];
+            str += '<a href="javascript:;" class="a-un-studied" data-card="' + data['card']['id'] + '" data-roll-call="' + data['id'] + '">';
+            str += '<span class="badge badge-success badge-pill">{% trans "select" %}</span></a></li>';
+            $('#un_studied_roll_calls').append(str);
+            $(this).parent('li.list-group-item').remove();
+            if ($('#studied_roll_calls').children('li').last().attr('id') === "item_no_trainee") {
+                $('#item_no_trainee').show();
+            }
+            _temp_count = parseInt($('#count_studied').text());
+            count = _temp_count - 1;
+            $('#count_studied').text(count);
+            Swal.fire(
+                '{% trans "done" %}{{ t_done|capfirst }}',
+                '{% trans "Undo the roll call successfully" %}',
+                'success'
+            )
+        }).fail((err) => {
+            console.log(err);
+        });
+    });
+
+    $('#trainee').change(function () {
+        var trainee_id = $(this).val();
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: '{% url "dashboard:api-roll-calls-list-make-up-lesson" %}',
+            method: 'GET',
+            data: {
+                'trainee_id': trainee_id,
+                'course_id': '{{ lesson.yogaclass.course.pk }}'
+            },
+            beforeSend: function () {
+                $('#lesson_choose').empty();
+            }
+        }).done((data) => {
+            var str = '';
+            if (data.length > 0) {
+                $.each(data, (i, v) => {
+                    var d = new Date(v['lesson']['date']);
+                    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                    var lesson_date = d.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options);
+                    var lesson_start_time = v['lesson']['start_time'].split(':', 2).join(":");
+                    var lesson_end_time = v['lesson']['end_time'].split(':', 2).join(":");
+
+                    str += '<div class="form-check">';
+                    str += '<label class="form-check-label" for="radio' + v['id'] + '">';
+                    str += '<input type="radio" class="form-check-input" id="rollcall' + v['id'] + '" name="roll_call" value="' + v['id'] + '">';
+                    str += '<span class="badge badge-danger">' + v['lesson']['yogaclass']['name'] + '</span> ';
+                    str += '<span class="badge badge-success"><i class="far fa-fw fa-bell"></i>' + lesson_start_time + '-' + lesson_end_time + '</span> ';
+                    str += '<span class="badge badge-warning"><i class="fas fa-fw fa-calendar-week"></i>' + lesson_date + '</span>';
+                    str += '</label></div>';
+                });
+            } else {
+                str += '<span class="badge badge-danger">Không có buổi học hợp lệ để đăng kí học bù</span>';
+            }
+
+            $('#lesson_choose').append(str);
+        }).fail((err) => {
+            console.log(err);
+        });
+    });
+
+    $(document).on('submit', 'form#form_make_up', function (e) {
+        e.preventDefault();
+        var arr_data = $(this).serializeArray();
+        var data = $(this).serialize();
+        var trainee = null;
+        var roll_call = null;
+        $.each(arr_data, (i, v) => {
+            if (v['name'] == 'trainee') {
+                trainee = v['value'];
+            }
+            if (v['name'] == 'roll_call') {
+                roll_call = v['value'];
+            }
+        });
+        if (trainee == null || parseInt(trainee) == -1) {
+            alert("chon hoc vien");
+        } else if (roll_call == null) {
+            alert("Không có buổi học để đăng kí học bù");
+        } else {
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: '{% url "dashboard:make-up-lessons-list-api" %}',
+                method: 'POST',
+                data: {
+                    'trainee': trainee,
+                    'roll_call': roll_call,
+                    'lesson': '{{ lesson.pk }}',
+                    'is_studied': 1
+                },
+            }).done((data) => {
+                Swal.fire(
+                    "{% trans 'done' as t_done %}{{ t_done|title }}",
+                    "Thêm học viên học bù thành công",
+                    'success'
+                );
+                var _url = '{% url "dashboard:make-up-lessons-delete-in-lesson-roll-call" pk=0 lesson_id=lesson.pk %}';
+                var url = _url.replace('0', data['roll_call']['id']);
+                //
+                str = '<li class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center">';
+                str += '<span class="badge badge-secondary">học bù</span>';
+                str += data['roll_call']['card']['trainee']['user']['first_name'] + ' ' + data['roll_call']['card']['trainee']['user']['last_name'];
+                str += '<a href="javascript:;" class="a-make-up-lesson" data-make-up-lessson="' + data['id'] + '">';
+                str += '<span class="badge badge-danger badge-pill">{% trans "remove" %}</span>';
+                str += '</a>';
+                str += '<form class="d-none" action="' + url + '" method="post">';
+                str += '{% csrf_token %}';
+                str += '<input type="submit" onclick="return confirm(\'Are you sure?\');" value="Confirm">';
+                str += '</form></li>';
+                // 
+
+                $('#item_no_trainee').hide();
+                $('#studied_roll_calls').append(str);
+                $('form#form_make_up').trigger("reset");
+                $('#btn_modal_close').click();
+                console.log(data);
+            }).fail((err) => {
+                Swal.fire(
+                    "{% trans 'error' as t_error %}{{ t_error|title }}",
+                    err['responseText'],
+                    'error'
+                )
+            });
+        }
+    });
+
+    $(document).on('click', '.a-make-up-lesson', function () {
+        $(this).siblings('form').children('input[type=submit]').click();
+    });
+
+    $(document).on('submit', 'form#form_substitute_trainer', function (e) {
+        e.preventDefault();
+        var sub_trainer = $('#sub_trainer').val();
+        if (sub_trainer == null || parseInt(sub_trainer) == -1) {
+            alert("Vui lòng chọn Huấn luyện viên");
+        } else {
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: "{% url 'dashboard:lessons-substitute-trainer' lesson.pk %}",
+                method: 'POST',
+                data: {
+                    'sub_trainer': sub_trainer
+                },
+            }).done((data) => {
+                str = `
+                    <div class="div-substitute-trainer">
+                    <i class="fas fa-chalkboard-teacher"></i> Dạy thay bởi: <span class="text-primary">`;
+                str += data['substitute_trainer']['user']['first_name'] + data['substitute_trainer']['user']['last_name']
+                str += `</span>
+                    <a class="text-danger remove-substitute-trainer" href="javascript:;"><i class="fa fa-sm fa-fw fa-times"></i></a>
+                    </div>`;
+                $('#btn_modal_substitute_trainer').addClass('d-none');
+                $('#head_contain').append(str);
+                $('#btn_modal_close_substitute_trainer').click();
+                Swal.fire(
+                    "{% trans 'done' as t_done %}{{ t_done|title }}",
+                    "Thêm huấn luyện viên dạy thay thành công",
+                    'success'
+                );
+                console.log(data);
+            }).fail((err) => {
+                Swal.fire(
+                    "{% trans 'error' as t_error %}{{ t_error|title }}",
+                    err['responseText'],
+                    'error'
+                )
+            });
+        }
+    });
+
+    $(document).on('click', '.remove-substitute-trainer', function () {
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: "{% url 'dashboard:lessons-substitute-trainer' lesson.pk %}",
+            method: 'DELETE',
+        }).done((data) => {
+            $('.div-substitute-trainer').remove();
+            $('#btn_modal_substitute_trainer').removeClass('d-none');
+            Swal.fire(
+                "{% trans 'done' as t_done %}{{ t_done|title }}",
+                "Xóa huấn luyện viên dạy thay thành công",
+                'success'
+            );
+            console.log(data);
+        }).fail((err) => {
+            console.log(err);
+        });
+    });
+
+</script>
+{% endblock %}

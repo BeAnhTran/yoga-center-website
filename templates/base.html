@@ -9,7 +9,7 @@
 <head>
   <title>Yoga Hương Tre</title>
   <meta charset="UTF-8">
-  <meta name="description" content="Yoga Hương Tre">
+  <meta name="description" content="HT Yoga">
   <meta name="keywords" content="yoga, html">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="{% static 'img/favicon.png'%}">
@@ -89,6 +89,7 @@
   <!-- Search model end -->
 
   <!-- Logout Modal-->
+  {% include 'dashboard/logout_model.html' %}
 
   <div class="call-now-button ui-draggable ui-draggable-handle" id="draggable">
     <div>
@@ -110,11 +111,11 @@
       <span class="tooltiptext">{% trans 'Feedback' %}</span>
       <i class="far fa-sm fa-comment-dots"></i>
     </a>
-    <a target="_blank" href="javascript:;" class="donate">
+    <a target="_blank" href="{% url 'donations:index' %}" class="donate">
       <span class="tooltiptext">{% trans 'Donate' %}</span>
       <i class="fas fa-sm fa-hand-holding-heart"></i>
     </a>
-    <a target="_blank" href="javascript:;" class="question">
+    <a target="_blank" href="{% url 'faq:list' %}" class="question">
       <span class="tooltiptext">{% trans 'FAQ' %}</span>
       <i class="far fa-sm fa-question-circle"></i>
     </a>
@@ -138,6 +139,44 @@
     });
     $('#icon_bar_feedback').click(function () {
       $('#infor-switch').click();
+    });
+    $('#form_feedback').submit(function (e) {
+      e.preventDefault();
+      $.ajax({
+        headers: {
+          'X-CSRFTOKEN': '{{ csrf_token }}'
+        },
+        url: "{% url 'feedback:create' %}",
+        type: 'POST',
+        data: $(this).serialize(),
+        beforeSend: function () {
+          $(".loader").fadeIn();
+          $("#preloder").fadeIn();
+        }
+      }).done(function (data) {
+        console.log("Success", data);
+        $(".loader").fadeOut();
+        $("#preloder").fadeOut(function () {
+          $('.infor-close').click();
+          Swal.fire(
+            "{% trans 'done' as t_done %}{{ t_done|title }}",
+            "{% trans 'Send feedback successfully' %}",
+            'success'
+          );
+          $('#form_feedback').trigger("reset");
+        });
+      }).fail(function (err) {
+        console.log("Err", err);
+        $(".loader").fadeOut();
+        $("#preloder").fadeOut(function () {
+          $('.infor-close').click();
+          Swal.fire(
+            "{% trans 'error' as t_error %}{{ t_error|title }}",
+            "{% trans 'There are some error. Please try again!' %}",
+            'error'
+          );
+        });
+      });
     });
   </script>
 
