@@ -64,7 +64,8 @@ class BasicInfoForm(forms.ModelForm):
                     'input_group': False,
                     'placeholder': formats.date_format(datetime.now(), use_l10n=True)
                 }
-            )
+            ),
+            required=False
         )
         self.helper.layout = Layout(
             'hidden_field',

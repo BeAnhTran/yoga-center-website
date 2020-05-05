@@ -8,6 +8,7 @@ from django.core.validators import RegexValidator
 from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from ckeditor.fields import RichTextField
+from django.utils.crypto import get_random_string
 
 
 class User(AbstractUser):
@@ -20,7 +21,7 @@ class User(AbstractUser):
     )
     username = None
     email = models.EmailField(
-        blank=False, null=False, max_length=254, verbose_name=_('email address'), unique=True)
+        blank=False, null=False, max_length=254, verbose_name=_('email'), unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     is_trainee = models.BooleanField(
@@ -49,12 +50,34 @@ class User(AbstractUser):
     updated_at = models.DateTimeField(
         auto_now=True, blank=True, null=True, verbose_name=_('updated_at'))
 
+    __original_slug = None
+
+    def __init__(self, *args, **kwargs):
+        super(User, self).__init__(*args, **kwargs)
+        self.__original_slug = self.slug
+
     def full_name(self):
         return self.first_name + ' ' + self.last_name
 
     def save(self, *args, **kwargs):
         full_name = self.first_name + ' ' + self.last_name
-        self.slug = slugify(full_name)
+        if not self.slug:
+            self.slug = slugify(full_name)
+            slug_exists = User.objects.filter(slug__startswith=self.slug)
+            if slug_exists.count() > 0:
+                temp = self.first_name + self.last_name
+                self.slug = self.slug + '-' + str(slug_exists.count() + 1) + get_random_string(
+                    length=8, allowed_chars=temp) + str(slug_exists.last().pk)
+        else:
+            slug = slugify(full_name)
+            if self.__original_slug != slug:
+                self.slug = slug
+                slug_exists = User.objects.filter(slug__startswith=slug)
+                if slug_exists.count() > 0:
+                    temp = self.first_name + self.last_name
+                    self.slug = slug + '-' + str(slug_exists.count() + 1) + get_random_string(
+                        length=8, allowed_chars=temp) + str(self.pk)
+
         super(User, self).save(*args, **kwargs)
 
     def __str__(self):

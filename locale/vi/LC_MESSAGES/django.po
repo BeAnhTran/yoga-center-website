@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-28 17:50+0700\n"
+"POT-Creation-Date: 2020-05-05 09:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,48 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: .\apps\accounts\forms\trainee_form.py:12
+#: .\apps\accounts\forms\trainee_form.py:13 .\apps\questions\forms.py:13
+msgid "First name"
+msgstr "Tên"
+
+#: .\apps\accounts\forms\trainee_form.py:14
+#: .\apps\accounts\forms\trainee_form.py:15 .\apps\questions\forms.py:16
+msgid "Last name"
+msgstr "Họ"
+
+#: .\apps\accounts\forms\trainee_form.py:16
+msgid "Phone Number"
+msgstr "Số điện thoại"
+
+#: .\apps\accounts\forms\trainee_form.py:19
+msgid "Country"
+msgstr "Quốc tịch"
+
+#: .\apps\accounts\forms\trainee_form.py:20
+msgid "Health Condition"
+msgstr "Tình trạng sức khỏe"
+
+#: .\apps\accounts\forms\trainee_form.py:28
+msgid "Birth day"
+msgstr "Ngày sinh"
+
+#: .\apps\accounts\forms\trainee_form.py:32
+msgid "Gender"
+msgstr "Giới tính"
+
+#: .\apps\accounts\forms\trainee_form.py:33
+msgid "Address"
+msgstr "Địa chỉ"
+
+#: .\apps\accounts\forms\trainee_form.py:39 .\apps\questions\forms.py:18
+msgid "Email"
+msgstr ""
+
+#: .\apps\accounts\forms\trainee_form.py:64
+msgid "Sign up"
+msgstr "Đăng kí"
+
 #: .\apps\accounts\models.py:18
 msgid "Female"
 msgstr "Nữ"
@@ -26,9 +68,21 @@ msgstr "Nữ"
 msgid "Male"
 msgstr "Nam"
 
-#: .\apps\accounts\models.py:23
-msgid "email address"
-msgstr "email"
+#: .\apps\accounts\models.py:23 .\apps\classes\templates\payment.html:41
+#: .\apps\classes\views.py:338
+#: .\apps\dashboard\templates\dashboard\admins\list.html:33
+#: .\apps\dashboard\templates\dashboard\feedback\list.html:29
+#: .\apps\dashboard\templates\dashboard\questions\list.html:29
+#: .\apps\dashboard\templates\dashboard\staffs\list.html:33
+#: .\apps\dashboard\templates\dashboard\trainees\list.html:33
+#: .\apps\dashboard\templates\dashboard\trainers\list.html:33
+#: .\apps\donations\models.py:12
+#: .\apps\donations\templates\donations\index.html:95
+#: .\apps\feedback\models.py:8 .\apps\questions\models.py:8
+#: .\apps\shop\templates\shop\checkout.html:58 .\apps\shop\views.py:213
+#: .\templates\home\index.html:367 .\templates\layouts\info_model.html:32
+msgid "email"
+msgstr ""
 
 #: .\apps\accounts\models.py:27
 msgid "is trainee"
@@ -101,7 +155,7 @@ msgstr "quốc tịch"
 msgid "language"
 msgstr "ngôn ngữ"
 
-#: .\apps\accounts\models.py:48 .\apps\accounts\models.py:69
+#: .\apps\accounts\models.py:48 .\apps\accounts\models.py:73
 #: .\apps\courses\models.py:38
 #: .\apps\dashboard\templates\dashboard\admins\list.html:36
 #: .\apps\dashboard\templates\dashboard\classes\show.html:77
@@ -121,7 +175,7 @@ msgstr "hình ảnh"
 msgid "updated_at"
 msgstr "thời gian cập nhật"
 
-#: .\apps\accounts\models.py:65 .\apps\card_types\models.py:17
+#: .\apps\accounts\models.py:69 .\apps\card_types\models.py:17
 #: .\apps\classes\models.py:16 .\apps\classes\templates\payment.html:29
 #: .\apps\courses\models.py:31
 #: .\apps\dashboard\templates\dashboard\admins\list.html:32
@@ -148,7 +202,7 @@ msgstr "thời gian cập nhật"
 msgid "name"
 msgstr "tên"
 
-#: .\apps\accounts\models.py:67 .\apps\card_invoices\models.py:14
+#: .\apps\accounts\models.py:71 .\apps\card_invoices\models.py:14
 #: .\apps\card_types\models.py:18 .\apps\courses\models.py:35
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:30
 #: .\apps\dashboard\templates\dashboard\card_types\list.html:28
@@ -161,24 +215,24 @@ msgstr "tên"
 msgid "description"
 msgstr "mô tả"
 
-#: .\apps\accounts\models.py:85 .\apps\refunds\models.py:13
+#: .\apps\accounts\models.py:89 .\apps\refunds\models.py:13
 msgid "pending"
 msgstr "chờ xử lý"
 
-#: .\apps\accounts\models.py:86 .\apps\refunds\models.py:14
+#: .\apps\accounts\models.py:90 .\apps\refunds\models.py:14
 msgid "approved"
 msgstr "đồng ý"
 
-#: .\apps\accounts\models.py:87 .\apps\refunds\models.py:15
+#: .\apps\accounts\models.py:91 .\apps\refunds\models.py:15
 msgid "rejected"
 msgstr "từ chối"
 
-#: .\apps\accounts\models.py:92 .\apps\cards\models.py:61
+#: .\apps\accounts\models.py:96 .\apps\cards\models.py:61
 #: .\apps\refunds\models.py:26
 msgid "reason"
 msgstr "lí do"
 
-#: .\apps\accounts\models.py:94 .\apps\cards\models.py:63
+#: .\apps\accounts\models.py:98 .\apps\cards\models.py:63
 #: .\apps\dashboard\forms\lesssons_form.py:64
 #: .\apps\dashboard\templates\dashboard\classes\show.html:56
 #: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:28
@@ -189,15 +243,15 @@ msgstr "lí do"
 msgid "state"
 msgstr "trạng thái"
 
-#: .\apps\accounts\models.py:95
+#: .\apps\accounts\models.py:99
 msgid "leave at"
 msgstr "thời gian bắt đầu nghỉ"
 
-#: .\apps\accounts\models.py:96
+#: .\apps\accounts\models.py:100
 msgid "back at"
 msgstr "thời gian quay lại"
 
-#: .\apps\accounts\models.py:98 .\apps\card_invoices\models.py:22
+#: .\apps\accounts\models.py:102 .\apps\card_invoices\models.py:22
 #: .\apps\card_types\models.py:28 .\apps\cards\models.py:22
 #: .\apps\cards\models.py:65 .\apps\classes\models.py:31
 #: .\apps\courses\models.py:50
@@ -216,7 +270,7 @@ msgstr "thời gian quay lại"
 msgid "created at"
 msgstr "thời gian tạo"
 
-#: .\apps\accounts\models.py:100 .\apps\card_invoices\models.py:24
+#: .\apps\accounts\models.py:104 .\apps\card_invoices\models.py:24
 #: .\apps\card_types\models.py:30 .\apps\cards\models.py:24
 #: .\apps\cards\models.py:67 .\apps\classes\models.py:33
 #: .\apps\courses\models.py:52 .\apps\donations\models.py:23
@@ -230,52 +284,50 @@ msgstr "thời gian tạo"
 msgid "updated at"
 msgstr "thời gian cập nhật"
 
-#: .\apps\accounts\models.py:112 .\templates\home\index.html:373
+#: .\apps\accounts\models.py:116 .\templates\home\index.html:373
 #: .\templates\profile\index.html:66
 msgid "health condition"
 msgstr "tình trạng sức khỏe"
 
-#: .\apps\accounts\models.py:123
-#, fuzzy
-#| msgid "Introduce"
-msgid "introduction"
-msgstr "Giới thiệu"
-
-#: .\apps\accounts\models.py:125 .\apps\accounts\models.py:152
-#, fuzzy
-#| msgid "work experience"
-msgid "experience"
-msgstr "kinh nghiệm làm việc"
-
 #: .\apps\accounts\models.py:127
-#, fuzzy
-#| msgid "events"
-msgid "achievements"
-msgstr "sự kiện"
+msgid "introduction"
+msgstr "giới thiệu"
 
-#: .\apps\accounts\models.py:129 .\apps\accounts\models.py:154
+#: .\apps\accounts\models.py:129 .\apps\accounts\models.py:156
+msgid "experience"
+msgstr "kinh nghiệm"
+
+#: .\apps\accounts\models.py:131
+msgid "achievements"
+msgstr "thành tích"
+
+#: .\apps\accounts\models.py:133 .\apps\accounts\models.py:158
 msgid "certificate"
 msgstr "chứng chỉ"
 
-#: .\apps\accounts\models.py:131 .\apps\accounts\models.py:162
+#: .\apps\accounts\models.py:135 .\apps\accounts\models.py:166
 msgid "temporary leave requests"
 msgstr "yêu cầu xin nghỉ tạm thời"
 
-#: .\apps\accounts\models.py:133 .\apps\accounts\models.py:156
+#: .\apps\accounts\models.py:137 .\apps\accounts\models.py:160
 msgid "is student"
 msgstr "là sinh viên (học sinh)"
 
-#: .\apps\accounts\models.py:135 .\apps\accounts\models.py:158
+#: .\apps\accounts\models.py:139 .\apps\accounts\models.py:162
 msgid "graduate school"
 msgstr "trường tốt nghiệp"
 
-#: .\apps\accounts\models.py:137 .\apps\accounts\models.py:160
+#: .\apps\accounts\models.py:141 .\apps\accounts\models.py:164
 msgid "company name"
 msgstr "tên công ty"
 
-#: .\apps\accounts\models.py:139
+#: .\apps\accounts\models.py:143
 msgid "taught lessons"
 msgstr "buổi tập đã dạy"
+
+#: .\apps\accounts\views.py:31
+msgid "Signup successfully"
+msgstr "Đăng kí thành công"
 
 #: .\apps\blog\templates\blog\post_list.html:17
 msgid "posts"
@@ -326,7 +378,6 @@ msgstr "bài viết"
 #: .\apps\blog\templates\blog\post_list.html:27
 #: .\apps\classes\templates\classes\list.html:15
 #: .\apps\courses\templates\courses\list.html:17
-#: .\apps\faq\templates\faq\list.html:33
 #: .\apps\shop\templates\shop\index.html:32
 #: .\apps\trainers\templates\trainers\list.html:27
 #, python-format
@@ -465,7 +516,7 @@ msgstr "Những buổi học sau sẽ được thêm"
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:25
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:13
 #: .\templates\registration\signup.html:33
-#: .\templates\registration\trainee_signup_form.html:15
+#: .\templates\registration\trainee_signup_form.html:16
 msgid "trainee"
 msgstr "học viên"
 
@@ -630,7 +681,7 @@ msgstr "buổi tập đã đủ số lượng"
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:339
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:440
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:486
-#: .\templates\base.html:172
+#: .\templates\base.html:174
 msgid "error"
 msgstr "lỗi"
 
@@ -713,21 +764,6 @@ msgstr "Thông tin thanh toán"
 #: .\apps\shop\templates\shop\checkout.html:39
 msgid "Please enter information below"
 msgstr "Vui lòng nhập thông tin"
-
-#: .\apps\classes\templates\payment.html:41 .\apps\classes\views.py:338
-#: .\apps\dashboard\templates\dashboard\admins\list.html:33
-#: .\apps\dashboard\templates\dashboard\feedback\list.html:29
-#: .\apps\dashboard\templates\dashboard\questions\list.html:29
-#: .\apps\dashboard\templates\dashboard\staffs\list.html:33
-#: .\apps\dashboard\templates\dashboard\trainees\list.html:33
-#: .\apps\dashboard\templates\dashboard\trainers\list.html:33
-#: .\apps\donations\models.py:12
-#: .\apps\donations\templates\donations\index.html:95
-#: .\apps\feedback\models.py:8 .\apps\questions\models.py:8
-#: .\apps\shop\templates\shop\checkout.html:58 .\apps\shop\views.py:213
-#: .\templates\home\index.html:367 .\templates\layouts\info_model.html:32
-msgid "email"
-msgstr ""
 
 #: .\apps\classes\templates\payment.html:53
 #: .\apps\shop\templates\shop\checkout.html:72
@@ -1204,7 +1240,7 @@ msgstr "Thông tin chi tiết"
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:414
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:479
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:505
-#: .\templates\base.html:160
+#: .\templates\base.html:162
 msgid "done"
 msgstr "hoàn thành"
 
@@ -1265,7 +1301,7 @@ msgstr "sự kiện"
 #: .\apps\dashboard\templates\dashboard\faq\edit.html:13
 #: .\apps\dashboard\templates\dashboard\faq\list.html:19
 #: .\apps\dashboard\templates\dashboard\faq\new.html:13
-#: .\apps\faq\templates\faq\list.html:24 .\apps\faq\templates\faq\list.html:32
+#: .\apps\faq\templates\faq\list.html:24
 msgid "faq"
 msgstr "câu hỏi thường gặp"
 
@@ -1282,7 +1318,7 @@ msgstr "câu hỏi"
 
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:12
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:263
-#: .\templates\base.html:109 .\templates\layouts\info_model.html:20
+#: .\templates\base.html:111 .\templates\layouts\info_model.html:20
 #: .\templates\layouts\info_model.html:38
 msgid "Feedback"
 msgstr "Góp ý & phản hồi"
@@ -1395,7 +1431,7 @@ msgid "events"
 msgstr "sự kiện"
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:253
-#: .\apps\faq\templates\faq\list.html:16 .\templates\base.html:117
+#: .\apps\faq\templates\faq\list.html:16 .\templates\base.html:119
 msgid "FAQ"
 msgstr "Câu hỏi thường gặp"
 
@@ -1568,7 +1604,7 @@ msgid "please input content"
 msgstr "vui lòng nhập nội dung"
 
 #: .\apps\donations\templates\donations\index.html:18
-#: .\apps\donations\views.py:40 .\templates\base.html:113
+#: .\apps\donations\views.py:40 .\templates\base.html:115
 msgid "Donate"
 msgstr "Ủng hộ tùy tâm"
 
@@ -1592,15 +1628,15 @@ msgstr "Cảm ơn vì sự đóng góp của bạn cho cộng đồng thông qua
 msgid "answer"
 msgstr "câu trả lời"
 
-#: .\apps\faq\templates\faq\list.html:61
+#: .\apps\faq\templates\faq\list.html:49
 msgid "Ask a question"
 msgstr "Đặt câu hỏi"
 
-#: .\apps\faq\templates\faq\list.html:80 .\templates\layouts\info_model.html:39
+#: .\apps\faq\templates\faq\list.html:68 .\templates\layouts\info_model.html:39
 msgid "Submit"
 msgstr "Gửi"
 
-#: .\apps\faq\views.py:35
+#: .\apps\faq\views.py:34
 msgid "Your question has been sent successfully"
 msgstr "Gửi câu hỏi thành công"
 
@@ -1719,18 +1755,6 @@ msgstr "Giá trị / số lượng"
 msgid "promotion type"
 msgstr "hình thức khuyến mãi"
 
-#: .\apps\questions\forms.py:13
-msgid "First name"
-msgstr "Tên"
-
-#: .\apps\questions\forms.py:16
-msgid "Last name"
-msgstr "Họ"
-
-#: .\apps\questions\forms.py:18
-msgid "Email"
-msgstr ""
-
 #: .\apps\questions\forms.py:20
 msgid "Phone number"
 msgstr "Số điện thoại"
@@ -1769,15 +1793,15 @@ msgid "Add product to cart successfully"
 msgstr "Đã thêm vào giỏ hàng"
 
 #: .\templates\account\login.html:9 .\templates\account\login.html:28
-#: .\templates\account\login.html:38
+#: .\templates\account\login.html:37
 msgid "Sign In"
 msgstr "Đăng nhập"
 
-#: .\templates\account\login.html:42
+#: .\templates\account\login.html:41
 msgid "Forgot Password?"
 msgstr "Quên mật khẩu?"
 
-#: .\templates\account\login.html:45
+#: .\templates\account\login.html:44
 msgid "Sign Up"
 msgstr "Đăng kí"
 
@@ -1785,17 +1809,19 @@ msgstr "Đăng kí"
 msgid "Login successfully"
 msgstr "Đăng nhập thành công"
 
-#: .\templates\base.html:82
-#, fuzzy
-#| msgid "Search for"
+#: .\templates\account\messages\logged_out.txt:2
+msgid "You have signed out."
+msgstr "Đăng xuất thành công"
+
+#: .\templates\base.html:84
 msgid "Search"
 msgstr "Tìm kiếm"
 
-#: .\templates\base.html:161
+#: .\templates\base.html:163
 msgid "Send feedback successfully"
 msgstr "Gửi feedback thành công"
 
-#: .\templates\base.html:173
+#: .\templates\base.html:175
 msgid "There are some error. Please try again!"
 msgstr "Đã xảy ra lỗi. Vui lòng thử lại"
 
@@ -2041,7 +2067,7 @@ msgstr "Đăng kí một tài khoản miễn phí"
 msgid "Select below the type of account you want to create"
 msgstr "Chọn loại tài khoản mà bạn muốn đăng kí"
 
-#: .\templates\registration\trainee_signup_form.html:16
+#: .\templates\registration\trainee_signup_form.html:19
 #, python-format
 msgid "Sign up as %(value)s"
 msgstr "Đăng kí tài khoản %(value)s"
@@ -2097,6 +2123,11 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:151
 msgid "&lsaquo; Prev"
+msgstr ""
+
+#: .\venv\Lib\site-packages\cloudinary\forms.py:55
+#: .\venv\Lib\site-packages\cloudinary\forms.py:124
+msgid "No file selected!"
 msgstr ""
 
 #: .\venv\Lib\site-packages\crispy_forms\tests\test_form_helper.py:142
@@ -3281,6 +3312,9 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:409
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "email address"
+#~ msgstr "email"
 
 #~ msgid "yoga teaching experience"
 #~ msgstr "kinh nghiệm dạy yoga"

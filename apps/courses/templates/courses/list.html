@@ -41,7 +41,7 @@
                             <a href="{% url 'courses:detail' course.slug %}"
                                 class="site-btn sb-gradient">{% trans 'detail' %}</a>
                         </div>
-                        <a href="javasript:;" class="site-btn sb-gradient">{% trans 'view classes' %}</a>
+                        <a href="{% url 'classes:list' %}?course={{course.slug}}" class="site-btn sb-gradient">{% trans 'view classes' %}</a>
                     </div>
                 </div>
             </div>

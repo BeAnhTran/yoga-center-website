@@ -5,44 +5,49 @@ from apps.accounts.models import User, Trainee
 from django_countries.fields import CountryField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
+from django.utils.translation import ugettext_lazy as _
 
 
 class TraineeSignupForm(SignupForm):
-    first_name = forms.CharField(max_length=255, label='First Name', widget=forms.TextInput(
-        attrs={'placeholder': 'First name'}))
-    last_name = forms.CharField(max_length=255, label='Last Name', widget=forms.TextInput(
-        attrs={'placeholder': 'Last name'}))
-    phone_number = forms.CharField(max_length=255, label='First Name', widget=forms.TextInput(
-        attrs={'placeholder': '0905989898'}))
+    first_name = forms.CharField(max_length=255, label=_('First name'), widget=forms.TextInput(
+        attrs={'placeholder': _('First name')}))
+    last_name = forms.CharField(max_length=255, label=_('Last name'), widget=forms.TextInput(
+        attrs={'placeholder': _('Last name')}))
+    phone_number = forms.CharField(max_length=255, label=_('Phone Number'), widget=forms.TextInput(
+        attrs={'placeholder': '0932190999'}), required=False)
     country = CountryField().formfield(
-        blank_label='(Select country)', initial='VN', required=False)
-    health_condition = forms.CharField(widget=forms.Textarea, required=False)
+        blank_label='(Select country)', initial='VN', label=_('Country'), required=False)
+    health_condition = forms.CharField(widget=forms.Textarea, label=_('Health Condition'), required=False)
+    health_condition.widget.attrs = {
+        'rows': 4,
+    }
     birth_day = forms.DateField(
         widget=forms.TextInput(
             attrs={'type': 'date', 'placeholder': 'cc'},
-        )
+        ),
+        label=_('Birth day'),
+        required=False
     )
     gender = forms.ChoiceField(
-        choices=User.GENDER_CHOICES, initial=User.GENDER_FEMALE)
-    address = forms.CharField(max_length=255, label='Address', widget=forms.TextInput(
-        attrs={'placeholder': 'Address'}))
+        choices=User.GENDER_CHOICES, initial=User.GENDER_FEMALE, label=_('Gender'), required=False)
+    address = forms.CharField(max_length=255, label=_('Address'), widget=forms.TextInput(
+        attrs={'placeholder': 'Address'}), required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['email'].widget.attrs.update(
+            {'autofocus': 'autofocus', 'placeholder': _('Email')})
         self.helper = FormHelper()
         self.helper.layout = Layout(
+            'email',
             Row(
-                Column('email', css_class='form-group col-md-6 mb-0'),
+                Column('first_name', css_class='form-group col-md-6 mb-0'),
+                Column('last_name', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Row(
                 Column('password1', css_class='form-group col-md-6 mb-0'),
                 Column('password2', css_class='form-group col-md-6 mb-0'),
-                css_class='form-row'
-            ),
-            Row(
-                Column('first_name', css_class='form-group col-md-6 mb-0'),
-                Column('last_name', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
             Row(
@@ -56,7 +61,7 @@ class TraineeSignupForm(SignupForm):
                 Column('country', css_class='form-group col-md-6 mb-0'),
             ),
             'health_condition',
-            Submit('submit', 'Sign up')
+            Submit('submit', _('Sign up'), css_class='site-btn sb-gradient')
         )
 
     @transaction.atomic
