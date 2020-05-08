@@ -28,7 +28,7 @@
                 <div class="hs-text">
                   <h2>{% trans 'Get slim and toned with yoga' %}</h2>
                   <p>{% trans 'Practice Yoga will help your body become toned, tidy and full of life' %}</p>
-                  <div class="site-btn sb-white">{% trans 'register' %}</div>
+                  <a href="{% url 'accounts:trainee-signup' %}" class="site-btn sb-white">{% trans 'register' %}</a>
                 </div>
               </div>
             </div>
@@ -43,7 +43,7 @@
             <div class="hs-text">
               <h2>{% trans 'Reduce your stress' %}</h2>
               <p>{% trans 'Yoga exercises will help you relax mind and spirit' %}</p>
-              <div class="site-btn sb-white">{% trans 'register' %}</div>
+              <a href="{% url 'accounts:trainee-signup' %}" class="site-btn sb-white">{% trans 'register' %}</a>
             </div>
           </div>
           <div class="row justify-content-center">
@@ -355,23 +355,24 @@
 					<div class="singup-text">
 						<h3>{% trans 'Sign Up Now' %}</h3>
 					</div>
-					<form class="singup-form">
+					<form class="singup-form" action="" method="POST">
+            {% csrf_token %}
 						<div class="row">
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'first name' as t_f %}{{ t_f|capfirst }}">
+                {{ signup_form_home.last_name }}
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'last name' as t_l %}{{ t_l|capfirst }}">
+								{{ signup_form_home.first_name }}
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'email' as t_email %}{{ t_email|capfirst }}">
+								{{ signup_form_home.email }}
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}">
+								{{ signup_form_home.phone_number }}
 							</div>
 							<div class="col-md-12">
-								<textarea placeholder="{% trans 'health condition' as t_health %}{{ t_health|capfirst }}"></textarea>
-								<a href="javascript:;" class="site-btn sb-gradient">{% trans 'Get started' %}</a>
+                {{ signup_form_home.health_condition }}
+                <button type="submit" class="site-btn sb-gradient">{% trans 'Get started' %}</button>
 							</div>
 						</div>
 					</form>
@@ -390,7 +391,7 @@
       <img class="img" width="225" height="225" src="{{ gallery_image.image.url }}" alt="{{gallery.title}}">
       <div class="gs-hover">
         <i class="fab fa-instagram"></i>
-        <p>ht.yoga</p>
+        <p>yoga hương tre</p>
       </div>
     </div>
     {% endfor %}

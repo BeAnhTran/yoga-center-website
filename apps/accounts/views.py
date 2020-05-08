@@ -24,8 +24,25 @@ class TraineeSignUpView(SignupView):
     # the previously created form class
     form_class = TraineeSignupForm
 
+    def get_context_data(self, **kwargs):
+        ret = super(TraineeSignUpView, self).get_context_data(**kwargs)
+        if self.request.session.get('sign_up_from_home') is not None:
+            ret['form'].fields['email'].initial = self.request.session.get('sign_up_from_home')[
+                'email']
+            ret['form'].fields['first_name'].initial = self.request.session.get(
+                'sign_up_from_home')['first_name']
+            ret['form'].fields['last_name'].initial = self.request.session.get(
+                'sign_up_from_home')['last_name']
+            ret['form'].fields['phone_number'].initial = self.request.session.get(
+                'sign_up_from_home')['phone_number']
+            ret['form'].fields['health_condition'].initial = self.request.session.get(
+                'sign_up_from_home')['health_condition']
+        return ret
+
     def form_valid(self, form):
         self.user = form.save(self.request)
+        if self.request.session.get('sign_up_from_home') is not None:
+            del self.request.session['sign_up_from_home']
         messages.success(
             self.request,
             _('Signup successfully'))
