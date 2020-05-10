@@ -25,6 +25,51 @@
         <div id='calendar'></div>
     </div>
 </section>
+
+<button id="btn_open_modal_lesson_info" type="button" class="d-none btn btn-primary" data-toggle="modal"
+    data-target="#modal_lesson_info">
+    Open modal
+</button>
+
+
+<!-- The Modal -->
+<div class="modal" id="modal_lesson_info">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-none">
+                <h4 id="model_title" class="modal-title">{% trans 'Detail Information'  %}</h4>
+                <button id="btn_close_modal_lesson_info" type="button" class="btn btn-sm btn-danger"
+                    data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>{% trans 'Class' %}</td>
+                            <td id="class_info">{% trans 'have not updated yet' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Room' %}</td>
+                            <td id="room_info">{% trans 'have not updated yet' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Trainer' %}</td>
+                            <td id="trainer_info">{% trans 'have not updated yet' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Date' %}</td>
+                            <td id="date_info">{% trans 'have not updated yet' %}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Time' %}</td>
+                            <td id="time_info">{% trans 'have not updated yet' %}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block specified_js %}
@@ -38,7 +83,7 @@
             defaultView: 'resourceTimeGridDay',
             defaultDate: Date.now(),
             selectable: true,
-            contentHeight:"auto",
+            contentHeight: "auto",
             header: {
                 left: 'prev, next',
                 center: 'title',
@@ -89,9 +134,9 @@
                             var _end_time = _d + ' ' + _et;
                             var start_time = new Date(_start_time);
                             var end_time = new Date(_end_time);
-
+                            console.log(data[i]['id']);
                             events.push({
-                                id: data[i]['pk'],
+                                id: data[i]['id'],
                                 title: data[i]['yogaclass']['name'],
                                 start: start_time,
                                 end: end_time,
@@ -108,7 +153,49 @@
                 });
             },
             eventClick: function (info) {
-                alert(info);
+                console.log(info);
+                var lesson_id = info.event.id;
+                var _url = "{% url 'lessons:json-lesson-api' 0 %}";
+                var url = _url.replace('0', lesson_id);
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    beforeSend: function () {
+                        $(".loader").fadeIn();
+                        $("#preloder").fadeIn();
+                    },
+                    success: function (data) {
+                        $(".loader").fadeOut();
+                        $("#preloder").fadeOut(function () {
+                            console.log(data);
+                            var _st = data['start_time'].substring(0, 5);
+                            var _et = data['end_time'].substring(0, 5);
+                            var d = new Date(data['date']);
+                            var time = _st + ' - ' + _et;
+                            const input_date_options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                            var date = d.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', input_date_options);
+                            var _class_url = "{% url 'classes:detail' 's-l-u-g' %}";
+                            
+                            var class_url = _class_url.replace('s-l-u-g', data['yogaclass']['slug']);
+                            var class_str = `<a class="text-danger" href="`+ class_url + `">`+ data['yogaclass']['name'] +`</a>`;
+                            $('#class_info').text("");
+                            $('#class_info').empty();
+                            $('#class_info').append(class_str);
+
+                            $('#room_info').text(data['room']['name'] + ' - ' + data['room']['location']);
+                            
+                            var _trainer_url = "{% url 'trainers:detail' 's-l-u-g' %}";
+                            var trainer_url = _trainer_url.replace('s-l-u-g', data['yogaclass']['trainer']['user']['slug']);
+                            var trainer_str = `<a class="text-danger" href="`+ trainer_url + `">`+ data['yogaclass']['trainer']['user']['first_name'] + ' ' + data['yogaclass']['trainer']['user']['last_name'] +`</a>`;
+                            $('#trainer_info').text("");
+                            $('#trainer_info').empty();
+                            $('#trainer_info').append(trainer_str);
+                            $('#date_info').text(date);
+                            $('#time_info').text(time);
+                            $('#btn_open_modal_lesson_info').click();
+                        });
+                    }
+                });
             },
             eventRender: function (info) {
                 if (info.event.extendedProps.imageClassUrl) {

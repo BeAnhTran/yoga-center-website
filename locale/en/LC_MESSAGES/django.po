@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-10 14:20+0700\n"
+"POT-Creation-Date: 2020-05-10 15:02+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -775,6 +775,7 @@ msgid "Other Classes"
 msgstr ""
 
 #: .\apps\classes\templates\classes\show.html:161
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:40
 msgid "Detail Information"
 msgstr ""
 
@@ -1844,6 +1845,29 @@ msgstr ""
 msgid "Add product to cart successfully"
 msgstr ""
 
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:48
+msgid "Class"
+msgstr ""
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:52
+msgid "Room"
+msgstr ""
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:56
+#, fuzzy
+#| msgid "Trainers"
+msgid "Trainer"
+msgstr "Trainer"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:60
+msgid "Date"
+msgstr ""
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:64
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2061
+msgid "Time"
+msgstr ""
+
 #: .\templates\account\login.html:9 .\templates\account\login.html:28
 #: .\templates\account\login.html:37
 msgid "Sign In"
@@ -2546,10 +2570,6 @@ msgstr ""
 msgid ""
 "“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
 "invalid time."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2061
-msgid "Time"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2187

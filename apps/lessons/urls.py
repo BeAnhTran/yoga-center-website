@@ -1,10 +1,12 @@
 from django.urls import include, path
 from django.conf.urls import url
 
-from apps.lessons.views import (get_lesson_list_in_range_time)
+from apps.lessons import views
 
 app_name = 'lessons'
 
 urlpatterns = [
-    url(r'^list/json/$', get_lesson_list_in_range_time.as_view(), name='json-list-in-range-time'),
+    url(r'^list/json/$', views.GetLessonListInRangeTimeAPIView.as_view(),
+        name='json-list-in-range-time'),
+    path('detail/<pk>/', views.LessonDetailAPIView.as_view(), name='json-lesson-api'),
 ]

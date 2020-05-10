@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-10 14:20+0700\n"
+"POT-Creation-Date: 2020-05-10 15:02+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -773,6 +773,7 @@ msgid "Other Classes"
 msgstr "Lớp yoga khác"
 
 #: .\apps\classes\templates\classes\show.html:161
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:40
 msgid "Detail Information"
 msgstr "Thông tin chi tiết"
 
@@ -1846,6 +1847,27 @@ msgstr "Vui lòng kiểm tra email và hóa đơn của bạn"
 msgid "Add product to cart successfully"
 msgstr "Đã thêm vào giỏ hàng"
 
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:48
+msgid "Class"
+msgstr "Lớp"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:52
+msgid "Room"
+msgstr "Phòng tập"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:56
+msgid "Trainer"
+msgstr "Huấn luyện viên"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:60
+msgid "Date"
+msgstr "Ngày"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:64
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2061
+msgid "Time"
+msgstr "Thời gian"
+
 #: .\templates\account\login.html:9 .\templates\account\login.html:28
 #: .\templates\account\login.html:37
 msgid "Sign In"
@@ -1898,7 +1920,7 @@ msgstr "Các bài tập Yoga sẽ giúp bạn thoải mái đầu óc va�
 
 #: .\templates\home\index.html:64
 msgid "Welcome to HT Yoga"
-msgstr "Chào mừng đến với HT Yoga"
+msgstr "Chào mừng đến với Yoga Hương Tre"
 
 #: .\templates\home\index.html:87
 msgid "Full Rejuvenation"
@@ -2550,10 +2572,6 @@ msgstr ""
 msgid ""
 "“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
 "invalid time."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2061
-msgid "Time"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2187
@@ -3363,6 +3381,11 @@ msgstr ""
 msgid "Connect, get help, or contribute"
 msgstr ""
 
+#, fuzzy
+#~| msgid "Detail Information"
+#~ msgid "Detail Infomation"
+#~ msgstr "Thông tin chi tiết"
+
 #~ msgid "email address"
 #~ msgstr "email"
 
@@ -3500,15 +3523,6 @@ msgstr ""
 
 #~ msgid "Consecutive Lessons"
 #~ msgstr "Học các buổi liên tiếp"
-
-#~ msgid "Room"
-#~ msgstr "Phòng tập"
-
-#~ msgid "Class"
-#~ msgstr "Lớp"
-
-#~ msgid "Date"
-#~ msgstr "Ngày"
 
 #~ msgid "Start Time"
 #~ msgstr "Giờ bắt đầu"

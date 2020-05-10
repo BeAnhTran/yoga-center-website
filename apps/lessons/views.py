@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from apps.lessons.models import Lesson
@@ -10,7 +10,7 @@ from apps.lessons.models import ACTIVE_STATE
 # Response to schedule
 
 
-class get_lesson_list_in_range_time(APIView):
+class GetLessonListInRangeTimeAPIView(APIView):
     def get(self, request):
         start_date = datetime.fromisoformat(request.GET['startStr'])
         end_date = datetime.fromisoformat(request.GET['endStr'])
@@ -40,3 +40,16 @@ def get_lessons(start_date, end_date, id_class=None, available_only=None):
         return yoga_class.lessons.filter(**filter_options).order_by('date')
     else:
         return Lesson.objects.filter(**filter_options).order_by('date')
+
+
+class LessonDetailAPIView(APIView):
+    def get_object(self, pk):
+        try:
+            return Lesson.objects.get(pk=pk)
+        except Lesson.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        lesson = self.get_object(pk)
+        serializer = LessonSerializer(lesson)
+        return Response(serializer.data)
