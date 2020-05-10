@@ -12,9 +12,24 @@ class PostListView(ListView):
     context_object_name = 'posts'
     paginate_by = 5
 
+    def get_queryset(self):
+        if self.request.GET.get('category') is not None:
+            category = get_object_or_404(
+                PostCategory, slug=self.request.GET['category'])
+            return category.posts.all()
+        return Post.objects.all()
+
     def get_context_data(self, **kwargs):
         context = super(PostListView, self).get_context_data(**kwargs)
+        categories = PostCategory.objects.all()
+        newest_posts = Post.objects.all().order_by('-created_at')[:3]
         context['active_nav'] = 'blog'
+        context['categories'] = categories
+        context['newest_posts'] = newest_posts
+        if self.request.GET.get('category') is not None:
+            category = get_object_or_404(
+                PostCategory, slug=self.request.GET['category'])
+            context['category'] = category
         return context
 
 
@@ -25,5 +40,9 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
+        categories = PostCategory.objects.all()
+        newest_posts = Post.objects.all().order_by('-created_at')[:3]
         context['active_nav'] = 'blog'
+        context['categories'] = categories
+        context['newest_posts'] = newest_posts
         return context

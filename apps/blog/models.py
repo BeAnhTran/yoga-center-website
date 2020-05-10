@@ -10,7 +10,7 @@ STATUS_CHOICES = (
 
 
 class Post(models.Model):
-    category = models.ForeignKey('blog.PostCategory', on_delete=models.CASCADE)
+    category = models.ForeignKey('blog.PostCategory', on_delete=models.CASCADE, related_name='posts')
     title = models.CharField(max_length=150)
     slug = models.SlugField(max_length=175, unique=True)
     description = models.CharField(max_length=255)

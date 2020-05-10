@@ -60,102 +60,36 @@
             <div class="col-lg-3 col-md-5 col-sm-8 sidebar">
                 <div class="sb-widget">
                     <form class="search-form">
-                        <input type="text" placeholder="Tìm kiếm">
+                        <input type="text" placeholder="{% trans 'Search' %}">
                         <button><i class="material-icons">search</i></button>
                     </form>
                 </div>
                 <div class="sb-widget">
-                    <h2 class="sb-title">Thể loại</h2>
+                    <h2 class="sb-title">{% trans 'Categories' %}</h2>
                     <ul class="sb-list">
-                        <li><a href="javascript:;">Sức khỏe<span>(5)</span></a></li>
-                        <li><a href="javascript:;">Đời sống<span>(7)</span></a></li>
-                        <li><a href="javascript:;">Làm đẹp<span>(3)</span></a></li>
-                        <li><a href="javascript:;">Thử thách Yoga<span>(10)</span></a></li>
-                        <li><a href="javascript:;">Đào tạo<span>(12)</span></a></li>
-                        <li><a href="javascript:;">Kinh nghiệm<span>(4)</span></a></li>
+                        {% for cat in categories %}
+                            <li>
+                                <a href="{% url 'blog:list' %}?category={{cat.slug}}">{{cat}}<span>({{cat.posts.count}})</span></a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="sb-widget">
-                    <h2 class="sb-title">Bài viết mới nhất</h2>
+                    <h2 class="sb-title">{% trans 'Newest Posts' %}</h2>
                     <div class="latest-post-widget">
+                        {% for p in newest_posts %}
                         <div class="lp-item">
-                            <a href="javascript:;" class="lp-thumb set-bg" data-setbg="{% static 'img/blog/8.jpg' %}"></a>
-                            <a href="javascript:;" class="lp-text">
-                                <h3>Rapid Weight Loss</h3>
-                                <p><i class="material-icons">event_available</i>June 28, 2019</p>
+                            <a href="{% url 'blog:detail' p.slug %}" class="lp-thumb set-bg" data-setbg="{{ p.image.url }}"></a>
+                            <a href="{% url 'blog:detail' p.slug %}" class="lp-text">
+                                <h3>{{ p }}</h3>
+                                <p><i class="material-icons">event_available</i>{{p.created_at|date}}</p>
                             </a>
                         </div>
-                        <div class="lp-item">
-                            <a href="javascript:;" class="lp-thumb set-bg" data-setbg="{% static 'img/blog/3.jpg' %}"></a>
-                            <a href="javascript:;" class="lp-text">
-                                <h3>Flexible Body</h3>
-                                <p><i class="material-icons">event_available</i>June 28, 2019</p>
-                            </a>
-                        </div>
-                        <div class="lp-item">
-                            <a href="javascript:;" class="lp-thumb set-bg" data-setbg="{% static 'img/blog/9.jpg' %}"></a>
-                            <a href="javascript:;" class="lp-text">
-                                <h3>Healthy Eating Mode</h3>
-                                <p><i class="material-icons">event_available</i>June 28, 2019</p>
-                            </a>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="sb-widget">
-                    <h2 class="sb-title">Hình ảnh nổi bật</h2>
-                    <div class="insta-widget">
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/1.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/2.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/3.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/4.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/5.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/6.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sb-widget">
-                    <h2 class="sb-title">Tags</h2>
+                    <h2 class="sb-title">{% trans 'Tags' %}</h2>
                     <div class="sb-tags">
                         <a href="javascript:;">Sức khỏe</a>
                         <a href="javascript:;">Đời sống</a>

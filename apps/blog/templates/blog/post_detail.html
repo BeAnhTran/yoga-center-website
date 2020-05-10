@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load settings_extras %}
+
 {% block specified_css %}
 <link href="{% static 'css/blog/posts/detail.css' %}" rel="stylesheet">
 {% endblock %}
@@ -11,10 +13,9 @@
             <div class="col-lg-9">
                 <div class="row mb-3">
                     <div class="col">
-                        <button class="btn btn-sm btn-outline-danger badge-pill"><span class="flaticon-lotus"></span></button>
-                        &frasl;
-                        <a class="text-danger" href="javascript:;">{{ post.category|title }}</a>
-                        &frasl;
+                        <a class="text-danger"><span class="flaticon-lotus"></span> &raquo; </a>
+                        <a class="text-danger" href="{% url 'blog:list' %}">Blog &raquo; </a>
+                        <a class="text-danger" href="javascript:;">{{ post.category|title }} &raquo; </a>
                         <a class="text-danger" href="javascript:;">{{ post|title }}</a>
                     </div>
                 </div>
@@ -23,7 +24,7 @@
                         <img src="{{ post.image.url }}" alt="{{ post }}">
                     </div>
                     <h2>{{ post }}</h2>
-                    <div class="blog-meta"><p><i class="material-icons">event_available</i>11/02/2020</p></div>
+                    <div class="blog-meta"><p><i class="material-icons">event_available</i>{{ post.created_at|date }}</p></div>
                     <blockquote>
                         {{ post.description }}
                     </blockquote>
@@ -34,74 +35,14 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-7">
-                            <div class="ed-cata"><p><i class="material-icons">local_offer</i>Health & Beauty</p></div>
-                        </div>
-                        <div class="col-sm-5 text-left text-sm-right pt-4 pt-sm-0">
-                            <div class="ed-social">
-                                <a href="#"><i class="fab fa-facebook"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                            </div>
+                            <div class="ed-cata"><p><i class="material-icons">local_offer</i>{{ post.category }}</p></div>
                         </div>
                     </div>
-                </div>
-                <div class="blog-author-card">
-                    <div class="blog-author">
-                        <img src="{% static 'img/classes/author/4.jpg' %}" alt="">
-                        <div class="ba-text">
-                            <h3>Dorothy Newman</h3>
-                            <p>Let Yoga bring you perfect body, health and flexibility and a spirit of relaxation. Choose the nearest gym at Ahana Yoga and start this amazing journey!</p>
-                            <div class="ba-social">
-                                <a href="#"><i class="fab fa-facebook"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="blog-nav-warp text-center text-sm-left">
+                    <h3 class="comment-title mt-3">{% trans 'Comments' %}</h3>
                     <div class="row">
-                        <div class="col-sm-6">
-                            <a href="#" class="blog-nav bn-prev">
-                                <i class="material-icons">keyboard_arrow_left</i>
-                                <h3>Movements for Slim</h3>
-                                <p>Bài viết trước</p>
-                            </a>
-                        </div>
-                        <div class="col-sm-6 text-center text-sm-right">
-                            <a href="#" class="blog-nav bn-next">
-                                <i class="material-icons">keyboard_arrow_right</i>
-                                <h3>The Perfect Dose</h3>
-                                <p>Bài viết tiếp theo</p>
-                            </a>
-                        </div>
+                        <div class="fb-comments" data-href="{% settings_value 'FACEBOOK_PRIVACY_POLICY_URL' %}{% url 'blog:detail' post.slug %}" data-numposts="5" data-width="100%"></div>
                     </div>
                 </div>
-                <h3 class="comment-title">Bình luận</h3>
-                <ul class="comment-list">
-                    <li>
-                        <img src="{% static 'img/classes/author/3.jpg' %}" class="comment-pic" alt="">
-                        <div class="comment-text">
-                            <h3>Beverly Price </h3>
-                            <div class="comment-date"><i class="material-icons">alarm_on</i>June 28, 2019 at 3:18 pm</div>
-                            <p>Just practicing yoga for more than 3 months, I dropped from 64 kg to 58 kg. I have used many weight loss measures such as medication, diet, but the effects are slow and low. </p>
-                            <a href="#" class="reply"><i class="material-icons">reply</i></a>
-                        </div>
-                        <ul class="comment-sub-list">
-                            <li>
-                                <img src="{% static 'img/classes/author/2.jpg' %}" class="comment-pic" alt="">
-                                <div class="comment-text">
-                                    <h3>Jacqueline Watkins</h3>
-                                    <div class="comment-date"><i class="material-icons">alarm_on</i>June 28, 2019 at 3:18 pm</div>
-                                    <p>Just practicing yoga for more than 3 months, I dropped from 64 kg to 58 kg. I have used many weight loss measures such as medication, diet, but the effects are slow and low. </p>
-                                    <a href="#" class="reply"><i class="material-icons">reply</i></a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
             <div class="col-lg-3 col-md-5 col-sm-8 sidebar">
                 <div class="sb-widget">
@@ -111,97 +52,31 @@
                     </form>
                 </div>
                 <div class="sb-widget">
-                    <h2 class="sb-title">Thể loại</h2>
+                    <h2 class="sb-title">{% trans 'Categories' %}</h2>
                     <ul class="sb-list">
-                        <li><a href="javascript:;">Sức khỏe<span>(5)</span></a></li>
-                        <li><a href="javascript:;">Đời sống<span>(7)</span></a></li>
-                        <li><a href="javascript:;">Làm đẹp<span>(3)</span></a></li>
-                        <li><a href="javascript:;">Thử thách Yoga<span>(10)</span></a></li>
-                        <li><a href="javascript:;">Đào tạo<span>(12)</span></a></li>
-                        <li><a href="javascript:;">Kinh nghiệm<span>(4)</span></a></li>
+                        {% for cat in categories %}
+                            <li>
+                                <a href="{% url 'blog:list' %}?category={{cat.slug}}">{{cat}}<span>({{cat.posts.count}})</span></a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="sb-widget">
-                    <h2 class="sb-title">Bài viết mới nhất</h2>
+                    <h2 class="sb-title">{% trans 'Newest Posts' %}</h2>
                     <div class="latest-post-widget">
+                        {% for p in newest_posts %}
                         <div class="lp-item">
-                            <a href="javascript:;" class="lp-thumb set-bg" data-setbg="{% static 'img/blog/8.jpg' %}"></a>
-                            <a href="javascript:;" class="lp-text">
-                                <h3>Rapid Weight Loss</h3>
-                                <p><i class="material-icons">event_available</i>June 28, 2019</p>
+                            <a href="{% url 'blog:detail' p.slug %}" class="lp-thumb set-bg" data-setbg="{{ p.image.url }}"></a>
+                            <a href="{% url 'blog:detail' p.slug %}" class="lp-text">
+                                <h3>{{ p }}</h3>
+                                <p><i class="material-icons">event_available</i>{{p.created_at|date}}</p>
                             </a>
                         </div>
-                        <div class="lp-item">
-                            <a href="javascript:;" class="lp-thumb set-bg" data-setbg="{% static 'img/blog/3.jpg' %}"></a>
-                            <a href="javascript:;" class="lp-text">
-                                <h3>Flexible Body</h3>
-                                <p><i class="material-icons">event_available</i>June 28, 2019</p>
-                            </a>
-                        </div>
-                        <div class="lp-item">
-                            <a href="javascript:;" class="lp-thumb set-bg" data-setbg="{% static 'img/blog/9.jpg' %}"></a>
-                            <a href="javascript:;" class="lp-text">
-                                <h3>Healthy Eating Mode</h3>
-                                <p><i class="material-icons">event_available</i>June 28, 2019</p>
-                            </a>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="sb-widget">
-                    <h2 class="sb-title">Hình ảnh nổi bật</h2>
-                    <div class="insta-widget">
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/1.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/2.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/3.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/4.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/5.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="insta-item">
-                            <div class="insta-img">
-                                <img src="{% static 'img/infor/6.jpg' %}" alt="">
-                                <div class="insta-hover">
-                                    <i class="fab fa-instagram"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sb-widget">
-                    <h2 class="sb-title">Tags</h2>
+                    <h2 class="sb-title">{% trans 'Tags' %}</h2>
                     <div class="sb-tags">
                         <a href="javascript:;">Sức khỏe</a>
                         <a href="javascript:;">Đời sống</a>

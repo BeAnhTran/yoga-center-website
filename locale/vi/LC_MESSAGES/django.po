@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-10 09:14+0700\n"
+"POT-Creation-Date: 2020-05-10 14:20+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -331,6 +331,25 @@ msgstr "buổi tập đã dạy"
 msgid "Signup successfully"
 msgstr "Đăng kí thành công"
 
+#: .\apps\blog\templates\blog\post_detail.html:41
+msgid "Comments"
+msgstr "Bình luận"
+
+#: .\apps\blog\templates\blog\post_detail.html:55
+#: .\apps\blog\templates\blog\post_list.html:68
+msgid "Categories"
+msgstr "Thể loại"
+
+#: .\apps\blog\templates\blog\post_detail.html:65
+#: .\apps\blog\templates\blog\post_list.html:78
+msgid "Newest Posts"
+msgstr "Bài viết mới nhất"
+
+#: .\apps\blog\templates\blog\post_detail.html:79
+#: .\apps\blog\templates\blog\post_list.html:92
+msgid "Tags"
+msgstr ""
+
 #: .\apps\blog\templates\blog\post_list.html:17
 msgid "posts"
 msgstr "bài viết"
@@ -385,6 +404,10 @@ msgstr "bài viết"
 #, python-format
 msgid "Showing %(value1)s of %(value2)s %(value3)s"
 msgstr "Hiển thị %(value1)s / %(value2)s %(value3)s"
+
+#: .\apps\blog\templates\blog\post_list.html:63 .\templates\base.html:88
+msgid "Search"
+msgstr "Tìm kiếm"
 
 #: .\apps\card_invoices\models.py:12 .\apps\cards\models.py:58
 #: .\apps\dashboard\templates\dashboard\cards\list.html:17
@@ -1369,19 +1392,19 @@ msgstr "Doanh thu tháng"
 msgid "Earnings (Annual)"
 msgstr "Doanh thu năm"
 
-#: .\apps\dashboard\templates\dashboard\index.html:62
+#: .\apps\dashboard\templates\dashboard\index.html:64
 msgid "Trainees"
 msgstr "Học viên"
 
-#: .\apps\dashboard\templates\dashboard\index.html:81
+#: .\apps\dashboard\templates\dashboard\index.html:83
 msgid "Pending Requests"
 msgstr "Yêu cầu đang chờ"
 
-#: .\apps\dashboard\templates\dashboard\index.html:103
+#: .\apps\dashboard\templates\dashboard\index.html:105
 msgid "Earnings Overview"
 msgstr "Tổng quan doanh thu"
 
-#: .\apps\dashboard\templates\dashboard\index.html:133
+#: .\apps\dashboard\templates\dashboard\index.html:135
 msgid "Popular Course Analysis"
 msgstr "Phân tích khóa học"
 
@@ -1843,10 +1866,6 @@ msgstr "Đăng nhập thành công"
 #: .\templates\account\messages\logged_out.txt:2
 msgid "You have signed out."
 msgstr "Đăng xuất thành công"
-
-#: .\templates\base.html:88
-msgid "Search"
-msgstr "Tìm kiếm"
 
 #: .\templates\base.html:167
 msgid "Send feedback successfully"

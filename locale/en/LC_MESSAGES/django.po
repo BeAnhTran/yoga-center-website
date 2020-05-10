@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-10 09:13+0700\n"
+"POT-Creation-Date: 2020-05-10 14:20+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -331,6 +331,25 @@ msgstr ""
 msgid "Signup successfully"
 msgstr ""
 
+#: .\apps\blog\templates\blog\post_detail.html:41
+msgid "Comments"
+msgstr ""
+
+#: .\apps\blog\templates\blog\post_detail.html:55
+#: .\apps\blog\templates\blog\post_list.html:68
+msgid "Categories"
+msgstr ""
+
+#: .\apps\blog\templates\blog\post_detail.html:65
+#: .\apps\blog\templates\blog\post_list.html:78
+msgid "Newest Posts"
+msgstr ""
+
+#: .\apps\blog\templates\blog\post_detail.html:79
+#: .\apps\blog\templates\blog\post_list.html:92
+msgid "Tags"
+msgstr ""
+
 #: .\apps\blog\templates\blog\post_list.html:17
 msgid "posts"
 msgstr ""
@@ -384,6 +403,10 @@ msgstr ""
 #: .\apps\trainers\templates\trainers\list.html:27
 #, python-format
 msgid "Showing %(value1)s of %(value2)s %(value3)s"
+msgstr ""
+
+#: .\apps\blog\templates\blog\post_list.html:63 .\templates\base.html:88
+msgid "Search"
 msgstr ""
 
 #: .\apps\card_invoices\models.py:12 .\apps\cards\models.py:58
@@ -1359,21 +1382,21 @@ msgstr ""
 msgid "Earnings (Annual)"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:62
+#: .\apps\dashboard\templates\dashboard\index.html:64
 #, fuzzy
 #| msgid "Trainers"
 msgid "Trainees"
 msgstr "Trainer"
 
-#: .\apps\dashboard\templates\dashboard\index.html:81
+#: .\apps\dashboard\templates\dashboard\index.html:83
 msgid "Pending Requests"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:103
+#: .\apps\dashboard\templates\dashboard\index.html:105
 msgid "Earnings Overview"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:133
+#: .\apps\dashboard\templates\dashboard\index.html:135
 #, fuzzy
 #| msgid "price course"
 msgid "Popular Course Analysis"
@@ -1840,10 +1863,6 @@ msgstr ""
 
 #: .\templates\account\messages\logged_out.txt:2
 msgid "You have signed out."
-msgstr ""
-
-#: .\templates\base.html:88
-msgid "Search"
 msgstr ""
 
 #: .\templates\base.html:167
