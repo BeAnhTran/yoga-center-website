@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-05 09:07+0700\n"
+"POT-Creation-Date: 2020-05-10 09:13+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,12 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\apps\accounts\forms\trainee_form.py:12
-#: .\apps\accounts\forms\trainee_form.py:13 .\apps\questions\forms.py:13
+#: .\apps\accounts\forms\trainee_form.py:13 .\apps\home\forms.py:9
+#: .\apps\questions\forms.py:13
 msgid "First name"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:14
-#: .\apps\accounts\forms\trainee_form.py:15 .\apps\questions\forms.py:16
+#: .\apps\accounts\forms\trainee_form.py:15 .\apps\home\forms.py:11
+#: .\apps\questions\forms.py:16
 msgid "Last name"
 msgstr ""
 
@@ -36,7 +38,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: .\apps\accounts\forms\trainee_form.py:20
+#: .\apps\accounts\forms\trainee_form.py:20 .\apps\home\forms.py:18
 msgid "Health Condition"
 msgstr ""
 
@@ -52,7 +54,8 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: .\apps\accounts\forms\trainee_form.py:39 .\apps\questions\forms.py:18
+#: .\apps\accounts\forms\trainee_form.py:39 .\apps\home\forms.py:7
+#: .\apps\questions\forms.py:18
 msgid "Email"
 msgstr ""
 
@@ -60,15 +63,15 @@ msgstr ""
 msgid "Sign up"
 msgstr ""
 
-#: .\apps\accounts\models.py:18
+#: .\apps\accounts\models.py:19
 msgid "Female"
 msgstr ""
 
-#: .\apps\accounts\models.py:19
+#: .\apps\accounts\models.py:20
 msgid "Male"
 msgstr ""
 
-#: .\apps\accounts\models.py:23 .\apps\classes\templates\payment.html:41
+#: .\apps\accounts\models.py:24 .\apps\classes\templates\payment.html:41
 #: .\apps\classes\views.py:338
 #: .\apps\dashboard\templates\dashboard\admins\list.html:33
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:29
@@ -80,52 +83,52 @@ msgstr ""
 #: .\apps\donations\templates\donations\index.html:95
 #: .\apps\feedback\models.py:8 .\apps\questions\models.py:8
 #: .\apps\shop\templates\shop\checkout.html:58 .\apps\shop\views.py:213
-#: .\templates\home\index.html:367 .\templates\layouts\info_model.html:32
+#: .\templates\layouts\info_model.html:32
 msgid "email"
 msgstr ""
 
-#: .\apps\accounts\models.py:27
+#: .\apps\accounts\models.py:28
 msgid "is trainee"
 msgstr ""
 
-#: .\apps\accounts\models.py:29
+#: .\apps\accounts\models.py:30
 msgid "is trainer"
 msgstr ""
 
-#: .\apps\accounts\models.py:30
+#: .\apps\accounts\models.py:31
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:30
 #: .\apps\dashboard\templates\dashboard\questions\list.html:30
 #: .\apps\feedback\models.py:6 .\apps\questions\models.py:6
-#: .\templates\home\index.html:361 .\templates\layouts\info_model.html:26
+#: .\templates\layouts\info_model.html:26
 msgid "first name"
 msgstr ""
 
-#: .\apps\accounts\models.py:31
+#: .\apps\accounts\models.py:32
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:31
 #: .\apps\dashboard\templates\dashboard\questions\list.html:31
 #: .\apps\feedback\models.py:7 .\apps\questions\models.py:7
-#: .\templates\home\index.html:364 .\templates\layouts\info_model.html:29
+#: .\templates\layouts\info_model.html:29
 msgid "last name"
 msgstr ""
 
-#: .\apps\accounts\models.py:33 .\apps\classes\models.py:18
+#: .\apps\accounts\models.py:34 .\apps\classes\models.py:18
 #: .\apps\courses\models.py:33 .\apps\events\models.py:10
 #: .\apps\shop\models.py:35
 msgid "slug"
 msgstr ""
 
-#: .\apps\accounts\models.py:37 .\apps\classes\templates\payment.html:35
+#: .\apps\accounts\models.py:38 .\apps\classes\templates\payment.html:35
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:32
 #: .\apps\dashboard\templates\dashboard\questions\list.html:32
 #: .\apps\donations\models.py:14
 #: .\apps\donations\templates\donations\index.html:88
 #: .\apps\feedback\models.py:10 .\apps\questions\models.py:10
-#: .\apps\shop\templates\shop\checkout.html:51 .\templates\home\index.html:370
+#: .\apps\shop\templates\shop\checkout.html:51
 #: .\templates\layouts\info_model.html:35
 msgid "phone number"
 msgstr ""
 
-#: .\apps\accounts\models.py:39
+#: .\apps\accounts\models.py:40
 #: .\apps\dashboard\templates\dashboard\admins\list.html:34
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:34
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:34
@@ -134,12 +137,12 @@ msgstr ""
 msgid "birth day"
 msgstr ""
 
-#: .\apps\accounts\models.py:41 .\apps\classes\templates\payment.html:47
+#: .\apps\accounts\models.py:42 .\apps\classes\templates\payment.html:47
 #: .\apps\shop\templates\shop\checkout.html:65
 msgid "address"
 msgstr ""
 
-#: .\apps\accounts\models.py:43
+#: .\apps\accounts\models.py:44
 #: .\apps\dashboard\templates\dashboard\admins\list.html:35
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:35
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:35
@@ -147,15 +150,15 @@ msgstr ""
 msgid "gender"
 msgstr ""
 
-#: .\apps\accounts\models.py:44
+#: .\apps\accounts\models.py:45
 msgid "country"
 msgstr ""
 
-#: .\apps\accounts\models.py:46
+#: .\apps\accounts\models.py:47
 msgid "language"
 msgstr ""
 
-#: .\apps\accounts\models.py:48 .\apps\accounts\models.py:73
+#: .\apps\accounts\models.py:49 .\apps\accounts\models.py:92
 #: .\apps\courses\models.py:38
 #: .\apps\dashboard\templates\dashboard\admins\list.html:36
 #: .\apps\dashboard\templates\dashboard\classes\show.html:77
@@ -171,11 +174,11 @@ msgstr ""
 msgid "image"
 msgstr ""
 
-#: .\apps\accounts\models.py:50
+#: .\apps\accounts\models.py:51
 msgid "updated_at"
 msgstr "updated at"
 
-#: .\apps\accounts\models.py:69 .\apps\card_types\models.py:17
+#: .\apps\accounts\models.py:88 .\apps\card_types\models.py:17
 #: .\apps\classes\models.py:16 .\apps\classes\templates\payment.html:29
 #: .\apps\courses\models.py:31
 #: .\apps\dashboard\templates\dashboard\admins\list.html:32
@@ -202,7 +205,7 @@ msgstr "updated at"
 msgid "name"
 msgstr ""
 
-#: .\apps\accounts\models.py:71 .\apps\card_invoices\models.py:14
+#: .\apps\accounts\models.py:90 .\apps\card_invoices\models.py:14
 #: .\apps\card_types\models.py:18 .\apps\courses\models.py:35
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:30
 #: .\apps\dashboard\templates\dashboard\card_types\list.html:28
@@ -215,24 +218,24 @@ msgstr ""
 msgid "description"
 msgstr ""
 
-#: .\apps\accounts\models.py:89 .\apps\refunds\models.py:13
+#: .\apps\accounts\models.py:108 .\apps\refunds\models.py:13
 msgid "pending"
 msgstr ""
 
-#: .\apps\accounts\models.py:90 .\apps\refunds\models.py:14
+#: .\apps\accounts\models.py:109 .\apps\refunds\models.py:14
 msgid "approved"
 msgstr ""
 
-#: .\apps\accounts\models.py:91 .\apps\refunds\models.py:15
+#: .\apps\accounts\models.py:110 .\apps\refunds\models.py:15
 msgid "rejected"
 msgstr ""
 
-#: .\apps\accounts\models.py:96 .\apps\cards\models.py:61
+#: .\apps\accounts\models.py:115 .\apps\cards\models.py:61
 #: .\apps\refunds\models.py:26
 msgid "reason"
 msgstr ""
 
-#: .\apps\accounts\models.py:98 .\apps\cards\models.py:63
+#: .\apps\accounts\models.py:117 .\apps\cards\models.py:63
 #: .\apps\dashboard\forms\lesssons_form.py:64
 #: .\apps\dashboard\templates\dashboard\classes\show.html:56
 #: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:28
@@ -243,15 +246,15 @@ msgstr ""
 msgid "state"
 msgstr ""
 
-#: .\apps\accounts\models.py:99
+#: .\apps\accounts\models.py:118
 msgid "leave at"
 msgstr ""
 
-#: .\apps\accounts\models.py:100
+#: .\apps\accounts\models.py:119
 msgid "back at"
 msgstr ""
 
-#: .\apps\accounts\models.py:102 .\apps\card_invoices\models.py:22
+#: .\apps\accounts\models.py:121 .\apps\card_invoices\models.py:22
 #: .\apps\card_types\models.py:28 .\apps\cards\models.py:22
 #: .\apps\cards\models.py:65 .\apps\classes\models.py:31
 #: .\apps\courses\models.py:50
@@ -270,7 +273,7 @@ msgstr ""
 msgid "created at"
 msgstr ""
 
-#: .\apps\accounts\models.py:104 .\apps\card_invoices\models.py:24
+#: .\apps\accounts\models.py:123 .\apps\card_invoices\models.py:24
 #: .\apps\card_types\models.py:30 .\apps\cards\models.py:24
 #: .\apps\cards\models.py:67 .\apps\classes\models.py:33
 #: .\apps\courses\models.py:52 .\apps\donations\models.py:23
@@ -284,48 +287,47 @@ msgstr ""
 msgid "updated at"
 msgstr ""
 
-#: .\apps\accounts\models.py:116 .\templates\home\index.html:373
-#: .\templates\profile\index.html:66
+#: .\apps\accounts\models.py:135 .\templates\profile\index.html:66
 msgid "health condition"
 msgstr ""
 
-#: .\apps\accounts\models.py:127
+#: .\apps\accounts\models.py:146
 msgid "introduction"
 msgstr ""
 
-#: .\apps\accounts\models.py:129 .\apps\accounts\models.py:156
+#: .\apps\accounts\models.py:148 .\apps\accounts\models.py:175
 msgid "experience"
 msgstr ""
 
-#: .\apps\accounts\models.py:131
+#: .\apps\accounts\models.py:150
 msgid "achievements"
 msgstr ""
 
-#: .\apps\accounts\models.py:133 .\apps\accounts\models.py:158
+#: .\apps\accounts\models.py:152 .\apps\accounts\models.py:177
 msgid "certificate"
 msgstr ""
 
-#: .\apps\accounts\models.py:135 .\apps\accounts\models.py:166
+#: .\apps\accounts\models.py:154 .\apps\accounts\models.py:185
 msgid "temporary leave requests"
 msgstr ""
 
-#: .\apps\accounts\models.py:137 .\apps\accounts\models.py:160
+#: .\apps\accounts\models.py:156 .\apps\accounts\models.py:179
 msgid "is student"
 msgstr ""
 
-#: .\apps\accounts\models.py:139 .\apps\accounts\models.py:162
+#: .\apps\accounts\models.py:158 .\apps\accounts\models.py:181
 msgid "graduate school"
 msgstr ""
 
-#: .\apps\accounts\models.py:141 .\apps\accounts\models.py:164
+#: .\apps\accounts\models.py:160 .\apps\accounts\models.py:183
 msgid "company name"
 msgstr ""
 
-#: .\apps\accounts\models.py:143
+#: .\apps\accounts\models.py:162
 msgid "taught lessons"
 msgstr ""
 
-#: .\apps\accounts\views.py:31
+#: .\apps\accounts\views.py:48
 msgid "Signup successfully"
 msgstr ""
 
@@ -484,9 +486,9 @@ msgstr ""
 #: .\apps\dashboard\forms\promotions_form.py:81
 #: .\apps\profiles\forms\certificate_form.py:27
 #: .\apps\profiles\forms\profile_form.py:32
-#: .\apps\profiles\forms\profile_form.py:83
-#: .\apps\profiles\forms\profile_form.py:116
-#: .\apps\profiles\forms\profile_form.py:141 .\apps\refunds\forms.py:31
+#: .\apps\profiles\forms\profile_form.py:84
+#: .\apps\profiles\forms\profile_form.py:117
+#: .\apps\profiles\forms\profile_form.py:142 .\apps\refunds\forms.py:31
 msgid "Save"
 msgstr ""
 
@@ -683,7 +685,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:339
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:440
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:486
-#: .\templates\base.html:174
+#: .\templates\base.html:178
 msgid "error"
 msgstr ""
 
@@ -889,7 +891,7 @@ msgid "detail"
 msgstr ""
 
 #: .\apps\courses\templates\courses\list.html:44
-#: .\apps\courses\templates\courses\show.html:33
+#: .\apps\courses\templates\courses\show.html:34
 msgid "view classes"
 msgstr ""
 
@@ -1230,7 +1232,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:414
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:479
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:505
-#: .\templates\base.html:162
+#: .\templates\base.html:166
 msgid "done"
 msgstr ""
 
@@ -1308,7 +1310,7 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:12
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:263
-#: .\templates\base.html:111 .\templates\layouts\info_model.html:20
+#: .\templates\base.html:115 .\templates\layouts\info_model.html:20
 #: .\templates\layouts\info_model.html:38
 msgid "Feedback"
 msgstr ""
@@ -1340,9 +1342,42 @@ msgstr ""
 msgid "Gallery List"
 msgstr ""
 
+#: .\apps\dashboard\templates\dashboard\index.html:8
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:15
 msgid "Dashboard"
 msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:10
+msgid "Generate Report"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:22
+msgid "Earnings (Monthly)"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:43
+msgid "Earnings (Annual)"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:62
+#, fuzzy
+#| msgid "Trainers"
+msgid "Trainees"
+msgstr "Trainer"
+
+#: .\apps\dashboard\templates\dashboard\index.html:81
+msgid "Pending Requests"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:103
+msgid "Earnings Overview"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:133
+#, fuzzy
+#| msgid "price course"
+msgid "Popular Course Analysis"
+msgstr "price of course"
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:21
 msgid "roll call"
@@ -1421,7 +1456,7 @@ msgid "events"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:253
-#: .\apps\faq\templates\faq\list.html:16 .\templates\base.html:119
+#: .\apps\faq\templates\faq\list.html:16 .\templates\base.html:123
 msgid "FAQ"
 msgstr ""
 
@@ -1596,7 +1631,7 @@ msgid "please input content"
 msgstr ""
 
 #: .\apps\donations\templates\donations\index.html:18
-#: .\apps\donations\views.py:40 .\templates\base.html:115
+#: .\apps\donations\views.py:40 .\templates\base.html:119
 msgid "Donate"
 msgstr ""
 
@@ -1630,6 +1665,10 @@ msgstr ""
 
 #: .\apps\faq\views.py:34
 msgid "Your question has been sent successfully"
+msgstr ""
+
+#: .\apps\home\forms.py:13 .\apps\questions\forms.py:20
+msgid "Phone number"
 msgstr ""
 
 #: .\apps\lessons\models.py:20 .\apps\rooms\models.py:8
@@ -1690,7 +1729,7 @@ msgstr ""
 msgid "please input your province/city"
 msgstr ""
 
-#: .\apps\profiles\forms\profile_form.py:131
+#: .\apps\profiles\forms\profile_form.py:132
 msgid "normal health"
 msgstr ""
 
@@ -1749,10 +1788,6 @@ msgstr ""
 msgid "promotion type"
 msgstr ""
 
-#: .\apps\questions\forms.py:20
-msgid "Phone number"
-msgstr ""
-
 #: .\apps\questions\forms.py:23
 msgid "Question"
 msgstr ""
@@ -1807,15 +1842,15 @@ msgstr ""
 msgid "You have signed out."
 msgstr ""
 
-#: .\templates\base.html:84
+#: .\templates\base.html:88
 msgid "Search"
 msgstr ""
 
-#: .\templates\base.html:163
+#: .\templates\base.html:167
 msgid "Send feedback successfully"
 msgstr ""
 
-#: .\templates\base.html:175
+#: .\templates\base.html:179
 msgid "There are some error. Please try again!"
 msgstr ""
 
@@ -1932,7 +1967,7 @@ msgstr ""
 msgid "Sign Up Now"
 msgstr ""
 
-#: .\templates\home\index.html:374
+#: .\templates\home\index.html:375
 msgid "Get started"
 msgstr ""
 
