@@ -6,6 +6,9 @@ from apps.blog.models import Post
 from apps.courses.models import Course
 from apps.home.forms import SignUpFromHomeForm
 from django.views import View
+from apps.feedback.forms import FeedbackForm
+from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
 
 
 class HomeIndexView(View):
@@ -54,3 +57,27 @@ class HomeIndexView(View):
                 'signup_form_home': signup_form_home,
             }
             return render(request, 'home/index.html', context=context)
+
+
+class ContactView(View):
+    def get(self, request):
+        gallery = Gallery.objects.first()
+        form = FeedbackForm()
+        context = {
+            'gallery': gallery,
+            'form': form,
+        }
+        return render(request, 'home/contact.html', context=context)
+
+    def post(self, request):
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, _('Send feedback successfully'))
+            return redirect('home:contact')
+        gallery = Gallery.objects.first()
+        context = {
+            'gallery': gallery,
+            'form': form,
+        }
+        return render(request, 'home/contact.html', context=context)

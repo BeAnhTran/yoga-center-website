@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-11 09:58+0700\n"
+"POT-Creation-Date: 2020-05-11 11:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,14 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\apps\accounts\forms\trainee_form.py:12
-#: .\apps\accounts\forms\trainee_form.py:13 .\apps\home\forms.py:9
-#: .\apps\questions\forms.py:13
+#: .\apps\accounts\forms\trainee_form.py:13 .\apps\feedback\forms.py:14
+#: .\apps\home\forms.py:9 .\apps\questions\forms.py:13
 msgid "First name"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:14
-#: .\apps\accounts\forms\trainee_form.py:15 .\apps\home\forms.py:11
-#: .\apps\questions\forms.py:16
+#: .\apps\accounts\forms\trainee_form.py:15 .\apps\feedback\forms.py:16
+#: .\apps\home\forms.py:11 .\apps\questions\forms.py:16
 msgid "Last name"
 msgstr ""
 
@@ -54,8 +54,8 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: .\apps\accounts\forms\trainee_form.py:39 .\apps\home\forms.py:7
-#: .\apps\questions\forms.py:18
+#: .\apps\accounts\forms\trainee_form.py:39 .\apps\feedback\forms.py:12
+#: .\apps\home\forms.py:7 .\apps\questions\forms.py:18
 msgid "Email"
 msgstr ""
 
@@ -1380,92 +1380,92 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:10
+#: .\apps\dashboard\templates\dashboard\index.html:11
 msgid "Generate Report"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:22
+#: .\apps\dashboard\templates\dashboard\index.html:24
 msgid "Earnings (Monthly)"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:43
+#: .\apps\dashboard\templates\dashboard\index.html:45
 msgid "Earnings (Annual)"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:64
+#: .\apps\dashboard\templates\dashboard\index.html:66
 #, fuzzy
 #| msgid "Trainers"
 msgid "Trainees"
 msgstr "Trainer"
 
-#: .\apps\dashboard\templates\dashboard\index.html:83
+#: .\apps\dashboard\templates\dashboard\index.html:85
 msgid "Pending Extend Card Requests"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:102
+#: .\apps\dashboard\templates\dashboard\index.html:104
 msgid "Pending Refund Requests"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:121
+#: .\apps\dashboard\templates\dashboard\index.html:123
 msgid "Pending Temporary Leave Requests"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:143
+#: .\apps\dashboard\templates\dashboard\index.html:145
 msgid "Earnings Overview"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:173
+#: .\apps\dashboard\templates\dashboard\index.html:175
 #, fuzzy
 #| msgid "price course"
 msgid "Course Registration Times Analysis"
 msgstr "price of course"
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Jan"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Feb"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Mar"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Apr"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 #: .\venv\Lib\site-packages\django\utils\dates.py:14
 msgid "May"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Jun"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Jul"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Aug"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Sep"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Oct"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Nov"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Dec"
 msgstr ""
 
@@ -1756,8 +1756,13 @@ msgstr ""
 msgid "Your question has been sent successfully"
 msgstr ""
 
-#: .\apps\home\forms.py:13 .\apps\questions\forms.py:20
+#: .\apps\feedback\forms.py:18 .\apps\home\forms.py:13
+#: .\apps\questions\forms.py:20
 msgid "Phone number"
+msgstr ""
+
+#: .\apps\feedback\forms.py:20
+msgid "Content"
 msgstr ""
 
 #: .\apps\lessons\models.py:20 .\apps\rooms\models.py:8
@@ -1962,6 +1967,46 @@ msgstr ""
 msgid "There are some error. Please try again!"
 msgstr ""
 
+#: .\templates\home\contact.html:10
+msgid "Contact"
+msgstr ""
+
+#: .\templates\home\contact.html:11
+msgid "Contact us to get the best physical and mental experience"
+msgstr ""
+
+#: .\templates\home\contact.html:25
+msgid "Visit the Yoga Hương Tre"
+msgstr ""
+
+#: .\templates\home\contact.html:31
+msgid "Message Us"
+msgstr ""
+
+#: .\templates\home\contact.html:38
+msgid "Opening Hours"
+msgstr ""
+
+#: .\templates\home\contact.html:40 .\templates\layouts\footer.html:44
+msgid "monday"
+msgstr ""
+
+#: .\templates\home\contact.html:41 .\templates\layouts\footer.html:45
+msgid "friday"
+msgstr ""
+
+#: .\templates\home\contact.html:42 .\templates\layouts\footer.html:46
+msgid "saturday"
+msgstr ""
+
+#: .\templates\home\contact.html:43 .\templates\layouts\footer.html:47
+msgid "sunday"
+msgstr ""
+
+#: .\templates\home\contact.html:74
+msgid "Send"
+msgstr ""
+
 #: .\templates\home\index.html:29
 msgid "Get slim and toned with yoga"
 msgstr ""
@@ -2110,22 +2155,6 @@ msgstr ""
 #: .\templates\layouts\footer.html:42
 msgid "Open time"
 msgstr "Open time"
-
-#: .\templates\layouts\footer.html:44
-msgid "monday"
-msgstr ""
-
-#: .\templates\layouts\footer.html:45
-msgid "friday"
-msgstr ""
-
-#: .\templates\layouts\footer.html:46
-msgid "saturday"
-msgstr ""
-
-#: .\templates\layouts\footer.html:47
-msgid "sunday"
-msgstr ""
 
 #: .\templates\layouts\header.html:54
 msgid "profile"
