@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-11 08:32+0700\n"
+"POT-Creation-Date: 2020-05-11 10:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1407,16 +1407,73 @@ msgid "Trainees"
 msgstr "Học viên"
 
 #: .\apps\dashboard\templates\dashboard\index.html:83
-msgid "Pending Requests"
-msgstr "Yêu cầu đang chờ"
+msgid "Pending Extend Card Requests"
+msgstr "Yêu cầu gia hạn đang chờ"
 
-#: .\apps\dashboard\templates\dashboard\index.html:105
+#: .\apps\dashboard\templates\dashboard\index.html:102
+msgid "Pending Refund Requests"
+msgstr "Yêu cầu hoàn tiền đang chờ"
+
+#: .\apps\dashboard\templates\dashboard\index.html:121
+msgid "Pending Temporary Leave Requests"
+msgstr "Yêu cầu xin nghỉ tạm thời đang chờ"
+
+#: .\apps\dashboard\templates\dashboard\index.html:143
 msgid "Earnings Overview"
 msgstr "Tổng quan doanh thu"
 
-#: .\apps\dashboard\templates\dashboard\index.html:135
-msgid "Popular Course Analysis"
-msgstr "Phân tích khóa học"
+#: .\apps\dashboard\templates\dashboard\index.html:173
+msgid "Course Registration Times Analysis"
+msgstr "Phân tích lượt đăng ký khóa học"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Jan"
+msgstr "Tháng 1"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Feb"
+msgstr "Tháng 2"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Mar"
+msgstr "Tháng 3"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Apr"
+msgstr "Tháng 4"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\venv\Lib\site-packages\django\utils\dates.py:14
+msgid "May"
+msgstr "Tháng 5"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Jun"
+msgstr "Tháng 6"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Jul"
+msgstr "Tháng 7"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Aug"
+msgstr "Tháng 8"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Sep"
+msgstr "Tháng 9"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Oct"
+msgstr "Tháng 10"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Nov"
+msgstr "Tháng 11"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Dec"
+msgstr "Tháng 12"
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:21
 msgid "roll call"
@@ -1600,7 +1657,7 @@ msgstr "từ chối"
 msgid "Refund request list"
 msgstr "Danh sách yêu cầu hoàn tiền"
 
-#: .\apps\dashboard\templates\dashboard\rooms\edit.html:16
+#: .\apps\dashboard\templates\dashboard\rooms\edit.html:11
 msgid "Update Room"
 msgstr "Cập nhật phòng tập"
 
@@ -2951,10 +3008,6 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:14
 msgid "April"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:14
-msgid "May"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:14

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-11 08:32+0700\n"
+"POT-Creation-Date: 2020-05-11 09:58+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1399,18 +1399,75 @@ msgid "Trainees"
 msgstr "Trainer"
 
 #: .\apps\dashboard\templates\dashboard\index.html:83
-msgid "Pending Requests"
+msgid "Pending Extend Card Requests"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:105
+#: .\apps\dashboard\templates\dashboard\index.html:102
+msgid "Pending Refund Requests"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:121
+msgid "Pending Temporary Leave Requests"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:143
 msgid "Earnings Overview"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:135
+#: .\apps\dashboard\templates\dashboard\index.html:173
 #, fuzzy
 #| msgid "price course"
-msgid "Popular Course Analysis"
+msgid "Course Registration Times Analysis"
 msgstr "price of course"
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Jan"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Feb"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Mar"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Apr"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+#: .\venv\Lib\site-packages\django\utils\dates.py:14
+msgid "May"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Jun"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Jul"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Aug"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Sep"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Oct"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Nov"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\index.html:233
+msgid "Dec"
+msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:21
 msgid "roll call"
@@ -1596,7 +1653,7 @@ msgstr ""
 msgid "Refund request list"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\rooms\edit.html:16
+#: .\apps\dashboard\templates\dashboard\rooms\edit.html:11
 msgid "Update Room"
 msgstr ""
 
@@ -2949,10 +3006,6 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:14
 msgid "April"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:14
-msgid "May"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:14
