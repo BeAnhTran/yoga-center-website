@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-11 11:33+0700\n"
+"POT-Creation-Date: 2020-05-11 12:04+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -399,11 +399,13 @@ msgstr "bài viết"
 #: .\apps\courses\templates\courses\list.html:17
 #: .\apps\shop\templates\shop\index.html:32
 #: .\apps\trainers\templates\trainers\list.html:27
+#: .\templates\events\list.html:25
 #, python-format
 msgid "Showing %(value1)s of %(value2)s %(value3)s"
 msgstr "Hiển thị %(value1)s / %(value2)s %(value3)s"
 
 #: .\apps\blog\templates\blog\post_list.html:63 .\templates\base.html:88
+#: .\templates\events\list.html:33
 msgid "Search"
 msgstr "Tìm kiếm"
 
@@ -1543,11 +1545,12 @@ msgid "bills"
 msgstr "hóa đơn"
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:223
-#: .\templates\layouts\header.html:114
+#: .\templates\layouts\header.html:119
 msgid "promotions"
 msgstr "khuyến mãi"
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:243
+#: .\templates\events\list.html:24
 msgid "events"
 msgstr "sự kiện"
 
@@ -1769,6 +1772,10 @@ msgstr "Số điện thoại"
 msgid "Content"
 msgstr "Nội dung"
 
+#: .\apps\home\views.py:76 .\templates\base.html:167
+msgid "Send feedback successfully"
+msgstr "Gửi feedback thành công"
+
 #: .\apps\lessons\models.py:20 .\apps\rooms\models.py:8
 msgid "Active"
 msgstr "Hoạt động"
@@ -1959,13 +1966,25 @@ msgstr "Đăng nhập thành công"
 msgid "You have signed out."
 msgstr "Đăng xuất thành công"
 
-#: .\templates\base.html:167
-msgid "Send feedback successfully"
-msgstr "Gửi feedback thành công"
-
 #: .\templates\base.html:179
 msgid "There are some error. Please try again!"
 msgstr "Đã xảy ra lỗi. Vui lòng thử lại"
+
+#: .\templates\events\list.html:11
+msgid "All Events"
+msgstr "Tất cả sự kiện"
+
+#: .\templates\events\list.html:12
+msgid "All events of our centre will be shown below"
+msgstr "Tất cả sự kiện của trung tâm được hiển thị bên dưới"
+
+#: .\templates\events\list.html:37
+msgid "Location"
+msgstr "Vị trí"
+
+#: .\templates\events\list.html:40
+msgid "Find Event"
+msgstr "Tìm sự kiện"
 
 #: .\templates\home\contact.html:10
 msgid "Contact"
@@ -1973,7 +1992,9 @@ msgstr "Liên hệ"
 
 #: .\templates\home\contact.html:11
 msgid "Contact us to get the best physical and mental experience"
-msgstr "Liên hệ với chúng tôi để nhận được trải nghiệm tuyệt vời nhất về thể chất và tâm hồn"
+msgstr ""
+"Liên hệ với chúng tôi để nhận được trải nghiệm tuyệt vời nhất về thể chất và "
+"tâm hồn"
 
 #: .\templates\home\contact.html:25
 msgid "Visit the Yoga Hương Tre"
@@ -2188,11 +2209,15 @@ msgstr "Khóa học"
 msgid "Schedule"
 msgstr "Lịch học"
 
-#: .\templates\layouts\header.html:116
+#: .\templates\layouts\header.html:115
 msgid "Blog"
 msgstr "Bài viết"
 
-#: .\templates\layouts\header.html:118
+#: .\templates\layouts\header.html:117
+msgid "Event"
+msgstr "Sự kiện"
+
+#: .\templates\layouts\header.html:121
 msgid "Shop"
 msgstr "Cửa hàng"
 

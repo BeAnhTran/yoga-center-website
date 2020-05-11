@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-11 11:33+0700\n"
+"POT-Creation-Date: 2020-05-11 12:04+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -399,11 +399,13 @@ msgstr ""
 #: .\apps\courses\templates\courses\list.html:17
 #: .\apps\shop\templates\shop\index.html:32
 #: .\apps\trainers\templates\trainers\list.html:27
+#: .\templates\events\list.html:25
 #, python-format
 msgid "Showing %(value1)s of %(value2)s %(value3)s"
 msgstr ""
 
 #: .\apps\blog\templates\blog\post_list.html:63 .\templates\base.html:88
+#: .\templates\events\list.html:33
 msgid "Search"
 msgstr ""
 
@@ -1537,11 +1539,12 @@ msgid "bills"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:223
-#: .\templates\layouts\header.html:114
+#: .\templates\layouts\header.html:119
 msgid "promotions"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:243
+#: .\templates\events\list.html:24
 msgid "events"
 msgstr ""
 
@@ -1765,6 +1768,10 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
+#: .\apps\home\views.py:76 .\templates\base.html:167
+msgid "Send feedback successfully"
+msgstr ""
+
 #: .\apps\lessons\models.py:20 .\apps\rooms\models.py:8
 msgid "Active"
 msgstr ""
@@ -1959,12 +1966,24 @@ msgstr ""
 msgid "You have signed out."
 msgstr ""
 
-#: .\templates\base.html:167
-msgid "Send feedback successfully"
-msgstr ""
-
 #: .\templates\base.html:179
 msgid "There are some error. Please try again!"
+msgstr ""
+
+#: .\templates\events\list.html:11
+msgid "All Events"
+msgstr ""
+
+#: .\templates\events\list.html:12
+msgid "All events of our centre will be shown below"
+msgstr ""
+
+#: .\templates\events\list.html:37
+msgid "Location"
+msgstr ""
+
+#: .\templates\events\list.html:40
+msgid "Find Event"
 msgstr ""
 
 #: .\templates\home\contact.html:10
@@ -2188,11 +2207,15 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-#: .\templates\layouts\header.html:116
+#: .\templates\layouts\header.html:115
 msgid "Blog"
 msgstr ""
 
-#: .\templates\layouts\header.html:118
+#: .\templates\layouts\header.html:117
+msgid "Event"
+msgstr ""
+
+#: .\templates\layouts\header.html:121
 msgid "Shop"
 msgstr ""
 

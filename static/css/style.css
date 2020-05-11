@@ -474,7 +474,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .main-menu li {
 	display: inline-block;
-	margin-right: 50px;
+	margin-right: 35px;
 	position: relative;
 }
 

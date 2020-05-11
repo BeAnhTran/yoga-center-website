@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block specified_css %}
+<link href="{% static 'css/events/style.css' %}" rel='stylesheet' />
+{% endblock %}
+{% block content %}
+<!-- Page top Section -->
+<section class="page-top-section page-sp set-bg" data-setbg="{% static 'img/page-top-bg.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 m-auto text-white">
+                <h2>{% trans 'All Events' %}</h2>
+                <p>{% trans 'All events of our centre will be shown below'%}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page top Section end -->
+
+<div class="container">
+    <div class="event-filter-warp">
+        <div class="row">
+            <div class="col-xl-3">
+                <p>
+                    {% trans 'events' as t_events %}
+                    {% blocktrans with value1=page_obj.object_list.count value2=page_obj.paginator.count value3=t_events trimmed %}
+                    Showing {{ value1 }} of {{ value2 }} {{ value3 }}
+                    {% endblocktrans %}
+                </p>
+            </div>
+            <div class="col-xl-9">
+                <form class="event-filter-form">
+                    <div class="ef-item">
+                        <input type="text" placeholder="{% trans 'Search' %}">
+                        <i class="material-icons">search</i>
+                    </div>
+                    <div class="ef-item">
+                        <input type="text" placeholder="{% trans 'Location' %}">
+                        <i class="material-icons">map</i>
+                    </div>
+                    <button class="site-btn sb-gradient">{% trans 'Find Event' %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Events Section -->
+<section class="events-page-section spad">
+    {% if events %}
+    <div class="container">
+        <div class="row">
+            {% for event in events %}
+            <div class="col-lg-6">
+                <div class="event-item">
+                    <div class="ei-img">
+                        <img src="{{event.image.url}}" alt="{{event}}">
+                    </div>
+                    <div class="ei-text">
+                        <h4><a href="{% url 'events:detail' event.slug %}">{{event}}</a></h4>
+                        <ul>
+                            <li><i class="material-icons">event_available</i>{{ event.start_at }}</li>
+                            <li><i class="material-icons">map</i>{{ event.location }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% include 'pagination.html' %}
+    </div>
+    {% else %}
+    <div class="container">
+        <div class="row">
+            <p class="text-danger">
+                {% trans 'events' as trans_value %}
+                {% blocktrans with value=trans_value %}No {{ value }} yet{% endblocktrans %}
+            </p>
+        </div>
+    </div>
+    {% endif %}
+</section>
+<!-- Events Section end -->
+
+{% if gallery %}
+<!-- Gallery Section -->
+<div class="gallery-section">
+    <div class="gallery-slider owl-carousel">
+        {% for gallery_image in gallery.images.all %}
+        <div class="gs-item">
+            <img class="img" width="225" height="225" src="{{ gallery_image.image.url }}" alt="{{gallery.title}}">
+            <div class="gs-hover">
+                <i class="fab fa-instagram"></i>
+                <p>yoga hương tre</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Gallery Section end -->
+{% endif %}
+{% endblock %}

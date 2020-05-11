@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load settings_extras %}
+
+{% block specified_css %}
+{% endblock %}
+
+{% block content %}
+<!-- Event Details Section -->
+<section class="event-details-section spad overflow-hidden">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col">
+                <a class="text-danger" href="{% url 'events:list' %}"><span class="flaticon-lotus"></span>
+                    {% trans 'Event' %}</a>
+                <a class="text-danger" href="javascript:;">&raquo; {{ event }}</a>
+            </div>
+        </div>
+        <div class="event-preview">
+            <img src="{{ event.image.url }}" alt="{{event}}">
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="event-details">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h2>{{event}}</h2>
+                            <div class="ed-meta"><p><i class="material-icons">alarm_on</i>{{event.start_at}}</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col">
+                {{event.content|safe}}
+            </div>
+        </div>
+        <div class="row">
+            <h3 class="comment-title">{% trans 'Comments' %}</h3>
+            <div class="fb-comments"
+                data-href="{% settings_value 'FACEBOOK_PRIVACY_POLICY_URL' %}{% url 'events:detail' event.slug %}"
+                data-numposts="5" data-width="100%"></div>
+        </div>
+    </div>
+</section>
+{% endblock %}
