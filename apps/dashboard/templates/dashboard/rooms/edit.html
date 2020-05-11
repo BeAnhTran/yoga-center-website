@@ -1,0 +1,21 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block specified_css %}
+{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid card mt-3 mb-5">
+    <h5 class="ml-3 mt-3 text-success"> {% trans 'Update Room' %}</h5>
+    <hr>
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                {% crispy form %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -2,157 +2,34 @@
 {% load static %}
 {% load i18n %}
 
-{% block specified_css %}
-<link href="{% static 'fullcalendar-4.3.1/packages/core/main.css' %}" rel='stylesheet' />
-<link href="{% static 'fullcalendar-4.3.1/packages/daygrid/main.css'%}" rel='stylesheet' />
-<link href="{% static 'fullcalendar-4.3.1/packages/timegrid/main.css' %}" rel='stylesheet' />
-<link href="{% static 'fullcalendar-4.3.1/packages/list/main.css' %}" rel='stylesheet' />
-<script src="{% static 'fullcalendar-4.3.1/packages/core/main.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages/core/locales-all.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages/interaction/main.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages/daygrid/main.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages/timegrid/main.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages/list/main.js' %}"></script>
-{% endblock %}
 {% block content %}
-<h1 class="text-danger text-center mt-3">{{ room.name }}</h1>
-<div class="container-fluid">
-    <div id='calendar'></div>
-</div>
-<button id="btn-modal" type="button" class="d-none btn btn-primary" data-toggle="modal" data-target="#myModal">
-    Open modal
-</button>
-<!-- The Modal -->
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-none">
-                <h5 class="modal-title text-center">{% trans 'Detail Info' %}</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-borderless table-dark table-hover">
-                    <tbody>
-                        <tr>
-                            <th>{% trans 'room' %}</th>
-                            <td>{{ room.name }}</td>
-                        </tr>
-                        <tr>
-                            <th>{% trans 'class' %}</th>
-                            <td class="yoga-class">yoga class</td>
-                        </tr>
-                        <tr>
-                            <th>{% trans 'date' %}</th>
-                            <td class="lesson-day">date</td>
-                        </tr>
-                        <tr>
-                            <th>{% trans 'start time' %}</th>
-                            <td class="start-time">start time</td>
-                        </tr>
-                        <tr>
-                            <th>{% trans 'end time' %}</th>
-                            <td class="end-time">end time</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+<h1 class="text-danger text-center">{{ room.name }}</h1>
 
-{% block specified_js %}
-<script>
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'timeGridWeek'
-            },
-            defaultView: 'timeGridWeek',
-            locale: "{{ request.LANGUAGE_CODE }}",
-            defaultDate: Date.now(),
-            editable: true,
-            firstDay: 1,
-            allDaySlot: false,
-            titleFormat: {
-                month: 'numeric',
-                year: 'numeric',
-                day: 'numeric',
-                weekday: 'long'
-            },
-            events: function (fetchInfo, successCallback, failureCallback) {
-                $.ajax({
-                    url: "{% url 'dashboard:rooms-get-lessons' room.id %}",
-                    type: 'GET',
-                    data: {
-                        startStr: fetchInfo.startStr,
-                        endStr: fetchInfo.endStr
-                    },
-                    success: function (data) {
-                        var events = [];
-                        for (var i = 0; i < data.length; i++) {
-                            var _d = data[i]['fields']['day'];
-                            var _st = data[i]['fields']['start_time'];
-                            var _et = data[i]['fields']['end_time'];
-                            var _start_time = _d + ' ' + _st;
-                            var _end_time = _d + ' ' + _et;
-                            var start_time = new Date(_start_time);
-                            var end_time = new Date(_end_time);
-
-                            events.push({
-                                id: data[i]['pk'],
-                                title: data[i]['fields']['yogaclass'],
-                                start: start_time,
-                                end: end_time,
-                                url: 'javascript:;',
-                                overlap: false,
-                                color: '#fb3958',
-                                allDaySlot: false
-                            })
-                        }
-                        successCallback(events);
-                    }
-                });
-            },
-            eventClick: function (info) {
-                $.ajax({
-                    url: "{% url 'dashboard:lessons-detail-json' %}",
-                    method: 'post',
-                    data: {
-                        'lesson_id': info.event.id,
-                        'csrfmiddlewaretoken': '{{ csrf_token }}'
-                    }
-                }).done(function (data) {
-                    console.log(data);
-                    var d = new Date(data[0]['fields']['day']);
-                    var lesson_day = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
-                    var start_time = data[0]['fields']['start_time'].split(':', 2).join(":");
-                    var end_time = data[0]['fields']['end_time'].split(':', 2).join(":");
-
-                    $('td.yoga-class').text(data[0]['fields']['yogaclass']);
-                    $('td.lesson-day').text(lesson_day);
-                    $('td.start-time').text(start_time);
-                    $('td.end-time').text(end_time);
-                    $('#btn-modal').click();
-                });
-            },
-            eventDrop: function (info) {
-                alert(info.event.title + " was dropped on " + info.event.start.toISOString());
-
-                if (!confirm("Are you sure about this change?")) {
-                    info.revert();
-                }else{
-                    console.log('cc');
-                }
-            }
-        });
-        calendar.render();
-    });
-
-</script>
+<ul class="list-group list-group-flush mb-3">
+    <li class="list-group-item list-group-item-action">
+        <h5 class="title">{% trans "name" as name %}{{ name|capfirst }}</h5>
+        <p>{{ room.name }}</p>
+    </li>
+    <li class="list-group-item list-group-item-action">
+        <h5 class="card-title">{% trans "location" as location %}{{ location|capfirst }}</h5>
+        <p class="card-text">{{ room.location }}</p>
+    </li>
+    <li class="list-group-item list-group-item-action">
+        <h5 class="card-title">{% trans "description" as des %}{{ des|capfirst }}</h5>
+        <p class="card-text">{{ room.description }}</p>
+    </li>
+    <li class="list-group-item list-group-item-action">
+        <h5 class="card-title">{% trans "max people" as max %}{{ max|capfirst }}</h5>
+        <p class="card-text">{{ room.max_people }}</p>
+    </li>
+    <li class="list-group-item list-group-item-action">
+        <h5 class="title">{% trans "state" as state %}{{ state|capfirst }}
+            {% if room.state == 0 %}
+            <i class="fas fa-check-circle text-success"></i>
+            {% else %}
+            <i class="fas fa-exclamation-circle text-warning"></i>
+            {% endif %}
+        </h5>
+    </li>
+</ul>
 {% endblock %}

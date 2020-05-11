@@ -58,7 +58,10 @@ lessons_urlpatterns = [
 # ROOMS
 rooms_urlpatterns = [
     path('', rooms_view.RoomListView.as_view(), name='rooms-list'),
+    path('new/', rooms_view.RoomNewView.as_view(), name='rooms-new'),
     path('<int:pk>/', rooms_view.RoomDetailView.as_view(), name='rooms-detail'),
+    path('<int:pk>/edit/', rooms_view.RoomEditView.as_view(), name='rooms-edit'),
+    path('<int:pk>/delete/', rooms_view.RoomDeleteView.as_view(), name='rooms-delete'),
     path('<int:pk>/lessons/',
          rooms_view.get_lessons, name='rooms-get-lessons'),
 ]

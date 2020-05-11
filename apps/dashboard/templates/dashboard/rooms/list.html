@@ -8,7 +8,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
     <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'room list' %}</h1>
-    <a href="javascript:;" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+    <a href="{% url 'dashboard:rooms-new' %}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'create new' %}</a>
 </div>
 <!-- Content Row -->
@@ -41,9 +41,15 @@
                         <td>{{ room.get_state_display }}</td>
                         <td>{{ room.max_people }}</td>
                         <td>
-                            <a class="btn btn-sm btn-outline-primary" href="{% url 'dashboard:rooms-detail' room.id %}"><i class="fas fa-eye"></i></a>
-                            <a class="btn btn-sm btn-outline-warning" href="javascript:;"><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-sm btn-outline-danger" href="javascript:;" class="delete-room"><i class="fas fa-trash"></i></a>
+                            <a class="btn btn-sm btn-outline-primary" href="{% url 'dashboard:rooms-detail' room.pk %}"><i class="fas fa-eye"></i></a>
+                            <a class="btn btn-sm btn-outline-warning" href="{% url 'dashboard:rooms-edit' room.pk %}"><i
+                                    class="fas fa-edit"></i></a>
+                            <a class="btn btn-sm btn-outline-danger delete-room" href="javascript:;"><i
+                                    class="fas fa-trash"></i></a>
+                            <form class="d-none" action="{% url 'dashboard:rooms-delete' room.pk %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                            </form>
                         </td>
                     </tr>
                     {% endfor %}
@@ -60,6 +66,10 @@
 {% endif %}
 
 {% endblock %}
-
 {% block specified_js %}
+<script type="text/javascript">
+    $('.delete-room').click(function () {
+        $(this).siblings('form').children('input[type=submit]').click();
+    });
+</script>
 {% endblock %}

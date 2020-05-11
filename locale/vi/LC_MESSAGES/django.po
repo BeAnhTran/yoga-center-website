@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-10 15:02+0700\n"
+"POT-Creation-Date: 2020-05-11 08:32+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,6 +188,7 @@ msgstr "thời gian cập nhật"
 #: .\apps\dashboard\templates\dashboard\courses\list.html:30
 #: .\apps\dashboard\templates\dashboard\events\list.html:30
 #: .\apps\dashboard\templates\dashboard\promotions\list.html:27
+#: .\apps\dashboard\templates\dashboard\rooms\detail.html:10
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:28
 #: .\apps\dashboard\templates\dashboard\shop\categories\list.html:29
 #: .\apps\dashboard\templates\dashboard\shop\products\list.html:29
@@ -211,6 +212,7 @@ msgstr "tên"
 #: .\apps\dashboard\templates\dashboard\card_types\list.html:28
 #: .\apps\dashboard\templates\dashboard\classes\show.html:36
 #: .\apps\dashboard\templates\dashboard\courses\list.html:32
+#: .\apps\dashboard\templates\dashboard\rooms\detail.html:18
 #: .\apps\lectures\models.py:14 .\apps\profiles\forms\certificate_form.py:17
 #: .\apps\promotions\models.py:17 .\apps\rooms\models.py:18
 #: .\apps\shop\models.py:13 .\apps\shop\models.py:54
@@ -240,6 +242,7 @@ msgstr "lí do"
 #: .\apps\dashboard\templates\dashboard\classes\show.html:56
 #: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:28
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:29
+#: .\apps\dashboard\templates\dashboard\rooms\detail.html:26
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:30
 #: .\apps\lessons\models.py:33 .\apps\lessons\models.py:140
 #: .\apps\refunds\models.py:28 .\apps\rooms\models.py:21
@@ -344,11 +347,6 @@ msgstr "Thể loại"
 #: .\apps\blog\templates\blog\post_list.html:78
 msgid "Newest Posts"
 msgstr "Bài viết mới nhất"
-
-#: .\apps\blog\templates\blog\post_detail.html:79
-#: .\apps\blog\templates\blog\post_list.html:92
-msgid "Tags"
-msgstr ""
 
 #: .\apps\blog\templates\blog\post_list.html:17
 msgid "posts"
@@ -505,6 +503,7 @@ msgstr "Những buổi học của bạn sẽ được hiển thị ở đây"
 #: .\apps\dashboard\forms\product_categories_form.py:19
 #: .\apps\dashboard\forms\products_form.py:37
 #: .\apps\dashboard\forms\promotions_form.py:81
+#: .\apps\dashboard\forms\rooms_form.py:26
 #: .\apps\profiles\forms\certificate_form.py:27
 #: .\apps\profiles\forms\profile_form.py:32
 #: .\apps\profiles\forms\profile_form.py:84
@@ -632,6 +631,7 @@ msgstr "giá khóa"
 
 #: .\apps\classes\models.py:26
 #: .\apps\dashboard\templates\dashboard\classes\show.html:69
+#: .\apps\dashboard\templates\dashboard\rooms\detail.html:22
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:31
 #: .\apps\events\models.py:15 .\apps\rooms\models.py:19
 msgid "max people"
@@ -667,6 +667,11 @@ msgstr "thời gian kết thúc"
 #: .\apps\dashboard\templates\dashboard\classes\show.html:90
 #: .\apps\dashboard\templates\dashboard\classes\show.html:98
 #: .\apps\dashboard\templates\dashboard\classes\show.html:106
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:49
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:53
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:57
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:61
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:65
 msgid "have not updated yet"
 msgstr "chưa cập nhật"
 
@@ -743,7 +748,9 @@ msgstr "mới nhất"
 #: .\apps\classes\templates\classes\list.html:83
 #: .\apps\classes\templates\classes\show.html:149
 #: .\apps\classes\templates\classes\show.html:193
-#: .\apps\classes\templates\payment.html:167 .\templates\home\index.html:215
+#: .\apps\classes\templates\payment.html:167
+#: .\apps\trainers\templates\trainers\list.html:48
+#: .\templates\home\index.html:215
 msgid "Yoga Trainer"
 msgstr "Huấn luyện viên"
 
@@ -969,31 +976,27 @@ msgid "A gallery with this title already exists."
 msgstr "Tên này đã tồn tại"
 
 #: .\apps\dashboard\forms\lesssons_form.py:28
+#: .\apps\dashboard\forms\rooms_form.py:13
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:49
-#: .\apps\dashboard\templates\dashboard\rooms\detail.html:37
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:17
+#: .\apps\dashboard\templates\dashboard\rooms\new.html:13
 #: .\apps\lessons\models.py:29
 msgid "room"
 msgstr "phòng tập"
 
 #: .\apps\dashboard\forms\lesssons_form.py:30
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:47
-#: .\apps\dashboard\templates\dashboard\rooms\detail.html:45
 #: .\apps\lessons\models.py:34
 msgid "date"
 msgstr "ngày"
 
 #: .\apps\dashboard\forms\lesssons_form.py:38
-#: .\apps\dashboard\forms\promotions_form.py:48
-#: .\apps\dashboard\templates\dashboard\rooms\detail.html:49
-#: .\apps\lessons\models.py:36
+#: .\apps\dashboard\forms\promotions_form.py:48 .\apps\lessons\models.py:36
 msgid "start time"
 msgstr "thời gian bắt đầu"
 
 #: .\apps\dashboard\forms\lesssons_form.py:47
-#: .\apps\dashboard\forms\promotions_form.py:58
-#: .\apps\dashboard\templates\dashboard\rooms\detail.html:53
-#: .\apps\lessons\models.py:38
+#: .\apps\dashboard\forms\promotions_form.py:58 .\apps\lessons\models.py:38
 msgid "end time"
 msgstr "thời gian kết thúc"
 
@@ -1053,6 +1056,13 @@ msgstr "Thời gian kết thúc phải sau thời gian bắt đầu"
 #| msgid "A post with this name already exists."
 msgid "A promotion with this name already exists."
 msgstr "Tên này đã tồn tại"
+
+#: .\apps\dashboard\forms\rooms_form.py:15
+#: .\apps\dashboard\templates\dashboard\rooms\detail.html:14
+#: .\apps\dashboard\templates\dashboard\rooms\list.html:29
+#: .\apps\events\models.py:16 .\apps\rooms\models.py:16
+msgid "location"
+msgstr "vị trí"
 
 #: .\apps\dashboard\templates\dashboard\admins\list.html:13
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:59
@@ -1192,6 +1202,7 @@ msgstr "quay lại"
 #: .\apps\dashboard\templates\dashboard\faq\new.html:14
 #: .\apps\dashboard\templates\dashboard\gallery\new.html:14
 #: .\apps\dashboard\templates\dashboard\promotions\new.html:12
+#: .\apps\dashboard\templates\dashboard\rooms\new.html:14
 #: .\apps\dashboard\templates\dashboard\shop\categories\new.html:15
 #: .\apps\dashboard\templates\dashboard\shop\products\new.html:15
 #, python-format
@@ -1224,7 +1235,6 @@ msgstr "Danh sách lớp học"
 
 #: .\apps\dashboard\templates\dashboard\classes\list.html:20
 #: .\apps\dashboard\templates\dashboard\classes\new.html:14
-#: .\apps\dashboard\templates\dashboard\rooms\detail.html:41
 msgid "class"
 msgstr "lớp học"
 
@@ -1255,7 +1265,6 @@ msgid "update"
 msgstr "cập nhật"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:206
-#: .\apps\dashboard\templates\dashboard\rooms\detail.html:30
 msgid "Detail Info"
 msgstr "Thông tin chi tiết"
 
@@ -1591,14 +1600,13 @@ msgstr "từ chối"
 msgid "Refund request list"
 msgstr "Danh sách yêu cầu hoàn tiền"
 
+#: .\apps\dashboard\templates\dashboard\rooms\edit.html:16
+msgid "Update Room"
+msgstr "Cập nhật phòng tập"
+
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:10
 msgid "room list"
 msgstr "Danh sách phòng tập"
-
-#: .\apps\dashboard\templates\dashboard\rooms\list.html:29
-#: .\apps\events\models.py:16 .\apps\rooms\models.py:16
-msgid "location"
-msgstr "vị trí"
 
 #: .\apps\dashboard\templates\dashboard\shop\bills.html:12
 msgid "Bill list"
