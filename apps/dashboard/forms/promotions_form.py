@@ -72,6 +72,7 @@ class PromotionForm(forms.ModelForm):
             'name',
             'image',
             'description',
+            'content',
             Row(
                 Column('start_at', css_class='form-group col-md-6 mb-0'),
                 Column('end_at', css_class='form-group col-md-6 mb-0'),
