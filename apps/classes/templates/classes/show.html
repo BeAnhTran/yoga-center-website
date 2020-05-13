@@ -71,7 +71,11 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="content">
-                                            {{ class.course.content | safe }}
+                                            {% if class.course.content %}
+                                                {{ class.course.content | safe }}
+                                            {% else %}
+                                                <h3>Chưa cập nhật</h3>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

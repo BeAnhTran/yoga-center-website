@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
-
+{% block specified_css %}
+<link href="{% static 'css/classes/style.css' %}" rel='stylesheet' />
+{% endblock %}
 {% block content %}
 <section class="classes-page-section spad">
     <div class="container">
