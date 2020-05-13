@@ -57,15 +57,15 @@ class User(AbstractUser):
         self.__original_slug = self.slug
 
     def full_name(self):
-        return self.first_name + ' ' + self.last_name
+        return self.last_name + ' ' + self.first_name
 
     def save(self, *args, **kwargs):
-        full_name = self.first_name + ' ' + self.last_name
+        full_name = self.last_name + ' ' + self.first_name
         if not self.slug:
             self.slug = slugify(full_name)
             slug_exists = User.objects.filter(slug__startswith=self.slug)
             if slug_exists.count() > 0:
-                temp = self.first_name + self.last_name
+                temp = self.last_name + self.first_name
                 self.slug = self.slug + '-' + str(slug_exists.count() + 1) + get_random_string(
                     length=8, allowed_chars=temp) + str(slug_exists.last().pk)
         else:

@@ -145,7 +145,7 @@
                                 <img src="{% static 'img/user/default.png'%}" alt="{{other.trainer}}">
                                 {% endif %}
                                 <div class="author-text">
-                                    <h6>{{ other.trainer|title }}</h6>
+                                    <h6>{{ other.trainer }}</h6>
                                     <p>{% trans 'Yoga Trainer' %}</p>
                                 </div>
                             </div>
@@ -189,7 +189,7 @@
                             {% else %}
                             <img src="{% static 'img/user/default.png' %}" alt="{{class.trainer}}">
                             {% endif %}
-                            <h4>{{ class.trainer|title }}</h4>
+                            <h4>{{ class.trainer }}</h4>
                             <h6>{% trans 'Yoga Trainer' %}</h6>
                         </a>
                         <p>{{ class.trainer.certificates.first|default_if_none:'' }}</p>

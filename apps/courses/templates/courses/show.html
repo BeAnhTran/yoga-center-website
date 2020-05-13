@@ -13,7 +13,7 @@
         <div class="row mb-3">
             <div class="col">
                 <a class="text-danger" href="javascript:;"><span class="flaticon-lotus"></span>
-                    {{ course.name|title }}</a>
+                    {{ course.name }}</a>
             </div>
         </div>
         <div class="row">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="row mt-3 mb-3">
                     <div class="col-md-8 col-lg-8">
-                        <h2>{{ course.name|title }}</h2>
+                        <h2>{{ course.name }}</h2>
                     </div>
                     <div class="col-md-4 col-lg-4 text-left text-md-right">
                         <a class="site-btn sb-gradient"
@@ -59,9 +59,9 @@
                                 <div class="row">
                                     <div class="content">
                                         {% if course.content %}
-                                            {{ course.content | safe }}
+                                        {{ course.content | safe }}
                                         {% else %}
-                                            <h3>Chưa cập nhật</h3>
+                                        <h3>Chưa cập nhật</h3>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -71,27 +71,28 @@
                             <div class="container">
                                 <div class="row pt-3">
                                     {% if course.lectures.all.count > 0 %}
-                                        <!--  -->
-                                        <div class="panel-group" id="accordion">
-                                            {% for lecture in course.lectures.all %}
-                                            <div class="panel panel-default mb-3">
-                                                <div class="panel-heading" id="heading{{lecture.pk}}">
-                                                    <h3>
-                                                        <a class="text-secondary" href="#collapseLecture{{lecture.pk}}" data-toggle="collapse"
-                                                            data-parent="#accordion">{{forloop.counter}}. {{ lecture }}</a>
-                                                    </h3>
-                                                </div>
-                                                <div id="collapseLecture{{lecture.pk}}"
-                                                    class="panel-collapse collapse {% if forloop.first %}show{% endif %}">
-                                                    <div class="panel-body lecture-des">
-                                                        {{ lecture.description | safe }}
-                                                    </div>
+                                    <!--  -->
+                                    <div class="panel-group" id="accordion">
+                                        {% for lecture in course.lectures.all %}
+                                        <div class="panel panel-default mb-3">
+                                            <div class="panel-heading" id="heading{{lecture.pk}}">
+                                                <h3>
+                                                    <a class="text-secondary" href="#collapseLecture{{lecture.pk}}"
+                                                        data-toggle="collapse"
+                                                        data-parent="#accordion">{{forloop.counter}}. {{ lecture }}</a>
+                                                </h3>
+                                            </div>
+                                            <div id="collapseLecture{{lecture.pk}}"
+                                                class="panel-collapse collapse {% if forloop.first %}show{% endif %}">
+                                                <div class="panel-body lecture-des">
+                                                    {{ lecture.description | safe }}
                                                 </div>
                                             </div>
-                                            {% endfor %}
                                         </div>
+                                        {% endfor %}
+                                    </div>
                                     {% else %}
-                                        <h3>Chưa cập nhật</h3>
+                                    <h3>Chưa cập nhật</h3>
                                     {% endif %}
                                 </div>
                             </div>
@@ -99,7 +100,9 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="fb-comments" data-href="{% settings_value 'FACEBOOK_PRIVACY_POLICY_URL' %}{% url 'courses:detail' course.slug %}" data-numposts="5" data-width="100%"></div>
+                    <div class="fb-comments"
+                        data-href="{% settings_value 'FACEBOOK_PRIVACY_POLICY_URL' %}{% url 'courses:detail' course.slug %}"
+                        data-numposts="5" data-width="100%"></div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -107,9 +110,13 @@
                     <h2 class="sb-title">Thông tin giá thẻ tập</h2>
                     <div class="classes-info">
                         <ul>
-                            <li><i class="material-icons">done</i>Giá tháng: {{ course.get_price_per_month }}đ</li>
-                            <li><i class="material-icons">done</i>Giá buổi: {{ course.get_price_per_month }}đ</li>
+                            {% if course.course_type == 0 %}
+                            <li><i class="material-icons">done</i>Giá tháng: {{ course.get_price_per_month }}</li>
+                            <li><i class="material-icons">done</i>Giá buổi: {{ course.get_price_per_lesson }}</li>
                             <li><i class="material-icons">done</i>Giá học thử: Miễn phí</li>
+                            {% else %}
+                            <li><i class="material-icons">done</i>Giá khóa: {{ course.get_price_for_training_class }}</li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -124,25 +131,27 @@
                                     <i class="material-icons">layers</i>{{ c }}
                                 </a>
                             </li>
-                            <li><i class="material-icons">event_available</i>{{ c.start_at }}</li>
                             <li><i class="material-icons">done_all</i>
                                 {% for lesson_in_week in c.get_first_week %}
-                                    {% if forloop.last %}
-                                        {{ lesson_in_week.date|date:"D" }}
-                                    {% else %}
-                                        {{ lesson_in_week.date|date:"D" }} - 
-                                    {% endif %}
+                                {% if forloop.last %}
+                                {{ lesson_in_week.date|date:"D" }}
+                                {% else %}
+                                {{ lesson_in_week.date|date:"D" }} -
+                                {% endif %}
                                 {% endfor %}
                             </li>
-                            <li><i class="material-icons">alarm_on</i>{{ c.lessons.first.start_time }} - {{ c.lessons.first.end_time }}</li>
-                            <li>    
+                            <li><i class="material-icons">alarm_on</i>{{ c.lessons.first.start_time }} -
+                                {{ c.lessons.first.end_time }}</li>
+                            <li>
                                 <a class="text-info" href="{% url 'trainers:detail' c.trainer.slug %}">
                                     <i class="material-icons">person_outline</i>{{ c.trainer }}
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'classes:detail' c.slug %}" class="site-btn site-btn-sm sb-gradient">Chi tiết</a>
-                                <a href="{% url 'classes:enroll' c.slug %}" class="site-btn site-btn-sm sb-gradient">Đăng kí</a>
+                                <a href="{% url 'classes:detail' c.slug %}" class="site-btn site-btn-sm sb-gradient">Chi
+                                    tiết</a>
+                                <a href="{% url 'classes:enroll' c.slug %}"
+                                    class="site-btn site-btn-sm sb-gradient">Đăng kí</a>
                             </li>
                         </ul>
                     </div>

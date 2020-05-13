@@ -66,7 +66,7 @@ class Course(models.Model):
             if trial_card_type.multiplier is not None and trial_card_type.multiplier > 0:
                 if self.price_per_lesson is not None:
                     price = self.price_per_lesson * trial_card_type.multiplier
-                    return sexify.sexy_number(price)
+                    return sexify.sexy_number(price) + 'đ'
                 else:
                     return _('have not updated yet')
             else:
@@ -76,7 +76,7 @@ class Course(models.Model):
         if self.price_per_month is not None:
             if self.price_per_month == int(self.price_per_month):
                 self.price_per_month = int(self.price_per_month)
-            return sexify.sexy_number(self.price_per_month)
+            return sexify.sexy_number(self.price_per_month) + 'đ'
         else:
             return _('have not updated yet')
 
@@ -84,6 +84,15 @@ class Course(models.Model):
         if self.price_per_lesson is not None:
             if self.price_per_lesson == int(self.price_per_lesson):
                 self.price_per_lesson = int(self.price_per_lesson)
-            return sexify.sexy_number(self.price_per_lesson)
+            return sexify.sexy_number(self.price_per_lesson) + 'đ'
+        else:
+            return _('have not updated yet')
+
+    def get_price_for_training_class(self):
+        if self.price_for_training_class is not None:
+            if self.price_for_training_class == int(self.price_for_training_class):
+                self.price_for_training_class = int(
+                    self.price_for_training_class)
+            return sexify.sexy_number(self.price_for_training_class) + 'đ'
         else:
             return _('have not updated yet')
