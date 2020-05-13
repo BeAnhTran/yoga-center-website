@@ -18,7 +18,7 @@
     <li class="nav-item {% if active_nav == 'roll_calls' %}active{% endif %}">
         <a class="nav-link" href="{% url 'dashboard:lessons-list' %}">
             <i class="fas fa-user-check"></i>
-            <span>{% trans 'roll call' as t_roll_call %}{{ t_roll_call|title }}</span></a>
+            <span>{% trans 'roll call' as t_roll_call %}{{ t_roll_call|capfirst}}</span></a>
     </li>
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Users -->
@@ -104,7 +104,7 @@
                     href="{% url 'dashboard:card-types-list' %}">
                     <i class="fas fa-fw fa-vr-cardboard"></i>
                     <span>
-                        {% trans 'card types' as t_card_types %} {{ t_card_types|title }}
+                        {% trans 'card types' as t_card_types %} {{ t_card_types }}
                     </span>
                 </a>
             </div>
@@ -172,7 +172,7 @@
                     href="{% url 'dashboard:blog-posts-list' %}">
                     <i class="fas fa-fw fa-cube"></i>
                     <span>
-                        {% trans 'post' as t_post %} {{ t_post|title }}
+                        {% trans 'post' as t_post %} {{ t_post }}
                     </span>
                 </a>
             </div>

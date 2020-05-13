@@ -27,28 +27,28 @@
 {% block content %}
 <div class="container-fluid mt-3 p-0">
     <a class="btn btn-sm btn-outline-primary" href="{{request.META.HTTP_REFERER}}">
-        <i class="fas fa-fw fa-arrow-left"></i>{% trans 'back' as back %} {{ back|title }}
+        <i class="fas fa-fw fa-arrow-left"></i>{% trans 'back' as back %} {{ back|capfirst }}
     </a>
     <div class="dropdown float-right">
         <button type="button" class="btn btn-sm btn-outline-success dropdown-toggle" data-toggle="dropdown">
             <i class="fas fa-fw fa-plus-square fa-sm"></i>{% trans 'create new lesson' as create_new_lesson %}
-            {{ create_new_lesson|title }}
+            {{ create_new_lesson|capfirst}}
         </button>
         <div class="dropdown-menu">
             <a id="btn_create_one_lesson" type="button" class="dropdown-item badge-success" href="javascript:;">
                 <span class="badge badge-warning">1</span>
                 {% trans 'Create one lesson' as create_one_lesson %}
-                {{ create_one_lesson|title }}
+                {{ create_one_lesson|capfirst }}
             </a>
             <a id="btn_create_lessons_from_last_week" data-type="last_week" class="dropdown-item badge-success btn-create-lessons-from-last-time" href="javascript:;">
                 <span class="badge badge-warning">2</span>
                 {% trans 'Create lessons from last week' as create_lessons_from_last_week %}
-                {{ create_lessons_from_last_week|title }}
+                {{ create_lessons_from_last_week|capfirst }}
             </a>
             <a id="btn_create_lessons_from_last_4_weeks" data-type="last_4_weeks" class="dropdown-item badge-success btn-create-lessons-from-last-time" href="javascript:;">
                 <span class="badge badge-warning">3</span>
                 {% trans 'Create lessons from last 4 weeks' as create_lessons_from_last_4_weeks %}
-                {{ create_lessons_from_last_4_weeks|title }}
+                {{ create_lessons_from_last_4_weeks|capfirst }}
             </a>
         </div>
     </div>
@@ -75,7 +75,7 @@
         <div class="modal-content">
             <div class="modal-header border-none">
                 <h4 id="model_title" class="modal-title">{% trans 'create new lesson' as t_create_new_lesson %}
-                    {{ t_create_new_lesson|title }}</h4>
+                    {{ t_create_new_lesson|capfirst }}</h4>
                 <button id="btn_modal_create_lesson" type="button" class="btn btn-sm btn-danger"
                     data-dismiss="modal">&times;</button>
             </div>
@@ -251,8 +251,8 @@
                 $('#modal_create_lesson').modal('hide');
                 $('#form_new_lesson').trigger("reset");
                 Swal.fire(
-                    "{% trans 'done' as t_done %}{{ t_done|title }}",
-                    "{% trans 'create successfully' as t_create_successfully %}{{ t_create_successfully |title }}",
+                    "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
+                    "{% trans 'create successfully' as t_create_successfully %}{{ t_create_successfully |capfirst }}",
                     'success'
                 );
                 calendar.refetchEvents();
@@ -270,7 +270,7 @@
                         $(objStr).addClass('is-invalid');
                     } else {
                         Swal.fire(
-                            "{% trans 'error' as t_error %}{{ t_error|title }}",
+                            "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                             value[0]['message'],
                             'error'
                         )
@@ -330,13 +330,13 @@
                 console.log(response);
                 calendar.refetchEvents();
                 Swal.fire(
-                    "{% trans 'done' as t_done %}{{ t_done|title }}",
-                    "{% trans 'create successfully' as t_create_successfully %}{{ t_create_successfully |title }}",
+                    "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
+                    "{% trans 'create successfully' as t_create_successfully %}{{ t_create_successfully |capfirst }}",
                     'success'
                 );
             }).fail(err=>{
                 Swal.fire(
-                    "{% trans 'error' as t_error %}{{ t_error|title }}",
+                    "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                     err.responseText,
                     'error'
                 )
@@ -359,7 +359,7 @@
     });
 
     $('#btn_create_one_lesson').click(function () {
-        var title = "{% trans 'create new lesson' as t_create_new_lesson %}{{ t_create_new_lesson|title }}";
+        var title = "{% trans 'create new lesson' as t_create_new_lesson %}{{ t_create_new_lesson|capfirst }}";
         $('#model_title').text(title);
         $('#form_new_lesson').trigger("reset");
         $('input#submit-id-submit').removeClass('d-none');

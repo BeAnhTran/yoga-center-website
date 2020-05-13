@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container-fluid p-0">
     <a class="btn btn-sm btn-primary" href="{{request.META.HTTP_REFERER}}">
-        <i class="fas fa-fw fa-arrow-left"></i>{% trans 'back' as t_back %} {{ t_back|title }}
+        <i class="fas fa-fw fa-arrow-left"></i>{% trans 'back' as t_back %} {{ t_back|capfirst }}
     </a>
 </div>
 <div class="container-fluid card mt-3 mb-5">

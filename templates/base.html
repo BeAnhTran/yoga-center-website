@@ -163,7 +163,7 @@
         $("#preloder").fadeOut(function () {
           $('.infor-close').click();
           Swal.fire(
-            "{% trans 'done' as t_done %}{{ t_done|title }}",
+            "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
             "{% trans 'Send feedback successfully' %}",
             'success'
           );
@@ -175,7 +175,7 @@
         $("#preloder").fadeOut(function () {
           $('.infor-close').click();
           Swal.fire(
-            "{% trans 'error' as t_error %}{{ t_error|title }}",
+            "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
             "{% trans 'There are some error. Please try again!' %}",
             'error'
           );

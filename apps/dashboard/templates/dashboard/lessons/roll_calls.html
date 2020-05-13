@@ -411,7 +411,7 @@
                 },
             }).done((data) => {
                 Swal.fire(
-                    "{% trans 'done' as t_done %}{{ t_done|title }}",
+                    "{% trans 'done' as t_done %}{{ t_done }}",
                     "Thêm học viên học bù thành công",
                     'success'
                 );
@@ -437,7 +437,7 @@
                 console.log(data);
             }).fail((err) => {
                 Swal.fire(
-                    "{% trans 'error' as t_error %}{{ t_error|title }}",
+                    "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                     err['responseText'],
                     'error'
                 )
@@ -476,14 +476,14 @@
                 $('#head_contain').append(str);
                 $('#btn_modal_close_substitute_trainer').click();
                 Swal.fire(
-                    "{% trans 'done' as t_done %}{{ t_done|title }}",
+                    "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
                     "Thêm huấn luyện viên dạy thay thành công",
                     'success'
                 );
                 console.log(data);
             }).fail((err) => {
                 Swal.fire(
-                    "{% trans 'error' as t_error %}{{ t_error|title }}",
+                    "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                     err['responseText'],
                     'error'
                 )
@@ -502,7 +502,7 @@
             $('.div-substitute-trainer').remove();
             $('#btn_modal_substitute_trainer').removeClass('d-none');
             Swal.fire(
-                "{% trans 'done' as t_done %}{{ t_done|title }}",
+                "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
                 "Xóa huấn luyện viên dạy thay thành công",
                 'success'
             );

@@ -28,8 +28,8 @@
         <div class="row mb-3">
             <div class="col">
                 <a class="text-danger" href="javascript:;"><span
-                        class="flaticon-lotus"></span> {{ yoga_class.course.name|title }}</a>
-                <a class="text-danger" href="javascript:;">&raquo; {{ yoga_class.name|title }}</a>
+                        class="flaticon-lotus"></span> {{ yoga_class.course.name }}</a>
+                <a class="text-danger" href="javascript:;">&raquo; {{ yoga_class.name }}</a>
                 <a class="text-danger" href="javascript:;">&raquo; {% trans 'Enroll' %}</a>
             </div>
         </div>
@@ -171,7 +171,7 @@
                     // content += info.event
                     if ($('#trial-lesson-listing').children().length > 0) {
                         Swal.fire(
-                            "{% trans 'error' as t_error %}{{ t_error|title }}",
+                            "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                             "{% trans 'Trial lesson has been added' %}",
                             'error'
                         )
@@ -302,7 +302,7 @@
         val = $(this).val();
         if (val <= 0) {
             Swal.fire(
-                "{% trans 'error' as t_error %}{{ t_error|title }}",
+                "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                 "{% trans 'Please enter positive integer' %}",
                 'error'
             )
@@ -396,7 +396,7 @@
                     $(objStr).focus();
                 } else {
                     Swal.fire(
-                        "{% trans 'error' as t_error %}{{ t_error|title }}",
+                        "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                         value[0]['message'],
                         'error'
                     )

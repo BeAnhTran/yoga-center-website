@@ -11,7 +11,7 @@
 <div class="container card mt-5 mb-5">
     <h5 class="ml-3 mt-3 text-success">
         {% trans 'update' as t_update %} {% trans 'course' as t_course %}
-        {{ t_update|title }} {{ t_course|title }} 
+        {{ t_update|capfirst }} {{ t_course }} 
     </h5>
     <hr>
     <div class="card-body">

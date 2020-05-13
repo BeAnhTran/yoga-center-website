@@ -20,7 +20,7 @@
                         <div class="col-md-6">
                             <select class="circle-select">
                                 {% trans 'default sorting' as t_default_sorting %}
-                                <option data-display="{{ t_default_sorting|title }}">{{ t_default_sorting|title }}
+                                <option data-display="{{ t_default_sorting|capfirst }}">{{ t_default_sorting|capfirst }}
                                 </option>
                                 <option value="0">{% trans 'oldest' as t_oldest %}{{ t_oldest|capfirst }}</option>
                                 <option value="1">{% trans 'newest' as t_newest %}{{ t_newest|capfirst }}</option>
