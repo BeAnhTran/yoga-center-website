@@ -56,10 +56,10 @@
                             <td>{% trans 'Trainer' %}</td>
                             <td id="trainer_info">{% trans 'have not updated yet' %}</td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td>{% trans 'Date' %}</td>
                             <td id="date_info">{% trans 'have not updated yet' %}</td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td>{% trans 'Time' %}</td>
                             <td id="time_info">{% trans 'have not updated yet' %}</td>
@@ -106,11 +106,12 @@
                     type: 'GET'
                 }).done(function (data) {
                     var resources = [];
+                    var colors = ['#06623b','#862a5c', '#d8345f', '#00005c','#005082', '#4a47a3', '#21bf73']
                     for (var i = 0; i < data.length; i++) {
                         resources.push({
                             id: data[i]['id'],
                             title: data[i]['name'],
-                            eventColor: "#" + ((1 << 24) * Math.random() | 0).toString(16)
+                            eventColor: colors[i]
                         })
                     }
                     successCallback(resources);
@@ -135,6 +136,18 @@
                             var start_time = new Date(_start_time);
                             var end_time = new Date(_end_time);
                             console.log(data[i]['id']);
+                            if (data[i]['yogaclass']['trainer']['user']['image']){
+                                trainer_img = data[i]['yogaclass']['trainer']['user']['image'];
+                            } else{
+                                trainer_img = '{% static "img/user/default.png" %}';
+                            }
+                            console.log(data[i]['yogaclass']);
+                            if (data[i]['yogaclass']['image']){
+                                class_img = data[i]['yogaclass']['image'];
+                            } else{
+                                class_img = data[i]['yogaclass']['course']['image'];
+                            }
+
                             events.push({
                                 id: data[i]['id'],
                                 title: data[i]['yogaclass']['name'],
@@ -143,8 +156,8 @@
                                 url: 'javascript:;',
                                 overlap: false,
                                 allDaySlot: false,
-                                imageClassUrl: '{% static "img/class/default.jpg" %}',
-                                imageTrainerUrl: '{% static "img/user/default.png" %}',
+                                imageClassUrl: class_img,
+                                imageTrainerUrl: trainer_img,
                                 resourceId: data[i]['room']['id']
                             })
                         }
@@ -186,11 +199,11 @@
                             
                             var _trainer_url = "{% url 'trainers:detail' 's-l-u-g' %}";
                             var trainer_url = _trainer_url.replace('s-l-u-g', data['yogaclass']['trainer']['user']['slug']);
-                            var trainer_str = `<a class="text-danger" href="`+ trainer_url + `">`+ data['yogaclass']['trainer']['user']['first_name'] + ' ' + data['yogaclass']['trainer']['user']['last_name'] +`</a>`;
+                            var trainer_str = `<a class="text-danger" href="`+ trainer_url + `">`+ data['yogaclass']['trainer']['user']['last_name'] + ' ' + data['yogaclass']['trainer']['user']['first_name'] +`</a>`;
                             $('#trainer_info').text("");
                             $('#trainer_info').empty();
                             $('#trainer_info').append(trainer_str);
-                            $('#date_info').text(date);
+                            // $('#date_info').text(date);
                             $('#time_info').text(time);
                             $('#btn_open_modal_lesson_info').click();
                         });
@@ -199,10 +212,10 @@
             },
             eventRender: function (info) {
                 if (info.event.extendedProps.imageClassUrl) {
-                    $(info.el).find("div.fc-time").prepend("<img class='img rounded-circle p-1' src='" + info.event.extendedProps.imageClassUrl + "' width='25' height='25'>");
+                    $(info.el).find("div.fc-time").prepend("<img class='img rounded-circle p-1' src='" + info.event.extendedProps.imageClassUrl + "' width='18' height='18'>");
                 }
                 if (info.event.extendedProps.imageTrainerUrl) {
-                    $(info.el).find("div.fc-time").append("<img class='img rounded-circle p-1' src='" + info.event.extendedProps.imageTrainerUrl + "' width='25' height='25'>");
+                    $(info.el).find("div.fc-time").append("<img class='img rounded-circle p-1' src='" + info.event.extendedProps.imageTrainerUrl + "' width='18' height='18'>");
                 }
             }
         });
