@@ -203,6 +203,7 @@ class Command(BaseCommand):
             'email': 'hangnga1@gmail.com',
             'first_name': 'Nga',
             'last_name': 'Hằng',
+            'image': '/seeds/images/trainers/co_hang_nga.jpg'
         }
         user_hang_nga = User(**data_co_hang_nga)
         user_hang_nga.set_password('truong77')
@@ -220,6 +221,7 @@ class Command(BaseCommand):
             'email': 'ngungnguyen1@gmail.com',
             'first_name': 'Ngừng',
             'last_name': 'Nguyễn',
+            'image': '/seeds/images/trainers/co_ngung.jpg'
         }
         user_co_ngung = User(**data_co_ngung)
         user_co_ngung.set_password('truong77')
@@ -236,7 +238,8 @@ class Command(BaseCommand):
         data_co_nhu = {
             'email': 'nhunguyen1@gmail.com',
             'first_name': 'Như',
-            'last_name': 'Nguyễn',
+            'last_name': 'Huỳnh',
+            'image': '/seeds/images/trainers/co_nhu.jpg'
         }
         user_co_nhu = User(**data_co_nhu)
         user_co_nhu.set_password('truong77')
@@ -254,6 +257,7 @@ class Command(BaseCommand):
             'email': 'kieutran1@gmail.com',
             'first_name': 'Kiều',
             'last_name': 'Trần',
+            'image': '/seeds/images/trainers/co_kieu.jpg'
         }
         user_co_kieu = User(**data_co_kieu)
         user_co_kieu.set_password('truong77')
@@ -271,6 +275,7 @@ class Command(BaseCommand):
             'email': 'xuannguyen1@gmail.com',
             'first_name': 'Xuân',
             'last_name': 'Nguyễn',
+            'image': '/seeds/images/trainers/co_xuan.jpg'
         }
         user_co_xuan = User(**data_co_xuan)
         user_co_xuan.set_password('truong77')
@@ -288,6 +293,7 @@ class Command(BaseCommand):
             'email': 'thuynguyen1@gmail.com',
             'first_name': 'Thùy',
             'last_name': 'Nguyễn',
+            'image': '/seeds/images/trainers/co_thuy.jpg'
         }
         user_co_thuy = User(**data_co_thuy)
         user_co_thuy.set_password('truong77')
@@ -305,6 +311,7 @@ class Command(BaseCommand):
             'email': 'tramy1@gmail.com',
             'first_name': 'My',
             'last_name': 'Trà',
+            'image': '/seeds/images/trainers/co_tra_my.jpg'
         }
         user_co_tra_my = User(**data_co_tra_my)
         user_co_tra_my.set_password('truong77')
@@ -322,6 +329,7 @@ class Command(BaseCommand):
             'email': 'nhannguyen1@gmail.com',
             'first_name': 'Nhàn',
             'last_name': 'Nguyễn',
+            'image': '/seeds/images/trainers/co_nhan.jpg'
         }
         user_co_nhan = User(**data_co_nhan)
         user_co_nhan.set_password('truong77')
@@ -339,6 +347,7 @@ class Command(BaseCommand):
             'email': 'quyennguyen1@gmail.com',
             'first_name': 'Quyên',
             'last_name': 'Nguyễn',
+            'image': '/seeds/images/trainers/co_quyen.jpg'
         }
         user_co_quyen = User(**data_co_quyen)
         user_co_quyen.set_password('truong77')
@@ -356,6 +365,7 @@ class Command(BaseCommand):
             'email': 'thiennguyen1@gmail.com',
             'first_name': 'Thiên',
             'last_name': 'Nguyễn',
+            'image': '/seeds/images/trainers/thay_thien.jpg'
         }
         user_thay_thien = User(**data_thay_thien)
         user_thay_thien.set_password('truong77')
@@ -373,6 +383,7 @@ class Command(BaseCommand):
             'email': 'hanhvo1@gmail.com',
             'first_name': 'Hạnh',
             'last_name': 'Võ',
+            'image': '/seeds/images/trainers/co_vo_hanh.jpg'
         }
         user_co_vo_hanh = User(**data_co_vo_hanh)
         user_co_vo_hanh.set_password('truong77')
@@ -390,6 +401,7 @@ class Command(BaseCommand):
             'email': 'hongnguyen1@gmail.com',
             'first_name': 'Hồng',
             'last_name': 'Nguyễn',
+            'image': '/seeds/images/trainers/co_hong.jpg'
         }
         user_co_hong = User(**data_co_hong)
         user_co_hong.set_password('truong77')
@@ -401,23 +413,6 @@ class Command(BaseCommand):
         co_hong.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_hong.save()
         co_hong.certificates.create(
-            name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
-
-        data_co_tanh = {
-            'email': 'tanhnguyen1@gmail.com',
-            'first_name': 'Tánh',
-            'last_name': 'Nguyễn',
-        }
-        user_co_tanh = User(**data_co_tanh)
-        user_co_tanh.set_password('truong77')
-        user_co_tanh.is_trainer = True
-        user_co_tanh.save()
-        co_tanh = Trainer.objects.create(user=user_co_tanh)
-        co_tanh.introduction = '''Phấn đấu là một huấn luyện viên được mọi người săn đón. Tôi không ngừng học hỏi, trau dồi kiến thức dinh dưỡng, tập luyện để áp dụng cho bản thân qua đó truyền cảm hứng, động lực cho học viên có một lối sống tích cực, khoa học, thói quen tập luyện đều đặn và đạt được kết quả sớm nhất trong việc tập luyện.'''
-        co_tanh.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
-        co_tanh.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
-        co_tanh.save()
-        co_tanh.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         print("Create CARD TYPES")
@@ -686,7 +681,7 @@ class Command(BaseCommand):
                 "start_time": t_7h,
                 "end_time": t_8h
             })
-        
+
         t_15h = '15:00'
         t_16h = (datetime.strptime(t_15h, '%H:%M') + timedelta(
             minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
@@ -864,7 +859,7 @@ class Command(BaseCommand):
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
-        
+
         t_18h35 = '18:35'
         t_19h35 = '19:35'
         basic_yoga_class_co_xuan_18h35_246 = basic_yoga_course.classes.create(
@@ -894,7 +889,7 @@ class Command(BaseCommand):
                 "start_time": t_18h35,
                 "end_time": t_19h35
             })
-        
+
         t_19h = '19:00'
         t_20h = '20:00'
         basic_yoga_class_co_thuy_19h_246 = basic_yoga_course.classes.create(
@@ -924,7 +919,7 @@ class Command(BaseCommand):
                 "start_time": t_19h,
                 "end_time": t_20h
             })
-        
+
         t_19h30 = '19:30'
         t_20h30 = '20:30'
         basic_yoga_class_co_nhan_19h30_246 = basic_yoga_course.classes.create(
@@ -982,6 +977,381 @@ class Command(BaseCommand):
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
+
+        t_6h = '06:00'
+        t_7h = '07:00'
+        basic_yoga_class_co_nhu_6h_357 = basic_yoga_course.classes.create(
+            name='Lớp cơ bản cô Như 6h sáng 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=co_nhu,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            basic_yoga_class_co_nhu_6h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_6h,
+                "end_time": t_7h
+            })
+            basic_yoga_class_co_nhu_6h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_6h,
+                "end_time": t_7h
+            })
+            basic_yoga_class_co_nhu_6h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_6h,
+                "end_time": t_7h
+            })
+        
+        advanced_yoga_class_thay_tien_6h_357 = advanced_yoga_course.classes.create(
+            name='Lớp nâng cao thầy Tiến 6h sáng 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=thay_tien,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            advanced_yoga_class_thay_tien_6h_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_6h,
+                "end_time": t_7h
+            })
+            advanced_yoga_class_thay_tien_6h_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_6h,
+                "end_time": t_7h
+            })
+            advanced_yoga_class_thay_tien_6h_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_6h,
+                "end_time": t_7h
+            })
+
+        t_9h = '09:00'
+        t_10h = '10:00'
+        basic_yoga_class_co_phuong_9h_357 = basic_yoga_course.classes.create(
+            name='Lớp cơ bản cô Phượng 9h sáng 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=co_phuong,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            basic_yoga_class_co_phuong_9h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_9h,
+                "end_time": t_10h
+            })
+            basic_yoga_class_co_phuong_9h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_9h,
+                "end_time": t_10h
+            })
+            basic_yoga_class_co_phuong_9h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_9h,
+                "end_time": t_10h
+            })
+
+        t_15h = '15:00'
+        t_16h = '16:00'
+        basic_yoga_class_co_thuy_15h_357 = basic_yoga_course.classes.create(
+            name='Lớp cơ bản cô Thúy 15h chiều 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=co_thuy,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            basic_yoga_class_co_thuy_15h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_15h,
+                "end_time": t_16h
+            })
+            basic_yoga_class_co_thuy_15h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_15h,
+                "end_time": t_16h
+            })
+            basic_yoga_class_co_thuy_15h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_15h,
+                "end_time": t_16h
+            })
+        
+        basic_yoga_class_co_quyen_15h_357 = basic_yoga_course.classes.create(
+            name='Lớp cơ bản cô Quyên 15h chiều 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=co_quyen,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            basic_yoga_class_co_quyen_15h_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_15h,
+                "end_time": t_16h
+            })
+            basic_yoga_class_co_quyen_15h_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_15h,
+                "end_time": t_16h
+            })
+            basic_yoga_class_co_quyen_15h_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_15h,
+                "end_time": t_16h
+            })
+        
+        intermediate_yoga_class_thay_tan_15h_357 = intermediate_yoga_course.classes.create(
+            name='Lớp trung cấp thầy Tân 15h chiều 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=thay_tan,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            intermediate_yoga_class_thay_tan_15h_357.lessons.create(**{
+                "room_id": room3.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_15h,
+                "end_time": t_16h
+            })
+            intermediate_yoga_class_thay_tan_15h_357.lessons.create(**{
+                "room_id": room3.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_15h,
+                "end_time": t_16h
+            })
+            intermediate_yoga_class_thay_tan_15h_357.lessons.create(**{
+                "room_id": room3.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_15h,
+                "end_time": t_16h
+            })
+        
+        t_17h = '17:00'
+        t_18h = '18:00'
+        intermediate_yoga_class_thay_thien_17h_357 = intermediate_yoga_course.classes.create(
+            name='Lớp trung cấp thầy Thiên 17h chiều 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=thay_thien,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            intermediate_yoga_class_thay_thien_17h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_17h,
+                "end_time": t_18h
+            })
+            intermediate_yoga_class_thay_thien_17h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_17h,
+                "end_time": t_18h
+            })
+            intermediate_yoga_class_thay_thien_17h_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_17h,
+                "end_time": t_18h
+            })
+
+        basic_yoga_class_co_kieu_17h_357 = basic_yoga_course.classes.create(
+            name='Lớp cơ bản cô Kiều 17h chiều 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=co_kieu,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            basic_yoga_class_co_kieu_17h_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_17h,
+                "end_time": t_18h
+            })
+            basic_yoga_class_co_kieu_17h_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_17h,
+                "end_time": t_18h
+            })
+            basic_yoga_class_co_kieu_17h_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_17h,
+                "end_time": t_18h
+            })
+        
+        t_17h30 = '17:30'
+        t_18h30 = '18:30'
+        basic_yoga_class_co_tra_my_17h30_357 = basic_yoga_course.classes.create(
+            name='Lớp cơ bản cô Trà My 17h30 chiều 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=co_tra_my,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            basic_yoga_class_co_tra_my_17h30_357.lessons.create(**{
+                "room_id": room3.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_17h30,
+                "end_time": t_18h30
+            })
+            basic_yoga_class_co_tra_my_17h30_357.lessons.create(**{
+                "room_id": room3.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_17h30,
+                "end_time": t_18h30
+            })
+            basic_yoga_class_co_tra_my_17h30_357.lessons.create(**{
+                "room_id": room3.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_17h30,
+                "end_time": t_18h30
+            })
+        
+        basic_yoga_class_co_phuong_17h30_357 = basic_yoga_course.classes.create(
+            name='Lớp cơ bản cô Phượng 17h30 chiều 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=co_phuong,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            basic_yoga_class_co_phuong_17h30_357.lessons.create(**{
+                "room_id": room4.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_17h30,
+                "end_time": t_18h30
+            })
+            basic_yoga_class_co_phuong_17h30_357.lessons.create(**{
+                "room_id": room4.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_17h30,
+                "end_time": t_18h30
+            })
+            basic_yoga_class_co_phuong_17h30_357.lessons.create(**{
+                "room_id": room4.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_17h30,
+                "end_time": t_18h30
+            })
+        
+        basic_yoga_class_co_vo_hanh_18h15_357 = basic_yoga_course.classes.create(
+            name='Lớp cơ bản cô Võ Hạnh 18h15 tối 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=co_vo_hanh,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            basic_yoga_class_co_vo_hanh_18h15_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_18h15,
+                "end_time": t_19h15
+            })
+            basic_yoga_class_co_vo_hanh_18h15_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_18h15,
+                "end_time": t_19h15
+            })
+            basic_yoga_class_co_vo_hanh_18h15_357.lessons.create(**{
+                "room_id": room1.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_18h15,
+                "end_time": t_19h15
+            })
+        
+        basic_yoga_class_co_man_18h15_357 = basic_yoga_course.classes.create(
+            name='Lớp cơ bản cô Mận 18h15 tối 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=co_man,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            basic_yoga_class_co_man_18h15_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_18h15,
+                "end_time": t_19h15
+            })
+            basic_yoga_class_co_man_18h15_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_18h15,
+                "end_time": t_19h15
+            })
+            basic_yoga_class_co_man_18h15_357.lessons.create(**{
+                "room_id": room2.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_18h15,
+                "end_time": t_19h15
+            })
+        
+        basic_yoga_class_co_vo_hanh_19h30_357 = basic_yoga_course.classes.create(
+            name='Lớp cơ bản cô Võ Hạnh 19h30 tối 3-5-7',
+            price_per_lesson=50000,
+            price_per_month=600000,
+            start_at=today,
+            trainer=co_vo_hanh,
+        )
+        for i in range(0, number_of_weeks):
+            count_weeks = 7 * i
+            basic_yoga_class_co_vo_hanh_19h30_357.lessons.create(**{
+                "room_id": room4.pk,
+                "date": tuesday + timedelta(days=count_weeks),
+                "start_time": t_19h30,
+                "end_time": t_20h30
+            })
+            basic_yoga_class_co_vo_hanh_19h30_357.lessons.create(**{
+                "room_id": room4.pk,
+                "date": thursday + timedelta(days=count_weeks),
+                "start_time": t_19h30,
+                "end_time": t_20h30
+            })
+            basic_yoga_class_co_vo_hanh_19h30_357.lessons.create(**{
+                "room_id": room4.pk,
+                "date": saturday + timedelta(days=count_weeks),
+                "start_time": t_19h30,
+                "end_time": t_20h30
+            })
+
     def __add_lectures(self, course):
         data = [
             {
