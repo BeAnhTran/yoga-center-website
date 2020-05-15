@@ -6,7 +6,7 @@ def staff_required(function):
     @wraps(function)
     def wrap(request, *args, **kwargs):
 
-        if request.user.is_active and request.user.is_staff:
+        if request.user.is_active and request.user.is_staff or request.user.is_superuser:
             pass
         else:
             return redirect('errors:error_401')
@@ -20,7 +20,7 @@ def admin_required(function):
     @wraps(function)
     def wrap(request, *args, **kwargs):
 
-        if request.user.is_active and request.user.is_staff and request.user.is_superuser:
+        if request.user.is_active and request.user.is_superuser:
             pass
         else:
             return redirect('errors:error_401')

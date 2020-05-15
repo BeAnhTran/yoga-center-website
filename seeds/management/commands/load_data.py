@@ -795,7 +795,7 @@ class Command(BaseCommand):
             })
             arr_lessons_basic_yoga_class_co_nhu_15h_246.append(l1)
             arr_lessons_basic_yoga_class_co_nhu_15h_246.append(l2)
-            arr_lessons_basic_yoga_class_co_nhu_15h_246.append(l2)
+            arr_lessons_basic_yoga_class_co_nhu_15h_246.append(l3)
         # add-trainees
         self.__enroll('Nga', 'Từ Thị Nguyệt', 'tuthinguyetnga1@gmail.com', basic_yoga_class_co_nhu_15h_246,
                       some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_15h_246[0:10])
@@ -937,26 +937,50 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_nhu,
         )
+        arr_lessons_basic_yoga_class_co_nhu_17h_246 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_nhu_17h_246.lessons.create(**{
+            l1 = basic_yoga_class_co_nhu_17h_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": monday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
-            basic_yoga_class_co_nhu_17h_246.lessons.create(**{
+            l2 = basic_yoga_class_co_nhu_17h_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
-            basic_yoga_class_co_nhu_17h_246.lessons.create(**{
+            l3 = basic_yoga_class_co_nhu_17h_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
+            arr_lessons_basic_yoga_class_co_nhu_17h_246.append(l1)
+            arr_lessons_basic_yoga_class_co_nhu_17h_246.append(l2)
+            arr_lessons_basic_yoga_class_co_nhu_17h_246.append(l3)
+        # add-trainees
+        self.__enroll('Trâm', 'Đèo Nguyễn Mai', 'deonguyenmaitram1@gmail.com', basic_yoga_class_co_nhu_17h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_17h_246[0:10])
+        self.__enroll('Hạnh', 'Cao Thị Ngọc', 'caothingochanh1@gmail.com', basic_yoga_class_co_nhu_17h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_17h_246[0:12])
+        self.__enroll('Vy', 'Lê Thị Tường', 'lethituongvy1@gmail.com', basic_yoga_class_co_nhu_17h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_17h_246)
+        self.__enroll('Phượng', 'Thanh', 'thanhphuong1@gmail.com', basic_yoga_class_co_nhu_17h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_17h_246[0:18])
+        self.__enroll('Thảo', 'Lê Thị', 'lethithao1@gmail.com', basic_yoga_class_co_nhu_17h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_17h_246[0:18])
+        self.__enroll('Xuân', 'Lê Hoàng', 'lehoangxuan1@gmail.com', basic_yoga_class_co_nhu_17h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_17h_246[0:18])
+        self.__enroll('Thư', 'Hoàng Anh', 'hoanganhthu1@gmail.com', basic_yoga_class_co_nhu_17h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_17h_246[0:18])
+        self.__enroll('Xuân', 'Dương Thị Tuyết', 'duongthituyetxuan1@gmail.com', basic_yoga_class_co_nhu_17h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_17h_246[0:18])
+        self.__enroll('Thanh', 'Nguyễn Phạm Hằng', 'nguyenphamhangthanh1@gmail.com', basic_yoga_class_co_nhu_17h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_17h_246[0:24])
+        # end add-trainees
 
         t_17h30 = '17:30'
         t_18h30 = '18:30'
@@ -967,26 +991,56 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_kieu,
         )
+        arr_lessons_basic_yoga_class_co_kieu_17h30_246 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_kieu_17h30_246.lessons.create(**{
+            l1 = basic_yoga_class_co_kieu_17h30_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": monday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
-            basic_yoga_class_co_kieu_17h30_246.lessons.create(**{
+            l2 = basic_yoga_class_co_kieu_17h30_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
-            basic_yoga_class_co_kieu_17h30_246.lessons.create(**{
+            l3 = basic_yoga_class_co_kieu_17h30_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            arr_lessons_basic_yoga_class_co_kieu_17h30_246.append(l1)
+            arr_lessons_basic_yoga_class_co_kieu_17h30_246.append(l2)
+            arr_lessons_basic_yoga_class_co_kieu_17h30_246.append(l3)
+        # add-trainees
+        self.__enroll('Cương', 'Trần Thị Kim', 'tranthikimcuong1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:10])
+        self.__enroll('Hương', 'Nguyễn Thị Thúy', 'nguyenthithuyhuong1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:12])
+        self.__enroll('Oanh', 'Nguyễn Thị Kim', 'nguyenthikimoanh1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246)
+        self.__enroll('Anh', 'Phạm Hoàng', 'phamhoanganh1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:18])
+        self.__enroll('Lành', 'Nguyễn Thị Bích', 'nguyenthibichlanh1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:18])
+        self.__enroll('Phương', 'Bùi Thị Thanh', 'buithithanhphuong1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:18])
+        self.__enroll('Vân', 'Nguyễn Ngọc Thùy', 'nguyenngocthuyvan1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:18])
+        self.__enroll('Vi', 'Dương Thị Hoài', 'duongthihoaivy1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:18])
+        self.__enroll('Ngọc', 'Đào Thị Bích', 'daothibichngoc1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:24])
+        self.__enroll('Uyên', 'Nguyễn Ngọc', 'nguyenngocuyen1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:24])
+        self.__enroll('Ngọc', 'Nguyễn Thị Quý', 'nguyenthiquyngoc1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:24])
+        self.__enroll('Nụ', 'Bùi Thị Hồng', 'buithihongnu1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:24])
+        # end add-trainees
 
         t_18h15 = '18:15'
         t_19h15 = '19:15'
@@ -997,26 +1051,54 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_nhu,
         )
+        arr_lessons_basic_yoga_class_co_nhu_18h15_246 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_nhu_18h15_246.lessons.create(**{
+            l1 = basic_yoga_class_co_nhu_18h15_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": monday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
-            basic_yoga_class_co_nhu_18h15_246.lessons.create(**{
+            l2 = basic_yoga_class_co_nhu_18h15_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
-            basic_yoga_class_co_nhu_18h15_246.lessons.create(**{
+            l3 = basic_yoga_class_co_nhu_18h15_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            arr_lessons_basic_yoga_class_co_nhu_18h15_246.append(l1)
+            arr_lessons_basic_yoga_class_co_nhu_18h15_246.append(l2)
+            arr_lessons_basic_yoga_class_co_nhu_18h15_246.append(l3)
+        # add-trainees
+        self.__enroll('Tâm', 'Hồ Thị Minh', 'hothiminhtam1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246[0:10])
+        self.__enroll('Tú', 'Hồ Thị Minh', 'hothiminhtu1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246[0:12])
+        self.__enroll('Vân', 'Ngô Thị Thùy', 'ngothithuyvan1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246)
+        self.__enroll('Dương', 'Trần Thị Thùy', 'tranthithuyduong1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246[0:18])
+        self.__enroll('Trúc', 'Ngô Thị Túy', 'ngothituytruc1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246[0:18])
+        self.__enroll('Hà', 'Phan Thị Thu', 'phanthithuha1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246[0:18])
+        self.__enroll('Thư', 'Lê Thị Minh', 'lethiminhthu1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246[0:18])
+        self.__enroll('Hồng', 'Hoàng Thị', 'hoangthihong1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246[0:18])
+        self.__enroll('Hợi', 'Trần Thị', 'tranthihoi1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246[0:24])
+        self.__enroll('Vân', 'Phan Thị Tường', 'phanthituongvan1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246[0:24])
+        self.__enroll('Nguyên', 'Ngô Ngọc Khôi', 'ngongockhoinguyen1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246[0:24])
+        # end add-trainees
 
         t_18h35 = '18:35'
         t_19h35 = '19:35'
@@ -1027,26 +1109,60 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_xuan,
         )
+        arr_lessons_basic_yoga_class_co_xuan_18h35_246 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_xuan_18h35_246.lessons.create(**{
+            l1 = basic_yoga_class_co_xuan_18h35_246.lessons.create(**{
                 "room_id": room3.pk,
                 "date": monday + timedelta(days=count_weeks),
                 "start_time": t_18h35,
                 "end_time": t_19h35
             })
-            basic_yoga_class_co_xuan_18h35_246.lessons.create(**{
+            l2 = basic_yoga_class_co_xuan_18h35_246.lessons.create(**{
                 "room_id": room3.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_18h35,
                 "end_time": t_19h35
             })
-            basic_yoga_class_co_xuan_18h35_246.lessons.create(**{
+            l3 = basic_yoga_class_co_xuan_18h35_246.lessons.create(**{
                 "room_id": room3.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_18h35,
                 "end_time": t_19h35
             })
+            arr_lessons_basic_yoga_class_co_xuan_18h35_246.append(l1)
+            arr_lessons_basic_yoga_class_co_xuan_18h35_246.append(l2)
+            arr_lessons_basic_yoga_class_co_xuan_18h35_246.append(l3)
+        # add-trainees
+        self.__enroll('Anh', 'Ngô Vân', 'ngovananh1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:10])
+        self.__enroll('Yến', 'Đoàn Thị Hồng', 'doanthihongyen1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:12])
+        self.__enroll('Nhung', 'Nguyễn Thị Tuyết', 'nguyenthituyetnhung1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246)
+        self.__enroll('Trâm', 'Lý Thị Anh', 'lythianhtram1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:18])
+        self.__enroll('Dung', 'Phan Thị Kim', 'phanthikimdung1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:18])
+        self.__enroll('Trang', 'Đỗ Minh', 'dominhtrang1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:18])
+        self.__enroll('Hà', 'Nguyễn Thu', 'nguyenthuha1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:18])
+        self.__enroll('Toàn', 'Nguyễn Thị Phương', 'nguyenthiphuongtoan1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:18])
+        self.__enroll('Như', 'Quỳnh', 'nhuquynh1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:24])
+        self.__enroll('Phấn', 'Phan Mỹ', 'phanmyphan1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:24])
+        self.__enroll('Trang', 'Trần Thị Ngọc', 'tranthingoctrang1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:24])
+        self.__enroll('Trang', 'Nguyễn Lê Thu', 'nguyenlethutrang1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:24])
+        self.__enroll('Oanh', 'Đoàn Thị Kim', 'doanthikimoanh1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:24])
+        self.__enroll('Hằng', 'Nguyễn Thị Thanh', 'nguyenthithanhhang1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:24])
+        # end add-trainees
 
         t_19h = '19:00'
         t_20h = '20:00'
@@ -1057,26 +1173,52 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_thuy,
         )
+        arr_lessons_basic_yoga_class_co_thuy_19h_246 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_thuy_19h_246.lessons.create(**{
+            l1 = basic_yoga_class_co_thuy_19h_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": monday + timedelta(days=count_weeks),
                 "start_time": t_19h,
                 "end_time": t_20h
             })
-            basic_yoga_class_co_thuy_19h_246.lessons.create(**{
+            l2 = basic_yoga_class_co_thuy_19h_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_19h,
                 "end_time": t_20h
             })
-            basic_yoga_class_co_thuy_19h_246.lessons.create(**{
+            l3 = basic_yoga_class_co_thuy_19h_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_19h,
                 "end_time": t_20h
             })
+            arr_lessons_basic_yoga_class_co_thuy_19h_246.append(l1)
+            arr_lessons_basic_yoga_class_co_thuy_19h_246.append(l2)
+            arr_lessons_basic_yoga_class_co_thuy_19h_246.append(l3)
+        # add-trainees
+        self.__enroll('Phương', 'Trần Thị Thanh', 'tranthithanhphuong1@gmail.com', basic_yoga_class_co_thuy_19h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_19h_246[0:10])
+        self.__enroll('Liên', 'Hoàng Thị Quỳnh', 'hoangthiquynhlien1@gmail.com', basic_yoga_class_co_thuy_19h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_19h_246[0:12])
+        self.__enroll('Anh', 'Nguyễn Thị Lan', 'nguyenthilananh1@gmail.com', basic_yoga_class_co_thuy_19h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_19h_246)
+        self.__enroll('Linh', 'Đoàn Thị Thùy', 'doanthithuylinh1@gmail.com', basic_yoga_class_co_thuy_19h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_19h_246[0:18])
+        self.__enroll('Mai', 'Nguyễn Kim', 'nguyenkimmai1@gmail.com', basic_yoga_class_co_thuy_19h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_19h_246[0:18])
+        self.__enroll('Trang', 'Nguyễn Vân', 'nguyenvantrang1@gmail.com', basic_yoga_class_co_thuy_19h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_19h_246[0:18])
+        self.__enroll('Châu', 'Trần Thị Diễm', 'tranthidiemchau1@gmail.com', basic_yoga_class_co_thuy_19h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_19h_246[0:18])
+        self.__enroll('Thúy', 'Lương Thị', 'luongthithuy1@gmail.com', basic_yoga_class_co_thuy_19h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_19h_246[0:18])
+        self.__enroll('Thủy', 'Phạm Thanh', 'phamthanhthuy1@gmail.com', basic_yoga_class_co_thuy_19h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_19h_246[0:24])
+        self.__enroll('Anh', 'Hoàng Thị Ngọc', 'hoangthingocanh1@gmail.com', basic_yoga_class_co_thuy_19h_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_19h_246[0:24])
+        # end add-trainees
 
         t_19h30 = '19:30'
         t_20h30 = '20:30'
@@ -1087,26 +1229,54 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_nhan,
         )
+        arr_lessons_basic_yoga_class_co_nhan_19h30_246 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_nhan_19h30_246.lessons.create(**{
+            l1 = basic_yoga_class_co_nhan_19h30_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": monday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
-            basic_yoga_class_co_nhan_19h30_246.lessons.create(**{
+            l2 = basic_yoga_class_co_nhan_19h30_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
-            basic_yoga_class_co_nhan_19h30_246.lessons.create(**{
+            l3 = basic_yoga_class_co_nhan_19h30_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
+            arr_lessons_basic_yoga_class_co_nhan_19h30_246.append(l1)
+            arr_lessons_basic_yoga_class_co_nhan_19h30_246.append(l2)
+            arr_lessons_basic_yoga_class_co_nhan_19h30_246.append(l3)
+        # add-trainees
+        self.__enroll('Thảo', 'Đặng Hoàng', 'danghoangthao1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:10])
+        self.__enroll('Phương', 'Trần Thị Bích', 'tranthibichphuong1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:12])
+        self.__enroll('Sang', 'Phan Thị Châu', 'phanthichausang1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246)
+        self.__enroll('Liêm', 'Trần Thanh', 'tranthanhliem1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:18])
+        self.__enroll('Ly', 'Nguyễn Thị Ái', 'nguyenthiaily1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:18])
+        self.__enroll('Hiền', 'Minh', 'minhhien1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:18])
+        self.__enroll('Thảo', 'Bùi Phương', 'buiphuongthao1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:18])
+        self.__enroll('Loan', 'Phạm Thị Thùy', 'phamthithuyloan1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:18])
+        self.__enroll('Thảo', 'Nguyễn Thị Phương', 'nguyenthiphuongthao1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:24])
+        self.__enroll('Ngọc', 'Huỳnh Thị Hoàng', 'huynhthihoangngoc1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:24])
+        self.__enroll('Duy', 'Ánh', 'anhduy1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:24])
+        # end add-trainees
 
         advanced_yoga_class_co_nhan_19h30_246 = advanced_yoga_course.classes.create(
             name='Lớp nâng cao cô Trà My 19h30 tối 2-4-6',
@@ -1115,26 +1285,54 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_tra_my,
         )
+        arr_lessons_advanced_yoga_class_co_nhan_19h30_246 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            advanced_yoga_class_co_nhan_19h30_246.lessons.create(**{
+            l1 = advanced_yoga_class_co_nhan_19h30_246.lessons.create(**{
                 "room_id": room4.pk,
                 "date": monday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
-            advanced_yoga_class_co_nhan_19h30_246.lessons.create(**{
+            l2 = advanced_yoga_class_co_nhan_19h30_246.lessons.create(**{
                 "room_id": room4.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
-            advanced_yoga_class_co_nhan_19h30_246.lessons.create(**{
+            l3 = advanced_yoga_class_co_nhan_19h30_246.lessons.create(**{
                 "room_id": room4.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
+            arr_lessons_advanced_yoga_class_co_nhan_19h30_246.append(l1)
+            arr_lessons_advanced_yoga_class_co_nhan_19h30_246.append(l2)
+            arr_lessons_advanced_yoga_class_co_nhan_19h30_246.append(l3)
+        # add-trainees
+        self.__enroll('Thư', 'Huỳnh', 'thuhuynh1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:10])
+        self.__enroll('Huyền', 'Tô Nam', 'tonamhuyen1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:12])
+        self.__enroll('Vỹ', 'Nguyễn Đình', 'nguyendinhvy1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246)
+        self.__enroll('Anh', 'Nguyễn Thành Thoại', 'nguyenthanhthoaianh1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:18])
+        self.__enroll('Thi', 'Nguyễn Thị Anh', 'nguyenthianhthi1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:18])
+        self.__enroll('Thủy', 'Lê Thị', 'lethithuy1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:18])
+        self.__enroll('Hoa', 'Nguyễn Thị', 'nguyenthihoa1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:18])
+        self.__enroll('Tố', 'Lê Thị Linh', 'lethilinhto1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:18])
+        self.__enroll('Huệ', 'Đài Thị Tuyết', 'daithituyethue1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:24])
+        self.__enroll('Hương', 'Nguyễn Thu', 'nguyenthuhuong1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:24])
+        self.__enroll('Thảo', 'Lê Trương Phương', 'letruongphuongthao1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:24])
+        # end add-trainees
 
         t_6h = '06:00'
         t_7h = '07:00'
@@ -1145,26 +1343,54 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_nhu,
         )
+        arr_lessons_basic_yoga_class_co_nhu_6h_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_nhu_6h_357.lessons.create(**{
+            l1 = basic_yoga_class_co_nhu_6h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_6h,
                 "end_time": t_7h
             })
-            basic_yoga_class_co_nhu_6h_357.lessons.create(**{
+            l2 = basic_yoga_class_co_nhu_6h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_6h,
                 "end_time": t_7h
             })
-            basic_yoga_class_co_nhu_6h_357.lessons.create(**{
+            l3 = basic_yoga_class_co_nhu_6h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_6h,
                 "end_time": t_7h
             })
+            arr_lessons_basic_yoga_class_co_nhu_6h_357.append(l1)
+            arr_lessons_basic_yoga_class_co_nhu_6h_357.append(l2)
+            arr_lessons_basic_yoga_class_co_nhu_6h_357.append(l3)
+        # add-trainees
+        self.__enroll('My', 'Phạm Đỗ Trà', 'phamdotramy1@gmail.com', basic_yoga_class_co_nhu_6h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357[0:10])
+        self.__enroll('Phương', 'Nguyễn Ngọc', 'nguyenngocphuong1@gmail.com', basic_yoga_class_co_nhu_6h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357[0:12])
+        self.__enroll('Cảnh', 'Lê Thị', 'lethicanh1@gmail.com', basic_yoga_class_co_nhu_6h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357)
+        self.__enroll('Nhiệm', 'Nguyễn Thị Bích', 'nguyenthibichnhiem1@gmail.com', basic_yoga_class_co_nhu_6h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357[0:18])
+        self.__enroll('Hòe', 'Mai Thị', 'maithihoe1@gmail.com', basic_yoga_class_co_nhu_6h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357[0:18])
+        self.__enroll('Hà', 'Lê Thị Cẩm', 'lethicamha1@gmail.com', basic_yoga_class_co_nhu_6h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357[0:18])
+        self.__enroll('Mai', 'Dương Thị Tuyết', 'duongthituyetmai1@gmail.com', basic_yoga_class_co_nhu_6h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357[0:18])
+        self.__enroll('Len', 'Nguyễn Thị', 'nguyenthilen1@gmail.com', basic_yoga_class_co_nhu_6h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357[0:18])
+        self.__enroll('Xuân', 'Phan Thị Thanh', 'phanthithanhxuan1@gmail.com', basic_yoga_class_co_nhu_6h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357[0:24])
+        self.__enroll('Hương', 'Nguyễn Thị', 'nguyenthihuong1@gmail.com', basic_yoga_class_co_nhu_6h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357[0:24])
+        self.__enroll('Huyền', 'Hoàng Thị Hải', 'hoangthihaihuyen1@gmail.com', basic_yoga_class_co_nhu_6h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357[0:24])
+        # end add-trainees
 
         advanced_yoga_class_thay_tien_6h_357 = advanced_yoga_course.classes.create(
             name='Lớp nâng cao thầy Tiến 6h sáng 3-5-7',
@@ -1173,26 +1399,52 @@ class Command(BaseCommand):
             start_at=today,
             trainer=thay_tien,
         )
+        arr_lessons_advanced_yoga_class_thay_tien_6h_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            advanced_yoga_class_thay_tien_6h_357.lessons.create(**{
+            l1 = advanced_yoga_class_thay_tien_6h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_6h,
                 "end_time": t_7h
             })
-            advanced_yoga_class_thay_tien_6h_357.lessons.create(**{
+            l2 = advanced_yoga_class_thay_tien_6h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_6h,
                 "end_time": t_7h
             })
-            advanced_yoga_class_thay_tien_6h_357.lessons.create(**{
+            l3 = advanced_yoga_class_thay_tien_6h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_6h,
                 "end_time": t_7h
             })
+            arr_lessons_advanced_yoga_class_thay_tien_6h_357.append(l1)
+            arr_lessons_advanced_yoga_class_thay_tien_6h_357.append(l2)
+            arr_lessons_advanced_yoga_class_thay_tien_6h_357.append(l3)
+        # add-trainees
+        self.__enroll('Diệu', 'Đinh Thị', 'dinhthidieu1@gmail.com', advanced_yoga_class_thay_tien_6h_357,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_thay_tien_6h_357[0:10])
+        self.__enroll('Chuyển', 'Ngô Thị', 'ngothichuyen1@gmail.com', advanced_yoga_class_thay_tien_6h_357,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_thay_tien_6h_357[0:12])
+        self.__enroll('Ny', 'Tô Rô Ly', 'torolyny1@gmail.com', advanced_yoga_class_thay_tien_6h_357,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_thay_tien_6h_357)
+        self.__enroll('Hoài', 'Đoàn Thị', 'doanthihoai1@gmail.com', advanced_yoga_class_thay_tien_6h_357,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_thay_tien_6h_357[0:18])
+        self.__enroll('Chi', 'Nguyễn Thị Kim', 'nguyenthikimchi1@gmail.com', advanced_yoga_class_thay_tien_6h_357,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_thay_tien_6h_357[0:18])
+        self.__enroll('Loan', 'Huỳnh Kim', 'huynhkimloan1@gmail.com', advanced_yoga_class_thay_tien_6h_357,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_thay_tien_6h_357[0:18])
+        self.__enroll('Nguyên', 'Phạm Thị Thảo', 'phamthithaonguyen1@gmail.com', advanced_yoga_class_thay_tien_6h_357,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_thay_tien_6h_357[0:18])
+        self.__enroll('Sương', 'Bùi Thị', 'buithisuong1@gmail.com', advanced_yoga_class_thay_tien_6h_357,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_thay_tien_6h_357[0:18])
+        self.__enroll('Huyền', 'Nguyễn Thị Mộng', 'nguyenthimonghuyen1@gmail.com', advanced_yoga_class_thay_tien_6h_357,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_thay_tien_6h_357[0:24])
+        self.__enroll('Trinh', 'Nguyễn Phạm Văn', 'nguyenphamvantrinh1@gmail.com', advanced_yoga_class_thay_tien_6h_357,
+                      some_lessons_card_type, arr_lessons_advanced_yoga_class_thay_tien_6h_357[0:24])
+        # end add-trainees
 
         t_9h = '09:00'
         t_10h = '10:00'
@@ -1203,26 +1455,48 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_phuong,
         )
+        arr_lessons_basic_yoga_class_co_phuong_9h_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_phuong_9h_357.lessons.create(**{
+            l1 = basic_yoga_class_co_phuong_9h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_9h,
                 "end_time": t_10h
             })
-            basic_yoga_class_co_phuong_9h_357.lessons.create(**{
+            l2 = basic_yoga_class_co_phuong_9h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_9h,
                 "end_time": t_10h
             })
-            basic_yoga_class_co_phuong_9h_357.lessons.create(**{
+            l3 = basic_yoga_class_co_phuong_9h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_9h,
                 "end_time": t_10h
             })
+            arr_lessons_basic_yoga_class_co_phuong_9h_357.append(l1)
+            arr_lessons_basic_yoga_class_co_phuong_9h_357.append(l2)
+            arr_lessons_basic_yoga_class_co_phuong_9h_357.append(l3)
+        # add-trainees
+        self.__enroll('Minh', 'Hoàng Cẩm', 'hoangcamminh1@gmail.com', basic_yoga_class_co_phuong_9h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_9h_357[0:10])
+        self.__enroll('Cơ', 'Nguyễn Thiện', 'nguyenthienco1@gmail.com', basic_yoga_class_co_phuong_9h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_9h_357[0:12])
+        self.__enroll('Hiền', 'Đoàn Minh', 'doanminhhien1@gmail.com', basic_yoga_class_co_phuong_9h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_9h_357)
+        self.__enroll('Vi', 'Lê Thị Xuân', 'lethixuanvi1@gmail.com', basic_yoga_class_co_phuong_9h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_9h_357[0:18])
+        self.__enroll('Diễm', 'Quách Thúy', 'quachthuydiem1@gmail.com', basic_yoga_class_co_phuong_9h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_9h_357[0:18])
+        self.__enroll('Tiên', 'Phan Thị Mỹ', 'phanthimytien1@gmail.com', basic_yoga_class_co_phuong_9h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_9h_357[0:18])
+        self.__enroll('Giang', 'Lê Hoàng', 'lehoanggiang1@gmail.com', basic_yoga_class_co_phuong_9h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_9h_357[0:18])
+        self.__enroll('Út', 'Phạm Thị Thúy', 'phamthiutsuong1@gmail.com', basic_yoga_class_co_phuong_9h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_9h_357[0:18])
+        # end add-trainees
 
         t_15h = '15:00'
         t_16h = '16:00'
@@ -1233,26 +1507,52 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_thuy,
         )
+        arr_lessons_basic_yoga_class_co_thuy_15h_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_thuy_15h_357.lessons.create(**{
+            l1 = basic_yoga_class_co_thuy_15h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
-            basic_yoga_class_co_thuy_15h_357.lessons.create(**{
+            l2 = basic_yoga_class_co_thuy_15h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
-            basic_yoga_class_co_thuy_15h_357.lessons.create(**{
+            l3 = basic_yoga_class_co_thuy_15h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            arr_lessons_basic_yoga_class_co_thuy_15h_357.append(l1)
+            arr_lessons_basic_yoga_class_co_thuy_15h_357.append(l2)
+            arr_lessons_basic_yoga_class_co_thuy_15h_357.append(l3)
+        # add-trainees
+        self.__enroll('Chánh', 'Nguyễn Thị', 'nguyenthichanh1@gmail.com', basic_yoga_class_co_thuy_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_15h_357[0:10])
+        self.__enroll('Hạnh', 'Phạm Thị Ngọc', 'phamthingochanh1@gmail.com', basic_yoga_class_co_thuy_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_15h_357[0:12])
+        self.__enroll('Hằng', 'Nguyễn Thị Minh', 'nguyenthiminhhang1@gmail.com', basic_yoga_class_co_thuy_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_15h_357)
+        self.__enroll('Nương', 'Hồ Thị Xuân', 'hothixuannuong1@gmail.com', basic_yoga_class_co_thuy_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_15h_357[0:18])
+        self.__enroll('Trang', 'Nguyễn Thị Quỳnh', 'nguyenthiquynhtrang1@gmail.com', basic_yoga_class_co_thuy_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_15h_357[0:18])
+        self.__enroll('Diễm', 'Nguyễn Thị Bích', 'nguyenthibichdiem1@gmail.com', basic_yoga_class_co_thuy_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_15h_357[0:18])
+        self.__enroll('Ca', 'Ngô Sơn', 'ngosonca1@gmail.com', basic_yoga_class_co_thuy_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_15h_357[0:18])
+        self.__enroll('Tuyến', 'Lê Thị Kim', 'lethikimtuyen1@gmail.com', basic_yoga_class_co_thuy_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_15h_357[0:18])
+        self.__enroll('Tư', 'Đoàn Thị', 'doanthitu1@gmail.com', basic_yoga_class_co_thuy_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_15h_357[0:18])
+        self.__enroll('Thảo', 'Nguyễn Thị Thu', 'nguyenthithuthao1@gmail.com', basic_yoga_class_co_thuy_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_15h_357[0:18])
+        # end add-trainees
 
         basic_yoga_class_co_quyen_15h_357 = basic_yoga_course.classes.create(
             name='Lớp cơ bản cô Quyên 15h chiều 3-5-7',
@@ -1261,26 +1561,49 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_quyen,
         )
+        arr_lessons_basic_yoga_class_co_quyen_15h_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_quyen_15h_357.lessons.create(**{
+            l1 = basic_yoga_class_co_quyen_15h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
-            basic_yoga_class_co_quyen_15h_357.lessons.create(**{
+            l2 = basic_yoga_class_co_quyen_15h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
-            basic_yoga_class_co_quyen_15h_357.lessons.create(**{
+            l3 = basic_yoga_class_co_quyen_15h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            arr_lessons_basic_yoga_class_co_quyen_15h_357.append(l1)
+            arr_lessons_basic_yoga_class_co_quyen_15h_357.append(l2)
+            arr_lessons_basic_yoga_class_co_quyen_15h_357.append(l3)
+        
+        # add-trainees
+        self.__enroll('Loan', 'Trần Thị Kim', 'tranthikimloan1@gmail.com', basic_yoga_class_co_quyen_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_quyen_15h_357[0:10])
+        self.__enroll('Thảo', 'Lê Thị Phương', 'lethiphuongthao1@gmail.com', basic_yoga_class_co_quyen_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_quyen_15h_357[0:12])
+        self.__enroll('Như', 'Nguyễn Thị Bảo', 'nguyenthibaonhu1@gmail.com', basic_yoga_class_co_quyen_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_quyen_15h_357)
+        self.__enroll('Đức', 'Phan Bá', 'phabaduc1@gmail.com', basic_yoga_class_co_quyen_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_quyen_15h_357[0:18])
+        self.__enroll('Hằng', 'Bùi Thị Thu', 'buithithuhang1@gmail.com', basic_yoga_class_co_quyen_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_quyen_15h_357[0:18])
+        self.__enroll('Uyên', 'Nguyễn Như Thúy', 'nguyennhuthuyuyen1@gmail.com', basic_yoga_class_co_quyen_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_quyen_15h_357[0:18])
+        self.__enroll('Dung', 'Trương Thị', 'truongthidung1@gmail.com', basic_yoga_class_co_quyen_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_quyen_15h_357[0:18])
+        self.__enroll('Hạnh', 'Dương Thị Bích', 'duongthibichhanh1@gmail.com', basic_yoga_class_co_quyen_15h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_quyen_15h_357[0:18])
+        # end add-trainees
 
         intermediate_yoga_class_thay_tan_15h_357 = intermediate_yoga_course.classes.create(
             name='Lớp trung cấp thầy Tân 15h chiều 3-5-7',
@@ -1289,26 +1612,54 @@ class Command(BaseCommand):
             start_at=today,
             trainer=thay_tan,
         )
+        arr_lessons_intermediate_yoga_class_thay_tan_15h_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            intermediate_yoga_class_thay_tan_15h_357.lessons.create(**{
+            l1 = intermediate_yoga_class_thay_tan_15h_357.lessons.create(**{
                 "room_id": room3.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
-            intermediate_yoga_class_thay_tan_15h_357.lessons.create(**{
+            l2 = intermediate_yoga_class_thay_tan_15h_357.lessons.create(**{
                 "room_id": room3.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
-            intermediate_yoga_class_thay_tan_15h_357.lessons.create(**{
+            l3 = intermediate_yoga_class_thay_tan_15h_357.lessons.create(**{
                 "room_id": room3.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            arr_lessons_intermediate_yoga_class_thay_tan_15h_357.append(l1)
+            arr_lessons_intermediate_yoga_class_thay_tan_15h_357.append(l2)
+            arr_lessons_intermediate_yoga_class_thay_tan_15h_357.append(l3)
+        # add-trainees
+        self.__enroll('Hồng', 'Nguyễn Thị Tuyết', 'nguyenthituyethong1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357[0:10])
+        self.__enroll('Bích', 'Nguyễn Thị', 'nguyenthibich1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357[0:12])
+        self.__enroll('Uyên', 'Nguyễn Tú', 'nguyentuuyen1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357)
+        self.__enroll('Cúc', 'Nguyễn Thị Kim', 'nguyenthikimcuc1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357[0:18])
+        self.__enroll('Hiếu', 'Trần Thị Thu', 'tranthithuhieu1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357[0:18])
+        self.__enroll('Phúc', 'Võ Thị Hồng', 'vothihongphuc1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357[0:18])
+        self.__enroll('Ngân', 'Lý Thị Kim', 'lythikimngan1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357[0:18])
+        self.__enroll('Huệ', 'Phạm Thị Minh', 'phamthiminhhue1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357[0:18])
+        self.__enroll('Trúc', 'Bùi Nguyễn Bảo', 'buinguyenbaotruc1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357[0:18])
+        self.__enroll('Nga', 'Trần Thị', 'tranthinga1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357[0:18])
+        self.__enroll('Dung', 'Trương Thị Thùy', 'truongthithuydung1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357[0:18])
+        # end add-trainees
 
         t_17h = '17:00'
         t_18h = '18:00'
@@ -1319,26 +1670,50 @@ class Command(BaseCommand):
             start_at=today,
             trainer=thay_thien,
         )
+        arr_lessons_intermediate_yoga_class_thay_thien_17h_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            intermediate_yoga_class_thay_thien_17h_357.lessons.create(**{
+            l1 = intermediate_yoga_class_thay_thien_17h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
-            intermediate_yoga_class_thay_thien_17h_357.lessons.create(**{
+            l2 = intermediate_yoga_class_thay_thien_17h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
-            intermediate_yoga_class_thay_thien_17h_357.lessons.create(**{
+            l3 = intermediate_yoga_class_thay_thien_17h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
+            arr_lessons_intermediate_yoga_class_thay_thien_17h_357.append(l1)
+            arr_lessons_intermediate_yoga_class_thay_thien_17h_357.append(l2)
+            arr_lessons_intermediate_yoga_class_thay_thien_17h_357.append(l3)
+        # add-trainees
+        self.__enroll('Dung', 'Hồ Thị Phương', 'hothiphuongdung1@gmail.com', intermediate_yoga_class_thay_thien_17h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_thien_17h_357[0:10])
+        self.__enroll('Anh', 'Nguyễn Thị Vân', 'nguyenthivananh1@gmail.com', intermediate_yoga_class_thay_thien_17h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_thien_17h_357[0:12])
+        self.__enroll('Ngân', 'Văn Thu', 'vanthungan1@gmail.com', intermediate_yoga_class_thay_thien_17h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_thien_17h_357)
+        self.__enroll('Phương', 'Phạm Thị Thùy', 'phamthithuyphuong1@gmail.com', intermediate_yoga_class_thay_thien_17h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_thien_17h_357[0:18])
+        self.__enroll('Thảo', 'Nguyễn Mai Hiếu', 'nguyenmaihieuthao1@gmail.com', intermediate_yoga_class_thay_thien_17h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_thien_17h_357[0:18])
+        self.__enroll('Chi', 'Nguyễn Thị Diệu', 'nguyenthidieuchi1@gmail.com', intermediate_yoga_class_thay_thien_17h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_thien_17h_357[0:18])
+        self.__enroll('Mai', 'Nguyễn Thị Tuyết', 'nguyenthituyetmai1@gmail.com', intermediate_yoga_class_thay_thien_17h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_thien_17h_357[0:18])
+        self.__enroll('Mai', 'Vũ Hồng Sao', 'vuhongsaomai1@gmail.com', intermediate_yoga_class_thay_thien_17h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_thien_17h_357[0:18])
+        self.__enroll('Thảo', 'Đặng Phương', 'dangphuongthao1@gmail.com', intermediate_yoga_class_thay_thien_17h_357,
+                      some_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_thien_17h_357[0:18])
+        # end add-trainees
 
         basic_yoga_class_co_kieu_17h_357 = basic_yoga_course.classes.create(
             name='Lớp cơ bản cô Kiều 17h chiều 3-5-7',
@@ -1347,26 +1722,48 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_kieu,
         )
+        arr_lessons_basic_yoga_class_co_kieu_17h_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_kieu_17h_357.lessons.create(**{
+            l1 = basic_yoga_class_co_kieu_17h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
-            basic_yoga_class_co_kieu_17h_357.lessons.create(**{
+            l2 = basic_yoga_class_co_kieu_17h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
-            basic_yoga_class_co_kieu_17h_357.lessons.create(**{
+            l3 = basic_yoga_class_co_kieu_17h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
+            arr_lessons_basic_yoga_class_co_kieu_17h_357.append(l1)
+            arr_lessons_basic_yoga_class_co_kieu_17h_357.append(l2)
+            arr_lessons_basic_yoga_class_co_kieu_17h_357.append(l3)
+        # add-trainees
+        self.__enroll('Nga', 'Nguyễn Hồng Bích', 'nguyenhongbichnga1@gmail.com', basic_yoga_class_co_kieu_17h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h_357[0:10])
+        self.__enroll('Phương', 'Trần Thị Hoài', 'tranthihoaiphuong1@gmail.com', basic_yoga_class_co_kieu_17h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h_357[0:12])
+        self.__enroll('Trân', 'Nguyễn Bảo', 'nguyenbaotran1@gmail.com', basic_yoga_class_co_kieu_17h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h_357)
+        self.__enroll('Anh', 'Nguyễn Phan', 'nguyenphananh1@gmail.com', basic_yoga_class_co_kieu_17h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h_357[0:18])
+        self.__enroll('Hương', 'Nguyễn Thị Thu', 'nguyenthithuhuong1@gmail.com', basic_yoga_class_co_kieu_17h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h_357[0:18])
+        self.__enroll('Vân', 'Chu Thị', 'chuthivan1@gmail.com', basic_yoga_class_co_kieu_17h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h_357[0:18])
+        self.__enroll('Khai', 'Đàm Thị', 'damthikhai1@gmail.com', basic_yoga_class_co_kieu_17h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h_357[0:18])
+        self.__enroll('Hân', 'Lê Ngọc', 'lengochan1@gmail.com', basic_yoga_class_co_kieu_17h_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h_357[0:18])
+        # end add-trainees
 
         t_17h30 = '17:30'
         t_18h30 = '18:30'
@@ -1377,26 +1774,48 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_tra_my,
         )
+        arr_lessons_basic_yoga_class_co_tra_my_17h30_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_tra_my_17h30_357.lessons.create(**{
+            l1 = basic_yoga_class_co_tra_my_17h30_357.lessons.create(**{
                 "room_id": room3.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
-            basic_yoga_class_co_tra_my_17h30_357.lessons.create(**{
+            l2 = basic_yoga_class_co_tra_my_17h30_357.lessons.create(**{
                 "room_id": room3.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
-            basic_yoga_class_co_tra_my_17h30_357.lessons.create(**{
+            l3 = basic_yoga_class_co_tra_my_17h30_357.lessons.create(**{
                 "room_id": room3.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            arr_lessons_basic_yoga_class_co_tra_my_17h30_357.append(l1)
+            arr_lessons_basic_yoga_class_co_tra_my_17h30_357.append(l2)
+            arr_lessons_basic_yoga_class_co_tra_my_17h30_357.append(l3)
+        # add-trainees
+        self.__enroll('An', 'Lê Thị Vân', 'lethivanan1@gmail.com', basic_yoga_class_co_tra_my_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_tra_my_17h30_357[0:10])
+        self.__enroll('Tiên', 'Vũ Thủy', 'vuthuytien1@gmail.com', basic_yoga_class_co_tra_my_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_tra_my_17h30_357[0:12])
+        self.__enroll('Lụa', 'Trần Thị', 'tranthilua1@gmail.com', basic_yoga_class_co_tra_my_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_tra_my_17h30_357)
+        self.__enroll('Hà', 'Phạm Thị Bích', 'phamthibichha1@gmail.com', basic_yoga_class_co_tra_my_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_tra_my_17h30_357[0:18])
+        self.__enroll('Phước', 'Võ Thị Hồng', 'vothihongphuoc1@gmail.com', basic_yoga_class_co_tra_my_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_tra_my_17h30_357[0:18])
+        self.__enroll('Châu', 'Vũ Thị Minh', 'vuthiminhchau1@gmail.com', basic_yoga_class_co_tra_my_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_tra_my_17h30_357[0:18])
+        self.__enroll('Tuyết', 'Nguyễn Thu Hồng', 'nguyenthuhongtuyet1@gmail.com', basic_yoga_class_co_tra_my_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_tra_my_17h30_357[0:18])
+        self.__enroll('Ngọc', 'Lê Thị Hoàng', 'lethihoangngoc1@gmail.com', basic_yoga_class_co_tra_my_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_tra_my_17h30_357[0:18])
+        # end add-trainees
 
         basic_yoga_class_co_phuong_17h30_357 = basic_yoga_course.classes.create(
             name='Lớp cơ bản cô Phượng 17h30 chiều 3-5-7',
@@ -1405,26 +1824,50 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_phuong,
         )
+        arr_lessons_basic_yoga_class_co_phuong_17h30_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_phuong_17h30_357.lessons.create(**{
+            l1 = basic_yoga_class_co_phuong_17h30_357.lessons.create(**{
                 "room_id": room4.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
-            basic_yoga_class_co_phuong_17h30_357.lessons.create(**{
+            l2 = basic_yoga_class_co_phuong_17h30_357.lessons.create(**{
                 "room_id": room4.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
-            basic_yoga_class_co_phuong_17h30_357.lessons.create(**{
+            l3 = basic_yoga_class_co_phuong_17h30_357.lessons.create(**{
                 "room_id": room4.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            arr_lessons_basic_yoga_class_co_phuong_17h30_357.append(l1)
+            arr_lessons_basic_yoga_class_co_phuong_17h30_357.append(l2)
+            arr_lessons_basic_yoga_class_co_phuong_17h30_357.append(l3)
+        # add-trainees
+        self.__enroll('Quyên', 'Nguyễn Vũ Ngọc', 'nguyenvungocquyen1@gmail.com', basic_yoga_class_co_phuong_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_17h30_357[0:10])
+        self.__enroll('Huyền', 'Trương Thị Ngọc', 'truongthingochuyen1@gmail.com', basic_yoga_class_co_phuong_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_17h30_357[0:12])
+        self.__enroll('Hân', 'Trần Thị Ngọc', 'tranthingochan1@gmail.com', basic_yoga_class_co_phuong_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_17h30_357)
+        self.__enroll('Hùng', 'Nguyễn Xuân', 'nguyenxuanhung1@gmail.com', basic_yoga_class_co_phuong_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_17h30_357[0:18])
+        self.__enroll('Anh', 'Lê Tuyết', 'letuyetanh1@gmail.com', basic_yoga_class_co_phuong_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_17h30_357[0:18])
+        self.__enroll('Huy', 'Nguyễn Đoàn', 'nguyendoanhuy1@gmail.com', basic_yoga_class_co_phuong_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_17h30_357[0:18])
+        self.__enroll('Hiền', 'Nguyễn Thị', 'nguyenthihien1@gmail.com', basic_yoga_class_co_phuong_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_17h30_357[0:18])
+        self.__enroll('Liễu', 'Lê Thị Bích', 'lethibichlieu1@gmail.com', basic_yoga_class_co_phuong_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_17h30_357[0:18])
+        self.__enroll('Trúc', 'Nguyễn Thanh', 'nguyenthanhtruc1@gmail.com', basic_yoga_class_co_phuong_17h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_17h30_357[0:18])
+        # end add-trainees
 
         basic_yoga_class_co_vo_hanh_18h15_357 = basic_yoga_course.classes.create(
             name='Lớp cơ bản cô Võ Hạnh 18h15 tối 3-5-7',
@@ -1433,26 +1876,48 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_vo_hanh,
         )
+        arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_vo_hanh_18h15_357.lessons.create(**{
+            l1 = basic_yoga_class_co_vo_hanh_18h15_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
-            basic_yoga_class_co_vo_hanh_18h15_357.lessons.create(**{
+            l2 = basic_yoga_class_co_vo_hanh_18h15_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
-            basic_yoga_class_co_vo_hanh_18h15_357.lessons.create(**{
+            l3 = basic_yoga_class_co_vo_hanh_18h15_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357.append(l1)
+            arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357.append(l2)
+            arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357.append(l3)
+        # add-trainees
+        self.__enroll('Tâm', 'Nguyễn Ngọc', 'nguyenngoctam1@gmail.com', basic_yoga_class_co_vo_hanh_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357[0:10])
+        self.__enroll('Yến', 'Võ Thị Thu', 'vothithuyen1@gmail.com', basic_yoga_class_co_vo_hanh_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357[0:12])
+        self.__enroll('Hoa', 'Hoàng Thị Thanh', 'hoangthithanhhoa1@gmail.com', basic_yoga_class_co_vo_hanh_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357)
+        self.__enroll('Huệ', 'Lê Thị', 'lethihue1@gmail.com', basic_yoga_class_co_vo_hanh_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357[0:18])
+        self.__enroll('Đạt', 'Đinh Phước', 'dinhphuocdat1@gmail.com', basic_yoga_class_co_vo_hanh_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357[0:18])
+        self.__enroll('Phượng', 'Đào Thị Thúy', 'daothithuyphuong1@gmail.com', basic_yoga_class_co_vo_hanh_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357[0:18])
+        self.__enroll('Tùng', 'Phạm Thị Kim', 'phamthikimtung1@gmail.com', basic_yoga_class_co_vo_hanh_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357[0:18])
+        self.__enroll('Trang', 'Nguyễn Thị Diễm', 'nguyenthidiemtrang1@gmail.com', basic_yoga_class_co_vo_hanh_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357[0:18])
+        # end add-trainees
 
         basic_yoga_class_co_man_18h15_357 = basic_yoga_course.classes.create(
             name='Lớp cơ bản cô Mận 18h15 tối 3-5-7',
@@ -1461,26 +1926,46 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_man,
         )
+        arr_lessons_basic_yoga_class_co_man_18h15_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_man_18h15_357.lessons.create(**{
+            l1 = basic_yoga_class_co_man_18h15_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
-            basic_yoga_class_co_man_18h15_357.lessons.create(**{
+            l2 = basic_yoga_class_co_man_18h15_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
-            basic_yoga_class_co_man_18h15_357.lessons.create(**{
+            l3 = basic_yoga_class_co_man_18h15_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            arr_lessons_basic_yoga_class_co_man_18h15_357.append(l1)
+            arr_lessons_basic_yoga_class_co_man_18h15_357.append(l2)
+            arr_lessons_basic_yoga_class_co_man_18h15_357.append(l3)
+        # add-trainees
+        self.__enroll('Sang', 'Lữ Đình', 'ludinhsang1@gmail.com', basic_yoga_class_co_man_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_man_18h15_357[0:10])
+        self.__enroll('Trâm', 'Lê Thị Ngọc', 'lethingoctram1@gmail.com', basic_yoga_class_co_man_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_man_18h15_357[0:12])
+        self.__enroll('Ngọc', 'Trần Bích', 'tranbichngoc1@gmail.com', basic_yoga_class_co_man_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_man_18h15_357)
+        self.__enroll('Ngân', 'Trần Thị Tuyết', 'tranthituyetngan1@gmail.com', basic_yoga_class_co_man_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_man_18h15_357[0:18])
+        self.__enroll('Hiền', 'Vũ Thị', 'vuthihien1@gmail.com', basic_yoga_class_co_man_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_man_18h15_357[0:18])
+        self.__enroll('Hằng', 'Vũ Thị', 'vuthihang1@gmail.com', basic_yoga_class_co_man_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_man_18h15_357[0:18])
+        self.__enroll('Hường', 'Vũ Thị', 'vuthihuong1@gmail.com', basic_yoga_class_co_man_18h15_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_man_18h15_357[0:18])
+        # end add-trainees
 
         basic_yoga_class_co_vo_hanh_19h30_357 = basic_yoga_course.classes.create(
             name='Lớp cơ bản cô Võ Hạnh 19h30 tối 3-5-7',
@@ -1489,26 +1974,50 @@ class Command(BaseCommand):
             start_at=today,
             trainer=co_vo_hanh,
         )
+        arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            basic_yoga_class_co_vo_hanh_19h30_357.lessons.create(**{
+            l1 = basic_yoga_class_co_vo_hanh_19h30_357.lessons.create(**{
                 "room_id": room4.pk,
                 "date": tuesday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
-            basic_yoga_class_co_vo_hanh_19h30_357.lessons.create(**{
+            l2 = basic_yoga_class_co_vo_hanh_19h30_357.lessons.create(**{
                 "room_id": room4.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
-            basic_yoga_class_co_vo_hanh_19h30_357.lessons.create(**{
+            l3 = basic_yoga_class_co_vo_hanh_19h30_357.lessons.create(**{
                 "room_id": room4.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
+            arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357.append(l1)
+            arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357.append(l2)
+            arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357.append(l3)
+        # add-trainees
+        self.__enroll('Hằng', 'Trần Thị Thu', 'tranthithuhang1@gmail.com', basic_yoga_class_co_vo_hanh_19h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357[0:10])
+        self.__enroll('Yên', 'Hồng Ngọc', 'hongngocyen1@gmail.com', basic_yoga_class_co_vo_hanh_19h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357[0:12])
+        self.__enroll('Ánh', 'Võ Thị Ngọc', 'vothingocanh1@gmail.com', basic_yoga_class_co_vo_hanh_19h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357)
+        self.__enroll('Nguyên', 'Nguyễn Thị', 'nguyenthinguyen1@gmail.com', basic_yoga_class_co_vo_hanh_19h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357[0:18])
+        self.__enroll('Thủy', 'Bùi Thị Thu', 'buithithuthuy1@gmail.com', basic_yoga_class_co_vo_hanh_19h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357[0:18])
+        self.__enroll('Hoa', 'Trần Thị Kim', 'tranthikimhoa1@gmail.com', basic_yoga_class_co_vo_hanh_19h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357[0:18])
+        self.__enroll('Sang', 'Vương Bội', 'vuongboisang1@gmail.com', basic_yoga_class_co_vo_hanh_19h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357[0:18])
+        self.__enroll('Thúy', 'Nguyễn Ngọc', 'nguyenngocthuy1@gmail.com', basic_yoga_class_co_vo_hanh_19h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357[0:18])
+        self.__enroll('Tuyền', 'Nguyễn Ngọc Phương', 'nguyenngocphuongtuyen1@gmail.com', basic_yoga_class_co_vo_hanh_19h30_357,
+                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357[0:18])
+        # end add-trainees
 
     def __add_lectures(self, course):
         data = [
