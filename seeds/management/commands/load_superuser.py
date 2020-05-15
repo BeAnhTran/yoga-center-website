@@ -20,6 +20,5 @@ class Command(BaseCommand):
         superuser = User(**data)
         superuser.set_password('truong77')
         superuser.is_active = True
-        superuser.is_staff = True
         superuser.is_superuser = True
         superuser.save()

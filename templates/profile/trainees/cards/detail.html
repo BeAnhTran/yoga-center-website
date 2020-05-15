@@ -10,10 +10,8 @@
 {% endblock %}
 
 {% block header_path %}
-<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">Thẻ tập</a>
-⁄
-<a class="text-danger" href="javascript:;">{{ card.yogaclass }} - {{ card.card_type }}</a>
-⁄
+<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">&raquo; Thẻ tập</a>
+<a class="text-danger" href="javascript:;">&raquo; {{ card.yogaclass }} - {{ card.card_type }}</a>
 {% endblock %}
 
 {% block profile_content %}

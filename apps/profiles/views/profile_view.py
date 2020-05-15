@@ -109,24 +109,25 @@ class ProfileView(View):
 
 
         # Certificate Form
-        if request.POST.get('hidden_field') is not None and request.POST.get('hidden_field') == 'certificate':
-            context['focus'] = 'collapseCertificate'
-            form_certificate = CertificateForm(request.POST, request.FILES)
-            if form_certificate.is_valid():
-                # remove hidden field
-                form_certificate.cleaned_data.pop('hidden_field')
-                if request.user.is_trainer:
-                    user_obj = request.user.trainer
-                else:
-                    user_obj = request.user.staff
-                user_obj.certificates.create(**form_certificate.cleaned_data)
+        if request.user.is_staff or request.user.is_trainer:
+            if request.POST.get('hidden_field') is not None and request.POST.get('hidden_field') == 'certificate':
+                context['focus'] = 'collapseCertificate'
+                form_certificate = CertificateForm(request.POST, request.FILES)
+                if form_certificate.is_valid():
+                    # remove hidden field
+                    form_certificate.cleaned_data.pop('hidden_field')
+                    if request.user.is_trainer:
+                        user_obj = request.user.trainer
+                    else:
+                        user_obj = request.user.staff
+                    user_obj.certificates.create(**form_certificate.cleaned_data)
 
-                messages.success(request, _('Create certificate successfully'))
-                return redirect(reverse('profile:index') + '?focus=collapseCertificate')
-        else:
-            form_certificate = CertificateForm()
-            form_certificate.fields['hidden_field'].initial = 'certificate'
-            context['form_certificate'] = form_certificate
+                    messages.success(request, _('Create certificate successfully'))
+                    return redirect(reverse('profile:index') + '?focus=collapseCertificate')
+            else:
+                form_certificate = CertificateForm()
+                form_certificate.fields['hidden_field'].initial = 'certificate'
+                context['form_certificate'] = form_certificate
 
         # Health Condition Form (Trainee)
         if request.user.is_trainee:

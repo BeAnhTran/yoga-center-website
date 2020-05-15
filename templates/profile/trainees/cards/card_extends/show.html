@@ -28,15 +28,11 @@
 {% endblock %}
 
 {% block header_path %}
-<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">Thẻ tập</a>
-⁄
-<a class="text-danger" href="javascript:;">{{ object.card.yogaclass }} - {{ object.card.card_type }}</a>
-⁄
-<a class="text-danger" href="javascript:;">Gia hạn</a>
-⁄
-<a class="text-danger" href="javascript:;">{{ object.pk }}</a>
-⁄
-<a class="text-danger" href="javascript:;">Xem</a>
+<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">&raquo; Thẻ tập</a>
+<a class="text-danger" href="javascript:;">&raquo; {{ object.card.yogaclass }} - {{ object.card.card_type }}</a>
+<a class="text-danger" href="javascript:;">&raquo; Gia hạn</a>
+<a class="text-danger" href="javascript:;">&raquo; {{ object.pk }}</a>
+<a class="text-danger" href="javascript:;">&raquo; Xem</a>
 {% endblock %}
 
 {% block profile_content %}

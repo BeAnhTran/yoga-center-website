@@ -69,8 +69,9 @@ form.form-signin .form-control-user {
 }
 
 .btn.btn-signin {
+    color: white;
     /*background-color: #4d90fe; */
-    background-color: rgb(104, 145, 162);
+    background-color: #fb3958;
     /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
     padding: 0px;
     font-weight: 700;
@@ -89,7 +90,7 @@ form.form-signin .form-control-user {
 .btn.btn-signin:hover,
 .btn.btn-signin:active,
 .btn.btn-signin:focus {
-    background-color: #fb3958
+    background-color: #b61616;
 }
 
 .forgot-password {
@@ -100,4 +101,8 @@ form.form-signin .form-control-user {
 .forgot-password:active,
 .forgot-password:focus{
     color: #fb3958
+}
+
+#div_id_remember{
+    display: none;
 }
