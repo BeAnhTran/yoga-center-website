@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, reverse
 from django.views.generic import TemplateView
 from apps.accounts.forms.trainee_form import TraineeSignupForm
 from allauth.account.views import SignupView
@@ -6,12 +6,15 @@ from django.views.generic import CreateView
 from django.views import View
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse_lazy
 
 
 class SignUpView(View):
     template_name = 'registration/signup.html'
 
     def get(self, request):
+        if request.GET.get('next') is not None:
+            return redirect(reverse('accounts:trainee-signup') + '?next=' + self.request.GET.get('next'))
         #context = {}
         #return render(request, self.template_name, context=context)
         return redirect('accounts:trainee-signup')
@@ -46,6 +49,8 @@ class TraineeSignUpView(SignupView):
         messages.success(
             self.request,
             _('Signup successfully'))
+        if self.request.GET.get('next') is not None:
+            return redirect(reverse('account_login') + '?next=' + self.request.GET.get('next'))
         return redirect('account_login')
 
 
