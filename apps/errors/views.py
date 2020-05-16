@@ -2,5 +2,5 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
 
-def _401(request):
-    return HttpResponse('401 Unauthorized', status=401)
+def _403(request):
+    return render(request, '403.html')

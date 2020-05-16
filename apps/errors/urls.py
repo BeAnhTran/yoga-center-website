@@ -5,5 +5,5 @@ from apps.errors import views
 app_name = 'errors'
 
 urlpatterns = [
-    path('401/', views._401, name='error-401'),
+    path('403/', views._403, name='error-403'),
 ]
