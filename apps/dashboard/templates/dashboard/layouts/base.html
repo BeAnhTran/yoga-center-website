@@ -36,7 +36,19 @@
         <!-- Sidebar -->
         {% include 'dashboard/layouts/sidebar.html' %}
         <!-- End of Sidebar -->
-
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success'%}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+                {% elif message.tags == 'info' %}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+                {% elif message.tags == 'warning' %}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+                {% elif message.tags == 'error' %}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -46,7 +58,7 @@
                 <!-- Topbar -->
                 {% include 'dashboard/layouts/topbar.html' %}
                 <!-- End of Topbar -->
-
+                
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     {% block content %}{% endblock %}
