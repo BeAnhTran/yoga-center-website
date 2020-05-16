@@ -3686,3 +3686,20 @@ msgstr ""
 
 #~ msgid "price_course"
 #~ msgstr "giá khóa"
+
+#: account/adapter.py:51
+msgid "A user is already registered with this e-mail address."
+msgstr "Email này đã tồn tại."
+
+#: account/forms.py:61 account/forms.py:398
+msgid "You must type the same password each time."
+msgstr "Vui lòng nhập lại đúng mật khẩu trước."
+
+#: account/forms.py:101
+msgid "The e-mail address and/or password you specified are not correct."
+msgstr "Email hoặc mật khẩu không hợp lệ."
+
+#: account/adapter.py:294
+#, python-brace-format
+msgid "Password must be a minimum of {0} characters."
+msgstr "Mật khẩu phải có ít nhất {0} kí tự."

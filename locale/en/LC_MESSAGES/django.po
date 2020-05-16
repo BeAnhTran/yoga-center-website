@@ -3500,3 +3500,20 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:409
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#: account/adapter.py:51
+msgid "A user is already registered with this e-mail address."
+msgstr ""
+
+#: account/forms.py:61 account/forms.py:398
+msgid "You must type the same password each time."
+msgstr ""
+
+#: account/forms.py:101
+msgid "The e-mail address and/or password you specified are not correct."
+msgstr ""
+
+#: account/adapter.py:294
+#, python-brace-format
+msgid "Password must be a minimum of {0} characters."
+msgstr ""
