@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% load sexify %}
+{% load qr_code %}
 
 {% block specified_css %}
 <link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
@@ -24,8 +25,12 @@
                 <a class="text-secondary" href="#collapseCardInfo" data-toggle="collapse" data-parent="#accordion">Thông
                     tin thẻ tập</a>
             </h3>
+            <div>
+                <img src="{% qr_url_from_text card_str_qrcode size=3 version=10 image_format='png' %}" alt="{{card}}">
+                <p class="mb-0 text-success"><small><i><b>QR Code</b>: Dùng để quét mã điểm danh</i></small></p>
+                <p class="mb-0"><small><i>(Có thể lưu vào điện thoại hoặc in mang theo khi đến tập)</i></small></p>
+            </div>
         </div>
-
         <div id="collapseCardInfo" class="panel-collapse collapse show">
             <div class="panel-body">
                 <table class="table table-striped table-borderless">

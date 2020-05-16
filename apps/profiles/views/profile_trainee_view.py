@@ -40,6 +40,17 @@ class TraineeCardDetailView(View):
         context = {}
         context['card'] = card
         context['sidebar_profile'] = 'cards'
+        card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}'''.format(
+            fname=card.trainee.user.full_name(),
+            femail=card.trainee.user.email,
+            fcard_id=card.pk,
+            fclass_name=card.yogaclass.name,
+            fcard_type=card.card_type.name,
+            fstart_at=str(card.start_at()),
+            fend_at=str(card.end_at())
+        )
+
+        context['card_str_qrcode'] = card_str_qrcode
         if request.GET.get('focus'):
             context['focus'] = request.GET.get('focus')
         return render(request, self.template_name, context=context)

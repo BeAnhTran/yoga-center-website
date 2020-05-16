@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'dynamic_formsets',
     'django_twilio',
+    'qr_code',
 
     'apps.accounts',
     'apps.common',
