@@ -334,8 +334,12 @@
             var room = data['lesson']['room']['name'] + ' ' + data['lesson']['room']['location'];
             $('.make-up-lesson-class-info').text(data['lesson']['yogaclass']['name']);
             var s1 = `<span class="badge badge-success mr-3">`+ _time +`</span>`;
-            var s2 = `<span class="badge badge-info">`+ room +`</span>`;
-            var str = s1 + s2;
+            var d = new Date(data['lesson']['date']);
+            const input_date_options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            var date = d.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', input_date_options);
+            var s2 = `<span class="badge badge-danger mr-3">`+ date +`</span>`;
+            var s3 = `<span class="badge badge-info">`+ room +`</span>`;
+            var str = s1 + s2 + s3;
             $('.make-up-lesson-info').empty();
             $('.make-up-lesson-info').append(str);        
             $('#btn_open_modal_make_up_detail_api').click();
