@@ -82,8 +82,8 @@
                 <i class="fas fa-fw fa-list"></i>
                 {% trans 'trainee' as t_trainee %}
                 {% blocktrans with value=t_trainee trimmed %} {{ value }} List{% endblocktrans %}
-                <a class="float-right" href="javascript:;"><span
-                        class="badge badge-pill badge-warning"><span class="register-count">{{lesson.get_all_register_trainee_studing}}</span>/{{lesson.max_people}}</span></a>
+                <a class="float-right" href="javascript:;"><span class="badge badge-pill badge-warning"><span
+                            class="register-count">{{lesson.get_all_register_trainee_studing}}</span>/{{lesson.max_people}}</span></a>
             </div>
             <div class="card-body">
                 <div id="studied_roll_calls" class="list-group">
@@ -147,7 +147,7 @@
                         class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center">
                         <span class="badge badge-secondary">{% trans 'have had a make up lesson' %}</span>
                         {{ r.card.trainee }}
-                        <a href="javascript:;" class="">
+                        <a href="javascript:;" class="make-up-detail" data-make-up-lesson-pk="{{r.make_up_lesson.pk}}">
                             <span class="badge badge-secondary">{% trans 'detail '%}</span>
                         </a>
                     </li>
@@ -246,6 +246,34 @@
         </div>
     </div>
 </div>
+<button id="btn_open_modal_make_up_detail_api" type="button" class="d-none" data-toggle="modal" data-target="#modal_make_up_detail"></button>
+<!-- Make up detail Modal -->
+<div class="modal" id="modal_make_up_detail">
+    <div class="modal-dialog" style="max-width: 650px;">
+        <div class="modal-content">
+            <div class="modal-header border-none">
+                <h4 id="model_title" class="modal-title">
+                    {% trans 'Studied make-up lesson detail info' %}
+                </h4>
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>{% trans 'class' as  t_class %}{{t_class|capfirst}}</td>
+                            <td class="make-up-lesson-class-info">class</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'lesson' as t_lesson %}{{t_lesson|capfirst}}</td>
+                            <td class="make-up-lesson-info">lesson</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
@@ -288,6 +316,33 @@
         });
     });
 
+    $(document).on('click', '.make-up-detail', function(){
+        var pk = $(this).attr('data-make-up-lesson-pk');
+        var _url = "{% url 'dashboard:make-up-lessons-detail-api' 0 %}";
+        var url = _url.replace(0, pk);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'GET'
+        }).done((data) => {
+            console.log(data);
+            var _st = data['lesson']['start_time'].substring(0, 5);
+            var _et = data['lesson']['end_time'].substring(0, 5);
+            var _time = _st + ' - ' + _et;
+            var room = data['lesson']['room']['name'] + ' ' + data['lesson']['room']['location'];
+            $('.make-up-lesson-class-info').text(data['lesson']['yogaclass']['name']);
+            var s1 = `<span class="badge badge-success mr-3">`+ _time +`</span>`;
+            var s2 = `<span class="badge badge-info">`+ room +`</span>`;
+            var str = s1 + s2;
+            $('.make-up-lesson-info').empty();
+            $('.make-up-lesson-info').append(str);        
+            $('#btn_open_modal_make_up_detail_api').click();
+        }).fail((err) => {
+            console.log(err);
+        });
+    });
     $(document).on('click', '.a-un-studied', function () {
         var roll_call_id = $(this).attr('data-roll-call');
         var _url = "{% url 'dashboard:roll-calls-detail' 0 %}";

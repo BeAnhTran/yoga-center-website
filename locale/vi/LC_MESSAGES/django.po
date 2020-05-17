@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-17 17:01+0700\n"
+"POT-Creation-Date: 2020-05-17 18:52+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -244,7 +244,7 @@ msgstr "lí do"
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:29
 #: .\apps\dashboard\templates\dashboard\rooms\detail.html:26
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:30
-#: .\apps\lessons\models.py:33 .\apps\lessons\models.py:146
+#: .\apps\lessons\models.py:33 .\apps\lessons\models.py:147
 #: .\apps\refunds\models.py:28 .\apps\rooms\models.py:21
 msgid "state"
 msgstr "trạng thái"
@@ -269,8 +269,8 @@ msgstr "thời gian quay lại"
 #: .\apps\donations\models.py:21 .\apps\events\models.py:19
 #: .\apps\feedback\models.py:13 .\apps\gallery\models.py:10
 #: .\apps\gallery\models.py:28 .\apps\lectures\models.py:16
-#: .\apps\lessons\models.py:44 .\apps\lessons\models.py:148
-#: .\apps\make_up_lessons\models.py:14 .\apps\questions\models.py:13
+#: .\apps\lessons\models.py:44 .\apps\lessons\models.py:149
+#: .\apps\make_up_lessons\models.py:16 .\apps\questions\models.py:13
 #: .\apps\refunds\models.py:30 .\apps\roll_calls\models.py:18
 #: .\apps\rooms\models.py:23 .\apps\shop\models.py:62 .\apps\shop\models.py:72
 msgid "created at"
@@ -283,7 +283,7 @@ msgstr "thời gian tạo"
 #: .\apps\events\models.py:21 .\apps\feedback\models.py:15
 #: .\apps\gallery\models.py:12 .\apps\gallery\models.py:30
 #: .\apps\lectures\models.py:18 .\apps\lessons\models.py:46
-#: .\apps\lessons\models.py:150 .\apps\make_up_lessons\models.py:16
+#: .\apps\lessons\models.py:151 .\apps\make_up_lessons\models.py:18
 #: .\apps\questions\models.py:15 .\apps\refunds\models.py:32
 #: .\apps\roll_calls\models.py:20 .\apps\rooms\models.py:25
 #: .\apps\shop\models.py:64 .\apps\shop\models.py:74
@@ -368,7 +368,7 @@ msgstr "bài viết"
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:18
 #: .\apps\dashboard\templates\dashboard\gallery\list.html:20
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:36
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:123
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:124
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:21
 #: .\apps\dashboard\templates\dashboard\promotions\list.html:17
 #: .\apps\dashboard\templates\dashboard\questions\list.html:18
@@ -538,8 +538,8 @@ msgstr "Những buổi học sau sẽ được thêm"
 
 #: .\apps\cards\models.py:14
 #: .\apps\dashboard\templates\dashboard\cards\list.html:28
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:84
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:120
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:83
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:121
 #: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:25
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:25
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:13
@@ -608,7 +608,7 @@ msgstr "khóa học"
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:50
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:22
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:13
-#: .\apps\lessons\models.py:142 .\apps\trainers\templates\trainers\list.html:17
+#: .\apps\lessons\models.py:143 .\apps\trainers\templates\trainers\list.html:17
 #: .\apps\trainers\templates\trainers\list.html:26
 #: .\templates\layouts\header.html:111
 #: .\templates\profile\trainees\cards\list.html:49
@@ -714,8 +714,8 @@ msgstr "buổi tập đã đủ số lượng"
 #: .\apps\classes\templates\payment.html:472
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:273
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:339
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:465
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:511
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:526
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:579
 #: .\templates\base.html:181
 msgid "error"
 msgstr "lỗi"
@@ -1075,7 +1075,7 @@ msgid "admin"
 msgstr "admin"
 
 #: .\apps\dashboard\templates\dashboard\admins\list.html:14
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:85
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:84
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:14
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:14
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:14
@@ -1240,6 +1240,7 @@ msgstr "Danh sách lớp học"
 
 #: .\apps\dashboard\templates\dashboard\classes\list.html:20
 #: .\apps\dashboard\templates\dashboard\classes\new.html:14
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:264
 msgid "class"
 msgstr "lớp học"
 
@@ -1275,11 +1276,10 @@ msgstr "Thông tin chi tiết"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:254
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:333
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:317
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:354
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:439
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:504
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:530
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:372
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:494
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:572
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:598
 #: .\templates\base.html:169
 msgid "done"
 msgstr "hoàn thành"
@@ -1374,8 +1374,8 @@ msgstr "thêm"
 #: .\apps\dashboard\templates\dashboard\formset.html:32
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:97
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:109
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:309
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:450
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:364
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:506
 msgid "remove"
 msgstr "xóa"
 
@@ -1581,7 +1581,8 @@ msgid "logout"
 msgstr "đăng xuất"
 
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:13
-#: .\apps\lessons\models.py:144 .\apps\roll_calls\models.py:14
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:268
+#: .\apps\lessons\models.py:145 .\apps\roll_calls\models.py:14
 msgid "lesson"
 msgstr "buổi tập"
 
@@ -1599,7 +1600,7 @@ msgstr "số lượng"
 
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:82
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:160
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:344
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:399
 msgid "select"
 msgstr "chọn"
 
@@ -1617,12 +1618,12 @@ msgstr "điểm danh"
 msgid "Taught instead by"
 msgstr "Dạy thay bởi"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:75
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:74
 msgid "Add substitute trainer"
 msgstr "Thêm huấn luyện viên dạy thay"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:106
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:447
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:503
 msgid "make up"
 msgstr "học bù"
 
@@ -1664,6 +1665,8 @@ msgid "Choose a lesson to replace"
 msgstr "Chọn buổi học muốn thay thế"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:206
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:519
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:535
 msgid "All valid lessons to choose to add make up lesson will be display here"
 msgstr "Những buổi học hợp lệ để đăng kí học bù của bạn sẽ được hiển thị ở đây"
 
@@ -1681,43 +1684,47 @@ msgstr "Thêm huấn luyện viên dạy thay"
 msgid "Trainer"
 msgstr "Huấn luyện viên"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:276
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:256
+msgid "Studied make-up lesson detail info"
+msgstr "Học viên đã đăng kí học bù vào buổi với thông tin sau"
+
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:304
 msgid "Lesson has been full"
 msgstr "Buổi tập đã đủ số lượng"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:318
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:373
 msgid "Do the roll call successfully"
 msgstr "Điểm danh thành công"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:355
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:410
 msgid "Undo the roll call successfully"
 msgstr "Hủy điểm danh thành công"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:397
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:452
 msgid "There is no valid lessons to add a make up lesson"
 msgstr "Không có buổi học hợp lệ để đăng kí học bù"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:421
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:476
 msgid "Choose a trainee"
 msgstr "Chọn học viên"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:423
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:478
 msgid "There is no lesson to add make up lesson"
 msgstr "Không có buổi học để đăng kí học bù"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:440
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:495
 msgid "Add a make up lesson for trainee successfully"
 msgstr "Thêm học viên học bù thành công"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:481
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:549
 msgid "Please choose a trainer"
 msgstr "Vui lòng chọn huấn luyện viên"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:505
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:573
 msgid "Add substitute trainer successfully"
 msgstr "Thêm huấn luyện viên dạy thay thành công"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:531
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:599
 msgid "Delete substitute trainer successfully"
 msgstr "Xóa huấn luyện viên dạy thay thành công"
 
@@ -1931,15 +1938,15 @@ msgstr "thời gian đã bị trùng"
 msgid "overlap time for trainer"
 msgstr "thời gian của HLV đã bị trùng"
 
-#: .\apps\lessons\models.py:135
+#: .\apps\lessons\models.py:136
 msgid "Taught"
 msgstr "Đã dạy"
 
-#: .\apps\lessons\models.py:136
+#: .\apps\lessons\models.py:137
 msgid "Taught Instead"
 msgstr "Đã dạy thay"
 
-#: .\apps\make_up_lessons\models.py:12 .\apps\roll_calls\models.py:16
+#: .\apps\make_up_lessons\models.py:14 .\apps\roll_calls\models.py:16
 msgid "studied"
 msgstr "đã học"
 

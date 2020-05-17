@@ -45,6 +45,14 @@ class MakeUpLessonListApi(APIView):
             return Response(e, status=status.HTTP_400_BAD_REQUEST)
 
 
+@method_decorator([login_required, staff_required], name='dispatch')
+class MakeUpLessonDetailApiView(APIView):
+    def get(self, request, pk):
+        make_up_lesson = get_object_or_404(MakeUpLesson, pk=pk)
+        serializer = MakeUpLessonSerializer(make_up_lesson)
+        return Response(serializer.data)
+
+
 @login_required
 @staff_required
 def delete_make_up_lesson_roll_call(request, lesson_id, pk):

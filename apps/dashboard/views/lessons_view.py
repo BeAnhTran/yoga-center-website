@@ -105,7 +105,6 @@ class ListRollCallApiView(View):
         cards = Card.objects.filter(yogaclass__course=lesson.yogaclass.course).exclude(
             yogaclass=lesson.yogaclass)
         make_up_lessons = MakeUpLesson.objects.filter(lesson=lesson)
-        print(make_up_lessons)
         available_substitute_trainers = Trainer.objects.filter(
             ~Q(pk=lesson.yogaclass.trainer.pk))
 

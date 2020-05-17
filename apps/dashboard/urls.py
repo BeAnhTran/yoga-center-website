@@ -133,6 +133,8 @@ make_up_lessons_urlpatterns = [
          name='make-up-lessons-list-api'),
     path('<int:pk>/roll_call/lessons/<int:lesson_id>/delete/',
          make_up_lessons_view.delete_make_up_lesson_roll_call, name='make-up-lessons-delete-in-lesson-roll-call'),
+    path('<int:pk>/', make_up_lessons_view.MakeUpLessonDetailApiView.as_view(),
+         name='make-up-lessons-detail-api'),
 ]
 
 # SHOP
