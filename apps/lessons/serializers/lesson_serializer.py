@@ -10,10 +10,14 @@ class LessonSerializer(serializers.ModelSerializer):
     room = RoomSerializer()
     yogaclass = YogaClassSerializer()
     substitute_trainer = TrainerSerializer(read_only=True)
+    register_trainee_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Lesson
         fields = '__all__'
+
+    def get_register_trainee_count(self, obj):
+        return obj.get_all_register_trainee_studing()
 
 
 class LessonUpdateScheduleSerializer(serializers.ModelSerializer):

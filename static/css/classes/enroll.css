@@ -21,6 +21,22 @@
 }
 
 #price_table{
-    border-radius: 0.5rem;
-    background: #f1d4d4;
+    background: #00918e;
+    color: white;
+}
+#price_table.table-hover tbody tr:hover{
+    color: white;
+}
+@media (min-width: 576px){
+    .jumbotron {
+        padding: 2rem 2rem;
+    }
+}
+.jumbotron {
+    background-color: #f9f9f9;
+    border-radius: 0; 
+}
+
+.card {
+    border-radius: 0;
 }

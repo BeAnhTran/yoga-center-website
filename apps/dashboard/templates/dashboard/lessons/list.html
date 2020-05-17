@@ -74,7 +74,7 @@
                                 {{ lesson.yogaclass.trainer }}
                             </span>
                         </td>
-                        <td>{{ lesson.get_current_studied_trainee }}</td>
+                        <td>{{ lesson.get_all_register_trainee_studing }}/{{ lesson.max_people }}</td>
                         <td class="text-center">
                             <a class="btn btn-sm btn-outline-primary"
                                 href="{% url 'dashboard:lessons-roll-calls' lesson.id %}"><i

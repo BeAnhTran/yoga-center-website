@@ -99,13 +99,13 @@ class CardFormForTraineeEnroll(forms.ModelForm):
             start_at = cleaned_data['start_at']
             end_at = cleaned_data['end_at']
             if start_at is not None and end_at is not None:
-                    if self.initial.get('yoga_class') is not None:
-                        yoga_class = self.initial.get('yoga_class')
-                        lesson_list = yoga_class.lessons.filter(
-                            date__range=[start_at, end_at])
-                        if not lesson_list:
-                            raise forms.ValidationError(
-                                _('Your range time does not have any lessons'))
+                if self.initial.get('yoga_class') is not None:
+                    yoga_class = self.initial.get('yoga_class')
+                    lesson_list = yoga_class.lessons.filter(
+                        date__range=[start_at, end_at], is_full=False)
+                    if not lesson_list:
+                        raise forms.ValidationError(
+                            _('Your range time does not have any lessons'))
         return cleaned_data
 
 

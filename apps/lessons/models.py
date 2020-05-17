@@ -117,9 +117,16 @@ class Lesson(models.Model):
             return min(self.yogaclass.max_people, self.room.max_people)
 
     def check_is_full(self):
-        if self.roll_calls.all().count() < self.max_people():
+        if self.get_all_register_trainee_studing() < self.max_people():
             return False
         return True
+
+    # enrolled trainee + make up lesson
+    def get_all_register_trainee_studing(self):
+        roll_calls_withou_make_up_lesson = self.roll_calls.filter(
+            make_up_lesson=None).count()
+        make_up_lessons_at_this_class = self.make_up_lessons.all().count()
+        return roll_calls_withou_make_up_lesson + make_up_lessons_at_this_class
 
 
 TAUGHT_STATE = 0

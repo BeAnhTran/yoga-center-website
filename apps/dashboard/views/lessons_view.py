@@ -20,6 +20,8 @@ from apps.make_up_lessons.models import MakeUpLesson
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from apps.lessons.models import TrainerLesson, TAUGHT_STATE, TAUGHT_INSTEAD_STATE
+from apps.cards.models import Card
+import json
 
 
 @method_decorator([login_required, staff_required], name='dispatch')
@@ -100,8 +102,10 @@ class ListRollCallApiView(View):
         un_studied_roll_calls = lesson.roll_calls.filter(studied=False)
         studied_roll_calls = lesson.roll_calls.filter(studied=True)
         total_count = un_studied_roll_calls.count() + studied_roll_calls.count()
-        trainees = Trainee.objects.all()
+        cards = Card.objects.filter(yogaclass__course=lesson.yogaclass.course).exclude(
+            yogaclass=lesson.yogaclass)
         make_up_lessons = MakeUpLesson.objects.filter(lesson=lesson)
+        print(make_up_lessons)
         available_substitute_trainers = Trainer.objects.filter(
             ~Q(pk=lesson.yogaclass.trainer.pk))
 
@@ -123,7 +127,7 @@ class ListRollCallApiView(View):
             'studied_roll_calls': studied_roll_calls,
             'active_nav': 'roll_calls',
             'total_count': total_count,
-            'trainees': trainees,
+            'cards': cards,
             'make_up_lessons': make_up_lessons,
             'available_substitute_trainers': available_substitute_trainers,
             'taught': taught,
@@ -135,7 +139,7 @@ class ListRollCallApiView(View):
 @method_decorator([login_required, staff_required], name='dispatch')
 class SubstituteTrainerApi(APIView):
     def post(self, request, pk, format=None):
-        from lessons.utils import check_overlap_in_list_lesson
+        from apps.lessons.utils import check_overlap_in_list_lesson
         sub_trainer = get_object_or_404(
             Trainer, pk=request.POST['sub_trainer'])
         lesson = get_object_or_404(Lesson, pk=pk)
@@ -160,3 +164,13 @@ class SubstituteTrainerApi(APIView):
         lesson.substitute_trainer = None
         lesson.save()
         return Response('Xóa thành công', status=status.HTTP_200_OK)
+
+
+@method_decorator([login_required, staff_required], name='dispatch')
+class CheckFullLessonApi(APIView):
+    def get(self, request, pk):
+        lesson = get_object_or_404(Lesson, pk=pk)
+        response_data = {'value': True}
+        if lesson.get_all_register_trainee_studing() < lesson.max_people():
+            response_data = {'value': False}
+        return Response(json.dumps(response_data), status=status.HTTP_200_OK)

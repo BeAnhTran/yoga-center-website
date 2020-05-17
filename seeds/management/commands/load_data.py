@@ -592,7 +592,7 @@ class Command(BaseCommand):
         room2_data = {
             "name": "Phòng 2",
             "location": "Lầu 2",
-            "max_people": 15
+            "max_people": 10
         }
         room2 = Room.objects.create(**room2_data)
         room3_data = {
@@ -887,8 +887,6 @@ class Command(BaseCommand):
                       some_lessons_card_type, arr_lessons_basic_yoga_class_co_man_15h_246[0:24])
         self.__enroll('Thy', 'Trần Minh', 'tranminhthy1@gmail.com', basic_yoga_class_co_man_15h_246,
                       some_lessons_card_type, arr_lessons_basic_yoga_class_co_man_15h_246[0:24])
-        self.__enroll('Châu', 'Nguyễn Trần Quỳnh', 'nguyentranquynhchau1@gmail.com', basic_yoga_class_co_man_15h_246,
-                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_man_15h_246[0:24])
         # end add-trainees
 
         intermediate_yoga_class_co_ngung_15h_246 = intermediate_yoga_course.classes.create(
@@ -1050,12 +1048,6 @@ class Command(BaseCommand):
         self.__enroll('Vi', 'Dương Thị Hoài', 'duongthihoaivy1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
                       some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:18])
         self.__enroll('Ngọc', 'Đào Thị Bích', 'daothibichngoc1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
-                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:24])
-        self.__enroll('Uyên', 'Nguyễn Ngọc', 'nguyenngocuyen1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
-                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:24])
-        self.__enroll('Ngọc', 'Nguyễn Thị Quý', 'nguyenthiquyngoc1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
-                      some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:24])
-        self.__enroll('Nụ', 'Bùi Thị Hồng', 'buithihongnu1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
                       some_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:24])
         # end add-trainees
 

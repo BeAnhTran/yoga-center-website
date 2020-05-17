@@ -115,7 +115,7 @@ class YogaClassEnrollView(View):
         if self.__is_trainee_of_class(yoga_class, request.user.trainee):
             messages.success(
                 request,
-                _('Your card is still in use. Please choose extend card only'))
+                _('Your card has been still in use for this class'))
             return redirect('classes:detail', slug=slug)
         # remove enroll card form when access enroll page
         if request.session.get('enroll_card_form') is not None:
@@ -297,7 +297,7 @@ class YogaClassEnrollPaymentView(View):
                         if request.session.get('promotion_type'):
                             del request.session['promotion_type']
                         send_twilio_message(
-                            _('Thank you for your register at Lotus Yoga'))
+                            _('Thank you for your register at Yoga Huong Tre'))
                         return HttpResponse('success', status=status.HTTP_200_OK)
                 except Exception as e:
                     print("<ERROR>")

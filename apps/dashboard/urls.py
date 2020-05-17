@@ -51,6 +51,8 @@ lessons_urlpatterns = [
         name='lessons-roll-calls'),
     url(r'^(?P<pk>[0-9]+)/substitute-trainer/$', lessons_view.SubstituteTrainerApi.as_view(),
         name='lessons-substitute-trainer'),
+    url(r'^(?P<pk>[0-9]+)/check-is-full-lesson/$', lessons_view.CheckFullLessonApi.as_view(),
+        name='check-is-full-lesson'),
     url(r'^(?P<lesson_id>[0-9]+)/roll-calls-trainer/$', taught_view.rollCallForTrainer,
         name='lessons-roll-calls-for-trainer'),
 ]
