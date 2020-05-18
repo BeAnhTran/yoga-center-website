@@ -31,6 +31,7 @@ from apps.gallery.models import Gallery, GalleryImage
 from services.roll_call_service import RollCallService
 from services.card_invoice_service import CardInvoiceService
 from apps.shop.models import ProductCategory, Product
+from random import randint
 
 
 class Command(BaseCommand):
@@ -613,6 +614,9 @@ class Command(BaseCommand):
         room4 = Room.objects.create(**room4_data)
 
         print("==============CREATE CLASSES==============")
+        basic_yoga_course_lectures = basic_yoga_course.lectures.all()
+        basic_yoga_course_lectures_count = basic_yoga_course_lectures.count()
+
         number_of_weeks = int(env('NUMBER_OF_WEEKS_TO_CREATE_LESSON'))
         basic_yoga_class_co_man_5h30_t246 = basic_yoga_course.classes.create(
             name='Lớp cơ bản cô Mận 5h30 sáng 2-4-6',
@@ -633,6 +637,9 @@ class Command(BaseCommand):
                 "start_time": t_5h_30,
                 "end_time": t_6h_30
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_man_5h30_246.append(l1)
             l2 = basic_yoga_class_co_man_5h30_t246.lessons.create(**{
                 "room_id": room1.pk,
@@ -640,6 +647,9 @@ class Command(BaseCommand):
                 "start_time": t_5h_30,
                 "end_time": t_6h_30
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_man_5h30_246.append(l2)
             l3 = basic_yoga_class_co_man_5h30_t246.lessons.create(**{
                 "room_id": room1.pk,
@@ -647,6 +657,9 @@ class Command(BaseCommand):
                 "start_time": t_5h_30,
                 "end_time": t_6h_30
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_man_5h30_246.append(l3)
         # add-trainees
         self.__enroll('Dung', 'Lê Thị Hoàng', 'lethihoangdung1@gmail.com', basic_yoga_class_co_man_5h30_t246,
@@ -688,6 +701,9 @@ class Command(BaseCommand):
                 "start_time": t_5h_30,
                 "end_time": t_6h_30
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_hang_nga_5h30_246.append(l1)
             l2 = basic_yoga_class_co_hang_nga_5h30_246.lessons.create(**{
                 "room_id": room2.pk,
@@ -695,6 +711,9 @@ class Command(BaseCommand):
                 "start_time": t_5h_30,
                 "end_time": t_6h_30
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_hang_nga_5h30_246.append(l2)
             l3 = basic_yoga_class_co_hang_nga_5h30_246.lessons.create(**{
                 "room_id": room2.pk,
@@ -702,6 +721,9 @@ class Command(BaseCommand):
                 "start_time": t_5h_30,
                 "end_time": t_6h_30
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_hang_nga_5h30_246.append(l3)
         # add-trainees
         self.__enroll('Phương', 'Nguyễn Thị', 'nguyenthiphuong1@gmail.com', basic_yoga_class_co_hang_nga_5h30_246,
@@ -802,18 +824,27 @@ class Command(BaseCommand):
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_nhu_15h_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_nhu_15h_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_nhu_15h_246.append(l1)
             arr_lessons_basic_yoga_class_co_nhu_15h_246.append(l2)
             arr_lessons_basic_yoga_class_co_nhu_15h_246.append(l3)
@@ -855,18 +886,27 @@ class Command(BaseCommand):
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_man_15h_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_man_15h_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_man_15h_246.append(l1)
             arr_lessons_basic_yoga_class_co_man_15h_246.append(l2)
             arr_lessons_basic_yoga_class_co_man_15h_246.append(l3)
@@ -965,18 +1005,27 @@ class Command(BaseCommand):
                 "start_time": t_17h,
                 "end_time": t_18h
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_nhu_17h_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_nhu_17h_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_nhu_17h_246.append(l1)
             arr_lessons_basic_yoga_class_co_nhu_17h_246.append(l2)
             arr_lessons_basic_yoga_class_co_nhu_17h_246.append(l3)
@@ -1019,18 +1068,27 @@ class Command(BaseCommand):
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_kieu_17h30_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_kieu_17h30_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_kieu_17h30_246.append(l1)
             arr_lessons_basic_yoga_class_co_kieu_17h30_246.append(l2)
             arr_lessons_basic_yoga_class_co_kieu_17h30_246.append(l3)
@@ -1073,18 +1131,27 @@ class Command(BaseCommand):
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_nhu_18h15_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_nhu_18h15_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_nhu_18h15_246.append(l1)
             arr_lessons_basic_yoga_class_co_nhu_18h15_246.append(l2)
             arr_lessons_basic_yoga_class_co_nhu_18h15_246.append(l3)
@@ -1131,18 +1198,27 @@ class Command(BaseCommand):
                 "start_time": t_18h35,
                 "end_time": t_19h35
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_xuan_18h35_246.lessons.create(**{
                 "room_id": room3.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_18h35,
                 "end_time": t_19h35
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_xuan_18h35_246.lessons.create(**{
                 "room_id": room3.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_18h35,
                 "end_time": t_19h35
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_xuan_18h35_246.append(l1)
             arr_lessons_basic_yoga_class_co_xuan_18h35_246.append(l2)
             arr_lessons_basic_yoga_class_co_xuan_18h35_246.append(l3)
@@ -1195,18 +1271,27 @@ class Command(BaseCommand):
                 "start_time": t_19h,
                 "end_time": t_20h
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_thuy_19h_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_19h,
                 "end_time": t_20h
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_thuy_19h_246.lessons.create(**{
                 "room_id": room2.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_19h,
                 "end_time": t_20h
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_thuy_19h_246.append(l1)
             arr_lessons_basic_yoga_class_co_thuy_19h_246.append(l2)
             arr_lessons_basic_yoga_class_co_thuy_19h_246.append(l3)
@@ -1251,18 +1336,27 @@ class Command(BaseCommand):
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_nhan_19h30_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_nhan_19h30_246.lessons.create(**{
                 "room_id": room1.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_nhan_19h30_246.append(l1)
             arr_lessons_basic_yoga_class_co_nhan_19h30_246.append(l2)
             arr_lessons_basic_yoga_class_co_nhan_19h30_246.append(l3)
@@ -1365,18 +1459,27 @@ class Command(BaseCommand):
                 "start_time": t_6h,
                 "end_time": t_7h
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_nhu_6h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_6h,
                 "end_time": t_7h
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_nhu_6h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_6h,
                 "end_time": t_7h
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_nhu_6h_357.append(l1)
             arr_lessons_basic_yoga_class_co_nhu_6h_357.append(l2)
             arr_lessons_basic_yoga_class_co_nhu_6h_357.append(l3)
@@ -1477,18 +1580,27 @@ class Command(BaseCommand):
                 "start_time": t_9h,
                 "end_time": t_10h
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_phuong_9h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_9h,
                 "end_time": t_10h
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_phuong_9h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_9h,
                 "end_time": t_10h
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_phuong_9h_357.append(l1)
             arr_lessons_basic_yoga_class_co_phuong_9h_357.append(l2)
             arr_lessons_basic_yoga_class_co_phuong_9h_357.append(l3)
@@ -1529,18 +1641,27 @@ class Command(BaseCommand):
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_thuy_15h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_thuy_15h_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_thuy_15h_357.append(l1)
             arr_lessons_basic_yoga_class_co_thuy_15h_357.append(l2)
             arr_lessons_basic_yoga_class_co_thuy_15h_357.append(l3)
@@ -1583,18 +1704,27 @@ class Command(BaseCommand):
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_quyen_15h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_quyen_15h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_15h,
                 "end_time": t_16h
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_quyen_15h_357.append(l1)
             arr_lessons_basic_yoga_class_co_quyen_15h_357.append(l2)
             arr_lessons_basic_yoga_class_co_quyen_15h_357.append(l3)
@@ -1744,18 +1874,27 @@ class Command(BaseCommand):
                 "start_time": t_17h,
                 "end_time": t_18h
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_kieu_17h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_kieu_17h_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_17h,
                 "end_time": t_18h
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_kieu_17h_357.append(l1)
             arr_lessons_basic_yoga_class_co_kieu_17h_357.append(l2)
             arr_lessons_basic_yoga_class_co_kieu_17h_357.append(l3)
@@ -1796,18 +1935,27 @@ class Command(BaseCommand):
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_tra_my_17h30_357.lessons.create(**{
                 "room_id": room3.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_tra_my_17h30_357.lessons.create(**{
                 "room_id": room3.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_tra_my_17h30_357.append(l1)
             arr_lessons_basic_yoga_class_co_tra_my_17h30_357.append(l2)
             arr_lessons_basic_yoga_class_co_tra_my_17h30_357.append(l3)
@@ -1846,18 +1994,27 @@ class Command(BaseCommand):
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_phuong_17h30_357.lessons.create(**{
                 "room_id": room4.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_phuong_17h30_357.lessons.create(**{
                 "room_id": room4.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_17h30,
                 "end_time": t_18h30
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_phuong_17h30_357.append(l1)
             arr_lessons_basic_yoga_class_co_phuong_17h30_357.append(l2)
             arr_lessons_basic_yoga_class_co_phuong_17h30_357.append(l3)
@@ -1898,18 +2055,27 @@ class Command(BaseCommand):
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_vo_hanh_18h15_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_vo_hanh_18h15_357.lessons.create(**{
                 "room_id": room1.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357.append(l1)
             arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357.append(l2)
             arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357.append(l3)
@@ -1948,18 +2114,27 @@ class Command(BaseCommand):
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_man_18h15_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_man_18h15_357.lessons.create(**{
                 "room_id": room2.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_18h15,
                 "end_time": t_19h15
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_man_18h15_357.append(l1)
             arr_lessons_basic_yoga_class_co_man_18h15_357.append(l2)
             arr_lessons_basic_yoga_class_co_man_18h15_357.append(l3)
@@ -1996,18 +2171,27 @@ class Command(BaseCommand):
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l1.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l2 = basic_yoga_class_co_vo_hanh_19h30_357.lessons.create(**{
                 "room_id": room4.pk,
                 "date": thursday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l2.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             l3 = basic_yoga_class_co_vo_hanh_19h30_357.lessons.create(**{
                 "room_id": room4.pk,
                 "date": saturday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
+            l3.lectures.add(basic_yoga_course_lectures[randint(0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357.append(l1)
             arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357.append(l2)
             arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357.append(l3)

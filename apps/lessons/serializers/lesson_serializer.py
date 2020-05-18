@@ -4,12 +4,14 @@ from apps.lessons.models import Lesson
 from apps.rooms.serializers.room_serializer import RoomSerializer
 from apps.classes.serializers.yoga_class_serializer import YogaClassSerializer
 from apps.accounts.serializers.trainer_serializer import TrainerSerializer
+from apps.lectures.serializers import LectureSerializer
 
 
 class LessonSerializer(serializers.ModelSerializer):
     room = RoomSerializer()
     yogaclass = YogaClassSerializer()
     substitute_trainer = TrainerSerializer(read_only=True)
+    lectures = LectureSerializer(read_only=True, many=True)
     register_trainee_count = serializers.SerializerMethodField()
     max_registrations_number = serializers.SerializerMethodField()
 

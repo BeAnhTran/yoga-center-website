@@ -37,7 +37,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header border-none">
-                <h4 id="model_title" class="modal-title">{% trans 'Detail Information'  %}</h4>
+                <h3 id="model_title" class="modal-title">{% trans 'Detail Information'  %}</h3>
                 <button id="btn_close_modal_lesson_info" type="button" class="btn btn-sm btn-danger"
                     data-dismiss="modal">&times;</button>
             </div>
@@ -70,6 +70,8 @@
                         </tr>
                     </tbody>
                 </table>
+                <h3 class="p-1" style="font-size: 24px;">{% trans 'Lecture List' %}</h3>
+                <div id="accordion"></div>
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
@@ -314,6 +316,7 @@
                         $("#preloder").fadeIn();
                     },
                     success: function (data) {
+                        console.log(data);
                         $(".loader").fadeOut();
                         $("#preloder").fadeOut(function () {
                             var _st = data['start_time'].substring(0, 5);
@@ -356,6 +359,28 @@
                             mkl_str += `<span class="badge badge-pill badge-warning">`+ date +`</span>` + ` `;
                             $('#info_lesson_to_register_make_up').empty();
                             $('#info_lesson_to_register_make_up').append(mkl_str);
+                            var lectures_str = '';
+                            if(data['lectures'].length > 0){
+                                $.each(data['lectures'], function(key, value){
+                                lectures_str += `
+                                    <div class="card">
+                                        <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#collapse`+ key +`">
+                                        `+ value['name'] +`
+                                        </a>
+                                        </div>
+                                        <div id="collapse`+ key +`" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                        `+ value['description'] +`
+                                        </div>
+                                        </div>
+                                    </div>`;
+                                });
+                            }else{
+                                lectures_str+=`<p class="text-danger p-1"><small><i>{% trans 'have not updated yet' %}</i></small></p>`;
+                            }
+                            $('#accordion').empty();
+                            $('#accordion').append(lectures_str);
                         });
                     }
                 });

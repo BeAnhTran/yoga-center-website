@@ -4,3 +4,11 @@
 .modal-dialog{
     max-width: 768px;
 }
+
+#accordion ul {
+    padding: inherit;
+    margin: inherit;
+}
+#accordion .card-link{
+    color: black;
+}
