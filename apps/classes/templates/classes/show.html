@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load settings_extras %}
 
 {% block specified_css %}
 <link href="{% static 'css/classes/show.css' %}" rel='stylesheet' />
@@ -109,6 +110,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="fb-comments"
+                        data-href="{% settings_value 'FACEBOOK_PRIVACY_POLICY_URL' %}{% url 'classes:detail' class.slug %}"
+                        data-numposts="5" data-width="100%"></div>
                 </div>
                 {% if others %}
                 <h3 class="comment-title">{% trans 'Other Classes' %}</h3>
