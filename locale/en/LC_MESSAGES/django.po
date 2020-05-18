@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 09:56+0700\n"
+"POT-Creation-Date: 2020-05-18 10:44+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -240,6 +240,7 @@ msgstr ""
 #: .\apps\accounts\models.py:117 .\apps\cards\models.py:63
 #: .\apps\dashboard\forms\lesssons_form.py:64
 #: .\apps\dashboard\templates\dashboard\classes\show.html:56
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:296
 #: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:28
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:29
 #: .\apps\dashboard\templates\dashboard\rooms\detail.html:26
@@ -369,7 +370,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:18
 #: .\apps\dashboard\templates\dashboard\gallery\list.html:20
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:36
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:124
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:130
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:21
 #: .\apps\dashboard\templates\dashboard\promotions\list.html:17
 #: .\apps\dashboard\templates\dashboard\questions\list.html:18
@@ -542,7 +543,7 @@ msgstr ""
 #: .\apps\cards\models.py:14
 #: .\apps\dashboard\templates\dashboard\cards\list.html:28
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:83
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:121
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:127
 #: .\apps\dashboard\templates\dashboard\requests\extend_card_requests\list.html:25
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:25
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:13
@@ -675,6 +676,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\classes\show.html:90
 #: .\apps\dashboard\templates\dashboard\classes\show.html:98
 #: .\apps\dashboard\templates\dashboard\classes\show.html:106
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:297
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:49
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:53
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:57
@@ -722,8 +724,8 @@ msgstr ""
 #: .\apps\classes\templates\payment.html:472
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:273
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:339
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:530
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:583
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:566
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:619
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:164
 #: .\templates\base.html:181
 msgid "error"
@@ -1154,6 +1156,8 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\cards\list.html:54
 #: .\apps\dashboard\templates\dashboard\classes\list.html:64
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:87
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:114
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:183
 #: .\apps\dashboard\templates\dashboard\promotions\list.html:51
 #: .\apps\dashboard\templates\dashboard\shop\bills.html:53
 #: .\apps\dashboard\templates\dashboard\shop\categories\list.html:47
@@ -1238,7 +1242,7 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\list.html:20
 #: .\apps\dashboard\templates\dashboard\classes\new.html:14
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:264
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:288
 #: .\templates\profile\trainees\cards\detail.html:130
 msgid "class"
 msgstr ""
@@ -1275,10 +1279,10 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:254
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:333
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:376
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:498
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:576
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:602
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:412
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:534
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:612
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:638
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:204
 #: .\templates\base.html:169 .\templates\profile\trainees\cards\detail.html:458
 msgid "done"
@@ -1373,9 +1377,8 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\formset.html:32
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:97
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:109
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:368
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:510
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:404
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:546
 msgid "remove"
 msgstr ""
 
@@ -1585,7 +1588,7 @@ msgid "logout"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:13
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:268
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:292
 #: .\apps\lessons\models.py:145 .\apps\roll_calls\models.py:14
 #: .\templates\profile\trainees\cards\detail.html:134
 msgid "lesson"
@@ -1606,8 +1609,8 @@ msgid "count"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:82
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:160
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:403
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:166
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:439
 msgid "select"
 msgstr ""
 
@@ -1630,117 +1633,140 @@ msgid "Add substitute trainer"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:106
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:507
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:543
 msgid "make up"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:135
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:113
+msgid "undo roll call"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:141
 msgid "Add a make up"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:142
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:148
 msgid "Select to do a roll call"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:148
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:154
 msgid "have had a make up lesson"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:151
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:157
 msgid "detail "
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:183
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:175
+msgid "make up lesson"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:182
+msgid "do roll call"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:206
 msgid "Add make up person"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:191
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:214
 #, fuzzy
 #| msgid "Trainers"
 msgid "Trainee"
 msgstr "Trainer"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:193
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:234
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:216
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:257
 msgid "Please choose"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:197
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:220
 msgid "Card id"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:203
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:226
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:107
 msgid "Choose a lesson to replace"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:206
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:523
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:539
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:229
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:559
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:575
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:110
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:172
 msgid "All valid lessons to choose to add make up lesson will be display here"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:210
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:243
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:233
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:266
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:114
 msgid "Done"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:223
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:246
 msgid "Add a substitute trainer"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:231
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:254
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:56
 #, fuzzy
 #| msgid "Trainers"
 msgid "Trainer"
 msgstr "Trainer"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:256
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:280
 msgid "Studied make-up lesson detail info"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:304
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:332
 msgid "Lesson has been full"
 msgstr ""
 
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:375
+#: .\apps\make_up_lessons\models.py:14 .\apps\roll_calls\models.py:16
+#: .\templates\profile\trainees\cards\detail.html:429
+msgid "studied"
+msgstr ""
+
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:377
+#: .\templates\profile\trainees\cards\detail.html:431
+msgid "have not studied"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:413
 msgid "Do the roll call successfully"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:414
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:450
 msgid "Undo the roll call successfully"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:456
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:492
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:156
 msgid "There is no valid lessons to add a make up lesson"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:480
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:516
 msgid "Choose a trainee"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:482
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:518
 msgid "There is no lesson to add make up lesson"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:499
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:535
 msgid "Add a make up lesson for trainee successfully"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:553
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:589
 msgid "Please choose a trainer"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:577
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:613
 msgid "Add substitute trainer successfully"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:603
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:639
 msgid "Delete substitute trainer successfully"
 msgstr ""
 
@@ -1962,11 +1988,6 @@ msgstr ""
 
 #: .\apps\lessons\models.py:137
 msgid "Taught Instead"
-msgstr ""
-
-#: .\apps\make_up_lessons\models.py:14 .\apps\roll_calls\models.py:16
-#: .\templates\profile\trainees\cards\detail.html:429
-msgid "studied"
 msgstr ""
 
 #: .\apps\make_up_lessons\views.py:28
@@ -2437,10 +2458,6 @@ msgstr ""
 
 #: .\templates\profile\trainees\cards\detail.html:122
 msgid "Make-up lesson detail info"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:431
-msgid "have not studied"
 msgstr ""
 
 #: .\templates\profile\trainees\cards\detail.html:436

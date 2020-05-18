@@ -99,30 +99,25 @@
                     </li>
                     {% endfor %}
                     {% endif %}
-                    {% if make_up_lessons %}
-                    {% for m in make_up_lessons %}
+                    {% if studied_make_up_lessons %}
+                    {% for m in studied_make_up_lessons %}
                     <li
                         class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center">
                         <span class="badge badge-secondary">{% trans 'make up' %}</span>
                         {{ m.roll_call.card.trainee }}
-                        <a href="javascript:;" class="a-make-up-lesson" data-make-up-lessson="{{m.pk}}">
-                            <span class="badge badge-danger badge-pill">{% trans 'remove' %}</span>
-                        </a>
-                        <form class="d-none"
-                            action="{% url 'dashboard:make-up-lessons-delete-in-lesson-roll-call' pk=m.pk lesson_id=lesson.pk %}"
-                            method="post">
-                            {% csrf_token %}
-                            <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
-                        </form>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item a-make-up-lesson" data-make-up-lesson-pk="{{m.pk}}"
+                                    href="javascript:;">{% trans 'undo roll call' %}</a>
+                                <a class="dropdown-item a-delete-make-up-lesson" data-make-up-lesson-pk="{{m.pk}}"
+                                    href="javascript:;">{% trans 'delete' %}</a>
+                            </div>
+                        </div>
                     </li>
                     {% endfor %}
-                    {% endif %}
-                    {% if not studied_roll_calls and not make_up_lessons %}
-                    {% trans 'trainee' as t_trainee %}
-                    <li id="item_no_trainee"
-                        class="list-group-item list-group-item-action list-group-item-danger align-items-center">
-                        {% blocktrans with value=t_trainee trimmed %}No {{ value }} yet{% endblocktrans %}
-                    </li>
                     {% endif %}
                 </div>
             </div>
@@ -146,7 +141,7 @@
                     <li
                         class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center">
                         <span class="badge badge-secondary">{% trans 'have had a make up lesson' %}</span>
-                        {{ r.card.trainee }}
+                        <small>{{ r.card.trainee }}</small>
                         <a href="javascript:;" class="make-up-detail" data-make-up-lesson-pk="{{r.make_up_lesson.pk}}">
                             <span class="badge badge-secondary">{% trans 'detail '%}</span>
                         </a>
@@ -155,12 +150,30 @@
                     <li
                         class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">
                         <span class="badge badge-secondary">{{ r.card.pk }}</span>
-                        {{ r.card.trainee }}
+                        <small>{{ r.card.trainee }}</small>
                         <a href="javascript:;" class="a-un-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
                             <span class="badge badge-success badge-pill">{% trans 'select' %}</span>
                         </a>
                     </li>
                     {% endif %}
+                    {% endfor %}
+                    {% for m in unstudied_make_up_lessons %}
+                    <li
+                        class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center text-center">
+                        <span class="badge badge-warning">{% trans 'make up lesson' %}</span>
+                        <small>{{ m.roll_call.card.trainee }}</small>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item a-un-studied-make-up-lesson" data-make-up-lesson-pk="{{m.pk}}"
+                                    href="javascript:;">{% trans 'do roll call' %}</a>
+                                <a class="dropdown-item a-delete-make-up-lesson" data-make-up-lesson-pk="{{m.pk}}"
+                                    href="javascript:;">{% trans 'delete' %}</a>
+                            </div>
+                        </div>
+                    </li>
                     {% endfor %}
                 </div>
             </div>
@@ -246,7 +259,8 @@
         </div>
     </div>
 </div>
-<button id="btn_open_modal_make_up_detail_api" type="button" class="d-none" data-toggle="modal" data-target="#modal_make_up_detail"></button>
+<button id="btn_open_modal_make_up_detail_api" type="button" class="d-none" data-toggle="modal"
+    data-target="#modal_make_up_detail"></button>
 <!-- Make up detail Modal -->
 <div class="modal" id="modal_make_up_detail">
     <div class="modal-dialog" style="max-width: 650px;">
@@ -268,6 +282,10 @@
                             <td>{% trans 'lesson' as t_lesson %}{{t_lesson|capfirst}}</td>
                             <td class="make-up-lesson-info">lesson</td>
                         </tr>
+                        <tr>
+                            <td>{% trans 'state' as t_state %}{{t_state|capfirst}}</td>
+                            <td class="make-up-lesson-state-info">{% trans 'have not updated yet' %}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -281,8 +299,105 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="{% static 'vendor/bootstrap-select/bootstrap-select.min.js' %} "></script>
 
-
 <script>
+    $(document).on('click', '.a-un-studied-make-up-lesson', function () {
+        var element = $(this);
+        var pk = $(this).attr('data-make-up-lesson-pk');
+        var _url = "{% url 'dashboard:make-up-lessons-update-state-api' 0 %}"
+        var url = _url.replace(0, pk);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'POST'
+        }).done((data) => {
+            console.log(data);
+            str = '';
+            str += `
+            <li class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center">
+            <span class="badge badge-secondary">{% trans 'make up' %}</span>` + data['roll_call']['card']['trainee']['user']['last_name'] + ' ' + data['roll_call']['card']['trainee']['user']['first_name'] + `
+                <div class="dropdown">
+                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item a-make-up-lesson" data-make-up-lesson-pk="`+ pk + `" href="javascript:;">{% trans 'undo roll call' %}</a>
+                        <a class="dropdown-item a-delete-make-up-lesson" data-make-up-lesson-pk="`+ pk + `" href="javascript:;">{% trans 'delete' %}</a>
+                    </div>
+                </div>
+            </li>`;
+            $('#studied_roll_calls').append(str);
+            element.parents('li.list-group-item').remove();
+            Swal.fire(
+                '{% trans "done" as t_done %}{{ t_done|capfirst }}',
+                '{% trans "Do the roll call successfully" %}',
+                'success'
+            )
+        }).fail((err) => console.log(err));
+    });
+
+    $(document).on('click', '.a-make-up-lesson', function () {
+        var element = $(this);
+        var pk = $(this).attr('data-make-up-lesson-pk');
+        var _url = "{% url 'dashboard:make-up-lessons-update-state-api' 0 %}"
+        var url = _url.replace(0, pk);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'POST'
+        }).done((data) => {
+            console.log(data);
+            str = '';
+            str += `
+            <li class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center">
+            <span class="badge badge-secondary">{% trans 'make up' %}</span>` + data['roll_call']['card']['trainee']['user']['last_name'] + ' ' + data['roll_call']['card']['trainee']['user']['first_name'] + `
+                <div class="dropdown">
+                    <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item a-un-studied-make-up-lesson" data-make-up-lesson-pk="`+ pk + `" href="javascript:;">{% trans 'do roll call' %}</a>
+                        <a class="dropdown-item a-delete-make-up-lesson" data-make-up-lesson-pk="`+ pk + `" href="javascript:;">{% trans 'delete' %}</a>
+                    </div>
+                </div>
+            </li>`;
+            element.parents('li.list-group-item').remove();
+            $('#un_studied_roll_calls').append(str);
+            Swal.fire(
+                '{{ t_done|capfirst }}',
+                '{% trans "Undo the roll call successfully" %}',
+                'success'
+            )
+        }).fail((err) => console.log(err));
+    });
+
+    $(document).on('click', '.a-delete-make-up-lesson', function () {
+        var element = $(this);
+        var pk = $(this).attr('data-make-up-lesson-pk');
+        var _url = "{% url 'make_up_lessons:destroy-register' 0 %}";
+        var url = _url.replace(0, pk);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'POST'
+        }).done((data) => {
+            console.log(data);
+            element.parents('li.list-group-item').remove();
+            Swal.fire(
+                "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
+                "{% trans 'Remove make up lesson successfully' %}",
+                'success'
+            ).then((result) => {
+                window.location.reload();
+            });
+        }).fail((err) => console.log(err));
+    });
+
     $(function () {
         $('#a_roll_call_for_trainer').click(function () {
             $(this).siblings('form').children('input[type=submit]').click();
@@ -310,13 +425,14 @@
             }).fail((err) => console.log(err));
         });
     });
+
     $(function () {
         $('#a_roll_call_for_substitute_trainer').click(function () {
             $(this).siblings('form').children('input[type=submit]').click();
         });
     });
 
-    $(document).on('click', '.make-up-detail', function(){
+    $(document).on('click', '.make-up-detail', function () {
         var pk = $(this).attr('data-make-up-lesson-pk');
         var _url = "{% url 'dashboard:make-up-lessons-detail-api' 0 %}";
         var url = _url.replace(0, pk);
@@ -333,20 +449,29 @@
             var _time = _st + ' - ' + _et;
             var room = data['lesson']['room']['name'] + ' ' + data['lesson']['room']['location'];
             $('.make-up-lesson-class-info').text(data['lesson']['yogaclass']['name']);
-            var s1 = `<span class="badge badge-success mr-3">`+ _time +`</span>`;
+            var s1 = `<span class="badge badge-success mr-3">` + _time + `</span>`;
             var d = new Date(data['lesson']['date']);
             const input_date_options = { year: 'numeric', month: '2-digit', day: '2-digit' };
             var date = d.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', input_date_options);
-            var s2 = `<span class="badge badge-danger mr-3">`+ date +`</span>`;
-            var s3 = `<span class="badge badge-info">`+ room +`</span>`;
+            var s2 = `<span class="badge badge-danger mr-3">` + date + `</span>`;
+            var s3 = `<span class="badge badge-info">` + room + `</span>`;
             var str = s1 + s2 + s3;
             $('.make-up-lesson-info').empty();
-            $('.make-up-lesson-info').append(str);        
+            $('.make-up-lesson-info').append(str);
+            var state_str = '';
+            if (data['is_studied'] == true) {
+                state_str += `<span class="badge badge-danger">` + '{% trans "studied" %}' + `</span>`;
+            } else {
+                state_str += `<span class="badge badge-warning">` + '{% trans "have not studied" %}' + `</span>`;
+            }
+            $('.make-up-lesson-state-info').empty();
+            $('.make-up-lesson-state-info').append(state_str);
             $('#btn_open_modal_make_up_detail_api').click();
         }).fail((err) => {
             console.log(err);
         });
     });
+
     $(document).on('click', '.a-un-studied', function () {
         var roll_call_id = $(this).attr('data-roll-call');
         var _url = "{% url 'dashboard:roll-calls-detail' 0 %}";
@@ -366,12 +491,8 @@
             str += data['card']['trainee']['user']['first_name'] + data['card']['trainee']['user']['last_name'];
             str += '<a href="javascript:;" class="a-studied" data-card="' + data['card']['id'] + '" data-roll-call="' + data['id'] + '">';
             str += '<span class="badge badge-danger badge-pill">{% trans "remove" %}</span></a></li>';
-            $('#item_no_trainee').hide();
             $('#studied_roll_calls').append(str);
             $(this).parent('li.list-group-item').remove();
-            _temp_count = parseInt($('#count_studied').text());
-            count = _temp_count + 1;
-            $('#count_studied').text(count);
             Swal.fire(
                 '{% trans "done" as t_done %}{{ t_done|capfirst }}',
                 '{% trans "Do the roll call successfully" %}',
@@ -403,12 +524,6 @@
             str += '<span class="badge badge-success badge-pill">{% trans "select" %}</span></a></li>';
             $('#un_studied_roll_calls').append(str);
             $(this).parent('li.list-group-item').remove();
-            if ($('#studied_roll_calls').children('li').last().attr('id') === "item_no_trainee") {
-                $('#item_no_trainee').show();
-            }
-            _temp_count = parseInt($('#count_studied').text());
-            count = _temp_count - 1;
-            $('#count_studied').text(count);
             Swal.fire(
                 '{{ t_done|capfirst }}',
                 '{% trans "Undo the roll call successfully" %}',
@@ -498,40 +613,10 @@
                     "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
                     "{% trans 'Add a make up lesson for trainee successfully' %}",
                     'success'
-                );
-                console.log(data);
-                var _url = '{% url "dashboard:make-up-lessons-delete-in-lesson-roll-call" pk=0 lesson_id=lesson.pk %}';
-                var url = _url.replace('0', data['roll_call']['id']);
-                //
-                str = '<li class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center">';
-                str += '<span class="badge badge-secondary">{% trans "make up" %}</span>';
-                str += data['roll_call']['card']['trainee']['user']['last_name'] + ' ' + data['roll_call']['card']['trainee']['user']['first_name'];
-                str += '<a href="javascript:;" class="a-make-up-lesson" data-make-up-lessson="' + data['id'] + '">';
-                str += '<span class="badge badge-danger badge-pill">{% trans "remove" %}</span>';
-                str += '</a>';
-                str += '<form class="d-none" action="' + url + '" method="post">';
-                str += '{% csrf_token %}';
-                str += '<input type="submit" value="Confirm">';
-                str += '</form></li>';
-                // 
-
-                $('#item_no_trainee').hide();
-                $('#studied_roll_calls').append(str);
-                $('form#form_make_up').trigger("reset");
-                $('.register-count').text(data['lesson']['register_trainee_count']);
-                $('#btn_modal_close').click();
-                var t = `<span class="badge badge-secondary">{% trans 'All valid lessons to choose to add make up lesson will be display here'%}</span>`;
-                $('#lesson_choose').empty();
-                $('#lesson_choose').append(t);
-                $('select#trainee').selectpicker('val', -1);
-                console.log(data);
-            }).fail((err) => {
-                Swal.fire(
-                    "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
-                    err['responseText'],
-                    'error'
-                )
-            });
+                ).then((result) => {
+                    window.location.reload();
+                });
+            }).fail((err) => console.log(err));
         }
     });
 

@@ -59,3 +59,16 @@ def delete_make_up_lesson_roll_call(request, lesson_id, pk):
     m = get_object_or_404(MakeUpLesson, pk=pk)
     m.delete()
     return redirect('dashboard:lessons-roll-calls', pk=lesson_id)
+
+
+@method_decorator([login_required, staff_required], name='dispatch')
+class UpdateMakeUpLessonStateApiView(APIView):
+    def post(self, request, pk):
+        make_up_lesson = get_object_or_404(MakeUpLesson, pk=pk)
+        if make_up_lesson.is_studied == False:
+            make_up_lesson.is_studied = True
+        else:
+            make_up_lesson.is_studied = False
+        make_up_lesson.save()
+        serializer = MakeUpLessonSerializer(make_up_lesson)
+        return Response(serializer.data)

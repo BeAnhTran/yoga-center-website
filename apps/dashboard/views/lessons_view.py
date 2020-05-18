@@ -104,7 +104,8 @@ class ListRollCallApiView(View):
         total_count = un_studied_roll_calls.count() + studied_roll_calls.count()
         cards = Card.objects.filter(yogaclass__course=lesson.yogaclass.course).exclude(
             yogaclass=lesson.yogaclass)
-        make_up_lessons = MakeUpLesson.objects.filter(lesson=lesson)
+        unstudied_make_up_lessons = MakeUpLesson.objects.filter(lesson=lesson, is_studied=False)
+        studied_make_up_lessons = MakeUpLesson.objects.filter(lesson=lesson, is_studied=True)
         available_substitute_trainers = Trainer.objects.filter(
             ~Q(pk=lesson.yogaclass.trainer.pk))
 
@@ -127,7 +128,8 @@ class ListRollCallApiView(View):
             'active_nav': 'roll_calls',
             'total_count': total_count,
             'cards': cards,
-            'make_up_lessons': make_up_lessons,
+            'studied_make_up_lessons': studied_make_up_lessons,
+            'unstudied_make_up_lessons': unstudied_make_up_lessons,
             'available_substitute_trainers': available_substitute_trainers,
             'taught': taught,
             'taught_instead': taught_instead

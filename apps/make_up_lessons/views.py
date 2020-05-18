@@ -42,7 +42,7 @@ class RegisterMakeUpLessonApi(APIView):
                 return Response(_('You have registed a make-up lesson for this lesson'), status=status.HTTP_400_BAD_REQUEST)
 
         valid_roll_calls = RollCall.objects.filter(
-            card__trainee=trainee, lesson__yogaclass__course=course, studied=False, make_up_lesson=None).exclude(id__in=[elem.roll_call.id for elem in make_up_lessons_of_trainee]).distinct()
+            card__trainee=trainee, lesson__yogaclass__course=course, studied=False).exclude(id__in=[elem.roll_call.id for elem in make_up_lessons_of_trainee]).distinct()
         serialized = RollCallSerializer(valid_roll_calls, many=True)
         return Response(serialized.data)
 
@@ -60,8 +60,11 @@ class DestroyMakeUpLessonApi(APIView):
     def post(self, request, pk):
         try:
             make_up_lesson = get_object_or_404(MakeUpLesson, pk=pk)
-            if make_up_lesson.roll_call.card.trainee.user != request.user:
-                return Response(_('You dont have permission'), status=status.HTTP_403_FORBIDDEN)
+            if request.user.is_superuser is True:
+                pass
+            else:
+                if make_up_lesson.roll_call.card.trainee.user != request.user:
+                    return Response(_('You dont have permission'), status=status.HTTP_403_FORBIDDEN)
             make_up_lesson.delete()
             return Response('success', status=status.HTTP_201_CREATED)
         except Exception as e:
