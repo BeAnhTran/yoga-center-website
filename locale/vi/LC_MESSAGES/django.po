@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-17 18:52+0700\n"
+"POT-Creation-Date: 2020-05-18 09:56+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -246,6 +246,7 @@ msgstr "lí do"
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:30
 #: .\apps\lessons\models.py:33 .\apps\lessons\models.py:147
 #: .\apps\refunds\models.py:28 .\apps\rooms\models.py:21
+#: .\templates\profile\trainees\cards\detail.html:138
 msgid "state"
 msgstr "trạng thái"
 
@@ -489,7 +490,7 @@ msgstr "Buổi tập thử"
 msgid "Please drap a lesson into this area below to choose"
 msgstr "Vui lòng kéo thả một buổi học vào vùng bên dưới để chọn"
 
-#: .\apps\cards\forms.py:64
+#: .\apps\cards\forms.py:64 .\templates\profile\trainees\cards\detail.html:77
 msgid "Lesson List"
 msgstr "Danh sách buổi tập"
 
@@ -677,6 +678,11 @@ msgstr "thời gian kết thúc"
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:57
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:61
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:65
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:69
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:103
+#: .\templates\profile\trainees\cards\detail.html:131
+#: .\templates\profile\trainees\cards\detail.html:135
+#: .\templates\profile\trainees\cards\detail.html:139
 msgid "have not updated yet"
 msgstr "chưa cập nhật"
 
@@ -714,8 +720,9 @@ msgstr "buổi tập đã đủ số lượng"
 #: .\apps\classes\templates\payment.html:472
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:273
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:339
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:526
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:579
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:530
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:583
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:164
 #: .\templates\base.html:181
 msgid "error"
 msgstr "lỗi"
@@ -923,6 +930,7 @@ msgstr "khóa học"
 
 #: .\apps\courses\templates\courses\list.html:42
 #: .\templates\home\index.html:185
+#: .\templates\profile\trainees\cards\detail.html:103
 msgid "detail"
 msgstr "chi tiết"
 
@@ -1127,8 +1135,8 @@ msgstr "hành động"
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:59
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:59
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:59
-#: .\templates\profile\trainees\cards\detail.html:195
-#: .\templates\profile\trainees\cards\detail.html:274
+#: .\templates\profile\trainees\cards\detail.html:249
+#: .\templates\profile\trainees\cards\detail.html:328
 msgid "show"
 msgstr "xem"
 
@@ -1145,8 +1153,8 @@ msgstr "xem"
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:61
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:61
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:61
-#: .\templates\profile\trainees\cards\detail.html:200
-#: .\templates\profile\trainees\cards\detail.html:279
+#: .\templates\profile\trainees\cards\detail.html:254
+#: .\templates\profile\trainees\cards\detail.html:333
 msgid "edit"
 msgstr "sửa"
 
@@ -1163,8 +1171,8 @@ msgstr "sửa"
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:64
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:64
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:63
-#: .\templates\profile\trainees\cards\detail.html:203
-#: .\templates\profile\trainees\cards\detail.html:282
+#: .\templates\profile\trainees\cards\detail.html:257
+#: .\templates\profile\trainees\cards\detail.html:336
 msgid "delete"
 msgstr "xóa"
 
@@ -1241,6 +1249,7 @@ msgstr "Danh sách lớp học"
 #: .\apps\dashboard\templates\dashboard\classes\list.html:20
 #: .\apps\dashboard\templates\dashboard\classes\new.html:14
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:264
+#: .\templates\profile\trainees\cards\detail.html:130
 msgid "class"
 msgstr "lớp học"
 
@@ -1276,11 +1285,12 @@ msgstr "Thông tin chi tiết"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:254
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:333
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:372
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:494
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:572
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:598
-#: .\templates\base.html:169
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:376
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:498
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:576
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:602
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:204
+#: .\templates\base.html:169 .\templates\profile\trainees\cards\detail.html:458
 msgid "done"
 msgstr "hoàn thành"
 
@@ -1290,26 +1300,26 @@ msgid "create successfully"
 msgstr "tạo thành công"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:284
-#: .\templates\profile\trainees\cards\detail.html:316
-#: .\templates\profile\trainees\cards\detail.html:332
+#: .\templates\profile\trainees\cards\detail.html:370
+#: .\templates\profile\trainees\cards\detail.html:386
 msgid "Are you sure?"
 msgstr "Bạn chắc chắn muốn thực hiện?"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:285
-#: .\templates\profile\trainees\cards\detail.html:317
-#: .\templates\profile\trainees\cards\detail.html:333
+#: .\templates\profile\trainees\cards\detail.html:371
+#: .\templates\profile\trainees\cards\detail.html:387
 msgid "You wont be able to revert this!"
 msgstr "Bạn sẽ không thể hoàn tác hành động này!"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:290
-#: .\templates\profile\trainees\cards\detail.html:322
-#: .\templates\profile\trainees\cards\detail.html:338
+#: .\templates\profile\trainees\cards\detail.html:376
+#: .\templates\profile\trainees\cards\detail.html:392
 msgid "Yes, delete it!"
 msgstr "Có"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:291
-#: .\templates\profile\trainees\cards\detail.html:323
-#: .\templates\profile\trainees\cards\detail.html:339
+#: .\templates\profile\trainees\cards\detail.html:377
+#: .\templates\profile\trainees\cards\detail.html:393
 msgid "Cancel"
 msgstr "Hủy"
 
@@ -1374,8 +1384,8 @@ msgstr "thêm"
 #: .\apps\dashboard\templates\dashboard\formset.html:32
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:97
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:109
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:364
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:506
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:368
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:510
 msgid "remove"
 msgstr "xóa"
 
@@ -1583,6 +1593,7 @@ msgstr "đăng xuất"
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:13
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:268
 #: .\apps\lessons\models.py:145 .\apps\roll_calls\models.py:14
+#: .\templates\profile\trainees\cards\detail.html:134
 msgid "lesson"
 msgstr "buổi tập"
 
@@ -1600,7 +1611,7 @@ msgstr "số lượng"
 
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:82
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:160
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:399
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:403
 msgid "select"
 msgstr "chọn"
 
@@ -1623,7 +1634,7 @@ msgid "Add substitute trainer"
 msgstr "Thêm huấn luyện viên dạy thay"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:106
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:503
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:507
 msgid "make up"
 msgstr "học bù"
 
@@ -1661,17 +1672,21 @@ msgid "Card id"
 msgstr "Mã thẻ"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:203
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:107
 msgid "Choose a lesson to replace"
 msgstr "Chọn buổi học muốn thay thế"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:206
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:519
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:535
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:523
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:539
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:110
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:172
 msgid "All valid lessons to choose to add make up lesson will be display here"
 msgstr "Những buổi học hợp lệ để đăng kí học bù của bạn sẽ được hiển thị ở đây"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:210
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:243
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:114
 msgid "Done"
 msgstr "Hoàn thành"
 
@@ -1692,39 +1707,40 @@ msgstr "Học viên đã đăng kí học bù vào buổi với thông tin sau"
 msgid "Lesson has been full"
 msgstr "Buổi tập đã đủ số lượng"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:373
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:377
 msgid "Do the roll call successfully"
 msgstr "Điểm danh thành công"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:410
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:414
 msgid "Undo the roll call successfully"
 msgstr "Hủy điểm danh thành công"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:452
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:456
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:156
 msgid "There is no valid lessons to add a make up lesson"
 msgstr "Không có buổi học hợp lệ để đăng kí học bù"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:476
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:480
 msgid "Choose a trainee"
 msgstr "Chọn học viên"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:478
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:482
 msgid "There is no lesson to add make up lesson"
 msgstr "Không có buổi học để đăng kí học bù"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:495
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:499
 msgid "Add a make up lesson for trainee successfully"
 msgstr "Thêm học viên học bù thành công"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:549
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:553
 msgid "Please choose a trainer"
 msgstr "Vui lòng chọn huấn luyện viên"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:573
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:577
 msgid "Add substitute trainer successfully"
 msgstr "Thêm huấn luyện viên dạy thay thành công"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:599
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:603
 msgid "Delete substitute trainer successfully"
 msgstr "Xóa huấn luyện viên dạy thay thành công"
 
@@ -1947,8 +1963,29 @@ msgid "Taught Instead"
 msgstr "Đã dạy thay"
 
 #: .\apps\make_up_lessons\models.py:14 .\apps\roll_calls\models.py:16
+#: .\templates\profile\trainees\cards\detail.html:429
 msgid "studied"
 msgstr "đã học"
+
+#: .\apps\make_up_lessons\views.py:28
+msgid "You dont have any the same card of course"
+msgstr "Bạn không có thẻ tập đăng kí cùng khóa"
+
+#: .\apps\make_up_lessons\views.py:31
+msgid "Lesson is full"
+msgstr "Buổi tập đã đủ số lượng"
+
+#: .\apps\make_up_lessons\views.py:36
+msgid "You have registed at this lesson"
+msgstr "Bạn đã đăng kí học buổi này"
+
+#: .\apps\make_up_lessons\views.py:42
+msgid "You have registed a make-up lesson for this lesson"
+msgstr "Bạn đã đăng kí học buổi học bù này"
+
+#: .\apps\make_up_lessons\views.py:64
+msgid "You dont have permission"
+msgstr "Bạn không có quyền thực hiện điều này"
 
 #: .\apps\payment\form.py:38
 msgid "please input your address"
@@ -2066,6 +2103,40 @@ msgstr "Ngày"
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2061
 msgid "Time"
 msgstr "Thời gian"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:68
+msgid "Current number of registrations"
+msgstr "Số học viên đã đăng kí"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:77
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:93
+msgid "Register a make up lesson"
+msgstr "Đăng kí học bù"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:79
+#: .\templates\profile\trainees\cards\detail.html:147
+msgid "Close"
+msgstr "Đóng"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:101
+msgid "Register a make-up lesson for lesson"
+msgstr "Đăng kí học bù buổi"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:191
+msgid "There is no lesson to register make up lesson"
+msgstr "Không có buổi học để đăng kí học bù"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:205
+msgid "Register a make up lesson successfully"
+msgstr "Đăng kí học bù thành công"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:336
+msgid "full"
+msgstr "đã đầy"
+
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:338
+msgid "available"
+msgstr "còn chỗ"
 
 #: .\templates\403.html:76
 msgid "You are not allowed to enter here"
@@ -2351,6 +2422,34 @@ msgstr "Thông tin thêm"
 #: .\templates\profile\trainees\cards\card_extends\new.html:102
 msgid "has been registered"
 msgstr "đã đăng kí"
+
+#: .\templates\profile\trainees\cards\detail.html:94
+msgid "have registerd make-up lesson"
+msgstr "đã đăng kí học bù"
+
+#: .\templates\profile\trainees\cards\detail.html:98
+msgid "have studied make-up lesson"
+msgstr "đã học bù"
+
+#: .\templates\profile\trainees\cards\detail.html:107
+msgid "not studied"
+msgstr "chưa học"
+
+#: .\templates\profile\trainees\cards\detail.html:122
+msgid "Make-up lesson detail info"
+msgstr "Thông tin chi tiết buổi học bù"
+
+#: .\templates\profile\trainees\cards\detail.html:431
+msgid "have not studied"
+msgstr "chưa học"
+
+#: .\templates\profile\trainees\cards\detail.html:436
+msgid "Remove make-up lesson"
+msgstr "Hủy đăng kí học bù"
+
+#: .\templates\profile\trainees\cards\detail.html:459
+msgid "Remove make up lesson successfully"
+msgstr "Hủy đăng kí học bù thành công"
 
 #: .\templates\profile\trainees\cards\list.html:71
 msgid "Detail"
@@ -2982,7 +3081,7 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\formsets.py:391
 msgid "Delete"
-msgstr ""
+msgstr "Xóa"
 
 #: .\venv\Lib\site-packages\django\forms\models.py:754
 #, python-format

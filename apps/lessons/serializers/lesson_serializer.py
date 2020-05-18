@@ -11,6 +11,7 @@ class LessonSerializer(serializers.ModelSerializer):
     yogaclass = YogaClassSerializer()
     substitute_trainer = TrainerSerializer(read_only=True)
     register_trainee_count = serializers.SerializerMethodField()
+    max_registrations_number = serializers.SerializerMethodField()
 
     class Meta:
         model = Lesson
@@ -18,6 +19,9 @@ class LessonSerializer(serializers.ModelSerializer):
 
     def get_register_trainee_count(self, obj):
         return obj.get_all_register_trainee_studing()
+
+    def get_max_registrations_number(self, obj):
+        return obj.max_people()
 
 
 class LessonUpdateScheduleSerializer(serializers.ModelSerializer):

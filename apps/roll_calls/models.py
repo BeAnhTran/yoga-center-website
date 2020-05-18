@@ -19,6 +19,13 @@ class RollCall(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
 
+    def has_make_up_lesson(self):
+        try:
+            r = self.make_up_lesson
+            return True
+        except e:
+            return False
+
 
 @receiver(post_save, sender=RollCall)
 def cards_changed(sender, instance, **kwargs):

@@ -28,12 +28,12 @@
 
 <button id="btn_open_modal_lesson_info" type="button" class="d-none btn btn-primary" data-toggle="modal"
     data-target="#modal_lesson_info">
-    Open modal
 </button>
 
 
 <!-- The Modal -->
 <div class="modal" id="modal_lesson_info">
+    <input type="hidden" id="input_lesson_pk" value="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header border-none">
@@ -56,16 +56,63 @@
                             <td>{% trans 'Trainer' %}</td>
                             <td id="trainer_info">{% trans 'have not updated yet' %}</td>
                         </tr>
-                        <!-- <tr>
+                        <tr>
                             <td>{% trans 'Date' %}</td>
                             <td id="date_info">{% trans 'have not updated yet' %}</td>
-                        </tr> -->
+                        </tr>
                         <tr>
                             <td>{% trans 'Time' %}</td>
                             <td id="time_info">{% trans 'have not updated yet' %}</td>
                         </tr>
+                        <tr>
+                            <td>{% trans 'Current number of registrations' %}</td>
+                            <td id="current_number_of_registrations">{% trans 'have not updated yet' %}</td>
+                        </tr>
                     </tbody>
                 </table>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                {% if request.user.is_authenticated and request.user.is_trainee and request.user.trainee.cards.count > 0 %}
+                <a href="javascript:;" id="btn_register_make_up_lesson" class="btn btn-primary">{% trans 'Register a make up lesson' %}</a>
+                {% endif %}
+                <button type="button" class="btn btn-danger" data-dismiss="modal">{% trans 'Close' %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Register Make up Lesson -->
+<button id="btn_open_modal_register_make_up_lesson" type="button" class="d-none" data-toggle="modal" data-target="#modal_register_make_up_lesson">
+</button>
+<div class="modal" id="modal_register_make_up_lesson">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header border-none">
+                <h4 id="model_title" class="modal-title">
+                    {% trans 'Register a make up lesson' %}
+                </h4>
+                <button id="btn_modal_close" type="button" class="btn btn-sm btn-danger"
+                    data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form_make_up">
+                    <div class="form-group">
+                        <label>{% trans 'Register a make-up lesson for lesson' %}</label>
+                        <div>
+                            <a href="javascript:;" class="btn btn-sm btn-success" id="info_lesson_to_register_make_up">{% trans 'have not updated yet' %}</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">{% trans 'Choose a lesson to replace' %}</label>
+                        <div id="lesson_choose">
+                            <span class="badge badge-secondary">
+                                {% trans 'All valid lessons to choose to add make up lesson will be display here'%}
+                            </span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-success">{% trans 'Done' %}</button>
+                </form>
             </div>
         </div>
     </div>
@@ -74,6 +121,97 @@
 
 {% block specified_js %}
 <script>
+    $(function () {});
+    $(document).on('click','#btn_register_make_up_lesson', function(){
+        $('#btn_close_modal_lesson_info').click();
+        var lesson_pk = $('#input_lesson_pk').val();
+        var _url = "{% url 'make_up_lessons:register' 0 %}";
+        var url = _url.replace(0, lesson_pk);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'GET'
+        }).done((data) => {
+            console.log(data);
+            var str = '';
+            if (data.length > 0) {
+                $.each(data, (i, v) => {
+                    var d = new Date(v['lesson']['date']);
+                    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                    var lesson_date = d.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options);
+                    var lesson_start_time = v['lesson']['start_time'].split(':', 2).join(":");
+                    var lesson_end_time = v['lesson']['end_time'].split(':', 2).join(":");
+
+                    str += '<div class="form-check">';
+                    str += '<label class="form-check-label" for="radio' + v['id'] + '">';
+                    str += '<input type="radio" class="form-check-input" id="rollcall' + v['id'] + '" name="roll_call" value="' + v['id'] + '">';
+                    str += '<span class="badge badge-danger">' + v['lesson']['yogaclass']['name'] + '</span> ';
+                    str += '<span class="badge badge-success"><i class="far fa-fw fa-bell"></i>' + lesson_start_time + '-' + lesson_end_time + '</span> ';
+                    str += '<span class="badge badge-warning"><i class="fas fa-fw fa-calendar-week"></i>' + lesson_date + '</span>';
+                    str += '</label></div>';
+                });
+            } else {
+                str += '<span class="badge badge-danger">{% trans "There is no valid lessons to add a make up lesson" %}</span>';
+            }
+
+            $('#lesson_choose').append(str);
+            $('#btn_open_modal_register_make_up_lesson').click();
+        }).fail( function(err){
+            console.log(err);
+            Swal.fire(
+                "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                err.responseJSON,
+                'error'
+            )
+        });
+    });
+    
+    $(document).on('hide.bs.modal', '#modal_register_make_up_lesson', function () {
+        var t = `<span class="badge badge-secondary">{% trans 'All valid lessons to choose to add make up lesson will be display here'%}</span>`;
+        $('#lesson_choose').empty();
+        $('#lesson_choose').append(t);
+    });
+
+    $(document).on('submit', 'form#form_make_up', function (e) {
+        e.preventDefault();
+        var lesson_pk = $('#input_lesson_pk').val();
+        var _url = "{% url 'make_up_lessons:register' 0 %}";
+        var url = _url.replace(0, lesson_pk);
+        var arr_data = $(this).serializeArray();
+        var data = $(this).serialize();
+        var roll_call = null;
+        $.each(arr_data, (i, v) => {
+            if (v['name'] == 'roll_call') {
+                roll_call = v['value'];
+            }
+        });
+        if (roll_call == null) {
+            alert("{% trans 'There is no lesson to register make up lesson' %}");
+        } else {
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: url,
+                method: 'POST',
+                data: {
+                    'roll_call': roll_call,
+                },
+            }).done((data) => {
+                Swal.fire(
+                    "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
+                    "{% trans 'Register a make up lesson successfully' %}",
+                    'success'
+                ).then((result) => {
+                    // redirect to /schedule/
+                    window.location.href = "{% url 'yoga_schedule:index' %}";
+                });
+                console.log(data);
+            }).fail((err) => console.log(err));
+        }
+    });
 
     document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
@@ -106,7 +244,7 @@
                     type: 'GET'
                 }).done(function (data) {
                     var resources = [];
-                    var colors = ['#06623b','#862a5c', '#d8345f', '#00005c','#005082', '#4a47a3', '#21bf73']
+                    var colors = ['#06623b', '#862a5c', '#d8345f', '#00005c', '#005082', '#4a47a3', '#21bf73']
                     for (var i = 0; i < data.length; i++) {
                         resources.push({
                             id: data[i]['id'],
@@ -135,16 +273,14 @@
                             var _end_time = _d + ' ' + _et;
                             var start_time = new Date(_start_time);
                             var end_time = new Date(_end_time);
-                            console.log(data[i]['id']);
-                            if (data[i]['yogaclass']['trainer']['user']['image']){
+                            if (data[i]['yogaclass']['trainer']['user']['image']) {
                                 trainer_img = data[i]['yogaclass']['trainer']['user']['image'];
-                            } else{
+                            } else {
                                 trainer_img = '{% static "img/user/default.png" %}';
                             }
-                            console.log(data[i]['yogaclass']);
-                            if (data[i]['yogaclass']['image']){
+                            if (data[i]['yogaclass']['image']) {
                                 class_img = data[i]['yogaclass']['image'];
-                            } else{
+                            } else {
                                 class_img = data[i]['yogaclass']['course']['image'];
                             }
 
@@ -166,7 +302,7 @@
                 });
             },
             eventClick: function (info) {
-                console.log(info);
+                // console.log(info);
                 var lesson_id = info.event.id;
                 var _url = "{% url 'lessons:json-lesson-api' 0 %}";
                 var url = _url.replace('0', lesson_id);
@@ -180,7 +316,6 @@
                     success: function (data) {
                         $(".loader").fadeOut();
                         $("#preloder").fadeOut(function () {
-                            console.log(data);
                             var _st = data['start_time'].substring(0, 5);
                             var _et = data['end_time'].substring(0, 5);
                             var d = new Date(data['date']);
@@ -188,24 +323,39 @@
                             const input_date_options = { year: 'numeric', month: '2-digit', day: '2-digit' };
                             var date = d.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', input_date_options);
                             var _class_url = "{% url 'classes:detail' 's-l-u-g' %}";
-                            
+
                             var class_url = _class_url.replace('s-l-u-g', data['yogaclass']['slug']);
-                            var class_str = `<a class="text-danger" href="`+ class_url + `">`+ data['yogaclass']['name'] +`</a>`;
+                            var class_str = `<a class="text-danger" href="` + class_url + `">` + data['yogaclass']['name'] + `</a>`;
                             $('#class_info').text("");
                             $('#class_info').empty();
                             $('#class_info').append(class_str);
-
+                            $('#date_info').text(date);
                             $('#room_info').text(data['room']['name'] + ' - ' + data['room']['location']);
-                            
+                            var check_full_str = data['register_trainee_count'] + '/' + data['max_registrations_number'] + ' ';
+                            if (data['is_full'] == true) {
+                                check_full_str += `<span class="badge badge-pill badge-danger">{% trans 'full' %}</span>`;
+                            } else {
+                                check_full_str += `<span class="badge badge-pill badge-success">{% trans 'available' %}</span>`;
+                            }
+                            $('#current_number_of_registrations').empty();
+                            $('#current_number_of_registrations').append(check_full_str);
                             var _trainer_url = "{% url 'trainers:detail' 's-l-u-g' %}";
                             var trainer_url = _trainer_url.replace('s-l-u-g', data['yogaclass']['trainer']['user']['slug']);
-                            var trainer_str = `<a class="text-danger" href="`+ trainer_url + `">`+ data['yogaclass']['trainer']['user']['last_name'] + ' ' + data['yogaclass']['trainer']['user']['first_name'] +`</a>`;
+                            var trainer_str = `<a class="text-danger" href="` + trainer_url + `">` + data['yogaclass']['trainer']['user']['last_name'] + ' ' + data['yogaclass']['trainer']['user']['first_name'] + `</a>`;
                             $('#trainer_info').text("");
                             $('#trainer_info').empty();
                             $('#trainer_info').append(trainer_str);
-                            // $('#date_info').text(date);
                             $('#time_info').text(time);
                             $('#btn_open_modal_lesson_info').click();
+                            //
+                            $('#input_lesson_pk').val(data['id']);
+                            // add info for modal register make up lesson
+                            var mkl_str = ``;
+                            mkl_str += data['yogaclass']['name'] + ` `;
+                            mkl_str += `<span class="badge badge-pill badge-warning">`+ time +`</span>` + ` `;
+                            mkl_str += `<span class="badge badge-pill badge-warning">`+ date +`</span>` + ` `;
+                            $('#info_lesson_to_register_make_up').empty();
+                            $('#info_lesson_to_register_make_up').append(mkl_str);
                         });
                     }
                 });

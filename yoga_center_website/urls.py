@@ -45,6 +45,8 @@ urlpatterns += i18n_patterns(
     path('rooms/', include('apps.rooms.urls')),
     # lessons
     path('lessons/', include('apps.lessons.urls')),
+    # make-up lessons
+    path('make-up-lessons/', include('apps.make_up_lessons.urls')),
     # card types
     path('card-types/', include('apps.card_types.urls')),
     # schedule
