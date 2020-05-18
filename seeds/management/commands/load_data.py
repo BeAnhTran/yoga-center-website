@@ -30,6 +30,7 @@ from apps.faq.models import FAQ
 from apps.gallery.models import Gallery, GalleryImage
 from services.roll_call_service import RollCallService
 from services.card_invoice_service import CardInvoiceService
+from apps.shop.models import ProductCategory, Product
 
 
 class Command(BaseCommand):
@@ -71,6 +72,9 @@ class Command(BaseCommand):
 
         print("Create FAQ")
         self.__create_faq()
+
+        print("Create SHOP")
+        self.__create_shop()
 
         data_co_phuong = {
             'email': 'phuongnguyen1@gmail.com',
@@ -2230,3 +2234,37 @@ class Command(BaseCommand):
         gallery = Gallery.objects.create(title='Gallery Sample')
         for img in img_list:
             gallery.images.create(image='seeds/gallery/' + img)
+    
+    def __create_shop(self):
+        print("Create Product Categories")
+        category = ProductCategory.objects.create(name='Thảm')
+        print("Create Products")
+        data = {
+            'category': category,
+            'name': 'Thảm yoga màu xanh rêu',
+            'description': 'thảm yoga màu xanh rêu',
+            'quantity': 10,
+            'price': 200000,
+            'image': 'seeds/shop/tham-yoga-xanh-reu-1.jpg'
+        }
+        Product.objects.create(**data)
+
+        data = {
+            'category': category,
+            'name': 'Thảm yoga màu xanh lá cây',
+            'description': 'thảm yoga màu xanh lá cây',
+            'quantity': 10,
+            'price': 200000,
+            'image': 'seeds/shop/tham-yoga-xanh-la-cay.jpg'
+        }
+        Product.objects.create(**data)
+
+        data = {
+            'category': category,
+            'name': 'Thảm yoga màu hồng',
+            'description': 'thảm yoga màu hồng',
+            'quantity': 10,
+            'price': 200000,
+            'image': 'seeds/shop/tham-yoga-hong.jpg'
+        }
+        Product.objects.create(**data)
