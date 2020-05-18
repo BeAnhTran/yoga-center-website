@@ -19,15 +19,6 @@
                                 {% endblocktrans %}
                             </p>
                         </div>
-                        <div class="col-md-6">
-                            <select class="circle-select">
-                                {% trans 'default sorting' as t_default_sorting %}
-                                <option data-display="{{ t_default_sorting|capfirst }}">{{ t_default_sorting|capfirst }}
-                                </option>
-                                <option value="0">{% trans 'oldest' as t_oldest %}{{ t_oldest|capfirst }}</option>
-                                <option value="1">{% trans 'newest' as t_newest %}{{ t_newest|capfirst }}</option>
-                            </select>
-                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -74,7 +65,7 @@
                                     <p>{{ class.course.description|truncatewords:20 }}</p>
                                 </div>
                                 <div class="ci-bottom">
-                                    <a href="javascript:;" class="ci-author">
+                                    <a href="{% url 'trainers:detail' class.trainer.user.slug %}" class="ci-author">
                                         {% if class.trainer.user.image %}
                                         <img src="{{ class.trainer.user.image.url }}" alt="{{class.trainer}}">
                                         {% else %}

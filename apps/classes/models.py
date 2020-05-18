@@ -83,5 +83,5 @@ class YogaClass(models.Model):
     def get_first_week(self):
         s = self.lessons.first().date
         result = self.lessons.filter(
-            date__range=[s, s + timedelta(days=6)], is_full=False).order_by('date')
+            date__range=[s, s + timedelta(days=6)]).order_by('date')
         return result
