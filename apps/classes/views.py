@@ -19,7 +19,7 @@ from apps.cards.forms import CardFormForTraineeEnroll
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from apps.lessons.serializers.lesson_serializer import LessonSerializer
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
 
 from django.contrib.auth.decorators import login_required
@@ -101,6 +101,10 @@ class YogaClassDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(YogaClassDetailView, self).get_context_data(**kwargs)
         context['active_nav'] = 'classes'
+        lesson = self.object.lessons.first()
+        tdelta = datetime.combine(date.today(), lesson.end_time) - datetime.combine(date.today(), lesson.start_time)
+        duration = int(tdelta.total_seconds() / 60)
+        context['duration'] = duration
         context['others'] = set(
             YogaClass.objects.filter(~Q(pk=self.object.pk)))
         return context
