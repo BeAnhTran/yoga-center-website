@@ -3730,3 +3730,12 @@ msgstr ""
 #, python-format
 msgid "The option '%s' is not a valid option for a QR code."
 msgstr ""
+
+msgid "A user is already registered with this e-mail address."
+msgstr ""
+
+msgid "You must type the same password each time."
+msgstr ""
+
+msgid "The e-mail address and/or password you specified are not correct."
+msgstr ""
