@@ -45,6 +45,7 @@ from apps.classes.forms import FilterForm
 from django.db.models import Value as V
 from django.db.models.functions import Concat
 from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION, PLUS_LESSON_PRACTICE_PROMOTION, PLUS_WEEK_PRACTICE_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
+from apps.roll_calls.models import RollCall
 
 
 class YogaClassListView(ListView):
@@ -116,11 +117,6 @@ class YogaClassEnrollView(View):
 
     def get(self, request, slug):
         yoga_class = YogaClass.objects.get(slug=slug)
-        if self.__is_trainee_of_class(yoga_class, request.user.trainee):
-            messages.success(
-                request,
-                _('Your card has been still in use for this class'))
-            return redirect('classes:detail', slug=slug)
         # remove enroll card form when access enroll page
         if request.session.get('enroll_card_form') is not None:
             del request.session['enroll_card_form']
@@ -138,7 +134,15 @@ class YogaClassEnrollView(View):
         yoga_class = YogaClass.objects.get(slug=kwargs['slug'])
         form = CardFormForTraineeEnroll(
             request.POST, initial={'yoga_class': yoga_class})
-
+        cleaned_data = form.cleaned_data
+        start = cleaned_data['start_at']
+        end = cleaned_data['end_at']
+        register_lesson_list = yoga_class.lessons.filter(date__range=[start, end], is_full=False).order_by('date')
+        register_roll_calls = RollCall.objects.filter(card__trainee=request.user.trainee, lesson_id__in=[elem.id for elem in register_lesson_list]).distinct()
+        if register_roll_calls.count() > 0:
+            response_data = {}
+            response_data['message'] = 'Bạn đã có thẻ tập đăng kí học một trong số những buổi học bạn đã chọn. Vui lòng kiểm tra lại thẻ tập của bạn.'
+            return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
         if form.is_valid():
             # save to session and get it in payment page
             request.session['enroll_card_form'] = request.POST

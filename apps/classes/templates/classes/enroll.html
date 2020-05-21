@@ -382,24 +382,36 @@
         }).done(function (data) {
             window.location.href = "{% url 'classes:enroll-payment' yoga_class.slug %}";
         }).fail(function (err) {
+            console.log(err);
             $('input.is-invalid').removeClass('is-invalid');
             $('.invalid-feedback').remove();
             $("span[id^=" + 'error_1_id_' + "]").remove();
             errors = JSON.parse(err.responseText);
+            console.log(errors);
             $.each(errors, function (key, value) {
-                if (key != '__all__') {
-                    objStr = "#id_" + key;
-                    htmlError = '<span id="error_1_id_' + key + '" class="invalid-feedback">';
-                    htmlError += '<strong>' + value[0]['message'] + '</strong></span>';
-                    $(htmlError).insertAfter($(objStr));
-                    $(objStr).addClass('is-invalid');
-                    $(objStr).focus();
-                } else {
+                console.log(key);
+                console.log(value);
+                if(key == 'message'){
                     Swal.fire(
                         "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
-                        value[0]['message'],
+                        value,
                         'error'
-                    )
+                    );
+                }else{
+                    if (key != '__all__') {
+                        objStr = "#id_" + key;
+                        htmlError = '<span id="error_1_id_' + key + '" class="invalid-feedback">';
+                        htmlError += '<strong>' + value[0]['message'] + '</strong></span>';
+                        $(htmlError).insertAfter($(objStr));
+                        $(objStr).addClass('is-invalid');
+                        $(objStr).focus();
+                    } else {
+                        Swal.fire(
+                            "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                            value[0]['message'],
+                            'error'
+                        );
+                    }
                 }
             });
         });
