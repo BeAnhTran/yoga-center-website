@@ -9,6 +9,7 @@ from apps.cards.models import ExtendCardRequest
 from apps.refunds.models import Refund
 from apps.courses.models import Course
 from django.db.models import Count
+from apps.card_invoices.models import CardInvoice
 
 
 @login_required
@@ -24,6 +25,9 @@ def index(request):
     for course in courses:
         course_colors.append('#%02X%02X%02X' % (r(), r(), r()))
     courses_colors = zip(courses, course_colors)
+    earning = 0
+    for c in CardInvoice.objects.all():
+        earning += c.amount
     context = {
         'active_nav': 'dashboard',
         'trainees': trainees,
@@ -33,5 +37,6 @@ def index(request):
         'courses': courses,
         'course_colors': course_colors,
         'courses_colors': courses_colors,
+        'earning': earning
     }
     return render(request, 'dashboard/index.html', context=context)

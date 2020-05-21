@@ -121,8 +121,16 @@
         </a>
     </li>
     <hr class="sidebar-divider my-0">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'dashboard:refund-requests-list' %}">
+            <i class="fas fa-retweet"></i>
+            <span>
+                {% trans 'refund request' as t_refund_request %} {{ t_refund_request|capfirst }}
+            </span>
+        </a>
+    </li>
     <!-- Request -->
-    <li class="nav-item {% if show_nav_request == True %}active{% endif %}">
+    <!-- <li class="nav-item {% if show_nav_request == True %}active{% endif %}">
         <a class="nav-link collapsed" href="javascript:;" data-toggle="collapse" data-target="#collapseRequest"
             aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-mail-bulk"></i>
@@ -148,7 +156,7 @@
                 </a>
             </div>
         </div>
-    </li>
+    </li> -->
     <hr class="sidebar-divider my-0">
     <!-- Blog -->
     <li class="nav-item {% if show_nav_blog == True %}active{% endif %}">

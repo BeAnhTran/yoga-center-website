@@ -26,7 +26,7 @@
                   <legend class="card-only">{% trans 'Please enter information below' %}</legend>
                   <div class="row">
                     <div class="field">
-                      <label for="example5-name">{% trans 'name' as t_name %} {{t_name|capfirst}</label>
+                      <label for="example5-name">{% trans 'name' as t_name %} {{t_name|capfirst}}</label>
                       {{ form.name }}
                     </div>
                   </div>
@@ -105,9 +105,17 @@
                   <h4>{{ yoga_class.name }}</h4>
                   <p><span class="badge badge-pill badge-warning">{{ yoga_class.course }}</span></p>
                   <div class="ci-metas">
-                    <div class="ci-meta"><i class="material-icons">event_available</i>Mon, Wed, Fri
+                    <div class="ci-meta"><i class="material-icons">event_available</i>
+                      {% for lesson_in_week in yoga_class.get_first_week %}
+                        {% if forloop.last %}
+                            {{ lesson_in_week.date|date:"D" }}
+                        {% else %}
+                            {{ lesson_in_week.date|date:"D" }} - 
+                        {% endif %}
+                      {% endfor %}
                     </div>
-                    <div class="ci-meta"><i class="material-icons">alarm_on</i>06:30pm - 07:45pm
+                    <div class="ci-meta"><i class="material-icons">alarm_on</i>
+                      {{ yoga_class.lessons.first.start_time }} - {{ yoga_class.lessons.first.end_time }}
                     </div>
                   </div>
                   <table class="table table-hover">
@@ -117,21 +125,7 @@
                         <td><small>{{ card_type }}</small></td>
                       </tr>
                       <tr>
-                        <td><small>{% trans 'start at' as t_start_at %}{{ t_start_at|capfirst }}</small></td>
-                        <td><small>{{ start_at }}</small></td>
-                      </tr>
-                      <tr>
-                        <td><small>{% trans 'end at' as t_end_at %}{{ t_end_at|capfirst }}</small></td>
-                        <td><small>{{ end_at }}</small></td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <small>{% trans 'number of lessons' as t_number_of_lessons %}{{ t_number_of_lessons|capfirst }}</small>
-                        </td>
-                        <td><small>{{ number_of_lessons }}</small></td>
-                      </tr>
-                      <tr>
-                        <td><small>{% trans 'price' as t_price %}{{ t_price|capfirst }}</small></td>
+                        <td><small>{% trans 'price per lesson' as t_price %}{{ t_price|capfirst }}</small></td>
                         <td><small>
                             {% if total_price > 0 %}
                             {{ price }} {% trans 'vnd' %}

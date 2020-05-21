@@ -1,7 +1,7 @@
 {% extends 'dashboard/layouts/base.html' %}
 {% load static %}
 {% load i18n %}
-
+{% load sexify %}
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -24,7 +24,7 @@
                             {% trans 'Earnings (Monthly)' %}
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            10.000.000đ
+                            {{earning|sexy_number}}đ
                         </div>
                     </div>
                     <div class="col-auto">
@@ -45,7 +45,7 @@
                             {% trans 'Earnings (Annual)' %}
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            20.000.000đ
+                            {% trans 'have not updated yet' %}
                         </div>
                     </div>
                     <div class="col-auto">
