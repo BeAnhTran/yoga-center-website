@@ -21,9 +21,9 @@ class RollCall(models.Model):
 
     def has_make_up_lesson(self):
         try:
-            r = self.make_up_lesson
+            self.make_up_lesson
             return True
-        except e:
+        except:
             return False
 
 

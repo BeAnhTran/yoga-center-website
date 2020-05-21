@@ -2,41 +2,14 @@
 {% load static %}
 {% load i18n %}
 {% load crispy_forms_tags %}
-
-{% block specified_css %}
-<link href="{% static 'fullcalendar-4.3.1/packages/core/main.css' %}" rel='stylesheet' />
-<link href="{% static 'fullcalendar-4.3.1/packages/daygrid/main.css'%}" rel='stylesheet' />
-<link href="{% static 'fullcalendar-4.3.1/packages/timegrid/main.css' %}" rel='stylesheet' />
-<link href="{% static 'fullcalendar-4.3.1/packages/list/main.css' %}" rel='stylesheet' />
-<script src="{% static 'fullcalendar-4.3.1/packages/core/main.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages/core/locales-all.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages/interaction/main.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages/daygrid/main.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages/timegrid/main.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages/list/main.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-common/main.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-daygrid/main.js' %}"></script>
-<script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-timegrid/main.js' %} "></script>
-<link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
-<link href="{% static 'css/core/profile/trainees/cards/style.css' %}" rel='stylesheet' />
-
-<style>
-    .fc-event {
-        font-size: 0.55em;
-    }
-</style>
-{% endblock %}
+{% load sexify %}
 
 {% block header_path %}
-<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">Thẻ tập</a>
-⁄
-<a class="text-danger" href="javascript:;">{{ object.card.yogaclass }} - {{ object.card.card_type }}</a>
-⁄
-<a class="text-danger" href="javascript:;">Hoàn tiền</a>
-⁄
-<a class="text-danger" href="javascript:;">{{ object.pk }}</a>
-⁄
-<a class="text-danger" href="javascript:;">Xem</a>
+<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">&raquo; Thẻ tập</a>
+<a class="text-danger" href="{% url 'profile:profile-trainee-cards-detail' object.card.pk %}">&raquo; {{ object.card.yogaclass }} - {{ object.card.card_type }}</a>
+<a class="text-danger" href="javascript:;">&raquo; Hoàn tiền</a>
+<a class="text-danger" href="javascript:;">&raquo; {{ object.pk }}</a>
+<a class="text-danger" href="javascript:;">&raquo; Xem</a>
 {% endblock %}
 
 {% block profile_content %}
@@ -51,9 +24,9 @@
                 <td>Số buổi gia hạn</td>
                 <td>
                     <div class="list-group">
-                        {% for lesson in object.lessons.all %}
+                        {% for r in object.roll_calls.all %}
                             <a href="javascript:;" class="list-group-item list-group-item-action list-group-item-success">
-                                {{ lesson }}
+                                {{ r.lesson }}
                             </a>
                         {% endfor %}
                       </div>
@@ -61,13 +34,13 @@
             </tr>
             <tr>
                 <td>Số tiền</td>
-                <td>{{ object.amount }}</td>
+                <td>{{ object.amount | sexy_number }}đ</td>
             </tr>
             <tr>
                 <td>Trạng thái</td>
                 <td>
                     <span class="badge badge-warning">
-                        {{ object.state }}
+                        {{ object.get_state_display }}
                     </span>
                 </td>
             </tr>
@@ -95,10 +68,6 @@
                 {% csrf_token %}
                 <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
             </form>
-            <a class="btn btn-sm btn-warning float-right ml-1"
-                href="{% url 'profile:profile-trainee-card-refunds-edit' object.card.pk object.pk %}">
-                <i class="fas fa-fw fa-pen"></i>
-            </a>
         </div>
     </div>
 </div>

@@ -35,8 +35,6 @@ urlpatterns = [
          name='profile-trainee-card-refunds-new'),
     path('accounts/cards/<int:card_id>/refunds/<int:pk>/', profile_trainee_view.RefundDetailView.as_view(),
          name='profile-trainee-card-refunds-detail'),
-    path('accounts/cards/<int:card_id>/refunds/<int:pk>/edit', profile_trainee_view.RefundEditView.as_view(),
-         name='profile-trainee-card-refunds-edit'),
     path('accounts/cards/<int:card_id>/refunds/<int:pk>/delete', profile_trainee_view.detele_refund_request,
          name='profile-trainee-card-refunds-delete'),
 ]

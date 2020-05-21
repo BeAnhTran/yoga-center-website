@@ -50,6 +50,9 @@ class Lesson(models.Model):
             return self.yogaclass.name + ' - ' + date_format(self.date, format='SHORT_DATE_FORMAT', use_l10n=True) + ' - ' + self.room.name + ' (' + self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M') + ')'
         return self.yogaclass.name + ' - ' + self.start_time.strftime('%H:%M')
 
+    def str_without_class(self):
+        return date_format(self.date, format='SHORT_DATE_FORMAT', use_l10n=True) + ' - ' + self.room.name + ' (' + self.start_time.strftime('%H:%M') + ' - ' + self.end_time.strftime('%H:%M') + ')'
+
     def clean(self):
         room = self.room
         trainer = self.yogaclass.trainer

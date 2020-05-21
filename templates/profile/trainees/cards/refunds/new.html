@@ -24,15 +24,16 @@
     .fc-event {
         font-size: 0.55em;
     }
+    .invalid-feedback {
+        display: block;
+    }
 </style>
 {% endblock %}
 
 {% block header_path %}
-<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">Thẻ tập</a>
-⁄
-<a class="text-danger" href="javascript:;">{{ card.yogaclass }} - {{ card.card_type }}</a>
-⁄
-<a class="text-danger" href="javascript:;">Hoàn tiền</a>
+<a class="text-danger" href="{% url 'profile:profile-trainee-cards' %}">&raquo; Thẻ tập</a>
+<a class="text-danger" href="{% url 'profile:profile-trainee-cards-detail' card.pk %}">&raquo; {{ card.yogaclass }} - {{ card.card_type }}</a>
+<a class="text-danger" href="javascript:;">&raquo; Hoàn tiền</a>
 {% endblock %}
 
 {% block profile_content %}
@@ -97,10 +98,17 @@
                             var border_color = '#0c9463';
                             var title_tooltip = null;
                             if (roll_call['studied'] == false) {
-                                bg_color = '#03A84E';
-                                border_color = '#03A84E';
-                                editable = false;
-                                title_tooltip = "chưa học";
+                                if(roll_call['having_make_up_lesson'] == true){
+                                    bg_color = '#f5a31a';
+                                    border_color = '#f5a31a';
+                                    editable = false;
+                                    title_tooltip = "học bù";
+                                }else{
+                                    bg_color = '#03A84E';
+                                    border_color = '#03A84E';
+                                    editable = false;
+                                    title_tooltip = "chưa học";
+                                }
                             } else {
                                 bg_color = '#EA390A';
                                 border_color = '#EA390A';
@@ -137,7 +145,7 @@
 
     $(document).on('click', 'form#form_refund > input[type=submit]', function (e) {
         var checkedValue = [];
-        var inputElements = document.getElementsByName('lessons');
+        var inputElements = document.getElementsByName('roll_calls');
         for (var i = 0; inputElements[i]; ++i) {
             if (inputElements[i].checked) {
                 checkedValue.push(inputElements[i].value);
@@ -146,15 +154,20 @@
         if (checkedValue.length > 0) {
             return true;
         } else {
-            alert("Vui lòng chọn buổi học");
+            Swal.fire(
+                "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                "Vui lòng chọn buổi học",
+                'error'
+            );
             return false;
         }
     });
 
-    $(document).on('change', 'input[name=lessons]', function () {
-        var price_of_one_lesson = parseFloat('{{ card.price_of_one_lesson }}')
+    $(document).on('change', 'input[name=roll_calls]', function () {
+        var price_of_one_lesson = parseFloat('{{ card.price_of_one_lesson }}');
+        console.log(price_of_one_lesson);
         var checkedValue = [];
-        var inputElements = document.getElementsByName('lessons');
+        var inputElements = document.getElementsByName('roll_calls');
         for (var i = 0; inputElements[i]; ++i) {
             if (inputElements[i].checked) {
                 checkedValue.push(inputElements[i].value);

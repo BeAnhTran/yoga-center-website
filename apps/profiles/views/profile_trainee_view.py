@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from apps.cards.models import Card, ExtendCardRequest
 from apps.cards.forms import ExtendCardRequestForm
-from django.contrib import messages
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.http import Http404
@@ -16,7 +15,9 @@ from apps.refunds.forms import RefundForm
 from django.db.models import Value as V
 from django.db.models.functions import Concat
 from django.db.models import CharField
-from apps.refunds.models import Refund
+from apps.refunds.models import Refund, PENDING_STATE
+from apps.make_up_lessons.models import MakeUpLesson
+from apps.roll_calls.models import RollCall
 
 
 @method_decorator([login_required, trainee_required], name='dispatch')
@@ -145,13 +146,26 @@ class RefundNewView(View):
     template_name = 'profile/trainees/cards/refunds/new.html'
 
     def get(self, request, pk):
-        card = Card.objects.get(pk=pk)
+        card = get_object_or_404(Card, pk=pk)
+        for r in card.refunds.all():
+            if r.state == PENDING_STATE:
+                messages.error(
+                    self.request, 'Bạn đang có yêu cầu đang chờ xử lý, vui lòng thử lại sau')
+                return redirect(reverse('profile:profile-trainee-cards-detail', args={card.pk}) + '?focus=collapseCardRefundRequest')
+        filter_options = {
+            'studied': False,
+            'card': card
+        }
+        make_up_lessons_of_trainee = MakeUpLesson.objects.filter(
+            roll_call__card=card)
         query_choices = list()
-        for lesson in card.lessons.all():
-            query_choices += ((lesson.pk, lesson),)
+        roll_calls = RollCall.objects.filter(**filter_options).exclude(
+            id__in=[elem.roll_call.id for elem in make_up_lessons_of_trainee]).distinct()
+        for r in roll_calls:
+            query_choices += ((r.pk, r.lesson.str_without_class()),)
         form = RefundForm(
             initial={
-                'registered_lessons': query_choices
+                'unstudied_lessons': query_choices
             }
         )
         form.fields['card'].initial = card
@@ -162,14 +176,22 @@ class RefundNewView(View):
         return render(request, self.template_name, context=context)
 
     def post(self, request, pk):
-        card = Card.objects.get(pk=pk)
+        card = get_object_or_404(Card, pk=pk)
+        filter_options = {
+            'studied': False,
+            'card': card
+        }
+        make_up_lessons_of_trainee = MakeUpLesson.objects.filter(
+            roll_call__card=card)
         query_choices = list()
-        for lesson in card.lessons.all():
-            query_choices += ((lesson.pk, lesson),)
+        roll_calls = RollCall.objects.filter(**filter_options).exclude(
+            id__in=[elem.roll_call.id for elem in make_up_lessons_of_trainee]).distinct()
+        for r in roll_calls:
+            query_choices += ((r.pk, r.lesson.str_without_class()),)
         form = RefundForm(
             request.POST, request.FILES,
             initial={
-                'registered_lessons': query_choices
+                'unstudied_lessons': query_choices
             }
         )
         if form.is_valid():
@@ -201,23 +223,6 @@ class RefundDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(RefundDetailView,
-                        self).get_context_data(**kwargs)
-        context['sidebar_profile'] = 'cards'
-        return context
-
-
-@method_decorator([login_required, trainee_required], name='dispatch')
-class RefundEditView(UpdateView):
-    model = Refund
-    template_name = 'profile/trainees/cards/refunds/edit.html'
-    form_class = RefundForm
-
-    def get_success_url(self):
-        messages.success(self.request, 'Cập nhật yêu cầu hoàn tiền thành công')
-        return (reverse('profile:profile-trainee-cards-detail', args={self.object.card.pk}) + '?focus=collapseCardRefundRequest')
-
-    def get_context_data(self, **kwargs):
-        context = super(RefundEditView,
                         self).get_context_data(**kwargs)
         context['sidebar_profile'] = 'cards'
         return context

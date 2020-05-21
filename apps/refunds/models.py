@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from ckeditor_uploader.fields import RichTextUploadingField
 
 from apps.cards.models import Card
-from apps.lessons.models import Lesson
+from apps.roll_calls.models import RollCall
 
 PENDING_STATE = 0
 APPROVED_STATE = 1
@@ -18,10 +18,9 @@ STATE_CHOICES = (
 
 class Refund(models.Model):
     card = models.ForeignKey(
-        Card, on_delete=models.CASCADE, related_name='refunds', verbose_name=_('card')
-    )
-    lessons = models.ManyToManyField(
-        Lesson, related_name='refunds', verbose_name=_('lessons'))
+        Card, on_delete=models.CASCADE, related_name='refunds', verbose_name=_('card'))
+    roll_calls = models.ManyToManyField(
+        RollCall, related_name='refunds', verbose_name=_('lessons'))
     amount = models.FloatField(verbose_name=_('amount'))
     reason = RichTextUploadingField(verbose_name=_('reason'))
     state = models.IntegerField(choices=STATE_CHOICES,

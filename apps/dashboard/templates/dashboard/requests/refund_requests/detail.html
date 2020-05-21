@@ -32,7 +32,7 @@
                         <td>{{ object.card.yogaclass }}</td>
                     </tr>
                     <tr>
-                        <td>Thời gian hết hạn cũ</td>
+                        <td>Thời gian hết hạn của thẻ tập</td>
                         <td>{{ object.card.end_at }}</td>
                     </tr>
                     <tr>
@@ -57,9 +57,9 @@
                         <td>Hoàn tiền cho buổi tập</td>
                         <td>
                             <ul class="list-group">
-                                {% for lesson in object.lessons.all %}
+                                {% for r in object.roll_calls.all %}
                                     <li class="list-group-item list-group-item-info">
-                                        {{ lesson }}
+                                        {{ r.lesson }}
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -67,7 +67,7 @@
                     </tr>
                     <tr>
                         <td>Số tiền</td>
-                        <td>{{ object.amount | sexy_number}} vnđ</td>
+                        <td>{{ object.amount | sexy_number}}đ</td>
                     </tr>
                     <tr>
                         <td>Lí do</td>

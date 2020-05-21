@@ -291,20 +291,20 @@
                     <table class="table table-sm table-bordered">
                         <thead>
                             <tr class="d-flex">
-                                <th class="col-1">Mã số</th>
-                                <th class="col-2">Số buổi</th>
-                                <th class="col-2">Số tiền</th>
-                                <th class="col-2">Trạng thái</th>
-                                <th class="col-2">Ngày tạo</th>
-                                <th class="col-3">Hành động</th>
+                                <th class="col-1"><small>Mã số</small></th>
+                                <th class="col-2"><small>Số buổi</small></th>
+                                <th class="col-2"><small>Số tiền</small></th>
+                                <th class="col-2"><small>Trạng thái</small></th>
+                                <th class="col-2"><small>Ngày tạo</small></th>
+                                <th class="col-3"><small>Hành động</small></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for refund in card.refunds.all %}
                             <tr class="d-flex">
                                 <td class="col-1">{{ refund.pk }}</td>
-                                <td class="col-2">{{ refund.lessons.all.count }}</td>
-                                <td class="col-2">{{ refund.amount | sexy_number }}</td>
+                                <td class="col-2">{{ refund.roll_calls.all.count }}</td>
+                                <td class="col-2">{{ refund.amount | sexy_number }}đ</td>
                                 <td class="col-2">
                                     {% if refund.state == 0 %}
                                     <span class="badge badge-pill badge-warning">
