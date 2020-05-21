@@ -7,6 +7,7 @@ from apps.roll_calls.serializers import RollCallSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from apps.make_up_lessons.models import MakeUpLesson
+from apps.refunds.models import Refund, PENDING_STATE, APPROVED_STATE
 
 
 @method_decorator([login_required, staff_required], name='dispatch')
@@ -29,7 +30,7 @@ class RollCallListViewApi(APIView):
         make_up_lessons_of_trainee = MakeUpLesson.objects.filter(
             lesson__yogaclass__course=request.GET.get('course_id'), roll_call__card__trainee=request.GET.get('trainee_id'))
         filter_options['studied'] = False
-        roll_calls = RollCall.objects.filter(**filter_options).exclude(
+        roll_calls = RollCall.objects.filter(**filter_options).exclude(refunds__state__in=[PENDING_STATE, APPROVED_STATE]).exclude(
             id__in=[elem.roll_call.id for elem in make_up_lessons_of_trainee]).distinct()
         serialized = RollCallSerializer(roll_calls, many=True)
         return Response(serialized.data)

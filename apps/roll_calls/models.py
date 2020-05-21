@@ -26,6 +26,11 @@ class RollCall(models.Model):
         except:
             return False
 
+    def has_refund(self):
+        if self.refunds.filter(state__in=[0, 1]).count() > 0:
+            return True
+        return False
+
 
 @receiver(post_save, sender=RollCall)
 def cards_changed(sender, instance, **kwargs):

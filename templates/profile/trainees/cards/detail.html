@@ -8,6 +8,15 @@
 {% block specified_css %}
 <link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/profile/trainees/cards/style.css' %}">
+<style>
+    .btn-group-sm>.btn, .btn-sm {
+        padding: .25em .4em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        border-radius: 5.2rem;
+    }
+</style>
 {% endblock %}
 
 {% block header_path %}
@@ -90,7 +99,7 @@
                         {% elif r.studied is False and r.has_make_up_lesson is True %}
                         <div class="btn-group btn-group-sm btn-group-custom">
                             {% if r.make_up_lesson.is_studied is False %}
-                            <a class="btn btn-sm btn-info" href="javascript:;">
+                            <a class="btn btn-sm btn-danger" href="javascript:;">
                                 {% trans 'have registerd make-up lesson'%}
                             </a>
                             {% else %}
@@ -103,6 +112,8 @@
                                 {% trans 'detail' %}
                             </a>
                         </div>
+                        {% elif r.studied is False and r.has_refund is True %}
+                            <span class="badge badge-danger badge-pill">đăng kí hoàn tiền</span>
                         {% else %}
                         <span class="badge badge-info badge-pill">{% trans 'not studied'%}</span>
                         {% endif %}
@@ -187,7 +198,7 @@
                                     </small></td>
                                 <td class="col-1"><small>{{ invoice.amount | sexy_number }}đ</small></td>
                                 <td class="col-3"><small>{{ invoice.description }}</small></td>
-                                <td class="col-4"><small>{{ invoice.charge_id }}</small></td>
+                                <td class="col-4"><small>{{ invoice.charge_id|default_if_none:'' }}</small></td>
                                 <td class="col-3"><small>{{ invoice.created_at }}</small></td>
                             </tr>
                             {% endfor %}
