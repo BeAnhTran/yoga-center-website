@@ -17,66 +17,30 @@
 {% block profile_content %}
 {% if cards %}
     {% for card in cards %}
-    <div class="card mb-3">
-        <div class="card-header">
-            <a href="javascript:;">
-                <span class="badge badge-danger">{{ card.card_type }}</span>
-            </a>
-            <a class="float-right" href="javascript:;">
-                <span class="badge badge-success">{{ card.yogaclass.course }}</span>
-            </a>
+    <div class="event-item">
+        <div class="ei-img">
+          {% if card.yogaclass.image %}
+          <img src="{{ card.yogaclass.image.url }}" height="280" alt="{{ card }}">
+          {% else %}
+          <img src="{{ card.yogaclass.course.image.url }}" height="280" alt="{{ card }}">
+          {% endif %}
         </div>
-        <div class="card-body">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <a href="javascript:;">
-                            {% if card.yogaclass.course.image %}
-                            <img width="150" src="{{ card.yogaclass.course.image.url }}" alt="{{card.yogaclass}}">
-                            {% else %}
-                            <img width="150" src="{% static 'img/course/default_course.jpg'%}" alt="{{card.yogaclass}}">
-                            {% endif %}
-                        </a>
-                    </div>
-                    <div class="col-lg-8">
-                        <table class="table table-borderless">
-                            <tbody>
-                                <tr>
-                                    <td>{% trans 'name' as t_name %}{{ t_name|capfirst }}</td>
-                                    <td><a class="text-danger" href="javascript:;"><b>{{ card.yogaclass }}</b></a></td>
-                                </tr>
-                                <tr>
-                                    <td>{% trans 'trainer' as t_trainer %}{{ t_trainer|capfirst }}</td>
-                                    <td><a class="text-info" href="javascript:;"><b>{{ card.yogaclass.trainer }}</b></a></td>
-                                </tr>
-                                <tr>
-                                    {% trans 'start at' as t_start_at %}
-                                    <td>{{ t_start_at|capfirst }}</td>
-                                    <td>{{ card.start_at }}</td>
-                                </tr>
-                                <tr>
-                                    {% trans 'end at' as t_end_at %}
-                                    <td>{{ t_end_at|capfirst }}</td>
-                                    <td>{{ card.end_at }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <div class="ei-text">
+          <h4><a href="{% url 'profile:profile-trainee-cards-detail' card.pk %}">{{ card.yogaclass }}</a></h4>
+          <ul>
+            <li><i class="material-icons">done</i>Mã thẻ: <span class="text-danger">{{ card.pk }}</span></li>
+            <li><i class="material-icons">done</i>Loại thẻ tập: <span class="text-danger">{{ card.card_type }}</span></li>
+            <li><i class="material-icons">done</i>Khóa học: <span class="text-danger">{{ card.yogaclass.course }}</span></li>
+            <li><i class="material-icons">done</i>Huấn luyện viên: <span class="text-danger">{{ card.yogaclass.trainer }}</span></li>
+            <li><i class="material-icons">done</i>Thời gian bắt đầu: <span class="text-danger">{{ card.start_at }}</span></li>
+            <li><i class="material-icons">done</i>Thời gian kết thúc: <span class="text-danger">{{ card.end_at }}</span></li>
+            <li>
+                <a class="site-btn site-btn-sm sb-gradient m-1" href="{% url 'profile:profile-trainee-cards-detail' card.pk %}">Chi tiết</a>
+                <a class="site-btn site-btn-sm sb-gradient m-1" href="{% url 'profile:profile-trainee-card-refunds-new' card.pk %}">Hoàn tiền</a>
+            </li>
+          </ul>
         </div>
-        <div class="card-footer">
-            <div class="float-right">
-                <a class="btn btn-sm btn-outline-secondary" href="{% url 'profile:profile-trainee-cards-detail' card.pk %}">
-                    {% trans 'Detail' %}
-                </a>
-                <a class="btn btn-sm btn-outline-secondary" href="{% url 'profile:profile-trainee-card-refunds-new' card.pk %}"
-                    class="ml-1">
-                    {% trans 'Refund' %}
-                </a>
-            </div>
-        </div>
-    </div>
+      </div>
     {% endfor%}
 {% else %}
 <h3 class="text-danger">Không có thẻ tập</h3>
