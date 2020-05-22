@@ -115,7 +115,7 @@ DATABASE Settings
 ```
 ### Bước 6: Chạy lệnh để tạo dữ liệu mẫu
 ```sh
-(env)$ python manage.py load_data
+(env)$ python manage.py load_sample_data
 ```
 ### Bước 7: Chạy dự án bằng cách thực hiện lệnh
 ```sh
