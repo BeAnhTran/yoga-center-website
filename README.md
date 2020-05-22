@@ -73,8 +73,8 @@ $ touch .env
 ```
 Thiết lập một số thông số trong file `.env` (Có thể tạm bỏ qua nếu bạn chưa chuẩn bị đầy đủ để cài đặt)
 
-- YOGA_HUONG_TRE_YOUTUBE_URL= "https://www.youtube.com/channel/UCKEKFt8623RUF-7Phxtnn-A"
-- YOGA_HUONG_TRE_FACEBOOK_URL= "https://www.facebook.com/CLB-Yoga-Huong-Tre-479934325379747/"
+- YOGA_HUONG_TRE_YOUTUBE_URL = "https://www.youtube.com/channel/UCKEKFt8623RUF-7Phxtnn-A"
+- YOGA_HUONG_TRE_FACEBOOK_URL = "https://www.facebook.com/CLB-Yoga-Huong-Tre-479934325379747/"
 
 MAIL Settings
 - EMAIL = 'your email'
@@ -98,7 +98,7 @@ DATABASE Settings
 - DEFAULT_TO_NUMBER = 'your DefaultToNumber'
 
 [TAWK.TO](https://www.tawk.to/) Settings
-- TAWK_TO_API_URL= 'your Tawk.to API'
+- TAWK_TO_API_URL = 'your Tawk.to API'
 
 [FACEBOOK COMMENT PLUGIN](https://developers.facebook.com/docs/plugins/comments/)
 - FACEBOOK_PRIVACY_POLICY_URL = yogahuongtre.herokuapp.com
