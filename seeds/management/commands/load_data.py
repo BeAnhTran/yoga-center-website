@@ -617,7 +617,7 @@ class Command(BaseCommand):
         basic_yoga_course_lectures = basic_yoga_course.lectures.all()
         basic_yoga_course_lectures_count = basic_yoga_course_lectures.count()
 
-        number_of_weeks = int(env('NUMBER_OF_WEEKS_TO_CREATE_LESSON'))
+        number_of_weeks = 12
         basic_yoga_class_co_man_5h30_t246 = basic_yoga_course.classes.create(
             name='Lớp cơ bản cô Mận 5h30 sáng 2-4-6',
             price_per_lesson=50000,

@@ -288,7 +288,7 @@ class Command(BaseCommand):
         t2_hatha_1_basic = (datetime.strptime(t1_hatha_1_basic, '%H:%M') + timedelta(
             minutes=default_range_time_for_practice_lesson)).strftime("%H:%M")
 
-        number_of_weeks = int(env('NUMBER_OF_WEEKS_TO_CREATE_LESSON'))
+        number_of_weeks = 12
 
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
