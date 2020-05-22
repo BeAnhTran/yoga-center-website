@@ -1,6 +1,8 @@
 # YOGA CENTER WEBSITE
 
-## Cài đặt Python3
+## Chuẩn bị: Cài đặt Python3, Pip và Virtualenv
+
+### Cài đặt Python3
 Mở file [runtime.txt](runtime.txt) để kiểm tra python version được sử dụng
 
 Phiên bản đang được sử dụng hiện tại trong project là 3.8.0
@@ -16,6 +18,24 @@ Kiểm tra việc cài đặt thành công Python bằng cách mở terminal và
 ```
 python --version
 ```
+### Cài đặt pip
+Với phiên bản python hiện tại, bạn có thể bỏ qua bước này vì
+```
+Từ phiên bản python 3.4 trở đi, PIP đã được cài sẵn trong python
+```
+Kiểm tra pip đã được cài đặt thành công bằng cách gõ lệnh
+```
+pip --version
+```
+### Cài đặt Virtualenv
+```
+pip install virtualenv
+```
+Kiểm tra Virtualenv đã cài đặt thành công bằng cách gõ lệnh
+```
+virtualenv --version
+```
+
 ## Cài đặt Project
 
 Điều đầu tiên cần làm là clone repository theo lệnh sau:
@@ -28,7 +48,7 @@ $ cd yoga-center-website
 Khởi tạo một virtual environment để cài đặt dependencies và kích hoạt:
 
 ```sh
-$ virtualenv2 --no-site-packages env
+$ virtualenv --no-site-packages env
 $ source env/bin/activate
 ```
 
@@ -37,7 +57,7 @@ Cài đặt dependencies bằng cách gõ lệnh sau:
 ```sh
 (env)$ pip install -r requirements.txt
 ```
-Lưu ý `(env)` trước dấu nhắc. Điều này chỉ ra rằng terminal session này hoạt động trong một môi trường ảo được thiết lập bởi `virtualenv2`
+Lưu ý `(env)` trước dấu nhắc để chỉ ra rằng terminal session này hoạt động trong một môi trường ảo được thiết lập bởi `virtualenv`
 
 Sau khi cài đặt thành công, ta tiến hành chạy dự án bằng cách truy cập vào dự án và gõ lệnh:
 ```sh
