@@ -21,7 +21,7 @@ python --version
 Điều đầu tiên cần làm là clone repository theo lệnh sau:
 
 ```sh
-$ git clone https://github.com/giatruongtran27/yoga-center-website.git
+$ git clone git@github.com:giatruongtran27/yoga-center-website.git
 $ cd yoga-center-website
 ```
 
