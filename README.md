@@ -1,32 +1,46 @@
 # YOGA CENTER WEBSITE
 
-## Setup
+## Cài đặt Python3
+Mở file [runtime.txt](runtime.txt) để kiểm tra python version được sử dụng
 
-The first thing to do is to clone the repository:
+Phiên bản đang được sử dụng hiện tại trong project là 3.8.0
 
-```sh
-$ git clone https://github.com/giatruongtran27/yoga-center.git
-$ cd yoga-center
+```
+python-3.8.0
 ```
 
-Create a virtual environment to install dependencies in and activate it:
+Truy cập [Python.org](https://www.python.org/downloads/) để tải và cài đặt Python
+
+Kiểm tra việc cài đặt thành công Python bằng cách mở terminal và gõ lệnh sau:
+
+```
+python --version
+```
+## Cài đặt Project
+
+Điều đầu tiên cần làm là clone repository theo lệnh sau:
+
+```sh
+$ git clone https://github.com/giatruongtran27/yoga-center-website.git
+$ cd yoga-center-website
+```
+
+Khởi tạo một virtual environment để cài đặt dependencies và kích hoạt:
 
 ```sh
 $ virtualenv2 --no-site-packages env
 $ source env/bin/activate
 ```
 
-Then install the dependencies:
+Cài đặt dependencies bằng cách gõ lệnh sau:
 
 ```sh
 (env)$ pip install -r requirements.txt
 ```
-Note the `(env)` in front of the prompt. This indicates that this terminal
-session operates in a virtual environment set up by `virtualenv2`.
+Lưu ý `(env)` trước dấu nhắc. Điều này chỉ ra rằng terminal session này hoạt động trong một môi trường ảo được thiết lập bởi `virtualenv2`
 
-Once `pip` has finished downloading the dependencies:
+Sau khi cài đặt thành công, ta tiến hành chạy dự án bằng cách truy cập vào dự án và gõ lệnh:
 ```sh
-(env)$ cd project
 (env)$ python manage.py runserver
 ```
-And navigate to `http://127.0.0.1:8000/`.
+Trang web được hiển thị tại `http://127.0.0.1:8000/`.
