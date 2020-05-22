@@ -73,8 +73,8 @@ $ touch .env
 ```
 Thiết lập một số thông số trong file `.env` (Có thể tạm bỏ qua nếu bạn chưa chuẩn bị đầy đủ để cài đặt)
 
-- YOGA_HUONG_TRE_YOUTUBE_URL = "https://www.youtube.com/channel/UCKEKFt8623RUF-7Phxtnn-A"
-- YOGA_HUONG_TRE_FACEBOOK_URL = "https://www.facebook.com/CLB-Yoga-Huong-Tre-479934325379747/"
+- YOGA_CENTER_YOUTUBE_URL = "https://www.youtube.com/channel/UCKEKFt8623RUF-7Phxtnn-A" hoặc "your youtube url"
+- YOGA_CENTER_FACEBOOK_URL = "https://www.facebook.com/CLB-Yoga-Huong-Tre-479934325379747/" hoặc "your facebook page url"
 
 MAIL Settings
 - EMAIL = 'your email'
