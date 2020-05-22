@@ -41,7 +41,8 @@
                         {% trans 'friday' as t_friday %}
                         {% trans 'saturday' as t_saturday %}
                         {% trans 'sunday' as t_sunday %}
-                        <li><i class="material-icons">map</i>{{ t_monday|capfirst }} - {{ t_saturday|capfirst }}: 05:30 - 22:00</li>
+                        <li><i class="material-icons">map</i>{{ t_monday|capfirst }} - {{ t_saturday|capfirst }}: 05:30
+                            - 22:00</li>
                     </ul>
                 </div>
                 <div class="contact-social">
@@ -69,8 +70,7 @@
                         </div>
                         <div class="col-md-12">
                             {{ form.content }}
-                            <button type="submit"
-                                class="site-btn sb-gradient">{% trans 'Send' %}</button>
+                            <button type="submit" class="site-btn sb-gradient">{% trans 'Send' %}</button>
                         </div>
                     </div>
                 </form>
@@ -78,21 +78,9 @@
         </div>
     </div>
 </section>
-{% if gallery %}
+
 <!-- Gallery Section -->
-<div class="gallery-section">
-    <div class="gallery-slider owl-carousel">
-        {% for gallery_image in gallery.images.all %}
-        <div class="gs-item">
-            <img class="img" width="225" height="225" src="{{ gallery_image.image.url }}" alt="{{gallery.title}}">
-            <div class="gs-hover">
-                <i class="fab fa-instagram"></i>
-                <p>yoga hương tre</p>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
+{% include 'gallery.html' %}
 <!-- Gallery Section end -->
-{% endif %}
+
 {% endblock %}

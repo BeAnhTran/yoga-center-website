@@ -76,7 +76,6 @@ INSTALLED_APPS = [
     'apps.shop',
     'apps.promotions',
     'apps.errors',
-    'apps.gallery',
     'apps.events',
     'apps.faq',
     'apps.questions',

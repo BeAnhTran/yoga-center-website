@@ -27,7 +27,6 @@ from services.roll_call_service import RollCallService
 from apps.blog.models import PostCategory, Post
 from apps.events.models import Event
 from apps.faq.models import FAQ
-from apps.gallery.models import Gallery, GalleryImage
 
 
 class Command(BaseCommand):
@@ -70,9 +69,6 @@ class Command(BaseCommand):
 
         print("Create EVENTS")
         self.__create_events()
-
-        print("Create GALLERY")
-        self.__create_gallery()
 
         print("Create FAQ")
         self.__create_faq()
@@ -718,13 +714,6 @@ class Command(BaseCommand):
         ]
         for d in data:
             FAQ.objects.create(**d)
-
-    def __create_gallery(self):
-        path = os.path.join(settings.MEDIA_ROOT, 'seeds/gallery/')
-        img_list = os.listdir(path)
-        gallery = Gallery.objects.create(title='Gallery Sample')
-        for img in img_list:
-            gallery.images.create(image='seeds/gallery/' + img)
 
     def __add_lectures(self, course):
         data = [

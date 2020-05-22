@@ -382,23 +382,11 @@
 	</section>
 	<!-- Sign up Section end -->
 
-{% if gallery %}
+
 <!-- Gallery Section -->
-<div class="gallery-section">
-  <div class="gallery-slider owl-carousel">
-    {% for gallery_image in gallery.images.all %}
-    <div class="gs-item">
-      <img class="img" width="225" height="225" src="{{ gallery_image.image.url }}" alt="{{gallery.title}}">
-      <div class="gs-hover">
-        <i class="fab fa-instagram"></i>
-        <p>yoga hương tre</p>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-</div>
+{% include 'gallery.html' %}
 <!-- Gallery Section end -->
-{% endif %}
+
 {% endblock %}
 {% block specified_js %}
 <script>

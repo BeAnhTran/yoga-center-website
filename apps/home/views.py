@@ -1,6 +1,5 @@
 from django.shortcuts import redirect, render
 from apps.accounts.models import Trainer
-from apps.gallery.models import Gallery
 from apps.events.models import Event
 from apps.blog.models import Post
 from apps.courses.models import Course
@@ -14,7 +13,6 @@ from django.utils.translation import ugettext_lazy as _
 class HomeIndexView(View):
     def get(self, request):
         trainers = Trainer.objects.all()
-        gallery = Gallery.objects.first()
         events = Event.objects.all()[:3]
         posts = Post.objects.all()[:3]
         courses = Course.objects.all()
@@ -22,7 +20,6 @@ class HomeIndexView(View):
         context = {
             'active_nav': 'home',
             'trainers': trainers,
-            'gallery': gallery,
             'events': events,
             'posts': posts,
             'courses': courses,
@@ -42,7 +39,6 @@ class HomeIndexView(View):
             return redirect('accounts:trainee-signup')
         else:
             trainers = Trainer.objects.all()
-            gallery = Gallery.objects.first()
             events = Event.objects.all()[:3]
             posts = Post.objects.all()[:3]
             courses = Course.objects.all()
@@ -50,7 +46,6 @@ class HomeIndexView(View):
             context = {
                 'active_nav': 'home',
                 'trainers': trainers,
-                'gallery': gallery,
                 'events': events,
                 'posts': posts,
                 'courses': courses,
@@ -61,10 +56,8 @@ class HomeIndexView(View):
 
 class ContactView(View):
     def get(self, request):
-        gallery = Gallery.objects.first()
         form = FeedbackForm()
         context = {
-            'gallery': gallery,
             'form': form,
         }
         return render(request, 'home/contact.html', context=context)
@@ -75,9 +68,7 @@ class ContactView(View):
             form.save()
             messages.success(request, _('Send feedback successfully'))
             return redirect('home:contact')
-        gallery = Gallery.objects.first()
         context = {
-            'gallery': gallery,
             'form': form,
         }
         return render(request, 'home/contact.html', context=context)

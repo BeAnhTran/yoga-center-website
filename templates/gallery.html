@@ -1,0 +1,18 @@
+{% load static %}
+<div class="gallery-section">
+    <div class="gallery-slider owl-carousel">
+        {% for i in "x"|rjust:"30" %}
+        {% with img=forloop.counter|stringformat:"s"|add:".jpg" %}
+        {% with img_url='img/gallery/'|add:img %}
+        <div class="gs-item">
+            <img class="img" width="225" height="225" src="{% static img_url %}" alt="yoga hương tre">
+            <div class="gs-hover">
+                <i class="fab fa-instagram"></i>
+                <p>yoga hương tre</p>
+            </div>
+        </div>
+        {% endwith %}
+        {% endwith %}
+        {% endfor %}
+    </div>
+</div>

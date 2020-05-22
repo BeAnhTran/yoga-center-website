@@ -54,37 +54,6 @@ class EventNewView(View):
         return render(request, self.template_name, context=context)
 
 
-# @method_decorator([login_required, admin_required], name='dispatch')
-# class GalleryEditView(UpdateView):
-#     model = Gallery
-#     template_name = 'dashboard/gallery/edit.html'
-#     form_class = gallery_form.GalleryEditForm
-
-#     def get_success_url(self):
-#             return reverse('dashboard:gallery-list', kwargs={})
-
-#     def get_context_data(self, **kwargs):
-#         context = super(GalleryEditView, self).get_context_data(**kwargs)
-#         context['active_nav'] = 'gallery'
-#         if self.request.POST:
-#             context['gallery_images'] = gallery_form.GalleryImageFormSet(
-#                 self.request.POST, self.request.FILES, instance=self.object)
-#         else:
-#             context['gallery_images'] = gallery_form.GalleryImageFormSet(
-#                 instance=self.object)
-#         return context
-
-#     def form_valid(self, form):
-#         context = self.get_context_data()
-#         gallery_images = context['gallery_images']
-#         with transaction.atomic():
-#             self.object = form.save()
-#             if gallery_images.is_valid():
-#                 gallery_images.instance = self.object
-#                 gallery_images.save()
-#         return super(GalleryEditView, self).form_valid(form)
-
-
 @method_decorator([login_required, admin_required], name='dispatch')
 class EventDeleteView(DeleteView):
     model = Event

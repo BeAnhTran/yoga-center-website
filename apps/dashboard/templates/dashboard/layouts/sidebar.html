@@ -233,16 +233,6 @@
         </a>
     </li>
     <hr class="sidebar-divider my-0">
-    <!-- Nav Item - Gallery -->
-    <li class="nav-item {% if active_nav == 'gallery' %}active{% endif %}">
-        <a class="nav-link" href="{% url 'dashboard:gallery-list' %}">
-            <i class="far fa-fw fa-images"></i>
-            <span>
-                {% trans 'gallery' as t_gallery %} {{ t_gallery|capfirst }}
-            </span>
-        </a>
-    </li>
-    <hr class="sidebar-divider my-0">
     <!-- Nav Item - Events -->
     <li class="nav-item {% if active_nav == 'events' %}active{% endif %}">
         <a class="nav-link" href="{% url 'dashboard:events-list' %}">
