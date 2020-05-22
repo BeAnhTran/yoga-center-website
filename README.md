@@ -43,9 +43,15 @@ virtualenv --version
 
 ```sh
 $ git clone git@github.com:giatruongtran27/yoga-center-website.git
+```
+hoặc
+```sh
+$ git clone https://github.com/giatruongtran27/yoga-center-website.git
+```
+Sau đó truy cập vào thư mục của project
+```sh
 $ cd yoga-center-website
 ```
-
 ### Bước 2: Khởi tạo một virtual environment để cài đặt dependencies
 
 ```sh
