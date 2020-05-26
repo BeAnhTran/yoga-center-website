@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="classes-preview">
                     {% if course.image %}
                     <img src="{{ course.image.url }}" alt="{{ course.name }}">
@@ -105,20 +105,40 @@
                         data-numposts="5" data-width="100%"></div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="sb-widget">
                     <h2 class="sb-title">Thông tin giá thẻ tập</h2>
+                    {% if course.course_type == 0 %}
                     <div class="classes-info">
                         <ul>
-                            {% if course.course_type == 0 %}
-                            <li><i class="material-icons">done</i>Giá tháng: {{ course.get_price_per_month }}</li>
-                            <li><i class="material-icons">done</i>Giá buổi: {{ course.get_price_per_lesson }}</li>
-                            <li><i class="material-icons">done</i>Giá học thử: Miễn phí</li>
-                            {% else %}
-                            <li><i class="material-icons">done</i>Giá khóa: {{ course.get_price_for_training_class }}</li>
-                            {% endif %}
+                            <li><i class="material-icons">more</i><b class="text-danger" style='font-family: "Playfair Display", serif;'>Đăng kí theo tháng</b></li>
+                            <li><i class="material-icons">attach_money</i>Giá 1 tháng: <span class="text-danger">{{ course.get_price_per_month }}</span></li>
+                            <li><i class="material-icons">notes</i>Đăng kí học toàn bộ số buổi trong tháng với giá tiền 1 tháng là {{ course.get_price_per_month }}</li>
                         </ul>
                     </div>
+                    <div class="classes-info">
+                        <ul>
+                            <li><i class="material-icons">more</i><b class="text-danger" style='font-family: "Playfair Display", serif;'>Đăng kí theo khoảng thời gian</b></li>
+                            <li><i class="material-icons">attach_money</i>Giá 1 buổi: <span class="text-danger">{{ course.get_price_per_lesson }}</span></li>
+                            <li><i class="material-icons">notes</i>Đăng kí học các buổi trong một khoảng thời gian với giá tiền 1 buổi là {{ course.get_price_per_lesson }}</li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="classes-info">
+                        <ul>
+                            <li><i class="material-icons">more</i><b class="text-danger" style='font-family: "Playfair Display", serif;'>Đăng kí học thử</b></li>
+                            <li><i class="material-icons">attach_money</i>Giá học thử 1 buổi: <span class="text-danger">{{ course.get_trial_price }}</span></li>
+                        </ul>
+                    </div>
+                    {% else %}
+                    <div class="classes-info">
+                        <ul>
+                            <li><i class="material-icons">more</i><b class="text-danger" style='font-family: "Playfair Display", serif;'>Đăng kí học khóa học</b></li>
+                            <li><i class="material-icons">attach_money</i>Giá: <span class="text-danger">{{ course.get_price_for_training_class }}</span></li>
+                            <li><i class="material-icons">notes</i>Đăng kí học khóa học với giá tiền cho toàn bộ khóa học là {{ course.get_price_for_training_class }}</li>
+                        </ul>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
