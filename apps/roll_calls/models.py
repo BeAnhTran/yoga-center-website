@@ -31,6 +31,13 @@ class RollCall(models.Model):
             return True
         return False
 
+    def has_absence_application(self):
+        try:
+            self.absence_application
+            return True
+        except:
+            return False
+
 
 @receiver(post_save, sender=RollCall)
 def cards_changed(sender, instance, **kwargs):

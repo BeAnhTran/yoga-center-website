@@ -69,6 +69,8 @@ urlpatterns += i18n_patterns(
     path('donations/', include('apps.donations.urls')),
     # dashboard
     path('dashboard/', include('apps.dashboard.urls')),
+    # absence applications
+    path('absence-applications/', include('apps.absence_applications.urls')),
     # admin site
     path('admin/', admin.site.urls),
     # accounts

@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/profile/trainees/cards/style.css' %}">
 <style>
-    .btn-group-sm>.btn, .btn-sm {
+    .btn-group-sm>.btn, .btn-group-sm>.btn-sm {
         padding: .25em .4em;
         font-size: 75%;
         font-weight: 700;
@@ -93,7 +93,7 @@
                     {% for r in card.roll_calls.all %}
                     <li
                         class="list-group-item list-group-item-light list-group-item-action d-flex justify-content-between align-items-center">
-                        {{ r.lesson }}
+                        <span class="info-lesson">{{ r.lesson }}</span>
                         {% if r.studied is True and r.has_make_up_lesson is False %}
                         <span class="badge badge-danger badge-pill">đã học</span>
                         {% elif r.studied is False and r.has_make_up_lesson is True %}
@@ -119,9 +119,15 @@
                             <a class="btn btn-sm btn-info" href="javascript:;">
                                 {% trans 'not studied'%}
                             </a>
+                            {% if r.has_absence_application %}
+                            <a class="btn btn-sm btn-secondary" data-roll-call='{{r.pk}}' href="javascript:;">
+                                đã xin nghỉ
+                            </a>
+                            {% else %}
                             <a class="btn btn-sm btn-warning a-make-a-leave-application" data-roll-call='{{r.pk}}' href="javascript:;">
                                 xin nghỉ
                             </a>
+                            {% endif %}
                         </div>
                         {% endif %}
                     </li>
@@ -180,7 +186,16 @@
                         <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        <div>
+                            <p style='color: #000; font-family: "Playfair Display", serif;'>Xin nghỉ cho buổi học</p>
+                            <p class="text-danger absence-application-for-lesson">{% trans 'have not updated yet' %}</p>
+                        </div>
+                        <form id="absence_application_form" class="form-group">
+                            <input type="hidden" name="roll_call" value="-1">
+                            <label style='color: #000; font-family: "Playfair Display", serif; font-size: 15px;'>{% trans 'reason' as t_reason %}{{t_reason|capfirst}}</label>
+                            <textarea name="reason" class="form-control" rows="5"></textarea>
+                            <input type="submit" class="float-right mt-3 site-btn site-btn-sm sb-gradient" value="{% trans 'Submit' %}">
+                        </form>
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
@@ -331,7 +346,41 @@
     });
     $(document).on('click', '.a-make-a-leave-application', function(){
         $('#btn_open_modal_make_leave_application').click();
+        var roll_call_pk = $(this).attr('data-roll-call');
+        var info_lesson_str = $(this).parent().siblings('.info-lesson').text();
+        $('.absence-application-for-lesson').text(info_lesson_str);
+        $('#absence_application_form').children('input[name="roll_call"]').val(roll_call_pk);
     });
+    $(document).on('submit', '#absence_application_form', function(e){
+        e.preventDefault();
+        if($('#absence_application_form').children('textarea[name="reason"]').val().trim() == ''){
+            Swal.fire(
+                "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                'Vui lòng nhập lí do',
+                'error'
+            );
+        }else{
+            var url = "{% url 'absence_applications:absence-applications-new' %}";
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: url,
+                method: 'POST',
+                data: $('#absence_application_form').serialize()
+            }).done((data) => {
+                console.log(data);
+                Swal.fire(
+                    "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
+                    "Xin nghỉ cho buổi học thành công",
+                    'success'
+                ).then((result) => {
+                    window.location.reload();
+                });
+            }).fail((err) => console.log(err));
+        }
+    });
+
     $('.delete-extend-card-request').click(function () {
         Swal.fire({
             title: "{% trans 'Are you sure?'%}",
