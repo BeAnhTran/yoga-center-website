@@ -14,7 +14,6 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.decorators import api_view, renderer_classes
 from django.db import transaction
 from apps.cards.models import Card
-from apps.cards.forms import ExtendCardRequestForm
 from apps.profiles.forms.certificate_form import CertificateForm
 
 

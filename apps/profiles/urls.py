@@ -20,16 +20,6 @@ urlpatterns = [
     path('cards/<int:pk>/roll-call-list', GetRollCallListApiView.as_view(),
          name='profile-trainee-cards-roll-call-list'),
 
-    # EXTEND CARD REQUEST
-    path('accounts/cards/<int:pk>/extend/', profile_trainee_view.TraineeCardExtendView.as_view(),
-         name='profile-trainee-card-extend'),
-    path('accounts/cards/<int:card_id>/extend-card-request/<int:pk>/', profile_trainee_view.ExtendCardRequestDetailView.as_view(),
-         name='profile-trainee-card-extend-request-detail'),
-    path('accounts/cards/<int:card_id>/extend-card-request/<int:pk>/edit', profile_trainee_view.ExtendCardRequestEditView.as_view(),
-         name='profile-trainee-card-extend-request-edit'),
-    path('accounts/cards/<int:card_id>/extend-card-request/<int:pk>/delete', profile_trainee_view.detele_extend_card_request,
-         name='profile-trainee-card-extend-request-delete'),
-
     # REFUND REQUEST
     path('accounts/cards/<int:pk>/refunds/new/', profile_trainee_view.RefundNewView.as_view(),
          name='profile-trainee-card-refunds-new'),

@@ -7,7 +7,7 @@ from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 import datetime
 from django.utils import formats
 
-from apps.cards.models import Card, ExtendCardRequest
+from apps.cards.models import Card
 
 
 class CardFormForTraineeEnroll(forms.ModelForm):
@@ -107,40 +107,3 @@ class CardFormForTraineeEnroll(forms.ModelForm):
                         raise forms.ValidationError(
                             _('Your range time does not have any lessons'))
         return cleaned_data
-
-
-class ExtendCardRequestForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['new_expire_date'] = forms.DateField(
-            label=_('new expire date').capitalize(),
-            widget=DatePicker(options={
-                'useCurrent': True,
-            }, attrs={
-                'placeholder': 'Vui lòng chọn ngày'
-            }),
-        )
-        self.fields['reason'].widget.attrs = {
-            'rows': 4
-        }
-        self.helper = FormHelper()
-        self.helper.form_show_errors = True
-        self.helper.form_id = 'form_new_extend_card_request'
-        self.helper.layout = Layout(
-            'new_expire_date',
-            'reason',
-            HTML("""
-                <div id='extend_lesson' class="mt-3 mb-3 d-none">
-                    <h4 class="mb-1">{}</h4>
-                    <p>{}</p>
-                    <div id='extend_lesson_list'>
-                    </div>
-                </div>
-            """.format(
-                _('Extend Lesson'),
-                _('Lessons will be added to your card'))),
-            Submit('submit', _('Save'), css_class='btn-success'))
-
-    class Meta:
-        model = ExtendCardRequest
-        exclude = ['created_at', 'updated_at', 'state', 'card']

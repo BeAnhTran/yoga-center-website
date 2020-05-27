@@ -115,7 +115,14 @@
                         {% elif r.studied is False and r.has_refund is True %}
                             <span class="badge badge-danger badge-pill">đăng kí hoàn tiền</span>
                         {% else %}
-                        <span class="badge badge-info badge-pill">{% trans 'not studied'%}</span>
+                        <div class="btn-group btn-group-sm btn-group-custom">
+                            <a class="btn btn-sm btn-info" href="javascript:;">
+                                {% trans 'not studied'%}
+                            </a>
+                            <a class="btn btn-sm btn-warning a-make-a-leave-application" data-roll-call='{{r.pk}}' href="javascript:;">
+                                xin nghỉ
+                            </a>
+                        </div>
                         {% endif %}
                     </li>
                     {% endfor %}
@@ -151,6 +158,29 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-danger"
+                            data-dismiss="modal">{% trans 'Close' %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="btn_open_modal_make_leave_application" type="button" class="d-none" data-toggle="modal"
+            data-target="#modal_make_leave_application"></button>
+        <!-- Make up detail Modal -->
+        <div class="modal" id="modal_make_leave_application">
+            <div class="modal-dialog" style="max-width: 650px;">
+                <div class="modal-content">
+                    <div class="modal-header border-none">
+                        <h3 id="model_title" class="modal-title">
+                            Tạo đơn xin nghỉ
+                        </h3>
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
@@ -298,6 +328,9 @@
         if (obj_str.length > 1) {
             $('html, body').animate({ scrollTop: $(obj_str).offset().top - 100 }, 'slow');
         }
+    });
+    $(document).on('click', '.a-make-a-leave-application', function(){
+        $('#btn_open_modal_make_leave_application').click();
     });
     $('.delete-extend-card-request').click(function () {
         Swal.fire({

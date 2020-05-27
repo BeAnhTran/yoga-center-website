@@ -39,29 +39,3 @@ class Card(models.Model):
         total_price = self.card_invoices.last().amount
         result = total_price / self.total_lesson()
         return result
-
-
-PENDING_STATE = 0
-APPROVED_STATE = 1
-REJECTED_STATE = 2
-
-
-STATE_CHOICES = (
-    (PENDING_STATE, _('Pending')),
-    (APPROVED_STATE, _('Approved')),
-    (REJECTED_STATE, _('Rejected')),
-)
-
-
-class ExtendCardRequest(models.Model):
-    card = models.ForeignKey(
-        Card, on_delete=models.CASCADE, related_name='extend_card_requests', verbose_name=_('card')
-    )
-    new_expire_date = models.DateField(verbose_name=_('new expire date'))
-    reason = RichTextUploadingField(verbose_name=_('reason'))
-    state = models.IntegerField(choices=STATE_CHOICES,
-                                default=PENDING_STATE, verbose_name=_('state'))
-    created_at = models.DateTimeField(
-        auto_now_add=True, verbose_name=_('created at'))
-    updated_at = models.DateTimeField(
-        auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
