@@ -152,7 +152,7 @@
                             class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center">
                             <span class="badge badge-secondary">{{ r.card.pk }}</span>
                             <small>{{ r.card.trainee }}</small>
-                            <a href="javascript:;" class="a-absence-application" data-rollcall-pk="{{r.pk}}"><span class="badge badge-secondary badge-pill">đã xin nghỉ</span></a>
+                            <a href="javascript:;" class="a-absence-application" data-rollcall-pk="{{r.pk}}" data-absence-application-pk="{{r.absence_application.pk}}"><span class="badge badge-secondary badge-pill">đã xin nghỉ</span></a>
                         </li>
                         {% else %}
                         <li
@@ -310,7 +310,7 @@
 
 <script>
     $(document).on('click', '.a-absence-application', function(){
-        var pk = $(this).attr('data-rollcall-pk');
+        var pk = $(this).attr('data-absence-application-pk');
         var _url = "{% url 'absence_applications:absence-applications-detail' 0 %}";
         var url = _url.replace(0, pk);
         $.ajax({
@@ -322,7 +322,7 @@
         }).done((data) => {
             console.log(data);
             Swal.fire(
-                '<strong>Xin nghỉ với lí do</strong>',
+                '<strong>{% trans "Absence Application Reason" %}</strong>',
                 '<span class="text-danger">'+ data['reason'] +'</span>',
                 'info'
             );

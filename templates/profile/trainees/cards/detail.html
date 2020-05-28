@@ -92,7 +92,7 @@
                 <ul class="list-group mb-3">
                     {% for r in card.roll_calls.all %}
                     <li
-                        class="list-group-item list-group-item-light list-group-item-action d-flex justify-content-between align-items-center">
+                        class="list-group-item {% if r.is_in_the_past %}list-group-item-secondary{% else %}list-group-item-light list-group-item-action{% endif %} d-flex justify-content-between align-items-center">
                         <span class="info-lesson">{{ r.lesson }}</span>
                         {% if r.studied is True and r.has_make_up_lesson is False %}
                         <span class="badge badge-danger badge-pill">đã học</span>
@@ -120,16 +120,22 @@
                             <a class="btn btn-sm btn-secondary" data-roll-call='{{r.pk}}' href="javascript:;">
                                 {% trans 'applied for leave' %}
                             </a>
-                            <a class="btn btn-sm btn-warning" data-roll-call='{{r.pk}}' data-absence-application-pk='{{r.absence_application.pk}}' href="javascript:;">
+                            <a class="btn btn-sm btn-warning a-absence-application" data-roll-call='{{r.pk}}' data-absence-application-pk='{{r.absence_application.pk}}' href="javascript:;">
                                 {% trans 'detail' %}
                             </a>
                             {% else %}
-                            <a class="btn btn-sm btn-info" href="javascript:;">
-                                {% trans 'not studied'%}
-                            </a>
-                            <a class="btn btn-sm btn-warning a-make-a-leave-application" data-roll-call='{{r.pk}}' href="javascript:;">
-                                {% trans 'make a absence application' %}
-                            </a>
+                                {% if r.is_in_the_past %}
+                                <a class="btn btn-sm btn-secondary" href="javascript:;">
+                                    {% trans 'not studied'%}
+                                </a>
+                                {% else %}
+                                <a class="btn btn-sm btn-info" href="javascript:;">
+                                    {% trans 'not studied'%}
+                                </a>
+                                <a class="btn btn-sm btn-warning a-make-a-leave-application" data-roll-call='{{r.pk}}' href="javascript:;">
+                                    {% trans 'make a absence application' %}
+                                </a>
+                                {% endif %}
                             {% endif %}
                         </div>
                         {% endif %}
@@ -344,6 +350,27 @@
             $('html, body').animate({ scrollTop: $(obj_str).offset().top - 100 }, 'slow');
         }
     });
+    
+    $(document).on('click', '.a-absence-application', function(){
+        var pk = $(this).attr('data-absence-application-pk');
+        var _url = "{% url 'absence_applications:absence-applications-detail' 0 %}";
+        var url = _url.replace(0, pk);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'GET'
+        }).done((data) => {
+            console.log(data);
+            Swal.fire(
+                '<strong>{% trans "Absence Application Reason" %}</strong>',
+                '<span class="text-danger">'+ data['reason'] +'</span>',
+                'info'
+            );
+        }).fail((err) => console.log(err));
+    });
+
     $(document).on('click', '.a-make-a-leave-application', function(){
         $('#btn_open_modal_make_leave_application').click();
         var roll_call_pk = $(this).attr('data-roll-call');

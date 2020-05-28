@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-28 19:45+0700\n"
+"POT-Creation-Date: 2020-05-28 21:42+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -684,7 +684,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:339
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:697
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:169
-#: .\templates\base.html:181 .\templates\profile\trainees\cards\detail.html:358
+#: .\templates\base.html:181 .\templates\profile\trainees\cards\detail.html:379
 #: .\templates\profile\trainees\cards\refunds\new.html:158
 msgid "error"
 msgstr ""
@@ -1202,7 +1202,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:690
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:716
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:209
-#: .\templates\base.html:169 .\templates\profile\trainees\cards\detail.html:474
+#: .\templates\base.html:169 .\templates\profile\trainees\cards\detail.html:495
 msgid "done"
 msgstr ""
 
@@ -1212,26 +1212,26 @@ msgid "create successfully"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:284
-#: .\templates\profile\trainees\cards\detail.html:386
-#: .\templates\profile\trainees\cards\detail.html:402
+#: .\templates\profile\trainees\cards\detail.html:407
+#: .\templates\profile\trainees\cards\detail.html:423
 msgid "Are you sure?"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:285
-#: .\templates\profile\trainees\cards\detail.html:387
-#: .\templates\profile\trainees\cards\detail.html:403
+#: .\templates\profile\trainees\cards\detail.html:408
+#: .\templates\profile\trainees\cards\detail.html:424
 msgid "You wont be able to revert this!"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:290
-#: .\templates\profile\trainees\cards\detail.html:392
-#: .\templates\profile\trainees\cards\detail.html:408
+#: .\templates\profile\trainees\cards\detail.html:413
+#: .\templates\profile\trainees\cards\detail.html:429
 msgid "Yes, delete it!"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:291
-#: .\templates\profile\trainees\cards\detail.html:393
-#: .\templates\profile\trainees\cards\detail.html:409
+#: .\templates\profile\trainees\cards\detail.html:414
+#: .\templates\profile\trainees\cards\detail.html:430
 msgid "Cancel"
 msgstr ""
 
@@ -1617,6 +1617,11 @@ msgstr "Trainer"
 msgid "Studied make-up lesson detail info"
 msgstr ""
 
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:325
+#: .\templates\profile\trainees\cards\detail.html:361
+msgid "Absence Application Reason"
+msgstr ""
+
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:363
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:527
 msgid "Do the roll call successfully"
@@ -1628,7 +1633,7 @@ msgid "Undo the roll call successfully"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:422
-#: .\templates\profile\trainees\cards\detail.html:475
+#: .\templates\profile\trainees\cards\detail.html:496
 msgid "Remove make up lesson successfully"
 msgstr ""
 
@@ -1638,12 +1643,12 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:492
 #: .\apps\make_up_lessons\models.py:14 .\apps\roll_calls\models.py:16
-#: .\templates\profile\trainees\cards\detail.html:445
+#: .\templates\profile\trainees\cards\detail.html:466
 msgid "studied"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:494
-#: .\templates\profile\trainees\cards\detail.html:447
+#: .\templates\profile\trainees\cards\detail.html:468
 msgid "have not studied"
 msgstr ""
 
@@ -2471,22 +2476,22 @@ msgstr ""
 msgid "You dont have any refund request"
 msgstr ""
 
-#: .\templates\profile\trainees\cards\detail.html:359
+#: .\templates\profile\trainees\cards\detail.html:380
 msgid "Please enter reason"
 msgstr ""
 
-#: .\templates\profile\trainees\cards\detail.html:374
+#: .\templates\profile\trainees\cards\detail.html:395
 msgid "Make a absence application successfully."
 msgstr ""
 
-#: .\templates\profile\trainees\cards\detail.html:375
+#: .\templates\profile\trainees\cards\detail.html:396
 #, python-format
 msgid ""
 "You can register a make-up lesson or make a refund for : %(value)s month(s) "
 "from date of lesson."
 msgstr ""
 
-#: .\templates\profile\trainees\cards\detail.html:452
+#: .\templates\profile\trainees\cards\detail.html:473
 msgid "Remove make-up lesson"
 msgstr ""
 

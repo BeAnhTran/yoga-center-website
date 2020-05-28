@@ -5,6 +5,7 @@ from apps.cards.models import Card
 from apps.lessons.models import Lesson
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from datetime import date, datetime
 
 
 class RollCall(models.Model):
@@ -37,6 +38,16 @@ class RollCall(models.Model):
             return True
         except:
             return False
+
+    def is_in_the_past(self):
+        now = datetime.now()
+        if self.lesson.date < now.date():
+            return True
+        elif self.lesson.date == now.date():
+            if self.lesson.end_time < now.time():
+                return True
+            return False
+        return False
 
 
 @receiver(post_save, sender=RollCall)

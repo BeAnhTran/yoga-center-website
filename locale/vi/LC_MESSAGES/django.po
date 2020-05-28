@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-28 19:46+0700\n"
+"POT-Creation-Date: 2020-05-28 21:49+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -682,7 +682,7 @@ msgstr "buổi tập đã đủ số lượng"
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:339
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:697
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:169
-#: .\templates\base.html:181 .\templates\profile\trainees\cards\detail.html:358
+#: .\templates\base.html:181 .\templates\profile\trainees\cards\detail.html:379
 #: .\templates\profile\trainees\cards\refunds\new.html:158
 msgid "error"
 msgstr "lỗi"
@@ -1208,7 +1208,7 @@ msgstr "Thông tin chi tiết"
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:690
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:716
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:209
-#: .\templates\base.html:169 .\templates\profile\trainees\cards\detail.html:474
+#: .\templates\base.html:169 .\templates\profile\trainees\cards\detail.html:495
 msgid "done"
 msgstr "hoàn thành"
 
@@ -1218,26 +1218,26 @@ msgid "create successfully"
 msgstr "tạo thành công"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:284
-#: .\templates\profile\trainees\cards\detail.html:386
-#: .\templates\profile\trainees\cards\detail.html:402
+#: .\templates\profile\trainees\cards\detail.html:407
+#: .\templates\profile\trainees\cards\detail.html:423
 msgid "Are you sure?"
 msgstr "Bạn chắc chắn muốn thực hiện?"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:285
-#: .\templates\profile\trainees\cards\detail.html:387
-#: .\templates\profile\trainees\cards\detail.html:403
+#: .\templates\profile\trainees\cards\detail.html:408
+#: .\templates\profile\trainees\cards\detail.html:424
 msgid "You wont be able to revert this!"
 msgstr "Bạn sẽ không thể hoàn tác hành động này!"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:290
-#: .\templates\profile\trainees\cards\detail.html:392
-#: .\templates\profile\trainees\cards\detail.html:408
+#: .\templates\profile\trainees\cards\detail.html:413
+#: .\templates\profile\trainees\cards\detail.html:429
 msgid "Yes, delete it!"
 msgstr "Có"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:291
-#: .\templates\profile\trainees\cards\detail.html:393
-#: .\templates\profile\trainees\cards\detail.html:409
+#: .\templates\profile\trainees\cards\detail.html:414
+#: .\templates\profile\trainees\cards\detail.html:430
 msgid "Cancel"
 msgstr "Hủy"
 
@@ -1613,6 +1613,11 @@ msgstr "Huấn luyện viên"
 msgid "Studied make-up lesson detail info"
 msgstr "Học viên đã đăng kí học bù vào buổi với thông tin sau"
 
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:325
+#: .\templates\profile\trainees\cards\detail.html:361
+msgid "Absence Application Reason"
+msgstr "Lí do xin nghỉ"
+
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:363
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:527
 msgid "Do the roll call successfully"
@@ -1624,7 +1629,7 @@ msgid "Undo the roll call successfully"
 msgstr "Hủy điểm danh thành công"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:422
-#: .\templates\profile\trainees\cards\detail.html:475
+#: .\templates\profile\trainees\cards\detail.html:496
 msgid "Remove make up lesson successfully"
 msgstr "Hủy đăng kí học bù thành công"
 
@@ -1634,12 +1639,12 @@ msgstr "Buổi tập đã đủ số lượng"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:492
 #: .\apps\make_up_lessons\models.py:14 .\apps\roll_calls\models.py:16
-#: .\templates\profile\trainees\cards\detail.html:445
+#: .\templates\profile\trainees\cards\detail.html:466
 msgid "studied"
 msgstr "đã học"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:494
-#: .\templates\profile\trainees\cards\detail.html:447
+#: .\templates\profile\trainees\cards\detail.html:468
 msgid "have not studied"
 msgstr "chưa học"
 
@@ -2463,15 +2468,16 @@ msgstr "hành động"
 msgid "You dont have any refund request"
 msgstr "Không có yêu cầu hoàn tiền nào"
 
-#: .\templates\profile\trainees\cards\detail.html:359
+#: .\templates\profile\trainees\cards\detail.html:380
 msgid "Please enter reason"
 msgstr "Vui lòng nhập lí do"
 
-#: .\templates\profile\trainees\cards\detail.html:374
+#: .\templates\profile\trainees\cards\detail.html:395
 msgid "Make a absence application successfully."
 msgstr "Xin nghỉ thành công"
 
-#: .\templates\profile\trainees\cards\detail.html:375
+#: .\templates\profile\trainees\cards\detail.html:396
+#, python-format
 msgid ""
 "You can register a make-up lesson or make a refund for : %(value)s month(s) "
 "from date of lesson."
@@ -2479,7 +2485,7 @@ msgstr ""
 "Bạn có thể đăng kí học bù hoặc xin hoàn tiền cho buổi học trong vòng "
 "%(value)s tháng tình từ ngày học của buổi tập."
 
-#: .\templates\profile\trainees\cards\detail.html:452
+#: .\templates\profile\trainees\cards\detail.html:473
 msgid "Remove make-up lesson"
 msgstr "Hủy đăng kí học bù"
 
@@ -3734,86 +3740,14 @@ msgstr ""
 msgid "The option '%s' is not a valid option for a QR code."
 msgstr ""
 
-#, fuzzy
-#~| msgid "Please choose"
-#~ msgid "Please"
-#~ msgstr "Vui lòng chọn"
+msgid "A user is already registered with this e-mail address."
+msgstr "Email này đã tồn tại."
 
-#~ msgid "min lessons required"
-#~ msgstr "số buổi đăng kí tối thiểu"
+msgid "You must type the same password each time."
+msgstr "Vui lòng nhập lại đúng mật khẩu trước."
 
-#~ msgid "new expire date"
-#~ msgstr "ngày hết hạn mới"
+msgid "The e-mail address and/or password you specified are not correct."
+msgstr "Email hoặc mật khẩu không hợp lệ."
 
-#~ msgid "Extend Lesson"
-#~ msgstr "Buổi học được gia hạn thêm"
-
-#~ msgid "Lessons will be added to your card"
-#~ msgstr "Những buổi học sau sẽ được thêm"
-
-#~ msgid "Pending"
-#~ msgstr "Chờ xử lý"
-
-#~ msgid "Approved"
-#~ msgstr "Đồng ý"
-
-#~ msgid "Rejected"
-#~ msgstr "Từ chối"
-
-#~ msgid "Your card has been still in use for this class"
-#~ msgstr "Thẻ đăng kí vào lớp này của bạn vẫn đang còn hoạt động"
-
-#, fuzzy
-#~| msgid "Image"
-#~ msgid "Images"
-#~ msgstr "Hình ảnh"
-
-#, fuzzy
-#~| msgid "A class with this name already exists."
-#~ msgid "A gallery with this title already exists."
-#~ msgstr "Tên này đã tồn tại"
-
-#~ msgid "gallery"
-#~ msgstr "bộ sưu tập"
-
-#~ msgid "Gallery List"
-#~ msgstr "Danh sách bộ sưu tập"
-
-#~ msgid "extend card request"
-#~ msgstr "yêu cầu gia hạn"
-
-#~ msgid "Extend card request list"
-#~ msgstr "Danh sách yêu cầu gia hạn"
-
-#~ msgid "Create extend card request successfully"
-#~ msgstr "Tạo yêu cầu gia hạn thẻ thành công"
-
-#~ msgid "Location"
-#~ msgstr "Vị trí"
-
-#~ msgid "Gallery"
-#~ msgstr "Bộ sưu tập"
-
-#~ msgid "has been registered"
-#~ msgstr "đã đăng kí"
-
-#~ msgid "Detail"
-#~ msgstr "Chi tiết"
-
-#~ msgid "Extend"
-#~ msgstr "Gia hạn"
-
-#~ msgid "Refund"
-#~ msgstr "Hoàn tiền"
-
-#~ msgid "A user is already registered with this e-mail address."
-#~ msgstr "Email này đã tồn tại."
-
-#~ msgid "You must type the same password each time."
-#~ msgstr "Vui lòng nhập lại đúng mật khẩu trước."
-
-#~ msgid "The e-mail address and/or password you specified are not correct."
-#~ msgstr "Email hoặc mật khẩu không hợp lệ."
-
-#~ msgid "Password must be a minimum of {0} characters."
-#~ msgstr "Mật khẩu phải có ít nhất {0} kí tự."
+msgid "Password must be a minimum of {0} characters."
+msgstr "Mật khẩu phải có ít nhất {0} kí tự."
