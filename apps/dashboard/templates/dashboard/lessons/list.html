@@ -39,7 +39,7 @@
         {% else %}
         <div class="table-responsive">
             <table class="table table-hover">
-                <thead>
+                <thead class="thead-dark">
                     <tr>
                         <th>#</th>
                         <th><small>{% trans 'yoga class' as t_class %}{{ t_class|capfirst }}</small></th>
@@ -54,7 +54,11 @@
                 </thead>
                 <tbody>
                     {% for lesson in lessons %}
+                    {% if lesson.is_in_the_past %}
+                    <tr class="table-secondary">
+                    {% else %}
                     <tr>
+                    {% endif %}
                         <td>{{ forloop.counter }}</td>
                         <td>{{ lesson.yogaclass }}</td>
                         <td>
@@ -62,21 +66,31 @@
                                 {{ lesson.yogaclass.course }}
                             </span>
                         </td>
-                        <td>{{ lesson.date }}</td>
                         <td>
-                            <span class="badge badge-pill badge-info">
+                            {{ lesson.date }}
+                        </td>
+                        <td>
+                            <span class="badge badge-pill badge-success">
                                 {{ lesson.get_time }}
                             </span>
                         </td>
-                        <td>{{ lesson.room }}</td>
                         <td>
-                            <span class="badge badge-pill badge-success">
+                            <span class="badge badge-pill badge-secondary">
+                                {{ lesson.room }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge badge-pill badge-info">
                                 {{ lesson.yogaclass.trainer }}
                             </span>
                         </td>
-                        <td>{{ lesson.get_all_register_trainee_studing }}/{{ lesson.max_people }}</td>
+                        <td>
+                            <span class="badge badge-pill badge-danger">
+                                {{ lesson.get_all_register_trainee_studing }}/{{ lesson.max_people }}
+                            </span>
+                        </td>
                         <td class="text-center">
-                            <a class="btn btn-sm btn-outline-primary"
+                            <a class="btn btn-sm btn-primary"
                                 href="{% url 'dashboard:lessons-roll-calls' lesson.id %}"><i
                                     class="far fa-hand-pointer"></i>
                                 {% trans 'select' as t_select %}{{ t_select|capfirst }}</a>

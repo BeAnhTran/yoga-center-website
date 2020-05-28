@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from apps.classes.models import YogaClass
@@ -130,6 +130,16 @@ class Lesson(models.Model):
             make_up_lesson=None, absence_application=None).count()
         make_up_lessons_at_this_class = self.make_up_lessons.all().count()
         return roll_calls_without_make_up_lesson_and_not_have_absence_application + make_up_lessons_at_this_class
+
+    def is_in_the_past(self):
+        now = datetime.now()
+        if self.date < now.date():
+            return True
+        elif self.date == now.date():
+            if self.end_time < now.time():
+                return True
+            return False
+        return False
 
 
 TAUGHT_STATE = 0
