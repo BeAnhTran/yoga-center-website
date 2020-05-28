@@ -4,6 +4,7 @@
 {% load crispy_forms_tags %}
 {% load sexify %}
 {% load qr_code %}
+{% load settings_extras %}
 
 {% block specified_css %}
 <link rel="stylesheet" href="{% static 'css/profile/style.css' %}">
@@ -371,8 +372,8 @@
             }).done((data) => {
                 console.log(data);
                 Swal.fire(
-                    "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
                     "Xin nghỉ cho buổi học thành công",
+                    "Bạn có thể đăng kí học bù hoặc xin hoàn tiền cho buổi học trong vòng {% settings_value 'EXPIRE_MONTH_OF_LESSON' %} tháng tình từ ngày học của buổi tập.",
                     'success'
                 ).then((result) => {
                     window.location.reload();

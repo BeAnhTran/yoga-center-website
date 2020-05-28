@@ -296,3 +296,9 @@ FACEBOOK_PRIVACY_POLICY_URL = str(env('FACEBOOK_PRIVACY_POLICY_URL'))
 
 prod_db = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
+
+# EXPIRE TIME (MONTH) OF LESSON
+# To register make-up lessons or make a refund
+EXPIRE_MONTH_OF_LESSON = 1
+
+MIN_PERCENTAGE_LESSONS_TO_REGISTER = 0.25
