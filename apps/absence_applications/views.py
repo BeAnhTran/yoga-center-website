@@ -19,3 +19,11 @@ class AbsenceApplicationApiNewView(APIView):
             roll_call=roll_call, reason=reason)
         serializer = AbsenceApplicationSerializer(absence_application)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@method_decorator([login_required], name='dispatch')
+class AbsenceApplicationDetailView(APIView):
+    def get(self, request, pk):
+        obj = get_object_or_404(AbsenceApplication, pk=pk)
+        serializer = AbsenceApplicationSerializer(obj)
+        return Response(serializer.data, status=status.HTTP_200_OK)

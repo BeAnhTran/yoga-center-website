@@ -17,6 +17,7 @@ from django.db.models import CharField
 from apps.refunds.models import Refund, PENDING_STATE
 from apps.make_up_lessons.models import MakeUpLesson
 from apps.roll_calls.models import RollCall
+from django.conf import settings
 
 
 @method_decorator([login_required, trainee_required], name='dispatch')
@@ -40,6 +41,7 @@ class TraineeCardDetailView(View):
         context = {}
         context['card'] = card
         context['sidebar_profile'] = 'cards'
+        context['expire_month_of_lessons'] = settings.EXPIRE_MONTH_OF_LESSON
         card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}'''.format(
             fname=card.trainee.user.full_name(),
             femail=card.trainee.user.email,

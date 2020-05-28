@@ -13,6 +13,7 @@ from apps.cards.models import Card
 from apps.make_up_lessons.serializers import MakeUpLessonSerializer
 from apps.roll_calls.serializers import RollCallSerializer
 from apps.refunds.models import Refund, PENDING_STATE, APPROVED_STATE
+from apps.absence_applications.models import AbsenceApplication
 
 
 @method_decorator([login_required], name='dispatch')
@@ -41,10 +42,13 @@ class RegisterMakeUpLessonApi(APIView):
         for m in make_up_lessons_of_trainee:
             if m.lesson == lesson:
                 return Response(_('You have registed a make-up lesson for this lesson'), status=status.HTTP_400_BAD_REQUEST)
+        # Valid RollCall is that has Absence Application
         # Check refund lesson roll call
         # If roll call has refund with state is APPROVE or PENDDING -> ignore)
-        valid_roll_calls = RollCall.objects.filter(card__trainee=trainee, lesson__yogaclass__course=course, studied=False).exclude(
-            refunds__state__in=[PENDING_STATE, APPROVED_STATE]).exclude(id__in=[elem.roll_call.id for elem in make_up_lessons_of_trainee]).distinct()
+        absence_applications = AbsenceApplication.objects.filter(
+            roll_call__card__trainee=trainee)
+        valid_roll_calls = RollCall.objects.filter(card__trainee=trainee, lesson__yogaclass__course=course, studied=False, id__in=[elem.roll_call.id for elem in absence_applications]).exclude(
+            refunds__state__in=[PENDING_STATE, APPROVED_STATE]).distinct()
         serialized = RollCallSerializer(valid_roll_calls, many=True)
         return Response(serialized.data)
 

@@ -6,4 +6,6 @@ app_name = 'absence_applications'
 urlpatterns = [
     path('new/', views.AbsenceApplicationApiNewView.as_view(),
          name='absence-applications-new'),
+    path('<int:pk>/', views.AbsenceApplicationDetailView.as_view(),
+         name='absence-applications-detail'),
 ]

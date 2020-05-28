@@ -126,10 +126,10 @@ class Lesson(models.Model):
 
     # enrolled trainee + make up lesson
     def get_all_register_trainee_studing(self):
-        roll_calls_withou_make_up_lesson = self.roll_calls.filter(
-            make_up_lesson=None).count()
+        roll_calls_without_make_up_lesson_and_not_have_absence_application = self.roll_calls.filter(
+            make_up_lesson=None, absence_application=None).count()
         make_up_lessons_at_this_class = self.make_up_lessons.all().count()
-        return roll_calls_withou_make_up_lesson + make_up_lessons_at_this_class
+        return roll_calls_without_make_up_lesson_and_not_have_absence_application + make_up_lessons_at_this_class
 
 
 TAUGHT_STATE = 0

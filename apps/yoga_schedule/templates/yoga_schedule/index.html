@@ -109,8 +109,11 @@
                         <label for="">{% trans 'Choose a lesson to replace' %}</label>
                         <div id="lesson_choose">
                             <span class="badge badge-secondary">
-                                {% trans 'All valid lessons to choose to add make up lesson will be display here'%}
+                                {% trans 'All valid lessons to choose to add make up lesson will be display here' %}
                             </span>
+                            <div>
+                                <small class="text-danger"><i class="fas fa-fw fa-exclamation-circle"></i><i>Chỉ áp dụng học bù cho buổi đã xin phép nghỉ</i></small>
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-sm btn-outline-success">{% trans 'Done' %}</button>

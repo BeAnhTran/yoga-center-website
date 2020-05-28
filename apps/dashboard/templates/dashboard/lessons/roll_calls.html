@@ -14,7 +14,7 @@
     <div class="row mb-2">
         <div class="col">
             <small><i class="fab fa-fw fa-leanpub"></i></small> {{ lesson.yogaclass.course }} - {{ lesson.yogaclass }} -
-            {{ lesson.get_time_and_room_detail }}
+            {{ lesson.get_time_and_room_detail }} - {{ lesson.date }}
         </div>
     </div>
     <div class="row mb-2">
@@ -147,14 +147,23 @@
                         </a>
                     </li>
                     {% else %}
-                    <li
-                        class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">
-                        <span class="badge badge-secondary">{{ r.card.pk }}</span>
-                        <small>{{ r.card.trainee }}</small>
-                        <a href="javascript:;" class="a-un-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
-                            <span class="badge badge-success badge-pill">{% trans 'select' %}</span>
-                        </a>
-                    </li>
+                        {% if r.has_absence_application %}
+                        <li
+                            class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center">
+                            <span class="badge badge-secondary">{{ r.card.pk }}</span>
+                            <small>{{ r.card.trainee }}</small>
+                            <a href="javascript:;" class="a-absence-application" data-rollcall-pk="{{r.pk}}"><span class="badge badge-secondary badge-pill">đã xin nghỉ</span></a>
+                        </li>
+                        {% else %}
+                        <li
+                            class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">
+                            <span class="badge badge-secondary">{{ r.card.pk }}</span>
+                            <small>{{ r.card.trainee }}</small>
+                            <a href="javascript:;" class="a-un-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
+                                <span class="badge badge-success badge-pill">{% trans 'select' %}</span>
+                            </a>
+                        </li>
+                        {% endif %}
                     {% endif %}
                     {% endfor %}
                     {% for m in unstudied_make_up_lessons %}
@@ -300,6 +309,26 @@
 <script src="{% static 'vendor/bootstrap-select/bootstrap-select.min.js' %} "></script>
 
 <script>
+    $(document).on('click', '.a-absence-application', function(){
+        var pk = $(this).attr('data-rollcall-pk');
+        var _url = "{% url 'absence_applications:absence-applications-detail' 0 %}";
+        var url = _url.replace(0, pk);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'GET'
+        }).done((data) => {
+            console.log(data);
+            Swal.fire(
+                '<strong>Xin nghỉ với lí do</strong>',
+                '<span class="text-danger">'+ data['reason'] +'</span>',
+                'info'
+            );
+        }).fail((err) => console.log(err));
+    });
+
     $(document).on('click', '.a-un-studied-make-up-lesson', function () {
         var element = $(this);
         var pk = $(this).attr('data-make-up-lesson-pk');
