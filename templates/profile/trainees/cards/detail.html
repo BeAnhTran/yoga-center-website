@@ -407,7 +407,7 @@
                 console.log(data);
                 Swal.fire(
                     "{% trans 'Make a absence application successfully.' %}",
-                    "{% blocktrans with value=expire_month_of_lessons trimmed %}You can register a make-up lesson or make a refund for : {{ value }} month(s) from date of lesson.{% endblocktrans %}",
+                    "{% blocktrans with value=number_of_expire_days_for_lessons trimmed %}You can register a make-up lesson or make a refund for : {{ value }} day(s) from date of lesson.{% endblocktrans %}",
                     'success'
                 ).then((result) => {
                     window.location.reload();

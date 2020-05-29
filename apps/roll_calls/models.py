@@ -5,7 +5,8 @@ from apps.cards.models import Card
 from apps.lessons.models import Lesson
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
+from django.conf import settings
 
 
 class RollCall(models.Model):
@@ -48,6 +49,11 @@ class RollCall(models.Model):
                 return True
             return False
         return False
+
+    def is_valid_to_register_make_up_lesson(self):
+        if self.lesson.date + timedelta(days=int(settings.NUMBER_OF_EXPIRE_DAYS_FOR_LESSON)) <= datetime.now().date():
+            return False
+        return True
 
 
 @receiver(post_save, sender=RollCall)

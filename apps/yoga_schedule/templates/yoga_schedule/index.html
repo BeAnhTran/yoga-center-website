@@ -214,7 +214,14 @@
                     window.location.href = "{% url 'yoga_schedule:index' %}";
                 });
                 console.log(data);
-            }).fail((err) => console.log(err));
+            }).fail(function(err){
+                console.log(err);
+                Swal.fire(
+                    "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                    err.responseJSON,
+                    'error'
+                );
+            });
         }
     });
 

@@ -35,6 +35,6 @@ class RollCallListViewApi(APIView):
         absence_applications = AbsenceApplication.objects.filter(
             roll_call__card__trainee=request.GET.get('trainee_id'))
         roll_calls = RollCall.objects.filter(**filter_options).exclude(refunds__state__in=[
-            PENDING_STATE, APPROVED_STATE]).filter(id__in=[elem.roll_call.id for elem in absence_applications]).distinct()
+            PENDING_STATE, APPROVED_STATE]).filter(id__in=[elem.roll_call.id for elem in absence_applications]).exclude(id__in=[elem.roll_call.id for elem in make_up_lessons_of_trainee]).distinct()
         serialized = RollCallSerializer(roll_calls, many=True)
         return Response(serialized.data)

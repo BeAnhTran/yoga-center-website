@@ -41,7 +41,7 @@ class TraineeCardDetailView(View):
         context = {}
         context['card'] = card
         context['sidebar_profile'] = 'cards'
-        context['expire_month_of_lessons'] = settings.EXPIRE_MONTH_OF_LESSON
+        context['number_of_expire_days_for_lessons'] = settings.NUMBER_OF_EXPIRE_DAYS_FOR_LESSON
         card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}'''.format(
             fname=card.trainee.user.full_name(),
             femail=card.trainee.user.email,
