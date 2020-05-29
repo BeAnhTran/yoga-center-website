@@ -89,7 +89,8 @@ class YogaClassListView(ListView):
                 'trainer')
         if self.request.GET.get('level'):
             filter_options['course__level'] = self.request.GET.get('level')
-        queryset = YogaClass.objects.filter(**filter_options).order_by('created_at')
+        queryset = YogaClass.objects.filter(
+            **filter_options).order_by('created_at')
         return queryset
 
 
@@ -103,7 +104,8 @@ class YogaClassDetailView(DetailView):
         context = super(YogaClassDetailView, self).get_context_data(**kwargs)
         context['active_nav'] = 'classes'
         lesson = self.object.lessons.first()
-        tdelta = datetime.combine(date.today(), lesson.end_time) - datetime.combine(date.today(), lesson.start_time)
+        tdelta = datetime.combine(
+            date.today(), lesson.end_time) - datetime.combine(date.today(), lesson.start_time)
         duration = int(tdelta.total_seconds() / 60)
         context['duration'] = duration
         context['others'] = set(
@@ -111,7 +113,6 @@ class YogaClassDetailView(DetailView):
         return context
 
 
-@method_decorator([login_required, trainee_required], name='dispatch')
 class YogaClassEnrollView(View):
     template_name = 'classes/enroll.html'
 
@@ -134,28 +135,22 @@ class YogaClassEnrollView(View):
         yoga_class = YogaClass.objects.get(slug=kwargs['slug'])
         form = CardFormForTraineeEnroll(
             request.POST, initial={'yoga_class': yoga_class})
-        cleaned_data = form.cleaned_data
-        start = cleaned_data['start_at']
-        end = cleaned_data['end_at']
-        register_lesson_list = yoga_class.lessons.filter(date__range=[start, end], is_full=False).order_by('date')
-        register_roll_calls = RollCall.objects.filter(card__trainee=request.user.trainee, lesson_id__in=[elem.id for elem in register_lesson_list]).distinct()
-        if register_roll_calls.count() > 0:
-            response_data = {}
-            response_data['message'] = 'Bạn đã có thẻ tập đăng kí học một trong số những buổi học bạn đã chọn. Vui lòng kiểm tra lại thẻ tập của bạn.'
-            return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
+        # cleaned_data = form.cleaned_data
+        # start = cleaned_data['start_at']
+        # end = cleaned_data['end_at']
+        # register_lesson_list = yoga_class.lessons.filter(
+        #     date__range=[start, end], is_full=False).order_by('date')
+        # register_roll_calls = RollCall.objects.filter(card__trainee=request.user.trainee, lesson_id__in=[
+        #                                               elem.id for elem in register_lesson_list]).distinct()
+        # if register_roll_calls.count() > 0:
+        #     response_data = {}
+        #     response_data['message'] = 'Bạn đã có thẻ tập đăng kí học một trong số những buổi học bạn đã chọn. Vui lòng kiểm tra lại thẻ tập của bạn.'
+        #     return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
         if form.is_valid():
             # save to session and get it in payment page
             request.session['enroll_card_form'] = request.POST
             return HttpResponse({'success': 'success'}, status=status.HTTP_200_OK)
         return HttpResponse(form.errors.as_json(), status=status.HTTP_400_BAD_REQUEST)
-
-    def __is_trainee_of_class(self, yoga_class, trainee):
-        cards = yoga_class.cards.filter(trainee=trainee)
-        if cards:
-            card = cards.last()
-            if card.lessons.last().date >= datetime.now().date():
-                return True
-        return False
 
 
 class YogaClassGetLessonListView(APIView):
@@ -179,6 +174,11 @@ class YogaClassEnrollPaymentView(View):
             enroll_card_form = request.session['enroll_card_form']
             lesson_list = self.__lesson_list_available(
                 yoga_class, enroll_card_form)
+            for l in lesson_list:
+                if l.roll_calls.filter(card__trainee=request.user.trainee).count() > 0:
+                    messages.error(
+                        request, 'Bạn đã có thẻ tập đăng kí học một trong số những buổi học bạn đã chọn. Vui lòng kiểm tra lại thẻ tập của bạn.')
+                    return redirect('classes:enroll', slug=slug)
             # Payment Form
             form = PaymentForm()
             card_type = CardType.objects.get(pk=enroll_card_form['card_type'])
