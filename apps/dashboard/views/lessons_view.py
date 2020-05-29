@@ -104,8 +104,10 @@ class ListRollCallApiView(View):
         total_count = un_studied_roll_calls.count() + studied_roll_calls.count()
         cards = Card.objects.filter(yogaclass__course=lesson.yogaclass.course).exclude(
             yogaclass=lesson.yogaclass)
-        unstudied_make_up_lessons = MakeUpLesson.objects.filter(lesson=lesson, is_studied=False)
-        studied_make_up_lessons = MakeUpLesson.objects.filter(lesson=lesson, is_studied=True)
+        unstudied_make_up_lessons = MakeUpLesson.objects.filter(
+            lesson=lesson, is_studied=False)
+        studied_make_up_lessons = MakeUpLesson.objects.filter(
+            lesson=lesson, is_studied=True)
         available_substitute_trainers = Trainer.objects.filter(
             ~Q(pk=lesson.yogaclass.trainer.pk))
 
@@ -120,7 +122,7 @@ class ListRollCallApiView(View):
                 lesson=lesson, trainer=lesson.substitute_trainer, state=TAUGHT_INSTEAD_STATE)
         except TrainerLesson.DoesNotExist:
             taught_instead = None
-
+        print(taught_instead)
         context = {
             'lesson': lesson,
             'un_studied_roll_calls': un_studied_roll_calls,
@@ -162,6 +164,10 @@ class SubstituteTrainerApi(APIView):
 
     def delete(self, request, pk, format=None):
         lesson = get_object_or_404(Lesson, pk=pk)
+        taught = TrainerLesson.objects.filter(
+            lesson=lesson, trainer=lesson.substitute_trainer)
+        if taught:
+            taught.delete()
         lesson.substitute_trainer = None
         lesson.save()
         return Response('Xóa thành công', status=status.HTTP_200_OK)

@@ -51,7 +51,7 @@
                 <a id="a_roll_call_for_substitute_trainer" class="text-success ml-3" href="javascript:;">
                     {% if taught_instead is not None %}
                     <i class="far fa-fw fa-check-square"></i>
-                    <small>{% trans 'have made the roll call' %}đã điểm danh</small>
+                    <small>{% trans 'have made the roll call' %}</small>
                     {% else %}
                     <i class="far fa-fw fa-square"></i>
                     <small>{% trans 'make the roll call' %}</small>
@@ -502,34 +502,46 @@
     });
 
     $(document).on('click', '.a-un-studied', function () {
-        var roll_call_id = $(this).attr('data-roll-call');
-        var _url = "{% url 'dashboard:roll-calls-detail' 0 %}";
-        url = _url.replace(0, roll_call_id);
-        $.ajax({
-            headers: {
-                'X-CSRFTOKEN': '{{ csrf_token }}'
-            },
-            url: url,
-            method: 'PUT',
-            data: {
-                'studied': true
-            }
-        }).done((data) => {
-            str = '<li class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">';
-            str += '<span class="badge badge-secondary">' + data['card']['id'] + '</span>';
-            str += data['card']['trainee']['user']['first_name'] + data['card']['trainee']['user']['last_name'];
-            str += '<a href="javascript:;" class="a-studied" data-card="' + data['card']['id'] + '" data-roll-call="' + data['id'] + '">';
-            str += '<span class="badge badge-danger badge-pill">{% trans "remove" %}</span></a></li>';
-            $('#studied_roll_calls').append(str);
-            $(this).parent('li.list-group-item').remove();
+        // Check that: Having make a roll call for trainer
+        var lesson_pk = '{{ lesson.pk }}';
+        var check_having_taught_trainer = '{% if lesson.check_having_trainer %}1{% else %}0{% endif %}';
+        console.log(check_having_taught_trainer);
+        if (check_having_taught_trainer == true){
+            var roll_call_id = $(this).attr('data-roll-call');
+            var _url = "{% url 'dashboard:roll-calls-detail' 0 %}";
+            url = _url.replace(0, roll_call_id);
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: url,
+                method: 'PUT',
+                data: {
+                    'studied': true
+                }
+            }).done((data) => {
+                str = '<li class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">';
+                str += '<span class="badge badge-secondary">' + data['card']['id'] + '</span>';
+                str += data['card']['trainee']['user']['last_name'] + ' ' + data['card']['trainee']['user']['first_name'];
+                str += '<a href="javascript:;" class="a-studied" data-card="' + data['card']['id'] + '" data-roll-call="' + data['id'] + '">';
+                str += '<span class="badge badge-danger badge-pill">{% trans "remove" %}</span></a></li>';
+                $('#studied_roll_calls').append(str);
+                $(this).parent('li.list-group-item').remove();
+                Swal.fire(
+                    '{% trans "done" as t_done %}{{ t_done|capfirst }}',
+                    '{% trans "Do the roll call successfully" %}',
+                    'success'
+                )
+            }).fail((err) => {
+                console.log(err);
+            });
+        }else{
             Swal.fire(
-                '{% trans "done" as t_done %}{{ t_done|capfirst }}',
-                '{% trans "Do the roll call successfully" %}',
-                'success'
-            )
-        }).fail((err) => {
-            console.log(err);
-        });
+                '{% trans "warning" as t_warning %}{{ t_warning|capfirst }}',
+                '{% trans "Please make a roll call for trainer first" %}',
+                'warning'
+            );
+        }
     });
 
     $(document).on('click', '.a-studied', function () {
@@ -548,7 +560,7 @@
         }).done((data) => {
             str = '<li class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">';
             str += '<span class="badge badge-secondary">' + data['card']['id'] + '</span>';
-            str += data['card']['trainee']['user']['first_name'] + data['card']['trainee']['user']['last_name'];
+            str += data['card']['trainee']['user']['last_name'] + ' ' + data['card']['trainee']['user']['first_name'];
             str += '<a href="javascript:;" class="a-un-studied" data-card="' + data['card']['id'] + '" data-roll-call="' + data['id'] + '">';
             str += '<span class="badge badge-success badge-pill">{% trans "select" %}</span></a></li>';
             $('#un_studied_roll_calls').append(str);
@@ -674,12 +686,12 @@
                 method: 'POST',
                 data: {
                     'sub_trainer': sub_trainer
-                },
+                }
             }).done((data) => {
                 str = `
                     <div class="div-substitute-trainer">
                     <i class="fas fa-chalkboard-teacher"></i> Dạy thay bởi: <span class="text-primary">`;
-                str += data['substitute_trainer']['user']['first_name'] + data['substitute_trainer']['user']['last_name']
+                str += data['substitute_trainer']['user']['last_name'] + ' ' + data['substitute_trainer']['user']['first_name']
                 str += `</span>
                     <a class="text-danger remove-substitute-trainer" href="javascript:;"><i class="fa fa-sm fa-fw fa-times"></i></a>
                     </div>`;
@@ -690,7 +702,9 @@
                     "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
                     "{% trans 'Add substitute trainer successfully'%}",
                     'success'
-                );
+                ).then((result) => {
+                    window.location.reload();
+                });
                 console.log(data);
             }).fail((err) => {
                 Swal.fire(
@@ -708,7 +722,7 @@
                 'X-CSRFTOKEN': '{{ csrf_token }}'
             },
             url: "{% url 'dashboard:lessons-substitute-trainer' lesson.pk %}",
-            method: 'DELETE',
+            method: 'DELETE'
         }).done((data) => {
             $('.div-substitute-trainer').remove();
             $('#btn_modal_substitute_trainer').removeClass('d-none');
@@ -716,8 +730,9 @@
                 "{% trans 'done' as t_done %}{{ t_done|capfirst }}",
                 "{% trans 'Delete substitute trainer successfully'%}",
                 'success'
-            );
-            console.log(data);
+            ).then((result) => {
+                window.location.reload();
+            });
         }).fail((err) => {
             console.log(err);
         });

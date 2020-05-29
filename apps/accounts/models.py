@@ -159,7 +159,7 @@ class Trainer(models.Model):
     company_name = models.CharField(
         blank=True, null=True, max_length=255, verbose_name=_('company name'))
     taught_lessons = models.ManyToManyField(
-        to='lessons.Lesson', through='lessons.TrainerLesson', related_name='taught_lessons', verbose_name=_('taught lessons'))
+        to='lessons.Lesson', through='lessons.TrainerLesson', related_name='taught_trainer', verbose_name=_('taught lessons'))
 
     def __str__(self):
         full_name = self.user.full_name()

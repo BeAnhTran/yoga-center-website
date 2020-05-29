@@ -141,6 +141,11 @@ class Lesson(models.Model):
             return False
         return False
 
+    def check_having_trainer(self):
+        if self.taught_trainer.all().count() > 0:
+            return True
+        return False
+
 
 TAUGHT_STATE = 0
 TAUGHT_INSTEAD_STATE = 1

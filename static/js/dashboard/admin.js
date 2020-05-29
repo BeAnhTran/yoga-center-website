@@ -1,6 +1,14 @@
 (function($) {
     "use strict"; // Start of use strict
-  
+
+    $(window).on('load', function () {
+      /*------------------
+        Preloder
+      --------------------*/
+      $(".loader").fadeOut();
+      $("#preloder").delay(400).fadeOut("slow");
+    });
+
     // Toggle the side navigation
     $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
       $("body").toggleClass("sidebar-toggled");
