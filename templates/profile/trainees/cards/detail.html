@@ -227,6 +227,7 @@
                         <thead>
                             <tr class="d-flex">
                                 <th class="col-1"><small>{% trans 'Id' %}</small></th>
+                                <th class="col-2"><small>{% trans 'State' %}</small></th>
                                 <th class="col-1"><small>{% trans 'Promotion' %}</small></th>
                                 <th class="col-1"><small>{% trans 'Amount' %}</small></th>
                                 <th class="col-3"><small>{% trans 'Description' %}</small></th>
@@ -239,6 +240,13 @@
                             {% for invoice in card.card_invoices.all %}
                             <tr class="d-flex">
                                 <td class="col-1"><small>{{ invoice.pk }}</small></td>
+                                <td class="col-2">
+                                    {% if invoice.is_charged %}
+                                    <span class="badge badge-pill badge-success">{% trans 'Charged' %}</span>
+                                    {% else %}
+                                    <span class="badge badge-pill badge-danger">{% trans 'Not charged' %}</span>
+                                    {% endif %}
+                                </td>
                                 <td class="col-1"><small>
                                         {% if invoice.apply_promotion_codes.count > 0 %}
                                         {{ invoice.apply_promotion_codes.first.promotion_code.promotion_type.full_title }}

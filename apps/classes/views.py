@@ -30,7 +30,7 @@ from django.conf import settings
 
 from rest_framework import status
 from django.http import HttpResponse
-from apps.payment.form import PaymentForm
+from apps.payment.form import CardPaymentForm
 
 from apps.card_types.models import (CardType,
                                     FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE, FOR_TRIAL)
@@ -180,7 +180,7 @@ class YogaClassEnrollPaymentView(View):
                         request, 'Bạn đã có thẻ tập đăng kí học một trong số những buổi học bạn đã chọn. Vui lòng kiểm tra lại thẻ tập của bạn.')
                     return redirect('classes:enroll', slug=slug)
             # Payment Form
-            form = PaymentForm()
+            form = CardPaymentForm()
             card_type = CardType.objects.get(pk=enroll_card_form['card_type'])
 
             # price of card when register
@@ -251,7 +251,7 @@ class YogaClassEnrollPaymentView(View):
     @transaction.atomic
     def post(self, request, slug):
         if request.session.get('enroll_card_form'):
-            card_payment_form = PaymentForm(request.POST)
+            card_payment_form = CardPaymentForm(request.POST)
             description = self.__description(
                 request.POST['name'], request.POST['email'], request.POST['amount'])
             charge_id = None

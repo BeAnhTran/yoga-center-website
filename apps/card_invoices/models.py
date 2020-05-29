@@ -22,3 +22,15 @@ class CardInvoice(models.Model):
         auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
         auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
+
+    def is_charged(self):
+        if self.charge_id or self.check_staff():
+            return True
+        return False
+
+    def check_staff(self):
+        try:
+            self.staff
+            return True
+        except:
+            return False

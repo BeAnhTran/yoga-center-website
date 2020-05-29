@@ -42,18 +42,6 @@
                       {{ form.email }}
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="field">
-                      <label for="example5-address">{% trans 'address' as t_addr %}{{ t_addr|capfirst }}</label>
-                      {{ form.address }}
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="field">
-                      <label for="example5-address">{% trans 'city' as t_city %}{{ t_city|capfirst }}</label>
-                      {{ form.city }}
-                    </div>
-                  </div>
                   <!-- Payment Card -->
                   {% if total_price > 0 %}
                   <div id="div_payment_card" class="row">
@@ -359,9 +347,7 @@
       var billing_details = {
         name: $('input[name=name]').val(),
         email: $('input#id_email').val(),
-        phone: $('input[name=phone]').val(),
-        address_line1: $('input[name=address]').val(),
-        address_city: $('input[name=city]').val()
+        phone: $('input[name=phone]').val()
       };
 
       data = $('form#payment_form').serialize();
