@@ -241,3 +241,13 @@
 .classes-item {
   margin-top: 0;
 }
+
+.btn-momo{
+  font-weight: 500;
+  border-color: #AF2070;
+  background: #AF2070;
+}
+.btn-momo:hover{
+  background: #fff;
+  color: #AF2070;
+}

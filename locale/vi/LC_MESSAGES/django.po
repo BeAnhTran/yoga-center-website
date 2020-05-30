@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-29 12:42+0700\n"
+"POT-Creation-Date: 2020-05-30 16:46+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr "lí do"
 
 #: .\apps\absence_applications\models.py:12 .\apps\accounts\models.py:121
 #: .\apps\card_invoices\models.py:22 .\apps\card_types\models.py:29
-#: .\apps\cards\models.py:22 .\apps\classes\models.py:31
+#: .\apps\cards\models.py:24 .\apps\classes\models.py:31
 #: .\apps\courses\models.py:50
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:33
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:34
@@ -36,20 +36,20 @@ msgstr "lí do"
 #: .\apps\feedback\models.py:13 .\apps\lectures\models.py:16
 #: .\apps\lessons\models.py:44 .\apps\lessons\models.py:167
 #: .\apps\make_up_lessons\models.py:16 .\apps\questions\models.py:13
-#: .\apps\refunds\models.py:29 .\apps\roll_calls\models.py:19
+#: .\apps\refunds\models.py:29 .\apps\roll_calls\models.py:20
 #: .\apps\rooms\models.py:23 .\apps\shop\models.py:62 .\apps\shop\models.py:72
 msgid "created at"
 msgstr "thời gian tạo"
 
 #: .\apps\absence_applications\models.py:14 .\apps\accounts\models.py:123
 #: .\apps\card_invoices\models.py:24 .\apps\card_types\models.py:31
-#: .\apps\cards\models.py:24 .\apps\classes\models.py:33
+#: .\apps\cards\models.py:26 .\apps\classes\models.py:33
 #: .\apps\courses\models.py:52 .\apps\donations\models.py:23
 #: .\apps\events\models.py:21 .\apps\feedback\models.py:15
 #: .\apps\lectures\models.py:18 .\apps\lessons\models.py:46
 #: .\apps\lessons\models.py:169 .\apps\make_up_lessons\models.py:18
 #: .\apps\questions\models.py:15 .\apps\refunds\models.py:31
-#: .\apps\roll_calls\models.py:21 .\apps\rooms\models.py:25
+#: .\apps\roll_calls\models.py:22 .\apps\rooms\models.py:25
 #: .\apps\shop\models.py:64 .\apps\shop\models.py:74
 msgid "updated at"
 msgstr "thời gian cập nhật"
@@ -108,7 +108,7 @@ msgid "Male"
 msgstr "Nam"
 
 #: .\apps\accounts\models.py:24 .\apps\classes\templates\payment.html:41
-#: .\apps\classes\views.py:346
+#: .\apps\classes\views.py:348
 #: .\apps\dashboard\templates\dashboard\admins\list.html:33
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:29
 #: .\apps\dashboard\templates\dashboard\questions\list.html:29
@@ -405,7 +405,7 @@ msgstr "Tìm kiếm"
 
 #: .\apps\card_invoices\models.py:12
 #: .\apps\dashboard\templates\dashboard\cards\list.html:17
-#: .\apps\refunds\models.py:21 .\apps\roll_calls\models.py:13
+#: .\apps\refunds\models.py:21 .\apps\roll_calls\models.py:14
 #: .\templates\layouts\header.html:58
 msgid "card"
 msgstr "thẻ tập"
@@ -515,7 +515,7 @@ msgstr "Thời gian kết thúc phải sau thời gian bắt đầu"
 msgid "Your range time does not have any lessons"
 msgstr "Khoảng thời gian bạn chọn không có buổi học phù hợp"
 
-#: .\apps\cards\models.py:14
+#: .\apps\cards\models.py:16
 #: .\apps\dashboard\templates\dashboard\cards\list.html:28
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:83
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:25
@@ -525,20 +525,20 @@ msgstr "Khoảng thời gian bạn chọn không có buổi học phù hợp"
 msgid "trainee"
 msgstr "học viên"
 
-#: .\apps\cards\models.py:16 .\apps\classes\templates\payment.html:112
+#: .\apps\cards\models.py:18 .\apps\classes\templates\payment.html:121
 #: .\apps\dashboard\templates\dashboard\cards\list.html:29
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:26
 msgid "card type"
 msgstr "loại thẻ"
 
-#: .\apps\cards\models.py:18
+#: .\apps\cards\models.py:20
 #: .\apps\dashboard\templates\dashboard\cards\list.html:30
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:45
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:27
 msgid "yoga class"
 msgstr "lớp"
 
-#: .\apps\cards\models.py:20 .\apps\refunds\forms.py:17
+#: .\apps\cards\models.py:22 .\apps\refunds\forms.py:17
 #: .\apps\refunds\models.py:23
 msgid "lessons"
 msgstr "buổi tập"
@@ -578,7 +578,7 @@ msgid "trainer"
 msgstr "huấn luyện viên"
 
 #: .\apps\classes\models.py:20 .\apps\classes\templates\classes\enroll.html:57
-#: .\apps\classes\templates\payment.html:116 .\apps\courses\models.py:44
+#: .\apps\classes\templates\payment.html:125 .\apps\courses\models.py:44
 #: .\apps\dashboard\templates\dashboard\classes\show.html:86
 msgid "price per lesson"
 msgstr "giá buổi"
@@ -638,7 +638,7 @@ msgstr "thời gian kết thúc"
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:65
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:69
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:105
-#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:383
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:390
 #: .\templates\profile\trainees\cards\detail.html:164
 #: .\templates\profile\trainees\cards\detail.html:168
 #: .\templates\profile\trainees\cards\detail.html:172
@@ -658,8 +658,8 @@ msgstr "đăng kí"
 #: .\apps\classes\templates\classes\enroll.html:52
 #: .\apps\classes\templates\classes\enroll.html:61
 #: .\apps\classes\templates\classes\enroll.html:78
-#: .\apps\classes\templates\payment.html:119
-#: .\apps\classes\templates\payment.html:130
+#: .\apps\classes\templates\payment.html:128
+#: .\apps\classes\templates\payment.html:139
 msgid "vnd"
 msgstr "vnđ"
 
@@ -675,12 +675,13 @@ msgstr "buổi tập đã đủ số lượng"
 #: .\apps\classes\templates\classes\enroll.html:305
 #: .\apps\classes\templates\classes\enroll.html:396
 #: .\apps\classes\templates\classes\enroll.html:410
-#: .\apps\classes\templates\payment.html:400
-#: .\apps\classes\templates\payment.html:452
+#: .\apps\classes\templates\payment.html:409
+#: .\apps\classes\templates\payment.html:461
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:273
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:339
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:711
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:169
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:220
 #: .\templates\base.html:181 .\templates\profile\trainees\cards\detail.html:393
 #: .\templates\profile\trainees\cards\refunds\new.html:158
 msgid "error"
@@ -707,7 +708,7 @@ msgstr "lớp học"
 #: .\apps\classes\templates\classes\list.html:76
 #: .\apps\classes\templates\classes\show.html:157
 #: .\apps\classes\templates\classes\show.html:201
-#: .\apps\classes\templates\payment.html:149
+#: .\apps\classes\templates\payment.html:158
 #: .\apps\trainers\templates\trainers\list.html:48
 #: .\templates\home\index.html:215
 msgid "Yoga Trainer"
@@ -769,41 +770,71 @@ msgstr "Đăng kí miễn phí"
 msgid "Contact for more"
 msgstr "Giá liên hệ"
 
-#: .\apps\classes\templates\payment.html:127
+#: .\apps\classes\templates\payment.html:86
+msgid "Pay with MOMO"
+msgstr "Thanh toán bằng MoMo"
+
+#: .\apps\classes\templates\payment.html:136
 msgid "total price"
 msgstr "tổng giá"
 
-#: .\apps\classes\templates\payment.html:215
+#: .\apps\classes\templates\payment.html:224
 msgid "Your Lesson List"
 msgstr "Danh sách buổi học của bạn"
 
-#: .\apps\classes\templates\payment.html:382
+#: .\apps\classes\templates\payment.html:391
 msgid "enroll successfully"
 msgstr "đăng kí thành công"
 
-#: .\apps\classes\templates\payment.html:383
+#: .\apps\classes\templates\payment.html:392
 msgid "Thanks for your register. Please check schedule and prepare to study"
 msgstr ""
 "Cảm ơn bạn đã đăng kí. Vui lòng kiểm tra thời khóa biểu và chuẩn bị cho việc "
 "học."
 
-#: .\apps\classes\views.py:271 .\apps\shop\views.py:189
+#: .\apps\classes\templates\payment_result.html:32
+msgid "Congratulation! Sign up for the class successfully."
+msgstr "Chúc mừng bạn đã đăng kí học thành công!"
+
+#: .\apps\classes\templates\payment_result.html:33
+msgid "Please check your card detail and prepare to study"
+msgstr "Vui lòng kiểm tra thông tin thẻ tập của bạn để chuẩn bị cho việc học."
+
+#: .\apps\classes\templates\payment_result.html:34
+#: .\apps\classes\templates\payment_result.html:38
+msgid "Your card detail information"
+msgstr "Thông tin chi tiết thẻ tập"
+
+#: .\apps\classes\templates\payment_result.html:36 .\apps\classes\views.py:398
+msgid "An error occurred. Please try again later"
+msgstr "Đã xảy ra lỗi. Vui lòng thử lại"
+
+#: .\apps\classes\templates\payment_result.html:37
+msgid "Back to payment"
+msgstr "Quay về trang thanh toán"
+
+#: .\apps\classes\views.py:250
+msgid "You dont have any info to payment. Please try again"
+msgstr "Bạn không đủ thông tin để thực hiện thanh toán. Vui lòng thử lại sau."
+
+#: .\apps\classes\views.py:273 .\apps\classes\views.py:382
+#: .\apps\shop\views.py:189
 msgid "Card Payment"
 msgstr "Thanh toán thẻ tập"
 
-#: .\apps\classes\views.py:308
+#: .\apps\classes\views.py:310
 msgid "Thank you for your register at Yoga Huong Tre"
 msgstr "Cảm ơn bạn đã đăng kí học tại trung tâm Yoga Hương Tre"
 
-#: .\apps\classes\views.py:320
+#: .\apps\classes\views.py:322
 msgid "Please enroll a class before payment"
 msgstr "Vui lòng đăng kí một lớp học trước khi tiến hành thanh toán"
 
-#: .\apps\classes\views.py:346 .\apps\shop\views.py:213
+#: .\apps\classes\views.py:348 .\apps\shop\views.py:213
 msgid "with"
 msgstr "với"
 
-#: .\apps\classes\views.py:346 .\apps\shop\views.py:213
+#: .\apps\classes\views.py:348 .\apps\shop\views.py:213
 msgid "paied"
 msgstr "đã thanh toán"
 
@@ -1481,7 +1512,7 @@ msgstr "đăng xuất"
 
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:13
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:291
-#: .\apps\lessons\models.py:163 .\apps\roll_calls\models.py:15
+#: .\apps\lessons\models.py:163 .\apps\roll_calls\models.py:16
 #: .\templates\profile\trainees\cards\detail.html:167
 msgid "lesson"
 msgstr "buổi tập"
@@ -1633,7 +1664,7 @@ msgid "Lesson has been full"
 msgstr "Buổi tập đã đủ số lượng"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:492
-#: .\apps\make_up_lessons\models.py:14 .\apps\roll_calls\models.py:17
+#: .\apps\make_up_lessons\models.py:14 .\apps\roll_calls\models.py:18
 #: .\templates\profile\trainees\cards\detail.html:480
 msgid "studied"
 msgstr "đã học"
@@ -1908,23 +1939,42 @@ msgstr "Đã dạy"
 msgid "Taught Instead"
 msgstr "Đã dạy thay"
 
-#: .\apps\make_up_lessons\views.py:30
+#: .\apps\make_up_lessons\views.py:31
 msgid "You dont have any the same card of course"
 msgstr "Bạn không có thẻ tập đăng kí cùng khóa"
 
-#: .\apps\make_up_lessons\views.py:33
+#: .\apps\make_up_lessons\views.py:34
 msgid "Lesson is full"
 msgstr "Buổi tập đã đủ số lượng"
 
-#: .\apps\make_up_lessons\views.py:38
+#: .\apps\make_up_lessons\views.py:39
 msgid "You have registed at this lesson"
 msgstr "Bạn đã đăng kí học buổi này"
 
-#: .\apps\make_up_lessons\views.py:44
+#: .\apps\make_up_lessons\views.py:45
 msgid "You have registed a make-up lesson for this lesson"
 msgstr "Bạn đã đăng kí học buổi học bù này"
 
-#: .\apps\make_up_lessons\views.py:73
+#: .\apps\make_up_lessons\views.py:53
+#, fuzzy, python-format
+#| msgid "You have registed a make-up lesson for this lesson"
+msgid ""
+"You have registered for up to %(lessons)s/%(max_lesson)s make-up lessons."
+msgstr "Bạn đã đăng kí học buổi học bù này"
+
+#: .\apps\make_up_lessons\views.py:75
+#, fuzzy, python-format
+#| msgid ""
+#| "You can register a make-up lesson or make a refund for : %(value)s "
+#| "month(s) from date of lesson."
+msgid ""
+"Your lesson is expired to make a make-up lesson. You can only register make-"
+"up lesson in %(days)s day(s) from the date of lesson. "
+msgstr ""
+"Bạn có thể đăng kí học bù hoặc xin hoàn tiền cho buổi học trong vòng "
+"%(value)s tháng tình từ ngày học của buổi tập."
+
+#: .\apps\make_up_lessons\views.py:88
 msgid "You dont have permission"
 msgstr "Bạn không có quyền thực hiện điều này"
 
@@ -2076,11 +2126,11 @@ msgstr "Không có buổi học để đăng kí học bù"
 msgid "Register a make up lesson successfully"
 msgstr "Đăng kí học bù thành công"
 
-#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:342
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:349
 msgid "full"
 msgstr "đã đầy"
 
-#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:344
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:351
 msgid "available"
 msgstr "còn chỗ"
 
@@ -2501,9 +2551,12 @@ msgid "Make a absence application successfully."
 msgstr "Xin nghỉ thành công"
 
 #: .\templates\profile\trainees\cards\detail.html:410
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "You can register a make-up lesson or make a refund for : %(value)s "
+#| "month(s) from date of lesson."
 msgid ""
-"You can register a make-up lesson or make a refund for : %(value)s month(s) "
+"You can register a make-up lesson or make a refund for : %(value)s day(s) "
 "from date of lesson."
 msgstr ""
 "Bạn có thể đăng kí học bù hoặc xin hoàn tiền cho buổi học trong vòng "

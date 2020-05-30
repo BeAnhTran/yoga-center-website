@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+import uuid
 from services.sms_service import send_twilio_message
 from services.stripe_service import StripeService
+from services.momo_service import MoMoService
 import json
 from django.utils.translation import gettext as _
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic import View
@@ -243,9 +245,9 @@ class YogaClassEnrollPaymentView(View):
             context['promotion_val'] = promotion_val
             context['amount'] = amount
             context['amount_display'] = amount_display
-
             return render(request, self.template_name, context=context)
         else:
+            messages.error(request, _('You dont have any info to payment. Please try again'))
             return redirect('classes:enroll', slug=slug)
 
     @transaction.atomic
@@ -367,3 +369,103 @@ class UsePromotionCodeView(View):
         request.session['promotion_code'] = promotion_code.pk
         request.session['promotion_type'] = promotion_type.pk
         return redirect('classes:enroll-payment', slug=slug)
+
+
+@method_decorator([login_required], name='dispatch')
+class YogaClassEnrollMOMOPaymentView(View):
+    def post(self, request, slug):
+        if request.session.get('enroll_card_form'):
+            if int(request.POST.get('amount')) > 0:
+                amount = request.POST.get('amount')
+                orderId = str(uuid.uuid4())
+                requestId = str(uuid.uuid4())
+                orderInfo = _('Card Payment')
+                returnUrl = request.scheme + '://' + \
+                    request.META.get(
+                        'HTTP_HOST') + reverse('classes:payment-result', kwargs={'slug': slug})
+                notifyUrl = request.scheme + '://' + \
+                    request.META.get(
+                        'HTTP_HOST') + reverse('classes:payment-result', kwargs={'slug': slug})
+                momo = MoMoService(orderInfo, returnUrl,
+                                   notifyUrl, amount, orderId, requestId)
+                response = momo.call()
+                response_data = response.content.decode("utf-8")
+                json_response = json.loads(response_data)
+                payUrl = json_response['payUrl']
+                return redirect(payUrl)
+        else:
+            messages.error(request, _(
+                'An error occurred. Please try again later'))
+            return redirect('classes:enroll-payment', slug=slug)
+
+
+@method_decorator([login_required], name='dispatch')
+class YogaClassPaymentResultView(View):
+    template_name = 'payment_result.html'
+
+    def get(self, request, slug):
+        if request.GET['signature']:
+            context = {}
+            yoga_class = YogaClass.objects.get(slug=slug)
+            context['yoga_class'] = yoga_class
+            context['errorCode'] = int(request.GET['errorCode'])
+            if int(request.GET['errorCode']) == 0:
+                if request.session.get('enroll_card_form'):
+                    enroll_form = CardFormForTraineeEnroll(
+                        request.session['enroll_card_form'])
+                    if enroll_form.is_valid():
+                        # PROMOTION
+                        promotion_type = None
+                        promotion_code = None
+                        if request.session.get('promotion_code') and request.session.get('promotion_type'):
+                            promotion_type = get_object_or_404(
+                                PromotionType, pk=request.session.get('promotion_type'))
+                            promotion_code = get_object_or_404(
+                                PromotionCode, pk=request.session.get('promotion_code'))
+                        # CREATE CARD
+                        card = self.__create_card(
+                            yoga_class, enroll_form, request.user.trainee, promotion_code, promotion_type)
+                        context['card'] = card
+                        # CREATE CARD INVOICE
+                        card_invoice = CardInvoiceService(
+                            card, request.GET['orderInfo'], request.GET['amount'], request.GET['transId']).call()
+
+                        if promotion_code is not None and promotion_type is not None:
+                            promotion_code.promotion_type = promotion_type
+                            promotion_code.save()
+                            if promotion_type.category == GIFT_PROMOTION:
+                                promotion_code.promotion_code_products.create(
+                                    product=promotion_type.product, quantity=promotion_type.value)
+                            card_invoice.apply_promotion_codes.create(
+                                promotion_code=promotion_code)
+                            if request.session.get('promotion_code'):
+                                del request.session['promotion_code']
+                            if request.session.get('promotion_type'):
+                                del request.session['promotion_type']
+                        del request.session['enroll_card_form']
+            print(context)
+            return render(request, self.template_name, context=context)
+        else:
+            return redirect('errors:error-403')
+
+    @transaction.atomic
+    def __create_card(self, yoga_class, enroll_form, trainee, promotion=None, promotion_type=None):
+        start = enroll_form.cleaned_data['start_at']
+        end = enroll_form.cleaned_data['end_at']
+        if promotion is not None and promotion_type is not None:
+            if promotion_type.category == PLUS_LESSON_PRACTICE_PROMOTION:
+                lesson_count = int(promotion_type.value)
+                end = end + timedelta(days=lesson_count)
+            elif promotion_type.category == PLUS_WEEK_PRACTICE_PROMOTION:
+                week_count = int(promotion_type.value)
+                end = end + timedelta(days=7*week_count)
+            elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
+                month_count = int(promotion_type.value)
+                end = end + relativedelta(months=month_count)
+        lesson_list = yoga_class.lessons.filter(date__range=[start, end])
+        card = enroll_form.save(commit=False)
+        card.trainee = trainee
+        card.yogaclass = yoga_class
+        card.save()
+        RollCallService(card, lesson_list).call()
+        return card

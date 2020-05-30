@@ -1,0 +1,71 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html class="no-js" lang="vi">
+<head>
+    <meta charset="utf-8">
+    <title>Yoga Hương Tre</title>
+    <meta name="description" content="Yoga Huong Tre">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="{% static 'payment_result/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'payment_result/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'payment_result/css/vendor.css' %}">
+    <script src="{% static 'payment_result/js/modernizr.js' %}" ></script>
+    <link rel="shortcut icon" href="{% static 'img/huongtre_favicon.png'%}">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="row">
+            <div class="logo">
+                <a href="{% url 'home:index' %}">Yoga Hương Tre</a>
+            </div>
+        </div>
+    </header>
+    <main id="main-404-content" class="main-content-particle-js">
+
+        <div class="content-wrap">
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-twelve">
+                        {% if errorCode == 0 %}
+                        <h2 style="color:red;">{% trans 'Congratulation! Sign up for the class successfully.' %}</h2>
+                        <p>{% trans 'Please check your card detail and prepare to study' %}</p>
+                        <a class="btn btn-success redirect" href="{% url 'profile:profile-trainee-cards-detail' card.pk %}">{% trans 'Your card detail information' %}</a>
+                        {% else %}
+                        <h3>{% trans 'An error occurred. Please try again later' %}</h3>
+                        <p>{% trans 'Back to payment' %}</p>
+                        <a class="btn btn-success redirect" href="{% url 'classes:enroll-payment' yoga_class.slug %}">{% trans 'Your card detail information' %}</a>
+                        {% endif %}
+                    </div>
+                </div> <!-- /twelve -->
+            </div> <!-- /row -->
+        </div> <!-- /main-content -->
+
+        <footer>
+            <div class="row">
+                <div class="col-five tab-full bottom-links">
+                    <ul class="links">
+                        <li><a href="{% url 'home:index' %}">Trang chủ</a></li>
+                    </ul>
+
+                    <div class="credits">
+                        <p>Yoga <a href="{% url 'home:index' %}" title="styleshout">Hương Tre</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        </div>
+    </main>
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+    <!-- Java Script
+   ================================================== -->
+    <script src="{% static 'payment_result/js/jquery-2.1.3.min.js'%}"></script>
+    <script src="{% static 'payment_result/js/plugins.js' %}"></script>
+    <script src="{% static 'payment_result/js/main.js' %}"></script>
+
+</body>
+
+</html>
