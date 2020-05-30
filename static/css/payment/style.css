@@ -244,10 +244,22 @@
 
 .btn-momo{
   font-weight: 500;
-  border-color: #AF2070;
-  background: #AF2070;
+  border-color: #fff;
+  background-color: #AF2070 !important;
+  background: url('../../img/momo_logo.png');
+  background-size: 47px 42px;
+  background-position:right;
+  background-repeat:no-repeat;
+  padding: 12px 24px;
+  transition: 0.2s;
+  font-family: serif;
+  text-transform: uppercase;
 }
 .btn-momo:hover{
-  background: #fff;
+  background-color: #fff !important;
+  background: url('../../img/momo_logo.png');
+  background-size: 40px 35px;
+  background-position:right;
+  background-repeat:no-repeat;
   color: #AF2070;
 }
