@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-30 16:43+0700\n"
+"POT-Creation-Date: 2020-05-30 22:26+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,6 +96,7 @@ msgid "Email"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:64
+#: .\apps\classes\templates\payment.html:122
 msgid "Sign up"
 msgstr ""
 
@@ -107,7 +108,7 @@ msgstr ""
 msgid "Male"
 msgstr ""
 
-#: .\apps\accounts\models.py:24 .\apps\classes\templates\payment.html:41
+#: .\apps\accounts\models.py:24 .\apps\classes\templates\payment.html:50
 #: .\apps\classes\views.py:348
 #: .\apps\dashboard\templates\dashboard\admins\list.html:33
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:29
@@ -153,7 +154,7 @@ msgstr ""
 msgid "slug"
 msgstr ""
 
-#: .\apps\accounts\models.py:38 .\apps\classes\templates\payment.html:35
+#: .\apps\accounts\models.py:38 .\apps\classes\templates\payment.html:44
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:32
 #: .\apps\dashboard\templates\dashboard\questions\list.html:32
 #: .\apps\donations\models.py:14
@@ -213,7 +214,7 @@ msgid "updated_at"
 msgstr "updated at"
 
 #: .\apps\accounts\models.py:88 .\apps\card_types\models.py:20
-#: .\apps\classes\models.py:16 .\apps\classes\templates\payment.html:29
+#: .\apps\classes\models.py:16 .\apps\classes\templates\payment.html:38
 #: .\apps\courses\models.py:31
 #: .\apps\dashboard\templates\dashboard\admins\list.html:32
 #: .\apps\dashboard\templates\dashboard\blog\categories\list.html:28
@@ -527,7 +528,7 @@ msgstr ""
 msgid "trainee"
 msgstr ""
 
-#: .\apps\cards\models.py:18 .\apps\classes\templates\payment.html:121
+#: .\apps\cards\models.py:18 .\apps\classes\templates\payment.html:159
 #: .\apps\dashboard\templates\dashboard\cards\list.html:29
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:26
 msgid "card type"
@@ -580,7 +581,7 @@ msgid "trainer"
 msgstr ""
 
 #: .\apps\classes\models.py:20 .\apps\classes\templates\classes\enroll.html:57
-#: .\apps\classes\templates\payment.html:125 .\apps\courses\models.py:44
+#: .\apps\classes\templates\payment.html:163 .\apps\courses\models.py:44
 #: .\apps\dashboard\templates\dashboard\classes\show.html:86
 msgid "price per lesson"
 msgstr ""
@@ -660,8 +661,8 @@ msgstr ""
 #: .\apps\classes\templates\classes\enroll.html:52
 #: .\apps\classes\templates\classes\enroll.html:61
 #: .\apps\classes\templates\classes\enroll.html:78
-#: .\apps\classes\templates\payment.html:128
-#: .\apps\classes\templates\payment.html:139
+#: .\apps\classes\templates\payment.html:166
+#: .\apps\classes\templates\payment.html:177
 msgid "vnd"
 msgstr ""
 
@@ -677,8 +678,8 @@ msgstr ""
 #: .\apps\classes\templates\classes\enroll.html:305
 #: .\apps\classes\templates\classes\enroll.html:396
 #: .\apps\classes\templates\classes\enroll.html:410
-#: .\apps\classes\templates\payment.html:409
-#: .\apps\classes\templates\payment.html:461
+#: .\apps\classes\templates\payment.html:447
+#: .\apps\classes\templates\payment.html:499
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:273
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:339
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:711
@@ -710,7 +711,7 @@ msgstr ""
 #: .\apps\classes\templates\classes\list.html:76
 #: .\apps\classes\templates\classes\show.html:157
 #: .\apps\classes\templates\classes\show.html:201
-#: .\apps\classes\templates\payment.html:158
+#: .\apps\classes\templates\payment.html:196
 #: .\apps\trainers\templates\trainers\list.html:48
 #: .\templates\home\index.html:215
 msgid "Yoga Trainer"
@@ -747,48 +748,72 @@ msgstr ""
 msgid "Payment Info"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:26
+#: .\apps\classes\templates\payment.html:25
+msgid "Pay with Stripe"
+msgstr ""
+
+#: .\apps\classes\templates\payment.html:35
 #: .\apps\donations\templates\donations\index.html:78
 #: .\apps\shop\templates\shop\checkout.html:39
 msgid "Please enter information below"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:53
+#: .\apps\classes\templates\payment.html:62
 #: .\apps\donations\templates\donations\index.html:117
 #: .\apps\shop\templates\shop\checkout.html:80
 msgid "Payment Card"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:62
+#: .\apps\classes\templates\payment.html:71
 #: .\apps\shop\templates\shop\checkout.html:88
 msgid "Pay"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:65
+#: .\apps\classes\templates\payment.html:74
 msgid "Free Register"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:67
+#: .\apps\classes\templates\payment.html:76
 msgid "Contact for more"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:86
+#: .\apps\classes\templates\payment.html:98
 msgid "Pay with MOMO"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:136
+#: .\apps\classes\templates\payment.html:105
+msgid "Pay when come to center"
+msgstr ""
+
+#: .\apps\classes\templates\payment.html:112
+msgid "Your card will be created with state"
+msgstr ""
+
+#: .\apps\classes\templates\payment.html:112
+msgid "not pay yet"
+msgstr ""
+
+#: .\apps\classes\templates\payment.html:115
+msgid "You have to pay your card at center with in 7 days"
+msgstr ""
+
+#: .\apps\classes\templates\payment.html:118
+msgid "If not, your card will be destroyed"
+msgstr ""
+
+#: .\apps\classes\templates\payment.html:174
 msgid "total price"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:224
+#: .\apps\classes\templates\payment.html:262
 msgid "Your Lesson List"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:391
+#: .\apps\classes\templates\payment.html:429
 msgid "enroll successfully"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:392
+#: .\apps\classes\templates\payment.html:430
 msgid "Thanks for your register. Please check schedule and prepare to study"
 msgstr ""
 

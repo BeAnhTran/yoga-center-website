@@ -14,79 +14,117 @@
 <section class="classes-page-section spad">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8" style="background: lightgrey;">
+      <div class="col-lg-8 pb-3" style="background: #28a78e38;">
         <h3 class="mt-3 mb-3">{% trans 'Payment Info' %}</h3>
         <div class="row">
           <div class="col-lg-6">
-            <div class="cell example example5" id="example-5">
-              <!--  -->
-              <form id="payment_form">
-                <input type="hidden" name="amount" value="{{ amount|floatformat }}">
-                <fieldset>
-                  <legend class="card-only">{% trans 'Please enter information below' %}</legend>
-                  <div class="row">
-                    <div class="field">
-                      <label for="example5-name">{% trans 'name' as t_name %} {{t_name|capfirst}}</label>
-                      {{ form.name }}
+            <div id="accordion">
+              <div class="card">
+                <div class="card-header pay-with-stripe">
+                  <a class="card-link" data-toggle="collapse" href="#payWithStripe">
+                    {% trans 'Pay with Stripe' %} <i class="fab fa-cc-stripe float-right"></i>
+                  </a>
+                </div>
+                <div id="payWithStripe" class="collapse" data-parent="#accordion">
+                  <div class="card-body">
+                    <div class="cell example example5" id="example-5">
+                      <!--  -->
+                      <form id="payment_form">
+                        <input type="hidden" name="amount" value="{{ amount|floatformat }}">
+                        <fieldset>
+                          <legend class="card-only">{% trans 'Please enter information below' %}</legend>
+                          <div class="row">
+                            <div class="field">
+                              <label for="example5-name">{% trans 'name' as t_name %} {{t_name|capfirst}}</label>
+                              {{ form.name }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="field">
+                              <label for="example5-phone">{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}</label>
+                              {{ form.phone }}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="field">
+                              <label for="example5-email">{% trans 'email' as t_email %}{{ t_email|capfirst }}</label>
+                              {{ form.email }}
+                            </div>
+                          </div>
+                          <!-- Payment Card -->
+                          {% if total_price > 0 %}
+                          <div id="div_payment_card" class="row">
+                            {% else %}
+                            <div id="div_payment_card" class="row d-none">
+                              {% endif %}
+                              <div class="field">
+                                <label>
+                                  {% trans 'Payment Card' %}
+                                </label>
+                                <div id="card-element" class="field"></div>
+                              </div>
+                            </div>
+                            <!--  -->
+                            <div class="row">
+                              <div class="field">
+                                {% if total_price > 0 %}
+                                <button type="submit">{% trans 'Pay' %} <strong
+                                    id="total_price_payment">{{ amount_display }}đ</strong></button>
+                                {% elif total_price == 0 %}
+                                <button type="submit">{% trans 'Free Register' %} </button>
+                                {% else %}
+                                <button type="submit">{% trans 'Contact for more' %} </button>
+                                {% endif %}
+                              </div>
+                              <div class="outcome">
+                                <div class="error"></div>
+                                <div class="success">
+                                  Success! Your Stripe token is <span class="token"></span>
+                                </div>
+                              </div>
+                            </div>
+                        </fieldset>
+                      </form>
+                      <!--  -->
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="field">
-                      <label for="example5-phone">{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}</label>
-                      {{ form.phone }}
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header pay-with-momo">
+                  <form action="{% url 'classes:enroll-momo-payment' yoga_class.slug %}" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="amount" value="{{ amount|floatformat }}">
+                      <input type="submit" class="card-link" value="{% trans 'Pay with MOMO' %}">
+                  </form>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header pay-when-come-to-the-center">
+                  <a class="collapsed card-link" data-toggle="collapse" href="#payWhenComeToCenter">
+                    {% trans 'Pay when come to center' %}
+                  </a>
+                </div>
+                <div id="payWhenComeToCenter" class="collapse show" data-parent="#accordion">
+                  <div class="card-body">
+                    <ul class="list-group list-group-flush mb-3">
+                      <li class="list-group-item pl-0 pr-0"><i class="fas fa-fw fa-exclamation-circle text-green-custom"></i>
+                        {% trans 'Your card will be created with state' %} <b>{% trans 'not pay yet' %}</b>
+                      </li>
+                      <li class="list-group-item pl-0 pr-0"><i class="fas fa-fw fa-exclamation-circle text-green-custom"></i>
+                        {% trans 'You have to pay your card at center with in 7 days' %}
+                      </li>
+                      <li class="list-group-item pl-0 pr-0"><i class="fas fa-fw fa-exclamation-circle text-green-custom"></i>
+                        {% trans 'If not, your card will be destroyed' %}
+                      </li>
+                    </ul>
+                    <div>
+                      <a href="javascript:;" class="confirm-payWhenComeToCenter">{% trans 'Sign up' %}</a>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="field">
-                      <label for="example5-email">{% trans 'email' as t_email %}{{ t_email|capfirst }}</label>
-                      {{ form.email }}
-                    </div>
-                  </div>
-                  <!-- Payment Card -->
-                  {% if total_price > 0 %}
-                  <div id="div_payment_card" class="row">
-                    {% else %}
-                    <div id="div_payment_card" class="row d-none">
-                      {% endif %}
-                      <div class="field">
-                        <label>
-                          {% trans 'Payment Card' %}
-                        </label>
-                        <div id="card-element" class="field"></div>
-                      </div>
-                    </div>
-                    <!--  -->
-                    <div class="row">
-                      <div class="field">
-                        {% if total_price > 0 %}
-                        <button type="submit">{% trans 'Pay' %} <strong
-                            id="total_price_payment">{{ amount_display }}đ</strong></button>
-                        {% elif total_price == 0 %}
-                        <button type="submit">{% trans 'Free Register' %} </button>
-                        {% else %}
-                        <button type="submit">{% trans 'Contact for more' %} </button>
-                        {% endif %}
-                      </div>
-                      <div class="outcome">
-                        <div class="error"></div>
-                        <div class="success">
-                          Success! Your Stripe token is <span class="token"></span>
-                        </div>
-                      </div>
-                    </div>
-                </fieldset>
-              </form>
-              <!--  -->
+                </div>
+              </div>
             </div>
-            <!-- MOMO PAYMENT -->
-            <div class="mt-3 mb-3">
-              <form action="{% url 'classes:enroll-momo-payment' yoga_class.slug %}" method="POST">
-                  {% csrf_token %}
-                  <input type="hidden" name="amount" value="{{ amount|floatformat }}">
-                  <input style="width: 100%;" type="submit" class="btn btn-danger btn-momo" value="{% trans 'Pay with MOMO' %}">
-              </form>
-            </div>
-            <!--  -->
           </div>
           <div class="col-lg-6">
             <div class="classes-item-warp">

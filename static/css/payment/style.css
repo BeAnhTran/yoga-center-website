@@ -1,5 +1,5 @@
 .example.example5 {
-    background-color: #585985;
+    background-color: #32325D;
   }
   
   .example.example5 * {
@@ -262,4 +262,93 @@
   background-position:right;
   background-repeat:no-repeat;
   color: #AF2070;
+}
+.card-link{
+  font-size: 18px;
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+}
+
+.pay-with-stripe i{
+  font-size: 27px;
+}
+
+.card-header {
+  padding: 1.0rem 1.25rem;
+}
+
+.pay-with-stripe{
+  background-color: #32325D;
+}
+
+.pay-with-stripe .card-link{
+  color:#fff;
+}
+.pay-with-stripe:hover{
+  cursor: pointer;
+}
+
+.pay-with-stripe:hover > .card-link{
+  text-decoration: underline;
+}
+
+.pay-with-momo{
+  background-color: #AF2070 !important;
+  background: url('../../img/momo_logo.png');
+  background-size: 40px 40px;
+  background-position: 95%;
+  background-repeat:no-repeat;
+}
+
+.pay-with-momo .card-link {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.pay-with-momo:hover{
+  cursor: pointer;
+}
+
+.pay-with-momo:hover .card-link{
+  text-decoration: underline;
+} 
+.pay-with-momo .card-link:hover{
+  text-decoration: underline;
+}
+
+.pay-when-come-to-the-center{
+  background-color: #527318 !important;
+  background: url('../../img/huongtre_favicon.png');
+  background-position: 92%;
+  background-repeat:no-repeat;
+}
+
+.pay-when-come-to-the-center .card-link {
+  color: #fff;
+}
+
+.pay-when-come-to-the-center:hover .card-link{
+  text-decoration: underline;
+} 
+.pay-when-come-to-the-center .card-link:hover{
+  text-decoration: underline;
+}
+
+.text-green-custom{
+  color: #527318 !important;
+}
+
+.confirm-payWhenComeToCenter{
+  background-color: #527318;
+  color:#fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 5px;
+  border: 1px solid #527318;
+  display: inline;
+}
+.confirm-payWhenComeToCenter:hover{
+  color:#527318;
+  background-color: #fff;
 }
