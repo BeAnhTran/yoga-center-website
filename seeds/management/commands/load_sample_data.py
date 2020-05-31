@@ -31,6 +31,8 @@ from services.roll_call_service import RollCallService
 from services.card_invoice_service import CardInvoiceService
 from apps.shop.models import ProductCategory, Product
 from random import randint
+import uuid
+from apps.card_invoices.models import PREPAID, POSTPAID
 
 
 class Command(BaseCommand):
@@ -2270,8 +2272,8 @@ class Command(BaseCommand):
         trainee = Trainee.objects.create(user=u)
         card = trainee.cards.create(
             yogaclass=yoga_class, card_type=card_type)
-        CardInvoiceService(card, 'Thanh toán thẻ tập', lesson_arr.__len__(
-        ) * yoga_class.price_per_lesson).call()
+        CardInvoiceService(card, PREPAID, 'Thanh toán thẻ tập', lesson_arr.__len__(
+        ) * yoga_class.price_per_lesson, str(uuid.uuid4())).call()
         RollCallService(card, lesson_arr).call()
 
     def __create_admin(self):
