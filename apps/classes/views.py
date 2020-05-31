@@ -382,10 +382,10 @@ class YogaClassEnrollMOMOPaymentView(View):
                 orderInfo = _('Card Payment')
                 returnUrl = request.scheme + '://' + \
                     request.META.get(
-                        'HTTP_HOST') + reverse('classes:payment-result', kwargs={'slug': slug})
+                        'HTTP_HOST') + reverse('classes:momo-payment-result', kwargs={'slug': slug})
                 notifyUrl = request.scheme + '://' + \
                     request.META.get(
-                        'HTTP_HOST') + reverse('classes:payment-result', kwargs={'slug': slug})
+                        'HTTP_HOST') + reverse('classes:momo-payment-result', kwargs={'slug': slug})
                 momo = MoMoService(orderInfo, returnUrl,
                                    notifyUrl, amount, orderId, requestId)
                 response = momo.call()
@@ -400,7 +400,7 @@ class YogaClassEnrollMOMOPaymentView(View):
 
 
 @method_decorator([login_required], name='dispatch')
-class YogaClassPaymentResultView(View):
+class YogaClassMoMoPaymentResultView(View):
     template_name = 'payment_result.html'
 
     def get(self, request, slug):
