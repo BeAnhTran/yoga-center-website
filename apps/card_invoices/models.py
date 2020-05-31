@@ -6,6 +6,14 @@ from apps.cards.models import Card
 from apps.promotions.models import ApplyPromotionCode
 from django.contrib.contenttypes.fields import GenericRelation
 
+PREPAID = 0
+POSTPAID = 1
+
+PAYMENT_TYPES = (
+    (PREPAID, _('Prepaid')),
+    (POSTPAID, _('Postpaid')),
+)
+
 
 class CardInvoice(models.Model):
     card = models.ForeignKey(
@@ -18,6 +26,8 @@ class CardInvoice(models.Model):
         'charge id'), null=True, blank=True)
     apply_promotion_codes = GenericRelation(
         ApplyPromotionCode, related_query_name='card_invoices')
+    payment_type = models.IntegerField(
+        choices=PAYMENT_TYPES, default=PREPAID, verbose_name=_('payment type'))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
