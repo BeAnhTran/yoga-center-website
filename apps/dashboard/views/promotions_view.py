@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.http import HttpResponse
 from django.views import View
 from django.utils.decorators import method_decorator
-from ..decorators import admin_required
+from ..decorators import admin_required, staff_required
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
@@ -13,7 +13,7 @@ from apps.promotions.models import Promotion
 from apps.dashboard.forms import promotions_form
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class PromotionListView(ListView):
     model = Promotion
     template_name = 'dashboard/promotions/list.html'
@@ -65,7 +65,7 @@ class PromotionNewView(View):
         return render(request, self.template_name, context=context)
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class PromotionDetailView(DetailView):
     model = Promotion
     template_name = 'dashboard/promotions/detail.html'

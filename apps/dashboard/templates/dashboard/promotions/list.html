@@ -8,8 +8,10 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
     <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small>
         {% trans 'promotion list' as t_promotion_list %} {{ t_promotion_list|capfirst }}</h1>
+    {% if request.user.is_superuser %}
     <a href="{% url 'dashboard:promotions-new' %}" class="btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'create new' %}</a>
+    {% endif %}
 </div>
 {% if not promotions %}
 <p class="text-danger">
@@ -38,13 +40,16 @@
                         <td>{{ promotion.start_at }}</td>
                         <td>{{ promotion.end_at }}</td>
                         <td>
-                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'dashboard:promotions-codes-list' promotion.pk %}">
-                                <i class="fas fa-fw fa-barcode"></i> Mã khuyến mãi
-                            </a>
                             <a class="btn btn-sm btn-outline-primary"
                                 href="{% url 'dashboard:promotions-detail' promotion.pk %}"><i
                                     class="fas fa-fw fa-eye"></i> {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
-                            <a class="btn btn-sm btn-outline-warning" href="{% url 'dashboard:promotions-edit' promotion.pk %}"><i
+                            {% if request.user.is_superuser %}
+                            <a class="btn btn-sm btn-outline-secondary"
+                                href="{% url 'dashboard:promotions-codes-list' promotion.pk %}">
+                                <i class="fas fa-fw fa-barcode"></i> Mã khuyến mãi
+                            </a>
+                            <a class="btn btn-sm btn-outline-warning"
+                                href="{% url 'dashboard:promotions-edit' promotion.pk %}"><i
                                     class="fas fa-fw fa-edit"></i> {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
                             <a class="btn btn-sm btn-outline-danger delete-promotion" href="javascript:;"><i
                                     class="fas fa-fw fa-trash"></i>
@@ -54,6 +59,7 @@
                                 {% csrf_token %}
                                 <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
                             </form>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

@@ -93,6 +93,13 @@
         <div id="collapseCards" class="collapse {% if show_nav == True %}show{% endif %}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-secondary pb-2 collapse-inner rounded">
+                <a class="collapse-item {% if active_nav == 'unpaid-cards' %}active{% endif %}"
+                    href="{% url 'dashboard:unpaid-cards-list' %}">
+                    <i class="fas fa-fw fa-funnel-dollar"></i>
+                    <span>
+                        {% trans 'Unpaid card' %}
+                    </span>
+                </a>
                 <a class="collapse-item {% if active_nav == 'cards' %}active{% endif %}"
                     href="{% url 'dashboard:cards-list' %}">
                     <i class="fas fa-fw fa-id-card-alt"></i>
@@ -104,7 +111,7 @@
                     href="{% url 'dashboard:card-types-list' %}">
                     <i class="fas fa-fw fa-vr-cardboard"></i>
                     <span>
-                        {% trans 'card types' as t_card_types %} {{ t_card_types }}
+                        {% trans 'card types' as t_card_types %} {{ t_card_types|capfirst }}
                     </span>
                 </a>
             </div>

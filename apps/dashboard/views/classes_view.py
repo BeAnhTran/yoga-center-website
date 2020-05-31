@@ -8,7 +8,7 @@ from django.views.generic.detail import DetailView
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from ..decorators import admin_required
+from ..decorators import admin_required, staff_required
 
 from apps.classes.models import YogaClass
 from ..forms import classes_form, lesssons_form
@@ -27,7 +27,7 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class ClassListView(ListView):
     model = YogaClass
     template_name = 'dashboard/classes/list.html'
@@ -64,7 +64,7 @@ class ClassNewView(View):
         return render(request, self.template_name, context=context)
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class ClassDetailView(DetailView):
     model = YogaClass
     template_name = 'dashboard/classes/show.html'
@@ -76,7 +76,7 @@ class ClassDetailView(DetailView):
         return context
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class ClassScheduleView(DetailView):
     model = YogaClass
     template_name = 'dashboard/classes/schedule.html'
@@ -110,14 +110,14 @@ class ClassEditView(UpdateView):
         return context
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class ClassDeleteView(DeleteView):
     model = YogaClass
     success_url = reverse_lazy('dashboard:classes-list')
 
 
 @login_required
-@admin_required
+@staff_required
 def get_lessons(request, pk):
     start_date = datetime.fromisoformat(request.GET['startStr'])
     end_date = datetime.fromisoformat(request.GET['endStr'])

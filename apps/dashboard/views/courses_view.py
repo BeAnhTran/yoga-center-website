@@ -4,7 +4,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.views import View
 from ..forms import courses_form
 from django.utils.decorators import method_decorator
-from ..decorators import admin_required
+from ..decorators import admin_required, staff_required
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import user_passes_test
 from apps.courses.models import Course
@@ -16,7 +16,7 @@ from apps.dashboard.forms.courses_form import LectureFormSet
 from django.db import transaction
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class CourseListView(ListView):
     model = Course
     template_name = 'dashboard/courses/list.html'

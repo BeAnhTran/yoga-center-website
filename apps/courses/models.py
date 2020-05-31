@@ -60,17 +60,7 @@ class Course(models.Model):
         super(Course, self).save(*args, **kwargs)
 
     def get_trial_price(self):
-        list_trial_card_types = self.card_types.filter(form_of_using=FOR_TRIAL)
-        if list_trial_card_types:
-            trial_card_type = list_trial_card_types[0]
-            if trial_card_type.multiplier is not None and trial_card_type.multiplier > 0:
-                if self.price_per_lesson is not None:
-                    price = self.price_per_lesson * trial_card_type.multiplier
-                    return sexify.sexy_number(price) + 'đ'
-                else:
-                    return _('have not updated yet')
-            else:
-                return _('Free')
+        return _('Free')
 
     def get_price_per_month(self):
         if self.price_per_month is not None:

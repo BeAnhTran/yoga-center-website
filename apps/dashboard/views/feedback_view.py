@@ -1,11 +1,11 @@
 from django.utils.decorators import method_decorator
-from ..decorators import admin_required
+from ..decorators import admin_required, staff_required
 from django.contrib.auth.decorators import login_required
 from django.views.generic.list import ListView
 from apps.feedback.models import Feedback
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class FeedbackListView(ListView):
     model = Feedback
     template_name = 'dashboard/feedback/list.html'

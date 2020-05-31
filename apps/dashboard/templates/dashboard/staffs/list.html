@@ -13,8 +13,10 @@
         {% trans 'staff' as t_staff %}
         {% blocktrans with value=t_staff|capfirst trimmed %} {{ value }} List{% endblocktrans %}
     </h1>
+    {% if request.user.is_superuser %}
     <a href="{% url 'dashboard:courses-new'%}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
+    {% endif %}
 </div>
 <!-- Content Row -->
 {% if not staffs %}
@@ -43,7 +45,7 @@
                         <td>{{ staff.user.id }}</td>
                         <td>{{ staff }}</td>
                         <td>{{ staff.user.email }}</td>
-                        <td>{{ staff.user.birth_day }}</td>
+                        <td>{{ staff.user.birth_day|default_if_none:'' }}</td>
                         <td>{{ staff.user.get_gender_display }}</td>
                         <td>
                             {% if staff.image %}
@@ -57,6 +59,7 @@
                         <td>
                             <a class="btn btn-sm btn-outline-primary" href="javascript:;"><i
                                     class="fas fa-fw fa-eye"></i> {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
+                            {% if request.user.is_superuser %}
                             <a class="btn btn-sm btn-outline-warning" href="javascript:;"><i
                                     class="fas fa-fw fa-edit"></i> {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
                             <a class="btn btn-sm btn-outline-danger delete-class" href="javascript:;"><i
@@ -66,6 +69,7 @@
                                 {% csrf_token %}
                                 <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
                             </form>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

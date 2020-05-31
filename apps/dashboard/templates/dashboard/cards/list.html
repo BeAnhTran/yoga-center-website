@@ -7,9 +7,13 @@
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
+    {% if active_nav == 'cards' %}
     <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Card List' %}</h1>
     <a href="javascript:;" class="btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
+    {% elif active_nav == 'unpaid-cards' %}
+    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Unpaid Card List' %}</h1>
+    {% endif%}
 </div>
 <!-- Content Row -->
 {% if not cards %}
@@ -41,20 +45,20 @@
                         <td>{{ card.yogaclass }}</td>
                         <td>{{ card.end_at }}</td>
                         <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-sm btn-primary" data-toggle="dropdown">
-                                    <i class="fa fa-bars"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="javascript:;"><i
-                                            class="fas fa-fw fa-eye"></i> {% trans 'show' %}</a>
-                                    <a class="dropdown-item" href="javascript:;"><i
-                                            class="fas fa-fw fa-edit"></i> {% trans 'edit' %}</a>
-                                    <a class="dropdown-item delete-class" href="javascript:;"><i
-                                            class="fas fa-fw fa-trash"></i> {% trans 'delete' %}</a>
-                                </div>
-                            </div>
-
+                            <a class="btn btn-sm btn-primary" href="javascript:;">
+                                <i class="fas fa-fw fa-eye"></i> {% trans 'show' %}
+                            </a>
+                            <a class="btn btn-sm btn-warning" href="javascript:;">
+                                <i class="fas fa-fw fa-edit"></i> {% trans 'edit' %}
+                            </a>
+                            <a class="btn btn-sm btn-danger delete-card" href="javascript:;">
+                                <i class="fas fa-fw fa-trash"></i> {% trans 'delete' %}
+                            </a>
+                            {% if active_nav == 'unpaid-cards' %}
+                            <a class="btn btn-sm btn-success pay-card" href="javascript:;">
+                                <i class="fas fa-fw fa-coins"></i> {% trans 'receive payment' %}
+                            </a>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

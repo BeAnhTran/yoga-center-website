@@ -8,13 +8,13 @@ from django.views import View
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from apps.dashboard.decorators import admin_required
+from apps.dashboard.decorators import admin_required, staff_required
 
 from apps.refunds.models import Refund
 from django.db import transaction
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class RefundRequestListView(ListView):
     model = Refund
     template_name = 'dashboard/requests/refund_requests/list.html'
@@ -30,7 +30,7 @@ class RefundRequestListView(ListView):
         return context
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class RefundRequestDetailView(DetailView):
     model = Refund
     template_name = 'dashboard/requests/refund_requests/detail.html'

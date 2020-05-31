@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import user_passes_test, login_required
-from ..decorators import admin_required
+from ..decorators import admin_required, staff_required
 
 from django.views import View
 from django.views.generic.list import ListView
@@ -23,7 +23,7 @@ from django.core import serializers
 from django.db import transaction
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class RoomListView(ListView):
     model = Room
     template_name = 'dashboard/rooms/list.html'
@@ -37,7 +37,7 @@ class RoomListView(ListView):
         return context
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class RoomDetailView(DetailView):
     model = Room
     template_name = 'dashboard/rooms/detail.html'
@@ -50,7 +50,7 @@ class RoomDetailView(DetailView):
 
 
 @login_required
-@admin_required
+@staff_required
 def get_lessons(request, pk):
     start_date = datetime.fromisoformat(request.GET['startStr'])
     end_date = datetime.fromisoformat(request.GET['endStr'])

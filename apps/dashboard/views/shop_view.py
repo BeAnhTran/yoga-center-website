@@ -8,7 +8,7 @@ from django.views import View
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from ..decorators import admin_required
+from ..decorators import admin_required, staff_required
 
 from apps.shop.models import Product, ProductCategory, Bill
 from apps.dashboard.forms import product_categories_form, products_form
@@ -19,7 +19,7 @@ from apps.dashboard.forms import product_categories_form, products_form
 #******************
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class ProductCategoryListView(ListView):
     model = ProductCategory
     template_name = 'dashboard/shop/categories/list.html'
@@ -35,7 +35,7 @@ class ProductCategoryListView(ListView):
         return context
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class ProductCategoryNewView(View):
     template_name = 'dashboard/shop/categories/new.html'
 
@@ -64,7 +64,7 @@ class ProductCategoryNewView(View):
         return render(request, self.template_name, context=context)
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class ProductCategoryDeleteView(DeleteView):
     model = ProductCategory
     success_url = reverse_lazy('dashboard:shop-categories-list')
@@ -75,7 +75,7 @@ class ProductCategoryDeleteView(DeleteView):
 #******************
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class ProductListView(ListView):
     model = Product
     template_name = 'dashboard/shop/products/list.html'
@@ -90,7 +90,7 @@ class ProductListView(ListView):
         return context
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class ProductNewView(View):
     template_name = 'dashboard/shop/products/new.html'
 
@@ -122,7 +122,7 @@ class ProductNewView(View):
 # BILLS
 #******************
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class BillListView(ListView):
     model = Bill
     template_name = 'dashboard/shop/bills.html'

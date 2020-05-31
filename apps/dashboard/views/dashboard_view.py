@@ -24,8 +24,12 @@ def index(request):
         course_colors.append('#%02X%02X%02X' % (r(), r(), r()))
     courses_colors = zip(courses, course_colors)
     earning = 0
+    unpaid_card_count = 0
     for c in CardInvoice.objects.all():
-        earning += c.amount
+        if c.is_charged():
+            earning += c.amount
+        else:
+            unpaid_card_count+=1
     context = {
         'active_nav': 'dashboard',
         'trainees': trainees,
@@ -34,6 +38,7 @@ def index(request):
         'courses': courses,
         'course_colors': course_colors,
         'courses_colors': courses_colors,
-        'earning': earning
+        'earning': earning,
+        'unpaid_card_count': unpaid_card_count
     }
     return render(request, 'dashboard/index.html', context=context)

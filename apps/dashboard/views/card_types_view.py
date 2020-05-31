@@ -8,14 +8,14 @@ from rest_framework.response import Response
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from ..decorators import admin_required
+from ..decorators import admin_required, staff_required
 
 from apps.card_types.models import (CardType, FOR_TRAINING_COURSE)
 from apps.card_types.serializers import CardTypeSerializer
 from apps.courses.models import (Course, PRACTICE_COURSE, TRAINING_COURSE)
 from django.db.models import Q
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class CardTypeListView(ListView):
     model = CardType
     template_name = 'dashboard/card_types/list.html'
@@ -29,7 +29,7 @@ class CardTypeListView(ListView):
         context['show_nav'] = True
         return context
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class get_card_types_for_course(APIView):
     def get(self, request):
         id_course = request.query_params['id_course']

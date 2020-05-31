@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views import View
 from django.utils.decorators import method_decorator
-from ..decorators import admin_required
+from ..decorators import admin_required, staff_required
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
@@ -14,7 +14,7 @@ from apps.faq.models import FAQ
 from django.db import transaction
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class FAQListView(ListView):
     model = FAQ
     template_name = 'dashboard/faq/list.html'
@@ -28,7 +28,7 @@ class FAQListView(ListView):
         return context
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class FAQNewView(View):
     template_name = 'dashboard/faq/new.html'
 
@@ -54,7 +54,7 @@ class FAQNewView(View):
         return render(request, self.template_name, context=context)
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class FAQEditView(UpdateView):
     model = FAQ
     template_name = 'dashboard/faq/edit.html'
@@ -64,7 +64,7 @@ class FAQEditView(UpdateView):
         return reverse('dashboard:faq-list', kwargs={})
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class FAQDeleteView(DeleteView):
     model = FAQ
     success_url = reverse_lazy('dashboard:faq-list')

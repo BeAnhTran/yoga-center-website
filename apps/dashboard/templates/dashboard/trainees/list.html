@@ -43,7 +43,7 @@
                         <td>{{ trainee.user.id }}</td>
                         <td>{{ trainee }}</td>
                         <td>{{ trainee.user.email }}</td>
-                        <td>{{ trainee.user.birth_day }}</td>
+                        <td>{{ trainee.user.birth_day|default_if_none:'' }}</td>
                         <td>{{ trainee.user.get_gender_display }}</td>
                         <td>
                             {% if trainee.image %}
@@ -59,6 +59,7 @@
                                     class="fas fa-fw fa-eye"></i> {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
                             <a class="btn btn-sm btn-outline-warning" href="javascript:;"><i
                                     class="fas fa-fw fa-edit"></i> {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
+                            {% if request.user.is_superuser %}
                             <a class="btn btn-sm btn-outline-danger delete-class" href="javascript:;"><i
                                     class="fas fa-fw fa-trash"></i>
                                 {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
@@ -66,6 +67,7 @@
                                 {% csrf_token %}
                                 <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
                             </form>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

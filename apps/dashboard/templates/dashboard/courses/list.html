@@ -10,8 +10,10 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
     <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'Course List'%}</h1>
+    {% if request.user.is_superuser %}
     <a href="{% url 'dashboard:courses-new'%}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
-            class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
+        class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'Create New' %}</a>
+    {% endif %}
 </div>
 <!-- Content Row -->
 {% if not courses %}
@@ -53,12 +55,14 @@
                             {{ course|display_course_type }}
                         </td>
                         <td>
+                            {% if request.user.is_superuser %}
                             <a class="btn btn-sm btn-outline-warning" href="{% url 'dashboard:courses-update' course.slug %}"><i class="fas fa-edit"></i></a>
                             <a class="btn btn-sm btn-outline-danger delete-course" href="javascript:;"><i class="fas fa-trash"></i></a>
                             <form class="d-none" action="{% url 'dashboard:courses-delete' course.id %}" method="post">
                                 {% csrf_token %}
                                 <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
                             </form>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

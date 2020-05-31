@@ -1,12 +1,12 @@
 from django.views.generic.list import ListView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from ..decorators import admin_required
+from ..decorators import admin_required, staff_required
 
 from apps.accounts.models import (Staff)
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class StaffListView(ListView):
     model = Staff
     template_name = 'dashboard/staffs/list.html'

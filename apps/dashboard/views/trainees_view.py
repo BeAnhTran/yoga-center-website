@@ -8,12 +8,12 @@ from rest_framework.response import Response
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from ..decorators import admin_required
+from ..decorators import staff_required
 
 from apps.accounts.models import (Trainee)
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class TraineeListView(ListView):
     model = Trainee
     template_name = 'dashboard/trainees/list.html'

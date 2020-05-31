@@ -11,8 +11,10 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
     <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'class list' %}</h1>
+    {% if request.user.is_superuser %}
     <a href="{% url 'dashboard:classes-new' %}" class="btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'create new' %}</a>
+    {% endif %}
 </div>
 <!-- Content Row -->
 {% if not classes %}
@@ -53,20 +55,26 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-outline-primary" href="{% url 'dashboard:classes-detail' class.id %}"><i
-                                    class="fas fa-fw fa-eye"></i> {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
-                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'dashboard:classes-schedule' class.id %}"><i
+                            <a class="btn btn-sm btn-outline-primary"
+                                href="{% url 'dashboard:classes-detail' class.id %}"><i class="fas fa-fw fa-eye"></i>
+                                {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
+                            <a class="btn btn-sm btn-outline-secondary"
+                                href="{% url 'dashboard:classes-schedule' class.id %}"><i
                                     class="fas fa-fw fa-calendar-alt"></i>
                                 {% trans 'schedule' %}</a>
-                            <a class="btn btn-sm btn-outline-warning" href="{% url 'dashboard:classes-update' class.slug %}"><i
-                                    class="fas fa-fw fa-edit"></i> {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
+                            {% if request.user.is_superuser %}
+                            <a class="btn btn-sm btn-outline-warning"
+                                href="{% url 'dashboard:classes-update' class.slug %}"><i class="fas fa-fw fa-edit"></i>
+                                {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
                             <a class="btn btn-sm btn-outline-danger delete-class" href="javascript:;"><i
-                                    class="fas fa-fw fa-trash"></i> {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
-                            <form class="d-none" action="{% url 'dashboard:classes-delete' class.id %}"
-                                method="post">
+                                    class="fas fa-fw fa-trash"></i>
+                                {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
+                            <form class="d-none" action="{% url 'dashboard:classes-delete' class.id %}" method="post">
                                 {% csrf_token %}
                                 <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
                             </form>
+                            {% endif %}
+
                         </td>
                     </tr>
                     {% endfor %}

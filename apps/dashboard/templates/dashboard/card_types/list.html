@@ -8,8 +8,10 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
     <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small>
         {% trans 'card type list' as t_card_type_list %} {{ t_card_type_list|capfirst }}</h1>
+    {% if request.user.is_superuser %}
     <a href="javascript:;" class="btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'create new' %}</a>
+    {% endif %}
 </div>
 {% if not card_types %}
 <p class="text-danger">
@@ -35,7 +37,7 @@
                         <td>{{ card_type.id }}</td>
                         <td>{{ card_type.name }}</td>
                         <td>{{ card_type.description}}</td>
-                        <td>{{ card_type.multiplier }}</td>
+                        <td>{{ card_type.multiplier|default_if_none:'' }}</td>
                         {% endfor %}
                 </tbody>
             </table>

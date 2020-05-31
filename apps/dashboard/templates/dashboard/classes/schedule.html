@@ -26,11 +26,9 @@
 {% endblock %}
 {% block content %}
 <div class="container-fluid mt-3 p-0">
-    <a class="btn btn-sm btn-outline-primary" href="{{request.META.HTTP_REFERER}}">
-        <i class="fas fa-fw fa-arrow-left"></i>{% trans 'back' as back %} {{ back|capfirst }}
-    </a>
+    {% if request.user.is_superuser %}
     <div class="dropdown float-right">
-        <button type="button" class="btn btn-sm btn-outline-success dropdown-toggle" data-toggle="dropdown">
+        <button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
             <i class="fas fa-fw fa-plus-square fa-sm"></i>{% trans 'create new lesson' as create_new_lesson %}
             {{ create_new_lesson|capfirst}}
         </button>
@@ -52,8 +50,9 @@
             </a>
         </div>
     </div>
+    {% endif %}
 </div>
-<h1 class="text-danger text-center">{{ yogaclass.course }} - {{ yogaclass.name }}</h1>
+<h3 class="text-danger text-center">{{ yogaclass.course }} - {{ yogaclass.name }}</h3>
 <div class="container-fluid mb-3">
     <div id='calendar'></div>
 </div>
@@ -82,6 +81,7 @@
             <div class="modal-body">
                 {% crispy lesson_form %}
             </div>
+            {% if request.user.is_superuser %}
             <div id="model_footer_lesson" class="modal-footer">
                 <button id="btn_delete_lesson" type="button" class="btn btn-danger">
                     <i class="fas fa-fw fa-trash"></i>{% trans 'delete' %}
@@ -90,6 +90,7 @@
                     <i class="fas fa-fw fa-edit"></i>{% trans 'update' %}
                 </button>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -162,9 +163,7 @@
                                 url: 'javascript:;',
                                 overlap: false,
                                 color: '#5b8c85',
-                                allDaySlot: false,
-                                imageClassUrl: 'https://picsum.photos/200/300?random=1',
-                                imageTrainerUrl: 'https://picsum.photos/200/300?random=2'
+                                allDaySlot: false
                             })
                         }
                         successCallback(events);
@@ -219,14 +218,6 @@
                     info.revert();
                 } else {
                     console.log('cc');
-                }
-            },
-            eventRender: function (info) {
-                if (info.event.extendedProps.imageClassUrl) {
-                    $(info.el).find("div.fc-time").prepend("<img class='img rounded-circle p-1' src='" + info.event.extendedProps.imageClassUrl + "' width='25' height='25'>");
-                }
-                if (info.event.extendedProps.imageTrainerUrl) {
-                    $(info.el).find("div.fc-time").append("<img class='img rounded-circle p-1' src='" + info.event.extendedProps.imageTrainerUrl + "' width='25' height='25'>");
                 }
             }
         });

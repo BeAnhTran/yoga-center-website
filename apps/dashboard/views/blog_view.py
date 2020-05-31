@@ -8,7 +8,7 @@ from django.views import View
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from ..decorators import admin_required
+from ..decorators import admin_required, staff_required
 
 from apps.blog.models import PostCategory, Post
 from ..forms import post_categories_form, posts_form
@@ -18,7 +18,7 @@ from ..forms import post_categories_form, posts_form
 #******************
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class PostCategoryListView(ListView):
     model = PostCategory
     template_name = 'dashboard/blog/categories/list.html'
@@ -33,7 +33,7 @@ class PostCategoryListView(ListView):
         return context
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class PostCategoryNewView(View):
     template_name = 'dashboard/blog/categories/new.html'
 
@@ -62,7 +62,7 @@ class PostCategoryNewView(View):
         return render(request, self.template_name, context=context)
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class PostCategoryDeleteView(DeleteView):
     model = PostCategory
     success_url = reverse_lazy('dashboard:blog-categories-list')
@@ -72,7 +72,7 @@ class PostCategoryDeleteView(DeleteView):
 #******************
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class PostListView(ListView):
     model = Post
     template_name = 'dashboard/blog/posts/list.html'
@@ -87,7 +87,7 @@ class PostListView(ListView):
         return context
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class PostNewView(View):
     template_name = 'dashboard/blog/posts/new.html'
 
@@ -116,7 +116,7 @@ class PostNewView(View):
         return render(request, self.template_name, context=context)
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class PostDeleteView(DeleteView):
     model = Post
     success_url = reverse_lazy('dashboard:blog-posts-list')

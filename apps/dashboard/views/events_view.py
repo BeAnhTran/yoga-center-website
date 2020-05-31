@@ -8,12 +8,12 @@ from django.views.generic.edit import DeleteView
 from django.db import transaction
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
-from ..decorators import admin_required
+from ..decorators import admin_required, staff_required
 from django.contrib.auth.decorators import login_required
 from apps.dashboard.forms import events_form
 
 
-@method_decorator([login_required, admin_required], name='dispatch')
+@method_decorator([login_required, staff_required], name='dispatch')
 class EventListView(ListView):
     model = Event
     template_name = 'dashboard/events/list.html'

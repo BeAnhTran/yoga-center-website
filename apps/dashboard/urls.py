@@ -71,6 +71,8 @@ rooms_urlpatterns = [
 # CARDS
 cards_urlpatterns = [
     path('', cards_view.CardListView.as_view(), name='cards-list'),
+    path('unpaid-list/', cards_view.UnPaidCardListView.as_view(),
+         name='unpaid-cards-list'),
 ]
 
 # CARD TYPES

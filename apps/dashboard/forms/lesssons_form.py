@@ -22,7 +22,7 @@ class LessonForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         now = datetime.datetime.now()
-        range_time = env('DEFAULT_RANGE_TIME_MINUTES_OF_LESSON')
+        range_time = 60
         now_with_range = now + datetime.timedelta(minutes=range_time)
         self.fields['room'].required = True
         self.fields['room'].label = _('room').capitalize()

@@ -459,8 +459,7 @@ class Command(BaseCommand):
         data_for_trial = {
             'name': 'học thử',
             'description': 'Áp dụng cho học viên muốn học thử',
-            'form_of_using': FOR_TRIAL,
-            'multiplier': 0
+            'form_of_using': FOR_TRIAL
         }
 
         trial_card_type = CardType(

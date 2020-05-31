@@ -63,7 +63,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            {% trans 'Trainees' %}
+                            <a href="{% url 'dashboard:trainees-list' %}">{% trans 'Trainees' %}</a>
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ trainees.count }}</div>
                     </div>
@@ -77,31 +77,13 @@
 
     <!-- Pending Requests Card Example -->
     <div class="col-xl-4 col-md-6 mb-4">
-        <div class="card border-left-secondary shadow h-100 pb-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
-                            {% trans 'Pending Extend Card Requests' %}
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{extend_card_requests.count}}</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Pending Requests Card Example -->
-    <div class="col-xl-4 col-md-6 mb-4">
         <div class="card border-left-danger shadow h-100 pb-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                            {% trans 'Pending Refund Requests' %}
+                            <a
+                                href="{% url 'dashboard:refund-requests-list' %}">{% trans 'Pending Refund Requests' %}</a>
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{refund_requests.count}}</div>
                     </div>
@@ -120,12 +102,30 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            {% trans 'Pending Temporary Leave Requests' %}
+                            <a href="javascript:;">{% trans 'Pending Temporary Leave Requests' %}</a>
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{temporary_leave_requests.count}}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Card Invoice has not paid -->
+    <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-secondary shadow h-100 pb-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            <a href="{% url 'dashboard:unpaid-cards-list' %}">{% trans 'Unpaid card' %}</a>
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{unpaid_card_count}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-funnel-dollar fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -182,7 +182,7 @@
                 <div class="mt-4 text-center small">
                     {% for course, color in courses_colors %}
                     <span class="mr-2">
-                    <i class="fas fa-circle" style="color: {{color}};"></i> {{course}}
+                        <i class="fas fa-circle" style="color: {{color}};"></i> {{course}}
                     </span>
                     {% endfor %}
                 </div>
@@ -278,7 +278,7 @@
                         padding: 10,
                         // Include a dollar sign in the ticks
                         callback: function (value, index, values) {
-                            return number_format(value)+'đ';
+                            return number_format(value) + 'đ';
                         }
                     },
                     gridLines: {
@@ -323,10 +323,10 @@
     var course_names = "{% for course in courses %} {{course}}, {% endfor %}";
     var course_regiters = "{% for course in courses %} {{course.registrations_count}}, {% endfor %}";
     var course_colors = "{% for color in course_colors %} {{color}}, {% endfor %}";
-    
+
     var lables_data = course_names.split(",", "{{courses.count}}");
     var colors_data = course_colors.split(",", "{{courses.count}}");
-    var datas_data = course_regiters.split(`,`,"{{courses.count}}").map(x=>+x)
+    var datas_data = course_regiters.split(`,`, "{{courses.count}}").map(x => +x)
 
     // course_regiters.split(`,`).map(x=>+x)
     console.log(datas_data)
