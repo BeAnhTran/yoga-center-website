@@ -241,7 +241,7 @@
                             <tr class="d-flex">
                                 <td class="col-1"><small>{{ card.invoice.pk }}</small></td>
                                 <td class="col-2">
-                                    {{ card.invoice.get_payment_type_display }}
+                                    <span class="badge badge-pill badge-info">{{ card.invoice.get_payment_type_display }}</span>
                                 </td>
                                 <td class="col-2">
                                     {% if card.invoice.is_charged %}
