@@ -119,7 +119,11 @@
                       </li>
                     </ul>
                     <div>
-                      <a href="javascript:;" class="confirm-payWhenComeToCenter">{% trans 'Sign up' %}</a>
+                      <form action="{% url 'classes:enroll-postpaid' yoga_class.slug %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="amount" value="{{ amount|floatformat }}">
+                        <input type="submit" class="confirm-payWhenComeToCenter" value="{% trans 'Sign up' %}">
+                      </form>
                     </div>
                   </div>
                 </div>

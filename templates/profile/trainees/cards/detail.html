@@ -227,40 +227,42 @@
                         <thead>
                             <tr class="d-flex">
                                 <th class="col-1"><small>{% trans 'Id' %}</small></th>
+                                <th class="col-2"><small>{% trans 'Payment Type' %}</small></th>
                                 <th class="col-2"><small>{% trans 'State' %}</small></th>
                                 <th class="col-1"><small>{% trans 'Promotion' %}</small></th>
                                 <th class="col-1"><small>{% trans 'Amount' %}</small></th>
                                 <th class="col-3"><small>{% trans 'Description' %}</small></th>
                                 <th class="col-4"><small>{% trans 'Online Payment Id' %}</small></th>
                                 <th class="col-4"><small>{% trans 'Staff' %}</small></th>
-                                <th class="col-3"><small>{% trans 'Payment Time' %}</small></th>
+                                <th class="col-3"><small>{% trans 'Create at' %}</small></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for invoice in card.card_invoices.all %}
                             <tr class="d-flex">
-                                <td class="col-1"><small>{{ invoice.pk }}</small></td>
+                                <td class="col-1"><small>{{ card.invoice.pk }}</small></td>
                                 <td class="col-2">
-                                    {% if invoice.is_charged %}
+                                    {{ card.invoice.get_payment_type_display }}
+                                </td>
+                                <td class="col-2">
+                                    {% if card.invoice.is_charged %}
                                     <span class="badge badge-pill badge-success">{% trans 'Charged' %}</span>
                                     {% else %}
                                     <span class="badge badge-pill badge-danger">{% trans 'Not charged' %}</span>
                                     {% endif %}
                                 </td>
                                 <td class="col-1"><small>
-                                        {% if invoice.apply_promotion_codes.count > 0 %}
-                                        {{ invoice.apply_promotion_codes.first.promotion_code.promotion_type.full_title }}
+                                        {% if card.invoice.apply_promotion_codes.count > 0 %}
+                                        {{ card.invoice.apply_promotion_codes.first.promotion_code.promotion_type.full_title }}
                                         {% else %}
                                         không
                                         {% endif  %}
                                     </small></td>
-                                <td class="col-1"><small>{{ invoice.amount | sexy_number }}đ</small></td>
-                                <td class="col-3"><small>{{ invoice.description }}</small></td>
-                                <td class="col-4"><small>{{ invoice.charge_id|default_if_none:'' }}</small></td>
-                                <td class="col-4"><small>{{ invoice.staff|default_if_none:'' }}</small></td>
-                                <td class="col-3"><small>{{ invoice.created_at }}</small></td>
+                                <td class="col-1"><small>{{ card.invoice.amount | sexy_number }}đ</small></td>
+                                <td class="col-3"><small>{{ card.invoice.description }}</small></td>
+                                <td class="col-4"><small>{{ card.invoice.charge_id|default_if_none:'' }}</small></td>
+                                <td class="col-4"><small>{{ card.invoice.staff|default_if_none:'' }}</small></td>
+                                <td class="col-3"><small>{{ card.invoice.created_at }}</small></td>
                             </tr>
-                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

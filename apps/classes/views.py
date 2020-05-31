@@ -48,6 +48,7 @@ from django.db.models import Value as V
 from django.db.models.functions import Concat
 from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION, PLUS_LESSON_PRACTICE_PROMOTION, PLUS_WEEK_PRACTICE_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
 from apps.roll_calls.models import RollCall
+from apps.card_invoices.models import POSTPAID, PREPAID
 
 
 class YogaClassListView(ListView):
@@ -279,7 +280,7 @@ class YogaClassEnrollPaymentView(View):
                             yoga_class, enroll_form, request.user.trainee, promotion_code, promotion_type)
                         # CREATE CARD INVOICE
                         card_invoice = CardInvoiceService(
-                            card, description, request.POST['amount'], charge_id).call()
+                            card, PREPAID, description, request.POST['amount'], charge_id).call()
 
                         if promotion_code is not None and promotion_type is not None:
                                 promotion_code.promotion_type = promotion_type
@@ -377,6 +378,7 @@ class YogaClassMoMoPaymentResultView(View):
             yoga_class = YogaClass.objects.get(slug=slug)
             context['yoga_class'] = yoga_class
             context['errorCode'] = int(request.GET['errorCode'])
+            context['paymentType'] = 'Prepaid'
             if int(request.GET['errorCode']) == 0:
                 if request.session.get('enroll_card_form'):
                     enroll_form = CardFormForTraineeEnroll(
@@ -396,7 +398,7 @@ class YogaClassMoMoPaymentResultView(View):
                         context['card'] = card
                         # CREATE CARD INVOICE
                         card_invoice = CardInvoiceService(
-                            card, request.GET['orderInfo'], request.GET['amount'], request.GET['transId']).call()
+                            card, PREPAID, request.GET['orderInfo'], request.GET['amount'], request.GET['transId']).call()
 
                         if promotion_code is not None and promotion_type is not None:
                             promotion_code.promotion_type = promotion_type
@@ -415,6 +417,67 @@ class YogaClassMoMoPaymentResultView(View):
             return render(request, self.template_name, context=context)
         else:
             return redirect('errors:error-403')
+
+
+@method_decorator([login_required], name='dispatch')
+class YogaClassEnrollPostPaidView(View):
+    @transaction.atomic
+    def post(self, request, slug):
+        if request.session.get('enroll_card_form'):
+            yoga_class = YogaClass.objects.get(slug=slug)
+            enroll_form = CardFormForTraineeEnroll(
+                request.session['enroll_card_form'])
+            if enroll_form.is_valid():
+                # PROMOTION
+                promotion_type = None
+                promotion_code = None
+                if request.session.get('promotion_code') and request.session.get('promotion_type'):
+                    promotion_type = get_object_or_404(
+                        PromotionType, pk=request.session.get('promotion_type'))
+                    promotion_code = get_object_or_404(
+                        PromotionCode, pk=request.session.get('promotion_code'))
+                # CREATE CARD
+                card = create_card(
+                    yoga_class, enroll_form, request.user.trainee, promotion_code, promotion_type)
+                # CREATE CARD INVOICE
+                card_invoice = CardInvoiceService(
+                    card, POSTPAID, _('Postpaid'), request.POST['amount']).call()
+
+                if promotion_code is not None and promotion_type is not None:
+                    promotion_code.promotion_type = promotion_type
+                    promotion_code.save()
+                    if promotion_type.category == GIFT_PROMOTION:
+                        promotion_code.promotion_code_products.create(
+                            product=promotion_type.product, quantity=promotion_type.value)
+                    card_invoice.apply_promotion_codes.create(
+                        promotion_code=promotion_code)
+                if request.session.get('enroll_card_form'):
+                    del request.session['enroll_card_form']
+                if request.session.get('promotion_code'):
+                    del request.session['promotion_code']
+                if request.session.get('promotion_type'):
+                    del request.session['promotion_type']
+                return redirect('classes:postpaid-result', slug=slug)
+        else:
+            messages.error(request, _(
+                'An error occurred. Please try again later'))
+            return redirect('classes:enroll-payment', slug=slug)
+
+
+@method_decorator([login_required], name='dispatch')
+class YogaClassPostPaidResultView(View):
+    template_name = 'payment_result.html'
+
+    def get(self, request, slug):
+        context = {}
+        context['paymentType'] = 'Postpaid'
+        card = request.user.trainee.cards.last()
+        if card.invoice.payment_type != POSTPAID:
+            messages.error(request, _(
+                'An error occurred. Please try again later'))
+            return redirect('errors:error-403')
+        context['card'] = card
+        return render(request, self.template_name, context=context)
 
 
 @transaction.atomic

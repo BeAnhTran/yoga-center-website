@@ -16,8 +16,8 @@ PAYMENT_TYPES = (
 
 
 class CardInvoice(models.Model):
-    card = models.ForeignKey(
-        Card, on_delete=models.CASCADE, related_name='card_invoices', verbose_name=_('card'))
+    card = models.OneToOneField(
+        Card, on_delete=models.CASCADE, primary_key=True, related_name='invoice', verbose_name=_('card'))
     description = models.TextField(
         null=True, blank=True, verbose_name=_('description'))
     amount = models.FloatField(
@@ -34,6 +34,8 @@ class CardInvoice(models.Model):
         auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
 
     def is_charged(self):
+        if self.amount == 0:
+            return True
         if self.charge_id or self.check_staff():
             return True
         return False
