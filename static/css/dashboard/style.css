@@ -1387,3 +1387,7 @@ body {
 		border-left-color: transparent;
 	}
 }
+
+h1.title, h5.title{
+  font-family: serif;
+}

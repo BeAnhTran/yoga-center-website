@@ -159,7 +159,7 @@
                     href="{% url 'dashboard:blog-posts-list' %}">
                     <i class="fas fa-fw fa-cube"></i>
                     <span>
-                        {% trans 'post' as t_post %} {{ t_post }}
+                        {% trans 'post' as t_post %} {{ t_post|capfirst }}
                     </span>
                 </a>
             </div>

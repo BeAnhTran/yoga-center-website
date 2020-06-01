@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
-    <h1 class="h3 mb-0">Danh sách mã khuyến mãi</h1>
+    <h1 class="h3 mb-0 title">{% trans 'Promotion code list' %}</h1>
     <a id="create_promotion_code" href="javascript:;" class="btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus-square fa-sm text-white-50"></i> {% trans 'create new' %}</a>
     <form class="d-none" action="{% url 'dashboard:promotions-codes-create' promotion.pk %}" method="post">

@@ -31,7 +31,7 @@ class TraineeSignupForm(SignupForm):
     gender = forms.ChoiceField(
         choices=User.GENDER_CHOICES, initial=User.GENDER_FEMALE, label=_('Gender'), required=False)
     address = forms.CharField(max_length=255, label=_('Address'), widget=forms.TextInput(
-        attrs={'placeholder': 'Address'}), required=False)
+        attrs={'placeholder': _('Address')}), required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

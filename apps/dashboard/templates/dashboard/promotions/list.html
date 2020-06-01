@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="d-sm-flex align-items-center justify-content-between mb-3">
-    <h1 class="h3 mb-0"><small><i class="fas fa-fw fa-list"></i></small>
+    <h1 class="h3 mb-0 title"><small><i class="fas fa-fw fa-list"></i></small>
         {% trans 'promotion list' as t_promotion_list %} {{ t_promotion_list|capfirst }}</h1>
     {% if request.user.is_superuser %}
     <a href="{% url 'dashboard:promotions-new' %}" class="btn btn-sm btn-success shadow-sm"><i
