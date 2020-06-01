@@ -73,6 +73,8 @@ cards_urlpatterns = [
     path('', cards_view.CardListView.as_view(), name='cards-list'),
     path('unpaid-list/', cards_view.UnPaidCardListView.as_view(),
          name='unpaid-cards-list'),
+    path('unpaid-list/<int:pk>/receive-payment/', cards_view.ReceiveCardPaymentView.as_view(),
+         name='receive-card-payment'),
 ]
 
 # CARD TYPES

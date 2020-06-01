@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 17:46+0700\n"
+"POT-Creation-Date: 2020-06-01 11:11+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1226,6 +1226,32 @@ msgstr ""
 msgid "receive payment"
 msgstr ""
 
+#: .\apps\dashboard\templates\dashboard\cards\list.html:88
+#: .\apps\dashboard\templates\dashboard\classes\schedule.html:275
+#: .\templates\profile\trainees\cards\detail.html:423
+#: .\templates\profile\trainees\cards\detail.html:439
+msgid "Are you sure?"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\cards\list.html:89
+#: .\apps\dashboard\templates\dashboard\classes\schedule.html:276
+#: .\templates\profile\trainees\cards\detail.html:424
+#: .\templates\profile\trainees\cards\detail.html:440
+msgid "You wont be able to revert this!"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\cards\list.html:94
+#: .\venv\Lib\site-packages\django\forms\widgets.py:710
+msgid "Yes"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\cards\list.html:95
+#: .\apps\dashboard\templates\dashboard\classes\schedule.html:282
+#: .\templates\profile\trainees\cards\detail.html:430
+#: .\templates\profile\trainees\cards\detail.html:446
+msgid "Cancel"
+msgstr ""
+
 #: .\apps\dashboard\templates\dashboard\classes\edit.html:15
 #: .\apps\dashboard\templates\dashboard\classes\list.html:64
 #: .\apps\dashboard\templates\dashboard\classes\show.html:27
@@ -1294,28 +1320,10 @@ msgstr ""
 msgid "create successfully"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\classes\schedule.html:275
-#: .\templates\profile\trainees\cards\detail.html:423
-#: .\templates\profile\trainees\cards\detail.html:439
-msgid "Are you sure?"
-msgstr ""
-
-#: .\apps\dashboard\templates\dashboard\classes\schedule.html:276
-#: .\templates\profile\trainees\cards\detail.html:424
-#: .\templates\profile\trainees\cards\detail.html:440
-msgid "You wont be able to revert this!"
-msgstr ""
-
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:281
 #: .\templates\profile\trainees\cards\detail.html:429
 #: .\templates\profile\trainees\cards\detail.html:445
 msgid "Yes, delete it!"
-msgstr ""
-
-#: .\apps\dashboard\templates\dashboard\classes\schedule.html:282
-#: .\templates\profile\trainees\cards\detail.html:430
-#: .\templates\profile\trainees\cards\detail.html:446
-msgid "Cancel"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:295
@@ -1405,75 +1413,75 @@ msgstr ""
 msgid "Trainees"
 msgstr "Trainer"
 
-#: .\apps\dashboard\templates\dashboard\index.html:85
+#: .\apps\dashboard\templates\dashboard\index.html:86
 msgid "Pending Refund Requests"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:104
+#: .\apps\dashboard\templates\dashboard\index.html:105
 msgid "Pending Temporary Leave Requests"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:122
+#: .\apps\dashboard\templates\dashboard\index.html:123
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:100
 msgid "Unpaid card"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:144
+#: .\apps\dashboard\templates\dashboard\index.html:145
 msgid "Earnings Overview"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:174
+#: .\apps\dashboard\templates\dashboard\index.html:175
 #, fuzzy
 #| msgid "price course"
 msgid "Course Registration Times Analysis"
 msgstr "price of course"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Jan"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Feb"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Mar"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Apr"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 #: .\venv\Lib\site-packages\django\utils\dates.py:14
 msgid "May"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Jun"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Jul"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Aug"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Sep"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Oct"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Nov"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Dec"
 msgstr ""
 
@@ -1866,6 +1874,10 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\shop\products\list.html:32
 #: .\apps\shop\models.py:19
 msgid "quantity"
+msgstr ""
+
+#: .\apps\dashboard\views\cards_view.py:60
+msgid "Receive card payment successfully"
 msgstr ""
 
 #: .\apps\dashboard\views\classes_view.py:168
@@ -3297,10 +3309,6 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:709
 msgid "Unknown"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\widgets.py:710
-msgid "Yes"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:711

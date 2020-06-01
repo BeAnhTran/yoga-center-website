@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 17:47+0700\n"
+"POT-Creation-Date: 2020-06-01 11:11+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1233,6 +1233,32 @@ msgstr "Danh sách thẻ tập chưa thanh toán"
 msgid "receive payment"
 msgstr "nhận thanh toán"
 
+#: .\apps\dashboard\templates\dashboard\cards\list.html:88
+#: .\apps\dashboard\templates\dashboard\classes\schedule.html:275
+#: .\templates\profile\trainees\cards\detail.html:423
+#: .\templates\profile\trainees\cards\detail.html:439
+msgid "Are you sure?"
+msgstr "Bạn chắc chắn muốn thực hiện?"
+
+#: .\apps\dashboard\templates\dashboard\cards\list.html:89
+#: .\apps\dashboard\templates\dashboard\classes\schedule.html:276
+#: .\templates\profile\trainees\cards\detail.html:424
+#: .\templates\profile\trainees\cards\detail.html:440
+msgid "You wont be able to revert this!"
+msgstr "Bạn sẽ không thể hoàn tác hành động này!"
+
+#: .\apps\dashboard\templates\dashboard\cards\list.html:94
+#: .\venv\Lib\site-packages\django\forms\widgets.py:710
+msgid "Yes"
+msgstr "Có"
+
+#: .\apps\dashboard\templates\dashboard\cards\list.html:95
+#: .\apps\dashboard\templates\dashboard\classes\schedule.html:282
+#: .\templates\profile\trainees\cards\detail.html:430
+#: .\templates\profile\trainees\cards\detail.html:446
+msgid "Cancel"
+msgstr "Hủy"
+
 #: .\apps\dashboard\templates\dashboard\classes\edit.html:15
 #: .\apps\dashboard\templates\dashboard\classes\list.html:64
 #: .\apps\dashboard\templates\dashboard\classes\show.html:27
@@ -1301,29 +1327,11 @@ msgstr "hoàn thành"
 msgid "create successfully"
 msgstr "tạo thành công"
 
-#: .\apps\dashboard\templates\dashboard\classes\schedule.html:275
-#: .\templates\profile\trainees\cards\detail.html:423
-#: .\templates\profile\trainees\cards\detail.html:439
-msgid "Are you sure?"
-msgstr "Bạn chắc chắn muốn thực hiện?"
-
-#: .\apps\dashboard\templates\dashboard\classes\schedule.html:276
-#: .\templates\profile\trainees\cards\detail.html:424
-#: .\templates\profile\trainees\cards\detail.html:440
-msgid "You wont be able to revert this!"
-msgstr "Bạn sẽ không thể hoàn tác hành động này!"
-
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:281
 #: .\templates\profile\trainees\cards\detail.html:429
 #: .\templates\profile\trainees\cards\detail.html:445
 msgid "Yes, delete it!"
 msgstr "Có"
-
-#: .\apps\dashboard\templates\dashboard\classes\schedule.html:282
-#: .\templates\profile\trainees\cards\detail.html:430
-#: .\templates\profile\trainees\cards\detail.html:446
-msgid "Cancel"
-msgstr "Hủy"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:295
 msgid "Deleted!"
@@ -1410,73 +1418,73 @@ msgstr "Doanh thu năm"
 msgid "Trainees"
 msgstr "Học viên"
 
-#: .\apps\dashboard\templates\dashboard\index.html:85
+#: .\apps\dashboard\templates\dashboard\index.html:86
 msgid "Pending Refund Requests"
 msgstr "Yêu cầu hoàn tiền đang chờ"
 
-#: .\apps\dashboard\templates\dashboard\index.html:104
+#: .\apps\dashboard\templates\dashboard\index.html:105
 msgid "Pending Temporary Leave Requests"
 msgstr "Yêu cầu xin nghỉ tạm thời đang chờ"
 
-#: .\apps\dashboard\templates\dashboard\index.html:122
+#: .\apps\dashboard\templates\dashboard\index.html:123
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:100
 msgid "Unpaid card"
 msgstr "Thẻ chưa thanh toán"
 
-#: .\apps\dashboard\templates\dashboard\index.html:144
+#: .\apps\dashboard\templates\dashboard\index.html:145
 msgid "Earnings Overview"
 msgstr "Tổng quan doanh thu"
 
-#: .\apps\dashboard\templates\dashboard\index.html:174
+#: .\apps\dashboard\templates\dashboard\index.html:175
 msgid "Course Registration Times Analysis"
 msgstr "Phân tích lượt đăng ký khóa học"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Jan"
 msgstr "Tháng 1"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Feb"
 msgstr "Tháng 2"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Mar"
 msgstr "Tháng 3"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Apr"
 msgstr "Tháng 4"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 #: .\venv\Lib\site-packages\django\utils\dates.py:14
 msgid "May"
 msgstr "Tháng 5"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Jun"
 msgstr "Tháng 6"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Jul"
 msgstr "Tháng 7"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Aug"
 msgstr "Tháng 8"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Sep"
 msgstr "Tháng 9"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Oct"
 msgstr "Tháng 10"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Nov"
 msgstr "Tháng 11"
 
-#: .\apps\dashboard\templates\dashboard\index.html:234
+#: .\apps\dashboard\templates\dashboard\index.html:235
 msgid "Dec"
 msgstr "Tháng 12"
 
@@ -1864,6 +1872,10 @@ msgstr "giá"
 #: .\apps\shop\models.py:19
 msgid "quantity"
 msgstr "số lượng"
+
+#: .\apps\dashboard\views\cards_view.py:60
+msgid "Receive card payment successfully"
+msgstr "Xác nhận đã nhận tiền thanh toán thẻ thành công"
 
 #: .\apps\dashboard\views\classes_view.py:168
 msgid "Last week has no lesson"
@@ -3305,10 +3317,6 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:709
 msgid "Unknown"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\widgets.py:710
-msgid "Yes"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:711
