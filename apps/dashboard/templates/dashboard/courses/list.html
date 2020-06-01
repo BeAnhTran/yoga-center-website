@@ -43,10 +43,10 @@
                         <td>{{ course.name|capfirst }}</td>
                         <td>
                             {% if course.image %}
-                            <img class="img img-fluid img-thumbnail course-img" src="{{ course.image.url }}"
+                            <img class="img img-fluid course-img" src="{{ course.image.url }}"
                                 alt="{{ course.name }}">
                             {% else %}
-                            <img class="img img-fluid img-thumbnail course-img"
+                            <img class="img img-fluid course-img"
                                 src="{% static 'img/course/default_course.jpg'%}" alt="{{ course.name }}">
                             {% endif %}
                         </td>

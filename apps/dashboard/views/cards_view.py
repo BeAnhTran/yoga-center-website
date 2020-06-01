@@ -20,7 +20,7 @@ class CardListView(ListView):
     model = Card
     template_name = 'dashboard/cards/list.html'
     context_object_name = 'cards'
-    ordering = ['created_at']
+    ordering = ['-created_at']
     paginate_by = 10
 
     def get_context_data(self, **kwargs):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-01 11:11+0700\n"
+"POT-Creation-Date: 2020-06-01 16:11+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,42 +55,55 @@ msgid "updated at"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:12
-#: .\apps\accounts\forms\trainee_form.py:13 .\apps\feedback\forms.py:14
+#: .\apps\accounts\forms\trainee_form.py:13
+#: .\apps\dashboard\forms\trainees_form.py:12
+#: .\apps\dashboard\forms\trainees_form.py:13 .\apps\feedback\forms.py:14
 #: .\apps\home\forms.py:9 .\apps\questions\forms.py:13
 msgid "First name"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:14
-#: .\apps\accounts\forms\trainee_form.py:15 .\apps\feedback\forms.py:16
+#: .\apps\accounts\forms\trainee_form.py:15
+#: .\apps\dashboard\forms\trainees_form.py:14
+#: .\apps\dashboard\forms\trainees_form.py:15 .\apps\feedback\forms.py:16
 #: .\apps\home\forms.py:11 .\apps\questions\forms.py:16
 msgid "Last name"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:16
+#: .\apps\dashboard\forms\trainees_form.py:16
 msgid "Phone Number"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:19
+#: .\apps\dashboard\forms\trainees_form.py:19
 msgid "Country"
 msgstr ""
 
-#: .\apps\accounts\forms\trainee_form.py:20 .\apps\home\forms.py:18
+#: .\apps\accounts\forms\trainee_form.py:20
+#: .\apps\dashboard\forms\trainees_form.py:21 .\apps\home\forms.py:18
 msgid "Health Condition"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:28
+#: .\apps\dashboard\forms\trainees_form.py:29
 msgid "Birth day"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:32
+#: .\apps\dashboard\forms\trainees_form.py:33
 msgid "Gender"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:33
+#: .\apps\accounts\forms\trainee_form.py:34
+#: .\apps\dashboard\forms\trainees_form.py:34
+#: .\apps\dashboard\forms\trainees_form.py:35
 msgid "Address"
 msgstr ""
 
-#: .\apps\accounts\forms\trainee_form.py:39 .\apps\feedback\forms.py:12
+#: .\apps\accounts\forms\trainee_form.py:39
+#: .\apps\dashboard\forms\trainees_form.py:40 .\apps\feedback\forms.py:12
 #: .\apps\home\forms.py:7 .\apps\questions\forms.py:18
 msgid "Email"
 msgstr ""
@@ -384,7 +397,7 @@ msgstr ""
 
 #: .\apps\blog\templates\blog\post_list.html:26
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:17
-#: .\apps\dashboard\templates\dashboard\blog\posts\new.html:14
+#: .\apps\dashboard\templates\dashboard\blog\posts\new.html:9
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:162
 msgid "post"
 msgstr ""
@@ -519,6 +532,7 @@ msgstr ""
 #: .\apps\dashboard\forms\products_form.py:37
 #: .\apps\dashboard\forms\promotions_form.py:82
 #: .\apps\dashboard\forms\rooms_form.py:26
+#: .\apps\dashboard\forms\trainees_form.py:65
 #: .\apps\profiles\forms\certificate_form.py:27
 #: .\apps\profiles\forms\profile_form.py:32
 #: .\apps\profiles\forms\profile_form.py:84
@@ -540,6 +554,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:83
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:25
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:13
+#: .\apps\dashboard\templates\dashboard\trainees\new.html:9
 #: .\templates\registration\signup.html:33
 #: .\templates\registration\trainee_signup_form.html:16
 msgid "trainee"
@@ -1171,29 +1186,21 @@ msgid "create new"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\blog\categories\list.html:17
-#: .\apps\dashboard\templates\dashboard\blog\categories\new.html:14
+#: .\apps\dashboard\templates\dashboard\blog\categories\new.html:9
 msgid "post category"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\blog\categories\new.html:9
-#: .\apps\dashboard\templates\dashboard\blog\posts\new.html:9
-#: .\apps\dashboard\templates\dashboard\classes\edit.html:12
-#: .\apps\dashboard\templates\dashboard\classes\show.html:21
-#: .\apps\dashboard\templates\dashboard\shop\categories\new.html:9
-#: .\apps\dashboard\templates\dashboard\shop\products\new.html:9
-msgid "back"
-msgstr ""
-
-#: .\apps\dashboard\templates\dashboard\blog\categories\new.html:15
-#: .\apps\dashboard\templates\dashboard\blog\posts\new.html:15
+#: .\apps\dashboard\templates\dashboard\blog\categories\new.html:10
+#: .\apps\dashboard\templates\dashboard\blog\posts\new.html:10
 #: .\apps\dashboard\templates\dashboard\classes\new.html:15
 #: .\apps\dashboard\templates\dashboard\courses\new.html:14
 #: .\apps\dashboard\templates\dashboard\events\new.html:15
 #: .\apps\dashboard\templates\dashboard\faq\new.html:14
 #: .\apps\dashboard\templates\dashboard\promotions\new.html:12
 #: .\apps\dashboard\templates\dashboard\rooms\new.html:14
-#: .\apps\dashboard\templates\dashboard\shop\categories\new.html:15
-#: .\apps\dashboard\templates\dashboard\shop\products\new.html:15
+#: .\apps\dashboard\templates\dashboard\shop\categories\new.html:10
+#: .\apps\dashboard\templates\dashboard\shop\products\new.html:10
+#: .\apps\dashboard\templates\dashboard\trainees\new.html:10
 #, python-format
 msgid "Create new %(value)s"
 msgstr ""
@@ -1250,6 +1257,11 @@ msgstr ""
 #: .\templates\profile\trainees\cards\detail.html:430
 #: .\templates\profile\trainees\cards\detail.html:446
 msgid "Cancel"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\classes\edit.html:12
+#: .\apps\dashboard\templates\dashboard\classes\show.html:21
+msgid "back"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\edit.html:15
@@ -1798,6 +1810,10 @@ msgstr ""
 msgid "sign out"
 msgstr ""
 
+#: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:9
+msgid "Promotion code list"
+msgstr ""
+
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:20
 msgid "code"
 msgstr ""
@@ -1808,7 +1824,7 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\promotions\new.html:36
 #: .\apps\dashboard\templates\dashboard\shop\products\list.html:18
-#: .\apps\dashboard\templates\dashboard\shop\products\new.html:14
+#: .\apps\dashboard\templates\dashboard\shop\products\new.html:9
 #: .\apps\promotions\models.py:62 .\apps\shop\templates\shop\index.html:31
 msgid "product"
 msgstr ""
@@ -1858,7 +1874,7 @@ msgid "product category list"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\shop\categories\list.html:18
-#: .\apps\dashboard\templates\dashboard\shop\categories\new.html:14
+#: .\apps\dashboard\templates\dashboard\shop\categories\new.html:9
 msgid "product category"
 msgstr ""
 
@@ -1894,6 +1910,10 @@ msgstr ""
 
 #: .\apps\dashboard\views\taught_view.py:28
 msgid "Undo the call successfully"
+msgstr ""
+
+#: .\apps\dashboard\views\trainees_view.py:53
+msgid "Create new trainee successfully"
 msgstr ""
 
 #: .\apps\donations\forms.py:12 .\apps\payment\form.py:11

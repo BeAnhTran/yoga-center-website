@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-01 11:11+0700\n"
+"POT-Creation-Date: 2020-06-01 16:11+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,42 +55,55 @@ msgid "updated at"
 msgstr "thời gian cập nhật"
 
 #: .\apps\accounts\forms\trainee_form.py:12
-#: .\apps\accounts\forms\trainee_form.py:13 .\apps\feedback\forms.py:14
+#: .\apps\accounts\forms\trainee_form.py:13
+#: .\apps\dashboard\forms\trainees_form.py:12
+#: .\apps\dashboard\forms\trainees_form.py:13 .\apps\feedback\forms.py:14
 #: .\apps\home\forms.py:9 .\apps\questions\forms.py:13
 msgid "First name"
 msgstr "Tên"
 
 #: .\apps\accounts\forms\trainee_form.py:14
-#: .\apps\accounts\forms\trainee_form.py:15 .\apps\feedback\forms.py:16
+#: .\apps\accounts\forms\trainee_form.py:15
+#: .\apps\dashboard\forms\trainees_form.py:14
+#: .\apps\dashboard\forms\trainees_form.py:15 .\apps\feedback\forms.py:16
 #: .\apps\home\forms.py:11 .\apps\questions\forms.py:16
 msgid "Last name"
 msgstr "Họ"
 
 #: .\apps\accounts\forms\trainee_form.py:16
+#: .\apps\dashboard\forms\trainees_form.py:16
 msgid "Phone Number"
 msgstr "Số điện thoại"
 
 #: .\apps\accounts\forms\trainee_form.py:19
+#: .\apps\dashboard\forms\trainees_form.py:19
 msgid "Country"
 msgstr "Quốc tịch"
 
-#: .\apps\accounts\forms\trainee_form.py:20 .\apps\home\forms.py:18
+#: .\apps\accounts\forms\trainee_form.py:20
+#: .\apps\dashboard\forms\trainees_form.py:21 .\apps\home\forms.py:18
 msgid "Health Condition"
 msgstr "Tình trạng sức khỏe"
 
 #: .\apps\accounts\forms\trainee_form.py:28
+#: .\apps\dashboard\forms\trainees_form.py:29
 msgid "Birth day"
 msgstr "Ngày sinh"
 
 #: .\apps\accounts\forms\trainee_form.py:32
+#: .\apps\dashboard\forms\trainees_form.py:33
 msgid "Gender"
 msgstr "Giới tính"
 
 #: .\apps\accounts\forms\trainee_form.py:33
+#: .\apps\accounts\forms\trainee_form.py:34
+#: .\apps\dashboard\forms\trainees_form.py:34
+#: .\apps\dashboard\forms\trainees_form.py:35
 msgid "Address"
 msgstr "Địa chỉ"
 
-#: .\apps\accounts\forms\trainee_form.py:39 .\apps\feedback\forms.py:12
+#: .\apps\accounts\forms\trainee_form.py:39
+#: .\apps\dashboard\forms\trainees_form.py:40 .\apps\feedback\forms.py:12
 #: .\apps\home\forms.py:7 .\apps\questions\forms.py:18
 msgid "Email"
 msgstr ""
@@ -384,7 +397,7 @@ msgstr "Không có %(value)s"
 
 #: .\apps\blog\templates\blog\post_list.html:26
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:17
-#: .\apps\dashboard\templates\dashboard\blog\posts\new.html:14
+#: .\apps\dashboard\templates\dashboard\blog\posts\new.html:9
 #: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:162
 msgid "post"
 msgstr "bài viết"
@@ -517,6 +530,7 @@ msgstr "Những buổi học của bạn sẽ được hiển thị ở đây"
 #: .\apps\dashboard\forms\products_form.py:37
 #: .\apps\dashboard\forms\promotions_form.py:82
 #: .\apps\dashboard\forms\rooms_form.py:26
+#: .\apps\dashboard\forms\trainees_form.py:65
 #: .\apps\profiles\forms\certificate_form.py:27
 #: .\apps\profiles\forms\profile_form.py:32
 #: .\apps\profiles\forms\profile_form.py:84
@@ -538,6 +552,7 @@ msgstr "Khoảng thời gian bạn chọn không có buổi học phù hợp"
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:83
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:25
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:13
+#: .\apps\dashboard\templates\dashboard\trainees\new.html:9
 #: .\templates\registration\signup.html:33
 #: .\templates\registration\trainee_signup_form.html:16
 msgid "trainee"
@@ -1178,29 +1193,21 @@ msgid "create new"
 msgstr "Tạo mới"
 
 #: .\apps\dashboard\templates\dashboard\blog\categories\list.html:17
-#: .\apps\dashboard\templates\dashboard\blog\categories\new.html:14
+#: .\apps\dashboard\templates\dashboard\blog\categories\new.html:9
 msgid "post category"
 msgstr "loại bài viết"
 
-#: .\apps\dashboard\templates\dashboard\blog\categories\new.html:9
-#: .\apps\dashboard\templates\dashboard\blog\posts\new.html:9
-#: .\apps\dashboard\templates\dashboard\classes\edit.html:12
-#: .\apps\dashboard\templates\dashboard\classes\show.html:21
-#: .\apps\dashboard\templates\dashboard\shop\categories\new.html:9
-#: .\apps\dashboard\templates\dashboard\shop\products\new.html:9
-msgid "back"
-msgstr "quay lại"
-
-#: .\apps\dashboard\templates\dashboard\blog\categories\new.html:15
-#: .\apps\dashboard\templates\dashboard\blog\posts\new.html:15
+#: .\apps\dashboard\templates\dashboard\blog\categories\new.html:10
+#: .\apps\dashboard\templates\dashboard\blog\posts\new.html:10
 #: .\apps\dashboard\templates\dashboard\classes\new.html:15
 #: .\apps\dashboard\templates\dashboard\courses\new.html:14
 #: .\apps\dashboard\templates\dashboard\events\new.html:15
 #: .\apps\dashboard\templates\dashboard\faq\new.html:14
 #: .\apps\dashboard\templates\dashboard\promotions\new.html:12
 #: .\apps\dashboard\templates\dashboard\rooms\new.html:14
-#: .\apps\dashboard\templates\dashboard\shop\categories\new.html:15
-#: .\apps\dashboard\templates\dashboard\shop\products\new.html:15
+#: .\apps\dashboard\templates\dashboard\shop\categories\new.html:10
+#: .\apps\dashboard\templates\dashboard\shop\products\new.html:10
+#: .\apps\dashboard\templates\dashboard\trainees\new.html:10
 #, python-format
 msgid "Create new %(value)s"
 msgstr "Tạo %(value)s mới"
@@ -1258,6 +1265,11 @@ msgstr "Có"
 #: .\templates\profile\trainees\cards\detail.html:446
 msgid "Cancel"
 msgstr "Hủy"
+
+#: .\apps\dashboard\templates\dashboard\classes\edit.html:12
+#: .\apps\dashboard\templates\dashboard\classes\show.html:21
+msgid "back"
+msgstr "quay lại"
 
 #: .\apps\dashboard\templates\dashboard\classes\edit.html:15
 #: .\apps\dashboard\templates\dashboard\classes\list.html:64
@@ -1795,6 +1807,10 @@ msgstr "Hủy"
 msgid "sign out"
 msgstr "Đăng xuất"
 
+#: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:9
+msgid "Promotion code list"
+msgstr "Danh sách mã khuyến mãi"
+
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:20
 msgid "code"
 msgstr ""
@@ -1805,7 +1821,7 @@ msgstr "Danh sách khuyến mãi"
 
 #: .\apps\dashboard\templates\dashboard\promotions\new.html:36
 #: .\apps\dashboard\templates\dashboard\shop\products\list.html:18
-#: .\apps\dashboard\templates\dashboard\shop\products\new.html:14
+#: .\apps\dashboard\templates\dashboard\shop\products\new.html:9
 #: .\apps\promotions\models.py:62 .\apps\shop\templates\shop\index.html:31
 msgid "product"
 msgstr "sản phẩm"
@@ -1855,7 +1871,7 @@ msgid "product category list"
 msgstr "Danh sách loại sản phẩm"
 
 #: .\apps\dashboard\templates\dashboard\shop\categories\list.html:18
-#: .\apps\dashboard\templates\dashboard\shop\categories\new.html:14
+#: .\apps\dashboard\templates\dashboard\shop\categories\new.html:9
 msgid "product category"
 msgstr "loại sản phẩm"
 
@@ -1892,6 +1908,10 @@ msgstr "Vui lòng thêm loại để tạo"
 #: .\apps\dashboard\views\taught_view.py:28
 msgid "Undo the call successfully"
 msgstr "Hủy điểm danh thành công"
+
+#: .\apps\dashboard\views\trainees_view.py:53
+msgid "Create new trainee successfully"
+msgstr "Thêm học viên mới thành công"
 
 #: .\apps\donations\forms.py:12 .\apps\payment\form.py:11
 #: .\apps\payment\form.py:41

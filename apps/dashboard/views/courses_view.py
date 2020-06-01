@@ -22,7 +22,7 @@ class CourseListView(ListView):
     template_name = 'dashboard/courses/list.html'
     context_object_name = 'courses'
     ordering = ['created_at']
-    paginate_by = 5
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(CourseListView, self).get_context_data(**kwargs)

@@ -33,7 +33,7 @@ class ClassListView(ListView):
     template_name = 'dashboard/classes/list.html'
     context_object_name = 'classes'
     ordering = ['created_at']
-    paginate_by = 5
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(ClassListView, self).get_context_data(**kwargs)
