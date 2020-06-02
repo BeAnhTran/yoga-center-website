@@ -352,3 +352,34 @@
   color:#527318;
   background-color: #fff;
 }
+
+.free-payment{
+  background-color: #b52b65 !important;
+  background: url('../../img/icon-free-1.webp');
+  background-position: 92%;
+  background-repeat:no-repeat;
+  background-size: 40px 40px;
+  color:#fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 5px;
+  border: 1px solid #b52b65;
+  display: inline;
+}
+
+.free-payment .card-link {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.free-payment:hover{
+  cursor: pointer;
+}
+
+.free-payment:hover .card-link{
+  text-decoration: underline;
+} 
+.free-payment .card-link:hover{
+  text-decoration: underline;
+}

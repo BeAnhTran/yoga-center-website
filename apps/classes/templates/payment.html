@@ -19,6 +19,18 @@
         <div class="row">
           <div class="col-lg-6">
             <div id="accordion">
+              {% if amount == 0 %}
+              <div class="card">
+                <div class="card-header free-payment">
+                  <form action="{% url 'classes:enroll-payment' yoga_class.slug %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="payment_type" value="PREPAID_FREE">
+                    <input type="hidden" name="amount" value="{{ amount|floatformat }}">
+                    <input type="submit" class="card-link" value="{% trans 'Free Registration' %}">
+                  </form>
+                </div>
+              </div>
+              {% else %}
               <div class="card">
                 <div class="card-header pay-with-stripe">
                   <a class="card-link" data-toggle="collapse" href="#payWithStripe">
@@ -128,6 +140,7 @@
                   </div>
                 </div>
               </div>
+              {% endif %}
             </div>
           </div>
           <div class="col-lg-6">
