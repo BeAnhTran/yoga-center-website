@@ -58,11 +58,11 @@ class YogaClass(models.Model):
         else:
             return _('have not updated yet')
 
-    def get_price_course(self):
-        if self.price_course is not None:
-            if self.price_course == int(self.price_course):
-                self.price_course = int(self.price_course)
-            return sexify.sexy_number(self.price_course)
+    def get_price_for_training_course(self):
+        if self.price_for_training_class is not None:
+            if self.price_for_training_class == int(self.price_for_training_class):
+                self.price_for_training_class = int(self.price_for_training_class)
+            return sexify.sexy_number(self.price_for_training_class)
         else:
             return _('have not updated yet')
 

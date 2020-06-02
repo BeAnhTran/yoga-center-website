@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row, Column, HTML
+from crispy_forms.layout import Layout, Submit, Row, Column, HTML, Field
 from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 
 import datetime
@@ -12,35 +12,41 @@ from apps.cards.models import Card
 
 class CardFormForTraineeEnroll(forms.ModelForm):
     start_at = forms.DateField(
-        label=_('Start at'),
-        widget=DatePicker(options={
-            'useCurrent': True,
-        }, attrs={
-            'placeholder': _('Please enter the value'),
-            'disabled': True
-        }),
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': _('Please enter the value'),
+                'class': 'form-control',
+                'autoComplete': "off"
+            },
+        )
     )
     end_at = forms.DateField(
-        label=_('End at'),
-        widget=DatePicker(options={
-            'useCurrent': True,
-        }, attrs={
-            'placeholder': _('Please enter the value'),
-            'readonly': True
-        }),
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': _('Please enter the value'),
+                'class': 'form-control',
+                'autoComplete': "off"
+            },
+        )
     )
+    lesson_list = forms.CharField(widget=forms.HiddenInput())
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['card_type'].empty_label = _('Please select a value')
+        self.fields['start_at'].required = False
+        self.fields['end_at'].required = False
+        self.fields['lesson_list'].required = True
         if kwargs.get('initial') is not None:
             if kwargs.get('initial').get('card_type_list') is not None:
                 self.fields['card_type'].queryset = kwargs['initial']['card_type_list']
-
+        self.fields['card_type'].widget.attrs.update({
+            'class': 'form-control'
+        })
         self.helper = FormHelper()
         self.helper.form_id = 'form_enroll'
         self.helper.layout = Layout(
-            'card_type',
+            Field('card_type', css_class='form-control'),
             'start_at',
             'end_at',
             HTML("""

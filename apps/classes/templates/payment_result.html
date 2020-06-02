@@ -30,6 +30,7 @@
                     <div class="col-twelve">
                         <!-- prePaid -->
                         {% if paymentType == 'Prepaid' %}
+                        {% if type == 'MOMO' %}
                         <!-- If success -->
                         {% if errorCode == 0 %}
                         <h2 style="color:red;">{% trans 'Congratulation! Sign up for the class successfully.' %}</h2>
@@ -41,6 +42,12 @@
                         <p>{% trans 'Back to payment' %}</p>
                         <a class="btn btn-success redirect" href="{% url 'classes:enroll-payment' yoga_class.slug %}">{% trans 'Back To Payment Page' %}</a>
                         {% endif %}
+                        {% else %}
+                        <h2 style="color:red;">{% trans 'Congratulation! Sign up for the class successfully.' %}</h2>
+                        <p>{% trans 'Please check your card detail and prepare to study' %}</p>
+                        <a class="btn btn-success redirect" href="{% url 'profile:profile-trainee-cards-detail' card.pk %}">{% trans 'Your card detail information' %}</a>
+                        {% endif %}
+                        
                         <!-- postPaid -->
                         {% elif paymentType == 'Postpaid'%}
                         <h2 style="color:red;">{% trans 'Congratulation! Sign up for the class successfully.' %}</h2>

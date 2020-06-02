@@ -25,12 +25,16 @@
                     {% trans 'Pay with Stripe' %} <i class="fab fa-cc-stripe float-right"></i>
                   </a>
                 </div>
-                <div id="payWithStripe" class="collapse" data-parent="#accordion">
+                <div id="payWithStripe" class="collapse show" data-parent="#accordion">
                   <div class="card-body">
                     <div class="cell example example5" id="example-5">
                       <!--  -->
-                      <form id="payment_form">
+                      <form action="{% url 'classes:enroll-payment' yoga_class.slug %}" method="POST"
+                        id="stripe_payment_form">
+                        {% csrf_token %}
+                        <input type="hidden" name="payment_type" value="PREPAID_STRIPE">
                         <input type="hidden" name="amount" value="{{ amount|floatformat }}">
+                        <input type="hidden" name="stripeToken" value="">
                         <fieldset>
                           <legend class="card-only">{% trans 'Please enter information below' %}</legend>
                           <div class="row">
@@ -41,7 +45,8 @@
                           </div>
                           <div class="row">
                             <div class="field">
-                              <label for="example5-phone">{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}</label>
+                              <label
+                                for="example5-phone">{% trans 'phone number' as t_phone %}{{ t_phone|capfirst }}</label>
                               {{ form.phone }}
                             </div>
                           </div>
@@ -52,37 +57,27 @@
                             </div>
                           </div>
                           <!-- Payment Card -->
-                          {% if total_price > 0 %}
                           <div id="div_payment_card" class="row">
-                            {% else %}
-                            <div id="div_payment_card" class="row d-none">
-                              {% endif %}
-                              <div class="field">
-                                <label>
-                                  {% trans 'Payment Card' %}
-                                </label>
-                                <div id="card-element" class="field"></div>
+                            <div class="field">
+                              <label>
+                                {% trans 'Payment Card' %}
+                              </label>
+                              <div id="card-element" class="field"></div>
+                            </div>
+                          </div>
+                          <!--  -->
+                          <div class="row">
+                            <div class="field">
+                              <button type="submit">{% trans 'Pay' %} <strong
+                                  id="total_price_payment">{{ amount_display }}đ</strong></button>
+                            </div>
+                            <div class="outcome">
+                              <div class="error"></div>
+                              <div class="success">
+                                Success! Your Stripe token is <span class="token"></span>
                               </div>
                             </div>
-                            <!--  -->
-                            <div class="row">
-                              <div class="field">
-                                {% if total_price > 0 %}
-                                <button type="submit">{% trans 'Pay' %} <strong
-                                    id="total_price_payment">{{ amount_display }}đ</strong></button>
-                                {% elif total_price == 0 %}
-                                <button type="submit">{% trans 'Free Register' %} </button>
-                                {% else %}
-                                <button type="submit">{% trans 'Contact for more' %} </button>
-                                {% endif %}
-                              </div>
-                              <div class="outcome">
-                                <div class="error"></div>
-                                <div class="success">
-                                  Success! Your Stripe token is <span class="token"></span>
-                                </div>
-                              </div>
-                            </div>
+                          </div>
                         </fieldset>
                       </form>
                       <!--  -->
@@ -92,10 +87,11 @@
               </div>
               <div class="card">
                 <div class="card-header pay-with-momo">
-                  <form action="{% url 'classes:enroll-momo-payment' yoga_class.slug %}" method="POST">
-                      {% csrf_token %}
-                      <input type="hidden" name="amount" value="{{ amount|floatformat }}">
-                      <input type="submit" class="card-link" value="{% trans 'Pay with MOMO' %}">
+                  <form action="{% url 'classes:enroll-payment' yoga_class.slug %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="payment_type" value="PREPAID_MOMO">
+                    <input type="hidden" name="amount" value="{{ amount|floatformat }}">
+                    <input type="submit" class="card-link" value="{% trans 'Pay with MOMO' %}">
                   </form>
                 </div>
               </div>
@@ -105,22 +101,26 @@
                     {% trans 'Pay when come to center' %}
                   </a>
                 </div>
-                <div id="payWhenComeToCenter" class="collapse show" data-parent="#accordion">
+                <div id="payWhenComeToCenter" class="collapse" data-parent="#accordion">
                   <div class="card-body">
                     <ul class="list-group list-group-flush mb-3">
-                      <li class="list-group-item pl-0 pr-0"><i class="fas fa-fw fa-exclamation-circle text-green-custom"></i>
+                      <li class="list-group-item pl-0 pr-0"><i
+                          class="fas fa-fw fa-exclamation-circle text-green-custom"></i>
                         {% trans 'Your card will be created with state' %} <b>{% trans 'not pay yet' %}</b>
                       </li>
-                      <li class="list-group-item pl-0 pr-0"><i class="fas fa-fw fa-exclamation-circle text-green-custom"></i>
+                      <li class="list-group-item pl-0 pr-0"><i
+                          class="fas fa-fw fa-exclamation-circle text-green-custom"></i>
                         {% trans 'You have to pay your card at center with in 7 days' %}
                       </li>
-                      <li class="list-group-item pl-0 pr-0"><i class="fas fa-fw fa-exclamation-circle text-green-custom"></i>
+                      <li class="list-group-item pl-0 pr-0"><i
+                          class="fas fa-fw fa-exclamation-circle text-green-custom"></i>
                         {% trans 'If not, your card will be destroyed' %}
                       </li>
                     </ul>
                     <div>
-                      <form action="{% url 'classes:enroll-postpaid' yoga_class.slug %}" method="POST">
+                      <form action="{% url 'classes:enroll-payment' yoga_class.slug %}" method="POST">
                         {% csrf_token %}
+                        <input type="hidden" name="payment_type" value="POSTPAID">
                         <input type="hidden" name="amount" value="{{ amount|floatformat }}">
                         <input type="submit" class="confirm-payWhenComeToCenter" value="{% trans 'Sign up' %}">
                       </form>
@@ -146,11 +146,11 @@
                   <div class="ci-metas">
                     <div class="ci-meta"><i class="material-icons">event_available</i>
                       {% for lesson_in_week in yoga_class.get_first_week %}
-                        {% if forloop.last %}
-                            {{ lesson_in_week.date|date:"D" }}
-                        {% else %}
-                            {{ lesson_in_week.date|date:"D" }} - 
-                        {% endif %}
+                      {% if forloop.last %}
+                      {{ lesson_in_week.date|date:"D" }}
+                      {% else %}
+                      {{ lesson_in_week.date|date:"D" }} -
+                      {% endif %}
                       {% endfor %}
                     </div>
                     <div class="ci-meta"><i class="material-icons">alarm_on</i>
@@ -309,7 +309,7 @@
         <button id="btn_modal_create_lesson" type="button" class="btn btn-sm btn-danger"
           data-dismiss="modal">&times;</button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body">`
         <table class="table table-borderless">
           <tbody>
             <tr class="row">
@@ -393,55 +393,65 @@
       setOutcome(event);
     });
 
-    $('form#payment_form').submit(function (e) {
+    $('#stripe_payment_form').find('button[type=submit]').click(function (e) {
       e.preventDefault();
-      var billing_details = {
-        name: $('input[name=name]').val(),
-        email: $('input#id_email').val(),
-        phone: $('input[name=phone]').val()
-      };
-
-      data = $('form#payment_form').serialize();
-      if ($('#card-element').is(":visible")) {
-        stripe.createToken(card, billing_details).then(function (result) {
-          stripeToken = result.token.id;
-          data += '&stripeToken=' + stripeToken;
-          submit_payment_form(data);
-        });
-      } else {
-        submit_payment_form(data);
+      var name = $('#stripe_payment_form').find('input[name=name]').val();
+      if (name == '') {
+        Swal.fire(
+          "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+          "{% trans 'Pleae enter your name' %}",
+          'error'
+        );
+        return false;
       }
+      var phone = $('#stripe_payment_form').find('input[name=phone]').val();
+      if (phone == '') {
+        Swal.fire(
+          "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+          "{% trans 'Pleae enter your phone' %}",
+          'error'
+        );
+        return false;
+      }
+      var email = $('#stripe_payment_form').find('input[name=email]').val();
+      if (email == '') {
+        Swal.fire(
+          "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+          "{% trans 'Pleae enter your email' %}",
+          'error'
+        );
+        return false;
+      }
+      var billing_details = {
+        name: name,
+        email: email,
+        phone: phone
+      };
+      stripe.createToken(card, billing_details).then(function (result) {
+        stripeToken = result.token.id;
+        var token= $('#stripe_payment_form').find('input[name=stripeToken]');
+        token.val(stripeToken);
+        if ($('#stripe_payment_form').find('input[name=stripeToken]').val() != ''){
+          $(".loader").fadeIn();
+          $("#preloder").fadeIn();
+          $('#stripe_payment_form').submit();
+        }else{
+          Swal.fire(
+            "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+            "{% trans 'Pleae enter your Credit or debit card number infomation' %}",
+            'error'
+          );
+        }
+      }).catch(e=>{
+        Swal.fire(
+          "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+          "{% trans 'Pleae enter your Credit or debit card number infomation' %}",
+          'error'
+        );
+        console.log(e);
+      });
     });
   });
-
-  submit_payment_form = function (data) {
-    $.ajax({
-      headers: {
-        'X-CSRFTOKEN': '{{ csrf_token }}'
-      },
-      url: "{% url 'classes:enroll-payment' yoga_class.slug %}",
-      type: 'POST',
-      data: data,
-      beforeSend: function () {
-        $(".loader").fadeIn();
-        $("#preloder").fadeIn();
-      }
-    }).done(function (data) {
-      $(".loader").fadeOut();
-      $("#preloder").fadeOut(function () {
-        Swal.fire(
-          "{% trans 'enroll successfully' as t_enroll_successfully %}{{ t_enroll_successfully|capfirst }}",
-          "{% trans 'Thanks for your register. Please check schedule and prepare to study' %}",
-          'success'
-        ).then((result) => {
-          // redirect to accounts/bills/
-          window.location.href = "{% url 'profile:profile-trainee-cards' %}";
-        });
-      });
-    }).fail(function (err) {
-      console.log(err);
-    });
-  }
 
   $('#form_promotion').submit(function (e) {
     e.preventDefault();

@@ -2,7 +2,7 @@
 import uuid
 from services.sms_service import send_twilio_message
 from services.stripe_service import StripeService
-from services.momo_service import MoMoService
+from services.momo_service import MoMoService, MoMoResponseService
 import json
 from django.utils.translation import gettext as _
 from django.shortcuts import render, redirect, get_object_or_404, reverse
@@ -35,7 +35,7 @@ from django.http import HttpResponse
 from apps.payment.form import CardPaymentForm
 
 from apps.card_types.models import (CardType,
-                                    FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE, FOR_TRIAL)
+                                    FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE, FOR_TRIAL, FOR_PERIOD_TIME_LESSONS)
 
 from apps.common.templatetags import sexify
 from apps.classes.utils import get_price, get_total_price, get_total_price_display
@@ -49,6 +49,7 @@ from django.db.models.functions import Concat
 from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION, PLUS_LESSON_PRACTICE_PROMOTION, PLUS_WEEK_PRACTICE_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
 from apps.roll_calls.models import RollCall
 from apps.card_invoices.models import POSTPAID, PREPAID
+from apps.cards.models import Card
 
 
 class YogaClassListView(ListView):
@@ -121,28 +122,60 @@ class YogaClassEnrollView(View):
 
     def get(self, request, slug):
         yoga_class = YogaClass.objects.get(slug=slug)
+        context = {
+            'yoga_class': yoga_class,
+            'active_nav': 'classes',
+            'form_of_using': -1,
+            'FOR_FULL_MONTH': FOR_FULL_MONTH,
+            'FOR_PERIOD_TIME_LESSONS': FOR_PERIOD_TIME_LESSONS,
+            'FOR_SOME_LESSONS': FOR_SOME_LESSONS,
+            'FOR_TRIAL': FOR_TRIAL,
+            'FOR_TRAINING_COURSE': FOR_TRAINING_COURSE
+        }
         # remove enroll card form when access enroll page
         if request.session.get('enroll_card_form') is not None:
             del request.session['enroll_card_form']
         card_type_list = yoga_class.course.card_types.all()
         form = CardFormForTraineeEnroll(
             initial={'card_type_list': card_type_list})
-        context = {
-            'yoga_class': yoga_class,
-            'form': form,
-            'active_nav': 'classes'
-        }
+        if request.GET.get('card-type'):
+            check_card_type_arr = yoga_class.course.card_types.filter(
+                pk=request.GET.get('card-type'))
+            if check_card_type_arr.count() > 0:
+                ctype = check_card_type_arr.first()
+                form.fields['card_type'].initial = ctype
+                context['form_of_using'] = ctype.form_of_using
+            else:
+                return redirect('classes:enroll', slug=slug)
+        context['form'] = form
         return render(request, self.template_name, context=context)
 
     def post(self, request, *args, **kwargs):
-        yoga_class = YogaClass.objects.get(slug=kwargs['slug'])
+        slug = kwargs['slug']
+        yoga_class = YogaClass.objects.get(slug=slug)
+        card_type_list = yoga_class.course.card_types.all()
+        context = {
+            'yoga_class': yoga_class,
+            'active_nav': 'classes',
+            'form_of_using': -1,
+            'FOR_FULL_MONTH': FOR_FULL_MONTH,
+            'FOR_PERIOD_TIME_LESSONS': FOR_PERIOD_TIME_LESSONS,
+            'FOR_SOME_LESSONS': FOR_SOME_LESSONS,
+            'FOR_TRIAL': FOR_TRIAL,
+            'FOR_TRAINING_COURSE': FOR_TRAINING_COURSE
+        }
         form = CardFormForTraineeEnroll(
-            request.POST, initial={'yoga_class': yoga_class})
+            request.POST, initial={'card_type_list': card_type_list})
         if form.is_valid():
             # save to session and get it in payment page
             request.session['enroll_card_form'] = request.POST
-            return HttpResponse({'success': 'success'}, status=status.HTTP_200_OK)
-        return HttpResponse(form.errors.as_json(), status=status.HTTP_400_BAD_REQUEST)
+            return redirect('classes:enroll-payment', slug=slug)
+        ctype = yoga_class.course.card_types.filter(
+            pk=request.POST['card_type']).first()
+        form.fields['card_type'].initial = ctype
+        context['form'] = form
+        context['form_of_using'] = ctype.form_of_using
+        return render(request, self.template_name, context=context)
 
 
 class YogaClassGetLessonListView(APIView):
@@ -243,108 +276,48 @@ class YogaClassEnrollPaymentView(View):
 
     @transaction.atomic
     def post(self, request, slug):
-        if request.session.get('enroll_card_form'):
-            card_payment_form = CardPaymentForm(request.POST)
-            description = self.__description(
-                request.POST['name'], request.POST['email'], request.POST['amount'])
-            charge_id = None
-            if card_payment_form.is_valid():
-                try:
-                    yoga_class = YogaClass.objects.get(slug=slug)
-                    enroll_form = CardFormForTraineeEnroll(
-                        request.session['enroll_card_form'])
-                    if request.POST.get('stripeToken') and int(request.POST.get('amount')) > 0:
-                        # STRIPE CHARGE
-                        charge = StripeService(
-                            request.POST['name'],
-                            request.POST['email'],
-                            request.POST['phone'],
-                            request.POST['amount'],
-                            request.POST['stripeToken'],
-                            _('Card Payment')
-                        ).call()
-                        if charge:
-                            charge_id = charge.id
-
-                    if enroll_form.is_valid():
-                        # PROMOTION
-                        promotion_type = None
-                        promotion_code = None
-                        if request.session.get('promotion_code') and request.session.get('promotion_type'):
-                            promotion_type = get_object_or_404(
-                                PromotionType, pk=request.session.get('promotion_type'))
-                            promotion_code = get_object_or_404(
-                                PromotionCode, pk=request.session.get('promotion_code'))
-                        # CREATE CARD
-                        card = create_card(
-                            yoga_class, enroll_form, request.user.trainee, promotion_code, promotion_type)
-                        # CREATE CARD INVOICE
-                        card_invoice = CardInvoiceService(
-                            card, PREPAID, description, request.POST['amount'], charge_id).call()
-
-                        if promotion_code is not None and promotion_type is not None:
-                                promotion_code.promotion_type = promotion_type
-                                promotion_code.save()
-                                if promotion_type.category == GIFT_PROMOTION:
-                                    promotion_code.promotion_code_products.create(
-                                        product=promotion_type.product, quantity=promotion_type.value)
-                                card_invoice.apply_promotion_codes.create(
-                                    promotion_code=promotion_code)
-
-                        if request.session.get('enroll_card_form'):
-                            del request.session['enroll_card_form']
-                        if request.session.get('promotion_code'):
-                            del request.session['promotion_code']
-                        if request.session.get('promotion_type'):
-                            del request.session['promotion_type']
-                        send_twilio_message(
-                            _('Thank you for your register at Yoga Huong Tre'))
-                        return HttpResponse('success', status=status.HTTP_200_OK)
-                except Exception as e:
-                    print("<ERROR>")
-                    print(e)
-                    return HttpResponse(e, status=status.HTTP_400_BAD_REQUEST)
-
-            else:
-                return HttpResponse(card_payment_form.errors.as_json(), status=status.HTTP_400_BAD_REQUEST)
-        else:
-            response_data = {}
-            response_data['message'] = _(
-                'Please enroll a class before payment')
-            return HttpResponse(json.dumps(response_data), status=status.HTTP_400_BAD_REQUEST)
-
-    def __description(self, name, email, amount):
-        listStr = [name, _('with'), _('email'), email, _('paied'), str(amount)]
-        result = ' '.join(listStr)
-        return result
-
-    def __lesson_list_available(self, yoga_class, enroll_card_form):
-        cleaned_data = CardFormForTraineeEnroll(enroll_card_form).cleaned_data
-        start = cleaned_data['start_at']
-        end = cleaned_data['end_at']
-        lesson_list = yoga_class.lessons.filter(
-            date__range=[start, end], is_full=False).order_by('date')
-        return lesson_list
-
-
-@method_decorator([login_required], name='dispatch')
-class UsePromotionCodeView(View):
-    def post(self, request, slug):
-        promotion_code = get_object_or_404(
-            PromotionCode, value=request.POST['promotion-code'])
-        promotion_type = get_object_or_404(
-            PromotionType, pk=request.POST['promotion-type']
-        )
-        request.session['promotion_code'] = promotion_code.pk
-        request.session['promotion_type'] = promotion_type.pk
-        return redirect('classes:enroll-payment', slug=slug)
-
-
-@method_decorator([login_required], name='dispatch')
-class YogaClassEnrollMOMOPaymentView(View):
-    def post(self, request, slug):
-        if request.session.get('enroll_card_form'):
-            if int(request.POST.get('amount')) > 0:
+        yoga_class = YogaClass.objects.get(slug=slug)
+        if request.session.get('enroll_card_form') and request.POST.get('payment_type'):
+            enroll_form = CardFormForTraineeEnroll(
+                request.session['enroll_card_form'])
+            if request.POST['payment_type'] == 'PREPAID_STRIPE':
+                card_payment_form = CardPaymentForm(request.POST)
+                charge_id = None
+                if card_payment_form.is_valid():
+                    try:
+                        if request.POST.get('stripeToken') and int(request.POST.get('amount')) > 0:
+                            # STRIPE CHARGE
+                            charge = StripeService(
+                                request.POST['name'],
+                                request.POST['email'],
+                                request.POST['phone'],
+                                request.POST['amount'],
+                                request.POST['stripeToken'],
+                                _('Card Payment')
+                            ).call()
+                            if charge:
+                                charge_id = charge.id
+                    except Exception:
+                        messages.error(request, _(
+                            'An error occurred. Please try again later'))
+                        return redirect('classes:enroll-payment', slug=slug)
+                if charge_id is None:
+                    messages.error(request, _(
+                        'An error occurred. Please enter the right number of VisaCard'))
+                    return redirect('classes:enroll-payment', slug=slug)
+                if enroll_form.is_valid():
+                    description = _('Pay card by Stripe')
+                    card = processCard(yoga_class, enroll_form,
+                                       request, request.POST['amount'], description, charge_id)
+                    return redirect(reverse('classes:enroll-payment-result', kwargs={'slug': slug, 'pk': card.pk}))
+            elif request.POST['payment_type'] == 'POSTPAID':
+                if enroll_form.is_valid():
+                    description = _('Postpaid')
+                    charge_id = None
+                    processCard(yoga_class, enroll_form,
+                                request, request.POST['amount'], description, charge_id)
+                    return redirect('classes:postpaid-result', slug=slug)
+            else:  # request.POST['payment_type'] == 'PREPAID_MOMO':
                 amount = request.POST.get('amount')
                 orderId = str(uuid.uuid4())
                 requestId = str(uuid.uuid4())
@@ -367,101 +340,89 @@ class YogaClassEnrollMOMOPaymentView(View):
                 'An error occurred. Please try again later'))
             return redirect('classes:enroll-payment', slug=slug)
 
+    def __lesson_list_available(self, yoga_class, enroll_card_form):
+        cleaned_data = CardFormForTraineeEnroll(enroll_card_form).cleaned_data
+        id_arr = eval(cleaned_data['lesson_list'])
+        lesson_list = yoga_class.lessons.filter(
+            is_full=False, pk__in=id_arr).order_by('date')
+        #start = cleaned_data['start_at']
+        #end = cleaned_data['end_at']
+        # lesson_list = yoga_class.lessons.filter(
+        #     date__range=[start, end], is_full=False).order_by('date')
+        return lesson_list
+
+
+@method_decorator([login_required], name='dispatch')
+class UsePromotionCodeView(View):
+    def post(self, request, slug):
+        promotion_code = get_object_or_404(
+            PromotionCode, value=request.POST['promotion-code'])
+        promotion_type = get_object_or_404(
+            PromotionType, pk=request.POST['promotion-type']
+        )
+        request.session['promotion_code'] = promotion_code.pk
+        request.session['promotion_type'] = promotion_type.pk
+        return redirect('classes:enroll-payment', slug=slug)
+
+
+@method_decorator([login_required], name='dispatch')
+class YogaClassPaymentResultView(View):
+    template_name = 'payment_result.html'
+
+    def get(self, request, slug, pk):
+        context = {}
+        card = get_object_or_404(Card, pk=pk)
+        yoga_class = YogaClass.objects.get(slug=slug)
+        context['yoga_class'] = yoga_class
+        context['paymentType'] = 'Prepaid'
+        context['type'] = 'STRIPE_FREE'
+        context['card'] = card
+        return render(request, self.template_name, context=context)
+
 
 @method_decorator([login_required], name='dispatch')
 class YogaClassMoMoPaymentResultView(View):
     template_name = 'payment_result.html'
 
     def get(self, request, slug):
-        if request.GET['signature']:
+        if request.GET.get('signature'):
+            resonse_signature = MoMoResponseService(
+                request.GET['requestId'],
+                request.GET['amount'],
+                request.GET['orderId'],
+                request.GET['orderInfo'],
+                request.GET['orderType'],
+                request.GET['transId'],
+                request.GET['message'],
+                request.GET['localMessage'],
+                request.GET['responseTime'],
+                request.GET['errorCode'],
+                request.GET['payType']).signature()
+            print("REQUEST GET SIGNATURE", request.GET['signature'])
+            print("RESPONSE SIGNATURE", resonse_signature)
+            print("COMPARE 2 SIGNATURE",  request.GET['signature'] == resonse_signature)
+            if request.GET['signature'] != resonse_signature:
+                return redirect('errors:error-403')
             context = {}
             yoga_class = YogaClass.objects.get(slug=slug)
             context['yoga_class'] = yoga_class
             context['errorCode'] = int(request.GET['errorCode'])
             context['paymentType'] = 'Prepaid'
+            context['type'] = 'MOMO'
             if int(request.GET['errorCode']) == 0:
                 if request.session.get('enroll_card_form'):
+                    description = _('Momo Payment')
                     enroll_form = CardFormForTraineeEnroll(
                         request.session['enroll_card_form'])
                     if enroll_form.is_valid():
-                        # PROMOTION
-                        promotion_type = None
-                        promotion_code = None
-                        if request.session.get('promotion_code') and request.session.get('promotion_type'):
-                            promotion_type = get_object_or_404(
-                                PromotionType, pk=request.session.get('promotion_type'))
-                            promotion_code = get_object_or_404(
-                                PromotionCode, pk=request.session.get('promotion_code'))
-                        # CREATE CARD
-                        card = create_card(
-                            yoga_class, enroll_form, request.user.trainee, promotion_code, promotion_type)
+                        card = processCard(
+                            yoga_class, enroll_form, request, request.GET['amount'], description, request.GET['transId'])
                         context['card'] = card
-                        # CREATE CARD INVOICE
-                        card_invoice = CardInvoiceService(
-                            card, PREPAID, request.GET['orderInfo'], request.GET['amount'], request.GET['transId']).call()
-
-                        if promotion_code is not None and promotion_type is not None:
-                            promotion_code.promotion_type = promotion_type
-                            promotion_code.save()
-                            if promotion_type.category == GIFT_PROMOTION:
-                                promotion_code.promotion_code_products.create(
-                                    product=promotion_type.product, quantity=promotion_type.value)
-                            card_invoice.apply_promotion_codes.create(
-                                promotion_code=promotion_code)
-                        if request.session.get('enroll_card_form'):
-                            del request.session['enroll_card_form']
-                        if request.session.get('promotion_code'):
-                            del request.session['promotion_code']
-                        if request.session.get('promotion_type'):
-                            del request.session['promotion_type']
+                else:
+                    return redirect('errors:error-403')
             return render(request, self.template_name, context=context)
         else:
             return redirect('errors:error-403')
-
-
-@method_decorator([login_required], name='dispatch')
-class YogaClassEnrollPostPaidView(View):
-    @transaction.atomic
-    def post(self, request, slug):
-        if request.session.get('enroll_card_form'):
-            yoga_class = YogaClass.objects.get(slug=slug)
-            enroll_form = CardFormForTraineeEnroll(
-                request.session['enroll_card_form'])
-            if enroll_form.is_valid():
-                # PROMOTION
-                promotion_type = None
-                promotion_code = None
-                if request.session.get('promotion_code') and request.session.get('promotion_type'):
-                    promotion_type = get_object_or_404(
-                        PromotionType, pk=request.session.get('promotion_type'))
-                    promotion_code = get_object_or_404(
-                        PromotionCode, pk=request.session.get('promotion_code'))
-                # CREATE CARD
-                card = create_card(
-                    yoga_class, enroll_form, request.user.trainee, promotion_code, promotion_type)
-                # CREATE CARD INVOICE
-                card_invoice = CardInvoiceService(
-                    card, POSTPAID, _('Postpaid'), request.POST['amount']).call()
-
-                if promotion_code is not None and promotion_type is not None:
-                    promotion_code.promotion_type = promotion_type
-                    promotion_code.save()
-                    if promotion_type.category == GIFT_PROMOTION:
-                        promotion_code.promotion_code_products.create(
-                            product=promotion_type.product, quantity=promotion_type.value)
-                    card_invoice.apply_promotion_codes.create(
-                        promotion_code=promotion_code)
-                if request.session.get('enroll_card_form'):
-                    del request.session['enroll_card_form']
-                if request.session.get('promotion_code'):
-                    del request.session['promotion_code']
-                if request.session.get('promotion_type'):
-                    del request.session['promotion_type']
-                return redirect('classes:postpaid-result', slug=slug)
-        else:
-            messages.error(request, _(
-                'An error occurred. Please try again later'))
-            return redirect('classes:enroll-payment', slug=slug)
 
 
 @method_decorator([login_required], name='dispatch')
@@ -478,6 +439,41 @@ class YogaClassPostPaidResultView(View):
             return redirect('errors:error-403')
         context['card'] = card
         return render(request, self.template_name, context=context)
+
+
+@transaction.atomic
+def processCard(yoga_class, enroll_form, request, amount, description, charge_id):
+    # PROMOTION
+    promotion_type = None
+    promotion_code = None
+    if request.session.get('promotion_code') and request.session.get('promotion_type'):
+        promotion_type = get_object_or_404(
+            PromotionType, pk=request.session.get('promotion_type'))
+        promotion_code = get_object_or_404(
+            PromotionCode, pk=request.session.get('promotion_code'))
+    # CREATE CARD
+    card = create_card(
+        yoga_class, enroll_form, request.user.trainee, promotion_code, promotion_type)
+    # CREATE CARD INVOICE
+    card_invoice = CardInvoiceService(
+        card, POSTPAID, description, amount, charge_id).call()
+
+    if promotion_code is not None and promotion_type is not None:
+        promotion_code.promotion_type = promotion_type
+        promotion_code.save()
+        if promotion_type.category == GIFT_PROMOTION:
+            promotion_code.promotion_code_products.create(
+                product=promotion_type.product, quantity=promotion_type.value)
+        card_invoice.apply_promotion_codes.create(
+            promotion_code=promotion_code)
+    if request.session.get('enroll_card_form'):
+        del request.session['enroll_card_form']
+    if request.session.get('promotion_code'):
+        del request.session['promotion_code']
+    if request.session.get('promotion_type'):
+        del request.session['promotion_type']
+    send_twilio_message(_('Thank you for your register at Yoga Huong Tre'))
+    return card
 
 
 @transaction.atomic

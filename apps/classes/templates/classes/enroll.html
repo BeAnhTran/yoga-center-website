@@ -5,6 +5,12 @@
 {% load sexify %}
 
 {% block specified_css %}
+<!-- DatetimePicker -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--end DatetimePicker -->
+
 <link href="{% static 'fullcalendar-4.3.1/packages/core/main.css' %}" rel='stylesheet' />
 <link href="{% static 'fullcalendar-4.3.1/packages/daygrid/main.css'%}" rel='stylesheet' />
 <link href="{% static 'fullcalendar-4.3.1/packages/timegrid/main.css' %}" rel='stylesheet' />
@@ -19,6 +25,13 @@
 <script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-daygrid/main.js' %}"></script>
 <script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-timegrid/main.js' %} "></script>
 <link href="{% static 'css/classes/enroll.css' %}" rel='stylesheet' />
+
+<!-- mCustomScrollbar -->
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
+  integrity="sha256-JHGEmB629pipTkMag9aMaw32I8zle24p3FpsEeI6oZU=" crossorigin="anonymous" />
+<!--end mCustomScrollbar -->
+
 {% endblock %}
 
 {% block content %}
@@ -81,7 +94,52 @@
                             </tbody>
                         </table>
                     </div>
-                    {% crispy form %}
+                    <div id="form-content">
+                        <form id="form_enroll" action="{% url 'classes:enroll' yoga_class.slug %}" method="POST">
+                            {% csrf_token %}
+                            {{form.lesson_list}}
+                            <div class="form-group">
+                                <label for="card_type">{% trans 'Card type' %} <span class="asteriskField">(*)</span></label>
+                                {{ form.card_type }}
+                            </div>
+                            {% if form_of_using > -1 %}
+                            {% if form_of_using == FOR_FULL_MONTH or form_of_using == FOR_PERIOD_TIME_LESSONS %}
+                                <div class="form-group">
+                                    <label>{% trans 'Start at' %} <span class="asteriskField">(*)</span></label>
+                                    {{ form.start_at }}
+                                </div>
+                                {% if form_of_using == FOR_FULL_MONTH %}
+                                <div class="form-group">
+                                    <label>{% trans "Number of months" %}</label>
+                                    <input id="id_number_of_months" type="number" class="form-control" name="number_of_month" value="1">
+                                </div>
+                                {% endif %}
+                                <div class="form-group">
+                                    <label>{% trans 'End at' %} <span class="asteriskField">(*)</span></label>
+                                    {{ form.end_at }}
+                                </div>
+                                <div id='div_for_some_lesson_list' class="mt-3 mb-2">
+                                    <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
+                                    <p>{% trans 'Lessons you choose will be displayed here' %}</p>
+                                    <div id='some_lesson_list' class="mCustomScrollbar" style="max-height: 250px;">
+                                    </div>
+                                </div>
+                            {% else %}
+                                <input type="text" name="start_at" class="d-none" autocomplete="off" id="id_start_at">
+                                <input type="text" name="end_at" class="d-none" autocomplete="off" id="id_end_at">
+                                {% if form_of_using == FOR_TRIAL %}
+                                <div id='trial-lesson' class="mt-3">
+                                    <h4 class="mb-1">{% trans 'Trial Lesson' %}</h4>
+                                    <p>{% trans 'Please drap a lesson into this area below to choose' %}</p>
+                                    <div id='trial-lesson-listing'>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endif %}
+                            <input class="btn btn-danger" type="submit" value="{% trans 'Sign up' %}">
+                            {% endif %}
+                        </form>
+                    </div>
                 </div>
                 <div class="col-md-8">
                     <div id='calendar'></div>
@@ -93,7 +151,11 @@
 {% endblock %}
 
 {% block specified_js %}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"
+  integrity="sha256-/YAntTqXy9V4LoXFkI5WPDl3ZwP/knn1BljmMJJ7QWc=" crossorigin="anonymous"></script>
 <script>
+    $("#some_lesson_list").mCustomScrollbar();
     document.addEventListener('DOMContentLoaded', function () {
         $('[data-toggle="tooltip"]').tooltip();   
 
@@ -119,7 +181,6 @@
                         endStr: fetchInfo.endStr
                     },
                     success: function (data) {
-                        console.log('data lesson events', data);
                         var events = [];
                         for (var i = 0; i < data.length; i++) {
                             var _d = data[i]['date'];
@@ -176,12 +237,16 @@
                             'error'
                         )
                     } else {
+                        var elems = [];
                         $(content).appendTo('#trial-lesson-listing');
-                        const input_date_options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-                        var date1 = start_at.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', input_date_options);
-                        var date2 = end_at.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', input_date_options);
-                        $('#id_start_at').val(date1);
-                        $('#id_end_at').val(date2);
+                        $('#id_start_at').datepicker("setDate", new Date(info.event.start));
+                        $('#id_end_at').datepicker("setDate", new Date(info.event.start));
+                        console.log("cccccccccccccccccccccccccccccccc");
+                        console.log($('#id_start_at').val());
+                        console.log($('#id_start_at').data("datepicker"));
+                        console.log("cccccccccccccccccccccccccccccccc");
+                        elems.push(info.event.id);
+                        $('#id_lesson_list').val(JSON.stringify(elems));
                     }
                 }
             },
@@ -200,10 +265,13 @@
         });
 
         var isEventOverDiv = function (x, y) {
+            console.log('x', x);
+            console.log('y', y);
             var external_events = $('#trial-lesson');
             var offset = external_events.offset();
             offset.right = external_events.width() + offset.left;
             offset.bottom = external_events.height() + offset.top;
+            console.log('offset', offset);
             if (x >= offset.left
                 && y >= offset.top
                 && x <= offset.right
@@ -214,85 +282,24 @@
     });
 
     $('#id_card_type').change(function () {
-        var _url = "{% url 'card_types:detail-json' 0 %}";
         var id_card_type = $(this).val();
-        $('#div_id_start_at').removeClass('d-none');
-        $('#div_id_end_at').removeClass('d-none');
-        $('#trial-lesson').addClass('d-none');
-        $('input#id_start_at').attr('disabled', true);
-        $('input#id_end_at').attr('readonly', true);
-
-        $('#div_id_number_of_months').remove();
-        $('#div_for_some_lesson_list').addClass('d-none');
-        $('input#id_start_at').val('');
-        $('input#id_end_at').val('');
-        if (id_card_type != '') {
-            $('input#id_start_at').val('');
-            $('input#id_end_at').val('');
-            $('input#id_start_at').attr('disabled', false);
-
-            var url = _url.replace('0', id_card_type);
-            $.ajax({
-                url: url
-            }).done((data) => {
-                $('input#id_end_at').removeAttr('readonly');
-                $('#div_id_number_of_months').remove();
-                $('input#form_of_using_card_type').val(data['form_of_using']);
-                if (data['form_of_using'] == 0) { // FULL MONTH
-                    input_number_str = '<div id="div_id_number_of_months" class="form-group">';
-                    input_number_str += '<label for="id_number_of_months" class=" requiredField">';
-                    input_number_str += '{% trans "Number of months" %}';
-                    input_number_str += '<span class="asteriskField">*</span></label>';
-                    input_number_str += '<div class="input-group">';
-                    input_number_str += '<input id="id_number_of_months" type="number" name="number_of_month" value="1"';
-                    input_number_str += ' class="form-control" required="True">';
-                    input_number_str += '</div></div>';
-                    $(input_number_str).insertAfter($('#div_id_start_at'));
-
-                    $('input#id_end_at').attr('readonly', true);
-
-                } else if (data['form_of_using'] == 1) { // FOR SOME LESSON
-                    $('input#id_end_at').removeAttr('readonly');
-                    $('#div_for_some_lesson_list').removeClass('d-none');
-
-                } else if (data['form_of_using'] == 2) { // TRIAL
-                    $('.fc-event-trial').remove();
-                    $('#div_id_start_at').addClass('d-none');
-                    $('#div_id_end_at').addClass('d-none');
-
-                    $('#trial-lesson').removeClass('d-none');
-                } else { // FOR FULL MONTH
-                    var _start_at = '{{ yoga_class.lessons.first.date }}';
-                    var _end_at = '{{ yoga_class.lessons.last.date }}';
-                    $('#id_start_at').val(_start_at);
-                    $('#id_end_at').val(_end_at);
-                }
-            });
-        }
+        var href = window.location.href.substring(0, window.location.href.indexOf('?'));
+        url = href += '?card-type=' + id_card_type
+        window.location.href = url;
     });
 
     // When CARD TYPE is FULL MONTH
     // Change end_at when has num_of_months and start_at
-    $('input#id_start_at').on("change.datetimepicker", ({ date, oldDate }) => {
+    $('input#id_start_at').on("change", () => {
         number_of_months = $('#id_number_of_months').val();
-        if (date != null && date._i != undefined) {
-            if ($('input#form_of_using_card_type').val() == 0) {
-                if (number_of_months != undefined) {
-                    var d1 = new Date(date._d);
-                    var d2 = new Date(d1);
-                    d2.setMonth(d1.getMonth() + parseInt(number_of_months));
-                    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-                    var end_date = d2.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options);
-                    $('#id_end_at').val(end_date);
-                }
-            } else if ($('input#form_of_using_card_type').val() == 1) {
-                if ($('#id_end_at').val() != '') {
-                    var end_at = $('#id_end_at').data("datetimepicker")._datesFormatted[0];
-                    if (end_at != undefined) {
-                        render_lesson_list();
-                    }
-                }
-            }
+        console.log(number_of_months);
+        var start_at_input = $('#id_start_at').data("datepicker");
+        if (number_of_months != undefined) {
+            var d1 = new Date(start_at_input.selectedYear, start_at_input.selectedMonth, start_at_input.selectedDay);
+            var d2 = new Date(d1);
+            d2.setMonth(d1.getMonth() + parseInt(number_of_months));
+            $('#id_end_at').datepicker("setDate", d2);
+            render_lesson_list();
         }
     });
 
@@ -308,14 +315,20 @@
             )
             $(this).val(1);
         } else {
-            var start_at = $('#id_start_at').data("datetimepicker")._datesFormatted[0];
-            if (start_at != undefined) {
-                var d1 = new Date(start_at);
+            var start_at_input = $('#id_start_at').data("datepicker");
+            if (start_at_input.selectedDay == 0 && start_at_input.selectedMonth == 0 && start_at_input.selectedYear == 0){
+                Swal.fire(
+                    "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                    "{% trans 'Please enter start at' %}",
+                    'error'
+                );
+                $(this).val(1);
+            }else{
+                var d1 = new Date(start_at_input.selectedYear, start_at_input.selectedMonth, start_at_input.selectedDay);
                 var d2 = new Date(d1);
                 d2.setMonth(d1.getMonth() + parseInt(val));
-                const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-                var end_date = d2.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options);
-                $('#id_end_at').val(end_date);
+                $('#id_end_at').datepicker("setDate", d2);
+                render_lesson_list();
             }
         }
     });
@@ -326,13 +339,19 @@
         $(this).parent('.fc-event-trial').remove();
         $('#id_start_at').val('');
         $('#id_end_at').val('');
+        $('#id_lesson_list').val('');
     });
 
     // WHEN CARD TYPE IS SOME LESSONS
     // Get and render leson list of class in range time 
     render_lesson_list = function () {
-        var start_at = $('#id_start_at').data("datetimepicker")._datesFormatted[0];
-        var end_at = $('#id_end_at').data("datetimepicker")._datesFormatted[0];
+        var start_at_input = $('#id_start_at').data("datepicker");
+        var end_at_input = $('#id_end_at').data("datepicker");
+        var s = new Date(start_at_input.selectedYear, start_at_input.selectedMonth, start_at_input.selectedDay)
+        var e = new Date(end_at_input.selectedYear, end_at_input.selectedMonth, end_at_input.selectedDay)
+        var start_at = new Date(s.getTime() - (s.getTimezoneOffset() * 60000)).toISOString().slice(0, 19);
+        var end_at = new Date(e.getTime() - (e.getTimezoneOffset() * 60000)).toISOString().slice(0, 19);
+
         $.ajax({
             url: '{% url "lessons:json-list-in-range-time" %}',
             data: {
@@ -343,79 +362,141 @@
             }
         }).done((data) => {
             console.log(data);
+            var elems = [];
             content = '<ul class="list-group">';
             content_li = "";
             for (var i = 0; i < data.length; i++) {
+                const input_date_options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                var d = new Date(data[i]['date']);
+                var date = d.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', input_date_options);
                 content_li += '<li class="list-group-item list-group-item-action list-group-item-info d-flex justify-content-between align-items-center">';
-                content_li += data[i]['date'];
+                content_li += date;
                 content_li += '<a href="javascript:;" class="badge badge-info badge-pill">';
                 content_li += (i + 1).toString();
                 content_li += '</a>';
                 content_li += '</li>';
+                elems.push(data[i]['id']);
             }
             content += content_li;
             content += '</ul>';
-            $('#some_lesson_list').empty();
-            $('#some_lesson_list').append(content);
+            $('#some_lesson_list').find('.mCSB_container').empty();
+            $('#some_lesson_list').find('.mCSB_container').append(content);
+            $("#some_lesson_list").mCustomScrollbar('update');
+
+            // Save to lesson_list
+            if(elems.length > 0){
+                $('#id_lesson_list').val(JSON.stringify(elems));
+            }else{
+                $('#id_lesson_list').val('');
+            }
         });
     }
 
-    $('input#id_end_at').on("change.datetimepicker", ({ date, oldDate }) => {
-        if ($('input#form_of_using_card_type').val() == 1) {
-            if ($('input#id_end_at').val() != '') {
-                if (date != null && date._i != undefined) {
+    $('input#id_end_at').on("change", () => {
+        if ($('input#id_end_at').val() != '') {
+            var form_of_using = '{{form_of_using}}';
+            var start_at_input = $('#id_start_at').data("datepicker");
+            var end_at_input = $('#id_end_at').data("datepicker");
+            var start_at = new Date(start_at_input.selectedYear, start_at_input.selectedMonth, start_at_input.selectedDay);
+            var d1_plus1month = new Date(start_at);
+            d1_plus1month.setMonth(start_at.getMonth() + 1);
+            var end_at_input = $('#id_end_at').data("datepicker");
+            var end_at = new Date(end_at_input.selectedYear, end_at_input.selectedMonth, end_at_input.selectedDay);
+            if(form_of_using == '{{FOR_FULL_MONTH}}'){
+                if(end_at >= d1_plus1month){
+                    render_lesson_list();
+                }else{
+                    Swal.fire(
+                        "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                        "{% trans 'You must register at least 1 month' %}",
+                        'error'
+                    );
+                    var number_of_months = parseInt($('input#id_number_of_months').val());
+                    var d2 = new Date(start_at);
+                    d2.setMonth(start_at.getMonth() + parseInt(number_of_months));
+                    $('#id_end_at').datepicker("setDate", d2);
+                    render_lesson_list();
+                }
+            }else{
+                if(end_at < start_at){
+                    Swal.fire(
+                        "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                        "{% trans 'End at must be greater than Start at' %}",
+                        'error'
+                    );
+                    $('#id_end_at').val('');
+                    $('#id_lesson_list').val('');
+                    $('#some_lesson_list').find('.mCSB_container').empty();
+                    $("#some_lesson_list").mCustomScrollbar('update');
+                }else{
                     render_lesson_list();
                 }
             }
+        }else{
+            $('#some_lesson_list').find('.mCSB_container').empty();
+            $("#some_lesson_list").mCustomScrollbar('update');
+            // Save to lesson_list
+            $('#id_lesson_list').val('');
         }
     });
 
-    $('#form_enroll').submit((e) => {
-        e.preventDefault();
-        $.ajax({
-            headers: {
-                'X-CSRFTOKEN': '{{ csrf_token }}'
-            },
-            url: "{% url 'classes:enroll' yoga_class.slug %}",
-            type: 'POST',
-            data: $('#form_enroll').serialize()
-        }).done(function (data) {
-            window.location.href = "{% url 'classes:enroll-payment' yoga_class.slug %}";
-        }).fail(function (err) {
-            console.log(err);
-            $('input.is-invalid').removeClass('is-invalid');
-            $('.invalid-feedback').remove();
-            $("span[id^=" + 'error_1_id_' + "]").remove();
-            errors = JSON.parse(err.responseText);
-            console.log(errors);
-            $.each(errors, function (key, value) {
-                console.log(key);
-                console.log(value);
-                if(key == 'message'){
-                    Swal.fire(
-                        "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
-                        value,
-                        'error'
-                    );
-                }else{
-                    if (key != '__all__') {
-                        objStr = "#id_" + key;
-                        htmlError = '<span id="error_1_id_' + key + '" class="invalid-feedback">';
-                        htmlError += '<strong>' + value[0]['message'] + '</strong></span>';
-                        $(htmlError).insertAfter($(objStr));
-                        $(objStr).addClass('is-invalid');
-                        $(objStr).focus();
-                    } else {
-                        Swal.fire(
-                            "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
-                            value[0]['message'],
-                            'error'
-                        );
-                    }
-                }
-            });
-        });
+    $(document).on('click', 'form#form_enroll > input[type=submit]', function (e) {
+        var form_of_using='{{form_of_using}}';
+        if(form_of_using == '{{FOR_FULL_MONTH}}' || form_of_using == '{{FOR_PERIOD_TIME_LESSONS}}'){
+            if($('input#id_start_at').val() == ''){
+                Swal.fire(
+                    "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                    "{% trans 'Pleae enter Start at' %}",
+                    'error'
+                );
+                return false;
+            }else if($('input#id_end_at').val() == ''){
+                Swal.fire(
+                    "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                    "{% trans 'Please enter End at' %}",
+                    'error'
+                );
+                return false;
+            }
+        }
+        if($('#id_lesson_list').val() == ''){
+            Swal.fire(
+                "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                "{% trans 'There is no lesson to register' %}",
+                'error'
+            );
+            return false;
+        }
+        return true;
     });
 
+    $('#id_start_at').datepicker({
+        prevText: "Trước",
+        nextText: "Sau",
+        currentText: "Hôm nay",
+        monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+        monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+        dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+        dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+        dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+        weekHeader: "Tuần",
+        dateFormat: "dd/mm/yy",
+        firstDay: 1,
+        showMonthAfterYear: false,
+    });
+    $('#id_end_at').datepicker({
+        prevText: "Trước",
+        nextText: "Sau",
+        currentText: "Hôm nay",
+        monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+        monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+        dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+        dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+        dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+        weekHeader: "Tuần",
+        dateFormat: "dd/mm/yy",
+        firstDay: 1,
+        showMonthAfterYear: false,
+    });
 </script>
 {% endblock %}
