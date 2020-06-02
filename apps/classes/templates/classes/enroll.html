@@ -28,9 +28,16 @@
 
 <!-- mCustomScrollbar -->
 <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
-  integrity="sha256-JHGEmB629pipTkMag9aMaw32I8zle24p3FpsEeI6oZU=" crossorigin="anonymous" />
+    href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
+    integrity="sha256-JHGEmB629pipTkMag9aMaw32I8zle24p3FpsEeI6oZU=" crossorigin="anonymous" />
 <!--end mCustomScrollbar -->
+<style>
+    .fc-event-trial {
+        font-size: 16px;
+        padding: 2px;
+        margin-bottom: 5px;
+    }
+</style>
 
 {% endblock %}
 
@@ -40,8 +47,8 @@
     <div class="container">
         <div class="row mb-3">
             <div class="col">
-                <a class="text-danger" href="javascript:;"><span
-                        class="flaticon-lotus"></span> {{ yoga_class.course.name }}</a>
+                <a class="text-danger" href="javascript:;"><span class="flaticon-lotus"></span>
+                    {{ yoga_class.course.name }}</a>
                 <a class="text-danger" href="javascript:;">&raquo; {{ yoga_class.name }}</a>
                 <a class="text-danger" href="javascript:;">&raquo; {% trans 'Enroll' %}</a>
             </div>
@@ -99,42 +106,48 @@
                             {% csrf_token %}
                             {{form.lesson_list}}
                             <div class="form-group">
-                                <label for="card_type">{% trans 'Card type' %} <span class="asteriskField">(*)</span></label>
+                                <label for="card_type">{% trans 'Card type' %} <span
+                                        class="asteriskField">(*)</span></label>
                                 {{ form.card_type }}
                             </div>
                             {% if form_of_using > -1 %}
                             {% if form_of_using == FOR_FULL_MONTH or form_of_using == FOR_PERIOD_TIME_LESSONS %}
-                                <div class="form-group">
-                                    <label>{% trans 'Start at' %} <span class="asteriskField">(*)</span></label>
-                                    {{ form.start_at }}
+                            <div class="form-group">
+                                <label>{% trans 'Start at' %} <span class="asteriskField">(*)</span></label>
+                                {{ form.start_at }}
+                            </div>
+                            {% if form_of_using == FOR_FULL_MONTH %}
+                            <div class="form-group">
+                                <label>{% trans "Number of months" %}</label>
+                                <input id="id_number_of_months" type="number" class="form-control"
+                                    name="number_of_month" value="1">
+                            </div>
+                            {% endif %}
+                            <div class="form-group">
+                                <label>{% trans 'End at' %} <span class="asteriskField">(*)</span></label>
+                                {{ form.end_at }}
+                            </div>
+                            <div id='div_for_some_lesson_list' class="mt-3 mb-2">
+                                <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
+                                <p>{% trans 'Lessons you choose will be displayed here' %}</p>
+                                <div id='some_lesson_list' class="mCustomScrollbar" style="max-height: 250px;">
                                 </div>
-                                {% if form_of_using == FOR_FULL_MONTH %}
-                                <div class="form-group">
-                                    <label>{% trans "Number of months" %}</label>
-                                    <input id="id_number_of_months" type="number" class="form-control" name="number_of_month" value="1">
-                                </div>
-                                {% endif %}
-                                <div class="form-group">
-                                    <label>{% trans 'End at' %} <span class="asteriskField">(*)</span></label>
-                                    {{ form.end_at }}
-                                </div>
-                                <div id='div_for_some_lesson_list' class="mt-3 mb-2">
-                                    <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
-                                    <p>{% trans 'Lessons you choose will be displayed here' %}</p>
-                                    <div id='some_lesson_list' class="mCustomScrollbar" style="max-height: 250px;">
-                                    </div>
-                                </div>
+                            </div>
                             {% else %}
-                                <input type="text" name="start_at" class="d-none" autocomplete="off" id="id_start_at">
-                                <input type="text" name="end_at" class="d-none" autocomplete="off" id="id_end_at">
+                            <input type="text" name="start_at" class="d-none" autocomplete="off" id="id_start_at">
+                            <input type="text" name="end_at" class="d-none" autocomplete="off" id="id_end_at">
+                            {% if form_of_using == FOR_TRIAL or form_of_using == FOR_SOME_LESSONS  %}
+                            <div id='drapdrop-lesson' class="mt-3">
                                 {% if form_of_using == FOR_TRIAL %}
-                                <div id='trial-lesson' class="mt-3">
-                                    <h4 class="mb-1">{% trans 'Trial Lesson' %}</h4>
-                                    <p>{% trans 'Please drap a lesson into this area below to choose' %}</p>
-                                    <div id='trial-lesson-listing'>
-                                    </div>
-                                </div>
+                                <h4 class="mb-1">{% trans 'Trial Lesson' %}</h4>
+                                {% else %}
+                                <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
                                 {% endif %}
+                                <p>{% trans 'Please drap a lesson into this area below to choose' %}</p>
+                                <div id='drapdrop-lesson-listing'>
+                                </div>
+                            </div>
+                            {% endif %}
                             {% endif %}
                             <input class="btn btn-danger" type="submit" value="{% trans 'Sign up' %}">
                             {% endif %}
@@ -152,15 +165,15 @@
 
 {% block specified_js %}
 <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"
-  integrity="sha256-/YAntTqXy9V4LoXFkI5WPDl3ZwP/knn1BljmMJJ7QWc=" crossorigin="anonymous"></script>
+    src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"
+    integrity="sha256-/YAntTqXy9V4LoXFkI5WPDl3ZwP/knn1BljmMJJ7QWc=" crossorigin="anonymous"></script>
 <script>
     $("#some_lesson_list").mCustomScrollbar();
     document.addEventListener('DOMContentLoaded', function () {
-        $('[data-toggle="tooltip"]').tooltip();   
+        $('[data-toggle="tooltip"]').tooltip();
 
         var Draggable = FullCalendarInteraction.Draggable;
-        var containerEl = document.getElementById('trial-lesson');
+        var containerEl = document.getElementById('drapdrop-lesson');
 
         var calendarEl = document.getElementById('calendar');
 
@@ -195,11 +208,10 @@
                             var editable = true;
                             var title_tooltip = null;
                             if (data[i]['is_full'] == true) {
-                                console.log("cc");
                                 bg_color = '#ef4339';
                                 border_color = '#ef4339';
                                 editable = false;
-                                title_tooltip="{% trans 'lesson is full' %}";
+                                title_tooltip = "{% trans 'lesson is full' %}";
                             }
                             events.push({
                                 id: data[i]['id'],
@@ -220,58 +232,73 @@
                 });
             },
             eventDragStop: function (info) {
+                var form_of_using = '{{form_of_using}}';
                 var start_at = new Date(info.event.start);
                 var end_at = new Date(info.event.end);
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 var _date_trial = start_at.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options)
                 if (isEventOverDiv(info.jsEvent.offsetX, info.jsEvent.offsetY)) {
-                    content = "<div id=trial_" + info.event.id + " class='fc-event fc-event-trial'>";
+                    content = "<div id='trial_" + info.event.id + "' class='fc-event fc-event-trial' data-pk='"+ info.event.id +"'>";
                     content += '(' + info.event.title + ') ' + _date_trial;
-                    content += '<a href="javascript:;" class="float-right a-remove-trial-lesson"><i class="fa fa-fw fa-times"></i></a>';
+                    content += '<a href="javascript:;" class="float-right a-remove-drapdrop-lesson" data-pk="'+ info.event.id +'"><i class="fa fa-fw fa-times"></i></a>';
                     content += "</div>";
                     // content += info.event
-                    if ($('#trial-lesson-listing').children().length > 0) {
-                        Swal.fire(
-                            "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
-                            "{% trans 'Trial lesson has been added' %}",
-                            'error'
-                        )
-                    } else {
-                        var elems = [];
-                        $(content).appendTo('#trial-lesson-listing');
-                        $('#id_start_at').datepicker("setDate", new Date(info.event.start));
-                        $('#id_end_at').datepicker("setDate", new Date(info.event.start));
-                        console.log("cccccccccccccccccccccccccccccccc");
-                        console.log($('#id_start_at').val());
-                        console.log($('#id_start_at').data("datepicker"));
-                        console.log("cccccccccccccccccccccccccccccccc");
-                        elems.push(info.event.id);
-                        $('#id_lesson_list').val(JSON.stringify(elems));
+                    if (form_of_using == '{{FOR_TRIAL}}') {
+                        if ($('#drapdrop-lesson-listing').children().length > 0) {
+                            Swal.fire(
+                                "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                                "{% trans 'Trial lesson has been added' %}",
+                                'error'
+                            )
+                        } else {
+                            var elems = [];
+                            $(content).appendTo('#drapdrop-lesson-listing');
+                            $('#id_start_at').datepicker("setDate", new Date(info.event.start));
+                            $('#id_end_at').datepicker("setDate", new Date(info.event.start));
+                            elems.push(info.event.id);
+                            $('#id_lesson_list').val(JSON.stringify(elems));
+                        }
                     }
+                    else if (form_of_using == '{{FOR_SOME_LESSONS}}') {
+                        var choosen_arr = eval($('#id_lesson_list').val());
+                        if (choosen_arr == undefined) {
+                            choosen_arr = []
+                        }
+                        // jQuery.inArray < 0: Not exist
+                        // jQuery.inArray >= 0: Exist
+                        if (jQuery.inArray(info.event.id, choosen_arr) < 0) {
+                            $(content).appendTo('#drapdrop-lesson-listing');
+                            choosen_arr.push(info.event.id);
+                            $('#id_lesson_list').val(JSON.stringify(choosen_arr));
+                        } else {
+                            Swal.fire(
+                                "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                                "{% trans 'Lesson has been added' %}",
+                                'error'
+                            );
+                        }
+                    }
+
                 }
             },
             eventDrop: function (info) {
                 if (info != undefined) {
                     info.revert();
                 }
-                console.log("event drop");
             },
             eventRender: function (info) {
                 if (info.event.extendedProps.titleTooltip) {
-                    $(info.el).attr('data-toggle',"tooltip"); 
-                    $(info.el).attr('title',info.event.extendedProps.titleTooltip); 
+                    $(info.el).attr('data-toggle', "tooltip");
+                    $(info.el).attr('title', info.event.extendedProps.titleTooltip);
                 }
             }
         });
 
         var isEventOverDiv = function (x, y) {
-            console.log('x', x);
-            console.log('y', y);
-            var external_events = $('#trial-lesson');
+            var external_events = $('#drapdrop-lesson');
             var offset = external_events.offset();
             offset.right = external_events.width() + offset.left;
             offset.bottom = external_events.height() + offset.top;
-            console.log('offset', offset);
             if (x >= offset.left
                 && y >= offset.top
                 && x <= offset.right
@@ -292,7 +319,6 @@
     // Change end_at when has num_of_months and start_at
     $('input#id_start_at').on("change", () => {
         number_of_months = $('#id_number_of_months').val();
-        console.log(number_of_months);
         var start_at_input = $('#id_start_at').data("datepicker");
         if (number_of_months != undefined) {
             var d1 = new Date(start_at_input.selectedYear, start_at_input.selectedMonth, start_at_input.selectedDay);
@@ -316,14 +342,14 @@
             $(this).val(1);
         } else {
             var start_at_input = $('#id_start_at').data("datepicker");
-            if (start_at_input.selectedDay == 0 && start_at_input.selectedMonth == 0 && start_at_input.selectedYear == 0){
+            if (start_at_input.selectedDay == 0 && start_at_input.selectedMonth == 0 && start_at_input.selectedYear == 0) {
                 Swal.fire(
                     "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                     "{% trans 'Please enter start at' %}",
                     'error'
                 );
                 $(this).val(1);
-            }else{
+            } else {
                 var d1 = new Date(start_at_input.selectedYear, start_at_input.selectedMonth, start_at_input.selectedDay);
                 var d2 = new Date(d1);
                 d2.setMonth(d1.getMonth() + parseInt(val));
@@ -335,11 +361,35 @@
 
     // When CARD TYPE is TRIAL
     // Remove trial lesson out of trial list
-    $(document).on('click', '.a-remove-trial-lesson', function () {
-        $(this).parent('.fc-event-trial').remove();
-        $('#id_start_at').val('');
-        $('#id_end_at').val('');
-        $('#id_lesson_list').val('');
+    $(document).on('click', '.a-remove-drapdrop-lesson', function () {
+        var form_of_using = '{{form_of_using}}';
+        var pk = $(this).attr('data-pk');
+        if (form_of_using == '{{FOR_TRIAL}}') {
+            $(this).parent('.fc-event-trial').remove();
+            $('#id_start_at').val('');
+            $('#id_end_at').val('');
+            $('#id_lesson_list').val('');
+        }else if (form_of_using == '{{FOR_SOME_LESSONS}}') {
+            $(this).parent('.fc-event-trial').remove();
+            var choosen_arr = eval($('#id_lesson_list').val());
+            console.log(choosen_arr);
+            if (choosen_arr == undefined) {
+                choosen_arr = []
+            }
+            var new_arr = [];
+            choosen_arr.forEach((element) => {
+                console.log("element::::", element);
+                console.log("pk::::", pk);
+                if (element != pk){
+                    new_arr.push(element);
+                }
+            });
+            if (new_arr.length == 0){
+                $('#id_lesson_list').val('');
+            }else{
+                $('#id_lesson_list').val(JSON.stringify(new_arr));
+            }
+        }
     });
 
     // WHEN CARD TYPE IS SOME LESSONS
@@ -361,7 +411,7 @@
                 'available_only': 1
             }
         }).done((data) => {
-            console.log(data);
+            // console.log(data);
             var elems = [];
             content = '<ul class="list-group">';
             content_li = "";
@@ -384,9 +434,9 @@
             $("#some_lesson_list").mCustomScrollbar('update');
 
             // Save to lesson_list
-            if(elems.length > 0){
+            if (elems.length > 0) {
                 $('#id_lesson_list').val(JSON.stringify(elems));
-            }else{
+            } else {
                 $('#id_lesson_list').val('');
             }
         });
@@ -402,10 +452,10 @@
             d1_plus1month.setMonth(start_at.getMonth() + 1);
             var end_at_input = $('#id_end_at').data("datepicker");
             var end_at = new Date(end_at_input.selectedYear, end_at_input.selectedMonth, end_at_input.selectedDay);
-            if(form_of_using == '{{FOR_FULL_MONTH}}'){
-                if(end_at >= d1_plus1month){
+            if (form_of_using == '{{FOR_FULL_MONTH}}') {
+                if (end_at >= d1_plus1month) {
                     render_lesson_list();
-                }else{
+                } else {
                     Swal.fire(
                         "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                         "{% trans 'You must register at least 1 month' %}",
@@ -417,8 +467,8 @@
                     $('#id_end_at').datepicker("setDate", d2);
                     render_lesson_list();
                 }
-            }else{
-                if(end_at < start_at){
+            } else {
+                if (end_at < start_at) {
                     Swal.fire(
                         "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                         "{% trans 'End at must be greater than Start at' %}",
@@ -428,11 +478,11 @@
                     $('#id_lesson_list').val('');
                     $('#some_lesson_list').find('.mCSB_container').empty();
                     $("#some_lesson_list").mCustomScrollbar('update');
-                }else{
+                } else {
                     render_lesson_list();
                 }
             }
-        }else{
+        } else {
             $('#some_lesson_list').find('.mCSB_container').empty();
             $("#some_lesson_list").mCustomScrollbar('update');
             // Save to lesson_list
@@ -441,16 +491,16 @@
     });
 
     $(document).on('click', 'form#form_enroll > input[type=submit]', function (e) {
-        var form_of_using='{{form_of_using}}';
-        if(form_of_using == '{{FOR_FULL_MONTH}}' || form_of_using == '{{FOR_PERIOD_TIME_LESSONS}}'){
-            if($('input#id_start_at').val() == ''){
+        var form_of_using = '{{form_of_using}}';
+        if (form_of_using == '{{FOR_FULL_MONTH}}' || form_of_using == '{{FOR_PERIOD_TIME_LESSONS}}') {
+            if ($('input#id_start_at').val() == '') {
                 Swal.fire(
                     "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                     "{% trans 'Pleae enter Start at' %}",
                     'error'
                 );
                 return false;
-            }else if($('input#id_end_at').val() == ''){
+            } else if ($('input#id_end_at').val() == '') {
                 Swal.fire(
                     "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                     "{% trans 'Please enter End at' %}",
@@ -459,7 +509,7 @@
                 return false;
             }
         }
-        if($('#id_lesson_list').val() == ''){
+        if ($('#id_lesson_list').val() == '') {
             Swal.fire(
                 "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                 "{% trans 'There is no lesson to register' %}",

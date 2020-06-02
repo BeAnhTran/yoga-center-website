@@ -6,17 +6,17 @@
     text-align: center;
 }
 
-#trial-lesson-listing, #some_lesson_list{
+#drapdrop-lesson-listing, #some_lesson_list{
     min-height: 100px;
 }
 
-#trial-lesson, #div_for_some_lesson_list{
+#drapdrop-lesson, #div_for_some_lesson_list{
     background-color: #fff;
     padding: 10px;
     border-radius: 0.5em;
     font-family: 'Times New Roman', Times, serif;
 }
-.a-remove-trial-lesson{
+.a-remove-drapdrop-lesson{
     color:#000;
 }
 
