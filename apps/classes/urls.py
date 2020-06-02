@@ -12,7 +12,7 @@ urlpatterns = [
     path('<slug:slug>/enroll/', views.YogaClassEnrollView.as_view(), name='enroll'),
     path('<slug:slug>/enroll/payment/',
          views.YogaClassEnrollPaymentView.as_view(), name='enroll-payment'),
-     path('<slug:slug>/enroll/<int:pk>/payment-result/',
+     path('<slug:slug>/enroll-payment-result/',
          views.YogaClassPaymentResultView.as_view(), name='enroll-payment-result'),
     path('<slug:slug>/momo-payment-result/',
          views.YogaClassMoMoPaymentResultView.as_view(), name='momo-payment-result'),

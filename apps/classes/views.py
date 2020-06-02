@@ -280,7 +280,15 @@ class YogaClassEnrollPaymentView(View):
         if request.session.get('enroll_card_form') and request.POST.get('payment_type'):
             enroll_form = CardFormForTraineeEnroll(
                 request.session['enroll_card_form'])
-            if request.POST['payment_type'] == 'PREPAID_STRIPE':
+            if request.POST['payment_type'] == 'PREPAID_FREE':
+                if enroll_form.is_valid():
+                    description = _('Free Registration')
+                    charge_id = '0VNDFREE'
+                    card = processCard(yoga_class, enroll_form,
+                                       request, request.POST['amount'], description, charge_id)
+                    request.session['new_card'] = card.pk
+                    return redirect('classes:enroll-payment-result', slug=slug)
+            elif request.POST['payment_type'] == 'PREPAID_STRIPE':
                 card_payment_form = CardPaymentForm(request.POST)
                 charge_id = None
                 if card_payment_form.is_valid():
@@ -309,13 +317,15 @@ class YogaClassEnrollPaymentView(View):
                     description = _('Pay card by Stripe')
                     card = processCard(yoga_class, enroll_form,
                                        request, request.POST['amount'], description, charge_id)
-                    return redirect(reverse('classes:enroll-payment-result', kwargs={'slug': slug, 'pk': card.pk}))
+                    request.session['new_card'] = card.pk
+                    return redirect('classes:enroll-payment-result', slug=slug)
             elif request.POST['payment_type'] == 'POSTPAID':
                 if enroll_form.is_valid():
                     description = _('Postpaid')
                     charge_id = None
-                    processCard(yoga_class, enroll_form,
-                                request, request.POST['amount'], description, charge_id)
+                    card = processCard(yoga_class, enroll_form,
+                                       request, request.POST['amount'], description, charge_id)
+                    request.session['new_card'] = card.pk
                     return redirect('classes:postpaid-result', slug=slug)
             else:  # request.POST['payment_type'] == 'PREPAID_MOMO':
                 amount = request.POST.get('amount')
@@ -369,15 +379,19 @@ class UsePromotionCodeView(View):
 class YogaClassPaymentResultView(View):
     template_name = 'payment_result.html'
 
-    def get(self, request, slug, pk):
-        context = {}
-        card = get_object_or_404(Card, pk=pk)
-        yoga_class = YogaClass.objects.get(slug=slug)
-        context['yoga_class'] = yoga_class
-        context['paymentType'] = 'Prepaid'
-        context['type'] = 'STRIPE_FREE'
-        context['card'] = card
-        return render(request, self.template_name, context=context)
+    def get(self, request, slug):
+        if request.session.get('new_card') is not None:
+            context = {}
+            card = get_object_or_404(Card, pk=request.session.get('new_card'))
+            yoga_class = YogaClass.objects.get(slug=slug)
+            context['yoga_class'] = yoga_class
+            context['paymentType'] = 'Prepaid'
+            context['type'] = 'STRIPE_FREE'
+            context['card'] = card
+            del request.session['new_card']
+            return render(request, self.template_name, context=context)
+        else:
+            return redirect('errors:error-404')
 
 
 @method_decorator([login_required], name='dispatch')
@@ -400,7 +414,8 @@ class YogaClassMoMoPaymentResultView(View):
                 request.GET['payType']).signature()
             print("REQUEST GET SIGNATURE", request.GET['signature'])
             print("RESPONSE SIGNATURE", resonse_signature)
-            print("COMPARE 2 SIGNATURE",  request.GET['signature'] == resonse_signature)
+            print("COMPARE 2 SIGNATURE",
+                  request.GET['signature'] == resonse_signature)
             if request.GET['signature'] != resonse_signature:
                 return redirect('errors:error-403')
             context = {}
@@ -430,15 +445,19 @@ class YogaClassPostPaidResultView(View):
     template_name = 'payment_result.html'
 
     def get(self, request, slug):
-        context = {}
-        context['paymentType'] = 'Postpaid'
-        card = request.user.trainee.cards.last()
-        if card.invoice.payment_type != POSTPAID:
-            messages.error(request, _(
-                'An error occurred. Please try again later'))
-            return redirect('errors:error-403')
-        context['card'] = card
-        return render(request, self.template_name, context=context)
+        if request.session.get('new_card') is not None:
+            context = {}
+            context['paymentType'] = 'Postpaid'
+            card = get_object_or_404(Card, pk=request.session.get('new_card'))
+            if card.invoice.payment_type != POSTPAID:
+                messages.error(request, _(
+                    'An error occurred. Please try again later'))
+                return redirect('errors:error-403')
+            context['card'] = card
+            del request.session.get['new_card']
+            return render(request, self.template_name, context=context)
+        else:
+            return redirect('errors:error-404')
 
 
 @transaction.atomic
