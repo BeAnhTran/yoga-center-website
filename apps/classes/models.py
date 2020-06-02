@@ -43,42 +43,25 @@ class YogaClass(models.Model):
         return (self.name)
 
     def get_price_per_month(self):
-        if self.price_per_month is not None:
-            if self.price_per_month == int(self.price_per_month):
-                self.price_per_month = int(self.price_per_month)
-            return sexify.sexy_number(self.price_per_month)
+        if self.price_per_month is None:
+            return self.course.price_per_month
         else:
-            return _('have not updated yet')
+            return self.price_per_month
 
     def get_price_per_lesson(self):
-        if self.price_per_lesson is not None:
-            if self.price_per_lesson == int(self.price_per_lesson):
-                self.price_per_lesson = int(self.price_per_lesson)
-            return sexify.sexy_number(self.price_per_lesson)
+        if self.price_per_lesson is None:
+            return self.course.price_per_lesson
         else:
-            return _('have not updated yet')
+            return self.price_per_lesson
 
     def get_price_for_training_course(self):
-        if self.price_for_training_class is not None:
-            if self.price_for_training_class == int(self.price_for_training_class):
-                self.price_for_training_class = int(self.price_for_training_class)
-            return sexify.sexy_number(self.price_for_training_class)
+        if self.price_for_training_class is None:
+            return self.course.price_for_training_class
         else:
-            return _('have not updated yet')
+            return self.price_for_training_class
 
     def get_trial_price(self):
-        list_trial_card_types = self.course.card_types.filter(
-            form_of_using=FOR_TRIAL)
-        if list_trial_card_types:
-            trial_card_type = list_trial_card_types[0]
-            if trial_card_type.multiplier is not None and trial_card_type.multiplier > 0:
-                if self.price_per_lesson is not None:
-                    price = self.price_per_lesson * trial_card_type.multiplier
-                    return sexify.sexy_number(price)
-                else:
-                    return _('have not updated yet')
-            else:
-                return _('Free')
+        return 0
 
     def get_first_week(self):
         s = self.lessons.first().date

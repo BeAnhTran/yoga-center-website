@@ -167,7 +167,7 @@
                         <td><small>{% trans 'price per lesson' as t_price %}{{ t_price|capfirst }}</small></td>
                         <td><small>
                             {% if total_price > 0 %}
-                            {{ price }} {% trans 'vnd' %}
+                            {{ price|sexy_number }}đ
                             {% else %}
                             {{ price }}
                             {% endif %}
@@ -178,7 +178,7 @@
                         <td><small>{% trans 'total price' as t_total_price %}{{ t_total_price|capfirst }}</small></td>
                         <td><small>
                             {% if total_price > 0 %}
-                            {{ total_price_display }} {% trans 'vnd' %}
+                            {{ total_price_display }}đ
                             {% else %}
                             {{ total_price_display }}
                             {% endif %}

@@ -10,7 +10,7 @@ def get_price(yoga_class, card_type):
     elif card_type.form_of_using == FOR_PERIOD_TIME_LESSONS:
         return yoga_class.get_price_per_lesson()
     elif card_type.form_of_using == FOR_SOME_LESSONS:
-        return yoga_class.get_price_per_lesson() * card_type.multiplier
+        return int(float(yoga_class.get_price_per_lesson()) * card_type.multiplier)
     elif card_type.form_of_using == FOR_TRIAL:
         return yoga_class.get_trial_price()
     return yoga_class.get_price_for_training_course()
@@ -19,24 +19,23 @@ def get_price(yoga_class, card_type):
 def get_total_price(yoga_class, card_type, number_of_lessons):
     # FULL MONTH = price month
     if card_type.form_of_using == FOR_FULL_MONTH:
-        return yoga_class.price_per_month
+        return yoga_class.get_price_per_month()
     # FOR SOME LESSONS = number_of_lessons * price
     elif card_type.form_of_using == FOR_PERIOD_TIME_LESSONS:
-        total_price = yoga_class.price_per_lesson * number_of_lessons
+        total_price = yoga_class.get_price_per_lesson() * number_of_lessons
         return total_price
     elif card_type.form_of_using == FOR_SOME_LESSONS:
-        total_price = yoga_class.price_per_lesson * \
-            number_of_lessons * card_type.multiplier
-        return total_price
+        total_price = float(yoga_class.get_price_per_lesson()) * \
+            float(number_of_lessons) * card_type.multiplier
+        return int(total_price)
     elif card_type.form_of_using == FOR_TRIAL:
         return 0
     else:
-        return yoga_class.price_for_training_class
+        return yoga_class.get_price_for_training_course()
 
 
 def get_total_price_display(total_price):
     if total_price > 0:
         return sexify.sexy_number(total_price)
-    if total_price == 0:
+    else:
         return _('Free')
-    return _('have not updated yet')
