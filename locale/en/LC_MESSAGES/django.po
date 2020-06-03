@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-02 19:39+0700\n"
+"POT-Creation-Date: 2020-06-03 07:53+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,7 +109,7 @@ msgid "Email"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:64
-#: .\apps\classes\templates\classes\enroll.html:152
+#: .\apps\classes\templates\classes\enroll.html:182
 #: .\apps\classes\templates\payment.html:137
 msgid "Sign up"
 msgstr ""
@@ -421,7 +421,7 @@ msgstr ""
 msgid "Prepaid"
 msgstr ""
 
-#: .\apps\card_invoices\models.py:15 .\apps\classes\views.py:315
+#: .\apps\card_invoices\models.py:15 .\apps\classes\views.py:338
 msgid "Postpaid"
 msgstr ""
 
@@ -495,21 +495,21 @@ msgstr ""
 msgid "Please select a value"
 msgstr ""
 
-#: .\apps\cards\forms.py:60 .\apps\classes\templates\classes\enroll.html:142
+#: .\apps\cards\forms.py:60 .\apps\classes\templates\classes\enroll.html:172
 msgid "Trial Lesson"
 msgstr ""
 
-#: .\apps\cards\forms.py:61 .\apps\classes\templates\classes\enroll.html:146
+#: .\apps\cards\forms.py:61 .\apps\classes\templates\classes\enroll.html:176
 msgid "Please drap a lesson into this area below to choose"
 msgstr ""
 
-#: .\apps\cards\forms.py:70 .\apps\classes\templates\classes\enroll.html:131
-#: .\apps\classes\templates\classes\enroll.html:144
+#: .\apps\cards\forms.py:70 .\apps\classes\templates\classes\enroll.html:161
+#: .\apps\classes\templates\classes\enroll.html:174
 #: .\templates\profile\trainees\cards\detail.html:86
 msgid "Lesson List"
 msgstr ""
 
-#: .\apps\cards\forms.py:71 .\apps\classes\templates\classes\enroll.html:132
+#: .\apps\cards\forms.py:71 .\apps\classes\templates\classes\enroll.html:162
 msgid "Lessons you choose will be displayed here"
 msgstr ""
 
@@ -532,7 +532,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: .\apps\cards\forms.py:99 .\apps\classes\templates\classes\enroll.html:474
+#: .\apps\cards\forms.py:99 .\apps\classes\templates\classes\enroll.html:504
 #: .\apps\dashboard\forms\classes_form.py:113
 msgid "End at must be greater than Start at"
 msgstr ""
@@ -604,19 +604,18 @@ msgstr ""
 msgid "trainer"
 msgstr ""
 
-#: .\apps\classes\models.py:20 .\apps\classes\templates\classes\enroll.html:77
-#: .\apps\classes\templates\payment.html:180 .\apps\courses\models.py:44
+#: .\apps\classes\models.py:20 .\apps\classes\templates\payment.html:180
+#: .\apps\courses\models.py:44
 #: .\apps\dashboard\templates\dashboard\classes\show.html:86
 msgid "price per lesson"
 msgstr ""
 
-#: .\apps\classes\models.py:22 .\apps\classes\templates\classes\enroll.html:68
-#: .\apps\courses\models.py:46
+#: .\apps\classes\models.py:22 .\apps\courses\models.py:46
 #: .\apps\dashboard\templates\dashboard\classes\show.html:94
 msgid "price per month"
 msgstr ""
 
-#: .\apps\classes\models.py:24 .\apps\classes\templates\classes\enroll.html:95
+#: .\apps\classes\models.py:24
 #: .\apps\dashboard\templates\dashboard\classes\show.html:102
 msgid "price course"
 msgstr "price of course"
@@ -648,49 +647,74 @@ msgstr ""
 msgid "Enroll"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:72
-#: .\apps\classes\templates\classes\enroll.html:81
-#: .\apps\classes\templates\classes\enroll.html:98
-msgid "vnd"
+#: .\apps\classes\templates\classes\enroll.html:65
+msgid "Price per month"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:86
-msgid "trial price"
+#: .\apps\classes\templates\classes\enroll.html:73
+msgid "Enroll all lessons in a month with price for each month is"
+msgstr ""
+
+#: .\apps\classes\templates\classes\enroll.html:83
+msgid "Price of lesson in consecutive time"
+msgstr ""
+
+#: .\apps\classes\templates\classes\enroll.html:91
+msgid "Enroll lessons in a consecutive time with price of each lesson is"
+msgstr ""
+
+#: .\apps\classes\templates\classes\enroll.html:101
+msgid "Price 1 of lesson in non-consecutive time"
 msgstr ""
 
 #: .\apps\classes\templates\classes\enroll.html:109
+msgid ""
+"Sign up for some lessons with non-consecutive time. Price of each lesson is"
+msgstr ""
+
+#: .\apps\classes\templates\classes\enroll.html:119
+msgid "Price of 1 trial lesson"
+msgstr ""
+
+#: .\apps\classes\templates\classes\enroll.html:127
+#, fuzzy
+#| msgid "price course"
+msgid "Free registration for one lesson"
+msgstr "price of course"
+
+#: .\apps\classes\templates\classes\enroll.html:139
 #: .\templates\profile\trainees\cards\detail.html:56
 msgid "Card type"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:116
+#: .\apps\classes\templates\classes\enroll.html:146
 #, fuzzy
 #| msgid "start time"
 msgid "Start at"
 msgstr "start at"
 
-#: .\apps\classes\templates\classes\enroll.html:121
+#: .\apps\classes\templates\classes\enroll.html:151
 msgid "Number of months"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:127
+#: .\apps\classes\templates\classes\enroll.html:157
 #: .\apps\dashboard\templates\dashboard\cards\list.html:35
 msgid "End at"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:214
+#: .\apps\classes\templates\classes\enroll.html:244
 msgid "lesson is full"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:249
-#: .\apps\classes\templates\classes\enroll.html:275
-#: .\apps\classes\templates\classes\enroll.html:338
-#: .\apps\classes\templates\classes\enroll.html:347
-#: .\apps\classes\templates\classes\enroll.html:460
-#: .\apps\classes\templates\classes\enroll.html:473
-#: .\apps\classes\templates\classes\enroll.html:498
-#: .\apps\classes\templates\classes\enroll.html:505
-#: .\apps\classes\templates\classes\enroll.html:514
+#: .\apps\classes\templates\classes\enroll.html:279
+#: .\apps\classes\templates\classes\enroll.html:305
+#: .\apps\classes\templates\classes\enroll.html:368
+#: .\apps\classes\templates\classes\enroll.html:377
+#: .\apps\classes\templates\classes\enroll.html:490
+#: .\apps\classes\templates\classes\enroll.html:503
+#: .\apps\classes\templates\classes\enroll.html:528
+#: .\apps\classes\templates\classes\enroll.html:535
+#: .\apps\classes\templates\classes\enroll.html:544
 #: .\apps\classes\templates\payment.html:414
 #: .\apps\classes\templates\payment.html:423
 #: .\apps\classes\templates\payment.html:432
@@ -708,35 +732,35 @@ msgstr ""
 msgid "error"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:250
+#: .\apps\classes\templates\classes\enroll.html:280
 msgid "Trial lesson has been added"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:276
+#: .\apps\classes\templates\classes\enroll.html:306
 msgid "Lesson has been added"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:339
+#: .\apps\classes\templates\classes\enroll.html:369
 msgid "Please enter positive integer"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:348
+#: .\apps\classes\templates\classes\enroll.html:378
 msgid "Please enter start at"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:461
+#: .\apps\classes\templates\classes\enroll.html:491
 msgid "You must register at least 1 month"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:499
+#: .\apps\classes\templates\classes\enroll.html:529
 msgid "Pleae enter Start at"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:506
+#: .\apps\classes\templates\classes\enroll.html:536
 msgid "Please enter End at"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:515
+#: .\apps\classes\templates\classes\enroll.html:545
 msgid "There is no lesson to register"
 msgstr ""
 
@@ -786,7 +810,7 @@ msgstr ""
 msgid "Payment Info"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:29
+#: .\apps\classes\templates\payment.html:29 .\apps\classes\views.py:299
 msgid "Free Registration"
 msgstr ""
 
@@ -878,8 +902,8 @@ msgstr ""
 msgid "Your card detail information"
 msgstr ""
 
-#: .\apps\classes\templates\payment_result.html:41 .\apps\classes\views.py:302
-#: .\apps\classes\views.py:340 .\apps\classes\views.py:438
+#: .\apps\classes\templates\payment_result.html:41 .\apps\classes\views.py:324
+#: .\apps\classes\views.py:364 .\apps\classes\views.py:468
 msgid "An error occurred. Please try again later"
 msgstr ""
 
@@ -891,33 +915,32 @@ msgstr ""
 msgid "Back To Payment Page"
 msgstr ""
 
-#: .\apps\classes\utils.py:15 .\apps\classes\utils.py:41
-#: .\apps\courses\models.py:63
+#: .\apps\classes\utils.py:41 .\apps\courses\models.py:63
 msgid "Free"
 msgstr ""
 
-#: .\apps\classes\views.py:274
+#: .\apps\classes\views.py:288
 msgid "You dont have any info to payment. Please try again"
 msgstr ""
 
-#: .\apps\classes\views.py:296 .\apps\classes\views.py:324
+#: .\apps\classes\views.py:318 .\apps\classes\views.py:348
 #: .\apps\shop\views.py:189
 msgid "Card Payment"
 msgstr ""
 
-#: .\apps\classes\views.py:306
+#: .\apps\classes\views.py:328
 msgid "An error occurred. Please enter the right number of VisaCard"
 msgstr ""
 
-#: .\apps\classes\views.py:309
+#: .\apps\classes\views.py:331
 msgid "Pay card by Stripe"
 msgstr ""
 
-#: .\apps\classes\views.py:414
+#: .\apps\classes\views.py:443
 msgid "Momo Payment"
 msgstr ""
 
-#: .\apps\classes\views.py:475
+#: .\apps\classes\views.py:508
 msgid "Thank you for your register at Yoga Huong Tre"
 msgstr ""
 
@@ -2275,20 +2298,15 @@ msgstr ""
 msgid "available"
 msgstr ""
 
-#: .\templates\403.html:76
+#: .\templates\403.html:33
 msgid "You are not allowed to enter here"
 msgstr ""
 
-#: .\templates\403.html:77 .\templates\404.html:77 .\templates\500.html:77
-#: .\templates\layouts\header.html:102
-msgid "Home"
+#: .\templates\404.html:33
+msgid "Oooooops! Looks like nothing was found at this location."
 msgstr ""
 
-#: .\templates\404.html:76
-msgid "Not Found"
-msgstr ""
-
-#: .\templates\500.html:76
+#: .\templates\500.html:33
 msgid "Something went wrong 😭"
 msgstr ""
 
@@ -2524,6 +2542,10 @@ msgstr ""
 
 #: .\templates\layouts\header.html:76
 msgid "login"
+msgstr ""
+
+#: .\templates\layouts\header.html:102
+msgid "Home"
 msgstr ""
 
 #: .\templates\layouts\header.html:104 .\templates\layouts\header.html:107
