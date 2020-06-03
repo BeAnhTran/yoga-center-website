@@ -32,3 +32,6 @@ class CardType(models.Model):
 
     def __str__(self):
         return self.name.capitalize()
+
+    class Meta:
+        unique_together = (('form_of_using', 'for_longtime_trainee_only'),)

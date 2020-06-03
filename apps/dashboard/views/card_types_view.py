@@ -1,3 +1,4 @@
+from django.shortcuts import render, redirect, reverse
 from django.views import View
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
@@ -14,6 +15,8 @@ from apps.card_types.models import (CardType, FOR_TRAINING_COURSE)
 from apps.card_types.serializers import CardTypeSerializer
 from apps.courses.models import (Course, PRACTICE_COURSE, TRAINING_COURSE)
 from django.db.models import Q
+from apps.dashboard.forms.card_types_form import CardTypeForm
+
 
 @method_decorator([login_required, staff_required], name='dispatch')
 class CardTypeListView(ListView):
@@ -28,6 +31,7 @@ class CardTypeListView(ListView):
         context['active_nav'] = 'card_types'
         context['show_nav'] = True
         return context
+
 
 @method_decorator([login_required, staff_required], name='dispatch')
 class get_card_types_for_course(APIView):
@@ -45,3 +49,25 @@ class get_card_types_for_course(APIView):
             return Response(serialized.data)
         else:
             raise MyException('msg here')
+
+
+@method_decorator([login_required, admin_required], name='dispatch')
+class CardTypeNewView(View):
+    template_name = 'dashboard/card_types/new.html'
+
+    def get(self, request):
+        form = CardTypeForm()
+        context = {
+            'form': form,
+            'active_nav': 'card_types'
+        }
+        return render(request, self.template_name, context=context)
+
+    def post(self, request, *arg, **kwargs):
+        form = CardTypeForm(request.POST, request.FILES)
+        context = {'form': form}
+
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard:card-types-list')
+        return render(request, self.template_name, context=context)

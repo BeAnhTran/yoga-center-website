@@ -81,6 +81,8 @@ cards_urlpatterns = [
 card_types_urlpatterns = [
     path('', card_types_view.CardTypeListView.as_view(),
          name='card-types-list'),
+    path('new/', card_types_view.CardTypeNewView.as_view(),
+         name='card-types-new'),
     path('for-course/', card_types_view.get_card_types_for_course.as_view(),
          name='json-card-type-list-for-course'),
 ]
