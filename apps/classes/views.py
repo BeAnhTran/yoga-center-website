@@ -132,6 +132,20 @@ class YogaClassEnrollView(View):
             'FOR_TRIAL': FOR_TRIAL,
             'FOR_TRAINING_COURSE': FOR_TRAINING_COURSE
         }
+        price_arr = {}
+        for card_type in yoga_class.course.card_types.all():
+            price = get_price(yoga_class, card_type)
+            if card_type.form_of_using == FOR_FULL_MONTH:
+                price_arr['FOR_FULL_MONTH'] = price
+            elif card_type.form_of_using == FOR_PERIOD_TIME_LESSONS:
+                price_arr['FOR_PERIOD_TIME_LESSONS'] = price
+            elif card_type.form_of_using == FOR_SOME_LESSONS:
+                price_arr['FOR_SOME_LESSONS'] = price
+            elif card_type.form_of_using == FOR_TRIAL:
+                price_arr['FOR_TRIAL'] = price
+            elif card_type.form_of_using == FOR_TRAINING_COURSE:
+                price_arr['FOR_TRAINING_COURSE'] = price
+        context['price_arr'] = price_arr
         # remove enroll card form when access enroll page
         if request.session.get('enroll_card_form') is not None:
             del request.session['enroll_card_form']

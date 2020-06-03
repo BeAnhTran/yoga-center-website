@@ -12,7 +12,7 @@ def get_price(yoga_class, card_type):
     elif card_type.form_of_using == FOR_SOME_LESSONS:
         return int(float(yoga_class.get_price_per_lesson()) * card_type.multiplier)
     elif card_type.form_of_using == FOR_TRIAL:
-        return _('Free')
+        return 0
     return yoga_class.get_price_for_training_course()
 
 

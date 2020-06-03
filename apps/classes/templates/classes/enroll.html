@@ -58,48 +58,82 @@
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-md-4 jumbotron">
-                    <div class="list-group">
-                        <table id="price_table" class="table table-hover table-borderless">
-                            <tbody>
-                                {% if yoga_class.course.course_type == 0 %}
-
-                                <tr>
-                                    <td>
-                                        {% trans "price per month" as t_price_per_month %}
-                                        {{ t_price_per_month|capfirst }}
-                                    </td>
-                                    <td>
-                                        {{ yoga_class.get_price_per_month }} {% trans 'vnd' %}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        {% trans "price per lesson" as t_price_per_lesson %}
-                                        {{ t_price_per_lesson|capfirst }}
-                                    </td>
-                                    <td>
-                                        {{ yoga_class.get_price_per_lesson }} {% trans 'vnd' %}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        {% trans "trial price" as t_trial_price %}
-                                        {{ t_trial_price|capfirst }}
-                                    </td>
-                                    <td>{{ yoga_class.get_trial_price }}</td>
-                                </tr>
-
-                                {% else %}
-                                <tr>
-                                    <td>
-                                        {% trans "price course" as t_price_course %}
-                                        {{ t_price_course|capfirst }}
-                                    </td>
-                                    <td>{{ yoga_class.get_price_course }} {% trans 'vnd' %}</td>
-                                </tr>
-                                {% endif %}
-                            </tbody>
-                        </table>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header price-card">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#ForFullmonthPrice">
+                                    {% trans 'Price per month' %}: {{ price_arr.FOR_FULL_MONTH|sexy_number }}đ
+                                </a>
+                            </div>
+                            <div id="ForFullmonthPrice" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush mb-3">
+                                        <li class="list-group-item pl-0 pr-0"><i
+                                                class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
+                                            {% trans "Enroll all lessons in a month with price for each month is" %}
+                                            <b>{{ price_arr.FOR_FULL_MONTH|sexy_number }}đ</b>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header price-card">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#ForLessonInPeriodTime">
+                                    {% trans 'Price of lesson in consecutive time' %}: {{ price_arr.FOR_PERIOD_TIME_LESSONS|sexy_number }}đ
+                                </a>
+                            </div>
+                            <div id="ForLessonInPeriodTime" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush mb-3">
+                                        <li class="list-group-item pl-0 pr-0"><i
+                                                class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
+                                            {% trans "Enroll lessons in a consecutive time with price of each lesson is" %}
+                                            <b>{{ price_arr.FOR_PERIOD_TIME_LESSONS|sexy_number }}đ</b>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header price-card">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#ForSomeLesson">
+                                    {% trans 'Price 1 of lesson in non-consecutive time' %}: {{ price_arr.FOR_SOME_LESSONS|sexy_number }}đ
+                                </a>
+                            </div>
+                            <div id="ForSomeLesson" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush mb-3">
+                                        <li class="list-group-item pl-0 pr-0"><i
+                                                class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
+                                            {% trans "Sign up for some lessons with non-consecutive time. Price of each lesson is" %}
+                                            <b>{{ price_arr.FOR_SOME_LESSONS|sexy_number }}đ</b>
+                                        </li>
+                                        <li class="list-group-item pl-0 pr-0"><i
+                                            class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
+                                        {% trans "Each lesson cannot be separated by more than 2 sessions" %}
+                                    </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header price-card">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#ForTrialLesson">
+                                    {% trans 'Price of 1 trial lesson' %}: {{ price_arr.FOR_TRIAL|sexy_number }}đ
+                                </a>
+                            </div>
+                            <div id="ForTrialLesson" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush mb-3">
+                                        <li class="list-group-item pl-0 pr-0"><i
+                                                class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
+                                            {% trans "Free registration for one lesson" %}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div id="form-content">
                         <form id="form_enroll" action="{% url 'classes:enroll' yoga_class.slug %}" method="POST">
@@ -238,9 +272,9 @@
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 var _date_trial = start_at.toLocaleString('{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}', options)
                 if (isEventOverDiv(info.jsEvent.offsetX, info.jsEvent.offsetY)) {
-                    content = "<div id='trial_" + info.event.id + "' class='fc-event fc-event-trial' data-pk='"+ info.event.id +"'>";
+                    content = "<div id='trial_" + info.event.id + "' class='fc-event fc-event-trial' data-pk='" + info.event.id + "'>";
                     content += '(' + info.event.title + ') ' + _date_trial;
-                    content += '<a href="javascript:;" class="float-right a-remove-drapdrop-lesson" data-pk="'+ info.event.id +'"><i class="fa fa-fw fa-times"></i></a>';
+                    content += '<a href="javascript:;" class="float-right a-remove-drapdrop-lesson" data-pk="' + info.event.id + '"><i class="fa fa-fw fa-times"></i></a>';
                     content += "</div>";
                     // content += info.event
                     if (form_of_using == '{{FOR_TRIAL}}') {
@@ -369,7 +403,7 @@
             $('#id_start_at').val('');
             $('#id_end_at').val('');
             $('#id_lesson_list').val('');
-        }else if (form_of_using == '{{FOR_SOME_LESSONS}}') {
+        } else if (form_of_using == '{{FOR_SOME_LESSONS}}') {
             $(this).parent('.fc-event-trial').remove();
             var choosen_arr = eval($('#id_lesson_list').val());
             console.log(choosen_arr);
@@ -380,13 +414,13 @@
             choosen_arr.forEach((element) => {
                 console.log("element::::", element);
                 console.log("pk::::", pk);
-                if (element != pk){
+                if (element != pk) {
                     new_arr.push(element);
                 }
             });
-            if (new_arr.length == 0){
+            if (new_arr.length == 0) {
                 $('#id_lesson_list').val('');
-            }else{
+            } else {
                 $('#id_lesson_list').val(JSON.stringify(new_arr));
             }
         }

@@ -40,3 +40,25 @@
 .card {
     border-radius: 0;
 }
+
+.price-card{
+    background-color: #731818 !important;
+    background: url('../../img/huongtre_favicon.png');
+    background-position: 92%;
+    background-repeat:no-repeat;
+  }
+  
+  .price-card .card-link {
+    color: #fff;
+  }
+  
+  .price-card:hover .card-link{
+    text-decoration: underline;
+  } 
+  .price-card .card-link:hover{
+    text-decoration: underline;
+  }
+
+  .text-red-custom{
+      color: #731818;
+  }
