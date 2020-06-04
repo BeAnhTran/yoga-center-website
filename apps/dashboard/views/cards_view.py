@@ -24,6 +24,9 @@ from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH
 from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
 from apps.accounts.models import Trainee
+from services.roll_call_service import RollCallService
+from apps.card_invoices.models import POSTPAID, PREPAID
+from services.card_invoice_service import CardInvoiceService
 
 
 @method_decorator([login_required, staff_required], name='dispatch')
@@ -172,7 +175,8 @@ class CardNewPreviewView(View):
         if request.session.get('dashboard_card_form'):
             yoga_class = YogaClass.objects.get(slug=slug)
             dashboard_card_form = request.session['dashboard_card_form']
-            trainee = get_object_or_404(Trainee, pk=dashboard_card_form['trainee'])
+            trainee = get_object_or_404(
+                Trainee, pk=dashboard_card_form['trainee'])
             lesson_list = self.__lesson_list_available(
                 yoga_class, dashboard_card_form)
             card_type = CardType.objects.get(
@@ -183,7 +187,7 @@ class CardNewPreviewView(View):
             total_price_display = get_total_price_display(total_price)
             context = {
                 'yoga_class': yoga_class,
-                'trainee':trainee,
+                'trainee': trainee,
                 'card_type': card_type,
                 'lesson_list': lesson_list,
                 'price': price,
@@ -246,9 +250,111 @@ class CardNewPreviewView(View):
                 'Dont have any info about card. Please try again'))
             return redirect('dashboard:cards-new-for-class', slug=slug)
 
+    @transaction.atomic
+    def post(self, request, slug):
+        yoga_class = YogaClass.objects.get(slug=slug)
+        if request.session.get('dashboard_card_form'):
+            form = CardForm(request.session['dashboard_card_form'])
+            trainee = get_object_or_404(
+                Trainee, pk=form.cleaned_data['trainee'])
+            amount = request.POST.get('amount')
+            #
+            # PROMOTION
+            promotion_type = None
+            promotion_code = None
+            if request.session.get('dashboard_promotion_code') and request.session.get('dashboard_promotion_type'):
+                promotion_type = get_object_or_404(
+                    PromotionType, pk=request.session.get('dashboard_promotion_type'))
+                promotion_code = get_object_or_404(
+                    PromotionCode, pk=request.session.get('dashboard_promotion_code'))
+            # CREATE CARD
+            card = self.create_card(
+                yoga_class, form, trainee, promotion_code, promotion_type)
+            # CREATE CARD INVOICE
+            description = _('Create new card at center')
+            card_invoice = CardInvoiceService(
+                card, POSTPAID, description, amount, None).call()
+            card_invoice.staff = request.user.staff
+            card_invoice.save()
+
+            if promotion_code is not None and promotion_type is not None:
+                promotion_code.promotion_type = promotion_type
+                promotion_code.save()
+                if promotion_type.category == GIFT_PROMOTION:
+                    promotion_code.promotion_code_products.create(
+                        product=promotion_type.product, quantity=promotion_type.value)
+                card_invoice.apply_promotion_codes.create(
+                    promotion_code=promotion_code)
+            if request.session.get('dashboard_card_form'):
+                del request.session['dashboard_card_form']
+            if request.session.get('dashboard_promotion_code'):
+                del request.session['dashboard_promotion_code']
+            if request.session.get('dashboard_promotion_type'):
+                del request.session['dashboard_promotion_type']
+
+            request.session['dashboard_new_card'] = card.pk
+            return redirect('dashboard:cards-new-for-class-result', slug=slug)
+        else:
+            messages.error(request, _(
+                'Dont have any info about card. Please try again'))
+            return redirect('dashboard:cards-new-for-class', slug=slug)
+
     def __lesson_list_available(self, yoga_class, form):
         cleaned_data = CardForm(form).cleaned_data
         id_arr = eval(cleaned_data['lesson_list'])
         lesson_list = yoga_class.lessons.filter(
             is_full=False, pk__in=id_arr).order_by('date')
         return lesson_list
+
+    @transaction.atomic
+    def create_card(self, yoga_class, form, trainee, promotion=None, promotion_type=None):
+        # TODO: Re check start_at and end_at
+        start = form.cleaned_data['start_at']
+        end = form.cleaned_data['end_at']
+        if promotion is not None and promotion_type is not None:
+            if promotion_type.category == PLUS_LESSON_PRACTICE_PROMOTION:
+                lesson_count = int(promotion_type.value)
+                end = end + timedelta(days=lesson_count)
+            elif promotion_type.category == PLUS_WEEK_PRACTICE_PROMOTION:
+                week_count = int(promotion_type.value)
+                end = end + timedelta(days=7*week_count)
+            elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
+                month_count = int(promotion_type.value)
+                end = end + relativedelta(months=month_count)
+        lesson_list = yoga_class.lessons.filter(date__range=[start, end])
+        card = form.save(commit=False)
+        card.trainee = trainee
+        card.yogaclass = yoga_class
+        card.save()
+        RollCallService(card, lesson_list).call()
+        return card
+
+
+@method_decorator([login_required, staff_required], name='dispatch')
+class CardNewResultView(View):
+    template_name = 'dashboard/cards/new/result.html'
+
+    def get(self, request, slug):
+        if request.session.get('dashboard_new_card') is not None:
+            context = {}
+            card = get_object_or_404(
+                Card, pk=request.session.get('dashboard_new_card'))
+            yoga_class = YogaClass.objects.get(slug=slug)
+            context['yoga_class'] = yoga_class
+            context['paymentType'] = 'Postpaid'
+            context['card'] = card
+            card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}'''.format(
+                fname=card.trainee.user.full_name(),
+                femail=card.trainee.user.email,
+                fcard_id=card.pk,
+                fclass_name=card.yogaclass.name,
+                fcard_type=card.card_type.name,
+                fstart_at=str(card.start_at()),
+                fend_at=str(card.end_at())
+            )
+            context['card_str_qrcode'] = card_str_qrcode
+
+            #del request.session['new_card']
+            return render(request, self.template_name, context=context)
+        else:
+            return redirect('errors:error-404')

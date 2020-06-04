@@ -13,11 +13,11 @@ class CardInvoiceService:
 
     @transaction.atomic
     def call(self):
-        card = CardInvoice.objects.create(**{
+        card_invoice = CardInvoice.objects.create(**{
             'card': self.card,
             'payment_type': self.payment_type,
             'description': self.description,
             'amount': self.amount,
             'charge_id': self.charge_id
         })
-        return card
+        return card_invoice

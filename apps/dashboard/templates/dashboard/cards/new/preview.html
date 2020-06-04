@@ -115,9 +115,9 @@
                         <div id="accordion">
                             <div class="card">
                                 <div class="card-header submit-payment">
-                                    <form action="javascript:;" method="POST">
+                                    <form action="." method="POST">
                                         {% csrf_token %}
-                                        <input type="hidden" name="payment_type" value="PREPAID_FREE">
+                                        <input type="hidden" name="payment_type" value="POSTPAID">
                                         <input type="hidden" name="amount" value="{{ amount|floatformat }}">
                                         <input style="width: 100%;" type="submit" class="card-link"
                                             value="{% trans 'Confirm to sign up' %}">

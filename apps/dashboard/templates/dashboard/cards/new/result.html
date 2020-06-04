@@ -1,0 +1,134 @@
+{% load static %}
+{% load i18n %}
+{% load qr_code %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="vi">
+
+<head>
+    <title>Yoga Hương Tre</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Yoga Hương Tre">
+    <meta name="keywords" content="yoga, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'img/huongtre_favicon.png'%}">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/vendor/bootstrap/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css'%}">
+    <link href="{% static 'fonts/fontawesome/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <script src="{% static 'js/vendor/jquery.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+    <script src="{% static 'js/vendor/bootstrap/bootstrap.min.js'%}"></script>
+    <link href="{% static 'css/dashboard/cards/new/result.css' %}" rel="stylesheet">
+    {% block specified_css %}{% endblock %}
+</head>
+
+<body>
+    <header class="container main-header">
+        <div class="row">
+            <div class="col">
+                <div class="logo">
+                    <a class="mb-3" href="{% url 'home:index' %}">Yoga Hương Tre</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <h3 style="font-family: serif;"><small>{% trans 'Card Infomation' %}</small></h3>
+        </div>
+        <div class="row">
+            <div class="col-md-2 float-left">
+                <img class="img img-fluid" src="{% qr_url_from_text card_str_qrcode size=2 version=10 image_format='png' %}" alt="{{card}}">
+            </div>
+            <div class="col-md-10">
+                <p class="mb-2" style="font-family: serif;">{% trans 'Card id' %}: {{ card.pk }}</p>
+                <p class="mb-2" style="font-family: serif;">{% trans 'Start at' %}: {{ card.start_at }}</p>
+                <p class="mb-2" style="font-family: serif;">{% trans 'End at' %}: {{ card.end_at }}</p>
+                <p class="mb-2" style="font-family: serif;">{% trans 'Number of lessons' %}: {{ card.lessons.all.count }}</p>
+            </div>
+            <table class="table table-bordered bg-light mt-3">
+                <thead>
+                    <tr>
+                        <th><small>{% trans 'Card id' %}</small></th>
+                        <th><small>{% trans 'Trainee' %}</small></th>
+                        <th><small>{% trans 'Email' %}</small></th>
+                        <th><small>{% trans 'Class' %}</small></th>
+                        <th><small>{% trans 'Card type' %}</small></th>
+                        <th><small>{% trans 'Amount' %}</small></th>
+                        <th><small>{% trans 'created at' as t %}{{t|capfirst}}</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><small><b>{{ card.pk }}</b></small></td>
+                        <td><small><b>{{ card.trainee.full_name }}</b></small></td>
+                        <td><small>{{ card.trainee.user.email }}</small></td>
+                        <td><small>{{ yoga_class.name }}</small></td>
+                        <td><small>{{ card.card_type }}</small></td>
+                        <td><small>{{ card.invoice.amount }}</small></td>
+                        <td><small>{{ card.created_at.date }}</small></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                <p class="float-right">
+                    Tp.Hồ Chí Minh, {% now "d M Y" %} 
+                </p>
+                <p class="float-right">
+                    <small>{% trans 'Payment Staff' %}</small>
+                </p>
+                <div class="clearfix"></div>
+                <p class="float-right">
+                    {{ request.user }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-five tab-full bottom-links">
+                    <ul class="links">
+                        <li><a href="{% url 'dashboard:index' %}">{% trans 'Dashboard' %}</a></li>
+                        <li><a id="print_card_invoice" href="javascript:;">{% trans 'Print card invoice' %}</a></li>
+                    </ul>
+                    <div class="credits">
+                        <p class="text-secondary">Yoga <a class="text-secondary" href="{% url 'home:index' %}">Hương Tre</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </div>
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!-- Java Script
+   ================================================== -->
+    <script>
+        $(window).on('load', function () {
+            /*------------------
+                Preloder
+            --------------------*/
+            $(".loader").fadeOut();
+            $("#preloder").delay(400).fadeOut("slow");
+
+        });
+        $('#print_card_invoice').click(function(){
+            $('footer').hide();
+            window.print();
+            $('footer').show();
+        });
+    </script>
+</body>
+
+</html>
