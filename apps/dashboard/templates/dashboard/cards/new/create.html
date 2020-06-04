@@ -1,8 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'dashboard/layouts/base.html' %}
 {% load static %}
 {% load i18n %}
-{% load crispy_forms_tags %}
-{% load sexify %}
+{% load dashboard_extras %}
 
 {% block specified_css %}
 <!-- DatetimePicker -->
@@ -24,177 +23,87 @@
 <script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-common/main.js' %}"></script>
 <script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-daygrid/main.js' %}"></script>
 <script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-timegrid/main.js' %} "></script>
-<link href="{% static 'css/classes/enroll.css' %}" rel='stylesheet' />
 
 <!-- mCustomScrollbar -->
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
     integrity="sha256-JHGEmB629pipTkMag9aMaw32I8zle24p3FpsEeI6oZU=" crossorigin="anonymous" />
 <!--end mCustomScrollbar -->
-<style>
-    .fc-event-trial {
-        font-size: 16px;
-        padding: 2px;
-        margin-bottom: 5px;
-    }
-</style>
-
+<link href="{% static 'css/dashboard/cards/new/style.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<input id="form_of_using_card_type" type="hidden" value="-1">
-<section class="classes-page-section spad">
-    <div class="container">
-        <div class="row mb-3">
-            <div class="col">
-                <a class="text-danger" href="javascript:;"><span class="flaticon-lotus"></span>
-                    {{ yoga_class.course.name }}</a>
-                <a class="text-danger" href="javascript:;">&raquo; {{ yoga_class.name }}</a>
-                <a class="text-danger" href="javascript:;">&raquo; {% trans 'Enroll' %}</a>
-            </div>
-        </div>
-    </div>
-    <div class="container card">
-        <div class="card-body">
-            <div class="row justify-content-center">
-                <div class="col-md-4 jumbotron">
-                    <div id="accordion">
-                        <div class="card">
-                            <div class="card-header price-card">
-                                <a class="collapsed card-link" data-toggle="collapse" href="#ForFullmonthPrice">
-                                    {% trans 'Price per month' %}: {{ price_arr.FOR_FULL_MONTH|sexy_number }}đ
-                                </a>
-                            </div>
-                            <div id="ForFullmonthPrice" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    <ul class="list-group list-group-flush mb-3">
-                                        <li class="list-group-item pl-0 pr-0"><i
-                                                class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
-                                            {% trans "Enroll all lessons in a month with price for each month is" %}
-                                            <b>{{ price_arr.FOR_FULL_MONTH|sexy_number }}đ</b>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header price-card">
-                                <a class="collapsed card-link" data-toggle="collapse" href="#ForLessonInPeriodTime">
-                                    {% trans 'Price of lesson in consecutive time' %}: {{ price_arr.FOR_PERIOD_TIME_LESSONS|sexy_number }}đ
-                                </a>
-                            </div>
-                            <div id="ForLessonInPeriodTime" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    <ul class="list-group list-group-flush mb-3">
-                                        <li class="list-group-item pl-0 pr-0"><i
-                                                class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
-                                            {% trans "Enroll lessons in a consecutive time with price of each lesson is" %}
-                                            <b>{{ price_arr.FOR_PERIOD_TIME_LESSONS|sexy_number }}đ</b>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header price-card">
-                                <a class="collapsed card-link" data-toggle="collapse" href="#ForSomeLesson">
-                                    {% trans 'Price 1 of lesson in non-consecutive time' %}: {{ price_arr.FOR_SOME_LESSONS|sexy_number }}đ
-                                </a>
-                            </div>
-                            <div id="ForSomeLesson" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    <ul class="list-group list-group-flush mb-3">
-                                        <li class="list-group-item pl-0 pr-0"><i
-                                                class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
-                                            {% trans "Sign up for some lessons with non-consecutive time. Price of each lesson is" %}
-                                            <b>{{ price_arr.FOR_SOME_LESSONS|sexy_number }}đ</b>
-                                        </li>
-                                        <li class="list-group-item pl-0 pr-0"><i
-                                            class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
-                                        {% trans "Each lesson cannot be separated by more than 2 sessions" %}
-                                    </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header price-card">
-                                <a class="collapsed card-link" data-toggle="collapse" href="#ForTrialLesson">
-                                    {% trans 'Price of 1 trial lesson' %}: {{ price_arr.FOR_TRIAL|sexy_number }}đ
-                                </a>
-                            </div>
-                            <div id="ForTrialLesson" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    <ul class="list-group list-group-flush mb-3">
-                                        <li class="list-group-item pl-0 pr-0"><i
-                                                class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
-                                            {% trans "Free registration for one lesson" %}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <h5 class="h3 mb-0 title"><small><i class="fab fa-fw fa-flipboard"></i></small>{% trans 'Sign up' %}
+        {{ yoga_class }}</h5>
+</div>
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="col-md-4" id="div_action_left">
+            <div id="form-content">
+                <form id="card_form" action="{% url 'dashboard:cards-new-for-class' yoga_class.slug %}" method="POST">
+                    {% csrf_token %}
+                    {{form.lesson_list}}
+                    <div class="form-group">
+                        <label for="trainee" class="d-block">{% trans 'Trainee' %} <span class="asteriskField">(*)</span> <a class="float-right btn btn-sm btn-success create-new-trainee" href="javascript:;">{% trans 'create new' %}</a></label>
+                        {{ form.trainee }}
+                    </div>
+                    <div class="form-group">
+                        <label for="card_type">{% trans 'Card type' %} <span class="asteriskField">(*)</span></label>
+                        {{ form.card_type }}
+                    </div>
+                    {% if form_of_using > -1 %}
+                    {% if form_of_using == FOR_FULL_MONTH or form_of_using == FOR_PERIOD_TIME_LESSONS %}
+                    <div class="form-group">
+                        <label>{% trans 'Start at' %} <span class="asteriskField">(*)</span></label>
+                        {{ form.start_at }}
+                    </div>
+                    {% if form_of_using == FOR_FULL_MONTH %}
+                    <div class="form-group">
+                        <label>{% trans "Number of months" %}</label>
+                        <input id="id_number_of_months" type="number" class="form-control" name="number_of_month"
+                            value="1">
+                    </div>
+                    {% endif %}
+                    <div class="form-group">
+                        <label>{% trans 'End at' %} <span class="asteriskField">(*)</span></label>
+                        {{ form.end_at }}
+                    </div>
+                    <div id='div_for_some_lesson_list' class="mt-3 mb-2">
+                        <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
+                        <p>{% trans 'Lessons you choose will be displayed here' %}</p>
+                        <div id='some_lesson_list' class="mCustomScrollbar" style="max-height: 250px;">
                         </div>
                     </div>
-                    <div id="form-content">
-                        <form id="form_enroll" action="{% url 'classes:enroll' yoga_class.slug %}" method="POST">
-                            {% csrf_token %}
-                            {{form.lesson_list}}
-                            <div class="form-group">
-                                <label for="card_type">{% trans 'Card type' %} <span
-                                        class="asteriskField">(*)</span></label>
-                                {{ form.card_type }}
-                            </div>
-                            {% if form_of_using > -1 %}
-                            {% if form_of_using == FOR_FULL_MONTH or form_of_using == FOR_PERIOD_TIME_LESSONS %}
-                            <div class="form-group">
-                                <label>{% trans 'Start at' %} <span class="asteriskField">(*)</span></label>
-                                {{ form.start_at }}
-                            </div>
-                            {% if form_of_using == FOR_FULL_MONTH %}
-                            <div class="form-group">
-                                <label>{% trans "Number of months" %}</label>
-                                <input id="id_number_of_months" type="number" class="form-control"
-                                    name="number_of_month" value="1">
-                            </div>
-                            {% endif %}
-                            <div class="form-group">
-                                <label>{% trans 'End at' %} <span class="asteriskField">(*)</span></label>
-                                {{ form.end_at }}
-                            </div>
-                            <div id='div_for_some_lesson_list' class="mt-3 mb-2">
-                                <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
-                                <p>{% trans 'Lessons you choose will be displayed here' %}</p>
-                                <div id='some_lesson_list' class="mCustomScrollbar" style="max-height: 250px;">
-                                </div>
-                            </div>
-                            {% else %}
-                            <input type="text" name="start_at" class="d-none" autocomplete="off" id="id_start_at">
-                            <input type="text" name="end_at" class="d-none" autocomplete="off" id="id_end_at">
-                            {% if form_of_using == FOR_TRIAL or form_of_using == FOR_SOME_LESSONS  %}
-                            <div id='drapdrop-lesson' class="mt-3">
-                                {% if form_of_using == FOR_TRIAL %}
-                                <h4 class="mb-1">{% trans 'Trial Lesson' %}</h4>
-                                {% else %}
-                                <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
-                                {% endif %}
-                                <p>{% trans 'Please drap a lesson into this area below to choose' %}</p>
-                                <div id='drapdrop-lesson-listing'>
-                                </div>
-                            </div>
-                            {% endif %}
-                            {% endif %}
-                            <input class="btn btn-danger" type="submit" value="{% trans 'Sign up' %}">
-                            {% endif %}
-                        </form>
+                    {% else %}
+                    <input type="text" name="start_at" class="d-none" autocomplete="off" id="id_start_at">
+                    <input type="text" name="end_at" class="d-none" autocomplete="off" id="id_end_at">
+                    {% if form_of_using == FOR_TRIAL or form_of_using == FOR_SOME_LESSONS  %}
+                    <div id='drapdrop-lesson' class="mt-3">
+                        {% if form_of_using == FOR_TRIAL %}
+                        <h4 class="mb-1">{% trans 'Trial Lesson' %}</h4>
+                        {% else %}
+                        <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
+                        {% endif %}
+                        <p>{% trans 'Please drap a lesson into this area below to choose' %}</p>
+                        <div id='drapdrop-lesson-listing'>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-8">
-                    <div id='calendar'></div>
-                </div>
+                    {% endif %}
+                    {% endif %}
+                    <input class="btn btn-danger mt-3" type="submit" value="{% trans 'Sign up' %}">
+                    {% endif %}
+                </form>
             </div>
         </div>
+        <div class="col-md-8" id="div_calendar">
+            <div id='calendar'></div>
+        </div>
     </div>
-</section>
+
+</div>
+
+
 {% endblock %}
 
 {% block specified_js %}
@@ -341,6 +250,34 @@
         }
         calendar.render();
     });
+    $('#id_start_at').datepicker({
+        prevText: "Trước",
+        nextText: "Sau",
+        currentText: "Hôm nay",
+        monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+        monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+        dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+        dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+        dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+        weekHeader: "Tuần",
+        dateFormat: "dd/mm/yy",
+        firstDay: 1,
+        showMonthAfterYear: false,
+    });
+    $('#id_end_at').datepicker({
+        prevText: "Trước",
+        nextText: "Sau",
+        currentText: "Hôm nay",
+        monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+        monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+        dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+        dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+        dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+        weekHeader: "Tuần",
+        dateFormat: "dd/mm/yy",
+        firstDay: 1,
+        showMonthAfterYear: false,
+    });
 
     $('#id_card_type').change(function () {
         var id_card_type = $(this).val();
@@ -389,39 +326,6 @@
                 d2.setMonth(d1.getMonth() + parseInt(val));
                 $('#id_end_at').datepicker("setDate", d2);
                 render_lesson_list();
-            }
-        }
-    });
-
-    // When CARD TYPE is TRIAL
-    // Remove trial lesson out of trial list
-    $(document).on('click', '.a-remove-drapdrop-lesson', function () {
-        var form_of_using = '{{form_of_using}}';
-        var pk = $(this).attr('data-pk');
-        if (form_of_using == '{{FOR_TRIAL}}') {
-            $(this).parent('.fc-event-trial').remove();
-            $('#id_start_at').val('');
-            $('#id_end_at').val('');
-            $('#id_lesson_list').val('');
-        } else if (form_of_using == '{{FOR_SOME_LESSONS}}') {
-            $(this).parent('.fc-event-trial').remove();
-            var choosen_arr = eval($('#id_lesson_list').val());
-            console.log(choosen_arr);
-            if (choosen_arr == undefined) {
-                choosen_arr = []
-            }
-            var new_arr = [];
-            choosen_arr.forEach((element) => {
-                console.log("element::::", element);
-                console.log("pk::::", pk);
-                if (element != pk) {
-                    new_arr.push(element);
-                }
-            });
-            if (new_arr.length == 0) {
-                $('#id_lesson_list').val('');
-            } else {
-                $('#id_lesson_list').val(JSON.stringify(new_arr));
             }
         }
     });
@@ -521,8 +425,41 @@
             $('#id_lesson_list').val('');
         }
     });
+    
+    // When CARD TYPE is TRIAL
+    // Remove trial lesson out of trial list
+    $(document).on('click', '.a-remove-drapdrop-lesson', function () {
+        var form_of_using = '{{form_of_using}}';
+        var pk = $(this).attr('data-pk');
+        if (form_of_using == '{{FOR_TRIAL}}') {
+            $(this).parent('.fc-event-trial').remove();
+            $('#id_start_at').val('');
+            $('#id_end_at').val('');
+            $('#id_lesson_list').val('');
+        } else if (form_of_using == '{{FOR_SOME_LESSONS}}') {
+            $(this).parent('.fc-event-trial').remove();
+            var choosen_arr = eval($('#id_lesson_list').val());
+            console.log(choosen_arr);
+            if (choosen_arr == undefined) {
+                choosen_arr = []
+            }
+            var new_arr = [];
+            choosen_arr.forEach((element) => {
+                console.log("element::::", element);
+                console.log("pk::::", pk);
+                if (element != pk) {
+                    new_arr.push(element);
+                }
+            });
+            if (new_arr.length == 0) {
+                $('#id_lesson_list').val('');
+            } else {
+                $('#id_lesson_list').val(JSON.stringify(new_arr));
+            }
+        }
+    });
 
-    $(document).on('click', 'form#form_enroll > input[type=submit]', function (e) {
+    $(document).on('click', 'form#card_form > input[type=submit]', function (e) {
         var form_of_using = '{{form_of_using}}';
         if (form_of_using == '{{FOR_FULL_MONTH}}' || form_of_using == '{{FOR_PERIOD_TIME_LESSONS}}') {
             if ($('input#id_start_at').val() == '') {
@@ -550,35 +487,6 @@
             return false;
         }
         return true;
-    });
-
-    $('#id_start_at').datepicker({
-        prevText: "Trước",
-        nextText: "Sau",
-        currentText: "Hôm nay",
-        monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
-        monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
-        dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
-        dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
-        dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
-        weekHeader: "Tuần",
-        dateFormat: "dd/mm/yy",
-        firstDay: 1,
-        showMonthAfterYear: false,
-    });
-    $('#id_end_at').datepicker({
-        prevText: "Trước",
-        nextText: "Sau",
-        currentText: "Hôm nay",
-        monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
-        monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
-        dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
-        dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
-        dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
-        weekHeader: "Tuần",
-        dateFormat: "dd/mm/yy",
-        firstDay: 1,
-        showMonthAfterYear: false,
     });
 </script>
 {% endblock %}

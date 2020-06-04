@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-03 07:53+0700\n"
+"POT-Creation-Date: 2020-06-04 11:24+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,14 +103,19 @@ msgid "Address"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:39
-#: .\apps\dashboard\forms\trainees_form.py:40 .\apps\feedback\forms.py:12
-#: .\apps\home\forms.py:7 .\apps\questions\forms.py:18
+#: .\apps\dashboard\forms\trainees_form.py:40
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:32
+#: .\apps\feedback\forms.py:12 .\apps\home\forms.py:7
+#: .\apps\questions\forms.py:18
 msgid "Email"
 msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:64
-#: .\apps\classes\templates\classes\enroll.html:182
+#: .\apps\classes\templates\classes\enroll.html:186
 #: .\apps\classes\templates\payment.html:137
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:37
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:94
+#: .\apps\dashboard\templates\dashboard\cards\new\index.html:48
 msgid "Sign up"
 msgstr ""
 
@@ -232,6 +237,7 @@ msgstr "updated at"
 #: .\apps\dashboard\templates\dashboard\admins\list.html:32
 #: .\apps\dashboard\templates\dashboard\blog\categories\list.html:28
 #: .\apps\dashboard\templates\dashboard\card_types\list.html:29
+#: .\apps\dashboard\templates\dashboard\cards\new\index.html:27
 #: .\apps\dashboard\templates\dashboard\classes\list.html:33
 #: .\apps\dashboard\templates\dashboard\courses\list.html:32
 #: .\apps\dashboard\templates\dashboard\events\list.html:32
@@ -303,39 +309,39 @@ msgstr ""
 msgid "health condition"
 msgstr ""
 
-#: .\apps\accounts\models.py:146
+#: .\apps\accounts\models.py:150
 msgid "introduction"
 msgstr ""
 
-#: .\apps\accounts\models.py:148 .\apps\accounts\models.py:175
+#: .\apps\accounts\models.py:152 .\apps\accounts\models.py:179
 msgid "experience"
 msgstr ""
 
-#: .\apps\accounts\models.py:150
+#: .\apps\accounts\models.py:154
 msgid "achievements"
 msgstr ""
 
-#: .\apps\accounts\models.py:152 .\apps\accounts\models.py:177
+#: .\apps\accounts\models.py:156 .\apps\accounts\models.py:181
 msgid "certificate"
 msgstr ""
 
-#: .\apps\accounts\models.py:154 .\apps\accounts\models.py:185
+#: .\apps\accounts\models.py:158 .\apps\accounts\models.py:189
 msgid "temporary leave requests"
 msgstr ""
 
-#: .\apps\accounts\models.py:156 .\apps\accounts\models.py:179
+#: .\apps\accounts\models.py:160 .\apps\accounts\models.py:183
 msgid "is student"
 msgstr ""
 
-#: .\apps\accounts\models.py:158 .\apps\accounts\models.py:181
+#: .\apps\accounts\models.py:162 .\apps\accounts\models.py:185
 msgid "graduate school"
 msgstr ""
 
-#: .\apps\accounts\models.py:160 .\apps\accounts\models.py:183
+#: .\apps\accounts\models.py:164 .\apps\accounts\models.py:187
 msgid "company name"
 msgstr ""
 
-#: .\apps\accounts\models.py:162
+#: .\apps\accounts\models.py:166
 msgid "taught lessons"
 msgstr ""
 
@@ -370,6 +376,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:18
 #: .\apps\dashboard\templates\dashboard\card_types\list.html:19
 #: .\apps\dashboard\templates\dashboard\cards\list.html:22
+#: .\apps\dashboard\templates\dashboard\cards\new\index.html:17
 #: .\apps\dashboard\templates\dashboard\classes\list.html:23
 #: .\apps\dashboard\templates\dashboard\courses\list.html:22
 #: .\apps\dashboard\templates\dashboard\events\list.html:22
@@ -488,28 +495,37 @@ msgid "for longtime trainee only"
 msgstr ""
 
 #: .\apps\cards\forms.py:17 .\apps\cards\forms.py:26
+#: .\apps\dashboard\forms\cards_form.py:11
+#: .\apps\dashboard\forms\cards_form.py:20
 msgid "Please enter the value"
 msgstr ""
 
-#: .\apps\cards\forms.py:36
+#: .\apps\cards\forms.py:36 .\apps\dashboard\forms\cards_form.py:30
+#: .\apps\dashboard\forms\cards_form.py:43
 msgid "Please select a value"
 msgstr ""
 
-#: .\apps\cards\forms.py:60 .\apps\classes\templates\classes\enroll.html:172
+#: .\apps\cards\forms.py:60 .\apps\classes\templates\classes\enroll.html:176
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:84
 msgid "Trial Lesson"
 msgstr ""
 
-#: .\apps\cards\forms.py:61 .\apps\classes\templates\classes\enroll.html:176
+#: .\apps\cards\forms.py:61 .\apps\classes\templates\classes\enroll.html:180
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:88
 msgid "Please drap a lesson into this area below to choose"
 msgstr ""
 
-#: .\apps\cards\forms.py:70 .\apps\classes\templates\classes\enroll.html:161
-#: .\apps\classes\templates\classes\enroll.html:174
+#: .\apps\cards\forms.py:70 .\apps\classes\templates\classes\enroll.html:165
+#: .\apps\classes\templates\classes\enroll.html:178
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:73
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:86
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:95
 #: .\templates\profile\trainees\cards\detail.html:86
 msgid "Lesson List"
 msgstr ""
 
-#: .\apps\cards\forms.py:71 .\apps\classes\templates\classes\enroll.html:162
+#: .\apps\cards\forms.py:71 .\apps\classes\templates\classes\enroll.html:166
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:74
 msgid "Lessons you choose will be displayed here"
 msgstr ""
 
@@ -532,12 +548,14 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: .\apps\cards\forms.py:99 .\apps\classes\templates\classes\enroll.html:504
+#: .\apps\cards\forms.py:99 .\apps\classes\templates\classes\enroll.html:506
+#: .\apps\dashboard\forms\cards_form.py:70
 #: .\apps\dashboard\forms\classes_form.py:113
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:410
 msgid "End at must be greater than Start at"
 msgstr ""
 
-#: .\apps\cards\forms.py:114
+#: .\apps\cards\forms.py:114 .\apps\dashboard\forms\cards_form.py:85
 msgid "Your range time does not have any lessons"
 msgstr ""
 
@@ -553,7 +571,9 @@ msgid "trainee"
 msgstr ""
 
 #: .\apps\cards\models.py:18 .\apps\classes\templates\payment.html:176
+#: .\apps\dashboard\templates\dashboard\card_types\new.html:9
 #: .\apps\dashboard\templates\dashboard\cards\list.html:33
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:47
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:26
 msgid "card type"
 msgstr ""
@@ -583,6 +603,7 @@ msgid "Advanced Level"
 msgstr ""
 
 #: .\apps\classes\models.py:13
+#: .\apps\dashboard\templates\dashboard\cards\new\index.html:28
 #: .\apps\dashboard\templates\dashboard\classes\list.html:34
 #: .\apps\dashboard\templates\dashboard\classes\show.html:32
 #: .\apps\dashboard\templates\dashboard\courses\edit.html:13
@@ -594,6 +615,7 @@ msgid "course"
 msgstr ""
 
 #: .\apps\classes\models.py:15 .\apps\dashboard\forms\lesssons_form.py:60
+#: .\apps\dashboard\templates\dashboard\cards\new\index.html:29
 #: .\apps\dashboard\templates\dashboard\classes\list.html:35
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:50
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:22
@@ -648,6 +670,7 @@ msgid "Enroll"
 msgstr ""
 
 #: .\apps\classes\templates\classes\enroll.html:65
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:53
 msgid "Price per month"
 msgstr ""
 
@@ -672,49 +695,58 @@ msgid ""
 "Sign up for some lessons with non-consecutive time. Price of each lesson is"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:119
+#: .\apps\classes\templates\classes\enroll.html:114
+msgid "Each lesson cannot be separated by more than 2 sessions"
+msgstr ""
+
+#: .\apps\classes\templates\classes\enroll.html:123
 msgid "Price of 1 trial lesson"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:127
+#: .\apps\classes\templates\classes\enroll.html:131
 #, fuzzy
 #| msgid "price course"
 msgid "Free registration for one lesson"
 msgstr "price of course"
 
-#: .\apps\classes\templates\classes\enroll.html:139
+#: .\apps\classes\templates\classes\enroll.html:143
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:52
 #: .\templates\profile\trainees\cards\detail.html:56
 msgid "Card type"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:146
+#: .\apps\classes\templates\classes\enroll.html:150
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:58
 #, fuzzy
 #| msgid "start time"
 msgid "Start at"
 msgstr "start at"
 
-#: .\apps\classes\templates\classes\enroll.html:151
+#: .\apps\classes\templates\classes\enroll.html:155
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:63
 msgid "Number of months"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:157
+#: .\apps\classes\templates\classes\enroll.html:161
 #: .\apps\dashboard\templates\dashboard\cards\list.html:35
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:69
 msgid "End at"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:244
+#: .\apps\classes\templates\classes\enroll.html:248
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:157
 msgid "lesson is full"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:279
-#: .\apps\classes\templates\classes\enroll.html:305
-#: .\apps\classes\templates\classes\enroll.html:368
-#: .\apps\classes\templates\classes\enroll.html:377
-#: .\apps\classes\templates\classes\enroll.html:490
-#: .\apps\classes\templates\classes\enroll.html:503
-#: .\apps\classes\templates\classes\enroll.html:528
-#: .\apps\classes\templates\classes\enroll.html:535
-#: .\apps\classes\templates\classes\enroll.html:544
+#: .\apps\classes\templates\classes\enroll.html:283
+#: .\apps\classes\templates\classes\enroll.html:309
+#: .\apps\classes\templates\classes\enroll.html:372
+#: .\apps\classes\templates\classes\enroll.html:381
+#: .\apps\classes\templates\classes\enroll.html:492
+#: .\apps\classes\templates\classes\enroll.html:505
+#: .\apps\classes\templates\classes\enroll.html:530
+#: .\apps\classes\templates\classes\enroll.html:537
+#: .\apps\classes\templates\classes\enroll.html:546
 #: .\apps\classes\templates\payment.html:414
 #: .\apps\classes\templates\payment.html:423
 #: .\apps\classes\templates\payment.html:432
@@ -722,6 +754,17 @@ msgstr ""
 #: .\apps\classes\templates\payment.html:460
 #: .\apps\classes\templates\payment.html:474
 #: .\apps\classes\templates\payment.html:526
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:192
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:218
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:309
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:318
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:396
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:409
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:467
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:474
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:483
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:271
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:323
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:264
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:330
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:711
@@ -732,35 +775,43 @@ msgstr ""
 msgid "error"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:280
+#: .\apps\classes\templates\classes\enroll.html:284
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:193
 msgid "Trial lesson has been added"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:306
+#: .\apps\classes\templates\classes\enroll.html:310
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:219
 msgid "Lesson has been added"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:369
+#: .\apps\classes\templates\classes\enroll.html:373
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:310
 msgid "Please enter positive integer"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:378
+#: .\apps\classes\templates\classes\enroll.html:382
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:319
 msgid "Please enter start at"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:491
+#: .\apps\classes\templates\classes\enroll.html:493
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:397
 msgid "You must register at least 1 month"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:529
+#: .\apps\classes\templates\classes\enroll.html:531
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:468
 msgid "Pleae enter Start at"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:536
+#: .\apps\classes\templates\classes\enroll.html:538
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:475
 msgid "Please enter End at"
 msgstr ""
 
-#: .\apps\classes\templates\classes\enroll.html:545
+#: .\apps\classes\templates\classes\enroll.html:547
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:484
 msgid "There is no lesson to register"
 msgstr ""
 
@@ -807,6 +858,7 @@ msgid "About Trainer"
 msgstr ""
 
 #: .\apps\classes\templates\payment.html:18
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:17
 msgid "Payment Info"
 msgstr ""
 
@@ -860,6 +912,7 @@ msgid "If not, your card will be destroyed"
 msgstr ""
 
 #: .\apps\classes\templates\payment.html:191
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:69
 msgid "total price"
 msgstr ""
 
@@ -1024,6 +1077,10 @@ msgstr ""
 msgid "view classes"
 msgstr ""
 
+#: .\apps\dashboard\forms\card_types_form.py:37
+msgid "A card type with this name already exists."
+msgstr ""
+
 #: .\apps\dashboard\forms\classes_form.py:102
 #: .\apps\dashboard\forms\classes_form.py:135
 msgid "A class with this name already exists."
@@ -1167,6 +1224,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\blog\categories\list.html:29
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:31
 #: .\apps\dashboard\templates\dashboard\cards\list.html:36
+#: .\apps\dashboard\templates\dashboard\cards\new\index.html:30
 #: .\apps\dashboard\templates\dashboard\classes\list.html:36
 #: .\apps\dashboard\templates\dashboard\courses\list.html:36
 #: .\apps\dashboard\templates\dashboard\events\list.html:34
@@ -1245,6 +1303,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\blog\categories\list.html:13
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:13
 #: .\apps\dashboard\templates\dashboard\card_types\list.html:13
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:48
 #: .\apps\dashboard\templates\dashboard\classes\list.html:16
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:11
 #: .\apps\dashboard\templates\dashboard\promotions\list.html:13
@@ -1261,6 +1320,7 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\blog\categories\new.html:10
 #: .\apps\dashboard\templates\dashboard\blog\posts\new.html:10
+#: .\apps\dashboard\templates\dashboard\card_types\new.html:10
 #: .\apps\dashboard\templates\dashboard\classes\new.html:15
 #: .\apps\dashboard\templates\dashboard\courses\new.html:14
 #: .\apps\dashboard\templates\dashboard\events\new.html:15
@@ -1328,6 +1388,61 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:48
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:27
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:213
+#, fuzzy
+#| msgid "Trainers"
+msgid "Trainee"
+msgstr "Trainer"
+
+#: .\apps\dashboard\templates\dashboard\cards\new\index.html:12
+#: .\apps\dashboard\templates\dashboard\classes\list.html:13
+msgid "class list"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\cards\new\index.html:16
+#: .\apps\dashboard\templates\dashboard\classes\list.html:22
+#: .\apps\dashboard\templates\dashboard\classes\new.html:14
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:287
+#: .\templates\profile\trainees\cards\detail.html:163
+msgid "class"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:23
+msgid "Card Infomation"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:37
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:48
+#: .\templates\profile\trainees\cards\detail.html:52
+msgid "Class"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:42
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:253
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:56
+#, fuzzy
+#| msgid "Trainers"
+msgid "Trainer"
+msgstr "Trainer"
+
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:55
+msgid "Price of training courses"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:57
+msgid "Price per lesson"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:81
+msgid "Payment Staff"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\cards\new\preview.html:123
+msgid "Confirm to sign up"
+msgstr ""
+
 #: .\apps\dashboard\templates\dashboard\classes\edit.html:12
 #: .\apps\dashboard\templates\dashboard\classes\show.html:21
 msgid "back"
@@ -1341,17 +1456,6 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\edit.html:19
 msgid "Update Class"
-msgstr ""
-
-#: .\apps\dashboard\templates\dashboard\classes\list.html:13
-msgid "class list"
-msgstr ""
-
-#: .\apps\dashboard\templates\dashboard\classes\list.html:22
-#: .\apps\dashboard\templates\dashboard\classes\new.html:14
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:287
-#: .\templates\profile\trainees\cards\detail.html:163
-msgid "class"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:32
@@ -1741,12 +1845,6 @@ msgstr ""
 msgid "Add make up person"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:213
-#, fuzzy
-#| msgid "Trainers"
-msgid "Trainee"
-msgstr "Trainer"
-
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:215
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:256
 msgid "Please choose"
@@ -1778,13 +1876,6 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:245
 msgid "Add a substitute trainer"
 msgstr ""
-
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:253
-#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:56
-#, fuzzy
-#| msgid "Trainers"
-msgid "Trainer"
-msgstr "Trainer"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:279
 msgid "Studied make-up lesson detail info"
@@ -1961,8 +2052,16 @@ msgstr ""
 msgid "quantity"
 msgstr ""
 
-#: .\apps\dashboard\views\cards_view.py:60
+#: .\apps\dashboard\views\cards_view.py:71
 msgid "Receive card payment successfully"
+msgstr ""
+
+#: .\apps\dashboard\views\cards_view.py:145
+msgid "Trainee have had one of this lessons before"
+msgstr ""
+
+#: .\apps\dashboard\views\cards_view.py:246
+msgid "Dont have any info about card. Please try again"
 msgstr ""
 
 #: .\apps\dashboard\views\classes_view.py:168
@@ -2240,11 +2339,6 @@ msgstr ""
 
 #: .\apps\shop\views.py:213
 msgid "paied"
-msgstr ""
-
-#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:48
-#: .\templates\profile\trainees\cards\detail.html:52
-msgid "Class"
 msgstr ""
 
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:52

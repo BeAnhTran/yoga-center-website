@@ -71,6 +71,11 @@ rooms_urlpatterns = [
 # CARDS
 cards_urlpatterns = [
     path('', cards_view.CardListView.as_view(), name='cards-list'),
+    path('new/', cards_view.CardNewIndexView.as_view(), name='cards-new-index'),
+    path('<slug:slug>/new/', cards_view.CardNewView.as_view(),
+         name='cards-new-for-class'),
+     path('<slug:slug>/new-preview/', cards_view.CardNewPreviewView.as_view(),
+         name='cards-new-for-class-preview'),
     path('unpaid-list/', cards_view.UnPaidCardListView.as_view(),
          name='unpaid-cards-list'),
     path('unpaid-list/<int:pk>/receive-payment/', cards_view.ReceiveCardPaymentView.as_view(),

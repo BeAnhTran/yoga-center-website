@@ -1,0 +1,67 @@
+#form_promotion lable{
+    color: #727272;
+    font-size: 0.75rem;
+  }
+  
+  #btn_submit_promotion_code {
+    background-color: #575757;
+    border: 1px solid #575757;
+    color: white;
+    font-weight: 400;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+  }
+  
+  #promotion_code {
+    height: calc(1.5em + .45rem + 2px);
+    padding: .375rem 1.75rem;
+    font-size: 0.85rem;
+  }
+
+  #accordion{
+        margin: auto;
+        max-width: 425px;
+  }
+
+  .submit-payment{
+    background-color: #527318 !important;
+    background: url('../../../../img/favicon.png');
+    background-position: 92%;
+    background-repeat:no-repeat;
+    background-size: 40px 40px;
+    color:#fff;
+    padding: 0;
+    border-radius: 5px;
+    border: 1px solid #527318;
+    display: inline;
+  }
+  
+  .submit-payment .card-link {
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    transition: 0.5s;
+  }
+  
+  .submit-payment:hover{
+    cursor: pointer;
+  }
+  
+  .submit-payment:hover .card-link{
+    color: #527318;
+    background-color: #fff !important;
+    background: url('../../../../img/favicon.png');
+    background-position: 92%;
+    background-repeat:no-repeat;
+    background-size: 40px 40px;
+  } 
+  .submit-payment .card-link:hover{
+    color: #527318;
+    background-color: #fff !important;
+    background: url('../../../../img/favicon.png');
+    background-position: 92%;
+    background-repeat:no-repeat;
+    background-size: 40px 40px;
+  }

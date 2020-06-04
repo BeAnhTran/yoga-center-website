@@ -135,8 +135,12 @@ class Trainee(models.Model):
         blank=True, verbose_name=_('health condition'))
 
     def __str__(self):
-        full_name = self.user.full_name()
-        return full_name
+        result = str(self.pk) + ' - ' + self.full_name() + \
+            ' (' + self.user.email + ')'
+        return result
+
+    def full_name(self):
+        return self.user.last_name + ' ' + self.user.first_name
 
 
 class Trainer(models.Model):

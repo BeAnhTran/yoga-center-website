@@ -1,0 +1,67 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load dashboard_extras %}
+
+{% block specified_css %}
+<link href="{% static 'css/dashboard/cards/new/style.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 mb-0 title"><small><i class="fas fa-fw fa-list"></i></small> {% trans 'class list' %}</h1>
+</div>
+{% if not classes %}
+<p class="text-danger">
+    {% trans 'class' as trans_class %}
+    {% blocktrans with value=trans_class %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th><small>{% trans 'name' as t_name %}{{ t_name|capfirst }}</small></th>
+                        <th><small>{% trans 'course' as t_course %}{{ t_course|capfirst }}</small></th>
+                        <th><small>{% trans 'trainer' as t_trainer %}{{ t_trainer|capfirst }}</small></th>
+                        <th><small>{% trans 'action' as t_action %}{{ t_action|capfirst }}</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in classes %}
+                    <tr>
+                        <td>{{ c.id }}</td>
+                        <td>{{ c.name }}</td>
+                        <td>
+                            <span class="badge badge-pill badge-info">
+                                {{ c.course }}
+                            </span>
+                        </td>
+                        <td>
+                            {{ c.trainer }}
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary" href="{% url 'dashboard:cards-new-for-class' c.slug %}">
+                                {% trans 'Sign up' %}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block specified_js %}
+{% endblock %}

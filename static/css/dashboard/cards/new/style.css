@@ -1,0 +1,53 @@
+.fc-time{
+    display: none;
+}
+
+.fc-content{
+    text-align: center;
+}
+
+#drapdrop-lesson-listing, #some_lesson_list{
+    min-height: 100px;
+}
+
+#drapdrop-lesson, #div_for_some_lesson_list{
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 0.5em;
+    font-family: 'Times New Roman', Times, serif;
+}
+.a-remove-drapdrop-lesson{
+    color:#000;
+}
+
+#div_calendar{
+    padding: 10px;
+    border: 2px solid lightseagreen;
+}
+
+#div_action_left{
+    padding-left: 0;
+}
+.fc-event-trial {
+    font-size: 16px;
+    padding: 2px;
+    margin-bottom: 5px;
+    background-color: #235952;
+    border-color: #235952;
+}
+.a-remove-drapdrop-lesson:hover{
+    color: #d32626;
+    background-color: #fff;
+}
+.fc-left h2{
+    font-family: serif;
+    text-transform: capitalize;
+    text-decoration: underline;
+}
+
+.create-new-trainee{
+    padding: .2rem .4rem;
+    font-size: .875rem;
+    line-height: 1.25;
+    border-radius: .2rem;
+}
