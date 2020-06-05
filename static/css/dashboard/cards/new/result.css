@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 /* Preloder */
 
 #preloder {
@@ -89,22 +90,75 @@ header .logo a {
 }
 
 footer{
-    padding: 25px;
+    padding: 10px 0;
     width: 100%;
     display: block;
     background-color: darkgreen;
 }
 
 ul.links{
-    padding-left: 0;
+	margin-top: auto;
+	margin-bottom: auto;
+	padding-left: 0;
 }
 
 ul.links li{
     display: inline-block;
-    margin-right: 30px;
+	margin-right: 15px;
 }
-ul.links li a{
+ul.links li a {
     font-size: 18px;
-    color: white;
     font-family: serif;
+    background-color: darkgreen;
+    padding: 12px 24px;
+    border: 1px solid darkgreen;
+    border-radius: 5px;
+    color: white;
+}
+
+.footer-widget .about-widget img {
+	margin-bottom: 30px;
+}
+
+.footer-widget .fw-title {
+	font-size: 20px;
+	margin-bottom: 30px;
+	padding-top: 10px;
+	text-transform: uppercase;
+}
+
+.footer-widget ul {
+	list-style: none;
+}
+
+.footer-widget ul li {
+	font-size: 16px;
+	color: #fefefe;
+	display: inline;
+}
+
+.footer-widget ul li i {
+	font-size: 18px;
+	color: #fefefe;
+	position: relative;
+	top: 3px;
+	margin-right: 10px;
+}
+
+.footer-widget ul li a {
+	color: #666666;
+}
+
+.footer-widget ul li a:hover {
+	color: #fb3958;
+}
+
+.footer-widget .infor-form {
+	margin: 30px 0 0;
+}
+
+.footer-bottom {
+	margin-top: 30px;
+	border-top: 1px solid #e6e6e6;
+	padding: 20px 0;
 }

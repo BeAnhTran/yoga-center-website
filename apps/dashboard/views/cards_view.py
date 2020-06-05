@@ -292,8 +292,7 @@ class CardNewPreviewView(View):
             if request.session.get('dashboard_promotion_type'):
                 del request.session['dashboard_promotion_type']
 
-            request.session['dashboard_new_card'] = card.pk
-            return redirect('dashboard:cards-new-for-class-result', slug=slug)
+            return redirect('dashboard:cards-new-for-class-result', pk=card.pk)
         else:
             messages.error(request, _(
                 'Dont have any info about card. Please try again'))
@@ -334,13 +333,12 @@ class CardNewPreviewView(View):
 class CardNewResultView(View):
     template_name = 'dashboard/cards/new/result.html'
 
-    def get(self, request, slug):
+    def get(self, request, pk):
         if request.session.get('dashboard_new_card') is not None:
             context = {}
             card = get_object_or_404(
-                Card, pk=request.session.get('dashboard_new_card'))
-            yoga_class = YogaClass.objects.get(slug=slug)
-            context['yoga_class'] = yoga_class
+                Card, pk=pk)
+            context['yoga_class'] = card.yogaclass
             context['paymentType'] = 'Postpaid'
             context['card'] = card
             card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}'''.format(
@@ -353,8 +351,6 @@ class CardNewResultView(View):
                 fend_at=str(card.end_at())
             )
             context['card_str_qrcode'] = card_str_qrcode
-
-            #del request.session['new_card']
             return render(request, self.template_name, context=context)
         else:
             return redirect('errors:error-404')

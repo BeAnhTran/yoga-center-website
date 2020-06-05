@@ -76,7 +76,7 @@ cards_urlpatterns = [
          name='cards-new-for-class'),
     path('<slug:slug>/new-preview/', cards_view.CardNewPreviewView.as_view(),
          name='cards-new-for-class-preview'),
-    path('<slug:slug>/new-result/', cards_view.CardNewResultView.as_view(),
+    path('new-result/<int:pk>/', cards_view.CardNewResultView.as_view(),
          name='cards-new-for-class-result'),
     path('unpaid-list/', cards_view.UnPaidCardListView.as_view(),
          name='unpaid-cards-list'),

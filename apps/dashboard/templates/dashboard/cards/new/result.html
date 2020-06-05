@@ -1,6 +1,7 @@
 {% load static %}
 {% load i18n %}
 {% load qr_code %}
+{% load sexify %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="vi">
@@ -14,15 +15,11 @@
     <link rel="shortcut icon" href="{% static 'img/huongtre_favicon.png'%}">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{% static 'css/vendor/bootstrap/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'css/flaticon.css'%}">
     <link href="{% static 'fonts/fontawesome/css/all.min.css' %}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
     <script src="{% static 'js/vendor/jquery.min.js'%}"></script>
     <script src="{% static 'js/popper.min.js'%}"></script>
     <script src="{% static 'js/vendor/bootstrap/bootstrap.min.js'%}"></script>
+
     <link href="{% static 'css/dashboard/cards/new/result.css' %}" rel="stylesheet">
     {% block specified_css %}{% endblock %}
 </head>
@@ -30,10 +27,18 @@
 <body>
     <header class="container main-header">
         <div class="row">
-            <div class="col">
+            <div class="col-md-2">
                 <div class="logo">
                     <a class="mb-3" href="{% url 'home:index' %}">Yoga Hương Tre</a>
                 </div>
+            </div>
+            <div id="nav" class="col-md-10 d-flex">
+                <ul class="links">
+                    <li><a href="{% url 'home:index' %}"><i class="fas fa-fw fa-home"></i> {% trans 'Home' %}</a></li>
+                    <li><a href="{% url 'dashboard:index' %}"><i class="fas fa-fw fa-tachometer-alt"></i> {% trans 'Dashboard' %}</a></li>
+                    <li><a id="print_card_invoice" href="javascript:;"><i class="fas fa-fw fa-print"></i> {% trans 'Print card invoice' %}</a></li>
+                    <li><a id="print_QR_code" href="javascript:;"><i class="fas fa-fw fa-print"></i> {% trans 'Print QR Code of card' %}</a></li>
+                </ul>
             </div>
         </div>
     </header>
@@ -41,16 +46,21 @@
         <div class="row">
             <h3 style="font-family: serif;"><small>{% trans 'Card Infomation' %}</small></h3>
         </div>
-        <div class="row">
+        <div id="card_info" class="row">
             <div class="col-md-2 float-left">
-                <img class="img img-fluid" src="{% qr_url_from_text card_str_qrcode size=2 version=10 image_format='png' %}" alt="{{card}}">
+                <img class="img img-fluid"
+                    src="{% qr_url_from_text card_str_qrcode size=4 version=10 image_format='png' %}" alt="{{card}}">
             </div>
             <div class="col-md-10">
                 <p class="mb-2" style="font-family: serif;">{% trans 'Card id' %}: {{ card.pk }}</p>
+                <p class="mb-2" style="font-family: serif;">{% trans 'Trainee' %}: {{ card.trainee }}</p>
                 <p class="mb-2" style="font-family: serif;">{% trans 'Start at' %}: {{ card.start_at }}</p>
                 <p class="mb-2" style="font-family: serif;">{% trans 'End at' %}: {{ card.end_at }}</p>
-                <p class="mb-2" style="font-family: serif;">{% trans 'Number of lessons' %}: {{ card.lessons.all.count }}</p>
+                <p class="mb-2" style="font-family: serif;">{% trans 'Number of lessons' %}:
+                    {{ card.lessons.all.count }}</p>
             </div>
+        </div>
+        <div class="row invoice">
             <table class="table table-bordered bg-light mt-3">
                 <thead>
                     <tr>
@@ -70,18 +80,19 @@
                         <td><small>{{ card.trainee.user.email }}</small></td>
                         <td><small>{{ yoga_class.name }}</small></td>
                         <td><small>{{ card.card_type }}</small></td>
-                        <td><small>{{ card.invoice.amount }}</small></td>
+                        <td><small>{{ card.invoice.amount|sexy_number }}đ</small></td>
                         <td><small>{{ card.created_at.date }}</small></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="row mb-5">
-            <div class="col-md-8"></div>
-            <div class="col-md-4">
+        <div class="row mb-5 staff_sign">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
                 <p class="float-right">
-                    Tp.Hồ Chí Minh, {% now "d M Y" %} 
+                    TP.Hồ Chí Minh, {% trans 'date' %} {{ card.invoice.updated_at|date:'d' }} {{ card.invoice.updated_at|date:'M' }} {% trans 'year' %} {{ card.invoice.updated_at|date:'Y' }}
                 </p>
+                <div class="clearfix"></div>
                 <p class="float-right">
                     <small>{% trans 'Payment Staff' %}</small>
                 </p>
@@ -92,17 +103,21 @@
             </div>
         </div>
     </div>
-
     <footer class="mt-5">
         <div class="container">
             <div class="row">
-                <div class="col-five tab-full bottom-links">
-                    <ul class="links">
-                        <li><a href="{% url 'dashboard:index' %}">{% trans 'Dashboard' %}</a></li>
-                        <li><a id="print_card_invoice" href="javascript:;">{% trans 'Print card invoice' %}</a></li>
-                    </ul>
-                    <div class="credits">
-                        <p class="text-secondary">Yoga <a class="text-secondary" href="{% url 'home:index' %}">Hương Tre</a></p>
+                <div class="col">
+                    <div class="footer-widget">
+                        <div class="about-widget">
+                            <a style="font-size: 18px;font-family: serif;text-decoration: none;" class="text-warning" href="javascript:;">Yoga <span class="flaticon-lotus"></span>
+                                Hương Tre</a>
+                            <p class="text-success pl-3" style="font-family: serif;font-size: 12px;">Tâm an vạn sự an</p>
+                            <ul class="row pl-0">
+                                <li class="col-2"><i class="material-icons">phone</i>0932 190 999</li>
+                                <li class="col-4"><i class="material-icons">email</i>huongtre.yoga@gmail.com</li>
+                                <li class="col-6"><i class="material-icons">map</i>140 Đường A4, phường 13, quận Tân Bình, TP.Hồ Chí Minh</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,10 +138,23 @@
             $("#preloder").delay(400).fadeOut("slow");
 
         });
-        $('#print_card_invoice').click(function(){
-            $('footer').hide();
+        $('#print_card_invoice').click(function () {
+            $('#nav').addClass('d-none');
+            $('.links').hide();
             window.print();
-            $('footer').show();
+            $('#nav').removeClass('d-none');
+            $('.links').show();
+        });
+        $('#print_QR_code').click(function(){
+            $('#nav').addClass('d-none');
+            $('.links').hide();
+            $('.invoice').hide();
+            $('.staff_sign').hide();
+            window.print();
+            $('#nav').removeClass('d-none');
+            $('.links').show();
+            $('.invoice').show();
+            $('.staff_sign').show();
         });
     </script>
 </body>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-04 11:32+0700\n"
+"POT-Creation-Date: 2020-06-05 12:41+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,6 +28,7 @@ msgstr "lí do"
 #: .\apps\card_invoices\models.py:35 .\apps\card_types\models.py:29
 #: .\apps\cards\models.py:24 .\apps\classes\models.py:31
 #: .\apps\courses\models.py:50
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:70
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:33
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:34
 #: .\apps\dashboard\templates\dashboard\questions\list.html:33
@@ -105,6 +106,7 @@ msgstr "Địa chỉ"
 #: .\apps\accounts\forms\trainee_form.py:39
 #: .\apps\dashboard\forms\trainees_form.py:40
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:32
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:66
 #: .\apps\feedback\forms.py:12 .\apps\home\forms.py:7
 #: .\apps\questions\forms.py:18
 msgid "Email"
@@ -711,12 +713,14 @@ msgstr "Đăng ký học thử 1 buổi miễn phí"
 
 #: .\apps\classes\templates\classes\enroll.html:143
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:52
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:68
 #: .\templates\profile\trainees\cards\detail.html:56
 msgid "Card type"
 msgstr "Loại thẻ tập"
 
 #: .\apps\classes\templates\classes\enroll.html:150
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:58
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:56
 msgid "Start at"
 msgstr "Thời gian bắt đầu"
 
@@ -728,6 +732,7 @@ msgstr "Số tháng"
 #: .\apps\classes\templates\classes\enroll.html:161
 #: .\apps\dashboard\templates\dashboard\cards\list.html:35
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:69
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:57
 msgid "End at"
 msgstr "Thời gian kết thúc"
 
@@ -1120,6 +1125,7 @@ msgid "room"
 msgstr "phòng tập"
 
 #: .\apps\dashboard\forms\lesssons_form.py:30
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:90
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:47
 #: .\apps\lessons\models.py:34
 msgid "date"
@@ -1390,6 +1396,7 @@ msgstr "Hủy"
 
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:48
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:27
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:65
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:213
 msgid "Trainee"
 msgstr "Học viên"
@@ -1408,10 +1415,12 @@ msgid "class"
 msgstr "lớp học"
 
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:23
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:47
 msgid "Card Infomation"
 msgstr "Thông tin thẻ tập"
 
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:37
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:67
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:48
 #: .\templates\profile\trainees\cards\detail.html:52
 msgid "Class"
@@ -1432,12 +1441,54 @@ msgid "Price per lesson"
 msgstr "Giá 1 buổi"
 
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:81
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:94
 msgid "Payment Staff"
 msgstr "Nhân viên thanh toán"
 
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:123
 msgid "Confirm to sign up"
 msgstr "Xác nhận đăng ký"
+
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:37
+#: .\templates\layouts\header.html:102
+msgid "Home"
+msgstr "Trang chủ"
+
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:38
+#: .\apps\dashboard\templates\dashboard\index.html:8
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:15
+msgid "Dashboard"
+msgstr "Bảng điều khiển"
+
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:39
+msgid "Print card invoice"
+msgstr "In hóa đơn thẻ tập"
+
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:40
+msgid "Print QR Code of card"
+msgstr "In mã QR thẻ tập"
+
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:55
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:64
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:219
+#: .\templates\profile\trainees\cards\detail.html:48
+msgid "Card id"
+msgstr "Mã thẻ"
+
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:58
+#: .\templates\profile\trainees\cards\detail.html:290
+msgid "Number of lessons"
+msgstr "Số buổi"
+
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:69
+#: .\templates\profile\trainees\cards\detail.html:233
+#: .\templates\profile\trainees\cards\detail.html:291
+msgid "Amount"
+msgstr "Số tiền"
+
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:90
+msgid "year"
+msgstr "năm"
 
 #: .\apps\dashboard\templates\dashboard\classes\edit.html:12
 #: .\apps\dashboard\templates\dashboard\classes\show.html:21
@@ -1570,11 +1621,6 @@ msgstr "thêm"
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:527
 msgid "remove"
 msgstr "xóa"
-
-#: .\apps\dashboard\templates\dashboard\index.html:8
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:15
-msgid "Dashboard"
-msgstr "Bảng điều khiển"
 
 #: .\apps\dashboard\templates\dashboard\index.html:11
 msgid "Generate Report"
@@ -1840,11 +1886,6 @@ msgstr "Thêm người học bù"
 msgid "Please choose"
 msgstr "Vui lòng chọn"
 
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:219
-#: .\templates\profile\trainees\cards\detail.html:48
-msgid "Card id"
-msgstr "Mã thẻ"
-
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:225
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:109
 msgid "Choose a lesson to replace"
@@ -2042,17 +2083,22 @@ msgstr "giá"
 msgid "quantity"
 msgstr "số lượng"
 
-#: .\apps\dashboard\views\cards_view.py:71
+#: .\apps\dashboard\views\cards_view.py:74
 msgid "Receive card payment successfully"
 msgstr "Xác nhận đã nhận tiền thanh toán thẻ thành công"
 
-#: .\apps\dashboard\views\cards_view.py:145
+#: .\apps\dashboard\views\cards_view.py:148
 msgid "Trainee have had one of this lessons before"
 msgstr "Học viên đã đăng ký một trong số những buổi tập này trước đó."
 
-#: .\apps\dashboard\views\cards_view.py:246
+#: .\apps\dashboard\views\cards_view.py:250
+#: .\apps\dashboard\views\cards_view.py:299
 msgid "Dont have any info about card. Please try again"
 msgstr "Không đủ thông tin để thực hiện. Vui lòng thử lại sau."
+
+#: .\apps\dashboard\views\cards_view.py:274
+msgid "Create new card at center"
+msgstr ""
 
 #: .\apps\dashboard\views\classes_view.py:168
 msgid "Last week has no lesson"
@@ -2634,10 +2680,6 @@ msgstr "lịch sử hoạt động"
 msgid "login"
 msgstr "đăng nhập"
 
-#: .\templates\layouts\header.html:102
-msgid "Home"
-msgstr "Trang chủ"
-
 #: .\templates\layouts\header.html:104 .\templates\layouts\header.html:107
 msgid "Classes"
 msgstr "Lớp học"
@@ -2755,11 +2797,6 @@ msgstr "Trạng thái"
 msgid "Promotion"
 msgstr "Khuyến mãi"
 
-#: .\templates\profile\trainees\cards\detail.html:233
-#: .\templates\profile\trainees\cards\detail.html:291
-msgid "Amount"
-msgstr "Số tiền"
-
 #: .\templates\profile\trainees\cards\detail.html:234
 msgid "Description"
 msgstr "Mô tả"
@@ -2788,10 +2825,6 @@ msgstr "chưa thanh toán"
 #: .\templates\profile\trainees\cards\detail.html:278
 msgid "Refund Request"
 msgstr "Yêu cầu hoàn tiền"
-
-#: .\templates\profile\trainees\cards\detail.html:290
-msgid "Number of lessons"
-msgstr "Số buổi"
 
 #: .\templates\profile\trainees\cards\detail.html:294
 msgid "Action"
