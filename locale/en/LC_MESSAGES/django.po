@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-05 12:41+0700\n"
+"POT-Creation-Date: 2020-06-05 13:45+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: .\apps\card_invoices\models.py:35 .\apps\card_types\models.py:29
 #: .\apps\cards\models.py:24 .\apps\classes\models.py:31
 #: .\apps\courses\models.py:50
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:70
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:73
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:33
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:34
 #: .\apps\dashboard\templates\dashboard\questions\list.html:33
@@ -106,7 +106,7 @@ msgstr ""
 #: .\apps\accounts\forms\trainee_form.py:39
 #: .\apps\dashboard\forms\trainees_form.py:40
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:32
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:66
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:69
 #: .\apps\feedback\forms.py:12 .\apps\home\forms.py:7
 #: .\apps\questions\forms.py:18
 msgid "Email"
@@ -713,14 +713,14 @@ msgstr "price of course"
 
 #: .\apps\classes\templates\classes\enroll.html:143
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:52
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:68
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:71
 #: .\templates\profile\trainees\cards\detail.html:56
 msgid "Card type"
 msgstr ""
 
 #: .\apps\classes\templates\classes\enroll.html:150
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:58
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:56
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:57
 #, fuzzy
 #| msgid "start time"
 msgid "Start at"
@@ -734,7 +734,7 @@ msgstr ""
 #: .\apps\classes\templates\classes\enroll.html:161
 #: .\apps\dashboard\templates\dashboard\cards\list.html:35
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:69
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:57
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:58
 msgid "End at"
 msgstr ""
 
@@ -1125,7 +1125,7 @@ msgid "room"
 msgstr ""
 
 #: .\apps\dashboard\forms\lesssons_form.py:30
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:90
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:93
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:47
 #: .\apps\lessons\models.py:34
 msgid "date"
@@ -1396,7 +1396,8 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:48
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:27
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:65
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:56
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:68
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:213
 #, fuzzy
 #| msgid "Trainers"
@@ -1422,7 +1423,7 @@ msgid "Card Infomation"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:37
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:67
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:70
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:48
 #: .\templates\profile\trainees\cards\detail.html:52
 msgid "Class"
@@ -1445,7 +1446,7 @@ msgid "Price per lesson"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:81
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:94
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:97
 msgid "Payment Staff"
 msgstr ""
 
@@ -1473,24 +1474,24 @@ msgid "Print QR Code of card"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:55
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:64
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:67
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:219
 #: .\templates\profile\trainees\cards\detail.html:48
 msgid "Card id"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:58
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:59
 #: .\templates\profile\trainees\cards\detail.html:290
 msgid "Number of lessons"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:69
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:72
 #: .\templates\profile\trainees\cards\detail.html:233
 #: .\templates\profile\trainees\cards\detail.html:291
 msgid "Amount"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\cards\new\result.html:90
+#: .\apps\dashboard\templates\dashboard\cards\new\result.html:93
 msgid "year"
 msgstr ""
 
@@ -2102,7 +2103,7 @@ msgid "Trainee have had one of this lessons before"
 msgstr ""
 
 #: .\apps\dashboard\views\cards_view.py:250
-#: .\apps\dashboard\views\cards_view.py:299
+#: .\apps\dashboard\views\cards_view.py:298
 msgid "Dont have any info about card. Please try again"
 msgstr ""
 
