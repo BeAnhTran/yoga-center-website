@@ -182,7 +182,7 @@
                             {% if total_price > 0 %}
                             {{ price|sexy_number }}đ
                             {% else %}
-                            {{ price }}
+                              {% trans 'Free' %}
                             {% endif %}
                           </small>
                         </td>

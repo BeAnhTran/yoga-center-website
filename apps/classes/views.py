@@ -299,7 +299,7 @@ class YogaClassEnrollPaymentView(View):
                     description = _('Free Registration')
                     charge_id = '0VNDFREE'
                     card = processCard(yoga_class, enroll_form,
-                                       request, request.POST['amount'], description, charge_id)
+                                       request, request.POST['amount'], description, PREPAID, charge_id)
                     request.session['new_card'] = card.pk
                     return redirect('classes:enroll-payment-result', slug=slug)
             elif request.POST['payment_type'] == 'PREPAID_STRIPE':
@@ -330,7 +330,7 @@ class YogaClassEnrollPaymentView(View):
                 if enroll_form.is_valid():
                     description = _('Pay card by Stripe')
                     card = processCard(yoga_class, enroll_form,
-                                       request, request.POST['amount'], description, charge_id)
+                                       request, request.POST['amount'], description, PREPAID, charge_id)
                     request.session['new_card'] = card.pk
                     return redirect('classes:enroll-payment-result', slug=slug)
             elif request.POST['payment_type'] == 'POSTPAID':
@@ -338,7 +338,7 @@ class YogaClassEnrollPaymentView(View):
                     description = _('Postpaid')
                     charge_id = None
                     card = processCard(yoga_class, enroll_form,
-                                       request, request.POST['amount'], description, charge_id)
+                                       request, request.POST['amount'], description, POSTPAID, charge_id)
                     request.session['new_card'] = card.pk
                     return redirect('classes:postpaid-result', slug=slug)
             else:  # request.POST['payment_type'] == 'PREPAID_MOMO':
@@ -445,7 +445,7 @@ class YogaClassMoMoPaymentResultView(View):
                         request.session['enroll_card_form'])
                     if enroll_form.is_valid():
                         card = processCard(
-                            yoga_class, enroll_form, request, request.GET['amount'], description, request.GET['transId'])
+                            yoga_class, enroll_form, request, request.GET['amount'], description, PREPAID, request.GET['transId'])
                         context['card'] = card
                 else:
                     return redirect('errors:error-403')
@@ -475,7 +475,7 @@ class YogaClassPostPaidResultView(View):
 
 
 @transaction.atomic
-def processCard(yoga_class, enroll_form, request, amount, description, charge_id):
+def processCard(yoga_class, enroll_form, request, amount, description, payment_type, charge_id):
     # PROMOTION
     promotion_type = None
     promotion_code = None
@@ -489,7 +489,7 @@ def processCard(yoga_class, enroll_form, request, amount, description, charge_id
         yoga_class, enroll_form, request.user.trainee, promotion_code, promotion_type)
     # CREATE CARD INVOICE
     card_invoice = CardInvoiceService(
-        card, POSTPAID, description, amount, charge_id).call()
+        card, payment_type, description, amount, charge_id).call()
 
     if promotion_code is not None and promotion_type is not None:
         promotion_code.promotion_type = promotion_type
@@ -513,6 +513,7 @@ def processCard(yoga_class, enroll_form, request, amount, description, charge_id
 def create_card(yoga_class, enroll_form, trainee, promotion=None, promotion_type=None):
     start = enroll_form.cleaned_data['start_at']
     end = enroll_form.cleaned_data['end_at']
+    # TODO: CHECK condition before use Promotion
     if promotion is not None and promotion_type is not None:
         if promotion_type.category == PLUS_LESSON_PRACTICE_PROMOTION:
             lesson_count = int(promotion_type.value)
@@ -523,7 +524,9 @@ def create_card(yoga_class, enroll_form, trainee, promotion=None, promotion_type
         elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
             month_count = int(promotion_type.value)
             end = end + relativedelta(months=month_count)
-    lesson_list = yoga_class.lessons.filter(date__range=[start, end])
+    id_arr = eval(enroll_form.cleaned_data['lesson_list'])
+    lesson_list = yoga_class.lessons.filter(is_full=False, pk__in=id_arr).order_by('date')
+    # lesson_list = yoga_class.lessons.filter(date__range=[start, end])
     card = enroll_form.save(commit=False)
     card.trainee = trainee
     card.yogaclass = yoga_class
