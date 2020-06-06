@@ -42,7 +42,7 @@
 }
 
 .price-card{
-    background-color: #731818 !important;
+    background-color: #527318 !important;
     background: url('../../img/huongtre_favicon.png');
     background-position: 92%;
     background-repeat:no-repeat;
@@ -60,5 +60,5 @@
   }
 
   .text-red-custom{
-      color: #731818;
+      color: #527318;
   }
