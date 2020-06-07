@@ -14,6 +14,7 @@ class LessonSerializer(serializers.ModelSerializer):
     lectures = LectureSerializer(read_only=True, many=True)
     register_trainee_count = serializers.SerializerMethodField()
     max_registrations_number = serializers.SerializerMethodField()
+    is_in_the_past = serializers.SerializerMethodField()
 
     class Meta:
         model = Lesson
@@ -24,6 +25,9 @@ class LessonSerializer(serializers.ModelSerializer):
 
     def get_max_registrations_number(self, obj):
         return obj.max_people()
+
+    def get_is_in_the_past(self, obj):
+        return obj.is_in_the_past()
 
 
 class LessonUpdateScheduleSerializer(serializers.ModelSerializer):

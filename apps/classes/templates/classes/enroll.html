@@ -228,6 +228,7 @@
                         endStr: fetchInfo.endStr
                     },
                     success: function (data) {
+                        console.log(data);
                         var events = [];
                         for (var i = 0; i < data.length; i++) {
                             var _d = data[i]['date'];
@@ -241,12 +242,20 @@
                             var border_color = '#0c9463';
                             var editable = true;
                             var title_tooltip = null;
-                            if (data[i]['is_full'] == true) {
-                                bg_color = '#ef4339';
-                                border_color = '#ef4339';
+                            if (data[i]['is_in_the_past'] == true){
+                                bg_color = '#979797';
+                                border_color = '#979797';
                                 editable = false;
-                                title_tooltip = "{% trans 'lesson is full' %}";
+                                title_tooltip = "{% trans 'lesson is old' %}";
+                            }else{
+                                if (data[i]['is_full'] == true) {
+                                    bg_color = '#ef4339';
+                                    border_color = '#ef4339';
+                                    editable = false;
+                                    title_tooltip = "{% trans 'lesson is full' %}";
+                                }
                             }
+                            
                             events.push({
                                 id: data[i]['id'],
                                 title: _st.split(':', 2).join(":") + ' - ' + _et.split(':', 2).join(":"),

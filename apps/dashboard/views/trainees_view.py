@@ -48,13 +48,15 @@ class TraineeNewView(View):
         context = {}
         context['form'] = form
         if form.is_valid():
-            form.save(request)
-            messages.success(self.request, _(
-                'Create new trainee successfully'))
-            if request.GET.get('next') is not None:
-                return redirect(self.request.GET.get('next'))
-            else:
-                return redirect('dashboard:trainees-list')
+            with transaction.atomic():
+                trainee = form.save(request)
+                messages.success(self.request, _(
+                    'Create new trainee successfully'))
+                if request.GET.get('next') is not None:
+                    next_str = request.GET.get('next')
+                    return redirect(self.request.GET.get('next') + '&trainee-id=' + str(trainee.pk))
+                else:
+                    return redirect('dashboard:trainees-list')
         context['active_nav'] = 'trainees'
         context['show_nav_users'] = True
         return render(request, self.template_name, context=context)

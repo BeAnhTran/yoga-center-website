@@ -181,6 +181,15 @@ class YogaClassEnrollView(View):
         form = CardFormForTraineeEnroll(
             request.POST, initial={'card_type_list': card_type_list})
         if form.is_valid():
+            id_arr = eval(request.POST['lesson_list'])
+            lesson_list = yoga_class.lessons.filter(
+                is_full=False, pk__in=id_arr).order_by('date')
+            # CHECK THAT HAVING OLD LESSON IN LESSON LIST
+            for l in lesson_list:
+                if l.is_in_the_past() is True:
+                    messages.error(request, _(
+                        'Your lesson list includes old lesson. Please try again.'))
+                    return redirect(reverse('classes:enroll', kwargs={'slug': slug}) + '?card-type=' + request.POST['card_type'])
             # save to session and get it in payment page
             request.session['enroll_card_form'] = request.POST
             return redirect('classes:enroll-payment', slug=slug)
@@ -216,7 +225,7 @@ class YogaClassEnrollPaymentView(View):
             for l in lesson_list:
                 if l.roll_calls.filter(card__trainee=request.user.trainee).count() > 0:
                     messages.error(
-                        request, 'Bạn đã có thẻ tập đăng kí học một trong số những buổi học bạn đã chọn. Vui lòng kiểm tra lại thẻ tập của bạn.')
+                        request, _('You have card including one of your choosen lesson list. Please check your card.'))
                     return redirect('classes:enroll', slug=slug)
             # Payment Form
             form = CardPaymentForm()
@@ -525,7 +534,8 @@ def create_card(yoga_class, enroll_form, trainee, promotion=None, promotion_type
             month_count = int(promotion_type.value)
             end = end + relativedelta(months=month_count)
     id_arr = eval(enroll_form.cleaned_data['lesson_list'])
-    lesson_list = yoga_class.lessons.filter(is_full=False, pk__in=id_arr).order_by('date')
+    lesson_list = yoga_class.lessons.filter(
+        is_full=False, pk__in=id_arr).order_by('date')
     # lesson_list = yoga_class.lessons.filter(date__range=[start, end])
     card = enroll_form.save(commit=False)
     card.trainee = trainee

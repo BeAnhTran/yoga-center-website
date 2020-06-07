@@ -156,11 +156,18 @@
                             var border_color = '#0c9463';
                             var editable = true;
                             var title_tooltip = null;
-                            if (data[i]['is_full'] == true) {
-                                bg_color = '#ef4339';
-                                border_color = '#ef4339';
+                            if (data[i]['is_in_the_past'] == true){
+                                bg_color = '#979797';
+                                border_color = '#979797';
                                 editable = false;
-                                title_tooltip = "{% trans 'lesson is full' %}";
+                                title_tooltip = "{% trans 'lesson is old' %}";
+                            }else{
+                                if (data[i]['is_full'] == true) {
+                                    bg_color = '#ef4339';
+                                    border_color = '#ef4339';
+                                    editable = false;
+                                    title_tooltip = "{% trans 'lesson is full' %}";
+                                }
                             }
                             events.push({
                                 id: data[i]['id'],

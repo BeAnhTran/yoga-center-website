@@ -41,7 +41,7 @@
                     {% for trainee in trainees %}
                     <tr>
                         <td>{{ trainee.user.id }}</td>
-                        <td>{{ trainee }}</td>
+                        <td>{{ trainee.user }}</td>
                         <td>{{ trainee.user.email }}</td>
                         <td>{{ trainee.user.birth_day|default_if_none:'' }}</td>
                         <td>{{ trainee.user.get_gender_display }}</td>

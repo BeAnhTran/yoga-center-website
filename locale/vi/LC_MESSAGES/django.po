@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-07 08:47+0700\n"
+"POT-Creation-Date: 2020-06-07 10:55+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,8 +115,8 @@ msgstr ""
 #: .\apps\accounts\forms\trainee_form.py:64
 #: .\apps\classes\templates\classes\enroll.html:186
 #: .\apps\classes\templates\payment.html:137
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:37
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:94
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:39
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:98
 #: .\apps\dashboard\templates\dashboard\cards\new\index.html:48
 msgid "Sign up"
 msgstr "Đăng kí"
@@ -430,7 +430,7 @@ msgstr "Tìm kiếm"
 msgid "Prepaid"
 msgstr "Trả trước"
 
-#: .\apps\card_invoices\models.py:15 .\apps\classes\views.py:338
+#: .\apps\card_invoices\models.py:15 .\apps\classes\views.py:342
 msgid "Postpaid"
 msgstr "Trả sau"
 
@@ -503,31 +503,31 @@ msgid "Please enter the value"
 msgstr "Vui lòng nhập giá trị"
 
 #: .\apps\cards\forms.py:36 .\apps\dashboard\forms\cards_form.py:30
-#: .\apps\dashboard\forms\cards_form.py:43
+#: .\apps\dashboard\forms\cards_form.py:44
 msgid "Please select a value"
 msgstr "Vui lòng chọn giá trị"
 
 #: .\apps\cards\forms.py:60 .\apps\classes\templates\classes\enroll.html:176
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:84
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:88
 msgid "Trial Lesson"
 msgstr "Buổi tập thử"
 
 #: .\apps\cards\forms.py:61 .\apps\classes\templates\classes\enroll.html:180
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:88
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:92
 msgid "Please drap a lesson into this area below to choose"
 msgstr "Vui lòng kéo thả một buổi học vào vùng bên dưới để chọn"
 
 #: .\apps\cards\forms.py:70 .\apps\classes\templates\classes\enroll.html:165
 #: .\apps\classes\templates\classes\enroll.html:178
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:73
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:86
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:77
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:90
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:95
 #: .\templates\profile\trainees\cards\detail.html:86
 msgid "Lesson List"
 msgstr "Danh sách buổi tập"
 
 #: .\apps\cards\forms.py:71 .\apps\classes\templates\classes\enroll.html:166
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:74
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:78
 msgid "Lessons you choose will be displayed here"
 msgstr "Những buổi học của bạn sẽ được hiển thị ở đây"
 
@@ -550,14 +550,14 @@ msgstr "Những buổi học của bạn sẽ được hiển thị ở đây"
 msgid "Save"
 msgstr "Lưu"
 
-#: .\apps\cards\forms.py:99 .\apps\classes\templates\classes\enroll.html:506
-#: .\apps\dashboard\forms\cards_form.py:70
+#: .\apps\cards\forms.py:99 .\apps\classes\templates\classes\enroll.html:515
+#: .\apps\dashboard\forms\cards_form.py:71
 #: .\apps\dashboard\forms\classes_form.py:113
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:410
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:416
 msgid "End at must be greater than Start at"
 msgstr "Thời gian kết thúc phải sau thời gian bắt đầu"
 
-#: .\apps\cards\forms.py:114 .\apps\dashboard\forms\cards_form.py:85
+#: .\apps\cards\forms.py:114 .\apps\dashboard\forms\cards_form.py:86
 msgid "Your range time does not have any lessons"
 msgstr "Khoảng thời gian bạn chọn không có buổi học phù hợp"
 
@@ -701,7 +701,7 @@ msgstr "Đăng ký các buổi học không liên tiếp nhau. Giá tiền mỗi
 
 #: .\apps\classes\templates\classes\enroll.html:114
 msgid "Each lesson cannot be separated by more than 2 sessions"
-msgstr ""
+msgstr "Buổi tập sau không được cách buổi tập trước quá 2 buổi"
 
 #: .\apps\classes\templates\classes\enroll.html:123
 msgid "Price of 1 trial lesson"
@@ -718,44 +718,48 @@ msgid "Free registration for one lesson"
 msgstr "Đăng ký học thử 1 buổi miễn phí"
 
 #: .\apps\classes\templates\classes\enroll.html:143
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:52
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:50
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:71
 #: .\templates\profile\trainees\cards\detail.html:56
 msgid "Card type"
 msgstr "Loại thẻ tập"
 
 #: .\apps\classes\templates\classes\enroll.html:150
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:58
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:62
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:57
 msgid "Start at"
 msgstr "Thời gian bắt đầu"
 
 #: .\apps\classes\templates\classes\enroll.html:155
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:63
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:67
 msgid "Number of months"
 msgstr "Số tháng"
 
 #: .\apps\classes\templates\classes\enroll.html:161
 #: .\apps\dashboard\templates\dashboard\cards\list.html:35
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:69
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:73
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:58
 msgid "End at"
 msgstr "Thời gian kết thúc"
 
-#: .\apps\classes\templates\classes\enroll.html:248
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:157
+#: .\apps\classes\templates\classes\enroll.html:249
+msgid "lesson is old"
+msgstr "buổi tập đã cũ"
+
+#: .\apps\classes\templates\classes\enroll.html:255
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:163
 msgid "lesson is full"
 msgstr "buổi tập đã đủ số lượng"
 
-#: .\apps\classes\templates\classes\enroll.html:283
-#: .\apps\classes\templates\classes\enroll.html:309
-#: .\apps\classes\templates\classes\enroll.html:372
+#: .\apps\classes\templates\classes\enroll.html:292
+#: .\apps\classes\templates\classes\enroll.html:318
 #: .\apps\classes\templates\classes\enroll.html:381
-#: .\apps\classes\templates\classes\enroll.html:492
-#: .\apps\classes\templates\classes\enroll.html:505
-#: .\apps\classes\templates\classes\enroll.html:530
-#: .\apps\classes\templates\classes\enroll.html:537
+#: .\apps\classes\templates\classes\enroll.html:390
+#: .\apps\classes\templates\classes\enroll.html:501
+#: .\apps\classes\templates\classes\enroll.html:514
+#: .\apps\classes\templates\classes\enroll.html:539
 #: .\apps\classes\templates\classes\enroll.html:546
+#: .\apps\classes\templates\classes\enroll.html:555
 #: .\apps\classes\templates\payment.html:414
 #: .\apps\classes\templates\payment.html:423
 #: .\apps\classes\templates\payment.html:432
@@ -763,15 +767,15 @@ msgstr "buổi tập đã đủ số lượng"
 #: .\apps\classes\templates\payment.html:460
 #: .\apps\classes\templates\payment.html:474
 #: .\apps\classes\templates\payment.html:526
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:192
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:218
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:309
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:318
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:396
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:409
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:467
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:474
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:483
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:198
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:224
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:315
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:324
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:402
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:415
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:473
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:480
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:489
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:271
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:323
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:264
@@ -784,43 +788,43 @@ msgstr "buổi tập đã đủ số lượng"
 msgid "error"
 msgstr "lỗi"
 
-#: .\apps\classes\templates\classes\enroll.html:284
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:193
+#: .\apps\classes\templates\classes\enroll.html:293
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:199
 msgid "Trial lesson has been added"
 msgstr "Buổi học thử đã được thêm"
 
-#: .\apps\classes\templates\classes\enroll.html:310
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:219
+#: .\apps\classes\templates\classes\enroll.html:319
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:225
 msgid "Lesson has been added"
 msgstr "Buổi học đã được thêm"
 
-#: .\apps\classes\templates\classes\enroll.html:373
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:310
+#: .\apps\classes\templates\classes\enroll.html:382
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:316
 msgid "Please enter positive integer"
 msgstr "Vui lòng nhập số nguyên dương"
 
-#: .\apps\classes\templates\classes\enroll.html:382
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:319
+#: .\apps\classes\templates\classes\enroll.html:391
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:325
 msgid "Please enter start at"
 msgstr "Vui lòng nhập thời gian bắt đầu"
 
-#: .\apps\classes\templates\classes\enroll.html:493
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:397
+#: .\apps\classes\templates\classes\enroll.html:502
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:403
 msgid "You must register at least 1 month"
 msgstr "Bạn phải đăng kí ít nhất 1 tháng tập"
 
-#: .\apps\classes\templates\classes\enroll.html:531
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:468
+#: .\apps\classes\templates\classes\enroll.html:540
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:474
 msgid "Pleae enter Start at"
 msgstr "Vui lòng nhập thời gian bắt đầu"
 
-#: .\apps\classes\templates\classes\enroll.html:538
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:475
+#: .\apps\classes\templates\classes\enroll.html:547
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:481
 msgid "Please enter End at"
 msgstr "Vui lòng nhập thời gian kết thúc"
 
-#: .\apps\classes\templates\classes\enroll.html:547
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:484
+#: .\apps\classes\templates\classes\enroll.html:556
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:490
 msgid "There is no lesson to register"
 msgstr "Không có buổi học hợp lệ để đăng kí"
 
@@ -871,7 +875,7 @@ msgstr "Huấn luyện viên"
 msgid "Payment Info"
 msgstr "Thông tin thanh toán"
 
-#: .\apps\classes\templates\payment.html:29 .\apps\classes\views.py:299
+#: .\apps\classes\templates\payment.html:29 .\apps\classes\views.py:303
 msgid "Free Registration"
 msgstr "Đăng ký miễn phí"
 
@@ -965,8 +969,9 @@ msgstr "Vui lòng kiểm tra thông tin thẻ tập của bạn để chuẩn 
 msgid "Your card detail information"
 msgstr "Thông tin chi tiết thẻ tập"
 
-#: .\apps\classes\templates\payment_result.html:41 .\apps\classes\views.py:324
-#: .\apps\classes\views.py:364 .\apps\classes\views.py:468
+#: .\apps\classes\templates\payment_result.html:41 .\apps\classes\views.py:328
+#: .\apps\classes\views.py:368 .\apps\classes\views.py:472
+#: .\apps\dashboard\views\cards_view.py:299
 msgid "An error occurred. Please try again later"
 msgstr "Đã xảy ra lỗi. Vui lòng thử lại"
 
@@ -978,29 +983,39 @@ msgstr "Quay về trang thanh toán"
 msgid "Back To Payment Page"
 msgstr "Quay về trang thanh toán"
 
-#: .\apps\classes\views.py:288
+#: .\apps\classes\views.py:219
+msgid "Your lesson list includes old lesson. Please try again."
+msgstr "Danh sách buổi học bạn chọn chứa buổi học đã cũ. Vui lòng thử lại."
+
+#: .\apps\classes\views.py:223
+msgid ""
+"You have card including one of your choosen lesson list. Please check your "
+"card."
+msgstr "Bạn đã có thẻ tập đăng kí học một trong số những buổi học bạn đã chọn. Vui lòng kiểm tra lại thẻ tập của bạn."
+
+#: .\apps\classes\views.py:292
 msgid "You dont have any info to payment. Please try again"
 msgstr "Bạn không đủ thông tin để thực hiện thanh toán. Vui lòng thử lại sau."
 
-#: .\apps\classes\views.py:318 .\apps\classes\views.py:348
+#: .\apps\classes\views.py:322 .\apps\classes\views.py:352
 #: .\apps\shop\views.py:189
 msgid "Card Payment"
 msgstr "Thanh toán thẻ tập"
 
-#: .\apps\classes\views.py:328
+#: .\apps\classes\views.py:332
 msgid "An error occurred. Please enter the right number of VisaCard"
 msgstr ""
 "Đã xảy ra lỗi. Vui lòng nhập đúng thông tin thẻ Credit hoặc Debit của bạn"
 
-#: .\apps\classes\views.py:331
+#: .\apps\classes\views.py:335
 msgid "Pay card by Stripe"
 msgstr "Thanh toán thông qua Stripe"
 
-#: .\apps\classes\views.py:443
+#: .\apps\classes\views.py:447
 msgid "Momo Payment"
 msgstr "Thanh toán thông qua Momo"
 
-#: .\apps\classes\views.py:508
+#: .\apps\classes\views.py:512
 msgid "Thank you for your register at Yoga Huong Tre"
 msgstr "Cảm ơn bạn đã đăng kí học tại trung tâm Yoga Hương Tre"
 
@@ -1311,7 +1326,7 @@ msgstr "danh sách loại bài viết"
 #: .\apps\dashboard\templates\dashboard\blog\categories\list.html:13
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:13
 #: .\apps\dashboard\templates\dashboard\card_types\list.html:13
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:48
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:56
 #: .\apps\dashboard\templates\dashboard\classes\list.html:16
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:11
 #: .\apps\dashboard\templates\dashboard\promotions\list.html:13
@@ -1396,7 +1411,7 @@ msgstr "Có"
 msgid "Cancel"
 msgstr "Hủy"
 
-#: .\apps\dashboard\templates\dashboard\cards\new\create.html:48
+#: .\apps\dashboard\templates\dashboard\cards\new\create.html:55
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:27
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:56
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:68
@@ -2086,28 +2101,30 @@ msgstr "giá"
 msgid "quantity"
 msgstr "số lượng"
 
-#: .\apps\dashboard\views\cards_view.py:74
+#: .\apps\dashboard\views\cards_view.py:75
 msgid "Receive card payment successfully"
 msgstr "Xác nhận đã nhận tiền thanh toán thẻ thành công"
 
-#: .\apps\dashboard\views\cards_view.py:148
+#: .\apps\dashboard\views\cards_view.py:149
 msgid "Trainee have had one of this lessons before"
 msgstr "Học viên đã đăng ký một trong số những buổi tập này trước đó."
 
-#: .\apps\dashboard\views\cards_view.py:250
-#: .\apps\dashboard\views\cards_view.py:298
+#: .\apps\dashboard\views\cards_view.py:251
+#: .\apps\dashboard\views\cards_view.py:303
 msgid "Dont have any info about card. Please try again"
 msgstr "Không đủ thông tin để thực hiện. Vui lòng thử lại sau."
 
-#: .\apps\dashboard\views\cards_view.py:274
+#: .\apps\dashboard\views\cards_view.py:276
 msgid "Create new card at center"
 msgstr "Đăng ký thẻ tập tại trung tâm"
 
-#: .\apps\dashboard\views\cards_view.py:347
+#: .\apps\dashboard\views\cards_view.py:355
+#: .\apps\profiles\views\profile_trainee_view.py:49
 msgid "Paied"
 msgstr "Đã thanh toán"
 
-#: .\apps\dashboard\views\cards_view.py:349
+#: .\apps\dashboard\views\cards_view.py:357
+#: .\apps\profiles\views\profile_trainee_view.py:51
 #: .\templates\profile\trainees\cards\detail.html:250
 msgid "Not charged"
 msgstr "chưa thanh toán"
@@ -2263,11 +2280,16 @@ msgid "You have registed a make-up lesson for this lesson"
 msgstr "Bạn đã đăng kí học buổi học bù này"
 
 #: .\apps\make_up_lessons\views.py:53
+#, python-format
 msgid ""
 "You have registered for up to %(lessons)s/%(max_lesson)s make-up lessons."
 msgstr "Bạn đã đăng kí %(lessons)s/%(max_lesson)s buổi học bù"
 
 #: .\apps\make_up_lessons\views.py:75
+#, fuzzy, python-format
+#| msgid ""
+#| "Your lesson is expired to make a make-up lesson. You can only register "
+#| "make-up lesson in %(days)s day(s) from the date of lesson. "
 msgid ""
 "Your lesson is expired to make a make-up lesson. You can only register make-"
 "up lesson in %(days)s day(s) from the date of lesson. "
@@ -2291,7 +2313,7 @@ msgstr "vui lòng nhập tỉnh/thành phố"
 msgid "normal health"
 msgstr "sức khỏe bình thường"
 
-#: .\apps\profiles\views\profile_trainee_view.py:119
+#: .\apps\profiles\views\profile_trainee_view.py:128
 msgid "Create refund card request successfully"
 msgstr "Tạo yêu cầu hoàn tiền thành công"
 
@@ -2845,6 +2867,7 @@ msgid "Make a absence application successfully."
 msgstr "Xin nghỉ thành công"
 
 #: .\templates\profile\trainees\cards\detail.html:412
+#, python-format
 msgid ""
 "You can register a make-up lesson or make a refund for : %(value)s day(s) "
 "from date of lesson."

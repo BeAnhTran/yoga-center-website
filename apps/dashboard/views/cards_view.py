@@ -120,6 +120,11 @@ class CardNewView(View):
                 ctype = check_card_type_arr.first()
                 form.fields['card_type'].initial = ctype
                 context['form_of_using'] = ctype.form_of_using
+                if request.GET.get('trainee-id'):
+                    check_trainee = Trainee.objects.filter(
+                        pk=request.GET.get('trainee-id'))
+                    if check_trainee.count() == 1:
+                        form.fields['trainee'].initial = check_trainee.first()
             else:
                 return redirect('dashboard:cards-new-for-class', slug=slug)
         context['form'] = form
@@ -142,8 +147,16 @@ class CardNewView(View):
         }
         form = CardForm(
             request.POST, initial={'card_type_list': card_type_list})
-        print(form.is_valid())
         if form.is_valid():
+            # CHECK THAT HAVING OLD LESSON IN LESSON LIST
+            id_arr = eval(request.POST['lesson_list'])
+            lesson_list = yoga_class.lessons.filter(
+                is_full=False, pk__in=id_arr).order_by('date')
+            for l in lesson_list:
+                if l.is_in_the_past() is True:
+                    messages.error(request, _(
+                        'Your lesson list includes old lesson. Please try again.'))
+                    return redirect(reverse('dashboard:cards-new-for-class', kwargs={'slug': slug}) + '?card-type=' + request.POST['card_type'] + '&trainee-id=' + request.POST['trainee'])
             if self.check_valid_lessons(form) is False:
                 messages.error(request, _(
                     'Trainee have had one of this lessons before'))
