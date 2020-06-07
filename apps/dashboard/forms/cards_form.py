@@ -38,22 +38,23 @@ class CardForm(forms.ModelForm):
             'class': 'form-control'
         })
         self.fields['trainee'].widget.attrs.update({
-            'class': 'form-control'
+            'class': 'form-control selectpicker',
+            'data-live-search': 'true'
         })
         self.fields['trainee'].empty_label = _('Please select a value')
 
-        # Focus on form field whenever error occurred
-        errorList = list(self.errors)
-        if errorList:
-            for item in errorList:
-                if item == '__all__':
-                    break
-                self.fields[item].widget.attrs.update(
-                    {'autofocus': 'autofocus'})
-                break
-        else:
-           self.fields['trainee'].widget.attrs.update(
-               {'autofocus': 'autofocus'})
+        # # Focus on form field whenever error occurred
+        # errorList = list(self.errors)
+        # if errorList:
+        #     for item in errorList:
+        #         if item == '__all__':
+        #             break
+        #         self.fields[item].widget.attrs.update(
+        #             {'autofocus': 'autofocus'})
+        #         break
+        # else:
+        #    self.fields['card_type'].widget.attrs.update(
+        #        {'autofocus': 'autofocus'})
 
     class Meta:
         model = Card

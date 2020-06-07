@@ -256,55 +256,61 @@ class CardNewPreviewView(View):
         yoga_class = YogaClass.objects.get(slug=slug)
         if request.session.get('dashboard_card_form'):
             form = CardForm(request.session['dashboard_card_form'])
-            trainee = get_object_or_404(
-                Trainee, pk=form.cleaned_data['trainee'])
-            amount = request.POST.get('amount')
-            #
-            # PROMOTION
-            promotion_type = None
-            promotion_code = None
-            if request.session.get('dashboard_promotion_code') and request.session.get('dashboard_promotion_type'):
-                promotion_type = get_object_or_404(
-                    PromotionType, pk=request.session.get('dashboard_promotion_type'))
-                promotion_code = get_object_or_404(
-                    PromotionCode, pk=request.session.get('dashboard_promotion_code'))
-            # CREATE CARD
-            card = self.create_card(
-                yoga_class, form, trainee, promotion_code, promotion_type)
-            # CREATE CARD INVOICE
-            description = _('Create new card at center')
-            card_invoice = CardInvoiceService(
-                card, POSTPAID, description, amount, None).call()
-            card_invoice.staff = request.user.staff
-            card_invoice.save()
+            if form.is_valid():
+                trainee = get_object_or_404(
+                    Trainee, pk=form.cleaned_data['trainee'])
+                amount = request.POST.get('amount')
+                #
+                # PROMOTION
+                promotion_type = None
+                promotion_code = None
+                if request.session.get('dashboard_promotion_code') and request.session.get('dashboard_promotion_type'):
+                    promotion_type = get_object_or_404(
+                        PromotionType, pk=request.session.get('dashboard_promotion_type'))
+                    promotion_code = get_object_or_404(
+                        PromotionCode, pk=request.session.get('dashboard_promotion_code'))
+                # CREATE CARD
+                card = self.create_card(
+                    yoga_class, form, trainee, promotion_code, promotion_type)
+                # CREATE CARD INVOICE
+                description = _('Create new card at center')
+                card_invoice = CardInvoiceService(
+                    card, POSTPAID, description, amount, None).call()
+                card_invoice.staff = request.user.staff
+                card_invoice.save()
 
-            if promotion_code is not None and promotion_type is not None:
-                promotion_code.promotion_type = promotion_type
-                promotion_code.save()
-                if promotion_type.category == GIFT_PROMOTION:
-                    promotion_code.promotion_code_products.create(
-                        product=promotion_type.product, quantity=promotion_type.value)
-                card_invoice.apply_promotion_codes.create(
-                    promotion_code=promotion_code)
-            if request.session.get('dashboard_card_form'):
-                del request.session['dashboard_card_form']
-            if request.session.get('dashboard_promotion_code'):
-                del request.session['dashboard_promotion_code']
-            if request.session.get('dashboard_promotion_type'):
-                del request.session['dashboard_promotion_type']
-
-            return redirect('dashboard:cards-new-for-class-result', pk=card.pk)
+                if promotion_code is not None and promotion_type is not None:
+                    promotion_code.promotion_type = promotion_type
+                    promotion_code.save()
+                    if promotion_type.category == GIFT_PROMOTION:
+                        promotion_code.promotion_code_products.create(
+                            product=promotion_type.product, quantity=promotion_type.value)
+                    card_invoice.apply_promotion_codes.create(
+                        promotion_code=promotion_code)
+                if request.session.get('dashboard_card_form'):
+                    del request.session['dashboard_card_form']
+                if request.session.get('dashboard_promotion_code'):
+                    del request.session['dashboard_promotion_code']
+                if request.session.get('dashboard_promotion_type'):
+                    del request.session['dashboard_promotion_type']
+                return redirect('dashboard:cards-new-for-class-result', pk=card.pk)
+            else:
+                messages.error(request, _(
+                    'An error occurred. Please try again later'))
+                return redirect('dashboard:cards-new-for-class', slug=slug)
         else:
             messages.error(request, _(
                 'Dont have any info about card. Please try again'))
             return redirect('dashboard:cards-new-for-class', slug=slug)
 
     def __lesson_list_available(self, yoga_class, form):
-        cleaned_data = CardForm(form).cleaned_data
-        id_arr = eval(cleaned_data['lesson_list'])
-        lesson_list = yoga_class.lessons.filter(
-            is_full=False, pk__in=id_arr).order_by('date')
-        return lesson_list
+        f = CardForm(form)
+        if f.is_valid():
+            id_arr = eval(f.cleaned_data['lesson_list'])
+            lesson_list = yoga_class.lessons.filter(
+                is_full=False, pk__in=id_arr).order_by('date')
+            return lesson_list
+        return []
 
     @transaction.atomic
     def create_card(self, yoga_class, form, trainee, promotion=None, promotion_type=None):
@@ -323,7 +329,8 @@ class CardNewPreviewView(View):
                 end = end + relativedelta(months=month_count)
         # lesson_list = yoga_class.lessons.filter(date__range=[start, end])
         id_arr = eval(form.cleaned_data['lesson_list'])
-        lesson_list = yoga_class.lessons.filter(is_full=False, pk__in=id_arr).order_by('date')
+        lesson_list = yoga_class.lessons.filter(
+            is_full=False, pk__in=id_arr).order_by('date')
         card = form.save(commit=False)
         card.trainee = trainee
         card.yogaclass = yoga_class
@@ -355,8 +362,10 @@ class CardNewResultView(View):
             fcard_id=card.pk,
             fclass_name=card.yogaclass.name,
             fcard_type=card.card_type.name,
-            fstart_at=date_format(card.start_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
-            fend_at=date_format(card.end_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
+            fstart_at=date_format(
+                card.start_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
+            fend_at=date_format(
+                card.end_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
             fis_charged=charged_str
         )
         context['card_str_qrcode'] = card_str_qrcode

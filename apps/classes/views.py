@@ -468,7 +468,7 @@ class YogaClassPostPaidResultView(View):
                     'An error occurred. Please try again later'))
                 return redirect('errors:error-403')
             context['card'] = card
-            del request.session.get['new_card']
+            del request.session['new_card']
             return render(request, self.template_name, context=context)
         else:
             return redirect('errors:error-404')

@@ -51,7 +51,10 @@ class TraineeNewView(View):
             form.save(request)
             messages.success(self.request, _(
                 'Create new trainee successfully'))
-            return redirect('dashboard:trainees-list')
+            if request.GET.get('next') is not None:
+                return redirect(self.request.GET.get('next'))
+            else:
+                return redirect('dashboard:trainees-list')
         context['active_nav'] = 'trainees'
         context['show_nav_users'] = True
         return render(request, self.template_name, context=context)

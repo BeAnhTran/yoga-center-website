@@ -24,6 +24,8 @@
 <script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-daygrid/main.js' %}"></script>
 <script src="{% static 'fullcalendar-4.3.1/packages-premium/resource-timegrid/main.js' %} "></script>
 
+<link rel="stylesheet" href="{% static 'vendor/bootstrap-select/bootstrap-select.min.css' %}">
+
 <!-- mCustomScrollbar -->
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
@@ -45,14 +47,16 @@
                     {% csrf_token %}
                     {{form.lesson_list}}
                     <div class="form-group">
-                        <label for="trainee" class="d-block">{% trans 'Trainee' %} <span class="asteriskField">(*)</span> <a class="float-right btn btn-sm btn-success create-new-trainee" href="javascript:;">{% trans 'create new' %}</a></label>
-                        {{ form.trainee }}
-                    </div>
-                    <div class="form-group">
                         <label for="card_type">{% trans 'Card type' %} <span class="asteriskField">(*)</span></label>
                         {{ form.card_type }}
                     </div>
                     {% if form_of_using > -1 %}
+                    <div class="form-group">
+                        <label for="trainee" class="d-block">{% trans 'Trainee' %} <span class="asteriskField">(*)</span> 
+                            <a href="{% url 'dashboard:trainees-new' %}?next={{request.get_full_path}}" class="float-right btn btn-sm btn-success create-new-trainee">{% trans 'create new' %}</a>
+                        </label>
+                        {{ form.trainee }}
+                    </div>
                     {% if form_of_using == FOR_FULL_MONTH or form_of_using == FOR_PERIOD_TIME_LESSONS %}
                     <div class="form-group">
                         <label>{% trans 'Start at' %} <span class="asteriskField">(*)</span></label>
@@ -107,6 +111,8 @@
 {% endblock %}
 
 {% block specified_js %}
+<script src="{% static 'vendor/bootstrap-select/bootstrap-select.min.js' %} "></script>
+
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"
     integrity="sha256-/YAntTqXy9V4LoXFkI5WPDl3ZwP/knn1BljmMJJ7QWc=" crossorigin="anonymous"></script>

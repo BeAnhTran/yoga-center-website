@@ -51,3 +51,18 @@
     line-height: 1.25;
     border-radius: .2rem;
 }
+
+.dropdown.bootstrap-select.form-control > button.btn-light{
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    color: #495057;
+}
+
+.dropdown.bootstrap-select.form-control > button.btn-light:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
