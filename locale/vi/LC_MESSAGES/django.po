@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-05 13:45+0700\n"
+"POT-Creation-Date: 2020-06-07 08:47+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -707,6 +707,12 @@ msgstr ""
 msgid "Price of 1 trial lesson"
 msgstr "Giá học thử một buổi"
 
+#: .\apps\classes\templates\classes\enroll.html:123
+#: .\apps\classes\templates\payment.html:185 .\apps\classes\utils.py:41
+#: .\apps\courses\models.py:63
+msgid "Free"
+msgstr "Miễn phí"
+
 #: .\apps\classes\templates\classes\enroll.html:131
 msgid "Free registration for one lesson"
 msgstr "Đăng ký học thử 1 buổi miễn phí"
@@ -971,10 +977,6 @@ msgstr "Quay về trang thanh toán"
 #: .\apps\classes\templates\payment_result.html:43
 msgid "Back To Payment Page"
 msgstr "Quay về trang thanh toán"
-
-#: .\apps\classes\utils.py:41 .\apps\courses\models.py:63
-msgid "Free"
-msgstr "Miễn phí"
 
 #: .\apps\classes\views.py:288
 msgid "You dont have any info to payment. Please try again"
@@ -2101,6 +2103,15 @@ msgstr "Không đủ thông tin để thực hiện. Vui lòng thử lại sau."
 msgid "Create new card at center"
 msgstr "Đăng ký thẻ tập tại trung tâm"
 
+#: .\apps\dashboard\views\cards_view.py:347
+msgid "Paied"
+msgstr "Đã thanh toán"
+
+#: .\apps\dashboard\views\cards_view.py:349
+#: .\templates\profile\trainees\cards\detail.html:250
+msgid "Not charged"
+msgstr "chưa thanh toán"
+
 #: .\apps\dashboard\views\classes_view.py:168
 msgid "Last week has no lesson"
 msgstr "Tuần trước không có buổi học nào"
@@ -2252,23 +2263,17 @@ msgid "You have registed a make-up lesson for this lesson"
 msgstr "Bạn đã đăng kí học buổi học bù này"
 
 #: .\apps\make_up_lessons\views.py:53
-#, fuzzy, python-format
-#| msgid "You have registed a make-up lesson for this lesson"
 msgid ""
 "You have registered for up to %(lessons)s/%(max_lesson)s make-up lessons."
-msgstr "Bạn đã đăng kí học buổi học bù này"
+msgstr "Bạn đã đăng kí %(lessons)s/%(max_lesson)s buổi học bù"
 
 #: .\apps\make_up_lessons\views.py:75
-#, fuzzy, python-format
-#| msgid ""
-#| "You can register a make-up lesson or make a refund for : %(value)s "
-#| "month(s) from date of lesson."
 msgid ""
 "Your lesson is expired to make a make-up lesson. You can only register make-"
 "up lesson in %(days)s day(s) from the date of lesson. "
 msgstr ""
 "Bạn có thể đăng kí học bù hoặc xin hoàn tiền cho buổi học trong vòng "
-"%(value)s tháng tình từ ngày học của buổi tập."
+"%(value)s ngày tình từ ngày học của buổi tập."
 
 #: .\apps\make_up_lessons\views.py:88
 msgid "You dont have permission"
@@ -2819,10 +2824,6 @@ msgstr "Ngày tạo"
 msgid "Charged"
 msgstr "đã thanh toán"
 
-#: .\templates\profile\trainees\cards\detail.html:250
-msgid "Not charged"
-msgstr "chưa thanh toán"
-
 #: .\templates\profile\trainees\cards\detail.html:278
 msgid "Refund Request"
 msgstr "Yêu cầu hoàn tiền"
@@ -2844,16 +2845,12 @@ msgid "Make a absence application successfully."
 msgstr "Xin nghỉ thành công"
 
 #: .\templates\profile\trainees\cards\detail.html:412
-#, fuzzy, python-format
-#| msgid ""
-#| "You can register a make-up lesson or make a refund for : %(value)s "
-#| "month(s) from date of lesson."
 msgid ""
 "You can register a make-up lesson or make a refund for : %(value)s day(s) "
 "from date of lesson."
 msgstr ""
 "Bạn có thể đăng kí học bù hoặc xin hoàn tiền cho buổi học trong vòng "
-"%(value)s tháng tình từ ngày học của buổi tập."
+"%(value)s ngày tình từ ngày học của buổi tập."
 
 #: .\templates\profile\trainees\cards\detail.html:489
 msgid "Remove make-up lesson"

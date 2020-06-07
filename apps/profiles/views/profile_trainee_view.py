@@ -18,6 +18,7 @@ from apps.refunds.models import Refund, PENDING_STATE
 from apps.make_up_lessons.models import MakeUpLesson
 from apps.roll_calls.models import RollCall
 from django.conf import settings
+from django.utils.formats import date_format
 
 
 @method_decorator([login_required, trainee_required], name='dispatch')
@@ -42,14 +43,22 @@ class TraineeCardDetailView(View):
         context['card'] = card
         context['sidebar_profile'] = 'cards'
         context['number_of_expire_days_for_lessons'] = settings.NUMBER_OF_EXPIRE_DAYS_FOR_LESSON
-        card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}'''.format(
+
+        charged_str = ''
+        if card.invoice.is_charged() is True:
+            charged_str = _('Paied')
+        else:
+            charged_str = _('Not charged')
+
+        card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}\nTrạng thái: {fis_charged}'''.format(
             fname=card.trainee.user.full_name(),
             femail=card.trainee.user.email,
             fcard_id=card.pk,
             fclass_name=card.yogaclass.name,
             fcard_type=card.card_type.name,
-            fstart_at=str(card.start_at()),
-            fend_at=str(card.end_at())
+            fstart_at=date_format(card.start_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
+            fend_at=date_format(card.end_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
+            fis_charged=charged_str
         )
 
         context['card_str_qrcode'] = card_str_qrcode

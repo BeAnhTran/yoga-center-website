@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-05 13:45+0700\n"
+"POT-Creation-Date: 2020-06-07 08:47+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -705,6 +705,12 @@ msgstr ""
 msgid "Price of 1 trial lesson"
 msgstr ""
 
+#: .\apps\classes\templates\classes\enroll.html:123
+#: .\apps\classes\templates\payment.html:185 .\apps\classes\utils.py:41
+#: .\apps\courses\models.py:63
+msgid "Free"
+msgstr ""
+
 #: .\apps\classes\templates\classes\enroll.html:131
 #, fuzzy
 #| msgid "price course"
@@ -971,10 +977,6 @@ msgstr ""
 
 #: .\apps\classes\templates\payment_result.html:43
 msgid "Back To Payment Page"
-msgstr ""
-
-#: .\apps\classes\utils.py:41 .\apps\courses\models.py:63
-msgid "Free"
 msgstr ""
 
 #: .\apps\classes\views.py:288
@@ -2111,6 +2113,15 @@ msgstr ""
 msgid "Create new card at center"
 msgstr ""
 
+#: .\apps\dashboard\views\cards_view.py:347
+msgid "Paied"
+msgstr ""
+
+#: .\apps\dashboard\views\cards_view.py:349
+#: .\templates\profile\trainees\cards\detail.html:250
+msgid "Not charged"
+msgstr ""
+
 #: .\apps\dashboard\views\classes_view.py:168
 msgid "Last week has no lesson"
 msgstr ""
@@ -2823,10 +2834,6 @@ msgstr ""
 
 #: .\templates\profile\trainees\cards\detail.html:248
 msgid "Charged"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:250
-msgid "Not charged"
 msgstr ""
 
 #: .\templates\profile\trainees\cards\detail.html:278

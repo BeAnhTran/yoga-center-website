@@ -27,6 +27,7 @@ from apps.accounts.models import Trainee
 from services.roll_call_service import RollCallService
 from apps.card_invoices.models import POSTPAID, PREPAID
 from services.card_invoice_service import CardInvoiceService
+from django.utils.formats import date_format
 
 
 @method_decorator([login_required, staff_required], name='dispatch')
@@ -320,7 +321,9 @@ class CardNewPreviewView(View):
             elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
                 month_count = int(promotion_type.value)
                 end = end + relativedelta(months=month_count)
-        lesson_list = yoga_class.lessons.filter(date__range=[start, end])
+        # lesson_list = yoga_class.lessons.filter(date__range=[start, end])
+        id_arr = eval(form.cleaned_data['lesson_list'])
+        lesson_list = yoga_class.lessons.filter(is_full=False, pk__in=id_arr).order_by('date')
         card = form.save(commit=False)
         card.trainee = trainee
         card.yogaclass = yoga_class
@@ -334,23 +337,27 @@ class CardNewResultView(View):
     template_name = 'dashboard/cards/new/result.html'
 
     def get(self, request, pk):
-        if request.session.get('dashboard_new_card') is not None:
-            context = {}
-            card = get_object_or_404(
-                Card, pk=pk)
-            context['yoga_class'] = card.yogaclass
-            context['paymentType'] = 'Postpaid'
-            context['card'] = card
-            card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}'''.format(
-                fname=card.trainee.user.full_name(),
-                femail=card.trainee.user.email,
-                fcard_id=card.pk,
-                fclass_name=card.yogaclass.name,
-                fcard_type=card.card_type.name,
-                fstart_at=str(card.start_at()),
-                fend_at=str(card.end_at())
-            )
-            context['card_str_qrcode'] = card_str_qrcode
-            return render(request, self.template_name, context=context)
+        context = {}
+        card = get_object_or_404(
+            Card, pk=pk)
+        context['yoga_class'] = card.yogaclass
+        context['paymentType'] = 'Postpaid'
+        context['card'] = card
+        charged_str = ''
+        if card.invoice.is_charged() is True:
+            charged_str = _('Paied')
         else:
-            return redirect('errors:error-404')
+            charged_str = _('Not charged')
+
+        card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}\nTrạng thái: {fis_charged}'''.format(
+            fname=card.trainee.user.full_name(),
+            femail=card.trainee.user.email,
+            fcard_id=card.pk,
+            fclass_name=card.yogaclass.name,
+            fcard_type=card.card_type.name,
+            fstart_at=date_format(card.start_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
+            fend_at=date_format(card.end_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
+            fis_charged=charged_str
+        )
+        context['card_str_qrcode'] = card_str_qrcode
+        return render(request, self.template_name, context=context)
