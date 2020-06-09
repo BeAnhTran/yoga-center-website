@@ -10,7 +10,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic import View
 
-from apps.courses.models import LEVEL_CHOICES
+from apps.courses.models import LEVEL_CHOICES, TRAINING_COURSE
 from apps.classes.models import YogaClass
 from apps.courses.models import Course
 from apps.accounts.models import Trainer
@@ -150,8 +150,20 @@ class YogaClassEnrollView(View):
         if request.session.get('enroll_card_form') is not None:
             del request.session['enroll_card_form']
         card_type_list = yoga_class.course.card_types.all()
-        form = CardFormForTraineeEnroll(
-            initial={'card_type_list': card_type_list})
+
+        if yoga_class.course.course_type == TRAINING_COURSE:
+            print(list(yoga_class.lessons.filter().values_list('id', flat=True).distinct()))
+            payment_period_choices = [(0, _('Pay all'))]
+            for p in yoga_class.payment_periods.all():
+                payment_period_choices.append((p.id, p.name),)
+            form = CardFormForTraineeEnroll(initial={'card_type_list': card_type_list, 'payment_period_choices': payment_period_choices})
+            form.fields['payment_period'].initial = 0
+            form.fields['lesson_list'].initial = str(list(yoga_class.lessons.filter().values_list('id', flat=True).distinct()))
+            form.fields['card_type'].initial = yoga_class.course.card_types.first()
+            context['form_of_using'] = yoga_class.course.card_types.first().form_of_using
+        else:
+            form = CardFormForTraineeEnroll(initial={'card_type_list': card_type_list})
+
         if request.GET.get('card-type'):
             check_card_type_arr = yoga_class.course.card_types.filter(
                 pk=request.GET.get('card-type'))
@@ -178,8 +190,15 @@ class YogaClassEnrollView(View):
             'FOR_TRIAL': FOR_TRIAL,
             'FOR_TRAINING_COURSE': FOR_TRAINING_COURSE
         }
-        form = CardFormForTraineeEnroll(
-            request.POST, initial={'card_type_list': card_type_list})
+        if yoga_class.course.course_type == TRAINING_COURSE:
+            payment_period_choices = [(0, _('Pay all'))]
+            for p in yoga_class.payment_periods.all():
+                payment_period_choices.append((p.id, p.name),)
+            form = CardFormForTraineeEnroll(
+                request.POST, initial={'card_type_list': card_type_list, 'payment_period_choices': payment_period_choices})
+        else:
+            form = CardFormForTraineeEnroll(
+                request.POST, initial={'card_type_list': card_type_list})
         if form.is_valid():
             id_arr = eval(request.POST['lesson_list'])
             lesson_list = yoga_class.lessons.filter(
@@ -193,11 +212,18 @@ class YogaClassEnrollView(View):
             # save to session and get it in payment page
             request.session['enroll_card_form'] = request.POST
             return redirect('classes:enroll-payment', slug=slug)
-        ctype = yoga_class.course.card_types.filter(
-            pk=request.POST['card_type']).first()
-        form.fields['card_type'].initial = ctype
+        # IF form is NOT VALID
+        if yoga_class.course.course_type == TRAINING_COURSE:
+            form.fields['card_type'].initial = yoga_class.course.card_types.first()
+            form.fields['lesson_list'].initial = str(
+                list(yoga_class.lessons.filter().values_list('id', flat=True)))
+            context['form_of_using'] = yoga_class.course.card_types.first().form_of_using
+            form.fields['payment_period'].initial = 0
+        else:
+            ctype = yoga_class.course.card_types.filter(pk=request.POST['card_type']).first()
+            form.fields['card_type'].initial = ctype
+            context['form_of_using'] = ctype.form_of_using
         context['form'] = form
-        context['form_of_using'] = ctype.form_of_using
         return render(request, self.template_name, context=context)
 
 
@@ -230,23 +256,33 @@ class YogaClassEnrollPaymentView(View):
             # Payment Form
             form = CardPaymentForm()
             card_type = CardType.objects.get(pk=enroll_card_form['card_type'])
-
-            # price of card when register
-            price = get_price(yoga_class, card_type)
-            total_price = get_total_price(
-                yoga_class, card_type, lesson_list.count())
-            total_price_display = get_total_price_display(total_price)
             context = {
                 'key': settings.STRIPE_PUBLISHABLE_KEY,
                 'form': form,
                 'yoga_class': yoga_class,
                 'card_type': card_type,
                 'lesson_list': lesson_list,
-                'price': price,
-                'total_price_display': total_price_display,
-                'total_price': total_price,
-                'active_nav': 'classes'
+                'active_nav': 'classes',
+                'FOR_TRAINING_COURSE': FOR_TRAINING_COURSE
             }
+            # NOTE: total_price is price with out promotion
+            # NOTE: price is price of one lesson
+            if card_type.form_of_using == FOR_TRAINING_COURSE:
+                payment_period = None
+                if int(enroll_card_form['payment_period']) == 0:
+                    total_price = get_price(yoga_class, card_type)
+                else:
+                    payment_period = yoga_class.payment_periods.all().get(pk=int(enroll_card_form['payment_period']))
+                    total_price = payment_period.amount
+                context['total_price'] = total_price
+                context['payment_period'] = payment_period
+            else:
+                price = get_price(yoga_class, card_type)
+                total_price = get_total_price(
+                    yoga_class, card_type, lesson_list.count())
+                context['price'] = price
+                context['total_price'] = total_price
+
             # PROMOTION
             promotion_type = None
             promotion_code = None
@@ -301,8 +337,17 @@ class YogaClassEnrollPaymentView(View):
     def post(self, request, slug):
         yoga_class = YogaClass.objects.get(slug=slug)
         if request.session.get('enroll_card_form') and request.POST.get('payment_type'):
-            enroll_form = CardFormForTraineeEnroll(
-                request.session['enroll_card_form'])
+            # enroll_form = CardFormForTraineeEnroll(
+            #     request.session['enroll_card_form'])
+            if yoga_class.course.course_type == TRAINING_COURSE:
+                payment_period_choices = [(0, _('Pay all'))]
+                for p in yoga_class.payment_periods.all():
+                    payment_period_choices.append((p.id, p.name),)
+                enroll_form = CardFormForTraineeEnroll(
+                    request.session['enroll_card_form'], initial={'payment_period_choices': payment_period_choices})
+            else:
+                enroll_form = CardFormForTraineeEnroll(
+                    request.session['enroll_card_form'])
             if request.POST['payment_type'] == 'PREPAID_FREE':
                 if enroll_form.is_valid():
                     description = _('Free Registration')
@@ -499,6 +544,14 @@ def processCard(yoga_class, enroll_form, request, amount, description, payment_t
     # CREATE CARD INVOICE
     card_invoice = CardInvoiceService(
         card, payment_type, description, amount, charge_id).call()
+    
+    # NOTE: ADD PAYMENT PERIOD IF HAVING
+    if yoga_class.course.course_type == TRAINING_COURSE:
+        if enroll_form.cleaned_data.get('payment_period') is not None:
+            if enroll_form.cleaned_data.get('payment_period') != 0:
+                payment_period = yoga_class.payment_periods.all().get(pk=enroll_form.cleaned_data.get('payment_period'))
+                card_invoice.payment_period = payment_period
+                card_invoice.save()
 
     if promotion_code is not None and promotion_type is not None:
         promotion_code.promotion_type = promotion_type

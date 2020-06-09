@@ -30,46 +30,26 @@ class CardFormForTraineeEnroll(forms.ModelForm):
         )
     )
     lesson_list = forms.CharField(widget=forms.HiddenInput())
+    payment_period = forms.ChoiceField(
+        widget=forms.RadioSelect())
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['card_type'].empty_label = _('Please select a value')
         self.fields['start_at'].required = False
         self.fields['end_at'].required = False
+        self.fields['payment_period'].required = False
         self.fields['lesson_list'].required = True
         if kwargs.get('initial') is not None:
             if kwargs.get('initial').get('card_type_list') is not None:
                 self.fields['card_type'].queryset = kwargs['initial']['card_type_list']
+            if kwargs.get('initial').get('payment_period_choices') is not None:
+                self.fields['payment_period'].choices = kwargs['initial']['payment_period_choices']
         self.fields['card_type'].widget.attrs.update({
             'class': 'form-control'
         })
         self.helper = FormHelper()
         self.helper.form_id = 'form_enroll'
-        self.helper.layout = Layout(
-            Field('card_type', css_class='form-control'),
-            'start_at',
-            'end_at',
-            HTML("""
-                <div id='trial-lesson' class="mt-3 d-none">
-                    <h4 class="mb-1">{}</h4>
-                    <p>{}</p>
-                    <div id='trial-lesson-listing'>
-                    </div>
-                </div>
-            """.format(
-                _('Trial Lesson'),
-                _('Please drap a lesson into this area below to choose'))),
-            HTML("""
-                <div id='div_for_some_lesson_list' class="mt-3 mb-2 d-none">
-                    <h4 class="mb-1">{}</h4>
-                    <p>{}</p>
-                    <div id='some_lesson_list'>
-                    </div>
-                </div>
-            """.format(
-                _('Lesson List'),
-                _('Lessons you choose will be displayed here'))),
-            Submit('submit', _('Save'), css_class='btn-success'))
 
         # Focus on form field whenever error occurred
         errorList = list(self.errors)

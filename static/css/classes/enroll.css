@@ -62,3 +62,7 @@
   .text-red-custom{
       color: #527318;
   }
+
+  #id_payment_period{
+      list-style: none;
+  }

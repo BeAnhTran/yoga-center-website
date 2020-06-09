@@ -176,6 +176,7 @@
                         <td><small>{% trans 'card type' as t_card_type %}{{ t_card_type|capfirst }}</small></td>
                         <td><small>{{ card_type }}</small></td>
                       </tr>
+                      {% if card_type.form_of_using != FOR_TRAINING_COURSE %}
                       <tr>
                         <td><small>{% trans 'price per lesson' as t_price %}{{ t_price|capfirst }}</small></td>
                         <td><small>
@@ -191,13 +192,36 @@
                         <td><small>{% trans 'total price' as t_total_price %}{{ t_total_price|capfirst }}</small></td>
                         <td><small>
                             {% if total_price > 0 %}
-                            {{ total_price_display }}đ
+                            {{ total_price|sexy_number }}đ
                             {% else %}
-                            {{ total_price_display }}
+                            {% trans 'Free' %}
                             {% endif %}
                           </small>
                         </td>
                       </tr>
+                      {% else %}
+                      {% if payment_period is not None %}
+                      <tr>
+                        <td><small>{% trans 'Payment period' %}</small></td>
+                        <td><small class="text-danger">{{ payment_period.name }}</small></td>
+                      </tr>
+                      {% else %}
+                      <tr>
+                        <td colspan="2"><small class="text-danger">{% trans 'Pay for entire course' %}</small></td>
+                      </tr>
+                      {% endif %}
+                      <tr>
+                        <td><small>{% trans 'total price' as t_total_price %}{{ t_total_price|capfirst }}</small></td>
+                        <td><small>
+                            {% if total_price > 0 %}
+                            {{ total_price|sexy_number }}đ
+                            {% else %}
+                            {% trans 'Free' %}
+                            {% endif %}
+                          </small>
+                        </td>
+                      </tr>
+                      {% endif %}
                     </tbody>
                   </table>
                 </div>

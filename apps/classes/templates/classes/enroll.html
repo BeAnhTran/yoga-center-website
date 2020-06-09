@@ -59,6 +59,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-4 jumbotron">
                     <div id="accordion">
+                        {% if form_of_using != FOR_TRAINING_COURSE %}
                         <div class="card">
                             <div class="card-header price-card">
                                 <a class="collapsed card-link" data-toggle="collapse" href="#ForFullmonthPrice">
@@ -134,6 +135,50 @@
                                 </div>
                             </div>
                         </div>
+                        {% else %}
+                        <div class="card">
+                            <div class="card-header price-card">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#TotalCourseAmout">
+                                    Đóng toàn bộ: <b class="text-warning">{{ yoga_class.get_price_for_training_course|sexy_number }}đ</b>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header price-card">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#Period1">
+                                    Đóng đợt (1): <b class="text-warning">{{ yoga_class.payment_periods.first.amount|sexy_number }}đ</b>
+                                </a>
+                            </div>
+                            <div id="Period1" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush mb-3">
+                                        <li class="list-group-item pl-0 pr-0"><i
+                                                class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
+                                            Đợt 1 cần được thanh toán trước ngay lúc đăng ký.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header price-card">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#Period2">
+                                    Đóng đợt (2): <b class="text-warning">{{ yoga_class.payment_periods.last.amount|sexy_number }}đ</b>
+                                </a>
+                            </div>
+                            <div id="Period2" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush mb-3">
+                                        <li class="list-group-item pl-0 pr-0"><i
+                                                class="fas fa-fw fa-exclamation-circle text-red-custom"></i>
+                                            Hạn chót để đóng tiền cho đợt này là:
+                                            <b>{{ yoga_class.payment_periods.last.end_at }}</b>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                     <div id="form-content">
                         <form id="form_enroll" action="{% url 'classes:enroll' yoga_class.slug %}" method="POST">
@@ -145,44 +190,53 @@
                                 {{ form.card_type }}
                             </div>
                             {% if form_of_using > -1 %}
-                            {% if form_of_using == FOR_FULL_MONTH or form_of_using == FOR_PERIOD_TIME_LESSONS %}
-                            <div class="form-group">
-                                <label>{% trans 'Start at' %} <span class="asteriskField">(*)</span></label>
-                                {{ form.start_at }}
-                            </div>
-                            {% if form_of_using == FOR_FULL_MONTH %}
-                            <div class="form-group">
-                                <label>{% trans "Number of months" %}</label>
-                                <input id="id_number_of_months" type="number" class="form-control"
-                                    name="number_of_month" value="1">
-                            </div>
-                            {% endif %}
-                            <div class="form-group">
-                                <label>{% trans 'End at' %} <span class="asteriskField">(*)</span></label>
-                                {{ form.end_at }}
-                            </div>
-                            <div id='div_for_some_lesson_list' class="mt-3 mb-2">
-                                <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
-                                <p>{% trans 'Lessons you choose will be displayed here' %}</p>
-                                <div id='some_lesson_list' class="mCustomScrollbar" style="max-height: 250px;">
+                                {% if form_of_using != FOR_TRAINING_COURSE %}
+                                {% if form_of_using == FOR_FULL_MONTH or form_of_using == FOR_PERIOD_TIME_LESSONS %}
+                                <div class="form-group">
+                                    <label>{% trans 'Start at' %} <span class="asteriskField">(*)</span></label>
+                                    {{ form.start_at }}
                                 </div>
-                            </div>
-                            {% else %}
-                            <input type="text" name="start_at" class="d-none" autocomplete="off" id="id_start_at">
-                            <input type="text" name="end_at" class="d-none" autocomplete="off" id="id_end_at">
-                            {% if form_of_using == FOR_TRIAL or form_of_using == FOR_SOME_LESSONS  %}
-                            <div id='drapdrop-lesson' class="mt-3">
-                                {% if form_of_using == FOR_TRIAL %}
-                                <h4 class="mb-1">{% trans 'Trial Lesson' %}</h4>
+                                    <!---->
+                                    {% if form_of_using == FOR_FULL_MONTH %}
+                                    <div class="form-group">
+                                        <label>{% trans "Number of months" %}</label>
+                                        <input id="id_number_of_months" type="number" class="form-control"
+                                            name="number_of_month" value="1">
+                                    </div>
+                                    {% endif %}
+                                    <!---->
+                                <div class="form-group">
+                                    <label>{% trans 'End at' %} <span class="asteriskField">(*)</span></label>
+                                    {{ form.end_at }}
+                                </div>
+                                <div id='div_for_some_lesson_list' class="mt-3 mb-2">
+                                    <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
+                                    <p>{% trans 'Lessons you choose will be displayed here' %}</p>
+                                    <div id='some_lesson_list' class="mCustomScrollbar" style="max-height: 250px;">
+                                    </div>
+                                </div>
                                 {% else %}
-                                <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
+                                <input type="text" name="start_at" class="d-none" autocomplete="off" id="id_start_at">
+                                <input type="text" name="end_at" class="d-none" autocomplete="off" id="id_end_at">
+                                    {% if form_of_using == FOR_TRIAL or form_of_using == FOR_SOME_LESSONS  %}
+                                    <div id='drapdrop-lesson' class="mt-3">
+                                        {% if form_of_using == FOR_TRIAL %}
+                                        <h4 class="mb-1">{% trans 'Trial Lesson' %}</h4>
+                                        {% else %}
+                                        <h4 class="mb-1">{% trans 'Lesson List' %}</h4>
+                                        {% endif %}
+                                        <p>{% trans 'Please drap a lesson into this area below to choose' %}</p>
+                                        <div id='drapdrop-lesson-listing'>
+                                        </div>
+                                    </div>
+                                    {% endif %}
                                 {% endif %}
-                                <p>{% trans 'Please drap a lesson into this area below to choose' %}</p>
-                                <div id='drapdrop-lesson-listing'>
+                                {% else %}
+                                <div class="form-group">
+                                    <label>{% trans 'Choose payment period' %} <span class="asteriskField">(*)</span></label>
+                                    {{ form.payment_period }}
                                 </div>
-                            </div>
-                            {% endif %}
-                            {% endif %}
+                                {% endif %}
                             <input class="btn btn-danger" type="submit" value="{% trans 'Sign up' %}">
                             {% endif %}
                         </form>

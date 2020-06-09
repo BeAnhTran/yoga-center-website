@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from apps.classes.models import YogaClass
+from apps.classes.models import YogaClass, PaymentPeriod
 from apps.cards.models import Card
 from apps.promotions.models import ApplyPromotionCode
 from django.contrib.contenttypes.fields import GenericRelation
@@ -19,6 +19,8 @@ PAYMENT_TYPES = (
 class CardInvoice(models.Model):
     card = models.ForeignKey(
         Card, on_delete=models.CASCADE, related_name='invoices', verbose_name=_('card'))
+    payment_period = models.ForeignKey(
+        PaymentPeriod, on_delete=models.SET_NULL, null=True, blank=True, related_name='invoices', verbose_name=_('payment period'))
     description = models.TextField(
         null=True, blank=True, verbose_name=_('description'))
     amount = models.FloatField(

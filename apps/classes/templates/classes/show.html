@@ -2,6 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% load settings_extras %}
+{% load sexify %}
 
 {% block specified_css %}
 <link href="{% static 'css/classes/show.css' %}" rel='stylesheet' />
@@ -194,6 +195,22 @@
                         </ul>
                     </div>
                 </div>
+                {% if class.course.course_type == 1 %}
+                <div class="sb-widget">
+                    <h2 class="sb-title">{% trans 'Payment Information' %}</h2>
+                    {% for period in class.payment_periods.all %}
+                    <div class="classes-info">
+                        <ul>
+                            <li><i class="material-icons">eco</i> {{ period.name }}</li>
+                            <li><i class="material-icons">event_available</i>Hạn chót: {{ period.end_at }}</li>
+                            <li>
+                                <i class="material-icons">attach_money</i> {{ period.amount|sexy_number }}đ
+                            </li>
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <div class="sb-widget">
                     <h2 class="sb-title">{% trans 'About Trainer' %}</h2>
                     <div class="about-instructor-widget">
