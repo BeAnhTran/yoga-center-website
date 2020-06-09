@@ -2845,10 +2845,8 @@ msgid "Id"
 msgstr "Mã số"
 
 #: .\templates\profile\trainees\cards\detail.html:230
-#, fuzzy
-#| msgid "Payment Time"
 msgid "Payment Type"
-msgstr "Thời gian thanh toán"
+msgstr "Hình thức thanh toán"
 
 #: .\templates\profile\trainees\cards\detail.html:231
 #: .\templates\profile\trainees\cards\detail.html:294
@@ -4164,14 +4162,14 @@ msgstr ""
 msgid "The option '%s' is not a valid option for a QR code."
 msgstr ""
 
-#~ msgid "A user is already registered with this e-mail address."
-#~ msgstr "Email này đã tồn tại."
+msgid "A user is already registered with this e-mail address."
+msgstr "Email này đã tồn tại."
 
-#~ msgid "You must type the same password each time."
-#~ msgstr "Vui lòng nhập lại đúng mật khẩu trước."
+msgid "You must type the same password each time."
+msgstr "Vui lòng nhập lại đúng mật khẩu trước."
 
-#~ msgid "The e-mail address and/or password you specified are not correct."
-#~ msgstr "Email hoặc mật khẩu không hợp lệ."
+msgid "The e-mail address and/or password you specified are not correct."
+msgstr "Email hoặc mật khẩu không hợp lệ."
 
-#~ msgid "Password must be a minimum of {0} characters."
-#~ msgstr "Mật khẩu phải có ít nhất {0} kí tự."
+msgid "Password must be a minimum of {0} characters."
+msgstr "Mật khẩu phải có ít nhất {0} kí tự."
