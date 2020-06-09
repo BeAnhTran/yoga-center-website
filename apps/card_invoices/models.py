@@ -17,8 +17,8 @@ PAYMENT_TYPES = (
 
 
 class CardInvoice(models.Model):
-    card = models.OneToOneField(
-        Card, on_delete=models.CASCADE, primary_key=True, related_name='invoice', verbose_name=_('card'))
+    card = models.ForeignKey(
+        Card, on_delete=models.CASCADE, related_name='invoices', verbose_name=_('card'))
     description = models.TextField(
         null=True, blank=True, verbose_name=_('description'))
     amount = models.FloatField(
