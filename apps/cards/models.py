@@ -63,3 +63,9 @@ class Card(models.Model):
         if self.get_number_of_make_up_lessons() < self.max_number_of_make_up_lessons():
             return True
         return False
+
+    def get_payment_status(self):
+        for invoice in self.invoices.all():
+            if invoice.is_charged() is False:
+                return _('Unpaid')
+        return _('Paied')

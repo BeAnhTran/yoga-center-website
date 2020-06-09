@@ -59,7 +59,7 @@
                                 <i class="fas fa-fw fa-coins"></i> {% trans 'receive payment' %}
                             </a>
                             <form class="d-none form-receive-payment"
-                                action="{% url 'dashboard:receive-card-payment' card.invoice.pk %}" method="POST">
+                                action="{% url 'dashboard:receive-card-payment' card.invoices.last.pk %}" method="POST">
                                 {% csrf_token %}
                                 <input type="submit" value="Confirm">
                             </form>

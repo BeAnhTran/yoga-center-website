@@ -80,7 +80,7 @@
                         <td><small>{{ card.trainee.user.email }}</small></td>
                         <td><small>{{ yoga_class.name }}</small></td>
                         <td><small>{{ card.card_type }}</small></td>
-                        <td><small>{{ card.invoice.amount|sexy_number }}đ</small></td>
+                        <td><small>{{ card.invoices.last.amount|sexy_number }}đ</small></td>
                         <td><small>{{ card.created_at.date }}</small></td>
                     </tr>
                 </tbody>
@@ -90,7 +90,7 @@
             <div class="col-md-6"></div>
             <div class="col-md-6">
                 <p class="float-right">
-                    TP.Hồ Chí Minh, {% trans 'date' %} {{ card.invoice.updated_at|date:'d' }} {{ card.invoice.updated_at|date:'M' }} {% trans 'year' %} {{ card.invoice.updated_at|date:'Y' }}
+                    TP.Hồ Chí Minh, {% trans 'date' %} {{ card.invoices.last.updated_at|date:'d' }} {{ card.invoices.last.updated_at|date:'M' }} {% trans 'year' %} {{ card.invoices.last.updated_at|date:'Y' }}
                 </p>
                 <div class="clearfix"></div>
                 <p class="float-right">

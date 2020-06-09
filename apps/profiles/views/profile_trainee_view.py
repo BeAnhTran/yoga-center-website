@@ -44,12 +44,7 @@ class TraineeCardDetailView(View):
         context['sidebar_profile'] = 'cards'
         context['number_of_expire_days_for_lessons'] = settings.NUMBER_OF_EXPIRE_DAYS_FOR_LESSON
 
-        charged_str = ''
-        if card.invoice.is_charged() is True:
-            charged_str = _('Paied')
-        else:
-            charged_str = _('Not charged')
-
+        charged_str = card.get_payment_status()
         card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}\nTrạng thái: {fis_charged}'''.format(
             fname=card.trainee.user.full_name(),
             femail=card.trainee.user.email,

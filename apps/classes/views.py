@@ -472,7 +472,7 @@ class YogaClassPostPaidResultView(View):
             context = {}
             context['paymentType'] = 'Postpaid'
             card = get_object_or_404(Card, pk=request.session.get('new_card'))
-            if card.invoice.payment_type != POSTPAID:
+            if card.invoices.last().payment_type != POSTPAID:
                 messages.error(request, _(
                     'An error occurred. Please try again later'))
                 return redirect('errors:error-403')

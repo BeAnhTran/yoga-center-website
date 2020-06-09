@@ -55,7 +55,7 @@ class UnPaidCardListView(ListView):
 
     def get_queryset(self):
         query = Card.objects.filter(
-            invoice__payment_type=POSTPAID, invoice__staff=None)
+            invoices__payment_type=POSTPAID, invoices__staff=None).distinct()
         return query
 
     def get_context_data(self, **kwargs):
@@ -363,11 +363,7 @@ class CardNewResultView(View):
         context['yoga_class'] = card.yogaclass
         context['paymentType'] = 'Postpaid'
         context['card'] = card
-        charged_str = ''
-        if card.invoice.is_charged() is True:
-            charged_str = _('Paied')
-        else:
-            charged_str = _('Not charged')
+        charged_str = card.get_payment_status()
 
         card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}\nTrạng thái: {fis_charged}'''.format(
             fname=card.trainee.user.full_name(),
