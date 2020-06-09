@@ -229,6 +229,9 @@
                                 <th class="col-1"><small>{% trans 'Id' %}</small></th>
                                 <th class="col-2"><small>{% trans 'Payment Type' %}</small></th>
                                 <th class="col-2"><small>{% trans 'State' %}</small></th>
+                                {% if card.yogaclass.payment_periods.count > 1 %}
+                                <th class="col-2"><small>{% trans 'Payment period' %}</small></th>
+                                {% endif %}
                                 <th class="col-1"><small>{% trans 'Promotion' %}</small></th>
                                 <th class="col-1"><small>{% trans 'Amount' %}</small></th>
                                 <th class="col-3"><small>{% trans 'Description' %}</small></th>
@@ -251,6 +254,11 @@
                                     <span class="badge badge-pill badge-danger">{% trans 'Not charged' %}</span>
                                     {% endif %}
                                 </td>
+                                {% if card.yogaclass.payment_periods.count > 1 %}
+                                <td class="col-2">
+                                    <span class="badge badge-pill badge-primary">{{ invoice.payment_period.name }}</span>
+                                </td>
+                                {% endif %}
                                 <td class="col-1"><small>
                                         {% if invoice.apply_promotion_codes.count > 0 %}
                                         {{ invoice.apply_promotion_codes.first.promotion_code.promotion_type.full_title }}
