@@ -14,11 +14,12 @@ from apps.refunds.forms import RefundForm
 from django.db.models import Value as V
 from django.db.models.functions import Concat
 from django.db.models import CharField
-from apps.refunds.models import Refund, PENDING_STATE
 from apps.make_up_lessons.models import MakeUpLesson
 from apps.roll_calls.models import RollCall
 from django.conf import settings
 from django.utils.formats import date_format
+from apps.absence_applications.models import AbsenceApplication
+from apps.refunds.models import Refund, PENDING_STATE, APPROVED_STATE
 
 
 @method_decorator([login_required, trainee_required], name='dispatch')
@@ -51,8 +52,10 @@ class TraineeCardDetailView(View):
             fcard_id=card.pk,
             fclass_name=card.yogaclass.name,
             fcard_type=card.card_type.name,
-            fstart_at=date_format(card.start_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
-            fend_at=date_format(card.end_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
+            fstart_at=date_format(
+                card.start_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
+            fend_at=date_format(
+                card.end_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
             fis_charged=charged_str
         )
 
@@ -81,8 +84,10 @@ class RefundNewView(View):
         make_up_lessons_of_trainee = MakeUpLesson.objects.filter(
             roll_call__card=card)
         query_choices = list()
-        roll_calls = RollCall.objects.filter(**filter_options).exclude(
-            id__in=[elem.roll_call.id for elem in make_up_lessons_of_trainee]).distinct()
+        absence_applications = AbsenceApplication.objects.filter(
+            roll_call__card__trainee=request.user.trainee)
+        roll_calls = RollCall.objects.filter(**filter_options).exclude(refunds__state__in=[
+            PENDING_STATE, APPROVED_STATE]).filter(id__in=[elem.roll_call.id for elem in absence_applications]).exclude(id__in=[elem.roll_call.id for elem in make_up_lessons_of_trainee]).distinct()
         for r in roll_calls:
             query_choices += ((r.pk, r.lesson.str_without_class()),)
         form = RefundForm(
@@ -94,6 +99,7 @@ class RefundNewView(View):
         context = {}
         context['card'] = card
         context['form'] = form
+        context['roll_calls'] = roll_calls
         context['sidebar_profile'] = 'cards'
         return render(request, self.template_name, context=context)
 
