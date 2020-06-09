@@ -76,16 +76,20 @@
                                         {% for lecture in course.lectures.all %}
                                         <div class="panel panel-default mb-3">
                                             <div class="panel-heading" id="heading{{lecture.pk}}">
-                                                <h3>
-                                                    <a class="text-secondary" href="#collapseLecture{{lecture.pk}}"
+                                                <h5>
+                                                    <a style="font-family: serif;color: darkred;" href="#collapseLecture{{lecture.pk}}"
                                                         data-toggle="collapse"
                                                         data-parent="#accordion">{{forloop.counter}}. {{ lecture }}</a>
-                                                </h3>
+                                                    </h5>
                                             </div>
                                             <div id="collapseLecture{{lecture.pk}}"
                                                 class="panel-collapse collapse {% if forloop.first %}show{% endif %}">
                                                 <div class="panel-body lecture-des">
-                                                    {{ lecture.description | safe }}
+                                                    {% if lecture.description is not None %}
+                                                    {{ lecture.description|safe }}
+                                                    {% else %}
+                                                    {% trans "have not updated yet" %}
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>

@@ -89,14 +89,18 @@
                                                 <div class="panel panel-default mb-3">
                                                     <div class="panel-heading" id="heading{{lecture.pk}}">
                                                         <h3>
-                                                            <a class="text-secondary" href="#collapseLecture{{lecture.pk}}" data-toggle="collapse"
+                                                            <a style="color: darkred;font-family: serif;" href="#collapseLecture{{lecture.pk}}" data-toggle="collapse"
                                                                 data-parent="#accordion">{{forloop.counter}}. {{ lecture }}</a>
                                                         </h3>
                                                     </div>
                                                     <div id="collapseLecture{{lecture.pk}}"
                                                         class="panel-collapse collapse {% if forloop.first %}show{% endif %}">
                                                         <div class="panel-body lecture-des">
+                                                            {% if lecture.description is not None %}
                                                             {{ lecture.description | safe }}
+                                                            {% else %}
+                                                            {% trans 'have not updated yet' %}
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -169,7 +173,9 @@
                     <h2 class="sb-title">{% trans 'Detail Information' %}</h2>
                     <div class="classes-info">
                         <ul>
+                            {% if class.start_at is not None %}
                             <li><i class="material-icons">event_available</i>{{ class.start_at }}</li>
+                            {% endif %}
                             <li><i class="material-icons">done_all</i>
                                 {% for lesson_in_week in class.get_first_week %}
                                     {% if forloop.last %}
