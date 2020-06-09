@@ -2398,6 +2398,16 @@ class Command(BaseCommand):
                 "start_time": t_18h,
                 "end_time": t_21h
             })
+        training_class_thay_hoang_anh.payment_periods.create(**{
+            'name': 'Đợt thanh toán 1',
+            'amount': 7500000,
+            'end_at': saturday + timedelta(days=14)
+        })
+        training_class_thay_hoang_anh.payment_periods.create(**{
+            'name': 'Đợt thanh toán 2',
+            'amount': 7500000,
+            'end_at': saturday + timedelta(days=(14 + 7*7))
+        })
 
     def __add_basic_lectures(self, course):
         data = [

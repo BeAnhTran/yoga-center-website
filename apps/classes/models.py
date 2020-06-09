@@ -74,7 +74,7 @@ class PaymentPeriod(models.Model):
     yoga_class = models.ForeignKey(
         YogaClass, on_delete=models.CASCADE, related_name='payment_periods', verbose_name=_('class'))
     name = models.CharField(max_length=120, verbose_name=_('name'))
-    price = models.FloatField(verbose_name=_('price'))
+    amount = models.FloatField(verbose_name=_('amount'))
     end_at = models.DateField(blank=True, null=True, verbose_name=_('end at'))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('created at'))
