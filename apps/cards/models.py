@@ -38,7 +38,7 @@ class Card(models.Model):
         return self.roll_calls.filter(studied=True).count()
 
     def price_of_one_lesson(self):
-        total_price = self.card_invoices.last().amount
+        total_price = self.invoices.last().amount
         result = total_price / self.total_lesson()
         return result
 
