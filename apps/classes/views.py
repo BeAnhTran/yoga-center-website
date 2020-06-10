@@ -450,10 +450,6 @@ class YogaClassEnrollPaymentView(View):
         id_arr = eval(cleaned_data['lesson_list'])
         lesson_list = yoga_class.lessons.filter(
             is_full=False, pk__in=id_arr).order_by('date')
-        #start = cleaned_data['start_at']
-        #end = cleaned_data['end_at']
-        # lesson_list = yoga_class.lessons.filter(
-        #     date__range=[start, end], is_full=False).order_by('date')
         return lesson_list
 
 
@@ -623,16 +619,18 @@ def processCard(yoga_class, enroll_form, request, amount, description, payment_t
 @transaction.atomic
 def create_card(yoga_class, enroll_form, trainee, promotion=None, promotion_type=None):
     # TODO: CHECK condition before use Promotion
+    id_arr = eval(enroll_form.cleaned_data['lesson_list'])
     if promotion is not None and promotion_type is not None and promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
-        start = enroll_form.cleaned_data['start_at']
-        end = enroll_form.cleaned_data['end_at']
-        month_count = int(promotion_type.value)
-        end = end + relativedelta(months=month_count)
-        lesson_list = yoga_class.lessons.filter(date__range=[start, end])
-    else:
-        id_arr = eval(enroll_form.cleaned_data['lesson_list'])
-        lesson_list = yoga_class.lessons.filter(
+        temp_lesson_list = yoga_class.lessons.filter(
             is_full=False, pk__in=id_arr).order_by('date')
+        month_count = int(promotion_type.value)
+        additional_s = temp_lesson_list.last().date
+        additional_e = temp_lesson_list.last().date + relativedelta(months=month_count)
+        additional_lesson_list = yoga_class.lessons.filter(date__gt=additional_s, date__lte=additional_e, is_full=False).order_by('date')
+        for l in additional_lesson_list:
+            id_arr.append(l.pk)
+    lesson_list = yoga_class.lessons.filter(
+        is_full=False, pk__in=id_arr).order_by('date')
     card = enroll_form.save(commit=False)
     card.trainee = trainee
     card.yogaclass = yoga_class
