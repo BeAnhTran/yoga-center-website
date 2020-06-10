@@ -154,8 +154,9 @@ class YogaClassEnrollView(View):
         if yoga_class.course.course_type == TRAINING_COURSE:
             print(list(yoga_class.lessons.filter().values_list('id', flat=True).distinct()))
             payment_period_choices = [(0, _('Pay all'))]
-            for p in yoga_class.payment_periods.all():
-                payment_period_choices.append((p.id, p.name),)
+            if yoga_class.payment_periods.all().count() > 0:
+                first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
+                payment_period_choices.append((first_payment_period.id, first_payment_period.name),)
             form = CardFormForTraineeEnroll(initial={'card_type_list': card_type_list, 'payment_period_choices': payment_period_choices})
             form.fields['payment_period'].initial = 0
             form.fields['lesson_list'].initial = str(list(yoga_class.lessons.filter().values_list('id', flat=True).distinct()))
@@ -192,8 +193,9 @@ class YogaClassEnrollView(View):
         }
         if yoga_class.course.course_type == TRAINING_COURSE:
             payment_period_choices = [(0, _('Pay all'))]
-            for p in yoga_class.payment_periods.all():
-                payment_period_choices.append((p.id, p.name),)
+            if yoga_class.payment_periods.all().count() > 0:
+                first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
+                payment_period_choices.append((first_payment_period.id, first_payment_period.name),)
             form = CardFormForTraineeEnroll(
                 request.POST, initial={'card_type_list': card_type_list, 'payment_period_choices': payment_period_choices})
         else:
@@ -341,8 +343,9 @@ class YogaClassEnrollPaymentView(View):
             #     request.session['enroll_card_form'])
             if yoga_class.course.course_type == TRAINING_COURSE:
                 payment_period_choices = [(0, _('Pay all'))]
-                for p in yoga_class.payment_periods.all():
-                    payment_period_choices.append((p.id, p.name),)
+                if yoga_class.payment_periods.all().count() > 0:
+                    first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
+                    payment_period_choices.append((first_payment_period.id, first_payment_period.name),)
                 enroll_form = CardFormForTraineeEnroll(
                     request.session['enroll_card_form'], initial={'payment_period_choices': payment_period_choices})
             else:
@@ -498,8 +501,9 @@ class YogaClassMoMoPaymentResultView(View):
                     #
                     if yoga_class.course.course_type == TRAINING_COURSE:
                         payment_period_choices = [(0, _('Pay all'))]
-                        for p in yoga_class.payment_periods.all():
-                            payment_period_choices.append((p.id, p.name),)
+                        if yoga_class.payment_periods.all().count() > 0:
+                            first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
+                            payment_period_choices.append((first_payment_period.id, first_payment_period.name),)
                         enroll_form = CardFormForTraineeEnroll(
                             request.session['enroll_card_form'], initial={'payment_period_choices': payment_period_choices})
                     else:
