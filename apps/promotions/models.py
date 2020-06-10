@@ -65,10 +65,10 @@ class PromotionType(models.Model):
     def full_title(self):
         if self.category == CASH_PROMOTION:
             return 'Khuyến mãi giảm ' + str(sexify.sexy_number(self.value)) + 'đ'
-        elif self.category == PLUS_LESSON_PRACTICE_PROMOTION:
-            return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + ' buổi tập'
+        elif self.category == FREE_SOME_LESSON_PROMOTION:
+            return 'Khuyến mãi tặng tiền miễn phí ' + str(sexify.sexy_number(self.value)) + ' buổi tập'
         elif self.category == PLUS_MONTH_PRACTICE_PROMOTION:
-            return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + ' tháng tập'
+            return 'Khuyến mãi tặng thêm ' + str(sexify.sexy_number(self.value)) + ' tháng tập'
         elif self.category == GIFT_PROMOTION:
             return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + ' ' + self.product.__str__()
         else:

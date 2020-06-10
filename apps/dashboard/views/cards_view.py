@@ -322,14 +322,11 @@ class CardNewPreviewView(View):
 
     @transaction.atomic
     def create_card(self, yoga_class, form, trainee, promotion=None, promotion_type=None):
-        # TODO: Re check start_at and end_at
-        start = form.cleaned_data['start_at']
-        end = form.cleaned_data['end_at']
+        # TODO: Start_at and end_at: only having in FULL MONTH
         if promotion is not None and promotion_type is not None:
-            if promotion_type.category == FREE_SOME_LESSON_PROMOTION:
-                lesson_count = int(promotion_type.value)
-                end = end + timedelta(days=lesson_count)
-            elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
+            if promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
+                start = form.cleaned_data['start_at']
+                end = form.cleaned_data['end_at']
                 month_count = int(promotion_type.value)
                 end = end + relativedelta(months=month_count)
         # lesson_list = yoga_class.lessons.filter(date__range=[start, end])

@@ -121,6 +121,10 @@ class YogaClassEnrollView(View):
     template_name = 'classes/enroll.html'
 
     def get(self, request, slug):
+        if request.session.get('promotion_code'):
+            del request.session['promotion_code']
+        if request.session.get('promotion_type'):
+            del request.session['promotion_type']
         yoga_class = YogaClass.objects.get(slug=slug)
         context = {
             'yoga_class': yoga_class,
@@ -152,18 +156,24 @@ class YogaClassEnrollView(View):
         card_type_list = yoga_class.course.card_types.all()
 
         if yoga_class.course.course_type == TRAINING_COURSE:
-            print(list(yoga_class.lessons.filter().values_list('id', flat=True).distinct()))
+            print(list(yoga_class.lessons.filter().values_list(
+                'id', flat=True).distinct()))
             payment_period_choices = [(0, _('Pay all'))]
             if yoga_class.payment_periods.all().count() > 0:
                 first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
-                payment_period_choices.append((first_payment_period.id, first_payment_period.name),)
-            form = CardFormForTraineeEnroll(initial={'card_type_list': card_type_list, 'payment_period_choices': payment_period_choices})
+                payment_period_choices.append(
+                    (first_payment_period.id, first_payment_period.name),)
+            form = CardFormForTraineeEnroll(initial={
+                                            'card_type_list': card_type_list, 'payment_period_choices': payment_period_choices})
             form.fields['payment_period'].initial = 0
-            form.fields['lesson_list'].initial = str(list(yoga_class.lessons.filter().values_list('id', flat=True).distinct()))
+            form.fields['lesson_list'].initial = str(
+                list(yoga_class.lessons.filter().values_list('id', flat=True).distinct()))
             form.fields['card_type'].initial = yoga_class.course.card_types.first()
-            context['form_of_using'] = yoga_class.course.card_types.first().form_of_using
+            context['form_of_using'] = yoga_class.course.card_types.first(
+            ).form_of_using
         else:
-            form = CardFormForTraineeEnroll(initial={'card_type_list': card_type_list})
+            form = CardFormForTraineeEnroll(
+                initial={'card_type_list': card_type_list})
 
         if request.GET.get('card-type'):
             check_card_type_arr = yoga_class.course.card_types.filter(
@@ -195,7 +205,8 @@ class YogaClassEnrollView(View):
             payment_period_choices = [(0, _('Pay all'))]
             if yoga_class.payment_periods.all().count() > 0:
                 first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
-                payment_period_choices.append((first_payment_period.id, first_payment_period.name),)
+                payment_period_choices.append(
+                    (first_payment_period.id, first_payment_period.name),)
             form = CardFormForTraineeEnroll(
                 request.POST, initial={'card_type_list': card_type_list, 'payment_period_choices': payment_period_choices})
         else:
@@ -219,10 +230,12 @@ class YogaClassEnrollView(View):
             form.fields['card_type'].initial = yoga_class.course.card_types.first()
             form.fields['lesson_list'].initial = str(
                 list(yoga_class.lessons.filter().values_list('id', flat=True)))
-            context['form_of_using'] = yoga_class.course.card_types.first().form_of_using
+            context['form_of_using'] = yoga_class.course.card_types.first(
+            ).form_of_using
             form.fields['payment_period'].initial = 0
         else:
-            ctype = yoga_class.course.card_types.filter(pk=request.POST['card_type']).first()
+            ctype = yoga_class.course.card_types.filter(
+                pk=request.POST['card_type']).first()
             form.fields['card_type'].initial = ctype
             context['form_of_using'] = ctype.form_of_using
         context['form'] = form
@@ -274,17 +287,32 @@ class YogaClassEnrollPaymentView(View):
                 if int(enroll_card_form['payment_period']) == 0:
                     total_price = get_price(yoga_class, card_type)
                 else:
-                    payment_period = yoga_class.payment_periods.all().get(pk=int(enroll_card_form['payment_period']))
+                    payment_period = yoga_class.payment_periods.all().get(
+                        pk=int(enroll_card_form['payment_period']))
                     total_price = payment_period.amount
                 context['total_price'] = total_price
                 context['payment_period'] = payment_period
+            elif card_type.form_of_using == FOR_FULL_MONTH:
+                temp_cleaned_data = CardFormForTraineeEnroll(
+                    enroll_card_form).cleaned_data
+                start_month = temp_cleaned_data['start_at']
+                end_month = start_month + relativedelta(months=1)
+                number_of_lesson_in_month = yoga_class.lessons.filter(
+                    date__range=[start_month, end_month], is_full=False).order_by('date').count()
+                price = round(yoga_class.get_price_per_month() /
+                              number_of_lesson_in_month / 1000) * 1000
+                if lesson_list.count() == number_of_lesson_in_month:
+                    total_price = yoga_class.get_price_per_month()
+                else:
+                    total_price = price * lesson_list.count()
+                context['price'] = price
+                context['total_price'] = total_price
             else:
                 price = get_price(yoga_class, card_type)
                 total_price = get_total_price(
                     yoga_class, card_type, lesson_list.count())
                 context['price'] = price
                 context['total_price'] = total_price
-
             # PROMOTION
             promotion_type = None
             promotion_code = None
@@ -307,9 +335,9 @@ class YogaClassEnrollPaymentView(View):
                     promotion_val = '-' + \
                         sexify.sexy_number(value*amount) + 'đ'
                 elif promotion_type.category == FREE_SOME_LESSON_PROMOTION:
-                    promotion_lessons = yoga_class.lessons.filter(
-                        date__gt=lesson_list.last().date, is_full=False).order_by('date')[:value]
-                    context['promotion_lessons'] = promotion_lessons
+                    amount -= value*price
+                    promotion_val = '-' + \
+                        sexify.sexy_number(value*price) + 'đ'
                 elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
                     s = lesson_list.last().date
                     promotion_lessons = yoga_class.lessons.filter(
@@ -340,7 +368,8 @@ class YogaClassEnrollPaymentView(View):
                 payment_period_choices = [(0, _('Pay all'))]
                 if yoga_class.payment_periods.all().count() > 0:
                     first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
-                    payment_period_choices.append((first_payment_period.id, first_payment_period.name),)
+                    payment_period_choices.append(
+                        (first_payment_period.id, first_payment_period.name),)
                 enroll_form = CardFormForTraineeEnroll(
                     request.session['enroll_card_form'], initial={'payment_period_choices': payment_period_choices})
             else:
@@ -442,6 +471,16 @@ class UsePromotionCodeView(View):
 
 
 @method_decorator([login_required], name='dispatch')
+class RemovePromotionCodeView(View):
+    def post(self, request, slug):
+        if request.session.get('promotion_code'):
+            del request.session['promotion_code']
+        if request.session.get('promotion_type'):
+            del request.session['promotion_type']
+        return redirect('classes:enroll-payment', slug=slug)
+
+
+@method_decorator([login_required], name='dispatch')
 class YogaClassPaymentResultView(View):
     template_name = 'payment_result.html'
 
@@ -498,7 +537,8 @@ class YogaClassMoMoPaymentResultView(View):
                         payment_period_choices = [(0, _('Pay all'))]
                         if yoga_class.payment_periods.all().count() > 0:
                             first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
-                            payment_period_choices.append((first_payment_period.id, first_payment_period.name),)
+                            payment_period_choices.append(
+                                (first_payment_period.id, first_payment_period.name),)
                         enroll_form = CardFormForTraineeEnroll(
                             request.session['enroll_card_form'], initial={'payment_period_choices': payment_period_choices})
                     else:
@@ -552,12 +592,13 @@ def processCard(yoga_class, enroll_form, request, amount, description, payment_t
     # CREATE CARD INVOICE
     card_invoice = CardInvoiceService(
         card, payment_type, description, amount, charge_id).call()
-    
+
     # NOTE: ADD PAYMENT PERIOD IF HAVING
     if yoga_class.course.course_type == TRAINING_COURSE:
         if enroll_form.cleaned_data.get('payment_period') is not None:
             if int(enroll_form.cleaned_data.get('payment_period')) != 0:
-                payment_period = yoga_class.payment_periods.all().get(pk=enroll_form.cleaned_data.get('payment_period'))
+                payment_period = yoga_class.payment_periods.all().get(
+                    pk=enroll_form.cleaned_data.get('payment_period'))
                 card_invoice.payment_period = payment_period
                 card_invoice.save()
 
@@ -581,20 +622,17 @@ def processCard(yoga_class, enroll_form, request, amount, description, payment_t
 
 @transaction.atomic
 def create_card(yoga_class, enroll_form, trainee, promotion=None, promotion_type=None):
-    start = enroll_form.cleaned_data['start_at']
-    end = enroll_form.cleaned_data['end_at']
     # TODO: CHECK condition before use Promotion
-    if promotion is not None and promotion_type is not None:
-        if promotion_type.category == FREE_SOME_LESSON_PROMOTION:
-            lesson_count = int(promotion_type.value)
-            end = end + timedelta(days=lesson_count)
-        elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
-            month_count = int(promotion_type.value)
-            end = end + relativedelta(months=month_count)
-    id_arr = eval(enroll_form.cleaned_data['lesson_list'])
-    lesson_list = yoga_class.lessons.filter(
-        is_full=False, pk__in=id_arr).order_by('date')
-    # lesson_list = yoga_class.lessons.filter(date__range=[start, end])
+    if promotion is not None and promotion_type is not None and promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
+        start = enroll_form.cleaned_data['start_at']
+        end = enroll_form.cleaned_data['end_at']
+        month_count = int(promotion_type.value)
+        end = end + relativedelta(months=month_count)
+        lesson_list = yoga_class.lessons.filter(date__range=[start, end])
+    else:
+        id_arr = eval(enroll_form.cleaned_data['lesson_list'])
+        lesson_list = yoga_class.lessons.filter(
+            is_full=False, pk__in=id_arr).order_by('date')
     card = enroll_form.save(commit=False)
     card.trainee = trainee
     card.yogaclass = yoga_class
