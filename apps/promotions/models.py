@@ -36,7 +36,7 @@ class Promotion(models.Model):
 
 CASH_PROMOTION = 0
 PERCENT_PROMOTION = 1
-PLUS_LESSON_PRACTICE_PROMOTION = 2
+FREE_SOME_LESSON_PROMOTION = 2
 PLUS_MONTH_PRACTICE_PROMOTION = 3
 GIFT_PROMOTION = 4
 
@@ -44,7 +44,7 @@ GIFT_PROMOTION = 4
 CATEGORY_CHOICES = (
     (CASH_PROMOTION, _('Cash promotion')),
     (PERCENT_PROMOTION, _('Percent promotion')),
-    (PLUS_LESSON_PRACTICE_PROMOTION, _('Plus lesson practice promotion')),
+    (FREE_SOME_LESSON_PROMOTION, _('Free some lesson promotion')),
     (PLUS_MONTH_PRACTICE_PROMOTION, _('Plus month practice promotion')),
     (GIFT_PROMOTION, _('Gift promotion')),
 )

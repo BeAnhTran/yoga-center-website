@@ -20,7 +20,7 @@ from apps.card_types.models import CardType, FOR_FULL_MONTH, FOR_SOME_LESSONS, F
 from apps.lessons.models import Lesson
 from apps.common.templatetags import sexify
 from apps.classes.utils import get_price, get_total_price, get_total_price_display
-from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION, PLUS_LESSON_PRACTICE_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
+from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION, FREE_SOME_LESSON_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
 from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
 from apps.accounts.models import Trainee
@@ -236,7 +236,7 @@ class CardNewPreviewView(View):
                     amount -= value*amount/100
                     promotion_val = '-' + \
                         sexify.sexy_number(value*amount) + 'đ'
-                elif promotion_type.category == PLUS_LESSON_PRACTICE_PROMOTION:
+                elif promotion_type.category == FREE_SOME_LESSON_PROMOTION:
                     promotion_lessons = yoga_class.lessons.filter(
                         date__gt=lesson_list.last().date, is_full=False).order_by('date')[:value]
                     context['promotion_lessons'] = promotion_lessons
@@ -326,7 +326,7 @@ class CardNewPreviewView(View):
         start = form.cleaned_data['start_at']
         end = form.cleaned_data['end_at']
         if promotion is not None and promotion_type is not None:
-            if promotion_type.category == PLUS_LESSON_PRACTICE_PROMOTION:
+            if promotion_type.category == FREE_SOME_LESSON_PROMOTION:
                 lesson_count = int(promotion_type.value)
                 end = end + timedelta(days=lesson_count)
             elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
