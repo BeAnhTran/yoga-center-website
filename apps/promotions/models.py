@@ -35,20 +35,18 @@ class Promotion(models.Model):
 
 
 CASH_PROMOTION = 0
-PLUS_LESSON_PRACTICE_PROMOTION = 1
-PLUS_WEEK_PRACTICE_PROMOTION = 2
+PERCENT_PROMOTION = 1
+PLUS_LESSON_PRACTICE_PROMOTION = 2
 PLUS_MONTH_PRACTICE_PROMOTION = 3
 GIFT_PROMOTION = 4
-PERCENT_PROMOTION = 5
 
 
 CATEGORY_CHOICES = (
     (CASH_PROMOTION, _('Cash promotion')),
+    (PERCENT_PROMOTION, _('Percent promotion')),
     (PLUS_LESSON_PRACTICE_PROMOTION, _('Plus lesson practice promotion')),
-    (PLUS_WEEK_PRACTICE_PROMOTION, _('Plus week practice promotion')),
     (PLUS_MONTH_PRACTICE_PROMOTION, _('Plus month practice promotion')),
     (GIFT_PROMOTION, _('Gift promotion')),
-    (PERCENT_PROMOTION, _('Percent promotion')),
 )
 
 
@@ -69,8 +67,6 @@ class PromotionType(models.Model):
             return 'Khuyến mãi giảm ' + str(sexify.sexy_number(self.value)) + 'đ'
         elif self.category == PLUS_LESSON_PRACTICE_PROMOTION:
             return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + ' buổi tập'
-        elif self.category == PLUS_WEEK_PRACTICE_PROMOTION:
-            return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + ' tuần tập'
         elif self.category == PLUS_MONTH_PRACTICE_PROMOTION:
             return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + ' tháng tập'
         elif self.category == GIFT_PROMOTION:

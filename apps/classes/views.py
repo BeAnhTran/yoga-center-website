@@ -46,7 +46,7 @@ from django.contrib import messages
 from apps.classes.forms import FilterForm
 from django.db.models import Value as V
 from django.db.models.functions import Concat
-from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION, PLUS_LESSON_PRACTICE_PROMOTION, PLUS_WEEK_PRACTICE_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
+from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION, PLUS_LESSON_PRACTICE_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
 from apps.roll_calls.models import RollCall
 from apps.card_invoices.models import POSTPAID, PREPAID
 from apps.cards.models import Card
@@ -309,11 +309,6 @@ class YogaClassEnrollPaymentView(View):
                 elif promotion_type.category == PLUS_LESSON_PRACTICE_PROMOTION:
                     promotion_lessons = yoga_class.lessons.filter(
                         date__gt=lesson_list.last().date, is_full=False).order_by('date')[:value]
-                    context['promotion_lessons'] = promotion_lessons
-                elif promotion_type.category == PLUS_WEEK_PRACTICE_PROMOTION:
-                    s = lesson_list.last().date
-                    promotion_lessons = yoga_class.lessons.filter(
-                        date__gt=s, date__lte=s + timedelta(days=7*value), is_full=False).order_by('date')
                     context['promotion_lessons'] = promotion_lessons
                 elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
                     s = lesson_list.last().date
@@ -593,9 +588,6 @@ def create_card(yoga_class, enroll_form, trainee, promotion=None, promotion_type
         if promotion_type.category == PLUS_LESSON_PRACTICE_PROMOTION:
             lesson_count = int(promotion_type.value)
             end = end + timedelta(days=lesson_count)
-        elif promotion_type.category == PLUS_WEEK_PRACTICE_PROMOTION:
-            week_count = int(promotion_type.value)
-            end = end + timedelta(days=7*week_count)
         elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
             month_count = int(promotion_type.value)
             end = end + relativedelta(months=month_count)

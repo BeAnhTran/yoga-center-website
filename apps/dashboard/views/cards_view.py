@@ -20,7 +20,7 @@ from apps.card_types.models import CardType, FOR_FULL_MONTH, FOR_SOME_LESSONS, F
 from apps.lessons.models import Lesson
 from apps.common.templatetags import sexify
 from apps.classes.utils import get_price, get_total_price, get_total_price_display
-from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION, PLUS_LESSON_PRACTICE_PROMOTION, PLUS_WEEK_PRACTICE_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
+from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION, PLUS_LESSON_PRACTICE_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
 from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
 from apps.accounts.models import Trainee
@@ -240,11 +240,6 @@ class CardNewPreviewView(View):
                     promotion_lessons = yoga_class.lessons.filter(
                         date__gt=lesson_list.last().date, is_full=False).order_by('date')[:value]
                     context['promotion_lessons'] = promotion_lessons
-                elif promotion_type.category == PLUS_WEEK_PRACTICE_PROMOTION:
-                    s = lesson_list.last().date
-                    promotion_lessons = yoga_class.lessons.filter(
-                        date__gt=s, date__lte=s + timedelta(days=7*value), is_full=False).order_by('date')
-                    context['promotion_lessons'] = promotion_lessons
                 elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
                     s = lesson_list.last().date
                     promotion_lessons = yoga_class.lessons.filter(
@@ -334,9 +329,6 @@ class CardNewPreviewView(View):
             if promotion_type.category == PLUS_LESSON_PRACTICE_PROMOTION:
                 lesson_count = int(promotion_type.value)
                 end = end + timedelta(days=lesson_count)
-            elif promotion_type.category == PLUS_WEEK_PRACTICE_PROMOTION:
-                week_count = int(promotion_type.value)
-                end = end + timedelta(days=7*week_count)
             elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
                 month_count = int(promotion_type.value)
                 end = end + relativedelta(months=month_count)
