@@ -495,8 +495,17 @@ class YogaClassMoMoPaymentResultView(View):
             if int(request.GET['errorCode']) == 0:
                 if request.session.get('enroll_card_form'):
                     description = _('Momo Payment')
-                    enroll_form = CardFormForTraineeEnroll(
-                        request.session['enroll_card_form'])
+                    #
+                    if yoga_class.course.course_type == TRAINING_COURSE:
+                        payment_period_choices = [(0, _('Pay all'))]
+                        for p in yoga_class.payment_periods.all():
+                            payment_period_choices.append((p.id, p.name),)
+                        enroll_form = CardFormForTraineeEnroll(
+                            request.session['enroll_card_form'], initial={'payment_period_choices': payment_period_choices})
+                    else:
+                        enroll_form = CardFormForTraineeEnroll(
+                            request.session['enroll_card_form'])
+                    #
                     if enroll_form.is_valid():
                         card = processCard(
                             yoga_class, enroll_form, request, request.GET['amount'], description, PREPAID, request.GET['transId'])
@@ -548,7 +557,7 @@ def processCard(yoga_class, enroll_form, request, amount, description, payment_t
     # NOTE: ADD PAYMENT PERIOD IF HAVING
     if yoga_class.course.course_type == TRAINING_COURSE:
         if enroll_form.cleaned_data.get('payment_period') is not None:
-            if enroll_form.cleaned_data.get('payment_period') != 0:
+            if int(enroll_form.cleaned_data.get('payment_period')) != 0:
                 payment_period = yoga_class.payment_periods.all().get(pk=enroll_form.cleaned_data.get('payment_period'))
                 card_invoice.payment_period = payment_period
                 card_invoice.save()

@@ -20,6 +20,7 @@ from django.conf import settings
 from django.utils.formats import date_format
 from apps.absence_applications.models import AbsenceApplication
 from apps.refunds.models import Refund, PENDING_STATE, APPROVED_STATE
+from apps.card_types.models import FOR_TRAINING_COURSE
 
 
 @method_decorator([login_required, trainee_required], name='dispatch')
@@ -44,7 +45,7 @@ class TraineeCardDetailView(View):
         context['card'] = card
         context['sidebar_profile'] = 'cards'
         context['number_of_expire_days_for_lessons'] = settings.NUMBER_OF_EXPIRE_DAYS_FOR_LESSON
-
+        context ['FOR_TRAINING_COURSE'] = FOR_TRAINING_COURSE
         charged_str = card.get_payment_status()
         card_str_qrcode = '''Tên: {fname}\nEmail: {femail}\nMã số thẻ: {fcard_id}\nTên lớp: {fclass_name}\nLoại thẻ: {fcard_type}\nNgày bắt đầu: {fstart_at}\nNgày kết thúc: {fend_at}\nTrạng thái: {fis_charged}'''.format(
             fname=card.trainee.user.full_name(),
@@ -58,7 +59,22 @@ class TraineeCardDetailView(View):
                 card.end_at(), format='SHORT_DATE_FORMAT', use_l10n=True),
             fis_charged=charged_str
         )
-
+        if card.card_type.form_of_using == FOR_TRAINING_COURSE:
+            if card.yogaclass.payment_periods.all().count() > 0:
+                total_paid_amount = 0
+                paid_payment_periods = []
+                for invoice in card.invoices.all():
+                    total_paid_amount += invoice.amount
+                    if invoice.payment_period is not None:
+                        paid_payment_periods.append(invoice.payment_period.pk)
+                price_of_training_course = card.yogaclass.get_price_for_training_course()
+                if total_paid_amount < price_of_training_course:
+                    context['paid_entire'] = False
+                else:
+                    context['paid_entire'] = True
+                unpaid_payment_periods = card.yogaclass.payment_periods.exclude(
+                    pk__in=paid_payment_periods)
+                context['unpaid_payment_periods'] = unpaid_payment_periods
         context['card_str_qrcode'] = card_str_qrcode
         if request.GET.get('focus'):
             context['focus'] = request.GET.get('focus')

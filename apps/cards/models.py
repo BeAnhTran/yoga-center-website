@@ -65,7 +65,29 @@ class Card(models.Model):
         return False
 
     def get_payment_status(self):
-        for invoice in self.invoices.all():
-            if invoice.is_charged() is False:
-                return _('Unpaid')
-        return _('Paied')
+        if self.card_type.form_of_using == FOR_TRAINING_COURSE:
+            total_amount =  self.yogaclass.get_price_for_training_course()
+            if self.yogaclass.payment_periods.all().count() == 0:
+                for invoice in self.invoices.all():
+                    if invoice.is_charged() is False:
+                        return _('Unpaid')
+                return _('Paied')
+            else:
+                result = ''
+                for invoice in self.invoices.all():
+                    if invoice.is_charged() is True:
+                        if invoice.amount == total_amount:
+                            return _('Paied')
+                        else:
+                            result += '\n'
+                            result += _('Paied') + ': ' + \
+                                invoice.payment_period.name + '(' + str(sexify.sexy_number(invoice.payment_period.amount)) + 'đ)'
+                if result == '':
+                    return _('Unpaid')
+                else:
+                    return result
+        else:
+            for invoice in self.invoices.all():
+                if invoice.is_charged() is False:
+                    return _('Unpaid')
+            return _('Paied')

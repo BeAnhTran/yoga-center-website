@@ -277,6 +277,21 @@
                     </table>
                 </div>
             </div>
+            {% if card.card_type.form_of_using == FOR_TRAINING_COURSE and card.yogaclass.payment_periods.all.count > 0 %}
+            {% if paid_entire == False %}
+            <div class="panel-body">
+                <h5 style='font-family: "Playfair Display", serif;' class="text-danger mb-3">Danh sách chưa thanh toán</h5>
+                <ul class="list-group">
+                    {% for v in unpaid_payment_periods %}
+                    <li class="list-group-item d-flex justify-content-between list-group-item-danger align-items-center">
+                        {{ v.name }} : {{v.amount |sexy_number }}đ - Hạn chót: {{ v.end_at }}
+                        <a href="javascript:;"><span class="badge badge-danger badge-pill">{% trans 'Pay' %}</span></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% endif %}
         </div>
     </div>
 
