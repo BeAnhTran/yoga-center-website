@@ -27,6 +27,9 @@ class YogaClass(models.Model):
     start_at = models.DateField(
         blank=True, null=True, verbose_name=_('start at'))
     end_at = models.DateField(blank=True, null=True, verbose_name=_('end at'))
+    # NOTE: CALCULATE WAGES FOR TRAINER
+    wages_per_lesson = models.FloatField(
+        blank=True, null=True, verbose_name=_('wages per lesson'))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(

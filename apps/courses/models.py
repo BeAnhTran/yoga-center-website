@@ -46,6 +46,8 @@ class Course(models.Model):
         blank=True, null=True, verbose_name=_('price per month'))
     price_for_training_class = models.FloatField(
         blank=True, null=True, verbose_name=_('price for training class'))
+    # NOTE: CALCULATE WAGES FOR TRAINER
+    wages_per_lesson = models.FloatField(verbose_name=_('wages per lesson'))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(

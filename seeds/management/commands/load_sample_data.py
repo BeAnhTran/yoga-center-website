@@ -498,6 +498,7 @@ class Command(BaseCommand):
             'image': 'seeds/images/courses/yoga_co_ban.jpg',
             'price_per_lesson': 50000,
             'price_per_month': 600000,
+            'wages_per_lesson': 110000
         }
         basic_yoga_course = Course.objects.create(**basic_yoga_course_data)
 
@@ -518,6 +519,7 @@ class Command(BaseCommand):
             'image': 'seeds/images/courses/yoga-trung-cap.jpg',
             'price_per_lesson': 50000,
             'price_per_month': 600000,
+            'wages_per_lesson': 120000
         }
         intermediate_yoga_course = Course.objects.create(
             **intermediate_yoga_course_data)
@@ -537,6 +539,7 @@ class Command(BaseCommand):
             'image': 'seeds/images/courses/yoga_nang_cao.jpg',
             'price_per_lesson': 50000,
             'price_per_month': 600000,
+            'wages_per_lesson': 130000
         }
         advanced_yoga_course = Course.objects.create(
             **advanced_yoga_course_data)
@@ -555,6 +558,7 @@ class Command(BaseCommand):
             'image': 'seeds/images/courses/yoga_dance.png',
             'price_per_lesson': 50000,
             'price_per_month': 600000,
+            'wages_per_lesson': 120000
         }
         yoga_dance_course = Course(**yoga_dance_course_data)
         yoga_dance_course.save()
@@ -566,6 +570,7 @@ class Command(BaseCommand):
             'image': 'seeds/images/courses/yoga_bau.jpg',
             'price_per_lesson': 50000,
             'price_per_month': 600000,
+            'wages_per_lesson': 120000
         }
         prenatal_yoga_course = Course(**prenatal_yoga_course_data)
         prenatal_yoga_course.save()
@@ -577,6 +582,7 @@ class Command(BaseCommand):
             'course_type': TRAINING_COURSE,
             'image': 'seeds/images/courses/huan_luyen_vien_yoga.jpg',
             'price_for_training_class': 15000000,
+            'wages_per_lesson': 300000
         }
         training_yoga_trainer_course = Course(
             **training_yoga_trainer_course_data)
@@ -595,6 +601,7 @@ class Command(BaseCommand):
             'image': 'seeds/images/courses/yogakid.jpg',
             'price_per_lesson': 50000,
             'price_per_month': 600000,
+            'wages_per_lesson': 120000
         }
         yoga_kid_course = Course(
             **yoga_kid_course_data)
