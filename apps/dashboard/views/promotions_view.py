@@ -9,8 +9,9 @@ from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from apps.promotions.models import Promotion
+from apps.promotions.models import Promotion, GIFT_PROMOTION
 from apps.dashboard.forms import promotions_form
+from apps.shop.models import Product
 
 
 @method_decorator([login_required, staff_required], name='dispatch')
@@ -40,11 +41,8 @@ class PromotionNewView(View):
         if self.request.POST:
             context['promotion_types'] = promotions_form.PromotionTypeFormSet(
                 self.request.POST)
-            context['products'] = promotions_form.PromotionTypeProductFormSet(
-                self.request.POST)
         else:
             context['promotion_types'] = promotions_form.PromotionTypeFormSet()
-            context['products'] = promotions_form.PromotionTypeProductFormSet()
 
         return render(request, self.template_name, context=context)
 
@@ -58,7 +56,26 @@ class PromotionNewView(View):
                 if promotion_types.is_valid():
                     promotion_types.instance = obj
                     promotion_types.save()
-
+                    product_promotion_types = obj.promotion_types.filter(
+                        category=GIFT_PROMOTION)
+                    if product_promotion_types.count() > 0 and request.POST.get('index-gift-type') is not None:
+                        product_promotion_type = product_promotion_types.first()
+                        idx = request.POST.get('index-gift-type')
+                        c = request.POST.get(
+                            'promotion_types-' + idx + '-value')
+                        count = 0
+                        for x in range(int(c)):
+                            temp_product = 'promotion_types-' + \
+                                str(idx) + '-product-' + str(x)
+                            temp_quantity = 'promotion_types-' + \
+                                str(idx) + '-quantity-' + str(x)
+                            if int(request.POST[temp_product]) > 0:
+                                p = Product.objects.get(pk=int(request.POST[temp_product]))
+                                product_promotion_type.promotion_type_products.create(
+                                    product=p, quantity=request.POST[temp_quantity])
+                                count += 1
+                        product_promotion_type.value = count
+                        product_promotion_type.save()
                 return redirect('dashboard:promotions-list')
 
         context = {

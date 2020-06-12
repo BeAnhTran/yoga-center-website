@@ -21,8 +21,8 @@ class PromotionTypeInlineForm(forms.ModelForm):
         # self.fields['product'].required = False
         # self.fields['product'].widget.attrs.update({'class': 'select-product d-none'})
         # self.fields['product'].label = ''
-        # self.fields['category'].widget.attrs.update(
-        #     {'class': 'select-category'})
+        self.fields['category'].widget.attrs.update(
+            {'class': 'select-category'})
 
     class Meta:
         exclude = ['created_at', 'updated_at']

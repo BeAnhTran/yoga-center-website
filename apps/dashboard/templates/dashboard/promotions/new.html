@@ -21,28 +21,135 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="number_of_promotion_products_select" value="0">
+    <input type="hidden" id="selected_products" value="">
 </div>
 {% endblock %}
 
 {% block specified_js %}
 <script>
-    // $(document).on('change', '.select-category', function () {
-    //     console.log($(this).val());
-    //     var category_name = $(this).attr('name');
-    //     var product_name = category_name.replace('category', 'product');
-    //     var quantity_name = category_name.replace('category', 'quantity');
+    $(document).on('change', '.select-category', function () {
+        var category_name = $(this).attr('name');
+        var product_name = category_name.replace('category', 'product');
+        var quantity_name = category_name.replace('category', 'quantity');
+        var value_name = category_name.replace('category', 'value');
+        var promotion_type_products_name = category_name.replace('category', 'promotiontypeproducts');
+        if ($(this).val() == 4) {
+            var v = $('input[name=' + value_name + ']').parents('.form-group').addClass('d-none');
+            var parent_V = $('input[name=' + value_name + ']').parents('td');
+            $.ajax({
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                url: "{% url 'dashboard:shop-products-list-api' %}",
+                method: 'GET'
+            }).done((data) => {
+                var str = '';
+                str += `<input id="index_gift" name="index-gift-type" type="hidden" value="`+ category_name.match(/\d+/)[0] +`">`;
+                str += '<div class="xxx '+ promotion_type_products_name +'">';
+                str += `<div class="row promotion-product-` + $('input#number_of_promotion_products_select').val() + `">`;
+                str += `<div class="col-6">`;
+                str += `<label class="mr-sm-2">Sản phẩm:</label>`;
+                str += `<select name="` + product_name + `-` + $('input#number_of_promotion_products_select').val() + `" class="select form-control select-promotion-product"><option value="0" selected>Vui lòng chọn sản phẩm</option>`;
+                $.each(data, (i, v) => {
+                    str += `<option value="` + v['id'] + `">` + v['name'] + `</option>`;
+                });
+                str += `</select>`;
+                str += `</div>`;
+                str += `<div class="col-6">`;
+                str += `<label class="mr-sm-2">Số lượng:</label>`;
+                str += `<input name="` + quantity_name + `-` + $('input#number_of_promotion_products_select').val() + `" type="number" class="form-control mb-2 mr-sm-2" min="1" id="pwd" value="1">`;
+                str += `</div>`;
+                str += `</div>`;
+                str += `<div class="row div-add-promotion-product">`
+                str += `<div class="col">`
+                str += `<a class="text-success a-add-promotion-product" href="javascript:;">thêm sản phẩm</a>`
+                str += `</div>`;
+                str += `</div>`;
+                str += `</div>`;
+                parent_V.append(str);
+            }).fail((err) => console.log(err));
 
-    //     if ($(this).val() == 4) {
-    //         console.log("xxx");
-    //         var product_str_lable = `<label>{% trans 'product' as t_product %}{{ t_product|capfirst }}</label>`;
-    //         $('select[name=' + product_name + ']').parents('.form-group').prepend(product_str_lable);
-    //         $('select[name=' + product_name + ']').removeClass('d-none');
-    //         var quantity_str_lable = `<label>{% trans 'quantity' as t_quantity %}{{ t_quantity|capfirst }}</label>`;
-    //         $('input[name=' + quantity_name + ']').parents('.form-group').prepend(quantity_str_lable);
-    //         $('input[name=' + quantity_name + ']').removeClass('d-none');
-    //     } else {
-    //         console.log("Cccc");
-    //     }
-    // });
+        }
+    });
+    $(document).on('click', '.a-add-promotion-product', function () {
+        var current = $(this);
+        var xxx = $(this).parents('.xxx');
+        var td = $(this).parents('td');
+        var category_name = $(this).parents('td').siblings('td').find('.select-category').attr('name');
+        var product_name = category_name.replace('category', 'product');
+        var quantity_name = category_name.replace('category', 'quantity');
+        var value_name = category_name.replace('category', 'value');
+        var old_num = $('input#number_of_promotion_products_select').val();
+        var new_num = parseInt(old_num) + 1;
+        $('input#number_of_promotion_products_select').val(new_num);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: "{% url 'dashboard:shop-products-list-api' %}",
+            method: 'GET'
+        }).done(function (data) {
+            var str = '';
+            str += `<div class="row promotion-product-` + $('input#number_of_promotion_products_select').val() + `">`;
+            str += `<div class="col-6">`;
+            str += `<label class="mr-sm-2">Sản phẩm:</label>`;
+            str += `<select name="` + product_name + `-` + $('input#number_of_promotion_products_select').val() + `" class="select form-control select-promotion-product">
+            <option value="0" selected>Vui lòng chọn sản phẩm</option>`;
+            $.each(data, (i, v) => {
+                str += `<option value="` + v['id'] + `">` + v['name'] + `</option>`;
+            });
+            str += `</select>`;
+            str += `</div>`;
+            str += `<div class="col-6">`;
+            str += `<label class="mr-sm-2">Số lượng:</label>`;
+            str += `<input name="` + quantity_name + `-` + $('input#number_of_promotion_products_select').val() + `" type="number" class="form-control mb-2 mr-sm-2" min="1" id="pwd" value="1">`;
+            str += `</div>`;
+            str += `</div>`;
+            $('.div-add-promotion-product').remove();
+            xxx.append(str);
+            var add_str = '';
+            add_str += `<div class="row div-add-promotion-product">`
+            add_str += `<div class="col">`
+            add_str += `<a class="text-success a-add-promotion-product" href="javascript:;">thêm sản phẩm</a>`
+            add_str += `</div>`;
+            add_str += `</div>`;
+            xxx.append(add_str);
+        }).fail((err) => console.log(err));
+    });
+
+    $(document).on('change', '.select-promotion-product', function () {
+        var value = $(this).val();
+        var current = $(this);
+        if (parseInt(value) > 0){
+            var occurance = 0;
+            var selected =  $(".select-promotion-product > option:selected").map(function(){ return this.value }).get();
+            // console.log('occurance 1', occurance);
+            console.log('selected', selected);
+            // $(selected).each(function (index, value) {
+            //     if(value.indexOf(value)!= -1) 
+            //     {
+            //         occurance++;
+            //     }
+            // });
+            var numOccurences = $.grep(selected, function (elem) {
+                return elem === value;
+            }).length;
+            console.log('occurance', numOccurences);
+            if (numOccurences > 1){
+                Swal.fire(
+                    "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                    "{% trans 'This product has been added' %}",
+                    'error'
+                );
+                current.val(0);
+            }else{
+                var idx = $('#index_gift').val();
+                var s =  $(".select-promotion-product > option:selected").map(function(){ return this.value }).get();
+                $('#id_promotion_types-'+ idx +'-value').val(selected.length);
+            }
+        }
+    });
+    
 </script>
 {% endblock %}

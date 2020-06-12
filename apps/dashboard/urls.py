@@ -168,6 +168,8 @@ shop_urlpatterns = [
          name='shop-products-list'),
     path('products/new/', shop_view.ProductNewView.as_view(),
          name='shop-products-new'),
+    path('products-list-api/', shop_view.ProductListAPIView.as_view(),
+         name='shop-products-list-api'),
 
     # bills
     path('bills/', shop_view.BillListView.as_view(),

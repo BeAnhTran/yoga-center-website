@@ -13,6 +13,10 @@ from ..decorators import admin_required, staff_required
 from apps.shop.models import Product, ProductCategory, Bill
 from apps.dashboard.forms import product_categories_form, products_form
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from apps.shop.serializers.product_serializer import ProductSerializer
 
 #******************
 # PRODUCT CATEGORY
@@ -135,3 +139,11 @@ class BillListView(ListView):
         context['active_nav'] = 'bills'
         context['show_nav_shop'] = True
         return context
+
+
+@method_decorator([login_required, staff_required], name='dispatch')
+class ProductListAPIView(APIView):
+    def get(self, request):
+        products = Product.objects.all()
+        serialized = ProductSerializer(products, many=True)
+        return Response(serialized.data)
