@@ -56,8 +56,6 @@ class PromotionType(models.Model):
     category = models.IntegerField(
         choices=CATEGORY_CHOICES, verbose_name=_('category'))
     value = models.FloatField(verbose_name=_('value or quantity'))
-    product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, null=True, related_name='promotion_types', verbose_name=_('product'))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -74,6 +72,18 @@ class PromotionType(models.Model):
         else:
             return 'Khuyến mãi giảm ' + str(sexify.sexy_number(self.value)) + '%'
 
+# NOTE: PromotionTypeProduct: Product that is used for PromotionType with quantity
+
+
+class PromotionTypeProduct(models.Model):
+    promotion_type = models.ForeignKey(
+        PromotionType, on_delete=models.CASCADE, related_name='promotion_type_products')
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='promotion_type_products')
+    quantity = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 
 class PromotionCode(models.Model):
     promotion = models.ForeignKey(
@@ -81,9 +91,10 @@ class PromotionCode(models.Model):
     promotion_type = models.ForeignKey(
         PromotionType, on_delete=models.CASCADE, null=True, related_name='codes', verbose_name=_('promotion type'))
     value = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    products = models.ManyToManyField(Product, through='PromotionCodeProduct')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+# NOTE: Apply protion code for CardInvoice or (Product)Bill
 
 
 class ApplyPromotionCode(models.Model):
@@ -98,13 +109,3 @@ class ApplyPromotionCode(models.Model):
 
     class Meta:
         unique_together = ('content_type', 'object_id')
-
-
-class PromotionCodeProduct(models.Model):
-    promotion_code = models.ForeignKey(
-        PromotionCode, on_delete=models.CASCADE, related_name='promotion_code_products')
-    product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name='promotion_code_products')
-    quantity = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)

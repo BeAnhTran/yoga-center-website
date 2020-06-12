@@ -40,8 +40,11 @@ class PromotionNewView(View):
         if self.request.POST:
             context['promotion_types'] = promotions_form.PromotionTypeFormSet(
                 self.request.POST)
+            context['products'] = promotions_form.PromotionTypeProductFormSet(
+                self.request.POST)
         else:
             context['promotion_types'] = promotions_form.PromotionTypeFormSet()
+            context['products'] = promotions_form.PromotionTypeProductFormSet()
 
         return render(request, self.template_name, context=context)
 

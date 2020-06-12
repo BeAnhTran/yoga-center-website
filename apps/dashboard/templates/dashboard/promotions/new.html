@@ -26,19 +26,23 @@
 
 {% block specified_js %}
 <script>
-    $(document).on('change', '.select-category', function () {
-        console.log($(this).val());
-        var category_name = $(this).attr('name');
-        var product_name = category_name.replace('category', 'product');
+    // $(document).on('change', '.select-category', function () {
+    //     console.log($(this).val());
+    //     var category_name = $(this).attr('name');
+    //     var product_name = category_name.replace('category', 'product');
+    //     var quantity_name = category_name.replace('category', 'quantity');
 
-        if ($(this).val() == 4) {
-            console.log("xxx");
-            var str_lable = `<label>{% trans 'product' as t_product %}{{ t_product|capfirst }}</label>`;
-            $('select[name=' + product_name + ']').parents('.form-group').prepend(str_lable);
-            $('select[name=' + product_name + ']').removeClass('d-none');
-        } else {
-            console.log("Cccc");
-        }
-    });
+    //     if ($(this).val() == 4) {
+    //         console.log("xxx");
+    //         var product_str_lable = `<label>{% trans 'product' as t_product %}{{ t_product|capfirst }}</label>`;
+    //         $('select[name=' + product_name + ']').parents('.form-group').prepend(product_str_lable);
+    //         $('select[name=' + product_name + ']').removeClass('d-none');
+    //         var quantity_str_lable = `<label>{% trans 'quantity' as t_quantity %}{{ t_quantity|capfirst }}</label>`;
+    //         $('input[name=' + quantity_name + ']').parents('.form-group').prepend(quantity_str_lable);
+    //         $('input[name=' + quantity_name + ']').removeClass('d-none');
+    //     } else {
+    //         console.log("Cccc");
+    //     }
+    // });
 </script>
 {% endblock %}

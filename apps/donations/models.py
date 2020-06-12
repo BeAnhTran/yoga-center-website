@@ -1,11 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from apps.classes.models import YogaClass
-from apps.cards.models import Card
-from apps.promotions.models import ApplyPromotionCode
-from django.contrib.contenttypes.fields import GenericRelation
-
 
 class Donation(models.Model):
     name = models.CharField(max_length=255, verbose_name=_('name'))
