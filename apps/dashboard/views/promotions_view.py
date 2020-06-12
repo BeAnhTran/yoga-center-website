@@ -70,7 +70,8 @@ class PromotionNewView(View):
                             temp_quantity = 'promotion_types-' + \
                                 str(idx) + '-quantity-' + str(x)
                             if int(request.POST[temp_product]) > 0:
-                                p = Product.objects.get(pk=int(request.POST[temp_product]))
+                                p = Product.objects.get(
+                                    pk=int(request.POST[temp_product]))
                                 product_promotion_type.promotion_type_products.create(
                                     product=p, quantity=request.POST[temp_quantity])
                                 count += 1
@@ -94,37 +95,6 @@ class PromotionDetailView(DetailView):
         context = super(PromotionDetailView, self).get_context_data(**kwargs)
         context['active_nav'] = 'promotions'
         return context
-
-
-@method_decorator([login_required, admin_required], name='dispatch')
-class PromotionEditView(UpdateView):
-    model = Promotion
-    template_name = 'dashboard/promotions/edit.html'
-    form_class = promotions_form.PromotionEditForm
-
-    def get_success_url(self):
-            return reverse('dashboard:promotions-list', kwargs={})
-
-    def get_context_data(self, **kwargs):
-        context = super(PromotionEditView, self).get_context_data(**kwargs)
-        context['active_nav'] = 'promotions'
-        if self.request.POST:
-            context['promotion_types'] = promotions_form.PromotionTypeFormSet(
-                self.request.POST, instance=self.object)
-        else:
-            context['promotion_types'] = promotions_form.PromotionTypeFormSet(
-                instance=self.object)
-        return context
-
-    def form_valid(self, form):
-        context = self.get_context_data()
-        promotion_types = context['promotion_types']
-        with transaction.atomic():
-            self.object = form.save()
-            if promotion_types.is_valid():
-                promotion_types.instance = self.object
-                promotion_types.save()
-        return super(PromotionEditView, self).form_valid(form)
 
 
 @method_decorator([login_required, admin_required], name='dispatch')

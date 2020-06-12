@@ -48,9 +48,6 @@
                                 href="{% url 'dashboard:promotions-codes-list' promotion.pk %}">
                                 <i class="fas fa-fw fa-barcode"></i> Mã khuyến mãi
                             </a>
-                            <a class="btn btn-sm btn-outline-warning"
-                                href="{% url 'dashboard:promotions-edit' promotion.pk %}"><i
-                                    class="fas fa-fw fa-edit"></i> {% trans 'edit' as t_edit %}{{ t_edit|capfirst }}</a>
                             <a class="btn btn-sm btn-outline-danger delete-promotion" href="javascript:;"><i
                                     class="fas fa-fw fa-trash"></i>
                                 {% trans 'delete' as t_delete %}{{ t_delete|capfirst }}</a>
