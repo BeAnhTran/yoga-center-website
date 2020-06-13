@@ -51,7 +51,7 @@ class TraineeSignUpView(SignupView):
             _('Signup successfully'))
         if self.request.GET.get('next') is not None:
             return redirect(reverse('account_login') + '?next=' + self.request.GET.get('next'))
-        return redirect(reverse('account_login') + '?next=' + self.request.GET.get('next'))
+        return redirect(reverse('account_login'))
 
 
 class TrainerSignUpView(CreateView):
