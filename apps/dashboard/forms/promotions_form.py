@@ -46,22 +46,24 @@ class PromotionForm(forms.ModelForm):
         ),
         self.fields['start_at'] = forms.DateField(
             label=_('start time').capitalize(),
-            widget=DatePicker(
-                options={
-                    'useCurrent': False,
-                }, attrs={
-                    'placeholder': formats.date_format(datetime.datetime.now(), use_l10n=True)
-                }),
+            widget=forms.TextInput(
+                attrs={
+                    'placeholder': _('Please enter the value'),
+                    'class': 'form-control',
+                    'autoComplete': "off"
+                },
+            ),
             required=False,
         )
         self.fields['end_at'] = forms.DateField(
             label=_('end time').capitalize(),
-            widget=DatePicker(
-                options={
-                    'useCurrent': False,
-                }, attrs={
-                    'placeholder': formats.date_format(datetime.datetime.now(), use_l10n=True)
-                }),
+            widget=forms.TextInput(
+                attrs={
+                    'placeholder': _('Please enter the value'),
+                    'class': 'form-control',
+                    'autoComplete': "off"
+                },
+            ),
             required=False,
         )
 
@@ -74,8 +76,8 @@ class PromotionForm(forms.ModelForm):
             'description',
             'content',
             Row(
-                Column('start_at', css_class='form-group col-md-6 mb-0'),
-                Column('end_at', css_class='form-group col-md-6 mb-0'),
+                Column('start_at', css_class='form-group col-md-4 mb-0'),
+                Column('end_at', css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
             Fieldset(_('Promotion type'), Formset('promotion_types')),

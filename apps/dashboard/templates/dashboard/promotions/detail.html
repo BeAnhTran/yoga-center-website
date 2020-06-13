@@ -21,11 +21,11 @@
                     </tr>
                     <tr>
                         <td>Thời gian bắt đầu</td>
-                        <td>{{ object.start_at }}</td>
+                        <td>{{ object.start_at.date }}</td>
                     </tr>
                     <tr>
                         <td>Thời gian kết thúc</td>
-                        <td>{{ object.end_at }}</td>
+                        <td>{{ object.end_at.date }}</td>
                     </tr>
                     <tr>
                         <td>Mô tả</td>
@@ -36,15 +36,15 @@
                         <td>
                             <ul class="list-group">
                                 {% for p in object.promotion_types.all %}
-                                    <li class="list-group-item list-group-item-info">
-                                        {{ p.get_category_display }}: {{ p.value | sexy_number }} {{ p.product|default_if_none:"" }}
+                                    <li class="list-group-item list-group-item-light">
+                                        <a class="text-danger" href="javascript:;">{{ p.full_title }}</a>
                                     </li>
                                 {% endfor %}
                             </ul>
                         </td>
                     </tr>
                     <tr>
-                        <td>Ngày tạo</td>
+                        <td>{% trans 'created at' as t_created_at %}{{t_created_at|capfirst}}</td>
                         <td>{{ object.created_at.date }}</td>
                     </tr>
                 </tbody>

@@ -37,8 +37,8 @@
                     <tr>
                         <td>{{ promotion.pk }}</td>
                         <td>{{ promotion.name }}</td>
-                        <td>{{ promotion.start_at }}</td>
-                        <td>{{ promotion.end_at }}</td>
+                        <td>{{ promotion.start_at.date }}</td>
+                        <td>{{ promotion.end_at.date }}</td>
                         <td>
                             <a class="btn btn-sm btn-outline-primary"
                                 href="{% url 'dashboard:promotions-detail' promotion.pk %}"><i

@@ -3,6 +3,11 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% block specified_css %}
+<!-- DatetimePicker -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--end DatetimePicker -->
 <link href="{% static 'css/dashboard/courses/style.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
@@ -29,48 +34,66 @@
 {% block specified_js %}
 <script>
     $(document).on('change', '.select-category', function () {
-        var category_name = $(this).attr('name');
-        var product_name = category_name.replace('category', 'product');
-        var quantity_name = category_name.replace('category', 'quantity');
-        var value_name = category_name.replace('category', 'value');
-        var promotion_type_products_name = category_name.replace('category', 'promotiontypeproducts');
-        if ($(this).val() == 4) {
-            var v = $('input[name=' + value_name + ']').parents('.form-group').addClass('d-none');
-            var parent_V = $('input[name=' + value_name + ']').parents('td');
-            $.ajax({
-                headers: {
-                    'X-CSRFTOKEN': '{{ csrf_token }}'
-                },
-                url: "{% url 'dashboard:shop-products-list-api' %}",
-                method: 'GET'
-            }).done((data) => {
-                var str = '';
-                str += `<input id="index_gift" name="index-gift-type" type="hidden" value="`+ category_name.match(/\d+/)[0] +`">`;
-                str += '<div class="xxx '+ promotion_type_products_name +'">';
-                str += `<div class="row promotion-product-` + $('input#number_of_promotion_products_select').val() + `">`;
-                str += `<div class="col-6">`;
-                str += `<label class="mr-sm-2">Sản phẩm:</label>`;
-                str += `<select name="` + product_name + `-` + $('input#number_of_promotion_products_select').val() + `" class="select form-control select-promotion-product"><option value="0" selected>Vui lòng chọn sản phẩm</option>`;
-                $.each(data, (i, v) => {
-                    str += `<option value="` + v['id'] + `">` + v['name'] + `</option>`;
-                });
-                str += `</select>`;
-                str += `</div>`;
-                str += `<div class="col-6">`;
-                str += `<label class="mr-sm-2">Số lượng:</label>`;
-                str += `<input name="` + quantity_name + `-` + $('input#number_of_promotion_products_select').val() + `" type="number" class="form-control mb-2 mr-sm-2" min="1" id="pwd" value="1">`;
-                str += `</div>`;
-                str += `</div>`;
-                str += `<div class="row div-add-promotion-product">`
-                str += `<div class="col">`
-                str += `<a class="text-success a-add-promotion-product" href="javascript:;">thêm sản phẩm</a>`
-                str += `</div>`;
-                str += `</div>`;
-                str += `</div>`;
-                parent_V.append(str);
-            }).fail((err) => console.log(err));
-
+        var value = $(this).val();
+        var current = $(this);
+        if (value != '') {
+            var occurance = 0;
+            var selected = $(".select-category > option:selected").map(function () { return this.value }).get();
+            var numOccurences = $.grep(selected, function (elem) {
+                return elem === value;
+            }).length;
+            if (numOccurences > 1) {
+                Swal.fire(
+                    "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
+                    "{% trans 'This category has been added' %}",
+                    'error'
+                );
+                current.val('');
+            } else {
+                if ($(this).val() == 4) {
+                    var category_name = $(this).attr('name');
+                    var product_name = category_name.replace('category', 'product');
+                    var quantity_name = category_name.replace('category', 'quantity');
+                    var value_name = category_name.replace('category', 'value');
+                    var promotion_type_products_name = category_name.replace('category', 'promotiontypeproducts');
+                    var v = $('input[name=' + value_name + ']').parents('.form-group').addClass('d-none');
+                    var parent_V = $('input[name=' + value_name + ']').parents('td');
+                    $.ajax({
+                        headers: {
+                            'X-CSRFTOKEN': '{{ csrf_token }}'
+                        },
+                        url: "{% url 'dashboard:shop-products-list-api' %}",
+                        method: 'GET'
+                    }).done((data) => {
+                        var str = '';
+                        str += `<input id="index_gift" name="index-gift-type" type="hidden" value="` + category_name.match(/\d+/)[0] + `">`;
+                        str += '<div class="xxx ' + promotion_type_products_name + '">';
+                        str += `<div class="row promotion-product-` + $('input#number_of_promotion_products_select').val() + `">`;
+                        str += `<div class="col-6">`;
+                        str += `<label class="mr-sm-2">Sản phẩm:</label>`;
+                        str += `<select name="` + product_name + `-` + $('input#number_of_promotion_products_select').val() + `" class="select form-control select-promotion-product"><option value="0" selected>Vui lòng chọn sản phẩm</option>`;
+                        $.each(data, (i, v) => {
+                            str += `<option value="` + v['id'] + `">` + v['name'] + `</option>`;
+                        });
+                        str += `</select>`;
+                        str += `</div>`;
+                        str += `<div class="col-6">`;
+                        str += `<label class="mr-sm-2">Số lượng:</label>`;
+                        str += `<input name="` + quantity_name + `-` + $('input#number_of_promotion_products_select').val() + `" type="number" class="form-control mb-2 mr-sm-2" min="1" id="pwd" value="1">`;
+                        str += `</div>`;
+                        str += `</div>`;
+                        str += `<div class="row div-add-promotion-product">`
+                        str += `<div class="col">`
+                        str += `<a class="text-success a-add-promotion-product" href="javascript:;">thêm sản phẩm</a>`
+                        str += `</div>`;
+                        str += `</div>`;
+                        str += `</div>`;
+                        parent_V.append(str);
+                    }).fail((err) => console.log(err));
+                }
+            }
         }
+
     });
     $(document).on('click', '.a-add-promotion-product', function () {
         var current = $(this);
@@ -121,35 +144,53 @@
     $(document).on('change', '.select-promotion-product', function () {
         var value = $(this).val();
         var current = $(this);
-        if (parseInt(value) > 0){
+        if (parseInt(value) > 0) {
             var occurance = 0;
-            var selected =  $(".select-promotion-product > option:selected").map(function(){ return this.value }).get();
-            // console.log('occurance 1', occurance);
-            console.log('selected', selected);
-            // $(selected).each(function (index, value) {
-            //     if(value.indexOf(value)!= -1) 
-            //     {
-            //         occurance++;
-            //     }
-            // });
+            var selected = $(".select-promotion-product > option:selected").map(function () { return this.value }).get();
             var numOccurences = $.grep(selected, function (elem) {
                 return elem === value;
             }).length;
-            console.log('occurance', numOccurences);
-            if (numOccurences > 1){
+            if (numOccurences > 1) {
                 Swal.fire(
                     "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
                     "{% trans 'This product has been added' %}",
                     'error'
                 );
                 current.val(0);
-            }else{
+            } else {
                 var idx = $('#index_gift').val();
-                var s =  $(".select-promotion-product > option:selected").map(function(){ return this.value }).get();
-                $('#id_promotion_types-'+ idx +'-value').val(selected.length);
+                var s = $(".select-promotion-product > option:selected").map(function () { return this.value }).get();
+                $('#id_promotion_types-' + idx + '-value').val(selected.length);
             }
         }
     });
-    
+    $('#id_start_at').datepicker({
+        prevText: "Trước",
+        nextText: "Sau",
+        currentText: "Hôm nay",
+        monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+        monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+        dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+        dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+        dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+        weekHeader: "Tuần",
+        dateFormat: "dd/mm/yy",
+        firstDay: 1,
+        showMonthAfterYear: false,
+    });
+    $('#id_end_at').datepicker({
+        prevText: "Trước",
+        nextText: "Sau",
+        currentText: "Hôm nay",
+        monthNames: ["Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu", "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"],
+        monthNamesShort: ["Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một", "Mười hai"],
+        dayNames: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
+        dayNamesShort: ["CN", "Hai", "Ba", "Tư", "Năm", "Sáu", "Bảy"],
+        dayNamesMin: ["CN", "T2", "T3", "T4", "T5", "T6", "T7"],
+        weekHeader: "Tuần",
+        dateFormat: "dd/mm/yy",
+        firstDay: 1,
+        showMonthAfterYear: false,
+    });
 </script>
 {% endblock %}

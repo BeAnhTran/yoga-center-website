@@ -59,6 +59,9 @@ class PromotionType(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        unique_together = (('promotion', 'category'),)
+
     @property
     def full_title(self):
         if self.category == CASH_PROMOTION:
@@ -68,9 +71,19 @@ class PromotionType(models.Model):
         elif self.category == PLUS_MONTH_PRACTICE_PROMOTION:
             return 'Khuyến mãi tặng thêm ' + str(sexify.sexy_number(self.value)) + ' tháng tập'
         elif self.category == GIFT_PROMOTION:
-            return 'Khuyến mãi tặng ' + str(sexify.sexy_number(self.value)) + ' ' + self.product.__str__()
+            pos = -1
+            s = 'Khuyến mãi tặng sản phẩm: '
+            promotion_type_products = self.promotion_type_products.all()
+            for p in promotion_type_products:
+                pos += 1
+                if pos == len(promotion_type_products) - 1:
+                    s += str(p.quantity) + ' ' + p.product.name + '.'
+                else:
+                    s += str(p.quantity) + ' ' + p.product.name + ', '
+            return s
         else:
             return 'Khuyến mãi giảm ' + str(sexify.sexy_number(self.value)) + '%'
+
 
 # NOTE: PromotionTypeProduct: Product that is used for PromotionType with quantity
 

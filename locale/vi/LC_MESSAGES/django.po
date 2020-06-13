@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-09 23:50+0700\n"
+"POT-Creation-Date: 2020-06-13 10:45+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,14 +26,15 @@ msgstr "lí do"
 
 #: .\apps\absence_applications\models.py:12 .\apps\accounts\models.py:121
 #: .\apps\card_invoices\models.py:37 .\apps\card_types\models.py:29
-#: .\apps\cards\models.py:24 .\apps\classes\models.py:31
-#: .\apps\classes\models.py:80 .\apps\courses\models.py:50
+#: .\apps\cards\models.py:24 .\apps\classes\models.py:34
+#: .\apps\classes\models.py:83 .\apps\courses\models.py:52
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:73
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:33
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:34
+#: .\apps\dashboard\templates\dashboard\promotions\detail.html:47
 #: .\apps\dashboard\templates\dashboard\questions\list.html:33
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:30
-#: .\apps\donations\models.py:21 .\apps\events\models.py:19
+#: .\apps\donations\models.py:16 .\apps\events\models.py:19
 #: .\apps\feedback\models.py:13 .\apps\lectures\models.py:16
 #: .\apps\lessons\models.py:44 .\apps\lessons\models.py:167
 #: .\apps\make_up_lessons\models.py:16 .\apps\questions\models.py:13
@@ -44,9 +45,9 @@ msgstr "thời gian tạo"
 
 #: .\apps\absence_applications\models.py:14 .\apps\accounts\models.py:123
 #: .\apps\card_invoices\models.py:39 .\apps\card_types\models.py:31
-#: .\apps\cards\models.py:26 .\apps\classes\models.py:33
-#: .\apps\classes\models.py:82 .\apps\courses\models.py:52
-#: .\apps\donations\models.py:23 .\apps\events\models.py:21
+#: .\apps\cards\models.py:26 .\apps\classes\models.py:36
+#: .\apps\classes\models.py:85 .\apps\courses\models.py:54
+#: .\apps\donations\models.py:18 .\apps\events\models.py:21
 #: .\apps\feedback\models.py:15 .\apps\lectures\models.py:18
 #: .\apps\lessons\models.py:46 .\apps\lessons\models.py:169
 #: .\apps\make_up_lessons\models.py:18 .\apps\questions\models.py:15
@@ -114,7 +115,7 @@ msgstr ""
 
 #: .\apps\accounts\forms\trainee_form.py:64
 #: .\apps\classes\templates\classes\enroll.html:240
-#: .\apps\classes\templates\payment.html:137
+#: .\apps\classes\templates\payment.html:150
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:39
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:98
 #: .\apps\dashboard\templates\dashboard\cards\new\index.html:48
@@ -129,14 +130,14 @@ msgstr "Nữ"
 msgid "Male"
 msgstr "Nam"
 
-#: .\apps\accounts\models.py:24 .\apps\classes\templates\payment.html:67
+#: .\apps\accounts\models.py:24 .\apps\classes\templates\payment.html:80
 #: .\apps\dashboard\templates\dashboard\admins\list.html:33
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:29
 #: .\apps\dashboard\templates\dashboard\questions\list.html:29
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:35
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:33
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:35
-#: .\apps\donations\models.py:12
+#: .\apps\donations\models.py:7
 #: .\apps\donations\templates\donations\index.html:95
 #: .\apps\feedback\models.py:8 .\apps\questions\models.py:8
 #: .\apps\shop\templates\shop\checkout.html:58 .\apps\shop\views.py:213
@@ -174,10 +175,10 @@ msgstr "họ"
 msgid "slug"
 msgstr ""
 
-#: .\apps\accounts\models.py:38 .\apps\classes\templates\payment.html:61
+#: .\apps\accounts\models.py:38 .\apps\classes\templates\payment.html:74
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:32
 #: .\apps\dashboard\templates\dashboard\questions\list.html:32
-#: .\apps\donations\models.py:14
+#: .\apps\donations\models.py:9
 #: .\apps\donations\templates\donations\index.html:88
 #: .\apps\feedback\models.py:10 .\apps\questions\models.py:10
 #: .\apps\shop\templates\shop\checkout.html:51
@@ -234,8 +235,8 @@ msgid "updated_at"
 msgstr "thời gian cập nhật"
 
 #: .\apps\accounts\models.py:88 .\apps\card_types\models.py:20
-#: .\apps\classes\models.py:16 .\apps\classes\models.py:76
-#: .\apps\classes\templates\payment.html:54 .\apps\courses\models.py:31
+#: .\apps\classes\models.py:16 .\apps\classes\models.py:79
+#: .\apps\classes\templates\payment.html:67 .\apps\courses\models.py:31
 #: .\apps\dashboard\templates\dashboard\admins\list.html:32
 #: .\apps\dashboard\templates\dashboard\blog\categories\list.html:28
 #: .\apps\dashboard\templates\dashboard\card_types\list.html:29
@@ -251,7 +252,7 @@ msgstr "thời gian cập nhật"
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:34
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:32
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:34
-#: .\apps\donations\models.py:11
+#: .\apps\donations\models.py:6
 #: .\apps\donations\templates\donations\index.html:81 .\apps\events\models.py:8
 #: .\apps\lectures\models.py:12 .\apps\profiles\forms\certificate_form.py:14
 #: .\apps\promotions\models.py:14 .\apps\rooms\models.py:14
@@ -430,7 +431,7 @@ msgstr "Tìm kiếm"
 msgid "Prepaid"
 msgstr "Trả trước"
 
-#: .\apps\card_invoices\models.py:15 .\apps\classes\views.py:392
+#: .\apps\card_invoices\models.py:15 .\apps\classes\views.py:419
 msgid "Postpaid"
 msgstr "Trả sau"
 
@@ -445,15 +446,15 @@ msgstr "thẻ tập"
 msgid "payment period"
 msgstr "Đợt thanh toán"
 
-#: .\apps\card_invoices\models.py:27 .\apps\classes\models.py:77
+#: .\apps\card_invoices\models.py:27 .\apps\classes\models.py:80
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:28
-#: .\apps\donations\models.py:17
+#: .\apps\donations\models.py:12
 #: .\apps\donations\templates\donations\index.html:109
 #: .\apps\refunds\models.py:24 .\apps\shop\models.py:56
 msgid "amount"
 msgstr "số tiền"
 
-#: .\apps\card_invoices\models.py:29 .\apps\donations\models.py:19
+#: .\apps\card_invoices\models.py:29 .\apps\donations\models.py:14
 #: .\apps\shop\models.py:58
 msgid "charge id"
 msgstr "mã giao dịch"
@@ -503,6 +504,8 @@ msgstr "chỉ áp dụng cho học viên lâu năm"
 #: .\apps\cards\forms.py:17 .\apps\cards\forms.py:26
 #: .\apps\dashboard\forms\cards_form.py:11
 #: .\apps\dashboard\forms\cards_form.py:20
+#: .\apps\dashboard\forms\promotions_form.py:51
+#: .\apps\dashboard\forms\promotions_form.py:62
 msgid "Please enter the value"
 msgstr "Vui lòng nhập giá trị"
 
@@ -533,7 +536,7 @@ msgstr "Khoảng thời gian bạn chọn không có buổi học phù hợp"
 msgid "trainee"
 msgstr "học viên"
 
-#: .\apps\cards\models.py:18 .\apps\classes\templates\payment.html:176
+#: .\apps\cards\models.py:18 .\apps\classes\templates\payment.html:189
 #: .\apps\dashboard\templates\dashboard\card_types\new.html:9
 #: .\apps\dashboard\templates\dashboard\cards\list.html:33
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:47
@@ -553,13 +556,15 @@ msgstr "lớp"
 msgid "lessons"
 msgstr "buổi tập"
 
-#: .\apps\cards\models.py:70
+#: .\apps\cards\models.py:73 .\apps\cards\models.py:86
+#: .\apps\cards\models.py:92
 #, fuzzy
 #| msgid "Unpaid card"
 msgid "Unpaid"
 msgstr "Thẻ chưa thanh toán"
 
-#: .\apps\cards\models.py:71
+#: .\apps\cards\models.py:74 .\apps\cards\models.py:80
+#: .\apps\cards\models.py:83 .\apps\cards\models.py:93
 msgid "Paied"
 msgstr "Đã thanh toán"
 
@@ -599,7 +604,7 @@ msgstr "khóa học"
 msgid "trainer"
 msgstr "huấn luyện viên"
 
-#: .\apps\classes\models.py:20 .\apps\classes\templates\payment.html:181
+#: .\apps\classes\models.py:20 .\apps\classes\templates\payment.html:194
 #: .\apps\courses\models.py:44
 #: .\apps\dashboard\templates\dashboard\classes\show.html:86
 msgid "price per lesson"
@@ -631,7 +636,7 @@ msgstr "số người tối đa"
 msgid "start at"
 msgstr "thời gian bắt đầu"
 
-#: .\apps\classes\models.py:29 .\apps\classes\models.py:78
+#: .\apps\classes\models.py:29 .\apps\classes\models.py:81
 #: .\apps\dashboard\forms\classes_form.py:35
 #: .\apps\dashboard\templates\dashboard\classes\show.html:48
 #: .\apps\dashboard\templates\dashboard\promotions\list.html:31
@@ -639,7 +644,13 @@ msgstr "thời gian bắt đầu"
 msgid "end at"
 msgstr "thời gian kết thúc"
 
-#: .\apps\classes\models.py:75
+#: .\apps\classes\models.py:32 .\apps\courses\models.py:50
+#, fuzzy
+#| msgid "price per lesson"
+msgid "wages per lesson"
+msgstr "giá buổi"
+
+#: .\apps\classes\models.py:78
 #: .\apps\dashboard\templates\dashboard\cards\new\index.html:16
 #: .\apps\dashboard\templates\dashboard\classes\list.html:22
 #: .\apps\dashboard\templates\dashboard\classes\new.html:14
@@ -689,10 +700,10 @@ msgid "Price of 1 trial lesson"
 msgstr "Giá học thử một buổi"
 
 #: .\apps\classes\templates\classes\enroll.html:124
-#: .\apps\classes\templates\payment.html:186
-#: .\apps\classes\templates\payment.html:197
-#: .\apps\classes\templates\payment.html:219 .\apps\classes\utils.py:41
-#: .\apps\courses\models.py:63
+#: .\apps\classes\templates\payment.html:199
+#: .\apps\classes\templates\payment.html:210
+#: .\apps\classes\templates\payment.html:232 .\apps\classes\utils.py:41
+#: .\apps\courses\models.py:65
 msgid "Free"
 msgstr "Miễn phí"
 
@@ -772,13 +783,13 @@ msgstr "buổi tập đã đủ số lượng"
 #: .\apps\classes\templates\classes\enroll.html:593
 #: .\apps\classes\templates\classes\enroll.html:600
 #: .\apps\classes\templates\classes\enroll.html:609
-#: .\apps\classes\templates\payment.html:438
-#: .\apps\classes\templates\payment.html:447
-#: .\apps\classes\templates\payment.html:456
-#: .\apps\classes\templates\payment.html:477
-#: .\apps\classes\templates\payment.html:484
-#: .\apps\classes\templates\payment.html:498
-#: .\apps\classes\templates\payment.html:550
+#: .\apps\classes\templates\payment.html:451
+#: .\apps\classes\templates\payment.html:460
+#: .\apps\classes\templates\payment.html:469
+#: .\apps\classes\templates\payment.html:490
+#: .\apps\classes\templates\payment.html:497
+#: .\apps\classes\templates\payment.html:511
+#: .\apps\classes\templates\payment.html:563
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:205
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:231
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:322
@@ -793,9 +804,11 @@ msgstr "buổi tập đã đủ số lượng"
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:264
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:330
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:711
+#: .\apps\dashboard\templates\dashboard\promotions\new.html:47
+#: .\apps\dashboard\templates\dashboard\promotions\new.html:155
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:169
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:220
-#: .\templates\base.html:181 .\templates\profile\trainees\cards\detail.html:405
+#: .\templates\base.html:181 .\templates\profile\trainees\cards\detail.html:420
 #: .\templates\profile\trainees\cards\refunds\new.html:170
 msgid "error"
 msgstr "lỗi"
@@ -849,7 +862,7 @@ msgstr "lớp học"
 #: .\apps\classes\templates\classes\list.html:76
 #: .\apps\classes\templates\classes\show.html:162
 #: .\apps\classes\templates\classes\show.html:224
-#: .\apps\classes\templates\payment.html:237
+#: .\apps\classes\templates\payment.html:250
 #: .\apps\trainers\templates\trainers\list.html:48
 #: .\templates\home\index.html:215
 msgid "Yoga Trainer"
@@ -869,8 +882,8 @@ msgstr "Tìm kiếm lớp học"
 msgid "Filter now"
 msgstr "Lọc"
 
-#: .\apps\classes\templates\classes\show.html:103 .\apps\courses\models.py:71
-#: .\apps\courses\models.py:79 .\apps\courses\models.py:88
+#: .\apps\classes\templates\classes\show.html:103 .\apps\courses\models.py:73
+#: .\apps\courses\models.py:81 .\apps\courses\models.py:90
 #: .\apps\courses\templates\courses\show.html:91
 #: .\apps\dashboard\templates\dashboard\classes\list.html:53
 #: .\apps\dashboard\templates\dashboard\classes\show.html:44
@@ -915,94 +928,95 @@ msgstr "Thông tin thanh toán"
 msgid "About Trainer"
 msgstr "Huấn luyện viên"
 
-#: .\apps\classes\templates\payment.html:18
+#: .\apps\classes\templates\payment.html:31
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:17
 msgid "Payment Info"
 msgstr "Thông tin thanh toán"
 
-#: .\apps\classes\templates\payment.html:29 .\apps\classes\views.py:353
+#: .\apps\classes\templates\payment.html:42 .\apps\classes\views.py:380
 msgid "Free Registration"
 msgstr "Đăng ký miễn phí"
 
-#: .\apps\classes\templates\payment.html:37
+#: .\apps\classes\templates\payment.html:50
 msgid "Pay with Stripe"
 msgstr "Thanh toán thông qua Stripe"
 
-#: .\apps\classes\templates\payment.html:51
+#: .\apps\classes\templates\payment.html:64
 #: .\apps\donations\templates\donations\index.html:78
 #: .\apps\shop\templates\shop\checkout.html:39
 msgid "Please enter information below"
 msgstr "Vui lòng nhập thông tin"
 
-#: .\apps\classes\templates\payment.html:75
+#: .\apps\classes\templates\payment.html:88
 #: .\apps\donations\templates\donations\index.html:117
 #: .\apps\shop\templates\shop\checkout.html:80
 msgid "Payment Card"
 msgstr "Thẻ thanh toán"
 
-#: .\apps\classes\templates\payment.html:83
+#: .\apps\classes\templates\payment.html:96
 #: .\apps\shop\templates\shop\checkout.html:88
+#: .\templates\profile\trainees\cards\detail.html:288
 msgid "Pay"
 msgstr "Thanh toán"
 
-#: .\apps\classes\templates\payment.html:106
+#: .\apps\classes\templates\payment.html:119
 msgid "Pay with MOMO"
 msgstr "Thanh toán thông qua MoMo"
 
-#: .\apps\classes\templates\payment.html:113
+#: .\apps\classes\templates\payment.html:126
 msgid "Pay when come to center"
 msgstr "Thanh toán tại trung tâm"
 
-#: .\apps\classes\templates\payment.html:121
+#: .\apps\classes\templates\payment.html:134
 msgid "Your card will be created with state"
 msgstr "Thẻ của bạn sẽ được tạo với trạng thái"
 
-#: .\apps\classes\templates\payment.html:121
+#: .\apps\classes\templates\payment.html:134
 msgid "not pay yet"
 msgstr "chưa thanh toán"
 
-#: .\apps\classes\templates\payment.html:125
+#: .\apps\classes\templates\payment.html:138
 msgid "You have to pay your card at center with in 7 days"
 msgstr ""
 "Bạn cần đến trung tâm và tiến hành thanh toán thẻ tập trong vòng 7 ngày"
 
-#: .\apps\classes\templates\payment.html:129
+#: .\apps\classes\templates\payment.html:142
 msgid "If not, your card will be destroyed"
 msgstr "Sau 7 ngày chưa thanh toán, thẻ của bạn sẽ bị hủy"
 
-#: .\apps\classes\templates\payment.html:192
-#: .\apps\classes\templates\payment.html:214
+#: .\apps\classes\templates\payment.html:205
+#: .\apps\classes\templates\payment.html:227
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:69
 msgid "total price"
 msgstr "tổng giá"
 
-#: .\apps\classes\templates\payment.html:205
+#: .\apps\classes\templates\payment.html:218
 #: .\templates\profile\trainees\cards\detail.html:233
 msgid "Payment period"
 msgstr "Đợt thanh toán"
 
-#: .\apps\classes\templates\payment.html:210
+#: .\apps\classes\templates\payment.html:223
 msgid "Pay for entire course"
 msgstr "Thanh toán toàn bộ khóa học"
 
-#: .\apps\classes\templates\payment.html:303
+#: .\apps\classes\templates\payment.html:316
 msgid "Your Lesson List"
 msgstr "Danh sách buổi học của bạn"
 
-#: .\apps\classes\templates\payment.html:439
+#: .\apps\classes\templates\payment.html:452
 msgid "Pleae enter your name"
 msgstr "Vui lòng nhập tên"
 
-#: .\apps\classes\templates\payment.html:448
+#: .\apps\classes\templates\payment.html:461
 msgid "Pleae enter your phone"
 msgstr "Vui lòng nhập số điện thoại"
 
-#: .\apps\classes\templates\payment.html:457
+#: .\apps\classes\templates\payment.html:470
 msgid "Pleae enter your email"
 msgstr "Vui lòng nhập email"
 
-#: .\apps\classes\templates\payment.html:478
-#: .\apps\classes\templates\payment.html:485
+#: .\apps\classes\templates\payment.html:491
+#: .\apps\classes\templates\payment.html:498
 msgid "Pleae enter your Credit or debit card number infomation"
 msgstr "Vui lòng nhập đúng thông tin thẻ Credit hoặc Debit của bạn"
 
@@ -1024,9 +1038,9 @@ msgstr "Vui lòng kiểm tra thông tin thẻ tập của bạn để chuẩn 
 msgid "Your card detail information"
 msgstr "Thông tin chi tiết thẻ tập"
 
-#: .\apps\classes\templates\payment_result.html:41 .\apps\classes\views.py:378
-#: .\apps\classes\views.py:418 .\apps\classes\views.py:522
-#: .\apps\dashboard\views\cards_view.py:312
+#: .\apps\classes\templates\payment_result.html:41 .\apps\classes\views.py:405
+#: .\apps\classes\views.py:445 .\apps\classes\views.py:566
+#: .\apps\dashboard\views\cards_view.py:307
 msgid "An error occurred. Please try again later"
 msgstr "Đã xảy ra lỗi. Vui lòng thử lại"
 
@@ -1038,16 +1052,16 @@ msgstr "Quay về trang thanh toán"
 msgid "Back To Payment Page"
 msgstr "Quay về trang thanh toán"
 
-#: .\apps\classes\views.py:156 .\apps\classes\views.py:194
-#: .\apps\classes\views.py:343
+#: .\apps\classes\views.py:161 .\apps\classes\views.py:205
+#: .\apps\classes\views.py:368 .\apps\classes\views.py:533
 msgid "Pay all"
 msgstr "Đóng toàn bộ"
 
-#: .\apps\classes\views.py:210 .\apps\dashboard\views\cards_view.py:158
+#: .\apps\classes\views.py:223 .\apps\dashboard\views\cards_view.py:158
 msgid "Your lesson list includes old lesson. Please try again."
 msgstr "Danh sách buổi học bạn chọn chứa buổi học đã cũ. Vui lòng thử lại."
 
-#: .\apps\classes\views.py:254
+#: .\apps\classes\views.py:269
 msgid ""
 "You have card including one of your choosen lesson list. Please check your "
 "card."
@@ -1055,29 +1069,29 @@ msgstr ""
 "Bạn đã có thẻ tập đăng kí học một trong số những buổi học bạn đã chọn. Vui "
 "lòng kiểm tra lại thẻ tập của bạn."
 
-#: .\apps\classes\views.py:333
+#: .\apps\classes\views.py:358
 msgid "You dont have any info to payment. Please try again"
 msgstr "Bạn không đủ thông tin để thực hiện thanh toán. Vui lòng thử lại sau."
 
-#: .\apps\classes\views.py:372 .\apps\classes\views.py:402
+#: .\apps\classes\views.py:399 .\apps\classes\views.py:429
 #: .\apps\shop\views.py:189
 msgid "Card Payment"
 msgstr "Thanh toán thẻ tập"
 
-#: .\apps\classes\views.py:382
+#: .\apps\classes\views.py:409
 msgid "An error occurred. Please enter the right number of VisaCard"
 msgstr ""
 "Đã xảy ra lỗi. Vui lòng nhập đúng thông tin thẻ Credit hoặc Debit của bạn"
 
-#: .\apps\classes\views.py:385
+#: .\apps\classes\views.py:412
 msgid "Pay card by Stripe"
 msgstr "Thanh toán thông qua Stripe"
 
-#: .\apps\classes\views.py:497
+#: .\apps\classes\views.py:530
 msgid "Momo Payment"
 msgstr "Thanh toán thông qua Momo"
 
-#: .\apps\classes\views.py:570
+#: .\apps\classes\views.py:615
 msgid "Thank you for your register at Yoga Huong Tre"
 msgstr "Cảm ơn bạn đã đăng kí học tại trung tâm Yoga Hương Tre"
 
@@ -1097,7 +1111,7 @@ msgstr "loại thẻ"
 
 #: .\apps\courses\models.py:36
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:28
-#: .\apps\donations\models.py:15
+#: .\apps\donations\models.py:10
 #: .\apps\donations\templates\donations\index.html:102
 #: .\apps\events\models.py:13 .\apps\feedback\models.py:11
 #: .\apps\promotions\models.py:19 .\apps\questions\models.py:11
@@ -1147,7 +1161,7 @@ msgstr "Tên này đã tồn tại"
 #: .\apps\dashboard\forms\posts_form.py:29
 #: .\apps\dashboard\forms\product_categories_form.py:19
 #: .\apps\dashboard\forms\products_form.py:37
-#: .\apps\dashboard\forms\promotions_form.py:82
+#: .\apps\dashboard\forms\promotions_form.py:84
 #: .\apps\dashboard\forms\rooms_form.py:26
 #: .\apps\dashboard\forms\trainees_form.py:65
 #: .\apps\profiles\forms\certificate_form.py:27
@@ -1209,7 +1223,7 @@ msgid "start time"
 msgstr "thời gian bắt đầu"
 
 #: .\apps\dashboard\forms\lesssons_form.py:47
-#: .\apps\dashboard\forms\promotions_form.py:58 .\apps\lessons\models.py:38
+#: .\apps\dashboard\forms\promotions_form.py:59 .\apps\lessons\models.py:38
 msgid "end time"
 msgstr "thời gian kết thúc"
 
@@ -1249,20 +1263,20 @@ msgstr "vui lòng nhập giá trị hoặc số lượng"
 #: .\apps\dashboard\forms\promotions_form.py:45
 #: .\apps\dashboard\templates\dashboard\promotions\edit.html:13
 #: .\apps\dashboard\templates\dashboard\promotions\list.html:18
-#: .\apps\dashboard\templates\dashboard\promotions\new.html:11
-#: .\apps\promotions\models.py:57 .\apps\promotions\models.py:84
+#: .\apps\dashboard\templates\dashboard\promotions\new.html:16
+#: .\apps\promotions\models.py:55 .\apps\promotions\models.py:103
 msgid "promotion"
 msgstr "khuyến mãi"
 
-#: .\apps\dashboard\forms\promotions_form.py:81
+#: .\apps\dashboard\forms\promotions_form.py:83
 msgid "Promotion type"
 msgstr "Hình thức khuyến mãi"
 
-#: .\apps\dashboard\forms\promotions_form.py:95
+#: .\apps\dashboard\forms\promotions_form.py:97
 msgid "End at must be greater than start at"
 msgstr "Thời gian kết thúc phải sau thời gian bắt đầu"
 
-#: .\apps\dashboard\forms\promotions_form.py:108
+#: .\apps\dashboard\forms\promotions_form.py:110
 msgid "A promotion with this name already exists."
 msgstr "Tên này đã tồn tại"
 
@@ -1330,7 +1344,7 @@ msgstr "hành động"
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:61
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:59
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:61
-#: .\templates\profile\trainees\cards\detail.html:333
+#: .\templates\profile\trainees\cards\detail.html:348
 msgid "show"
 msgstr "xem"
 
@@ -1340,7 +1354,6 @@ msgstr "xem"
 #: .\apps\dashboard\templates\dashboard\cards\list.html:52
 #: .\apps\dashboard\templates\dashboard\classes\list.html:68
 #: .\apps\dashboard\templates\dashboard\classes\show.html:24
-#: .\apps\dashboard\templates\dashboard\promotions\list.html:53
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:50
 #: .\apps\dashboard\templates\dashboard\shop\bills.html:50
 #: .\apps\dashboard\templates\dashboard\shop\categories\list.html:44
@@ -1348,7 +1361,7 @@ msgstr "xem"
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:64
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:61
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:64
-#: .\templates\profile\trainees\cards\detail.html:338
+#: .\templates\profile\trainees\cards\detail.html:353
 msgid "edit"
 msgstr "sửa"
 
@@ -1362,7 +1375,7 @@ msgstr "sửa"
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:182
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:355
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:392
-#: .\apps\dashboard\templates\dashboard\promotions\list.html:56
+#: .\apps\dashboard\templates\dashboard\promotions\list.html:53
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:52
 #: .\apps\dashboard\templates\dashboard\shop\bills.html:53
 #: .\apps\dashboard\templates\dashboard\shop\categories\list.html:47
@@ -1370,7 +1383,7 @@ msgstr "sửa"
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:67
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:65
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:67
-#: .\templates\profile\trainees\cards\detail.html:341
+#: .\templates\profile\trainees\cards\detail.html:356
 msgid "delete"
 msgstr "xóa"
 
@@ -1403,7 +1416,7 @@ msgstr "loại bài viết"
 #: .\apps\dashboard\templates\dashboard\courses\new.html:14
 #: .\apps\dashboard\templates\dashboard\events\new.html:15
 #: .\apps\dashboard\templates\dashboard\faq\new.html:14
-#: .\apps\dashboard\templates\dashboard\promotions\new.html:12
+#: .\apps\dashboard\templates\dashboard\promotions\new.html:17
 #: .\apps\dashboard\templates\dashboard\rooms\new.html:14
 #: .\apps\dashboard\templates\dashboard\shop\categories\new.html:10
 #: .\apps\dashboard\templates\dashboard\shop\products\new.html:10
@@ -1442,15 +1455,15 @@ msgstr "nhận thanh toán"
 
 #: .\apps\dashboard\templates\dashboard\cards\list.html:88
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:275
-#: .\templates\profile\trainees\cards\detail.html:433
-#: .\templates\profile\trainees\cards\detail.html:449
+#: .\templates\profile\trainees\cards\detail.html:448
+#: .\templates\profile\trainees\cards\detail.html:464
 msgid "Are you sure?"
 msgstr "Bạn chắc chắn muốn thực hiện?"
 
 #: .\apps\dashboard\templates\dashboard\cards\list.html:89
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:276
-#: .\templates\profile\trainees\cards\detail.html:434
-#: .\templates\profile\trainees\cards\detail.html:450
+#: .\templates\profile\trainees\cards\detail.html:449
+#: .\templates\profile\trainees\cards\detail.html:465
 msgid "You wont be able to revert this!"
 msgstr "Bạn sẽ không thể hoàn tác hành động này!"
 
@@ -1461,8 +1474,8 @@ msgstr "Có"
 
 #: .\apps\dashboard\templates\dashboard\cards\list.html:95
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:282
-#: .\templates\profile\trainees\cards\detail.html:440
-#: .\templates\profile\trainees\cards\detail.html:456
+#: .\templates\profile\trainees\cards\detail.html:455
+#: .\templates\profile\trainees\cards\detail.html:471
 msgid "Cancel"
 msgstr "Hủy"
 
@@ -1541,13 +1554,13 @@ msgid "Card id"
 msgstr "Mã thẻ"
 
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:59
-#: .\templates\profile\trainees\cards\detail.html:300
+#: .\templates\profile\trainees\cards\detail.html:315
 msgid "Number of lessons"
 msgstr "Số buổi"
 
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:72
 #: .\templates\profile\trainees\cards\detail.html:236
-#: .\templates\profile\trainees\cards\detail.html:301
+#: .\templates\profile\trainees\cards\detail.html:316
 msgid "Amount"
 msgstr "Số tiền"
 
@@ -1608,7 +1621,7 @@ msgstr "Thông tin chi tiết"
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:702
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:730
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:209
-#: .\templates\base.html:169 .\templates\profile\trainees\cards\detail.html:521
+#: .\templates\base.html:169 .\templates\profile\trainees\cards\detail.html:536
 msgid "done"
 msgstr "hoàn thành"
 
@@ -1618,8 +1631,8 @@ msgid "create successfully"
 msgstr "tạo thành công"
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:281
-#: .\templates\profile\trainees\cards\detail.html:439
-#: .\templates\profile\trainees\cards\detail.html:455
+#: .\templates\profile\trainees\cards\detail.html:454
+#: .\templates\profile\trainees\cards\detail.html:470
 msgid "Yes, delete it!"
 msgstr "Có"
 
@@ -1978,7 +1991,7 @@ msgid "Studied make-up lesson detail info"
 msgstr "Học viên đã đăng kí học bù vào buổi với thông tin sau"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:325
-#: .\templates\profile\trainees\cards\detail.html:387
+#: .\templates\profile\trainees\cards\detail.html:402
 msgid "Absence Application Reason"
 msgstr "Lí do xin nghỉ"
 
@@ -1994,7 +2007,7 @@ msgid "Undo the roll call successfully"
 msgstr "Hủy điểm danh thành công"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:422
-#: .\templates\profile\trainees\cards\detail.html:522
+#: .\templates\profile\trainees\cards\detail.html:537
 msgid "Remove make up lesson successfully"
 msgstr "Hủy đăng kí học bù thành công"
 
@@ -2004,12 +2017,12 @@ msgstr "Buổi tập đã đủ số lượng"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:492
 #: .\apps\make_up_lessons\models.py:14 .\apps\roll_calls\models.py:18
-#: .\templates\profile\trainees\cards\detail.html:492
+#: .\templates\profile\trainees\cards\detail.html:507
 msgid "studied"
 msgstr "đã học"
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:494
-#: .\templates\profile\trainees\cards\detail.html:494
+#: .\templates\profile\trainees\cards\detail.html:509
 msgid "have not studied"
 msgstr "chưa học"
 
@@ -2078,12 +2091,13 @@ msgstr ""
 msgid "promotion list"
 msgstr "Danh sách khuyến mãi"
 
-#: .\apps\dashboard\templates\dashboard\promotions\new.html:36
-#: .\apps\dashboard\templates\dashboard\shop\products\list.html:18
-#: .\apps\dashboard\templates\dashboard\shop\products\new.html:9
-#: .\apps\promotions\models.py:62 .\apps\shop\templates\shop\index.html:31
-msgid "product"
-msgstr "sản phẩm"
+#: .\apps\dashboard\templates\dashboard\promotions\new.html:48
+msgid "This category has been added"
+msgstr "Thể loại này đã được thêm"
+
+#: .\apps\dashboard\templates\dashboard\promotions\new.html:156
+msgid "This product has been added"
+msgstr "Sản phẩm này đã được thêm"
 
 #: .\apps\dashboard\templates\dashboard\questions\list.html:12
 msgid "Question List"
@@ -2138,6 +2152,12 @@ msgstr "loại sản phẩm"
 msgid "product list"
 msgstr "Danh sách sản phẩm"
 
+#: .\apps\dashboard\templates\dashboard\shop\products\list.html:18
+#: .\apps\dashboard\templates\dashboard\shop\products\new.html:9
+#: .\apps\shop\templates\shop\index.html:31
+msgid "product"
+msgstr "sản phẩm"
+
 #: .\apps\dashboard\templates\dashboard\shop\products\list.html:31
 #: .\apps\shop\models.py:16
 msgid "price"
@@ -2156,12 +2176,12 @@ msgstr "Xác nhận đã nhận tiền thanh toán thẻ thành công"
 msgid "Trainee have had one of this lessons before"
 msgstr "Học viên đã đăng ký một trong số những buổi tập này trước đó."
 
-#: .\apps\dashboard\views\cards_view.py:264
-#: .\apps\dashboard\views\cards_view.py:316
+#: .\apps\dashboard\views\cards_view.py:259
+#: .\apps\dashboard\views\cards_view.py:311
 msgid "Dont have any info about card. Please try again"
 msgstr "Không đủ thông tin để thực hiện. Vui lòng thử lại sau."
 
-#: .\apps\dashboard\views\cards_view.py:289
+#: .\apps\dashboard\views\cards_view.py:284
 msgid "Create new card at center"
 msgstr "Đăng ký thẻ tập tại trung tâm"
 
@@ -2349,7 +2369,7 @@ msgstr "vui lòng nhập tỉnh/thành phố"
 msgid "normal health"
 msgstr "sức khỏe bình thường"
 
-#: .\apps\profiles\views\profile_trainee_view.py:129
+#: .\apps\profiles\views\profile_trainee_view.py:145
 msgid "Create refund card request successfully"
 msgstr "Tạo yêu cầu hoàn tiền thành công"
 
@@ -2364,39 +2384,35 @@ msgstr "Cập nhật thành công"
 msgid "Create certificate successfully"
 msgstr "thêm chứng chỉ thành công"
 
-#: .\apps\promotions\models.py:46
+#: .\apps\promotions\models.py:45
 msgid "Cash promotion"
 msgstr "Khuyến mãi tiền mặt"
 
-#: .\apps\promotions\models.py:47
-msgid "Plus lesson practice promotion"
-msgstr "Khuyến mãi tặng thêm buổi tập"
-
-#: .\apps\promotions\models.py:48
-msgid "Plus week practice promotion"
-msgstr "Khuyến mãi tặng thêm tuần tập"
-
-#: .\apps\promotions\models.py:49
-msgid "Plus month practice promotion"
-msgstr "Khuyến mãi tặng thêm tháng tập"
-
-#: .\apps\promotions\models.py:50
-msgid "Gift promotion"
-msgstr "Khuyến mãi tặng sản phẩm"
-
-#: .\apps\promotions\models.py:51
+#: .\apps\promotions\models.py:46
 msgid "Percent promotion"
 msgstr "Khuyến mãi giảm giá phần trăm"
 
-#: .\apps\promotions\models.py:59 .\apps\shop\models.py:10
+#: .\apps\promotions\models.py:47
+msgid "Free some lesson promotion"
+msgstr "Khuyến mãi miễn phí buổi tập"
+
+#: .\apps\promotions\models.py:48
+msgid "Plus month practice promotion"
+msgstr "Khuyến mãi tặng thêm tháng tập"
+
+#: .\apps\promotions\models.py:49
+msgid "Gift promotion"
+msgstr "Khuyến mãi tặng sản phẩm"
+
+#: .\apps\promotions\models.py:57 .\apps\shop\models.py:10
 msgid "category"
 msgstr "thể loại"
 
-#: .\apps\promotions\models.py:60
+#: .\apps\promotions\models.py:58
 msgid "value or quantity"
 msgstr "Giá trị / số lượng"
 
-#: .\apps\promotions\models.py:86
+#: .\apps\promotions\models.py:105
 msgid "promotion type"
 msgstr "hình thức khuyến mãi"
 
@@ -2842,7 +2858,7 @@ msgid "Card Payment History"
 msgstr "Lịch sử thanh toán thẻ tập"
 
 #: .\templates\profile\trainees\cards\detail.html:229
-#: .\templates\profile\trainees\cards\detail.html:299
+#: .\templates\profile\trainees\cards\detail.html:314
 msgid "Id"
 msgstr "Mã số"
 
@@ -2851,7 +2867,7 @@ msgid "Payment Type"
 msgstr "Hình thức thanh toán"
 
 #: .\templates\profile\trainees\cards\detail.html:231
-#: .\templates\profile\trainees\cards\detail.html:302
+#: .\templates\profile\trainees\cards\detail.html:317
 msgid "State"
 msgstr "Trạng thái"
 
@@ -2872,7 +2888,7 @@ msgid "Staff"
 msgstr "Nhân viên"
 
 #: .\templates\profile\trainees\cards\detail.html:240
-#: .\templates\profile\trainees\cards\detail.html:303
+#: .\templates\profile\trainees\cards\detail.html:318
 msgid "Create at"
 msgstr "Ngày tạo"
 
@@ -2884,27 +2900,27 @@ msgstr "đã thanh toán"
 msgid "Not charged"
 msgstr "chưa thanh toán"
 
-#: .\templates\profile\trainees\cards\detail.html:288
+#: .\templates\profile\trainees\cards\detail.html:303
 msgid "Refund Request"
 msgstr "Yêu cầu hoàn tiền"
 
-#: .\templates\profile\trainees\cards\detail.html:304
+#: .\templates\profile\trainees\cards\detail.html:319
 msgid "Action"
 msgstr "hành động"
 
-#: .\templates\profile\trainees\cards\detail.html:356
+#: .\templates\profile\trainees\cards\detail.html:371
 msgid "You dont have any refund request"
 msgstr "Không có yêu cầu hoàn tiền nào"
 
-#: .\templates\profile\trainees\cards\detail.html:406
+#: .\templates\profile\trainees\cards\detail.html:421
 msgid "Please enter reason"
 msgstr "Vui lòng nhập lí do"
 
-#: .\templates\profile\trainees\cards\detail.html:421
+#: .\templates\profile\trainees\cards\detail.html:436
 msgid "Make a absence application successfully."
 msgstr "Xin nghỉ thành công"
 
-#: .\templates\profile\trainees\cards\detail.html:422
+#: .\templates\profile\trainees\cards\detail.html:437
 #, python-format
 msgid ""
 "You can register a make-up lesson or make a refund for : %(value)s day(s) "
@@ -2913,7 +2929,7 @@ msgstr ""
 "Bạn có thể đăng kí học bù hoặc xin hoàn tiền cho buổi học trong vòng "
 "%(value)s ngày tình từ ngày học của buổi tập."
 
-#: .\templates\profile\trainees\cards\detail.html:499
+#: .\templates\profile\trainees\cards\detail.html:514
 msgid "Remove make-up lesson"
 msgstr "Hủy đăng kí học bù"
 
@@ -4167,6 +4183,9 @@ msgstr ""
 #, python-format
 msgid "The option '%s' is not a valid option for a QR code."
 msgstr ""
+
+msgid "Plus week practice promotion"
+msgstr "Khuyến mãi tặng thêm tuần tập"
 
 msgid "A user is already registered with this e-mail address."
 msgstr "Email này đã tồn tại."
