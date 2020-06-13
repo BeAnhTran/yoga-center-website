@@ -300,7 +300,7 @@
             </tr>
             <tr>
               <td><small>Hình thức KM:</small></td>
-              <td class="float-right">
+              <td class="float-right" style="max-width:250px">
                 <small>{{ promotion_type.full_title }}</small>
               </td>
             </tr>
@@ -370,21 +370,17 @@
               <td class="col-4">Mô tả</td>
               <td class="col-8" id="promotion_description" class="float-right">mô tả</td>
             </tr>
-            <tr class="row">
-              <td class="col-4">
-                Chọn hình thức khuyến mãi
-              </td>
-              <td class="col-8" id="td_promotion_types" class="float-right">
-                <form id="promotion_types" method="POST"
-                  action="{% url 'classes:use-promotion-code-when-payment' yoga_class.slug %}">
-                  {% csrf_token %}
-                  <input id="input_promotion_code" type="hidden" name="promotion-code">
-                  <input type="submit" class="btn btn-success mt-3" value="Xác nhận">
-                </form>
-              </td>
-            </tr>
           </tbody>
         </table>
+        <div>
+          <h5 style="font-family: serif;">Chọn hình thức khuyến mãi</h5>
+          <form class="mt-3" id="promotion_types" method="POST"
+            action="{% url 'classes:use-promotion-code-when-payment' yoga_class.slug %}">
+            {% csrf_token %}
+            <input id="input_promotion_code" type="hidden" name="promotion-code">
+            <input type="submit" class="site-btn btn-success mt-3" value="Xác nhận">
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -568,7 +564,7 @@
       });
     }
   });
-  $('#remove_promotion_code').click(function(){
+  $('#remove_promotion_code').click(function () {
     $(this).siblings('form#form_remove_promotion_code').submit();
   });
 </script>

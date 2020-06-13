@@ -12,3 +12,13 @@
 #accordion .card-link{
     color: black;
 }
+
+#modal_lesson_info .modal-content{
+  background: url('../../img/t1.jpg');
+}
+
+.spad{
+    background: url('../../img/yoga-background-1.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}

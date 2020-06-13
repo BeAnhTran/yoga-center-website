@@ -230,7 +230,7 @@
   .modal-dialog {
     max-width: 876px;
   }
-}
+}`
 
 
 .classes-item .ci-img img {
@@ -382,4 +382,16 @@
 } 
 .free-payment .card-link:hover{
   text-decoration: underline;
+}
+
+#model_title{
+  font-family: serif;
+  color: #fb3958;
+}
+#modal_check_promotion .modal-content{
+  background: url('../../img/promotion-bg.jpg');
+}
+
+#modal_check_promotion .modal-header {
+  border-bottom: 1px solid #fdb07d;
 }

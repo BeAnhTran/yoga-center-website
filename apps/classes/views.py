@@ -331,9 +331,10 @@ class YogaClassEnrollPaymentView(View):
                     promotion_val = '-' + \
                         sexify.sexy_number(value) + 'đ'
                 elif promotion_type.category == PERCENT_PROMOTION:
-                    amount -= value*amount/100
+                    reduce = round(value*amount/100/1000)*1000
+                    amount -= reduce
                     promotion_val = '-' + \
-                        sexify.sexy_number(value*amount) + 'đ'
+                        sexify.sexy_number(reduce) + 'đ'
                 elif promotion_type.category == FREE_SOME_LESSON_PROMOTION:
                     amount -= value*price
                     promotion_val = '-' + \
@@ -602,8 +603,13 @@ def processCard(yoga_class, enroll_form, request, amount, description, payment_t
         promotion_code.promotion_type = promotion_type
         promotion_code.save()
         if promotion_type.category == GIFT_PROMOTION:
-            promotion_code.promotion_code_products.create(
-                product=promotion_type.product, quantity=promotion_type.value)
+            # NOTE: Delete quantity in total quantity of product
+            for v in promotion_type.promotion_type_products.all():
+                product = v.product
+                product.quantity -= v.quantity
+                if product.quantity <= 0:
+                    product.quantity = 0
+                product.save()
         card_invoice.apply_promotion_codes.create(
             promotion_code=promotion_code)
     if request.session.get('enroll_card_form'):
@@ -626,7 +632,8 @@ def create_card(yoga_class, enroll_form, trainee, promotion=None, promotion_type
         month_count = int(promotion_type.value)
         additional_s = temp_lesson_list.last().date
         additional_e = temp_lesson_list.last().date + relativedelta(months=month_count)
-        additional_lesson_list = yoga_class.lessons.filter(date__gt=additional_s, date__lte=additional_e, is_full=False).order_by('date')
+        additional_lesson_list = yoga_class.lessons.filter(
+            date__gt=additional_s, date__lte=additional_e, is_full=False).order_by('date')
         for l in additional_lesson_list:
             id_arr.append(l.pk)
     lesson_list = yoga_class.lessons.filter(
