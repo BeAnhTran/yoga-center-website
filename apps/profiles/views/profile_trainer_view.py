@@ -45,25 +45,28 @@ class TrainerYogaClassDetailView(View):
     def get(self, request, slug):
         trainer = request.user.trainer
         yoga_class = get_object_or_404(YogaClass, slug=slug)
-        context = {
-            'yoga_class': yoga_class,
-            'trainer': trainer,
-            'sidebar_profile': 'trainers-yoga-classes'
-        }
         now = datetime.now()
         month = now.month
         year = now.year
-        print("month1", month)
-        print("year1", year)
         if request.GET.get('month') and request.GET.get('year'):
             month = int(request.GET.get('month'))
             year = int(request.GET.get('year'))
-        print("month2", month)
-        print("year2", year)
         lessons = yoga_class.lessons.filter(
             date__month=month, date__year=year)
-        print("lessons", lessons)
-        context['lessons'] = lessons
-        context['month'] = int(month)
-        context['year'] = int(year)
+        number_of_taught_lessons = 0
+        for lesson in lessons:
+            if lesson.check_having_trainer is True and lesson.substitute_trainer is None:
+                number_of_taught_lessons += 1
+        total_salary_in_month = number_of_taught_lessons * \
+            yoga_class.get_wages_per_lesson()
+        context = {
+            'yoga_class': yoga_class,
+            'trainer': trainer,
+            'sidebar_profile': 'trainers-yoga-classes',
+            'lessons': lessons,
+            'month': int(month),
+            'year': int(year),
+            'number_of_taught_lessons': number_of_taught_lessons,
+            'total_salary_in_month': total_salary_in_month
+        }
         return render(request, self.template_name, context=context)

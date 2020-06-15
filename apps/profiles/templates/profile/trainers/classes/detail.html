@@ -2,6 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% load crispy_forms_tags %}
+{% load sexify %}
 
 {% block additional_css %}
 <style>
@@ -84,10 +85,30 @@
                     <td>{{lesson.date}}</td>
                     <td>{{lesson.room}}</td>
                     <td>
-                        <span class="badge badge-success badge-pill">đã dạy</span>
+                        {% if lesson.check_having_trainer is True %}
+                            {% if lesson.substitute_trainer is None %}
+                            <span class="badge badge-success badge-pill">đã dạy</span>
+                            {% else %}
+                            <span class="badge badge-warning badge-pill">dạy thay bởi {{ lesson.substitute_trainer }}</span>
+                            {% endif %}
+                        {% else %}
+                        <span class="badge badge-secondary badge-pill">chưa dạy</span>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
+                <tr>
+                    <td colspan="4"><span class="text-danger">Tổng số buổi đã dạy</span></td>
+                    <td>{{ number_of_taught_lessons }}</td>
+                </tr>
+                <tr>
+                    <td colspan="4"><span class="text-danger">Tiền lương một buổi</span></td>
+                    <td>{{ yoga_class.get_wages_per_lesson | sexy_number }}đ</td>
+                </tr>
+                <tr>
+                    <td colspan="4"><span class="text-danger">Tiền lương tổng cộng trong tháng</span></td>
+                    <td>{{ total_salary_in_month | sexy_number }}đ</td>
+                </tr>
             </tbody>
         </table>
 

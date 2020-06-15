@@ -72,6 +72,12 @@ class YogaClass(models.Model):
             date__range=[s, s + timedelta(days=6)]).order_by('date')
         return result
 
+    def get_wages_per_lesson(self):
+        if self.wages_per_lesson is None:
+            return self.course.wages_per_lesson
+        else:
+            return self.wages_per_lesson
+
 
 class PaymentPeriod(models.Model):
     yoga_class = models.ForeignKey(
