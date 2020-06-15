@@ -95,9 +95,7 @@
                     <thead>
                         <tr class="table-success">
                             <th><small>#</small></th>
-                            <th><small>{% trans 'image' as t_img %}{{ t_img|capfirst }}</small></th>
                             <th><small>{% trans 'name' as t_name %}{{ t_name|capfirst }}</small></th>
-                            <th><small>{% trans 'description' as t_description %}{{ t_description|capfirst }}</small></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -105,11 +103,7 @@
                         {% for certificate in certificate_user_obj.certificates.all %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>
-                                <img class="img img-fluid" width="50" src="{{ certificate.image.url }}" alt="{{ certificate.name }}">
-                            </td>
                             <td>{{ certificate.name }}</td>
-                            <td>{{ certificate.description }}</td>
                             <td><a href="javascript:;">Chỉnh sửa</a></td>
                         </tr>
                         {% endfor %}
