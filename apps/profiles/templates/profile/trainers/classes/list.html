@@ -1,0 +1,52 @@
+{% extends 'profile/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/profile/trainees/cards/style.css' %}">
+{% endblock %}
+
+
+{% block header_path %}
+<a class="text-danger" href="javascript:;">
+    &raquo; Danh sách lớp dạy
+</a>
+{% endblock %}
+
+{% block profile_content %}
+{% if yoga_classes %}
+{% for yoga_class in yoga_classes %}
+<div class="event-item">
+    <div class="ei-img">
+        {% if yoga_class.image %}
+        <img src="{{ yoga_class.image.url }}" height="280" alt="{{ card }}">
+        {% else %}
+        <img src="{{ yoga_class.course.image.url }}" height="280" alt="{{ card }}">
+        {% endif %}
+    </div>
+    <div class="ei-text">
+        <h4><a href="{% url 'profile:trainers-yoga-classes-detail' yoga_class.slug %}">{{ yoga_class }}</a></h4>
+        <ul>
+            </li>
+            <li><i class="material-icons">done</i>Khóa học: <span class="text-danger">{{ yoga_class.course }}</span>
+            </li>
+            <li><i class="material-icons">done</i>Huấn luyện viên: <span
+                    class="text-danger">{{ yoga_class.trainer }}</span></li>
+            <li>
+                <a class="site-btn site-btn-sm sb-gradient m-1"
+                    href="{% url 'profile:trainers-yoga-classes-detail' yoga_class.slug %}">Chi tiết</a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endfor%}
+{% else %}
+<h3 class="text-danger">Không có lớp nào</h3>
+{% endif %}
+
+
+{% endblock %}
+
+{% block specified_js %}
+{% endblock %}

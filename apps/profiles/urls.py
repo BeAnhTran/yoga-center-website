@@ -27,4 +27,9 @@ urlpatterns = [
          name='profile-trainee-card-refunds-detail'),
     path('accounts/cards/<int:card_id>/refunds/<int:pk>/delete', profile_trainee_view.detele_refund_request,
          name='profile-trainee-card-refunds-delete'),
+    # ----- TRAINER ----- #
+    path('trainers/yoga-classes/',
+         profile_trainer_view.TrainerYogaClassView.as_view(), name='trainers-yoga-classes'),
+    path('trainers/yoga-classes/<slug:slug>/',
+         profile_trainer_view.TrainerYogaClassDetailView.as_view(), name='trainers-yoga-classes-detail'),
 ]
