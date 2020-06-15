@@ -167,3 +167,6 @@ class TrainerLesson(models.Model):
         auto_now_add=True, verbose_name=_('created at'))
     updated_at = models.DateTimeField(
         auto_now=True, blank=True, null=True, verbose_name=_('updated at'))
+
+    class Meta:
+        unique_together = (('trainer', 'lesson'),)

@@ -55,7 +55,7 @@ class TrainerYogaClassDetailView(View):
             date__month=month, date__year=year)
         number_of_taught_lessons = 0
         for lesson in lessons:
-            if lesson.check_having_trainer is True and lesson.substitute_trainer is None:
+            if lesson.check_having_trainer() is True and lesson.substitute_trainer is None:
                 number_of_taught_lessons += 1
         total_salary_in_month = number_of_taught_lessons * \
             yoga_class.get_wages_per_lesson()

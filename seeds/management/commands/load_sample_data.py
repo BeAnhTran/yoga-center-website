@@ -33,6 +33,7 @@ from apps.shop.models import ProductCategory, Product
 from random import randint
 import uuid
 from apps.card_invoices.models import PREPAID, POSTPAID
+from dateutil.relativedelta import relativedelta
 
 
 class Command(BaseCommand):
@@ -40,7 +41,10 @@ class Command(BaseCommand):
     @transaction.atomic
     def handle(self, **options):
         today = timezone.now()
-        start_of_week = today - timedelta(days=today.weekday())  # Monday
+        this_month = today.date().month
+        last_month = this_month - 1
+        last_date = datetime(today.date().year, last_month, 1)
+        start_of_week = last_date - timedelta(days=last_date.weekday())  # Monday
         end_of_week = start_of_week + timedelta(days=6)  # Sunday
 
         ############# DAY IN CURRENT WEEK ###########
@@ -636,7 +640,7 @@ class Command(BaseCommand):
         basic_yoga_course_lectures = basic_yoga_course.lectures.all()
         basic_yoga_course_lectures_count = basic_yoga_course_lectures.count()
 
-        number_of_weeks = 12
+        number_of_weeks = 20
         basic_yoga_class_co_man_5h30_t246 = basic_yoga_course.classes.create(
             name='Lớp cơ bản cô Mận 5h30 sáng 2-4-6',
             price_per_lesson=50000,
@@ -688,6 +692,13 @@ class Command(BaseCommand):
             l3.lectures.add(basic_yoga_course_lectures[randint(
                 0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_man_5h30_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_man)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_man)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_man)
         # add-trainees
         self.__enroll('Dung', 'Lê Thị Hoàng', 'lethihoangdung1@gmail.com', basic_yoga_class_co_man_5h30_t246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[0:10])
@@ -760,6 +771,13 @@ class Command(BaseCommand):
             l3.lectures.add(basic_yoga_course_lectures[randint(
                 0, basic_yoga_course_lectures_count - 1)])
             arr_lessons_basic_yoga_class_co_hang_nga_5h30_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_hang_nga)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_hang_nga)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_hang_nga)
         # add-trainees
         self.__enroll('Phương', 'Nguyễn Thị', 'nguyenthiphuong1@gmail.com', basic_yoga_class_co_hang_nga_5h30_246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_hang_nga_5h30_246[0:10])
@@ -816,6 +834,13 @@ class Command(BaseCommand):
                 "end_time": t_8h
             })
             arr_lessons_intermediate_yoga_class_co_man_7h_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_man)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_man)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_man)
         # add-trainees
         self.__enroll('Nhi', 'Võ Thị', 'vothinhi1@gmail.com', intermediate_yoga_class_co_man_7h_246,
                       period_lessons_card_type, arr_lessons_intermediate_yoga_class_co_man_7h_246[0:10])
@@ -890,6 +915,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_nhu_15h_246.append(l1)
             arr_lessons_basic_yoga_class_co_nhu_15h_246.append(l2)
             arr_lessons_basic_yoga_class_co_nhu_15h_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_nhu)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_nhu)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_nhu)
         # add-trainees
         self.__enroll('Nga', 'Từ Thị Nguyệt', 'tuthinguyetnga1@gmail.com', basic_yoga_class_co_nhu_15h_246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_15h_246[0:10])
@@ -960,6 +992,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_man_15h_246.append(l1)
             arr_lessons_basic_yoga_class_co_man_15h_246.append(l2)
             arr_lessons_basic_yoga_class_co_man_15h_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_man)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_man)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_man)
         # add-trainees
         self.__enroll('Hồng', 'Phạm Thị Anh', 'phamthianhhong1@gmail.com', basic_yoga_class_co_man_15h_246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_15h_246[0:10])
@@ -1013,6 +1052,13 @@ class Command(BaseCommand):
             arr_lessons_intermediate_yoga_class_co_ngung_15h_246.append(l1)
             arr_lessons_intermediate_yoga_class_co_ngung_15h_246.append(l2)
             arr_lessons_intermediate_yoga_class_co_ngung_15h_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_ngung)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_ngung)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_ngung)
         # add-trainees
         self.__enroll('Hà', 'Nguyễn Thị Thanh', 'nguyenthithanhha1@gmail.com', intermediate_yoga_class_co_ngung_15h_246,
                       period_lessons_card_type, arr_lessons_intermediate_yoga_class_co_ngung_15h_246[0:10])
@@ -1086,6 +1132,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_nhu_17h_246.append(l1)
             arr_lessons_basic_yoga_class_co_nhu_17h_246.append(l2)
             arr_lessons_basic_yoga_class_co_nhu_17h_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_nhu)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_nhu)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_nhu)
         # add-trainees
         self.__enroll('Trâm', 'Đèo Nguyễn Mai', 'deonguyenmaitram1@gmail.com', basic_yoga_class_co_nhu_17h_246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_17h_246[0:10])
@@ -1157,6 +1210,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_kieu_17h30_246.append(l1)
             arr_lessons_basic_yoga_class_co_kieu_17h30_246.append(l2)
             arr_lessons_basic_yoga_class_co_kieu_17h30_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_kieu)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_kieu)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_kieu)
         # add-trainees
         self.__enroll('Cương', 'Trần Thị Kim', 'tranthikimcuong1@gmail.com', basic_yoga_class_co_kieu_17h30_246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h30_246[0:10])
@@ -1228,6 +1288,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_nhu_18h15_246.append(l1)
             arr_lessons_basic_yoga_class_co_nhu_18h15_246.append(l2)
             arr_lessons_basic_yoga_class_co_nhu_18h15_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_nhu)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_nhu)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_nhu)
         # add-trainees
         self.__enroll('Tâm', 'Hồ Thị Minh', 'hothiminhtam1@gmail.com', basic_yoga_class_co_nhu_18h15_246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_18h15_246[0:10])
@@ -1303,6 +1370,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_xuan_18h35_246.append(l1)
             arr_lessons_basic_yoga_class_co_xuan_18h35_246.append(l2)
             arr_lessons_basic_yoga_class_co_xuan_18h35_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_xuan)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_xuan)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_xuan)
         # add-trainees
         self.__enroll('Anh', 'Ngô Vân', 'ngovananh1@gmail.com', basic_yoga_class_co_xuan_18h35_246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_xuan_18h35_246[0:10])
@@ -1384,6 +1458,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_thuy_19h_246.append(l1)
             arr_lessons_basic_yoga_class_co_thuy_19h_246.append(l2)
             arr_lessons_basic_yoga_class_co_thuy_19h_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_thuy)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_thuy)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_thuy)
         # add-trainees
         self.__enroll('Phương', 'Trần Thị Thanh', 'tranthithanhphuong1@gmail.com', basic_yoga_class_co_thuy_19h_246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_19h_246[0:10])
@@ -1457,6 +1538,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_nhan_19h30_246.append(l1)
             arr_lessons_basic_yoga_class_co_nhan_19h30_246.append(l2)
             arr_lessons_basic_yoga_class_co_nhan_19h30_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_nhan)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_nhan)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_nhan)
         # add-trainees
         self.__enroll('Thảo', 'Đặng Hoàng', 'danghoangthao1@gmail.com', basic_yoga_class_co_nhan_19h30_246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:10])
@@ -1482,59 +1570,66 @@ class Command(BaseCommand):
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_nhan_19h30_246[0:24])
         # end add-trainees
 
-        advanced_yoga_class_co_nhan_19h30_246 = advanced_yoga_course.classes.create(
+        advanced_yoga_class_co_tra_my_19h30_246 = advanced_yoga_course.classes.create(
             name='Lớp nâng cao cô Trà My 19h30 tối 2-4-6',
             price_per_lesson=50000,
             price_per_month=600000,
             trainer=co_tra_my,
         )
-        arr_lessons_advanced_yoga_class_co_nhan_19h30_246 = []
+        arr_lessons_advanced_yoga_class_co_tra_my_19h30_246 = []
         for i in range(0, number_of_weeks):
             count_weeks = 7 * i
-            l1 = advanced_yoga_class_co_nhan_19h30_246.lessons.create(**{
+            l1 = advanced_yoga_class_co_tra_my_19h30_246.lessons.create(**{
                 "room_id": room4.pk,
                 "date": monday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
-            l2 = advanced_yoga_class_co_nhan_19h30_246.lessons.create(**{
+            l2 = advanced_yoga_class_co_tra_my_19h30_246.lessons.create(**{
                 "room_id": room4.pk,
                 "date": wednesday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
-            l3 = advanced_yoga_class_co_nhan_19h30_246.lessons.create(**{
+            l3 = advanced_yoga_class_co_tra_my_19h30_246.lessons.create(**{
                 "room_id": room4.pk,
                 "date": friday + timedelta(days=count_weeks),
                 "start_time": t_19h30,
                 "end_time": t_20h30
             })
-            arr_lessons_advanced_yoga_class_co_nhan_19h30_246.append(l1)
-            arr_lessons_advanced_yoga_class_co_nhan_19h30_246.append(l2)
-            arr_lessons_advanced_yoga_class_co_nhan_19h30_246.append(l3)
+            arr_lessons_advanced_yoga_class_co_tra_my_19h30_246.append(l1)
+            arr_lessons_advanced_yoga_class_co_tra_my_19h30_246.append(l2)
+            arr_lessons_advanced_yoga_class_co_tra_my_19h30_246.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_tra_my)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_tra_my)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_tra_my)
         # add-trainees
-        self.__enroll('Thư', 'Huỳnh', 'thuhuynh1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
-                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:10])
-        self.__enroll('Huyền', 'Tô Nam', 'tonamhuyen1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
-                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:12])
-        self.__enroll('Vỹ', 'Nguyễn Đình', 'nguyendinhvy1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
-                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246)
-        self.__enroll('Anh', 'Nguyễn Thành Thoại', 'nguyenthanhthoaianh1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
-                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:18])
-        self.__enroll('Thi', 'Nguyễn Thị Anh', 'nguyenthianhthi1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
-                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:18])
-        self.__enroll('Thủy', 'Lê Thị', 'lethithuy1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
-                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:18])
-        self.__enroll('Hoa', 'Nguyễn Thị', 'nguyenthihoa1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
-                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:18])
-        self.__enroll('Tố', 'Lê Thị Linh', 'lethilinhto1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
-                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:18])
-        self.__enroll('Huệ', 'Đài Thị Tuyết', 'daithituyethue1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
-                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:24])
-        self.__enroll('Hương', 'Nguyễn Thu', 'nguyenthuhuong1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
-                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:24])
-        self.__enroll('Thảo', 'Lê Trương Phương', 'letruongphuongthao1@gmail.com', advanced_yoga_class_co_nhan_19h30_246,
-                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_nhan_19h30_246[0:24])
+        self.__enroll('Thư', 'Huỳnh', 'thuhuynh1@gmail.com', advanced_yoga_class_co_tra_my_19h30_246,
+                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_tra_my_19h30_246[0:10])
+        self.__enroll('Huyền', 'Tô Nam', 'tonamhuyen1@gmail.com', advanced_yoga_class_co_tra_my_19h30_246,
+                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_tra_my_19h30_246[0:12])
+        self.__enroll('Vỹ', 'Nguyễn Đình', 'nguyendinhvy1@gmail.com', advanced_yoga_class_co_tra_my_19h30_246,
+                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_tra_my_19h30_246)
+        self.__enroll('Anh', 'Nguyễn Thành Thoại', 'nguyenthanhthoaianh1@gmail.com', advanced_yoga_class_co_tra_my_19h30_246,
+                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_tra_my_19h30_246[0:18])
+        self.__enroll('Thi', 'Nguyễn Thị Anh', 'nguyenthianhthi1@gmail.com', advanced_yoga_class_co_tra_my_19h30_246,
+                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_tra_my_19h30_246[0:18])
+        self.__enroll('Thủy', 'Lê Thị', 'lethithuy1@gmail.com', advanced_yoga_class_co_tra_my_19h30_246,
+                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_tra_my_19h30_246[0:18])
+        self.__enroll('Hoa', 'Nguyễn Thị', 'nguyenthihoa1@gmail.com', advanced_yoga_class_co_tra_my_19h30_246,
+                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_tra_my_19h30_246[0:18])
+        self.__enroll('Tố', 'Lê Thị Linh', 'lethilinhto1@gmail.com', advanced_yoga_class_co_tra_my_19h30_246,
+                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_tra_my_19h30_246[0:18])
+        self.__enroll('Huệ', 'Đài Thị Tuyết', 'daithituyethue1@gmail.com', advanced_yoga_class_co_tra_my_19h30_246,
+                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_tra_my_19h30_246[0:24])
+        self.__enroll('Hương', 'Nguyễn Thu', 'nguyenthuhuong1@gmail.com', advanced_yoga_class_co_tra_my_19h30_246,
+                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_tra_my_19h30_246[0:24])
+        self.__enroll('Thảo', 'Lê Trương Phương', 'letruongphuongthao1@gmail.com', advanced_yoga_class_co_tra_my_19h30_246,
+                      period_lessons_card_type, arr_lessons_advanced_yoga_class_co_tra_my_19h30_246[0:24])
         # end add-trainees
 
         t_6h = '06:00'
@@ -1587,6 +1682,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_nhu_6h_357.append(l1)
             arr_lessons_basic_yoga_class_co_nhu_6h_357.append(l2)
             arr_lessons_basic_yoga_class_co_nhu_6h_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_nhu)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_nhu)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_nhu)
         # add-trainees
         self.__enroll('My', 'Phạm Đỗ Trà', 'phamdotramy1@gmail.com', basic_yoga_class_co_nhu_6h_357,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_nhu_6h_357[0:10])
@@ -1642,6 +1744,13 @@ class Command(BaseCommand):
             arr_lessons_advanced_yoga_class_thay_tien_6h_357.append(l1)
             arr_lessons_advanced_yoga_class_thay_tien_6h_357.append(l2)
             arr_lessons_advanced_yoga_class_thay_tien_6h_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=thay_tien)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=thay_tien)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=thay_tien)
         # add-trainees
         self.__enroll('Diệu', 'Đinh Thị', 'dinhthidieu1@gmail.com', advanced_yoga_class_thay_tien_6h_357,
                       period_lessons_card_type, arr_lessons_advanced_yoga_class_thay_tien_6h_357[0:10])
@@ -1715,6 +1824,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_phuong_9h_357.append(l1)
             arr_lessons_basic_yoga_class_co_phuong_9h_357.append(l2)
             arr_lessons_basic_yoga_class_co_phuong_9h_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_phuong)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_phuong)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_phuong)
         # add-trainees
         self.__enroll('Minh', 'Hoàng Cẩm', 'hoangcamminh1@gmail.com', basic_yoga_class_co_phuong_9h_357,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_9h_357[0:10])
@@ -1784,6 +1900,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_thuy_15h_357.append(l1)
             arr_lessons_basic_yoga_class_co_thuy_15h_357.append(l2)
             arr_lessons_basic_yoga_class_co_thuy_15h_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_thuy)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_thuy)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_thuy)
         # add-trainees
         self.__enroll('Chánh', 'Nguyễn Thị', 'nguyenthichanh1@gmail.com', basic_yoga_class_co_thuy_15h_357,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_thuy_15h_357[0:10])
@@ -1855,6 +1978,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_quyen_15h_357.append(l1)
             arr_lessons_basic_yoga_class_co_quyen_15h_357.append(l2)
             arr_lessons_basic_yoga_class_co_quyen_15h_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_quyen)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_quyen)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_quyen)
 
         # add-trainees
         self.__enroll('Loan', 'Trần Thị Kim', 'tranthikimloan1@gmail.com', basic_yoga_class_co_quyen_15h_357,
@@ -1905,6 +2035,13 @@ class Command(BaseCommand):
             arr_lessons_intermediate_yoga_class_thay_tan_15h_357.append(l1)
             arr_lessons_intermediate_yoga_class_thay_tan_15h_357.append(l2)
             arr_lessons_intermediate_yoga_class_thay_tan_15h_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=thay_tan)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=thay_tan)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=thay_tan)
         # add-trainees
         self.__enroll('Hồng', 'Nguyễn Thị Tuyết', 'nguyenthituyethong1@gmail.com', intermediate_yoga_class_thay_tan_15h_357,
                       period_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_tan_15h_357[0:10])
@@ -1962,6 +2099,13 @@ class Command(BaseCommand):
             arr_lessons_intermediate_yoga_class_thay_thien_17h_357.append(l1)
             arr_lessons_intermediate_yoga_class_thay_thien_17h_357.append(l2)
             arr_lessons_intermediate_yoga_class_thay_thien_17h_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=thay_thien)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=thay_thien)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=thay_thien)
         # add-trainees
         self.__enroll('Dung', 'Hồ Thị Phương', 'hothiphuongdung1@gmail.com', intermediate_yoga_class_thay_thien_17h_357,
                       period_lessons_card_type, arr_lessons_intermediate_yoga_class_thay_thien_17h_357[0:10])
@@ -2031,6 +2175,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_kieu_17h_357.append(l1)
             arr_lessons_basic_yoga_class_co_kieu_17h_357.append(l2)
             arr_lessons_basic_yoga_class_co_kieu_17h_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_kieu)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_kieu)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_kieu)
         # add-trainees
         self.__enroll('Nga', 'Nguyễn Hồng Bích', 'nguyenhongbichnga1@gmail.com', basic_yoga_class_co_kieu_17h_357,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_kieu_17h_357[0:10])
@@ -2100,6 +2251,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_tra_my_16h30_357.append(l1)
             arr_lessons_basic_yoga_class_co_tra_my_16h30_357.append(l2)
             arr_lessons_basic_yoga_class_co_tra_my_16h30_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_tra_my)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_tra_my)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_tra_my)
         # add-trainees
         self.__enroll('An', 'Lê Thị Vân', 'lethivanan1@gmail.com', basic_yoga_class_co_tra_my_16h30_357,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_tra_my_16h30_357[0:10])
@@ -2167,6 +2325,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_phuong_17h30_357.append(l1)
             arr_lessons_basic_yoga_class_co_phuong_17h30_357.append(l2)
             arr_lessons_basic_yoga_class_co_phuong_17h30_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_phuong)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_phuong)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_phuong)
         # add-trainees
         self.__enroll('Quyên', 'Nguyễn Vũ Ngọc', 'nguyenvungocquyen1@gmail.com', basic_yoga_class_co_phuong_17h30_357,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_phuong_17h30_357[0:10])
@@ -2236,6 +2401,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357.append(l1)
             arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357.append(l2)
             arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_vo_hanh)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_vo_hanh)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_vo_hanh)
         # add-trainees
         self.__enroll('Tâm', 'Nguyễn Ngọc', 'nguyenngoctam1@gmail.com', basic_yoga_class_co_vo_hanh_18h15_357,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_18h15_357[0:10])
@@ -2303,6 +2475,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_man_18h15_357.append(l1)
             arr_lessons_basic_yoga_class_co_man_18h15_357.append(l2)
             arr_lessons_basic_yoga_class_co_man_18h15_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_man)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_man)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_man)
         # add-trainees
         self.__enroll('Sang', 'Lữ Đình', 'ludinhsang1@gmail.com', basic_yoga_class_co_man_18h15_357,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_18h15_357[0:10])
@@ -2368,6 +2547,13 @@ class Command(BaseCommand):
             arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357.append(l1)
             arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357.append(l2)
             arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357.append(l3)
+            # NOTE: Add taught lessons default
+            if l1.is_in_the_past():
+                l1.taught.create(trainer=co_vo_hanh)
+            if l2.is_in_the_past():
+                l2.taught.create(trainer=co_vo_hanh)
+            if l3.is_in_the_past():
+                l3.taught.create(trainer=co_vo_hanh)
         # add-trainees
         self.__enroll('Hằng', 'Trần Thị Thu', 'tranthithuhang1@gmail.com', basic_yoga_class_co_vo_hanh_19h30_357,
                       some_lessons_card_type, arr_lessons_basic_yoga_class_co_vo_hanh_19h30_357[0:10])
@@ -2391,29 +2577,32 @@ class Command(BaseCommand):
 
         # TRAINING CLASS
         t_21h = '21:00'
+        _today = timezone.now()
+        _start_of_week = _today - timedelta(days=_today.weekday())  # Monday
+        _saturday = (_start_of_week + timedelta(days=5)).date()
         training_class_thay_hoang_anh = training_yoga_trainer_course.classes.create(
             name='Lớp đào tạo thầy Hoàng Anh 18h tối thứ 7',
             price_for_training_class=15000000,
-            start_at=saturday + timedelta(days=14),
+            start_at=_saturday + timedelta(days=14),
             trainer=thay_hoang_anh,
         )
         for i in range(0, 12):
             count_date = 7 * i + 14
             training_class_thay_hoang_anh.lessons.create(**{
                 "room_id": room3.pk,
-                "date": saturday + timedelta(days=count_date),
+                "date": _saturday + timedelta(days=count_date),
                 "start_time": t_18h,
                 "end_time": t_21h
             })
         training_class_thay_hoang_anh.payment_periods.create(**{
             'name': 'Đợt thanh toán 1',
             'amount': 7500000,
-            'end_at': saturday + timedelta(days=14)
+            'end_at': _saturday + timedelta(days=14)
         })
         training_class_thay_hoang_anh.payment_periods.create(**{
             'name': 'Đợt thanh toán 2',
             'amount': 7500000,
-            'end_at': saturday + timedelta(days=(14 + 7*7))
+            'end_at': _saturday + timedelta(days=(14 + 7*7))
         })
 
     def __add_basic_lectures(self, course):

@@ -14,6 +14,7 @@
         font-weight: 600;
         font-family: serif;
         text-decoration: underline;
+        cursor: pointer;
     }
 </style>
 {% endblock %}
@@ -29,6 +30,13 @@
 {% endblock %}
 
 {% block profile_content %}
+<div class="row mb-3">
+    <div class="col">
+        <h3 style="font-size: 24px;">
+            <span class="text-danger">{{yoga_class}}</span>
+        </h3>
+    </div>
+</div>
 <div class="row">
     <div class="col">
         <form class="form-inline" action="." method="GET">
@@ -63,7 +71,9 @@
 </div>
 <div class="row">
     <div class="container mt-3 mb-3">
-        <h3 style="font-size: 24px;">Danh sách buổi dạy trong {{ month }} - {{ year }}</h3>
+        <h3 style="font-size: 24px;">
+            Danh sách buổi dạy trong tháng {{ month }}/{{ year }}
+        </h3>
     </div>
     <div class="col">
         {% if lessons %}
