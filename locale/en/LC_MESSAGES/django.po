@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-13 10:44+0700\n"
+"POT-Creation-Date: 2020-06-15 21:10+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\apps\absence_applications\models.py:10 .\apps\accounts\models.py:115
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:204
 #: .\apps\refunds\models.py:25
-#: .\templates\profile\trainees\cards\detail.html:204
 msgid "reason"
 msgstr ""
 
 #: .\apps\absence_applications\models.py:12 .\apps\accounts\models.py:121
 #: .\apps\card_invoices\models.py:37 .\apps\card_types\models.py:29
 #: .\apps\cards\models.py:24 .\apps\classes\models.py:34
-#: .\apps\classes\models.py:83 .\apps\courses\models.py:52
+#: .\apps\classes\models.py:89 .\apps\courses\models.py:52
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:73
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:33
 #: .\apps\dashboard\templates\dashboard\promotions\codes\list.html:34
@@ -46,7 +46,7 @@ msgstr ""
 #: .\apps\absence_applications\models.py:14 .\apps\accounts\models.py:123
 #: .\apps\card_invoices\models.py:39 .\apps\card_types\models.py:31
 #: .\apps\cards\models.py:26 .\apps\classes\models.py:36
-#: .\apps\classes\models.py:85 .\apps\courses\models.py:54
+#: .\apps\classes\models.py:91 .\apps\courses\models.py:54
 #: .\apps\donations\models.py:18 .\apps\events\models.py:21
 #: .\apps\feedback\models.py:15 .\apps\lectures\models.py:18
 #: .\apps\lessons\models.py:46 .\apps\lessons\models.py:169
@@ -226,7 +226,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:36
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:38
 #: .\apps\events\models.py:12 .\apps\promotions\models.py:21
-#: .\apps\shop\models.py:15 .\templates\profile\index.html:98
+#: .\apps\shop\models.py:15
 msgid "image"
 msgstr ""
 
@@ -235,7 +235,7 @@ msgid "updated_at"
 msgstr "updated at"
 
 #: .\apps\accounts\models.py:88 .\apps\card_types\models.py:20
-#: .\apps\classes\models.py:16 .\apps\classes\models.py:79
+#: .\apps\classes\models.py:16 .\apps\classes\models.py:85
 #: .\apps\classes\templates\payment.html:67 .\apps\courses\models.py:31
 #: .\apps\dashboard\templates\dashboard\admins\list.html:32
 #: .\apps\dashboard\templates\dashboard\blog\categories\list.html:28
@@ -255,10 +255,10 @@ msgstr "updated at"
 #: .\apps\donations\models.py:6
 #: .\apps\donations\templates\donations\index.html:81 .\apps\events\models.py:8
 #: .\apps\lectures\models.py:12 .\apps\profiles\forms\certificate_form.py:14
+#: .\apps\profiles\templates\profile\index.html:98
 #: .\apps\promotions\models.py:14 .\apps\rooms\models.py:14
 #: .\apps\shop\models.py:11 .\apps\shop\models.py:33
 #: .\apps\shop\templates\shop\checkout.html:43
-#: .\templates\profile\index.html:99
 msgid "name"
 msgstr ""
 
@@ -272,7 +272,6 @@ msgstr ""
 #: .\apps\lectures\models.py:14 .\apps\profiles\forms\certificate_form.py:17
 #: .\apps\promotions\models.py:17 .\apps\rooms\models.py:18
 #: .\apps\shop\models.py:13 .\apps\shop\models.py:54
-#: .\templates\profile\index.html:100
 msgid "description"
 msgstr ""
 
@@ -295,8 +294,8 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\rooms\detail.html:26
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:32
 #: .\apps\lessons\models.py:33 .\apps\lessons\models.py:165
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:171
 #: .\apps\refunds\models.py:27 .\apps\rooms\models.py:21
-#: .\templates\profile\trainees\cards\detail.html:171
 msgid "state"
 msgstr ""
 
@@ -308,7 +307,8 @@ msgstr ""
 msgid "back at"
 msgstr ""
 
-#: .\apps\accounts\models.py:135 .\templates\profile\index.html:66
+#: .\apps\accounts\models.py:135
+#: .\apps\profiles\templates\profile\index.html:66
 msgid "health condition"
 msgstr ""
 
@@ -325,6 +325,7 @@ msgid "achievements"
 msgstr ""
 
 #: .\apps\accounts\models.py:156 .\apps\accounts\models.py:181
+#: .\apps\profiles\templates\profile\base.html:61
 msgid "certificate"
 msgstr ""
 
@@ -408,7 +409,7 @@ msgstr ""
 #: .\apps\blog\templates\blog\post_list.html:26
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:17
 #: .\apps\dashboard\templates\dashboard\blog\posts\new.html:9
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:162
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:168
 msgid "post"
 msgstr ""
 
@@ -431,14 +432,14 @@ msgstr ""
 msgid "Prepaid"
 msgstr ""
 
-#: .\apps\card_invoices\models.py:15 .\apps\classes\views.py:419
+#: .\apps\card_invoices\models.py:15 .\apps\classes\views.py:420
 msgid "Postpaid"
 msgstr ""
 
 #: .\apps\card_invoices\models.py:21
 #: .\apps\dashboard\templates\dashboard\cards\list.html:21
 #: .\apps\refunds\models.py:21 .\apps\roll_calls\models.py:14
-#: .\templates\layouts\header.html:58
+#: .\templates\layouts\header.html:56
 msgid "card"
 msgstr ""
 
@@ -446,7 +447,7 @@ msgstr ""
 msgid "payment period"
 msgstr ""
 
-#: .\apps\card_invoices\models.py:27 .\apps\classes\models.py:80
+#: .\apps\card_invoices\models.py:27 .\apps\classes\models.py:86
 #: .\apps\dashboard\templates\dashboard\requests\refund_requests\list.html:28
 #: .\apps\donations\models.py:12
 #: .\apps\donations\templates\donations\index.html:109
@@ -598,7 +599,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:13
 #: .\apps\lessons\models.py:161 .\apps\trainers\templates\trainers\list.html:17
 #: .\apps\trainers\templates\trainers\list.html:26
-#: .\templates\layouts\header.html:111 .\templates\registration\signup.html:35
+#: .\templates\layouts\header.html:109 .\templates\registration\signup.html:35
 msgid "trainer"
 msgstr ""
 
@@ -634,7 +635,7 @@ msgstr ""
 msgid "start at"
 msgstr ""
 
-#: .\apps\classes\models.py:29 .\apps\classes\models.py:81
+#: .\apps\classes\models.py:29 .\apps\classes\models.py:87
 #: .\apps\dashboard\forms\classes_form.py:35
 #: .\apps\dashboard\templates\dashboard\classes\show.html:48
 #: .\apps\dashboard\templates\dashboard\promotions\list.html:31
@@ -646,12 +647,12 @@ msgstr ""
 msgid "wages per lesson"
 msgstr ""
 
-#: .\apps\classes\models.py:78
+#: .\apps\classes\models.py:84
 #: .\apps\dashboard\templates\dashboard\cards\new\index.html:16
 #: .\apps\dashboard\templates\dashboard\classes\list.html:22
 #: .\apps\dashboard\templates\dashboard\classes\new.html:14
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:287
-#: .\templates\profile\trainees\cards\detail.html:163
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:163
 msgid "class"
 msgstr ""
 
@@ -710,7 +711,7 @@ msgstr "price of course"
 #: .\apps\classes\templates\classes\enroll.html:188
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:50
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:71
-#: .\templates\profile\trainees\cards\detail.html:56
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:56
 msgid "Card type"
 msgstr ""
 
@@ -739,7 +740,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:77
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:90
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:95
-#: .\templates\profile\trainees\cards\detail.html:86
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:86
 msgid "Lesson List"
 msgstr ""
 
@@ -781,13 +782,13 @@ msgstr ""
 #: .\apps\classes\templates\classes\enroll.html:593
 #: .\apps\classes\templates\classes\enroll.html:600
 #: .\apps\classes\templates\classes\enroll.html:609
-#: .\apps\classes\templates\payment.html:451
-#: .\apps\classes\templates\payment.html:460
-#: .\apps\classes\templates\payment.html:469
-#: .\apps\classes\templates\payment.html:490
-#: .\apps\classes\templates\payment.html:497
-#: .\apps\classes\templates\payment.html:511
-#: .\apps\classes\templates\payment.html:563
+#: .\apps\classes\templates\payment.html:447
+#: .\apps\classes\templates\payment.html:456
+#: .\apps\classes\templates\payment.html:465
+#: .\apps\classes\templates\payment.html:486
+#: .\apps\classes\templates\payment.html:493
+#: .\apps\classes\templates\payment.html:507
+#: .\apps\classes\templates\payment.html:559
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:205
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:231
 #: .\apps\dashboard\templates\dashboard\cards\new\create.html:322
@@ -804,10 +805,11 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:711
 #: .\apps\dashboard\templates\dashboard\promotions\new.html:47
 #: .\apps\dashboard\templates\dashboard\promotions\new.html:155
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:420
+#: .\apps\profiles\templates\profile\trainees\cards\refunds\new.html:170
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:169
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:220
-#: .\templates\base.html:181 .\templates\profile\trainees\cards\detail.html:420
-#: .\templates\profile\trainees\cards\refunds\new.html:170
+#: .\templates\base.html:181
 msgid "error"
 msgstr ""
 
@@ -853,7 +855,7 @@ msgstr ""
 
 #: .\apps\classes\templates\classes\list.html:16
 #: .\apps\classes\templates\classes\list.html:28
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:81
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:87
 msgid "classes"
 msgstr ""
 
@@ -892,6 +894,10 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\classes\show.html:106
 #: .\apps\dashboard\templates\dashboard\index.html:48
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:296
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:164
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:168
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:172
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:200
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:49
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:53
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:57
@@ -900,10 +906,6 @@ msgstr ""
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:69
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:105
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:390
-#: .\templates\profile\trainees\cards\detail.html:164
-#: .\templates\profile\trainees\cards\detail.html:168
-#: .\templates\profile\trainees\cards\detail.html:172
-#: .\templates\profile\trainees\cards\detail.html:200
 msgid "have not updated yet"
 msgstr ""
 
@@ -929,7 +931,7 @@ msgstr ""
 msgid "Payment Info"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:42 .\apps\classes\views.py:380
+#: .\apps\classes\templates\payment.html:42 .\apps\classes\views.py:381
 msgid "Free Registration"
 msgstr ""
 
@@ -950,8 +952,8 @@ msgid "Payment Card"
 msgstr ""
 
 #: .\apps\classes\templates\payment.html:96
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:288
 #: .\apps\shop\templates\shop\checkout.html:88
-#: .\templates\profile\trainees\cards\detail.html:288
 msgid "Pay"
 msgstr ""
 
@@ -986,7 +988,7 @@ msgid "total price"
 msgstr ""
 
 #: .\apps\classes\templates\payment.html:218
-#: .\templates\profile\trainees\cards\detail.html:233
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:233
 msgid "Payment period"
 msgstr ""
 
@@ -1000,20 +1002,20 @@ msgstr "price of course"
 msgid "Your Lesson List"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:452
+#: .\apps\classes\templates\payment.html:448
 msgid "Pleae enter your name"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:461
+#: .\apps\classes\templates\payment.html:457
 msgid "Pleae enter your phone"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:470
+#: .\apps\classes\templates\payment.html:466
 msgid "Pleae enter your email"
 msgstr ""
 
-#: .\apps\classes\templates\payment.html:491
-#: .\apps\classes\templates\payment.html:498
+#: .\apps\classes\templates\payment.html:487
+#: .\apps\classes\templates\payment.html:494
 msgid "Pleae enter your Credit or debit card number infomation"
 msgstr ""
 
@@ -1035,8 +1037,8 @@ msgstr ""
 msgid "Your card detail information"
 msgstr ""
 
-#: .\apps\classes\templates\payment_result.html:41 .\apps\classes\views.py:405
-#: .\apps\classes\views.py:445 .\apps\classes\views.py:566
+#: .\apps\classes\templates\payment_result.html:41 .\apps\classes\views.py:406
+#: .\apps\classes\views.py:446 .\apps\classes\views.py:567
 #: .\apps\dashboard\views\cards_view.py:307
 msgid "An error occurred. Please try again later"
 msgstr ""
@@ -1050,7 +1052,7 @@ msgid "Back To Payment Page"
 msgstr ""
 
 #: .\apps\classes\views.py:161 .\apps\classes\views.py:205
-#: .\apps\classes\views.py:368 .\apps\classes\views.py:533
+#: .\apps\classes\views.py:369 .\apps\classes\views.py:534
 msgid "Pay all"
 msgstr ""
 
@@ -1064,28 +1066,28 @@ msgid ""
 "card."
 msgstr ""
 
-#: .\apps\classes\views.py:358
+#: .\apps\classes\views.py:359
 msgid "You dont have any info to payment. Please try again"
 msgstr ""
 
-#: .\apps\classes\views.py:399 .\apps\classes\views.py:429
+#: .\apps\classes\views.py:400 .\apps\classes\views.py:430
 #: .\apps\shop\views.py:189
 msgid "Card Payment"
 msgstr ""
 
-#: .\apps\classes\views.py:409
+#: .\apps\classes\views.py:410
 msgid "An error occurred. Please enter the right number of VisaCard"
 msgstr ""
 
-#: .\apps\classes\views.py:412
+#: .\apps\classes\views.py:413
 msgid "Pay card by Stripe"
 msgstr ""
 
-#: .\apps\classes\views.py:530
+#: .\apps\classes\views.py:531
 msgid "Momo Payment"
 msgstr ""
 
-#: .\apps\classes\views.py:615
+#: .\apps\classes\views.py:621
 msgid "Thank you for your register at Yoga Huong Tre"
 msgstr ""
 
@@ -1099,7 +1101,7 @@ msgstr ""
 
 #: .\apps\courses\models.py:30
 #: .\apps\dashboard\templates\dashboard\card_types\list.html:18
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:114
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:120
 msgid "card types"
 msgstr ""
 
@@ -1127,14 +1129,15 @@ msgstr ""
 
 #: .\apps\courses\templates\courses\list.html:8
 #: .\apps\courses\templates\courses\list.html:16
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:71
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:77
 msgid "courses"
 msgstr ""
 
 #: .\apps\courses\templates\courses\list.html:42
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:112
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:124
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:88
 #: .\templates\home\index.html:185
-#: .\templates\profile\trainees\cards\detail.html:112
-#: .\templates\profile\trainees\cards\detail.html:124
 msgid "detail"
 msgstr ""
 
@@ -1282,7 +1285,7 @@ msgid "location"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\admins\list.html:13
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:59
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:65
 msgid "admin"
 msgstr ""
 
@@ -1338,7 +1341,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:61
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:59
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:61
-#: .\templates\profile\trainees\cards\detail.html:348
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:348
 msgid "show"
 msgstr ""
 
@@ -1355,7 +1358,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:64
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:61
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:64
-#: .\templates\profile\trainees\cards\detail.html:353
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:353
 msgid "edit"
 msgstr ""
 
@@ -1377,7 +1380,7 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\staffs\list.html:67
 #: .\apps\dashboard\templates\dashboard\trainees\list.html:65
 #: .\apps\dashboard\templates\dashboard\trainers\list.html:67
-#: .\templates\profile\trainees\cards\detail.html:356
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:356
 msgid "delete"
 msgstr ""
 
@@ -1449,15 +1452,15 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\cards\list.html:88
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:275
-#: .\templates\profile\trainees\cards\detail.html:448
-#: .\templates\profile\trainees\cards\detail.html:464
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:448
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:464
 msgid "Are you sure?"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\cards\list.html:89
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:276
-#: .\templates\profile\trainees\cards\detail.html:449
-#: .\templates\profile\trainees\cards\detail.html:465
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:449
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:465
 msgid "You wont be able to revert this!"
 msgstr ""
 
@@ -1468,8 +1471,8 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\cards\list.html:95
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:282
-#: .\templates\profile\trainees\cards\detail.html:455
-#: .\templates\profile\trainees\cards\detail.html:471
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:455
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:471
 msgid "Cancel"
 msgstr ""
 
@@ -1495,8 +1498,8 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\cards\new\preview.html:37
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:70
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:52
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:48
-#: .\templates\profile\trainees\cards\detail.html:52
 msgid "Class"
 msgstr ""
 
@@ -1526,7 +1529,7 @@ msgid "Confirm to sign up"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:37
-#: .\templates\layouts\header.html:102
+#: .\templates\layouts\header.html:100
 msgid "Home"
 msgstr ""
 
@@ -1547,18 +1550,18 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:55
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:67
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:219
-#: .\templates\profile\trainees\cards\detail.html:48
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:48
 msgid "Card id"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:59
-#: .\templates\profile\trainees\cards\detail.html:315
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:315
 msgid "Number of lessons"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\cards\new\result.html:72
-#: .\templates\profile\trainees\cards\detail.html:236
-#: .\templates\profile\trainees\cards\detail.html:316
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:236
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:316
 msgid "Amount"
 msgstr ""
 
@@ -1618,8 +1621,9 @@ msgstr ""
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:654
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:702
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:730
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:536
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:209
-#: .\templates\base.html:169 .\templates\profile\trainees\cards\detail.html:536
+#: .\templates\base.html:169
 msgid "done"
 msgstr ""
 
@@ -1629,8 +1633,8 @@ msgid "create successfully"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\classes\schedule.html:281
-#: .\templates\profile\trainees\cards\detail.html:454
-#: .\templates\profile\trainees\cards\detail.html:470
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:454
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:470
 msgid "Yes, delete it!"
 msgstr ""
 
@@ -1678,7 +1682,7 @@ msgid "question"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\feedback\list.html:12
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:240
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:246
 #: .\templates\base.html:118 .\templates\layouts\info_model.html:20
 #: .\templates\layouts\info_model.html:38
 msgid "Feedback"
@@ -1725,7 +1729,7 @@ msgid "Pending Temporary Leave Requests"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\index.html:123
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:100
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:106
 msgid "Unpaid card"
 msgstr ""
 
@@ -1756,6 +1760,9 @@ msgid "Apr"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\index.html:235
+#: .\apps\dashboard\templates\dashboard\salary\index.html:18
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:49
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:39
 #: .\venv\Lib\site-packages\django\utils\dates.py:14
 msgid "May"
 msgstr ""
@@ -1792,75 +1799,79 @@ msgstr ""
 msgid "roll call"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:29
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:27
+msgid "Salary of trainer "
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:35
 msgid "users"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:38
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:44
 msgid "trainees"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:45
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:51
 msgid "trainers"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:52
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:58
 msgid "staffs"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:91
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:97
 msgid "cards"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:126
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:132
 msgid "rooms"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:135
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:141
 msgid "refund request"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:145
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:151
 msgid "blog"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:154
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:160
 msgid "post categories"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:174
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:180
 msgid "shop"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:183
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:189
 msgid "product categories"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:191
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:197
 #: .\apps\shop\templates\shop\index.html:22
 msgid "products"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:198
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:204
 msgid "bills"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:210
-#: .\templates\layouts\header.html:119
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:216
+#: .\templates\layouts\header.html:117
 msgid "promotions"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:220
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:226
 #: .\templates\events\list.html:26 .\templates\events\list.html:73
 msgid "events"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:230
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:236
 #: .\apps\faq\templates\faq\list.html:16 .\templates\base.html:126
 msgid "FAQ"
 msgstr ""
 
-#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:250
+#: .\apps\dashboard\templates\dashboard\layouts\sidebar.html:256
 msgid "Question of User"
 msgstr ""
 
@@ -1869,19 +1880,20 @@ msgid "Search for"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\layouts\topbar.html:171
-#: .\templates\layouts\header.html:54
+#: .\templates\layouts\header.html:52
 msgid "profile"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\layouts\topbar.html:177
-#: .\templates\layouts\header.html:68
+#: .\templates\layouts\header.html:66
 msgid "logout"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\list.html:13
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:291
-#: .\apps\lessons\models.py:163 .\apps\roll_calls\models.py:16
-#: .\templates\profile\trainees\cards\detail.html:167
+#: .\apps\lessons\models.py:163
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:167
+#: .\apps\roll_calls\models.py:16
 msgid "lesson"
 msgstr ""
 
@@ -1995,7 +2007,7 @@ msgid "Studied make-up lesson detail info"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:325
-#: .\templates\profile\trainees\cards\detail.html:402
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:402
 msgid "Absence Application Reason"
 msgstr ""
 
@@ -2011,7 +2023,7 @@ msgid "Undo the roll call successfully"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:422
-#: .\templates\profile\trainees\cards\detail.html:537
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:537
 msgid "Remove make up lesson successfully"
 msgstr ""
 
@@ -2020,13 +2032,14 @@ msgid "Lesson has been full"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:492
-#: .\apps\make_up_lessons\models.py:14 .\apps\roll_calls\models.py:18
-#: .\templates\profile\trainees\cards\detail.html:507
+#: .\apps\make_up_lessons\models.py:14
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:507
+#: .\apps\roll_calls\models.py:18
 msgid "studied"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:494
-#: .\templates\profile\trainees\cards\detail.html:509
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:509
 msgid "have not studied"
 msgstr ""
 
@@ -2133,6 +2146,83 @@ msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\rooms\list.html:10
 msgid "room list"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\salary\index.html:14
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:45
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:35
+#: .\venv\Lib\site-packages\django\utils\dates.py:14
+msgid "January"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\salary\index.html:15
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:46
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:36
+#: .\venv\Lib\site-packages\django\utils\dates.py:14
+msgid "February"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\salary\index.html:16
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:47
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:37
+#: .\venv\Lib\site-packages\django\utils\dates.py:14
+msgid "March"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\salary\index.html:17
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:48
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:38
+#: .\venv\Lib\site-packages\django\utils\dates.py:14
+msgid "April"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\salary\index.html:19
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:50
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:40
+#: .\venv\Lib\site-packages\django\utils\dates.py:14
+msgid "June"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\salary\index.html:20
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:51
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:41
+#: .\venv\Lib\site-packages\django\utils\dates.py:15
+msgid "July"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\salary\index.html:21
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:52
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:42
+#: .\venv\Lib\site-packages\django\utils\dates.py:15
+msgid "August"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\salary\index.html:22
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:53
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:43
+#: .\venv\Lib\site-packages\django\utils\dates.py:15
+msgid "September"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\salary\index.html:23
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:54
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:44
+#: .\venv\Lib\site-packages\django\utils\dates.py:15
+msgid "October"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\salary\index.html:24
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:55
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:45
+#: .\venv\Lib\site-packages\django\utils\dates.py:15
+msgid "November"
+msgstr ""
+
+#: .\apps\dashboard\templates\dashboard\salary\index.html:25
+#: .\apps\profiles\templates\profile\trainers\classes\detail.html:56
+#: .\apps\profiles\templates\profile\trainers\classes\list.html:46
+#: .\venv\Lib\site-packages\django\utils\dates.py:16
+msgid "December"
 msgstr ""
 
 #: .\apps\dashboard\templates\dashboard\shop\bills.html:12
@@ -2257,8 +2347,9 @@ msgstr ""
 msgid "Ask a question"
 msgstr ""
 
-#: .\apps\faq\templates\faq\list.html:68 .\templates\layouts\info_model.html:39
-#: .\templates\profile\trainees\cards\detail.html:206
+#: .\apps\faq\templates\faq\list.html:68
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:206
+#: .\templates\layouts\info_model.html:39
 msgid "Submit"
 msgstr ""
 
@@ -2368,6 +2459,170 @@ msgstr ""
 
 #: .\apps\profiles\forms\profile_form.py:132
 msgid "normal health"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\index.html:34
+msgid "Basic information"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\index.html:50
+msgid "Additional information"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:35
+msgid "Card infomation"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:39
+msgid "Scan to make a roll call"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:40
+msgid "You can save to your phone or bring it to our center when practicing"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:60
+#, fuzzy
+#| msgid "start time"
+msgid "Start time"
+msgstr "start at"
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:64
+#, fuzzy
+#| msgid "end time"
+msgid "End time"
+msgstr "end at"
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:68
+msgid "Total number of lessons"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:72
+msgid "Number of studied lessons"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:103
+msgid "have registerd make-up lesson"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:107
+msgid "have studied make-up lesson"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:116
+msgid "register a refund"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:121
+msgid "applied for leave"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:129
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:133
+msgid "not studied"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:136
+msgid "make a absence application"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:155
+msgid "Make-up lesson detail info"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:180
+#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:81
+msgid "Close"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:193
+msgid "Make a absence application"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:199
+msgid "Make a absence application for"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:219
+msgid "Card Payment History"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:229
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:314
+msgid "Id"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:230
+msgid "Payment Type"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:231
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:317
+msgid "State"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:235
+msgid "Promotion"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:237
+msgid "Description"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:238
+msgid "Online Payment Id"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:239
+msgid "Staff"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:240
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:318
+msgid "Create at"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:252
+msgid "Charged"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:254
+msgid "Not charged"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:303
+msgid "Refund Request"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:319
+msgid "Action"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:371
+msgid "You dont have any refund request"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:421
+msgid "Please enter reason"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:436
+msgid "Make a absence application successfully."
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:437
+#, python-format
+msgid ""
+"You can register a make-up lesson or make a refund for : %(value)s day(s) "
+"from date of lesson."
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:514
+msgid "Remove make-up lesson"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\trainees\cards\refunds\new.html:56
+msgid "There is no valid lesson to make a refund"
 msgstr ""
 
 #: .\apps\profiles\views\profile_trainee_view.py:145
@@ -2488,11 +2743,6 @@ msgstr ""
 msgid "Register a make up lesson"
 msgstr ""
 
-#: .\apps\yoga_schedule\templates\yoga_schedule\index.html:81
-#: .\templates\profile\trainees\cards\detail.html:180
-msgid "Close"
-msgstr ""
-
 #: .\apps\yoga_schedule\templates\yoga_schedule\index.html:103
 msgid "Register a make-up lesson for lesson"
 msgstr ""
@@ -2550,7 +2800,7 @@ msgstr ""
 msgid "There are some error. Please try again!"
 msgstr ""
 
-#: .\templates\events\detail.html:16 .\templates\layouts\header.html:117
+#: .\templates\events\detail.html:16 .\templates\layouts\header.html:115
 msgid "Event"
 msgstr ""
 
@@ -2615,7 +2865,7 @@ msgid "Practice Yoga will help your body become toned, tidy and full of life"
 msgstr ""
 
 #: .\templates\home\index.html:31 .\templates\home\index.html:46
-#: .\templates\layouts\header.html:80 .\templates\registration\signup.html:13
+#: .\templates\layouts\header.html:78 .\templates\registration\signup.html:13
 msgid "register"
 msgstr ""
 
@@ -2751,191 +3001,32 @@ msgstr ""
 msgid "Open time"
 msgstr "Open time"
 
-#: .\templates\layouts\header.html:63
+#: .\templates\layouts\header.html:61
 msgid "activity log"
 msgstr ""
 
-#: .\templates\layouts\header.html:76
+#: .\templates\layouts\header.html:74
 msgid "login"
 msgstr ""
 
-#: .\templates\layouts\header.html:104 .\templates\layouts\header.html:107
+#: .\templates\layouts\header.html:102 .\templates\layouts\header.html:105
 msgid "Classes"
 msgstr ""
 
-#: .\templates\layouts\header.html:106
+#: .\templates\layouts\header.html:104
 msgid "Courses"
 msgstr ""
 
-#: .\templates\layouts\header.html:113
+#: .\templates\layouts\header.html:111
 msgid "Schedule"
 msgstr ""
 
-#: .\templates\layouts\header.html:115
+#: .\templates\layouts\header.html:113
 msgid "Blog"
 msgstr ""
 
-#: .\templates\layouts\header.html:121
+#: .\templates\layouts\header.html:119
 msgid "Shop"
-msgstr ""
-
-#: .\templates\profile\index.html:34
-msgid "Basic information"
-msgstr ""
-
-#: .\templates\profile\index.html:50
-msgid "Additional information"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:35
-msgid "Card infomation"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:39
-msgid "Scan to make a roll call"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:40
-msgid "You can save to your phone or bring it to our center when practicing"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:60
-#, fuzzy
-#| msgid "start time"
-msgid "Start time"
-msgstr "start at"
-
-#: .\templates\profile\trainees\cards\detail.html:64
-#, fuzzy
-#| msgid "end time"
-msgid "End time"
-msgstr "end at"
-
-#: .\templates\profile\trainees\cards\detail.html:68
-msgid "Total number of lessons"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:72
-msgid "Number of studied lessons"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:103
-msgid "have registerd make-up lesson"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:107
-msgid "have studied make-up lesson"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:116
-msgid "register a refund"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:121
-msgid "applied for leave"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:129
-#: .\templates\profile\trainees\cards\detail.html:133
-msgid "not studied"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:136
-msgid "make a absence application"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:155
-msgid "Make-up lesson detail info"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:193
-msgid "Make a absence application"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:199
-msgid "Make a absence application for"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:219
-msgid "Card Payment History"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:229
-#: .\templates\profile\trainees\cards\detail.html:314
-msgid "Id"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:230
-msgid "Payment Type"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:231
-#: .\templates\profile\trainees\cards\detail.html:317
-msgid "State"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:235
-msgid "Promotion"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:237
-msgid "Description"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:238
-msgid "Online Payment Id"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:239
-msgid "Staff"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:240
-#: .\templates\profile\trainees\cards\detail.html:318
-msgid "Create at"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:252
-msgid "Charged"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:254
-msgid "Not charged"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:303
-msgid "Refund Request"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:319
-msgid "Action"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:371
-msgid "You dont have any refund request"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:421
-msgid "Please enter reason"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:436
-msgid "Make a absence application successfully."
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:437
-#, python-format
-msgid ""
-"You can register a make-up lesson or make a refund for : %(value)s day(s) "
-"from date of lesson."
-msgstr ""
-
-#: .\templates\profile\trainees\cards\detail.html:514
-msgid "Remove make-up lesson"
-msgstr ""
-
-#: .\templates\profile\trainees\cards\refunds\new.html:56
-msgid "There is no valid lesson to make a refund"
 msgstr ""
 
 #: .\templates\registration\signup.html:27
@@ -3728,50 +3819,6 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:11
 msgid "Sun"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:14
-msgid "January"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:14
-msgid "February"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:14
-msgid "March"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:14
-msgid "April"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:14
-msgid "June"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:15
-msgid "July"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:15
-msgid "August"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:15
-msgid "September"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:15
-msgid "October"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:15
-msgid "November"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:16
-msgid "December"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\utils\dates.py:19

@@ -21,6 +21,12 @@
             <span>{% trans 'roll call' as t_roll_call %}{{ t_roll_call|capfirst}}</span></a>
     </li>
     <hr class="sidebar-divider my-0">
+    <li class="nav-item {% if active_nav == 'salary' %}active{% endif %}">
+        <a class="nav-link" href="{% url 'dashboard:salary-trainers-index' %}">
+            <i class="fas fa-fw fa-file-invoice-dollar"></i>
+            <span>{% trans 'Salary of trainer '%}</span></a>
+    </li>
+    <hr class="sidebar-divider my-0">
     <!-- Nav Item - Users -->
     <li class="nav-item {% if show_nav_users == True %}active{% endif %}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true"
