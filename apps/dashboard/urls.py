@@ -240,6 +240,10 @@ feedback_urlpatterns = [
 salary_urlpatterns = [
     path('trainers/', trainers_salary_view.IndexView.as_view(),
          name='salary-trainers-index'),
+    path('trainers/<slug:slug>/', trainers_salary_view.DetailListYogaClassView.as_view(),
+         name='salary-trainers-detail-list-class'),
+    path('trainers/<slug:slug>/yoga-classes/<int:yoga_class_pk>/', trainers_salary_view.DetailYogaClassSalaryView.as_view(),
+         name='salary-trainers-detail-class-detail'),
 ]
 
 

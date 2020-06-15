@@ -84,7 +84,7 @@
                         <small>{{ d.total_of_trainer | sexy_number }}đ</small>
                         {% endif %}
                     </td>
-                    <td><a href="javascript:;" class="badge badge-warning badge-pill">{% trans 'detail' %}</a></td>
+                    <td><a href="{% url 'dashboard:salary-trainers-detail-list-class' d.trainer.user.slug %}?month={{month}}&year={{year}}" class="badge badge-warning badge-pill">{% trans 'detail' %}</a></td>
                 </tr>
                 {% endfor %}
                 <tr>
