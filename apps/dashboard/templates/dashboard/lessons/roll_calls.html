@@ -92,7 +92,7 @@
                     <li
                         class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">
                         <span class="badge badge-secondary">{{ r.card.pk }}</span>
-                        {{ r.card.trainee }}
+                        {{ r.card.trainee.full_name }}
                         <a href="javascript:;" class="a-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
                             <span class="badge badge-danger badge-pill">{% trans 'remove' %}</span>
                         </a>
@@ -104,7 +104,7 @@
                     <li
                         class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center">
                         <span class="badge badge-secondary">{% trans 'make up' %}</span>
-                        {{ m.roll_call.card.trainee }}
+                        {{ m.roll_call.card.trainee.full_name }}
                         <div class="dropdown">
                             <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bars"></i>
@@ -141,7 +141,7 @@
                     <li
                         class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center">
                         <span class="badge badge-secondary">{% trans 'have had a make up lesson' %}</span>
-                        <small>{{ r.card.trainee }}</small>
+                        <small>{{ r.card.trainee.full_name }}</small>
                         <a href="javascript:;" class="make-up-detail" data-make-up-lesson-pk="{{r.make_up_lesson.pk}}">
                             <span class="badge badge-secondary">{% trans 'detail '%}</span>
                         </a>
@@ -151,14 +151,14 @@
                         <li
                             class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center">
                             <span class="badge badge-secondary">{{ r.card.pk }}</span>
-                            <small>{{ r.card.trainee }}</small>
+                            <small>{{ r.card.trainee.full_name }}</small>
                             <a href="javascript:;" class="a-absence-application" data-rollcall-pk="{{r.pk}}" data-absence-application-pk="{{r.absence_application.pk}}"><span class="badge badge-secondary badge-pill">đã xin nghỉ</span></a>
                         </li>
                         {% else %}
                         <li
                             class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">
                             <span class="badge badge-secondary">{{ r.card.pk }}</span>
-                            <small>{{ r.card.trainee }}</small>
+                            <small>{{ r.card.trainee.full_name }}</small>
                             <a href="javascript:;" class="a-un-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
                                 <span class="badge badge-success badge-pill">{% trans 'select' %}</span>
                             </a>
@@ -170,7 +170,7 @@
                     <li
                         class="list-group-item list-group-item-action list-group-item-warning d-flex justify-content-between align-items-center text-center">
                         <span class="badge badge-warning">{% trans 'make up lesson' %}</span>
-                        <small>{{ m.roll_call.card.trainee }}</small>
+                        <small>{{ m.roll_call.card.trainee.full_name }}</small>
                         <div class="dropdown">
                             <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bars"></i>
