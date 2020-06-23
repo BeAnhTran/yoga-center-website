@@ -191,6 +191,7 @@ class YogaClassEnrollView(View):
         slug = kwargs['slug']
         yoga_class = YogaClass.objects.get(slug=slug)
         card_type_list = yoga_class.course.card_types.all()
+        card_type = CardType.objects.get(pk=request.POST.get('card_type'))
         context = {
             'yoga_class': yoga_class,
             'active_nav': 'classes',
@@ -222,6 +223,21 @@ class YogaClassEnrollView(View):
                     messages.error(request, _(
                         'Your lesson list includes old lesson. Please try again.'))
                     return redirect(reverse('classes:enroll', kwargs={'slug': slug}) + '?card-type=' + request.POST['card_type'])
+            # NOTE: check lessons of FOR_SOME_LESSONS
+            if card_type.form_of_using == FOR_SOME_LESSONS:
+                i = 0
+                while i < (len(lesson_list) - 1):
+                    current_lesson = lesson_list[i]
+                    next_index = i + 1
+                    next_lesson = lesson_list[next_index]
+                    check_list = yoga_class.lessons.filter(
+                        date__gt=current_lesson.date, date__lt=next_lesson.date, is_full=False)
+                    if len(check_list) > 2:
+                        messages.error(
+                        request, 'Hai buổi tập đăng ký liên tiếp trong thẻ không được cách nhau quá 2 buổi trống khác.')
+                        return redirect('classes:enroll', slug=slug)
+                    i += 1
+            
             # save to session and get it in payment page
             request.session['enroll_card_form'] = request.POST
             return redirect('classes:enroll-payment', slug=slug)
@@ -261,8 +277,10 @@ class YogaClassEnrollPaymentView(View):
         if request.session.get('enroll_card_form'):
             yoga_class = YogaClass.objects.get(slug=slug)
             enroll_card_form = request.session['enroll_card_form']
+            card_type = CardType.objects.get(pk=enroll_card_form['card_type'])
             lesson_list = self.__lesson_list_available(
                 yoga_class, enroll_card_form)
+            # NOTE: check da dang ky buoi tap
             for l in lesson_list:
                 if l.roll_calls.filter(card__trainee=request.user.trainee).count() > 0:
                     messages.error(
@@ -270,7 +288,6 @@ class YogaClassEnrollPaymentView(View):
                     return redirect('classes:enroll', slug=slug)
             # Payment Form
             form = CardPaymentForm()
-            card_type = CardType.objects.get(pk=enroll_card_form['card_type'])
             context = {
                 'key': settings.STRIPE_PUBLISHABLE_KEY,
                 'form': form,
