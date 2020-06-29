@@ -153,7 +153,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGES = [('vi', 'VN'), ('en', 'EN')]
+LANGUAGES = [('vi', 'VN')]
 
 TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
