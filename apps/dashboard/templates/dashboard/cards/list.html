@@ -40,17 +40,17 @@
                     {% for card in cards %}
                     <tr>
                         <td>{{ card.id }}</td>
-                        <td>{{ card.trainee }}</td>
+                        <td>{{ card.trainee.full_name }}</td>
                         <td>{{ card.card_type }}</td>
                         <td>{{ card.yogaclass }}</td>
                         <td>{{ card.end_at }}</td>
                         <td>
-                            <a class="btn btn-sm btn-primary" href="javascript:;">
+                            <!-- <a class="btn btn-sm btn-primary" href="javascript:;">
                                 <i class="fas fa-fw fa-eye"></i> {% trans 'show' %}
                             </a>
                             <a class="btn btn-sm btn-warning" href="javascript:;">
                                 <i class="fas fa-fw fa-edit"></i> {% trans 'edit' %}
-                            </a>
+                            </a> -->
                             <a class="btn btn-sm btn-danger delete-card" href="javascript:;">
                                 <i class="fas fa-fw fa-trash"></i> {% trans 'delete' %}
                             </a>
