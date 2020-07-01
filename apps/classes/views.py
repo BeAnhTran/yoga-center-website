@@ -35,7 +35,8 @@ from django.http import HttpResponse
 from apps.payment.form import CardPaymentForm
 
 from apps.card_types.models import (CardType,
-                                    FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE, FOR_TRIAL, FOR_PERIOD_TIME_LESSONS)
+                                    FOR_FULL_MONTH, FOR_SOME_LESSONS, FOR_TRAINING_COURSE, FOR_TRIAL,
+                                    FOR_PERIOD_TIME_LESSONS)
 
 from apps.common.templatetags import sexify
 from apps.classes.utils import get_price, get_total_price, get_total_price_display
@@ -46,10 +47,13 @@ from django.contrib import messages
 from apps.classes.forms import FilterForm
 from django.db.models import Value as V
 from django.db.models.functions import Concat
-from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, GIFT_PROMOTION, FREE_SOME_LESSON_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
+from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH_PROMOTION, PERCENT_PROMOTION, \
+    GIFT_PROMOTION, FREE_SOME_LESSON_PROMOTION, PLUS_MONTH_PRACTICE_PROMOTION
 from apps.roll_calls.models import RollCall
 from apps.card_invoices.models import POSTPAID, PREPAID
 from apps.cards.models import Card
+from apps.common.tasks import removeCardWhenNotPayed
+from django.utils import timezone
 
 
 class YogaClassListView(ListView):
@@ -61,7 +65,7 @@ class YogaClassListView(ListView):
 
     def get_context_data(self, **kwargs):
         query_course = list(((None, 'Chọn khóa học'),)) + \
-            list(Course.objects.values_list('slug', 'name'))
+                       list(Course.objects.values_list('slug', 'name'))
         query_trainer = list(((None, 'Chọn huấn luyện viên'),)) + list(Trainer.objects.annotate(
             full_name=Concat('user__last_name', V(' '), 'user__first_name')).values_list('user__slug', 'full_name'))
 
@@ -162,9 +166,9 @@ class YogaClassEnrollView(View):
             if yoga_class.payment_periods.all().count() > 0:
                 first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
                 payment_period_choices.append(
-                    (first_payment_period.id, first_payment_period.name),)
+                    (first_payment_period.id, first_payment_period.name), )
             form = CardFormForTraineeEnroll(initial={
-                                            'card_type_list': card_type_list, 'payment_period_choices': payment_period_choices})
+                'card_type_list': card_type_list, 'payment_period_choices': payment_period_choices})
             form.fields['payment_period'].initial = 0
             form.fields['lesson_list'].initial = str(
                 list(yoga_class.lessons.filter().values_list('id', flat=True).distinct()))
@@ -207,9 +211,10 @@ class YogaClassEnrollView(View):
             if yoga_class.payment_periods.all().count() > 0:
                 first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
                 payment_period_choices.append(
-                    (first_payment_period.id, first_payment_period.name),)
+                    (first_payment_period.id, first_payment_period.name), )
             form = CardFormForTraineeEnroll(
-                request.POST, initial={'card_type_list': card_type_list, 'payment_period_choices': payment_period_choices})
+                request.POST,
+                initial={'card_type_list': card_type_list, 'payment_period_choices': payment_period_choices})
         else:
             form = CardFormForTraineeEnroll(
                 request.POST, initial={'card_type_list': card_type_list})
@@ -222,7 +227,8 @@ class YogaClassEnrollView(View):
                 if l.is_in_the_past() is True:
                     messages.error(request, _(
                         'Your lesson list includes old lesson. Please try again.'))
-                    return redirect(reverse('classes:enroll', kwargs={'slug': slug}) + '?card-type=' + request.POST['card_type'])
+                    return redirect(
+                        reverse('classes:enroll', kwargs={'slug': slug}) + '?card-type=' + request.POST['card_type'])
             # NOTE: check lessons of FOR_SOME_LESSONS
             if card_type.form_of_using == FOR_SOME_LESSONS:
                 i = 0
@@ -234,10 +240,11 @@ class YogaClassEnrollView(View):
                         date__gt=current_lesson.date, date__lt=next_lesson.date, is_full=False)
                     if len(check_list) > 2:
                         messages.error(
-                        request, 'Hai buổi tập đăng ký liên tiếp trong thẻ không được cách nhau quá 2 buổi trống khác.')
+                            request,
+                            'Hai buổi tập đăng ký liên tiếp trong thẻ không được cách nhau quá 2 buổi trống khác.')
                         return redirect('classes:enroll', slug=slug)
                     i += 1
-            
+
             # save to session and get it in payment page
             request.session['enroll_card_form'] = request.POST
             return redirect('classes:enroll-payment', slug=slug)
@@ -346,16 +353,16 @@ class YogaClassEnrollPaymentView(View):
                 if promotion_type.category == CASH_PROMOTION:
                     amount -= value
                     promotion_val = '-' + \
-                        sexify.sexy_number(value) + 'đ'
+                                    sexify.sexy_number(value) + 'đ'
                 elif promotion_type.category == PERCENT_PROMOTION:
-                    reduce = round(value*amount/100/1000)*1000
+                    reduce = round(value * amount / 100 / 1000) * 1000
                     amount -= reduce
                     promotion_val = '-' + \
-                        sexify.sexy_number(reduce) + 'đ'
+                                    sexify.sexy_number(reduce) + 'đ'
                 elif promotion_type.category == FREE_SOME_LESSON_PROMOTION:
-                    amount -= value*price
+                    amount -= value * price
                     promotion_val = '-' + \
-                        sexify.sexy_number(value*price) + 'đ'
+                                    sexify.sexy_number(value * price) + 'đ'
                 elif promotion_type.category == PLUS_MONTH_PRACTICE_PROMOTION:
                     s = lesson_list.last().date
                     promotion_lessons = yoga_class.lessons.filter(
@@ -387,7 +394,7 @@ class YogaClassEnrollPaymentView(View):
                 if yoga_class.payment_periods.all().count() > 0:
                     first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
                     payment_period_choices.append(
-                        (first_payment_period.id, first_payment_period.name),)
+                        (first_payment_period.id, first_payment_period.name), )
                 enroll_form = CardFormForTraineeEnroll(
                     request.session['enroll_card_form'], initial={'payment_period_choices': payment_period_choices})
             else:
@@ -439,6 +446,11 @@ class YogaClassEnrollPaymentView(View):
                     card = processCard(yoga_class, enroll_form,
                                        request, request.POST['amount'], description, POSTPAID, charge_id)
                     request.session['new_card'] = card.pk
+                    # NOTES: Add TASK: Remove card after 7 days
+                    card_invoice = card.invoices.last()
+                    seven_days_after = timezone.now() + timedelta(days=7)
+                    removeCardWhenNotPayed.apply_async(args=(card_invoice.pk,), eta=seven_days_after)
+                    # RETURN
                     return redirect('classes:postpaid-result', slug=slug)
             else:  # request.POST['payment_type'] == 'PREPAID_MOMO':
                 amount = request.POST.get('amount')
@@ -446,11 +458,11 @@ class YogaClassEnrollPaymentView(View):
                 requestId = str(uuid.uuid4())
                 orderInfo = _('Card Payment')
                 returnUrl = request.scheme + '://' + \
-                    request.META.get(
-                        'HTTP_HOST') + reverse('classes:momo-payment-result', kwargs={'slug': slug})
+                            request.META.get(
+                                'HTTP_HOST') + reverse('classes:momo-payment-result', kwargs={'slug': slug})
                 notifyUrl = request.scheme + '://' + \
-                    request.META.get(
-                        'HTTP_HOST') + reverse('classes:momo-payment-result', kwargs={'slug': slug})
+                            request.META.get(
+                                'HTTP_HOST') + reverse('classes:momo-payment-result', kwargs={'slug': slug})
                 momo = MoMoService(orderInfo, returnUrl,
                                    notifyUrl, amount, orderId, requestId)
                 response = momo.call()
@@ -552,16 +564,18 @@ class YogaClassMoMoPaymentResultView(View):
                         if yoga_class.payment_periods.all().count() > 0:
                             first_payment_period = yoga_class.payment_periods.all().order_by('end_at').first()
                             payment_period_choices.append(
-                                (first_payment_period.id, first_payment_period.name),)
+                                (first_payment_period.id, first_payment_period.name), )
                         enroll_form = CardFormForTraineeEnroll(
-                            request.session['enroll_card_form'], initial={'payment_period_choices': payment_period_choices})
+                            request.session['enroll_card_form'],
+                            initial={'payment_period_choices': payment_period_choices})
                     else:
                         enroll_form = CardFormForTraineeEnroll(
                             request.session['enroll_card_form'])
                     #
                     if enroll_form.is_valid():
                         card = processCard(
-                            yoga_class, enroll_form, request, request.GET['amount'], description, PREPAID, request.GET['transId'])
+                            yoga_class, enroll_form, request, request.GET['amount'], description, PREPAID,
+                            request.GET['transId'])
                         context['card'] = card
                 else:
                     return redirect('errors:error-403')

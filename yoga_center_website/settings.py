@@ -194,7 +194,6 @@ SITE_ID = 1
 # Custom Auth User model
 AUTH_USER_MODEL = 'accounts.User'
 
-
 # Custom Auth User model
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -309,3 +308,6 @@ MOMO_ACCESS_KEY = "aLGGNpsO3HcSPkqQ"
 MOMO_SECRET_KEY = "w84mB5zTLehWMUqPNvnWuvqg5S2DkUfH"
 MOMO_PARTNER_CODE = "MOMONZWN20200513"
 MOMO_END_POINT = "https://test-payment.momo.vn/gw_payment/transactionProcessor"
+
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://127.0.0.1:6379')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://127.0.0.1:6379')
