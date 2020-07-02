@@ -4708,3 +4708,65 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .course-des{
 	height: 110px !important;
 }
+
+#alertsDropdown{
+	position: relative;
+}
+#alertsDropdown:after{
+	display: none;
+}
+.badge-counter {
+    position: absolute;
+    transform: scale(.7);
+    transform-origin: top right;
+    right: .15rem;
+}
+
+.notifications-dropdown {
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background: linear-gradient(45deg, #ffc107, #ebb92073);
+    border-radius: 0 0 0 100%;
+    width: 55px;
+    height: 55px;
+    text-align: right;
+}
+
+.live_notify_list{
+    width: 20rem!important;
+	font-family: serif;
+}
+
+.live_notify_list .dropdown-item {
+    white-space: normal;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border-left: 1px solid #e3e6f0;
+    border-right: 1px solid #e3e6f0;
+    border-bottom: 1px solid #e3e6f0;
+    line-height: 1.3rem;
+}
+
+.dropdown-header-notification {
+    background-color: #4e73df;
+    border: 1px solid #4e73df;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    color: #fff;
+}
+
+.icon-circle {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-primary-2 {
+    background-color: #4e73df!important;
+}

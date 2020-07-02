@@ -83,6 +83,7 @@ INSTALLED_APPS = [
     'apps.donations',
     'apps.absence_applications',
     'seeds',
+    'notifications'
 ]
 
 MIDDLEWARE = [

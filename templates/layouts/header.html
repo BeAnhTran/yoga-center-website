@@ -24,10 +24,11 @@
                             {% get_current_language as LANGUAGE_CODE %} {% get_available_languages as LANGUAGES %}
                             {% get_language_info_list for LANGUAGES as languages %}
                             {% for language in languages %}
-                            <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}> {{ language.code }}</option>
+                                <option value="{{ language.code }}"
+                                        {% if language.code == LANGUAGE_CODE %}selected{% endif %}> {{ language.code }}</option>
                             {% endfor %}
                         </select>
-                        <input class="d-none" type="submit" value="Go" />
+                        <input class="d-none" type="submit" value="Go"/>
                     </form>
                 </div>
                 <div class="header-info">
@@ -36,22 +37,22 @@
                     </a>
                 </div>
                 {% if user.is_authenticated %}
-                <div class="header-info">
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="javascript:;" id="user_infoDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="header-info">
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="javascript:;" id="user_infoDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span
-                                class="mr-2 d-none d-lg-inline">{{ user.full_name }}</span>
-                            <img class="img-profile rounded-circle" src="{% static 'img/user/default.png' %}">
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="user_infoDropdown">
-                            <a class="dropdown-item" href="{% url 'profile:index' %}">
-                                <i class="fa fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {% trans 'profile' as t_profile  %} {{ t_profile|capfirst }}
+                                    class="mr-2 d-none d-lg-inline">{{ user.full_name }}</span>
+                                <img class="img-profile rounded-circle" src="{% static 'img/user/default.png' %}">
                             </a>
-                            <!-- <a class="dropdown-item" href="{% url 'profile:profile-trainee-cards' %}">
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="user_infoDropdown">
+                                <a class="dropdown-item" href="{% url 'profile:index' %}">
+                                    <i class="fa fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    {% trans 'profile' as t_profile %} {{ t_profile|capfirst }}
+                                </a>
+                                <!-- <a class="dropdown-item" href="{% url 'profile:profile-trainee-cards' %}">
                                 <i class="fas fa-id-card fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {% trans 'card' as t_cards %}
                                 {{ t_cards|capfirst }}
@@ -60,24 +61,25 @@
                                 <i class="fa fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                 {% trans 'activity log' as t_activity_log %} {{ t_activity_log|capfirst }}
                             </a> -->
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:;" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {% trans 'logout' as t_logout %} {{ t_logout|capfirst }}
-                            </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:;" data-toggle="modal"
+                                   data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    {% trans 'logout' as t_logout %} {{ t_logout|capfirst }}
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% else %}
-                <div class="header-info">
-                    <a class="btn btn-sm btn-default header-info-link"
-                        href="{% url 'account_login' %}">{% trans 'login' as t_login %}{{ t_login|capfirst }}</a>
-                </div>
-                <div class="header-info">
-                    <a class="btn btn-sm btn-default header-info-link"
-                        href="{% url 'accounts:sign-up' %}">{% trans 'register' as t_register %}
-                        {{ t_register|capfirst }} </a>
-                </div>
+                    <div class="header-info">
+                        <a class="btn btn-sm btn-default header-info-link"
+                           href="{% url 'account_login' %}">{% trans 'login' as t_login %}{{ t_login|capfirst }}</a>
+                    </div>
+                    <div class="header-info">
+                        <a class="btn btn-sm btn-default header-info-link"
+                           href="{% url 'accounts:sign-up' %}">{% trans 'register' as t_register %}
+                            {{ t_register|capfirst }} </a>
+                    </div>
                 {% endif %}
             </div>
         </div>
@@ -97,26 +99,26 @@
         <div class="container">
             <ul class="main-menu">
                 <li><a href="{% url 'home:index' %}"
-                        class="{% if active_nav == 'home' %}active{% endif %}">{% trans 'Home' %}</a></li>
+                       class="{% if active_nav == 'home' %}active{% endif %}">{% trans 'Home' %}</a></li>
                 <li><a href="{% url 'courses:list' %}"
-                        class="{% if active_nav == 'classes' %}active{% endif %}">{% trans 'Classes'%}</a>
+                       class="{% if active_nav == 'classes' %}active{% endif %}">{% trans 'Classes' %}</a>
                     <ul class="sub-menu bg-gray">
                         <li><a href="{% url 'courses:list' %}">{% trans 'Courses' %}</a></li>
                         <li><a href="{% url 'classes:list' %}">{% trans 'Classes' %}</a></li>
                     </ul>
                 </li>
                 <li><a href="{% url 'trainers:list' %}"
-                        class="{% if active_nav == 'trainers' %}active{% endif %}">{% trans 'trainer' %}</a></li>
+                       class="{% if active_nav == 'trainers' %}active{% endif %}">{% trans 'trainer' %}</a></li>
                 <li><a href="{% url 'yoga_schedule:index' %}"
-                        class="{% if active_nav == 'schedule' %}active{% endif %}">{% trans 'Schedule' %}</a></li>
+                       class="{% if active_nav == 'schedule' %}active{% endif %}">{% trans 'Schedule' %}</a></li>
                 <li><a href="{% url 'blog:list' %}"
-                        class="{% if active_nav == 'blog' %}active{% endif %}">{% trans 'Blog'%}</a></li>
+                       class="{% if active_nav == 'blog' %}active{% endif %}">{% trans 'Blog' %}</a></li>
                 <li><a href="{% url 'events:list' %}"
-                        class="{% if active_nav == 'events' %}active{% endif %}">{% trans 'Event' %}</a></li>
+                       class="{% if active_nav == 'events' %}active{% endif %}">{% trans 'Event' %}</a></li>
 
                 <!-- <li><a href="javascript:;">{% trans 'promotions' %}</a></li> -->
                 <li><a href="{% url 'shop:index' %}"
-                        class="{% if active_nav == 'shop' %}active{% endif %}">{% trans 'Shop'%}</a></li>
+                       class="{% if active_nav == 'shop' %}active{% endif %}">{% trans 'Shop' %}</a></li>
             </ul>
         </div>
     </div>

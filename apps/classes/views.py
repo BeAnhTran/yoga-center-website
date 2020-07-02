@@ -13,7 +13,7 @@ from django.views.generic import View
 from apps.courses.models import LEVEL_CHOICES, TRAINING_COURSE
 from apps.classes.models import YogaClass
 from apps.courses.models import Course
-from apps.accounts.models import Trainer
+from apps.accounts.models import Trainer, User
 
 from django.db.models import Q
 from apps.cards.forms import CardFormForTraineeEnroll
@@ -54,6 +54,7 @@ from apps.card_invoices.models import POSTPAID, PREPAID
 from apps.cards.models import Card
 from apps.common.tasks import removeCardWhenNotPayed
 from django.utils import timezone
+from notifications.signals import notify
 
 
 class YogaClassListView(ListView):
@@ -599,6 +600,9 @@ class YogaClassPostPaidResultView(View):
                 return redirect('errors:error-403')
             context['card'] = card
             del request.session['new_card']
+            admin = User.objects.filter(is_superuser=True).first()
+            str = 'Đăng ký học ' + card.yogaclass.name + '. Vui lòng thanh toán thẻ tập trong vòng 7 ngày.'
+            notify.send(sender=admin, recipient=request.user, verb=str)
             return render(request, self.template_name, context=context)
         else:
             return redirect('errors:error-404')

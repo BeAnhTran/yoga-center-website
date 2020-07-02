@@ -21,6 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include
 from django.urls import path
+import notifications.urls
 
 
 urlpatterns = [
@@ -76,6 +77,7 @@ urlpatterns += i18n_patterns(
     # accounts
     url(r'^accounts/', include('allauth.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url('notifications/', include(notifications.urls)),
 ) + static(settings.MEDIA_URL,
            document_root=settings.MEDIA_ROOT)
 urlpatterns += [

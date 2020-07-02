@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block specified_css %}
+{% endblock %}
+{% block content %}
+    <section class="blog-details-section spad">
+        <div class="container">
+            <div class="row mb-3">
+                    <div class="col">
+                        <a class="text-danger"><span class="flaticon-lotus"></span> &raquo; </a>
+                        <a class="text-danger" href="javascript:;">Thông báo</a>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col">
+                    <ul class="notifications">
+                        {% for notice in notifications %}
+                            {% include 'notifications/notice.html' %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block specified_js %}
+{% endblock %}
