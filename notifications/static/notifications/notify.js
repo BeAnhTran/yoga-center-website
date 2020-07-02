@@ -26,7 +26,11 @@ function fill_notification_badge(data) {
     var badges = document.getElementsByClassName(notify_badge_class);
     if (badges) {
         for (var i = 0; i < badges.length; i++) {
-            badges[i].innerHTML = data.unread_count;
+            if (data.unread_count > 0) {
+                badges[i].innerHTML = data.unread_count;
+            } else {
+                badges[i].innerHTML = '';
+            }
         }
     }
 }
@@ -34,7 +38,7 @@ function fill_notification_badge(data) {
 function fill_notification_list(data) {
     var menus = document.getElementsByClassName(notify_menu_class);
     if (menus) {
-        var messages = data.unread_list.map(function (item) {
+        var messages = data.all_list.map(function (item) {
             var message = "";
             let str = "";
             let _time = "";

@@ -40,11 +40,13 @@ def register_notify_callbacks(badge_class='live_notify_badge',  # pylint: disabl
                               menu_class='live_notify_list',
                               refresh_period=15,
                               callbacks='',
-                              api_name='list',
+                              api_name='all',
                               fetch=5):
     refresh_period = int(refresh_period) * 1000
 
-    if api_name == 'list':
+    if api_name == 'all':
+        api_url = reverse('notifications:live_all_notification_list')
+    elif api_name == 'unread-list':
         api_url = reverse('notifications:live_unread_notification_list')
     elif api_name == 'count':
         api_url = reverse('notifications:live_unread_notification_count')
@@ -80,8 +82,9 @@ def live_notify_badge(context, badge_class='live_notify_badge'):
     user = user_context(context)
     if not user:
         return ''
-
-    html = "<span class='{badge_class}'>{unread}</span>".format(
+    if user.notifications.unread().count() == 0:
+        return ''
+    html = "<span class='badge badge-danger badge-counter {badge_class}'>{unread} <i class='fas fa-plus''></i></span>".format(
         badge_class=badge_class, unread=user.notifications.unread().count()
     )
     return format_html(html)

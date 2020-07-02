@@ -449,7 +449,7 @@ class YogaClassEnrollPaymentView(View):
                     request.session['new_card'] = card.pk
                     # NOTES: Add TASK: Remove card after 7 days
                     card_invoice = card.invoices.last()
-                    seven_days_after = timezone.now() + timedelta(days=7)
+                    seven_days_after = timezone.now() + timedelta(minutes=int(settings.MINUTES_TO_REMOVE_UNPAID_CARD))
                     removeCardWhenNotPayed.apply_async(args=(card_invoice.pk,), eta=seven_days_after)
                     # RETURN
                     return redirect('classes:postpaid-result', slug=slug)

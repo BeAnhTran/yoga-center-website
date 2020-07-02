@@ -131,6 +131,23 @@ def delete(request, slug=None):
 
     return redirect('notifications:all')
 
+@never_cache
+def mark_all_as_read_api(request):
+    try:
+        user_is_authenticated = request.user.is_authenticated()
+    except TypeError:  # Django >= 1.11
+        user_is_authenticated = request.user.is_authenticated
+
+    if not user_is_authenticated:
+        data = {
+            'status': 0
+        }
+    else:
+        request.user.notifications.mark_all_as_read()
+        data = {
+            'status': 1
+        }
+    return JsonResponse(data)
 
 @never_cache
 def live_unread_notification_count(request):
@@ -209,7 +226,8 @@ def live_all_notification_list(request):
     if not user_is_authenticated:
         data = {
             'all_count': 0,
-            'all_list': []
+            'all_list': [],
+            'unread_count': 0
         }
         return JsonResponse(data)
 
@@ -241,7 +259,8 @@ def live_all_notification_list(request):
             notification.mark_as_read()
     data = {
         'all_count': request.user.notifications.count(),
-        'all_list': all_list
+        'all_list': all_list,
+        'unread_count': request.user.notifications.unread().count()
     }
     return JsonResponse(data)
 

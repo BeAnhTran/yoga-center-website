@@ -312,3 +312,5 @@ MOMO_END_POINT = "https://test-payment.momo.vn/gw_payment/transactionProcessor"
 
 CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://127.0.0.1:6379')
 CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://127.0.0.1:6379')
+
+MINUTES_TO_REMOVE_UNPAID_CARD = int(os.getenv('MINUTES_TO_REMOVE_UNPAID_CARD', 7 * 24 * 60))

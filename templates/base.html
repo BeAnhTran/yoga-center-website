@@ -1,7 +1,7 @@
 {% load static %}
 {% load i18n %}
 {% load settings_extras %}
-{% load static notifications_tags %}
+{% load notifications_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -139,7 +139,7 @@
            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell fa-fw"></i>
             <!-- Counter - Alerts -->
-            <span class="badge badge-danger badge-counter">{% live_notify_badge %}+</span>
+            {% live_notify_badge %}
         </a>
         <!-- Dropdown - Alerts -->
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -211,6 +211,15 @@
                 );
             });
         });
+    });
+    $('#alertsDropdown').click(function () {
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: "{% url 'notifications:mark_all_as_read_api' %}",
+            type: 'POST'
+        }).done(data=> console.log(data)).fail(err=>console.log(err));
     });
 </script>
 
