@@ -646,10 +646,8 @@ msgid "end at"
 msgstr "thời gian kết thúc"
 
 #: .\apps\classes\models.py:32 .\apps\courses\models.py:50
-#, fuzzy
-#| msgid "price per lesson"
 msgid "wages per lesson"
-msgstr "giá buổi"
+msgstr "giá tiền dạy một buổi của huấn luyện viên"
 
 #: .\apps\classes\models.py:84
 #: .\apps\dashboard\templates\dashboard\cards\new\index.html:16

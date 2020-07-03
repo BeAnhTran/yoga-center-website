@@ -10,7 +10,6 @@ from ..forms.lectures_form import LectureInlineForm
 from django.forms.models import inlineformset_factory
 from apps.dashboard.custom_layout_object import Formset
 
-
 LectureFormSet = inlineformset_factory(
     Course, Lecture, form=LectureInlineForm,
     fields=['name'], extra=1, can_delete=True
@@ -47,6 +46,7 @@ class CourseForm(forms.ModelForm):
             'card_types',
             'content',
             'image',
+            'wages_per_lesson',
             Row(
                 Column('price_per_lesson', css_class='form-group col-md-4 mb-0'),
                 Column('price_per_month', css_class='form-group col-md-4 mb-0'),
@@ -74,7 +74,7 @@ class CourseForm(forms.ModelForm):
 
 
 class CourseEditForm(CourseForm):
-   def clean_name(self):
+    def clean_name(self):
         name = self.cleaned_data['name']
         if 'name' in self.changed_data:
             from django.utils.text import slugify
