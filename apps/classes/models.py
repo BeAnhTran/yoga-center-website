@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
-from apps.courses.models import Course
+from apps.courses.models import Course, TRAINING_COURSE
 from apps.accounts.models import Trainer
 from apps.common.templatetags import sexify
 from apps.card_types.models import FOR_TRIAL
@@ -77,6 +77,34 @@ class YogaClass(models.Model):
             return self.course.wages_per_lesson
         else:
             return self.wages_per_lesson
+
+    def is_training_class(self):
+        if self.course.course_type == TRAINING_COURSE:
+            return True
+        return False
+
+    def can_register_training_class(self):
+        if self.course.course_type == TRAINING_COURSE:
+            now = datetime.now()
+            if self.start_at > now.date():
+                return True
+            elif self.start_at == now.date():
+                if self.lessons.first.start_time > now.time():
+                    return True
+                else:
+                    return False
+            else:
+                return False
+        return False
+
+    def is_happened_training_class(self):
+        if self.course.course_type == TRAINING_COURSE:
+            now = datetime.now()
+            if self.end_at < now.date():
+                return True
+            else:
+                return False
+        return False
 
 
 class PaymentPeriod(models.Model):

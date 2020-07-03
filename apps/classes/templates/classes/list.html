@@ -31,6 +31,7 @@
                     </div>
                     {% else %}
                     {% for class in classes %}
+                    {% if class.is_training_class is False or class.can_register_training_class %}
                     <div class="col-md-6">
                         <div class="classes-item-warp">
                             <div class="classes-item">
@@ -76,11 +77,21 @@
                                             <p>{% trans 'Yoga Trainer' %}</p>
                                         </div>
                                     </a>
+                                    {% if class.is_training_class %}
+                                        {% if class.can_register_training_class %}
+                                        <a href="{% url 'classes:enroll' class.slug %}" class="site-btn sb-gradient">{% trans 'book now'%}</a>
+                                        {% else %}
+                                        <a href="javascript:;" class="site-btn bg-dark" style="font-size: 11px; padding: 13px;">Hết hạn đăng ký</a>
+                                        {% endif %}
+                                    {% else %}
                                     <a href="{% url 'classes:enroll' class.slug %}" class="site-btn sb-gradient">{% trans 'book now'%}</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {% endif %}
+                    
                     {% endfor %}
                     {% endif %}
                 </div>
