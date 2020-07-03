@@ -2699,14 +2699,56 @@ class Command(BaseCommand):
         # end add-trainees
 
         # TRAINING CLASS
-        t_21h = '21:00'
         _today = timezone.now()
         _start_of_week = _today - timedelta(days=_today.weekday())  # Monday
+        t_21h = '21:00'
         _saturday = (_start_of_week + timedelta(days=5)).date()
+        last_4months_saturday = _saturday - timedelta(days=28*4)
+        last_4_months_training_class_thay_hoang_anh = training_yoga_trainer_course.classes.create(
+            name='Lớp đào tạo thầy Hoàng Anh 18h tối thứ 7 - KDT1',
+            price_for_training_class=20000000,
+            start_at= last_4months_saturday,
+            end_at=last_4months_saturday + timedelta(days=28*3),
+            trainer=thay_hoang_anh,
+        )
+        for i in range(0, 12):
+            count_date = 7 * i
+            l = last_4_months_training_class_thay_hoang_anh.lessons.create(**{
+                "room_id": room3.pk,
+                "date": last_4months_saturday + timedelta(days=count_date),
+                "start_time": t_18h,
+                "end_time": t_21h
+            })
+            if l.is_in_the_past():
+                l.taught.create(trainer=thay_hoang_anh)
+        self.__enroll('Kiều', 'Trần Lệ', 'tranlekieu26@gmail.com', last_4_months_training_class_thay_hoang_anh,
+                      training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all())
+        self.__enroll('Lệ', 'Nguyễn Thị Mỹ', 'mylee1@gmail.com', last_4_months_training_class_thay_hoang_anh,
+                      training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all())
+        self.__enroll('Mai', 'Trần Thị', 'kieumai77@gmail.com', last_4_months_training_class_thay_hoang_anh,
+                      training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all())
+        self.__enroll('Vy', 'Đào Thị Tường', 'tuongvy2699@gmail.com', last_4_months_training_class_thay_hoang_anh,
+                      training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all())
+        self.__enroll('Hà', 'Ngọc', 'ngochaussh2@gmail.com', last_4_months_training_class_thay_hoang_anh,
+                      training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all())
+        self.__enroll('Trinh', 'Trần Thị Mai', 'maitrinh176@gmail.com', last_4_months_training_class_thay_hoang_anh,
+                      training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all())
+        self.__enroll('Phượng', 'Trần Thị Bích', 'tranthibichphuong2504@gmail.com', last_4_months_training_class_thay_hoang_anh,
+                      training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all())
+        self.__enroll('Lanh', 'Nguyễn', 'nguyenlanh145@gmail.com', last_4_months_training_class_thay_hoang_anh,
+                      training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all())
+        self.__enroll('Lãm', 'Trần', 'tranlam3004@gmail.com', last_4_months_training_class_thay_hoang_anh,
+                      training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all())
+        self.__enroll('Vương', 'Trần Minh', 'tranminhvuong1812@gmail.com', last_4_months_training_class_thay_hoang_anh,
+                      training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all())
+        
+
+        # new class in the future
         training_class_thay_hoang_anh = training_yoga_trainer_course.classes.create(
-            name='Lớp đào tạo thầy Hoàng Anh 18h tối thứ 7',
-            price_for_training_class=15000000,
+            name='Lớp đào tạo thầy Hoàng Anh 18h tối thứ 7 - KDT2',
+            price_for_training_class=20000000,
             start_at=_saturday + timedelta(days=14),
+            end_at=_saturday + timedelta(days=14 + 28*3),
             trainer=thay_hoang_anh,
         )
         for i in range(0, 12):
@@ -2848,6 +2890,8 @@ class Command(BaseCommand):
             amount = lesson_arr.__len__() * yoga_class.price_per_lesson * card_type.multiplier
         elif card_type.form_of_using == FOR_PERIOD_TIME_LESSONS:
             amount = lesson_arr.__len__() * yoga_class.price_per_lesson
+        elif card_type.form_of_using == FOR_TRAINING_COURSE:
+            amount = yoga_class.get_price_for_training_course()
         CardInvoiceService(card, PREPAID, 'Thanh toán thẻ tập',
                            amount, str(uuid.uuid4())).call()
         RollCallService(card, lesson_arr).call()

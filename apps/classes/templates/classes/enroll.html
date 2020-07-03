@@ -136,6 +136,7 @@
                             </div>
                         </div>
                         {% else %}
+                        {% if yoga_class.payment_periods.all.count > 1 %}
                         <div class="card">
                             <div class="card-header price-card">
                                 <a class="collapsed card-link" data-toggle="collapse" href="#TotalCourseAmout">
@@ -178,6 +179,16 @@
                                 </div>
                             </div>
                         </div>
+                        {% else %}
+                        <div class="card">
+                            <div class="card-header price-card">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#TotalCourseAmout">
+                                    Giá tiền khóa học: <b class="text-warning">{{ yoga_class.get_price_for_training_course|sexy_number }}đ</b>
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
                         {% endif %}
                     </div>
                     <div id="form-content">
