@@ -2766,7 +2766,7 @@ class Command(BaseCommand):
         })
         training_class_thay_hoang_anh.payment_periods.create(**{
             'name': 'Đợt thanh toán 2',
-            'amount': 1000000,
+            'amount': 10000000,
             'end_at': _saturday + timedelta(days=(14 + 7*7))
         })
 
