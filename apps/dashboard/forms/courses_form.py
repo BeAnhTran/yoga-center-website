@@ -34,6 +34,8 @@ class CourseForm(forms.ModelForm):
         })
         self.fields['card_types'] = forms.ModelMultipleChoiceField(label=_(
             'Card types'), widget=forms.CheckboxSelectMultiple(), queryset=CardType.objects.all())
+        self.fields['level'].required = False
+
         self.helper = FormHelper()
         self.helper.layout = Layout(
             'name',

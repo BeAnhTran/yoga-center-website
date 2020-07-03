@@ -1391,3 +1391,7 @@ body {
 h1.title, h5.title{
   font-family: serif;
 }
+
+.invalid-feedback {
+  display: block;
+}
