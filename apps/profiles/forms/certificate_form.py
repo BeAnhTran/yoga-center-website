@@ -6,21 +6,18 @@ from apps.accounts.models import Certificate
 
 
 class CertificateForm(forms.ModelForm):
-    hidden_field = forms.CharField(widget=forms.HiddenInput())
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs = {
-            'placeholder': _('name')
+            'placeholder': 'tên chứng nhận'
         }
         self.fields['description'].widget.attrs = {
-            'placeholder': _('description')
+            'placeholder': 'mô tả về chứng nhận'
         }
         self.helper = FormHelper()
         self.helper.form_show_errors = True
         self.helper.form_id = 'form_certificate'
         self.helper.layout = Layout(
-            'hidden_field',
             'name',
             'description',
             'image',

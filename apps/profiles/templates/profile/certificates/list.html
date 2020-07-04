@@ -14,7 +14,7 @@
     &raquo; Chứng nhận
 </a>
 {% if user.is_trainee is False %}
-<a class="text-success float-right" href="javascript:;"><i>thêm mới</i></a>
+<a class="text-success float-right" href="{% url 'profile:certificates-new' %}"><i>thêm mới</i></a>
 {% endif %}
 
 {% endblock %}
@@ -40,8 +40,12 @@
             <li>
                 <a class="site-btn site-btn-sm sb-gradient m-1" href="{% url 'profile:certificates-detail' certificate.pk %}">Chi tiết</a>
                 {% if user.is_trainee is False %}
-                <a class="site-btn site-btn-sm sb-gradient m-1" href="javascript:;">Chỉnh sửa</a>
-                <a class="site-btn site-btn-sm sb-gradient m-1" href="javascript:;">Xóa</a>
+                <a class="site-btn site-btn-sm sb-gradient m-1" href="{% url 'profile:certificates-edit' certificate.pk %}">Chỉnh sửa</a>
+                <a class="site-btn site-btn-sm sb-gradient m-1 delete-certificate" href="javascript:;">Xóa</a>
+                <form class="d-none" action="{% url 'profile:certificates-delete' certificate.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                </form>
                 {% endif %}
             </li>
           </ul>
@@ -55,4 +59,9 @@
 {% endblock %}
 
 {% block specified_js %}
+<script type="text/javascript">
+  $('.delete-certificate').click(function () {
+      $(this).siblings('form').children('input[type=submit]').click();
+  });
+</script>
 {% endblock %}

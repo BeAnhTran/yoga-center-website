@@ -38,8 +38,12 @@
                     class="text-danger">{{ certificate.yoga_class.end_at }}</span></li>
             {% else %}
             <li>
-                <a class="site-btn site-btn-sm sb-gradient m-1" style="font-family: serif;" href="javascript:;">Chỉnh sửa</a>
-                <a class="site-btn site-btn-sm sb-gradient m-1" style="font-family: serif;" href="javascript:;">Xóa</a>
+                <a class="site-btn site-btn-sm sb-gradient m-1" style="font-family: serif;" href="{% url 'profile:certificates-edit' certificate.pk %}">Chỉnh sửa</a>
+                <a class="site-btn site-btn-sm sb-gradient m-1 delete-certificate" style="font-family: serif;" href="javascript:;">Xóa</a>
+                <form class="d-none" action="{% url 'profile:certificates-delete' certificate.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" onclick="return confirm('Are you sure?');" value="Confirm">
+                </form>
             </li>
             {% endif %}
         </ul>
@@ -62,4 +66,9 @@
 {% endblock %}
 
 {% block specified_js %}
+<script type="text/javascript">
+  $('.delete-certificate').click(function () {
+      $(this).siblings('form').children('input[type=submit]').click();
+  });
+</script>
 {% endblock %}
