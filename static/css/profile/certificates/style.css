@@ -1,0 +1,19 @@
+.event-item{
+    position: relative;
+    min-height: 120px;
+    background: linear-gradient(145deg, #fcc83594 0%, #f8f8f8 100%);
+}
+.event-item .medal-img{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10%;
+}
+
+.event-item .ei-text {
+    padding-left: 15px;
+}
+
+.bg-gradient{
+    background: linear-gradient(145deg, #fcc83594 0%, #f8f8f8 100%);
+}

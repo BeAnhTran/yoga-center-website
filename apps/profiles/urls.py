@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from apps.profiles.views import bills_view, profile_view, profile_trainee_view, profile_trainer_view
+from apps.profiles.views import bills_view, profile_view, profile_trainee_view, profile_trainer_view, profile_certificate_view
 from apps.roll_calls.views import GetRollCallListApiView
 
 
@@ -32,4 +32,7 @@ urlpatterns = [
          profile_trainer_view.TrainerYogaClassView.as_view(), name='trainers-yoga-classes'),
     path('trainers/yoga-classes/<slug:slug>/',
          profile_trainer_view.TrainerYogaClassDetailView.as_view(), name='trainers-yoga-classes-detail'),
+    # ----- CERTIFICATE -----
+    path('certificates/',
+         profile_certificate_view.ProfileCerfiticateView.as_view(), name='certificates'),
 ]

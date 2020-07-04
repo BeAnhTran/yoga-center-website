@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-04 08:54+0700\n"
+"POT-Creation-Date: 2020-07-04 11:27+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -215,7 +215,7 @@ msgstr ""
 msgid "language"
 msgstr ""
 
-#: .\apps\accounts\models.py:50 .\apps\certificates\models.py:17
+#: .\apps\accounts\models.py:50 .\apps\certificates\models.py:16
 #: .\apps\courses\models.py:38
 #: .\apps\dashboard\templates\dashboard\admins\list.html:36
 #: .\apps\dashboard\templates\dashboard\classes\show.html:77
@@ -406,7 +406,7 @@ msgid "payment period"
 msgstr ""
 
 #: .\apps\card_invoices\models.py:25 .\apps\card_types\models.py:21
-#: .\apps\certificates\models.py:15 .\apps\courses\models.py:35
+#: .\apps\certificates\models.py:14 .\apps\courses\models.py:35
 #: .\apps\dashboard\templates\dashboard\blog\posts\list.html:30
 #: .\apps\dashboard\templates\dashboard\card_types\list.html:30
 #: .\apps\dashboard\templates\dashboard\classes\show.html:36
@@ -460,7 +460,7 @@ msgstr ""
 msgid "For Training Course"
 msgstr ""
 
-#: .\apps\card_types\models.py:20 .\apps\certificates\models.py:13
+#: .\apps\card_types\models.py:20 .\apps\certificates\models.py:12
 #: .\apps\classes\models.py:16 .\apps\classes\models.py:113
 #: .\apps\classes\templates\payment.html:67 .\apps\courses\models.py:31
 #: .\apps\dashboard\templates\dashboard\admins\list.html:32
@@ -565,16 +565,13 @@ msgstr ""
 msgid "Paied"
 msgstr ""
 
-#: .\apps\certificates\models.py:12 .\apps\classes\models.py:13
-#: .\apps\dashboard\templates\dashboard\cards\new\index.html:28
-#: .\apps\dashboard\templates\dashboard\classes\list.html:34
-#: .\apps\dashboard\templates\dashboard\classes\show.html:32
-#: .\apps\dashboard\templates\dashboard\courses\edit.html:13
-#: .\apps\dashboard\templates\dashboard\courses\list.html:21
-#: .\apps\dashboard\templates\dashboard\courses\new.html:13
-#: .\apps\dashboard\templates\dashboard\lessons\list.html:46
-#: .\apps\lectures\models.py:11
-msgid "course"
+#: .\apps\certificates\models.py:11 .\apps\classes\models.py:112
+#: .\apps\dashboard\templates\dashboard\cards\new\index.html:16
+#: .\apps\dashboard\templates\dashboard\classes\list.html:22
+#: .\apps\dashboard\templates\dashboard\classes\new.html:14
+#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:287
+#: .\apps\profiles\templates\profile\trainees\cards\detail.html:163
+msgid "class"
 msgstr ""
 
 #: .\apps\classes\forms.py:11 .\apps\courses\models.py:22
@@ -587,6 +584,18 @@ msgstr ""
 
 #: .\apps\classes\forms.py:13 .\apps\courses\models.py:24
 msgid "Advanced Level"
+msgstr ""
+
+#: .\apps\classes\models.py:13
+#: .\apps\dashboard\templates\dashboard\cards\new\index.html:28
+#: .\apps\dashboard\templates\dashboard\classes\list.html:34
+#: .\apps\dashboard\templates\dashboard\classes\show.html:32
+#: .\apps\dashboard\templates\dashboard\courses\edit.html:13
+#: .\apps\dashboard\templates\dashboard\courses\list.html:21
+#: .\apps\dashboard\templates\dashboard\courses\new.html:13
+#: .\apps\dashboard\templates\dashboard\lessons\list.html:46
+#: .\apps\lectures\models.py:11
+msgid "course"
 msgstr ""
 
 #: .\apps\classes\models.py:15 .\apps\dashboard\forms\lesssons_form.py:60
@@ -643,15 +652,6 @@ msgstr ""
 
 #: .\apps\classes\models.py:32 .\apps\courses\models.py:50
 msgid "wages per lesson"
-msgstr ""
-
-#: .\apps\classes\models.py:112
-#: .\apps\dashboard\templates\dashboard\cards\new\index.html:16
-#: .\apps\dashboard\templates\dashboard\classes\list.html:22
-#: .\apps\dashboard\templates\dashboard\classes\new.html:14
-#: .\apps\dashboard\templates\dashboard\lessons\roll_calls.html:287
-#: .\apps\profiles\templates\profile\trainees\cards\detail.html:163
-msgid "class"
 msgstr ""
 
 #: .\apps\classes\templates\classes\enroll.html:53
@@ -2501,6 +2501,10 @@ msgstr ""
 
 #: .\apps\profiles\templates\profile\base.html:61
 msgid "certificate"
+msgstr ""
+
+#: .\apps\profiles\templates\profile\certificates\list.html:14
+msgid "Certificate"
 msgstr ""
 
 #: .\apps\profiles\templates\profile\index.html:34
