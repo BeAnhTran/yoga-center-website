@@ -82,6 +82,7 @@ INSTALLED_APPS = [
     'apps.feedback',
     'apps.donations',
     'apps.absence_applications',
+    'apps.certificates',
     'seeds',
     'notifications'
 ]

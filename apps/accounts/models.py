@@ -9,6 +9,7 @@ from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from ckeditor.fields import RichTextField
 from django.utils.crypto import get_random_string
+from apps.certificates.models import Certificate
 
 
 class User(AbstractUser):
@@ -49,6 +50,8 @@ class User(AbstractUser):
         upload_to='profile', blank=True, null=True, verbose_name=_('image'))
     updated_at = models.DateTimeField(
         auto_now=True, blank=True, null=True, verbose_name=_('updated_at'))
+    certificates = GenericRelation(
+        Certificate, related_query_name='users', verbose_name=_('certificates'))
 
     __original_slug = None
 
@@ -82,22 +85,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.full_name()
-
-
-class Certificate(models.Model):
-    name = models.CharField(max_length=255, verbose_name=_('name'))
-    description = models.CharField(
-        blank=True, null=True, max_length=255, verbose_name=_('description'))
-    image = models.ImageField(upload_to='certificates',
-                              blank=True, null=True, verbose_name=_('image'))
-
-    # Below the mandatory fields for generic relation
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey()
-
-    def __str__(self):
-        return self.name
 
 
 PENDING_STATE = 0
@@ -152,8 +139,6 @@ class Trainer(models.Model):
         blank=True, null=True, verbose_name=_('experience'))
     achievements = RichTextUploadingField(
         null=True, blank=True, verbose_name=_('achievements'))
-    certificates = GenericRelation(
-        Certificate, related_query_name='trainers', verbose_name=_('certificate'))
     temporary_leave_requests = GenericRelation(
         TemporaryLeaveRequest, related_query_name='trainers', verbose_name=_('temporary leave requests'))
     is_student = models.BooleanField(
@@ -177,8 +162,6 @@ class Staff(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True, related_name='staff')
     experience = RichTextField(blank=True, verbose_name=_('experience'))
-    certificates = GenericRelation(
-        Certificate, related_query_name='staffs', verbose_name=_('certificate'))
     is_student = models.BooleanField(
         default=False, verbose_name=_('is student'))
     graduate_school = models.CharField(
