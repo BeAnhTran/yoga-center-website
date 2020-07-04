@@ -13,6 +13,10 @@
 <a class="text-danger" href="javascript:;">
     &raquo; Chứng nhận
 </a>
+{% if user.is_trainee is False %}
+<a class="text-success float-right" href="javascript:;"><i>thêm mới</i></a>
+{% endif %}
+
 {% endblock %}
 
 {% block profile_content %}
@@ -25,15 +29,22 @@
           {% if certificate.description %}
           <p>{{certificate.description}}</p>
           {% endif %}
-          {% if certificate.yoga_class %}
           <ul>
+            {% if certificate.yoga_class %}
             <li><i class="material-icons">done</i>Lớp: <span class="text-danger">{{ certificate.yoga_class }}</span></li>
             <li><i class="material-icons">done</i>Khóa học: <span class="text-danger">{{ certificate.yoga_class.course }}</span></li>
             <li><i class="material-icons">done</i>Huấn luyện viên: <span class="text-danger">{{ certificate.yoga_class.trainer }}</span></li>
             <li><i class="material-icons">done</i>Thời gian bắt đầu: <span class="text-danger">{{ certificate.yoga_class.start_at }}</span></li>
             <li><i class="material-icons">done</i>Thời gian kết thúc: <span class="text-danger">{{ certificate.yoga_class.end_at }}</span></li>
+            {% endif %}
+            <li>
+                <a class="site-btn site-btn-sm sb-gradient m-1" href="javascript:;">Chi tiết</a>
+                {% if user.is_trainee is False %}
+                <a class="site-btn site-btn-sm sb-gradient m-1" href="javascript:;">Chỉnh sửa</a>
+                <a class="site-btn site-btn-sm sb-gradient m-1" href="javascript:;">Xóa</a>
+                {% endif %}
+            </li>
           </ul>
-          {% endif %}
         </div>
       </div>
     {% endfor%}
