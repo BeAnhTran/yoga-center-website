@@ -46,7 +46,7 @@
                             <div class="ti-text">
                                 <a class="trainer-name" href="{% url 'trainers:detail' trainer.slug %}">{{ trainer }}</a>
                                 <h6>{% trans 'Yoga Trainer' %}</h6>
-                                <p class="ti-certificate-des">{{ trainer.certificates.first|default_if_none:"" }}</p>
+                                <p class="ti-certificate-des">{{ trainer.user.certificates.first|default_if_none:"" }}</p>
                                 <div class="ti-social">
                                     <a href="javascript:;"><i class="fab fa-facebook"></i></a>
                                     <a href="javascript:;"><i class="fab fa-instagram"></i></a>

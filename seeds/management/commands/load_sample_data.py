@@ -93,15 +93,15 @@ class Command(BaseCommand):
         co_phuong.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_phuong.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_phuong_anh_tan.jpg" /></p>'''
         co_phuong.save()
-        co_phuong.certificates.create(
+        co_phuong.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga Quốc tế')
-        co_phuong.certificates.create(
-            name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
-        co_phuong.certificates.create(
+        co_phuong.user.certificates.create(
+            name='Chứng nhận Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
+        co_phuong.user.certificates.create(
             name='Chứng chỉ trị liệu Yoga cấp bởi Indian Board of Alternative Medicines')
-        co_phuong.certificates.create(
+        co_phuong.user.certificates.create(
             name='Huy chương vàng cuộc thi Master Yoga Science & Holistic Health')
-        co_phuong.certificates.create(
+        co_phuong.user.certificates.create(
             name='Bằng thạc sĩ khoa học Yoga của Đại Học Haridwar, Ấn Độ năm 2012')
 
         data_co_man = {
@@ -119,13 +119,13 @@ class Command(BaseCommand):
         co_man.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_man.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_man.jpg" /></p>'''
         co_man.save()
-        co_man.certificates.create(
+        co_man.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
-        co_man.certificates.create(
+        co_man.user.certificates.create(
             name='Chứng chỉ trị liệu Yoga cấp bởi Indian Board of Alternative Medicines')
-        co_man.certificates.create(
+        co_man.user.certificates.create(
             name='Huy chương vàng cuộc thi Master Yoga Science & Holistic Health')
-        co_man.certificates.create(
+        co_man.user.certificates.create(
             name='Bằng thạc sĩ khoa học Yoga của Đại Học Haridwar, Ấn Độ năm 2012')
 
         data_hoang_anh = {
@@ -143,13 +143,13 @@ class Command(BaseCommand):
         thay_hoang_anh.experience = '''<ul><li>10 năm luyện tập Yoga.</li><li>8 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         thay_hoang_anh.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/all.jpg" /></p>'''
         thay_hoang_anh.save()
-        thay_hoang_anh.certificates.create(
+        thay_hoang_anh.user.certificates.create(
             name='Chứng chỉ trị liệu Yoga cấp bởi Indian Board of Alternative Medicines')
-        thay_hoang_anh.certificates.create(
+        thay_hoang_anh.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
-        thay_hoang_anh.certificates.create(
+        thay_hoang_anh.user.certificates.create(
             name='Bằng thạc sĩ khoa học Yoga của Đại Học Haridwar, Ấn Độ năm 2012')
-        thay_hoang_anh.certificates.create(
+        thay_hoang_anh.user.certificates.create(
             name='Huy chương vàng cuộc thi Master Yoga Science & Holistic Health')
 
         data_hai_tan = {
@@ -167,13 +167,13 @@ class Command(BaseCommand):
         thay_tan.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         thay_tan.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_phuong_anh_tan.jpg" /></p>'''
         thay_tan.save()
-        thay_tan.certificates.create(
+        thay_tan.user.certificates.create(
             name='Bằng thạc sĩ khoa học Yoga của Đại Học Haridwar, Ấn Độ năm 2012')
-        thay_tan.certificates.create(
+        thay_tan.user.certificates.create(
             name='Chứng chỉ trị liệu Yoga cấp bởi Indian Board of Alternative Medicines')
-        thay_tan.certificates.create(
+        thay_tan.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
-        thay_tan.certificates.create(
+        thay_tan.user.certificates.create(
             name='Huy chương vàng cuộc thi Master Yoga Science & Holistic Health')
 
         data_thay_tien = {
@@ -191,13 +191,13 @@ class Command(BaseCommand):
         thay_tien.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         thay_tien.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/all.jpg" /></p>'''
         thay_tien.save()
-        thay_tien.certificates.create(
+        thay_tien.user.certificates.create(
             name='Chứng chỉ trị liệu Yoga cấp bởi Indian Board of Alternative Medicines')
-        thay_tien.certificates.create(
+        thay_tien.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
-        thay_tien.certificates.create(
+        thay_tien.user.certificates.create(
             name='Huy chương vàng cuộc thi Master Yoga Science & Holistic Health')
-        thay_tien.certificates.create(
+        thay_tien.user.certificates.create(
             name='Bằng thạc sĩ khoa học Yoga của Đại Học Haridwar, Ấn Độ năm 2012')
 
         data_kieu_linh = {
@@ -215,13 +215,13 @@ class Command(BaseCommand):
         co_linh.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_linh.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_linh.save()
-        co_linh.certificates.create(
+        co_linh.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
-        co_linh.certificates.create(
+        co_linh.user.certificates.create(
             name='Bằng thạc sĩ khoa học Yoga của Đại Học Haridwar, Ấn Độ năm 2012')
-        co_linh.certificates.create(
+        co_linh.user.certificates.create(
             name='Chứng chỉ trị liệu Yoga cấp bởi Indian Board of Alternative Medicines')
-        co_linh.certificates.create(
+        co_linh.user.certificates.create(
             name='Huy chương vàng cuộc thi Master Yoga Science & Holistic Health')
 
         data_co_hang_nga = {
@@ -239,7 +239,7 @@ class Command(BaseCommand):
         co_hang_nga.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_hang_nga.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_hang_nga.save()
-        co_hang_nga.certificates.create(
+        co_hang_nga.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         data_co_ngung = {
@@ -257,7 +257,7 @@ class Command(BaseCommand):
         co_ngung.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_ngung.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_ngung.save()
-        co_ngung.certificates.create(
+        co_ngung.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         data_co_nhu = {
@@ -275,7 +275,7 @@ class Command(BaseCommand):
         co_nhu.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_nhu.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_nhu.save()
-        co_nhu.certificates.create(
+        co_nhu.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         data_co_kieu = {
@@ -293,7 +293,7 @@ class Command(BaseCommand):
         co_kieu.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_kieu.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_kieu.save()
-        co_kieu.certificates.create(
+        co_kieu.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         data_co_xuan = {
@@ -311,7 +311,7 @@ class Command(BaseCommand):
         co_xuan.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_xuan.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_xuan.save()
-        co_xuan.certificates.create(
+        co_xuan.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         data_co_thuy = {
@@ -329,7 +329,7 @@ class Command(BaseCommand):
         co_thuy.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_thuy.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_thuy.save()
-        co_thuy.certificates.create(
+        co_thuy.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         data_co_tra_my = {
@@ -347,7 +347,7 @@ class Command(BaseCommand):
         co_tra_my.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_tra_my.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_tra_my.save()
-        co_tra_my.certificates.create(
+        co_tra_my.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         data_co_nhan = {
@@ -365,7 +365,7 @@ class Command(BaseCommand):
         co_nhan.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_nhan.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_nhan.save()
-        co_nhan.certificates.create(
+        co_nhan.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         data_co_quyen = {
@@ -383,7 +383,7 @@ class Command(BaseCommand):
         co_quyen.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_quyen.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_quyen.save()
-        co_quyen.certificates.create(
+        co_quyen.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         data_thay_thien = {
@@ -401,7 +401,7 @@ class Command(BaseCommand):
         thay_thien.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         thay_thien.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         thay_thien.save()
-        thay_thien.certificates.create(
+        thay_thien.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         data_co_vo_hanh = {
@@ -419,7 +419,7 @@ class Command(BaseCommand):
         co_vo_hanh.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_vo_hanh.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_vo_hanh.save()
-        co_vo_hanh.certificates.create(
+        co_vo_hanh.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         data_co_hong = {
@@ -437,7 +437,7 @@ class Command(BaseCommand):
         co_hong.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
         co_hong.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_ly.jpg" /></p>'''
         co_hong.save()
-        co_hong.certificates.create(
+        co_hong.user.certificates.create(
             name='Chứng chỉ Huấn luyện viên Yoga của trung tâm Yoga Hương Tre')
 
         print("Create CARD TYPES")
