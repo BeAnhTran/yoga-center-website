@@ -38,7 +38,7 @@
             <li><i class="material-icons">done</i>Thời gian kết thúc: <span class="text-danger">{{ certificate.yoga_class.end_at }}</span></li>
             {% endif %}
             <li>
-                <a class="site-btn site-btn-sm sb-gradient m-1" href="javascript:;">Chi tiết</a>
+                <a class="site-btn site-btn-sm sb-gradient m-1" href="{% url 'profile:certificates-detail' certificate.pk %}">Chi tiết</a>
                 {% if user.is_trainee is False %}
                 <a class="site-btn site-btn-sm sb-gradient m-1" href="javascript:;">Chỉnh sửa</a>
                 <a class="site-btn site-btn-sm sb-gradient m-1" href="javascript:;">Xóa</a>

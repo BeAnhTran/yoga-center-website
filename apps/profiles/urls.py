@@ -35,4 +35,6 @@ urlpatterns = [
     # ----- CERTIFICATE -----
     path('certificates/',
          profile_certificate_view.ProfileCerfiticateView.as_view(), name='certificates'),
+    path('certificates/<int:pk>/',
+         profile_certificate_view.ProfileCertificateDetailView.as_view(), name='certificates-detail'),
 ]

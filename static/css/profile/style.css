@@ -231,9 +231,9 @@ a.list-group-item-custom, .list-group-item-custom-action {
 .bg-left{
   background-image: url('../../img/profile-bg-left.jpg');
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: 100% 100%;
   background-position: top;
-  min-height: 450px;
+  min-height: 650px;
 }
 
 .site-btn.site-btn-sm {

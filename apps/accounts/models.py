@@ -10,6 +10,8 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from ckeditor.fields import RichTextField
 from django.utils.crypto import get_random_string
 from apps.certificates.models import Certificate
+from apps.card_types.models import FOR_TRAINING_COURSE
+from datetime import date, datetime
 
 
 class User(AbstractUser):
@@ -128,6 +130,31 @@ class Trainee(models.Model):
 
     def full_name(self):
         return self.user.last_name + ' ' + self.user.first_name
+
+    def finish_training_class(self):
+        check = False
+        now = datetime.now()
+        for card in self.cards.filter(card_type__form_of_using=FOR_TRAINING_COURSE):
+            yoga_class = card.yogaclass
+            if yoga_class.end_at > now.date():
+                break
+            else:
+                price_of_training_class = yoga_class.get_price_for_training_course()
+                if yoga_class.payment_periods.all().count() == 0:
+                    if card.invoices.last().is_charged() is False:
+                        break
+                    else:
+                        return True
+                else:
+                    total = 0
+                    for invoice in card.invoices.all():
+                        if invoice.is_charged() is True:
+                            total += invoice.amount
+                    if total < price_of_training_class:
+                        break
+                    else:
+                        return True
+        return check
 
 
 class Trainer(models.Model):
