@@ -1,0 +1,69 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block specified_css %}
+<link href="{% static 'css/dashboard/courses/list.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-3">
+    <h5 class="mb-0 title">
+        <small><i class="fas fa-fw fa-list"></i></small>
+        Danh sách học viên <span class="text-danger">{{ yoga_class }}</span> ({{yoga_class.start_at}} - {{yoga_class.end_at}})
+    </h5>
+</div>
+<!-- Content Row -->
+{% if not trainees %}
+<p class="text-danger">
+    Không có học viên nào
+</p>
+{% else %}
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th><small>{% trans 'name' as t_name %}{{ t_name|capfirst }}</small></th>
+                        <th><small>{% trans 'email' as t_email %}{{ t_email|capfirst }}</small></th>
+                        <th><small>Trạng thái</small></th>
+                        <th><small>{% trans 'action' as t_action %}{{ t_action|capfirst }}</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trainee in trainees %}
+                    <tr>
+                        <td>{{ trainee.user.id }}</td>
+                        <td>{{ trainee.user }}</td>
+                        <td>{{ trainee.user.email }}</td>
+                        <td>
+                            {% if trainee.finish_training_class is True %}
+                            <span class="badge badge-success">Đã hoàn thành</span>
+                            {% else %}
+                            <span class="badge badge-danger">Chưa hoàn thành</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary" href="javascript:;"><i
+                                    class="fas fa-fw fa-eye"></i> {% trans 'show' as t_show %}{{ t_show|capfirst }}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block specified_js %}
+{% endblock %}

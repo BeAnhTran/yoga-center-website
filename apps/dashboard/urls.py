@@ -97,7 +97,9 @@ card_types_urlpatterns = [
 # TRAINEES
 trainees_urlpatterns = [
     path('', trainees_view.TraineeListView.as_view(), name='trainees-list'),
-    path('new/', trainees_view.TraineeNewView.as_view(), name='trainees-new')
+    path('new/', trainees_view.TraineeNewView.as_view(), name='trainees-new'),
+    path('training-class/', trainees_view.TrainingClassListView.as_view(), name='training-class-list'),
+    path('training-class/<slug:slug>/', trainees_view.TraineeOfTrainingClassListView.as_view(), name='trainee-of-training-class-list'),
 ]
 
 # TRAINERS

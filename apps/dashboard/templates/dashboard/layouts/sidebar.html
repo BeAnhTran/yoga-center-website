@@ -65,6 +65,11 @@
                         {% trans 'admin' as t_admin %}{{ t_admin|capfirst }}
                     </span>
                 </a>
+                <a class="collapse-item {% if active_nav == 'trainees-of-training-class' %}active{% endif %}"
+                    href="{% url 'dashboard:training-class-list' %}">
+                    <i class="fas fa-medal"></i>
+                    <span>Học viên khóa đào tạo</span>
+                </a>
             </div>
         </div>
     </li>
