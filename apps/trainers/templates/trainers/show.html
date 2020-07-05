@@ -3,67 +3,103 @@
 {% load i18n %}
 
 {% block content %}
-	<!-- Trainers Section -->
-	<section class="trainer-details-section spad">
-		<div class="container">
-			<div class="trainer-details">
-				<div class="trainer-info">
-					<div class="td-left">
-                        {% if trainer.user.image %}
-						<img src="{{ trainer.user.image.url }}" alt="{{ trainer }}">
-                        {% else %}
-						<img src="{% static 'img/user/default.png' %}" alt="{{ trainer }}">
-                        {% endif %}
-						<div class="td-social">
-							<a href="javascript:;"><i class="fab fa-facebook"></i></a>
-							<a href="javascript:;"><i class="fab fa-instagram"></i></a>
-							<a href="javascript:;"><i class="fab fa-twitter"></i></a>
-							<a href="javascript:;"><i class="fab fa-linkedin"></i></a>
-						</div>
-					</div>
-					<div class="td-right">
-						<h3>{{ trainer }}</h3>
-						<h6>Huấn luyện viên</h6>
-						<ul>
-							<li><strong>Email:</strong><p>{{ trainer.user.email }}</p></li>
-							<li><strong>Giới thiệu:</strong><p>{{ trainer.introduction }}</p></li>
-						</ul>
-						<a href="{% url 'classes:list' %}?trainer={{ trainer.slug }}" class="site-btn sb-gradient">Xem danh sách lớp học</a>
+<!-- Trainers Section -->
+<section class="trainer-details-section spad">
+	<div class="container">
+		<div class="trainer-details">
+			<div class="trainer-info">
+				<div class="td-left">
+					{% if trainer.user.image %}
+					<img src="{{ trainer.user.image.url }}" alt="{{ trainer }}">
+					{% else %}
+					<img src="{% static 'img/user/default.png' %}" alt="{{ trainer }}">
+					{% endif %}
+					<div class="td-social">
+						<a href="javascript:;"><i class="fab fa-facebook"></i></a>
+						<a href="javascript:;"><i class="fab fa-instagram"></i></a>
+						<a href="javascript:;"><i class="fab fa-twitter"></i></a>
+						<a href="javascript:;"><i class="fab fa-linkedin"></i></a>
 					</div>
 				</div>
-				
-				<div class="trainer-details-text mb-3">
-					<h3><i class="fas fa-sm fa-fw fa-praying-hands text-cyan-custom-1"></i> Kinh nghiệm</h3>
-					<div class="div-experience">
-						{{ trainer.experience | safe }}
-					</div>
-                </div>
-
-				<!-- CERTIFICATE  -->
-				{% if trainer.user.certificates.all.count > 0 %}
-				<div class="trainer-details-text mb-3">
-					<h3><i class="fas fa-sm fa-fw fa-trophy text-cyan-custom-1"></i> Chứng nhận</h3>
+				<div class="td-right">
+					<h3>{{ trainer }}</h3>
+					<h6>Huấn luyện viên</h6>
 					<ul>
-						{% for certificate in trainer.user.certificates.all %}
-						<li>
-							<i class="material-icons">check_circle</i>
-							{{ certificate }}
+						<li><strong>Email:</strong>
+							<p>{{ trainer.user.email }}</p>
 						</li>
-						{% endfor %}
+						<li><strong>Giới thiệu:</strong>
+							<p>{{ trainer.introduction }}</p>
+						</li>
 					</ul>
-                </div>
-				{% endif %}
-                <div class="trainer-details-text mb-3">
-					<h3><i class="fas fa-sm fa-fw fa-star text-cyan-custom-1"></i> Thành tích hoạt động</h3>
-					<div class="container">
-                        {{ trainer.achievements | safe }}
-                    </div>
+					<a href="{% url 'classes:list' %}?trainer={{ trainer.slug }}" class="site-btn sb-gradient">Xem danh
+						sách lớp học</a>
+				</div>
+			</div>
+
+			<div class="trainer-details-text mb-3">
+				<h3><i class="fas fa-sm fa-fw fa-praying-hands text-cyan-custom-1"></i> Kinh nghiệm</h3>
+				<div class="div-experience">
+					{{ trainer.experience | safe }}
+				</div>
+			</div>
+
+			<!-- CERTIFICATE  -->
+			{% if trainer.user.certificates.all.count > 0 %}
+			<div class="trainer-details-text mb-3">
+				<h3><i class="fas fa-sm fa-fw fa-trophy text-cyan-custom-1"></i> Chứng nhận</h3>
+				<ul>
+					{% for certificate in trainer.user.certificates.all %}
+					<li>
+						<a class="text-danger certificate" href="javascript:;" {% if certificate.image %}data-img="{{certificate.image.url}}"{% else %}data-img=""{% endif %}><i class="fas fa-medal"></i>{{ certificate }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% endif %}
+			<div class="trainer-details-text mb-3">
+				<h3><i class="fas fa-sm fa-fw fa-star text-cyan-custom-1"></i> Thành tích hoạt động</h3>
+				<div class="container">
+					{{ trainer.achievements | safe }}
 				</div>
 			</div>
 		</div>
-	</section>
-	<!-- Trainers Section end -->
+	</div>
+</section>
+<!-- Trainers Section end -->
+<!-- Button to Open the Modal -->
+<button id="btn_modal" type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#myModal">
+	Open modal
+</button>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" style="font-family: serif;">Thông tin chi tiết</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				Chưa cập nhật
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}
 
 {% block specified_js %}
+<script>
+	$('.certificate').click(function(){
+		var img_url = $(this).attr('data-img');
+		$('.modal-body').empty();
+		if(img_url == ''){
+			$('.modal-body').append('<p>Chưa cập nhật</p>');
+		}else{
+			var img = '';
+			img += `<img src="`+ img_url +`">`;
+			$('.modal-body').append(img);
+		}
+		$('#btn_modal').click();
+	});
+</script>
 {% endblock %}
