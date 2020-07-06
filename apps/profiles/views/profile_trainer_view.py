@@ -42,6 +42,7 @@ class TrainerYogaClassView(View):
         yoga_classes = trainer.classes.filter(
             lessons__date__month=month, lessons__date__year=year).distinct()
         total = 0
+        class_total = 0
         for yoga_class in yoga_classes:
             lessons = yoga_class.lessons.filter(
                 date__month=month, date__year=year)
@@ -51,6 +52,7 @@ class TrainerYogaClassView(View):
                     number_of_taught_lessons += 1
             total_salary_in_month = number_of_taught_lessons * \
                 yoga_class.get_wages_per_lesson()
+            class_total += total_salary_in_month
             total += total_salary_in_month
             d = {
                 'yoga_class': yoga_class,
@@ -59,14 +61,33 @@ class TrainerYogaClassView(View):
                 'total_salary_in_month': total_salary_in_month
             }
             data.append(d)
-        print(data)
+        # print(data)
+        substitute_lessons = trainer.substitute_lessons.filter(date__month=month,date__year=year).distinct()
+        data_substitute_lessons = []
+        substitute_total = 0
+        for sub in substitute_lessons:
+            if sub.check_having_trainer() is True:
+                sub_class = sub.yogaclass
+                sub_wages_per_lesson = sub_class.get_wages_per_lesson()
+                total += sub_wages_per_lesson
+                substitute_total += sub_wages_per_lesson
+                d = {
+                    'sub_lesson': sub,
+                    'sub_class': sub_class,
+                    'sub_wages_per_lesson': sub_wages_per_lesson
+                }
+                data_substitute_lessons.append(d)
+
         context = {
             'yoga_classes': yoga_classes,
             'sidebar_profile': 'trainers-yoga-classes',
             'month': int(month),
             'year': int(year),
             'data': data,
-            'total': total
+            'class_total':class_total,
+            'total': total,
+            'substitute_total': substitute_total,
+            'data_substitute_lessons': data_substitute_lessons
         }
         return render(request, self.template_name, context=context)
 
