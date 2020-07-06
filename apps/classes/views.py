@@ -296,6 +296,9 @@ class YogaClassEnrollPaymentView(View):
                     return redirect('classes:enroll', slug=slug)
             # Payment Form
             form = CardPaymentForm()
+            form.fields['name'].initial = request.user.full_name()
+            form.fields['email'].initial = request.user.email
+            form.fields['phone'].initial = request.user.phone_number
             context = {
                 'key': settings.STRIPE_PUBLISHABLE_KEY,
                 'form': form,

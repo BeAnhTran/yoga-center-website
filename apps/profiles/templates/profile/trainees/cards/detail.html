@@ -132,9 +132,13 @@
                                 <a class="btn btn-sm btn-info" href="javascript:;">
                                     {% trans 'not studied'%}
                                 </a>
+                                {% if card.is_paid is True %}
                                 <a class="btn btn-sm btn-warning a-make-a-leave-application" data-roll-call='{{r.pk}}' href="javascript:;">
                                     {% trans 'make a absence application' %}
                                 </a>
+                                {% else %}
+                                <a class="btn btn-sm btn-danger" href="javascript:;">chưa thanh toán</a>
+                                {% endif %}
                                 {% endif %}
                             {% endif %}
                         </div>

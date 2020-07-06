@@ -451,14 +451,6 @@
         return false;
       }
       var phone = $('#stripe_payment_form').find('input[name=phone]').val();
-      if (phone == '') {
-        Swal.fire(
-          "{% trans 'error' as t_error %}{{ t_error|capfirst }}",
-          "{% trans 'Pleae enter your phone' %}",
-          'error'
-        );
-        return false;
-      }
       var email = $('#stripe_payment_form').find('input[name=email]').val();
       if (email == '') {
         Swal.fire(
@@ -566,6 +558,10 @@
   });
   $('#remove_promotion_code').click(function () {
     $(this).siblings('form#form_remove_promotion_code').submit();
+  });
+  $('.confirm-payWhenComeToCenter').click(function(){
+    $(".loader").fadeIn();
+    $("#preloder").fadeIn();
   });
 </script>
 {% endblock %}

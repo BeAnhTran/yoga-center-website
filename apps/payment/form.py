@@ -22,8 +22,8 @@ class CardPaymentForm(forms.Form):
             }
         ))
     phone = forms.CharField(
+        required=False,
         max_length=30,
-        required=True,
         widget=forms.TextInput(
             attrs={
                 'placeholder':  _('please input your phone'),
