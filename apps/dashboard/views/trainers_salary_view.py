@@ -43,6 +43,12 @@ class IndexView(View):
                 total_salary_in_month = number_of_taught_lessons * \
                     yoga_class.get_wages_per_lesson()
                 total_of_trainer += total_salary_in_month
+            # SUBSTITUTE LESSONS
+            substitute_lessons = trainer.substitute_lessons.filter(date__month=month,date__year=year).distinct()
+            for sub in substitute_lessons:
+                if sub.check_having_trainer() is True:
+                    sub_wages_per_lesson = sub.yogaclass.get_wages_per_lesson()
+                    total_of_trainer += sub_wages_per_lesson
             d = {
                 'trainer': trainer,
                 'total_of_trainer': total_of_trainer,
@@ -74,6 +80,7 @@ class DetailListYogaClassView(View):
             year = int(request.GET.get('year'))
         data = []
         total = 0
+        class_total = 0
         yoga_classes = trainer.classes.filter(
             lessons__date__month=month, lessons__date__year=year).distinct()
         for yoga_class in yoga_classes:
@@ -86,6 +93,7 @@ class DetailListYogaClassView(View):
             total_salary_in_month = number_of_taught_lessons * \
                 yoga_class.get_wages_per_lesson()
             total += total_salary_in_month
+            class_total += total_salary_in_month
             d = {
                 'yoga_class': yoga_class,
                 'number_of_taught_lessons': number_of_taught_lessons,
@@ -93,13 +101,34 @@ class DetailListYogaClassView(View):
                 'total_lessons_on_month': lessons.count()
             }
             data.append(d)
+        
+        # SUBSTITUTE LESSONS
+        substitute_lessons = trainer.substitute_lessons.filter(date__month=month,date__year=year).distinct()
+        data_substitute_lessons = []
+        substitute_total = 0
+        for sub in substitute_lessons:
+            if sub.check_having_trainer() is True:
+                sub_class = sub.yogaclass
+                sub_wages_per_lesson = sub_class.get_wages_per_lesson()
+                total += sub_wages_per_lesson
+                substitute_total += sub_wages_per_lesson
+                d = {
+                    'sub_lesson': sub,
+                    'sub_class': sub_class,
+                    'sub_wages_per_lesson': sub_wages_per_lesson
+                }
+                data_substitute_lessons.append(d)
+
         context = {
             'active_nav': 'salary',
             'data': data,
             'month': month,
             'year': year,
+            'class_total':class_total,
             'total': total,
-            'trainer': trainer
+            'trainer': trainer,
+            'substitute_total': substitute_total,
+            'data_substitute_lessons': data_substitute_lessons
         }
         return render(request, self.template_name, context=context)
 

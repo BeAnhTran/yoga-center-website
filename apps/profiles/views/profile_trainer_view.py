@@ -84,7 +84,7 @@ class TrainerYogaClassView(View):
             'month': int(month),
             'year': int(year),
             'data': data,
-            'class_total':class_total,
+            'class_total': class_total,
             'total': total,
             'substitute_total': substitute_total,
             'data_substitute_lessons': data_substitute_lessons

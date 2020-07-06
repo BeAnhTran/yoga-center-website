@@ -84,8 +84,8 @@
                     <td><small>{{d.yoga_class}}</small></td>
                     <td>{{ d.yoga_class.get_wages_per_lesson | sexy_number }}đ</td>
                     <td>{{ d.number_of_taught_lessons }}/{{ d.total_lessons_on_month }}</td>
-                    <td>{{ d.total_salary_in_month | sexy_number }}đ</td>
-                    <td><a href="{% url 'profile:trainers-yoga-classes-detail' d.yoga_class.slug %}?month={{month}}&year={{year}}" class="badge badge-warning badge-pill">{% trans 'detail' %}</a></td>
+                    <td width="12%">{{ d.total_salary_in_month | sexy_number }}đ</td>
+                    <td width="10%"><a href="{% url 'profile:trainers-yoga-classes-detail' d.yoga_class.slug %}?month={{month}}&year={{year}}" class="badge badge-warning badge-pill">{% trans 'detail' %}</a></td>
                 </tr>
                 {% endfor %}
                 <tr>
@@ -102,7 +102,7 @@
 <div class="row">
     <div class="container mt-3 mb-3">
         <h3 style="font-size: 24px;">
-            Danh sách lớp dạy thay trong tháng {{ month }}/{{ year }}
+            Danh sách buổi dạy thay trong tháng {{ month }}/{{ year }}
         </h3>
     </div>
     <div class="col">
@@ -110,8 +110,8 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th class="w-5"><small><b>#</b></small></th>
-                    <th class="w-45"><small><b>Lớp</b></small></th>
+                    <th><small><b>#</b></small></th>
+                    <th><small><b>Lớp</b></small></th>
                     <th><small><b>Huấn luyện viên</b></small></th>
                     <th><small><b>Ngày</b></small></th>
                     <th><small><b>Thời gian</b></small></th>
@@ -126,8 +126,8 @@
                     <td>{{ d.sub_class.trainer }}</td>
                     <td>{{ d.sub_lesson.date }}</td>
                     <td>{{ d.sub_lesson.start_time }} - {{ d.sub_lesson.end_time }}</td>
-                    <td>{{ d.sub_wages_per_lesson | sexy_number }}đ</td>
-                    <td><a href="javascript:;" class="badge badge-warning badge-pill">{% trans 'detail' %}</a></td>
+                    <td width="12%">{{ d.sub_wages_per_lesson | sexy_number }}đ</td>
+                    <td width="10%"><a href="javascript:;" class="badge badge-warning badge-pill">{% trans 'detail' %}</a></td>
                 </tr>
                 {% endfor %}
                 <tr>
@@ -137,18 +137,21 @@
             </tbody>
         </table>
         {% else %}
-        <p class="text-danger">Không có lớp nào</p>
+        <p class="text-danger">Không có buổi dạy thay nào</p>
         {% endif %}
     </div>
 </div>
-<div class="row">
-    <div class="container mt-3 mb-3">
-        <h3 style="font-size: 24px;">
-            Tổng cộng: <a href="javascript:;" class="text-danger float-right" style="margin-right: 90px;font-family: serif;"><b>{{total|sexy_number}}đ</b></a>
-        </h3>
-    </div>
+<div class="row mb-3">
     <div class="col">
-       
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                    <td class="pl-0"><h3 style="font-size: 24px;">Tổng cộng</h3></td>
+                    <td width="12%"><span class="text-danger"><b>{{ total | sexy_number }}đ</b></span></td>
+                    <td width="10%"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

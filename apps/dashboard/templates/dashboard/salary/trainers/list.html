@@ -78,23 +78,23 @@
                     <th><small><b>Lớp</b></small></th>
                     <th><small><b>Tiền lương một buổi</b></small></th>
                     <th><small><b>Số buổi đã dạy</b></small></th>
-                    <th><small><b>Tiền lương trong tháng</b></small></th>
+                    <th><small><b>Tiền lương</b></small></th>
                 </tr>
             </thead>
             <tbody>
                 {% for d in data %}
                 <tr>
                     <td>{{forloop.counter}}</td>
-                    <td><small>{{d.yoga_class}}</small></td>
+                    <td width="30%"><small>{{d.yoga_class}}</small></td>
                     <td>{{ d.yoga_class.get_wages_per_lesson | sexy_number }}đ</td>
                     <td>{{ d.number_of_taught_lessons }}/{{ d.total_lessons_on_month }}</td>
-                    <td>{{ d.total_salary_in_month | sexy_number }}đ</td>
-                    <td><a href="{% url 'dashboard:salary-trainers-detail-class-detail' slug=trainer.user.slug yoga_class_pk=d.yoga_class.pk %}" class="badge badge-warning badge-pill">{% trans 'detail' %}</a></td>
+                    <td width="12%">{{ d.total_salary_in_month | sexy_number }}đ</td>
+                    <td width="10%"><a href="{% url 'dashboard:salary-trainers-detail-class-detail' slug=trainer.user.slug yoga_class_pk=d.yoga_class.pk %}" class="badge badge-warning badge-pill">{% trans 'detail' %}</a></td>
                 </tr>
                 {% endfor %}
                 <tr>
-                    <td colspan="4"><span class="text-danger">Tổng cộng</span></td>
-                    <td><span class="text-danger">{{ total | sexy_number }}đ</span></td>
+                    <td colspan="4"><span class="text-danger"></span></td>
+                    <td><span class="text-danger">{{ class_total | sexy_number }}đ</span></td>
                 </tr>
             </tbody>
         </table>
@@ -102,6 +102,64 @@
         {% else %}
         <p class="text-danger">Không có lớp nào</p>
         {% endif %}
+    </div>
+</div>
+<div class="row mt-3 mb-3">
+    <div class="col">
+        <h1 class="h3 mb-0 title">
+            Danh sách buổi dạy thay trong tháng {{ month }}/{{ year }}
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        {% if data_substitute_lessons %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th><small><b>#</b></small></th>
+                    <th><small><b>Lớp</b></small></th>
+                    <th><small><b>Ngày</b></small></th>
+                    <th><small><b>Thời gian</b></small></th>
+                    <th><small><b>Huấn luyện viên</b></small></th>
+                    <th><small><b>Tiền lương</b></small></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in data_substitute_lessons %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td width="30%"><small>{{d.sub_class}}</small></td>
+                    <td>{{ d.sub_lesson.date }}</td>
+                    <td>{{ d.sub_lesson.start_time }} - {{ d.sub_lesson.end_time }}</td>
+                    <td>{{ d.sub_class.trainer }}</td>
+                    <td width="12%">{{ d.sub_wages_per_lesson | sexy_number }}đ</td>
+                    <td width="10%"><a href="javascript:;" class="badge badge-warning badge-pill">{% trans 'detail' %}</a></td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="5"><span class="text-danger"></span></td>
+                    <td><span class="text-danger">{{ substitute_total | sexy_number }}đ</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% else %}
+        <p class="text-danger">Không có buổi dạy thay nào</p>
+        {% endif %}
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col">
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                    <td class="pl-0"><h1 class="h3 mb-0 title">Tổng cộng</h1></td>
+                    <td width="12%"><h1 class="text-danger h3 mb-0 title">{{ total | sexy_number }}đ</h1></td>
+                    <td width="10%"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}
