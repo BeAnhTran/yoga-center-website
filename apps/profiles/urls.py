@@ -28,6 +28,10 @@ urlpatterns = [
     path('accounts/cards/<int:card_id>/refunds/<int:pk>/delete', profile_trainee_view.detele_refund_request,
          name='profile-trainee-card-refunds-delete'),
     # ----- TRAINER ----- #
+    path('trainers/info/',
+         profile_trainer_view.TrainerInfoView.as_view(), name='trainers-info'),
+    path('trainers/info/edit/',
+         profile_trainer_view.TrainerInfoEditView.as_view(), name='trainers-info-edit'),
     path('trainers/yoga-classes/',
          profile_trainer_view.TrainerYogaClassView.as_view(), name='trainers-yoga-classes'),
     path('trainers/yoga-classes/<slug:slug>/',

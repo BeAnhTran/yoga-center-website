@@ -1,0 +1,50 @@
+{% extends 'profile/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/profile/trainees/cards/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile/certificates/style.css' %}">
+{% endblock %}
+
+{% block header_path %}
+<a class="text-danger" href="javascript:;">
+    &raquo; Thông tin giới thiệu bản thân huấn luyện viên
+</a>
+{% endblock %}
+
+{% block profile_content %}
+<div class="event-item">
+    <div class="ei-text">
+        <a class="site-btn sb-gradient float-right" href="{% url 'profile:trainers-info-edit'%}">Cập nhật</a>
+        <h3 class="text-danger">Giới thiệu</h3>
+        <div class="m-3">
+            {% if trainer.introduction %}
+            <p style="color: #212529;">{{ trainer.introduction }}</p>
+            {% else %}
+            <p class="text-secondary"><small><i>Chưa cập nhật</i></small></p>
+            {% endif %}
+        </div>
+        <h3 class="text-danger">Kinh nghiệm</h3>
+        <div class="m-3">
+            {% if trainer.experience %}
+            {{ trainer.experience |safe }}
+            {% else %}
+            <p class="text-secondary"><small><i>Chưa cập nhật</i></small></p>
+            {% endif %}
+        </div>
+        <h3 class="text-danger">Thành tích hoạt động</h3>
+        <div class="m-3">
+            {% if trainer.achievements %}
+            {{ trainer.achievements|safe }}
+            {% else %}
+            <p class="text-secondary"><small><i>Chưa cập nhật</i></small></p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block specified_js %}
+{% endblock %}

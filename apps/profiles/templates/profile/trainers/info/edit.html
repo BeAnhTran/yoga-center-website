@@ -1,0 +1,26 @@
+{% extends 'profile/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/profile/trainees/cards/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile/certificates/style.css' %}">
+{% endblock %}
+
+{% block header_path %}
+<a class="text-danger" href="javascript:;">
+    &raquo; Thông tin giới thiệu bản thân
+</a>
+{% endblock %}
+
+{% block profile_content %}
+    <div class="event-item">
+        <div class="ei-text">
+          {% crispy form %}
+        </div>
+      </div>
+{% endblock %}
+
+{% block specified_js %}
+{% endblock %}

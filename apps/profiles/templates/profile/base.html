@@ -74,17 +74,10 @@
                                 </div>
                             </div>
                         </a>
-                        <a class="list-group-item-custom {% if sidebar_profile == 'introduction' %} active {% endif %}" href="javascript:;">
+                        <a class="list-group-item-custom {% if sidebar_profile == 'trainer_info' %} active {% endif %}" href="{% url 'profile:trainers-info' %}">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                     <div class="d-inline-block">Thông tin giới thiệu bản thân</div>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="list-group-item-custom {% if sidebar_profile == 'achievements' %} active {% endif %}" href="javascript:;">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div><i class="fe-icon-heart mr-1 text-muted"></i>
-                                    <div class="d-inline-block">Thành tích hoạt động</div>
                                 </div>
                             </div>
                         </a>

@@ -23,6 +23,7 @@ from apps.refunds.models import Refund, PENDING_STATE, APPROVED_STATE
 from apps.card_types.models import FOR_TRAINING_COURSE
 from apps.classes.models import YogaClass
 from datetime import datetime
+from apps.profiles.forms.trainer_info_form import TrainerInfoForm
 
 
 @method_decorator([login_required, trainer_required], name='dispatch')
@@ -100,4 +101,47 @@ class TrainerYogaClassDetailView(View):
             'number_of_taught_lessons': number_of_taught_lessons,
             'total_salary_in_month': total_salary_in_month
         }
+        return render(request, self.template_name, context=context)
+
+
+@method_decorator([login_required, trainer_required], name='dispatch')
+class TrainerInfoView(View):
+    template_name = 'profile/trainers/info/index.html'
+
+    def get(self, request):
+        trainer = request.user.trainer
+        context = {
+            'trainer': trainer,
+            'sidebar_profile': 'trainer_info'
+        }
+        return render(request, self.template_name, context=context)
+
+@method_decorator([login_required, trainer_required], name='dispatch')
+class TrainerInfoEditView(View):
+    template_name = 'profile/trainers/info/edit.html'
+
+    def get(self, request):
+        trainer = request.user.trainer
+        form = TrainerInfoForm(instance=trainer)
+        context = {
+            'trainer': trainer,
+            'sidebar_profile': 'trainer_info',
+            'form': form
+        }
+        return render(request, self.template_name, context=context)
+
+    def post(self, request):
+        form = TrainerInfoForm(
+            request.POST, request.FILES, instance=request.user.trainer)
+        context = {
+            'form': form,
+            'active_nav': 'trainer_info',
+            'trainer': request.user.trainer,
+        }
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cập nhật thông tin thành công')
+            return redirect('profile:trainers-info')
+
         return render(request, self.template_name, context=context)
