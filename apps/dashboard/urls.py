@@ -5,7 +5,7 @@ from .views import (
     dashboard_view, courses_view, rooms_view,
     lessons_view, classes_view, cards_view,
     card_types_view, trainees_view, trainers_view, staffs_view,
-    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view, taught_view, events_view, faq_view, questions_view, feedback_view, trainers_salary_view)
+    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view, taught_view, events_view, faq_view, questions_view, feedback_view, trainers_salary_view, notifications_view)
 
 from .views.requests import refund_requests_view
 
@@ -98,8 +98,10 @@ card_types_urlpatterns = [
 trainees_urlpatterns = [
     path('', trainees_view.TraineeListView.as_view(), name='trainees-list'),
     path('new/', trainees_view.TraineeNewView.as_view(), name='trainees-new'),
-    path('training-class/', trainees_view.TrainingClassListView.as_view(), name='training-class-list'),
-    path('training-class/<slug:slug>/', trainees_view.TraineeOfTrainingClassListView.as_view(), name='trainee-of-training-class-list'),
+    path('training-class/', trainees_view.TrainingClassListView.as_view(),
+         name='training-class-list'),
+    path('training-class/<slug:slug>/', trainees_view.TraineeOfTrainingClassListView.as_view(),
+         name='trainee-of-training-class-list'),
 ]
 
 # TRAINERS
@@ -249,6 +251,12 @@ salary_urlpatterns = [
 ]
 
 
+# Notifications
+notifications_urlpatterns = [
+    path('create/for-unpaid-card/<int:pk>/', notifications_view.createNotificationForUnpaidCard,
+         name='notifications-create-for-unpaid-card'),
+]
+
 # DASHBOARD
 urlpatterns = [
     path('', dashboard_view.index, name='index'),
@@ -273,4 +281,5 @@ urlpatterns = [
     path('questions/', include(questions_urlpatterns)),
     path('feedback/', include(feedback_urlpatterns)),
     path('salary/', include(salary_urlpatterns)),
+    path('notifications/', include(notifications_urlpatterns)),
 ]

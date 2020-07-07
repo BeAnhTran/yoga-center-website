@@ -32,37 +32,49 @@
                         <th><small>{% trans 'trainee' as t_trainee %}{{ t_trainee|capfirst }}</small></th>
                         <th><small>{% trans 'card type' as t_card_type %}{{ t_card_type|capfirst }}</small></th>
                         <th><small>{% trans 'yoga class' as t_yoga_class %}{{ t_yoga_class|capfirst }}</small></th>
+                        {% if active_nav == 'unpaid-cards' %}
+                        <th><small>Thời gian hết hạn thanh toán</small></th>
+                        {% else %}
                         <th><small>{% trans 'End at' %}</small></th>
+                        {% endif %}
                         <th><small>{% trans 'action' as t_action %}{{ t_action|capfirst }}</small></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for card in cards %}
                     <tr>
-                        <td>{{ card.id }}</td>
-                        <td>{{ card.trainee.full_name }}</td>
-                        <td>{{ card.card_type }}</td>
-                        <td>{{ card.yogaclass }}</td>
-                        <td>{{ card.end_at }}</td>
-                        <td>
-                            <!-- <a class="btn btn-sm btn-primary" href="javascript:;">
+                        <td><small>{{ card.id }}</small></td>
+                        <td><small>{{ card.trainee.full_name }}</small></td>
+                        <td><small>{{ card.card_type }}</small></td>
+                        <td><small>{{ card.yogaclass }}</small></td>
+                        {% if active_nav == 'unpaid-cards' %}
+                        <td><small class="text-danger">{{ card.get_expire_time }}</small></td>
+                        {% else %}
+                        <td><small>{{ card.end_at }}</small></td>
+                        {% endif %}
+                        <td width="25%">
+                            <a class="btn btn-sm btn-primary mb-1" href="javascript:;">
                                 <i class="fas fa-fw fa-eye"></i> {% trans 'show' %}
                             </a>
-                            <a class="btn btn-sm btn-warning" href="javascript:;">
-                                <i class="fas fa-fw fa-edit"></i> {% trans 'edit' %}
-                            </a> -->
-                            <a class="btn btn-sm btn-danger delete-card" href="javascript:;">
-                                <i class="fas fa-fw fa-trash"></i> {% trans 'delete' %}
+                            <a class="btn btn-sm btn-info mb-1" href="javascript:;">
+                                <i class="fas fa-fw fa-pen"></i> {% trans 'edit' %}
+                            </a>
+                            <a class="btn btn-sm btn-danger mb-1 delete-card" href="javascript:;">
+                                <small><i class="fas fa-fw fa-trash"></i>{% trans 'delete' %}</small>
                             </a>
                             {% if active_nav == 'unpaid-cards' %}
-                            <a class="btn btn-sm btn-success receive-payment" href="javascript:;">
-                                <i class="fas fa-fw fa-coins"></i> {% trans 'receive payment' %}
+                            <a class="btn btn-sm btn-success mb-1 receive-payment" href="javascript:;">
+                                <small><i class="fas fa-fw fa-coins"></i> {% trans 'receive payment' %}</small>
                             </a>
                             <form class="d-none form-receive-payment"
                                 action="{% url 'dashboard:receive-card-payment' card.invoices.last.pk %}" method="POST">
                                 {% csrf_token %}
                                 <input type="submit" value="Confirm">
                             </form>
+                            <a class="btn btn-sm btn-warning mb-1 create-reminder" data-card="{{card.pk}}"
+                                href="javascript:;">
+                                <small><i class="fas fa-fw fa-bell"></i> tạo lời nhắc</small>
+                            </a>
                             {% endif %}
                         </td>
                     </tr>
@@ -98,6 +110,26 @@
                 $(this).siblings('form.form-receive-payment').children('input[type=submit]').click();
             }
         })
+    });
+
+    $('.create-reminder').click(function () {
+        var _url = '{% url "dashboard:notifications-create-for-unpaid-card" 0 %}';
+        var id = $(this).attr('data-card');
+        var url = _url.replace('0', id);
+        $.ajax({
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            url: url,
+            method: 'POST'
+        }).done(function (data) {
+            console.log(data);
+            Swal.fire(
+                'Hoàn thành',
+                'Tạo thông báo thành công',
+                'success'
+            )
+        }).fail(err => console.log(err));
     });
 </script>
 
