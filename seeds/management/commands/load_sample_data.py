@@ -845,6 +845,38 @@ class Command(BaseCommand):
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[0:36])
         self.__enroll('Lý', 'Nguyễn Thị', 'nguyenthily1@gmail.com', basic_yoga_class_co_man_5h30_t246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[0:36])
+        ### THE CHUA THANH TOAN
+        data_ctt1 = {
+            'email': 'chuathanhtoan1@gmail.com',
+            'first_name': 'Hoa',
+            'last_name': 'Nguyen'
+        }
+        chuathanhtoan1 = User(**data_ctt1)
+        chuathanhtoan1.set_password('truong77')
+        chuathanhtoan1.is_trainee = True
+        chuathanhtoan1.save()
+        trainee_chuathanhtoan1 = Trainee.objects.create(user=chuathanhtoan1)
+        card_ctt1 = trainee_chuathanhtoan1.cards.create(
+            yogaclass=basic_yoga_class_co_man_5h30_t246, card_type=period_lessons_card_type)
+        amount_ctt1 = arr_lessons_basic_yoga_class_co_man_5h30_246[:36].__len__() * basic_yoga_class_co_man_5h30_t246.price_per_lesson
+        CardInvoiceService(card_ctt1, POSTPAID, 'Thanh toán thẻ tập', amount_ctt1).call()
+        RollCallService(card_ctt1, arr_lessons_basic_yoga_class_co_man_5h30_246[:36]).call()
+        data_ctt2 = {
+            'email': 'chuathanhtoan2@gmail.com',
+            'first_name': 'Hoa',
+            'last_name': 'Nguyen'
+        }
+        chuathanhtoan2 = User(**data_ctt2)
+        chuathanhtoan2.set_password('truong77')
+        chuathanhtoan2.is_trainee = True
+        chuathanhtoan2.save()
+        trainee_chuathanhtoan2 = Trainee.objects.create(user=chuathanhtoan2)
+        card_ctt2 = trainee_chuathanhtoan2.cards.create(
+            yogaclass=basic_yoga_class_co_man_5h30_t246, card_type=period_lessons_card_type)
+        amount_ctt2 = arr_lessons_basic_yoga_class_co_man_5h30_246[:36].__len__() * basic_yoga_class_co_man_5h30_t246.price_per_lesson
+        CardInvoiceService(card_ctt2, POSTPAID, 'Thanh toán thẻ tập', amount_ctt2).call()
+        RollCallService(card_ctt2, arr_lessons_basic_yoga_class_co_man_5h30_246[:36]).call()
+
         # end add-trainees
         basic_yoga_class_co_hang_nga_5h30_246 = basic_yoga_course.classes.create(
             name='Lớp cơ bản cô Hằng Nga 5h30 sáng 2-4-6',
