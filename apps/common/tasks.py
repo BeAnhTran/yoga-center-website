@@ -16,16 +16,18 @@ def removeCardWhenNotPayed(card_invoice_pk):
     result_str = ''
     if card_invoice.is_charged() is False:
         card = card_invoice.card
-        yoga_class = card.yogaclass
-        result_str = 'Thẻ tập ' + ' - ' + card.yogaclass.name + ' - Học viên: ' + card.trainee.full_name() + ' đã bị xóa vì chưa thanh toán trong 7 ngày.'
+        result_str = 'Thẻ tập ' + ' - ' + card.yogaclass.name + ' - Học viên: ' + \
+            card.trainee.full_name() + ' đã bị xóa vì chưa thanh toán trong 7 ngày.'
         card.delete()
         admin = User.objects.filter(is_superuser=True).first()
         # send for admins and staffs
         notify.send(sender=admin, recipient=User.objects.filter(Q(is_superuser=True) | Q(is_staff=True)),
                     verb=result_str)
-        trainee_str = 'Thẻ tập ' + ' - ' + card.yogaclass.name + ' của bạn đã bị xóa vì chưa thanh toán trong 7 ngày.'
+        trainee_str = 'Thẻ tập ' + ' - ' + card.yogaclass.name + \
+            ' của bạn đã bị xóa vì chưa thanh toán trong 7 ngày.'
         # send for trainee
-        notify.send(sender=admin, recipient=card.trainee.user, verb=trainee_str)
+        notify.send(sender=admin, recipient=card.trainee.user,
+                    verb=trainee_str)
     else:
         result_str = 'Thẻ tập đã thanh toán.'
     return result_str
