@@ -1,6 +1,10 @@
 import os
 from celery import Celery
 from celery.schedules import crontab
+import dotenv
+
+env_file = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), '.env')
+dotenv.read_dotenv(env_file)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'yoga_center_website.settings')
 
