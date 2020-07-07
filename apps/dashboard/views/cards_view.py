@@ -73,7 +73,8 @@ class ReceiveCardPaymentView(View):
             invoice.staff = request.user.staff
             invoice.save()
             messages.success(request, _('Receive card payment successfully'))
-            return redirect('dashboard:unpaid-cards-list')
+            # return redirect('dashboard:unpaid-cards-list')
+            return redirect('dashboard:cards-new-for-class-result',pk=invoice.card.pk)
 
 
 @method_decorator([login_required, staff_required], name='dispatch')

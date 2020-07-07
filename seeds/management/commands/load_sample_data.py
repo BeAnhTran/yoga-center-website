@@ -849,7 +849,7 @@ class Command(BaseCommand):
         data_ctt1 = {
             'email': 'chuathanhtoan1@gmail.com',
             'first_name': 'Hoa',
-            'last_name': 'Nguyen'
+            'last_name': 'Nguyễn'
         }
         chuathanhtoan1 = User(**data_ctt1)
         chuathanhtoan1.set_password('truong77')
@@ -863,8 +863,8 @@ class Command(BaseCommand):
         RollCallService(card_ctt1, arr_lessons_basic_yoga_class_co_man_5h30_246[:36]).call()
         data_ctt2 = {
             'email': 'chuathanhtoan2@gmail.com',
-            'first_name': 'Hoa',
-            'last_name': 'Nguyen'
+            'first_name': 'Lam',
+            'last_name': 'Trần'
         }
         chuathanhtoan2 = User(**data_ctt2)
         chuathanhtoan2.set_password('truong77')

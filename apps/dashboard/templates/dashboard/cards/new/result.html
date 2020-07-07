@@ -38,6 +38,7 @@
                     <li><a href="{% url 'dashboard:index' %}"><i class="fas fa-fw fa-tachometer-alt"></i> {% trans 'Dashboard' %}</a></li>
                     <li><a id="print_card_invoice" href="javascript:;"><i class="fas fa-fw fa-print"></i> {% trans 'Print card invoice' %}</a></li>
                     <li><a id="print_QR_code" href="javascript:;"><i class="fas fa-fw fa-print"></i> {% trans 'Print QR Code of card' %}</a></li>
+                    <li><a href="{{request.META.HTTP_REFERER}}"><i class="fas fa-arrow-circle-left"></i> Trở lại</a></li>
                 </ul>
             </div>
         </div>
