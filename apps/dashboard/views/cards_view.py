@@ -47,15 +47,14 @@ class CardListView(ListView):
 
 @method_decorator([login_required, staff_required], name='dispatch')
 class UnPaidCardListView(ListView):
-    model = Card
-    template_name = 'dashboard/cards/list.html'
-    context_object_name = 'cards'
+    model = CardInvoice
+    template_name = 'dashboard/cards/unpaid_list.html'
+    context_object_name = 'invoices'
     ordering = ['created_at']
     paginate_by = 10
 
     def get_queryset(self):
-        query = Card.objects.filter(
-            invoices__payment_type=POSTPAID, invoices__staff=None).distinct()
+        query = CardInvoice.objects.filter(charge_id=None, staff=None)
         return query
 
     def get_context_data(self, **kwargs):
@@ -74,7 +73,7 @@ class ReceiveCardPaymentView(View):
             invoice.save()
             messages.success(request, _('Receive card payment successfully'))
             # return redirect('dashboard:unpaid-cards-list')
-            return redirect('dashboard:cards-new-for-class-result',pk=invoice.card.pk)
+            return redirect('dashboard:cards-new-for-class-result', pk=invoice.card.pk)
 
 
 @method_decorator([login_required, staff_required], name='dispatch')

@@ -6,13 +6,16 @@ from apps.cards.models import Card
 from apps.promotions.models import ApplyPromotionCode
 from django.contrib.contenttypes.fields import GenericRelation
 from apps.accounts.models import Staff
+from datetime import date, datetime, timedelta
 
 PREPAID = 0
 POSTPAID = 1
+NOT_SPECIFIED = 2
 
 PAYMENT_TYPES = (
     (PREPAID, _('Prepaid')),
     (POSTPAID, _('Postpaid')),
+    (NOT_SPECIFIED, _('Not specified')),
 )
 
 
@@ -44,3 +47,11 @@ class CardInvoice(models.Model):
         if self.charge_id or self.staff is not None:
             return True
         return False
+
+    def get_expire_time(self):
+        if self.is_charged() is False:
+            if self.payment_type == POSTPAID:
+                return self.created_at + timedelta(days=7)
+            elif self.payment_type == NOT_SPECIFIED:
+                return self.payment_period.end_at
+        return None

@@ -32,7 +32,7 @@ from services.card_invoice_service import CardInvoiceService
 from apps.shop.models import ProductCategory, Product
 from random import randint
 import uuid
-from apps.card_invoices.models import PREPAID, POSTPAID
+from apps.card_invoices.models import PREPAID, POSTPAID, NOT_SPECIFIED
 from dateutil.relativedelta import relativedelta
 from notifications.signals import notify
 from django.db.models import Q
@@ -2832,7 +2832,12 @@ class Command(BaseCommand):
         trainee_chuathanhtoan2 = Trainee.objects.create(user=chuathanhtoan2)
         card_ctt2 = trainee_chuathanhtoan2.cards.create(
             yogaclass=training_class_thay_hoang_anh, card_type=training_course_card_type)
-        CardInvoiceService(card_ctt2, PREPAID, 'Thanh toán thẻ tập', period1.amount, 'test1axvdjjsasbxbasasas').call()
+        invoice1 = CardInvoiceService(card_ctt2, PREPAID, 'Thanh toán thẻ tập', period1.amount, 'test1axvdjjsasbxbasasas').call()
+        invoice1.payment_period = period1
+        invoice1.save()
+        invoice2 = CardInvoiceService(card_ctt2, NOT_SPECIFIED, 'Thanh toán thẻ tập', period2.amount).call()
+        invoice2.payment_period = period2
+        invoice2.save()
         RollCallService(card_ctt2, training_class_thay_hoang_anh.lessons.all()).call()
         data_ctt3 = {
             'email': 'testdaotao3@gmail.com',
@@ -2846,7 +2851,12 @@ class Command(BaseCommand):
         trainee_chuathanhtoan3 = Trainee.objects.create(user=chuathanhtoan3)
         card_ctt3 = trainee_chuathanhtoan3.cards.create(
             yogaclass=training_class_thay_hoang_anh, card_type=training_course_card_type)
-        CardInvoiceService(card_ctt3, POSTPAID, 'Thanh toán thẻ tập', period1.amount).call()
+        invoice11 = CardInvoiceService(card_ctt3, POSTPAID, 'Thanh toán thẻ tập', period1.amount).call()
+        invoice11.payment_period = period1
+        invoice11.save()
+        invoice12 = CardInvoiceService(card_ctt3, NOT_SPECIFIED, 'Thanh toán thẻ tập', period2.amount).call()
+        invoice12.payment_period = period2
+        invoice12.save()
         RollCallService(card_ctt3, training_class_thay_hoang_anh.lessons.all()).call()
 
 

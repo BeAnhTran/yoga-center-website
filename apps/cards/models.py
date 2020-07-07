@@ -117,32 +117,23 @@ class Card(models.Model):
 
     def get_expire_time(self):
         if self.card_type.form_of_using == FOR_TRAINING_COURSE:
-            total_amount = self.yogaclass.get_price_for_training_course()
-            if self.yogaclass.payment_periods.all().count() == 0:
-                if self.invoices.first().is_charged() is False:
+            if self.invoices.all().count() == 1:
+                if self.invoices.last().is_charged() is False:
                     expire = self.created_at + timedelta(days=7)
                     return expire
-                return None
+                else:
+                    return None
             else:
-                total = 0
-                check_payment_period = None
+                expire = None
                 for invoice in self.invoices.all():
                     if invoice.is_charged() is False:
-                        check_payment_period = invoice.payment_period
-                    else:
-                        total += invoice.amount
-                if total == total_amount:
-                    if check_payment_period is None:
-                        expire = self.created_at + timedelta(days=7)
-                        return expire
-                    else:
-                        return None
-                else:
-                    if check_payment_period is None:
-                        return self.yogaclass.payment_periods.last().end_at
-                    else:
-                        expire = self.created_at + timedelta(days=7)
-                        return expire
+                        temp_expire = invoice.payment_period.end_at
+                        if expire is None:
+                            expire = temp_expire
+                        else:
+                            if expire > temp_expire:
+                                expire = temp_expire
+                return expire
         else:
             if self.invoices.first().is_charged() is False:
                 expire = self.created_at + timedelta(days=7)
