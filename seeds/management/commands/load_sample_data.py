@@ -2793,16 +2793,63 @@ class Command(BaseCommand):
                 "start_time": t_18h,
                 "end_time": t_21h
             })
-        training_class_thay_hoang_anh.payment_periods.create(**{
+        period1 = training_class_thay_hoang_anh.payment_periods.create(**{
             'name': 'Đợt thanh toán 1',
             'amount': 12000000,
             'end_at': _saturday + timedelta(days=14)
         })
-        training_class_thay_hoang_anh.payment_periods.create(**{
+        period2 = training_class_thay_hoang_anh.payment_periods.create(**{
             'name': 'Đợt thanh toán 2',
             'amount': 10000000,
             'end_at': _saturday + timedelta(days=(14 + 7*7))
         })
+
+        ### THE CHUA THANH TOAN
+        data_ctt1 = {
+            'email': 'testdaotao1@gmail.com',
+            'first_name': 'Tú',
+            'last_name': 'Nguyễn'
+        }
+        chuathanhtoan1 = User(**data_ctt1)
+        chuathanhtoan1.set_password('truong77')
+        chuathanhtoan1.is_trainee = True
+        chuathanhtoan1.save()
+        trainee_chuathanhtoan1 = Trainee.objects.create(user=chuathanhtoan1)
+        card_ctt1 = trainee_chuathanhtoan1.cards.create(
+            yogaclass=training_class_thay_hoang_anh, card_type=training_course_card_type)
+        CardInvoiceService(card_ctt1, POSTPAID, 'Thanh toán thẻ tập', training_class_thay_hoang_anh.get_price_for_training_course()).call()
+        RollCallService(card_ctt1, training_class_thay_hoang_anh.lessons.all()).call()
+        # da thanh toan dot 1
+        data_ctt2 = {
+            'email': 'testdaotao2@gmail.com',
+            'first_name': 'Long',
+            'last_name': 'Trần'
+        }
+        chuathanhtoan2 = User(**data_ctt2)
+        chuathanhtoan2.set_password('truong77')
+        chuathanhtoan2.is_trainee = True
+        chuathanhtoan2.save()
+        trainee_chuathanhtoan2 = Trainee.objects.create(user=chuathanhtoan2)
+        card_ctt2 = trainee_chuathanhtoan2.cards.create(
+            yogaclass=training_class_thay_hoang_anh, card_type=training_course_card_type)
+        CardInvoiceService(card_ctt2, PREPAID, 'Thanh toán thẻ tập', period1.amount, 'test1axvdjjsasbxbasasas').call()
+        RollCallService(card_ctt2, training_class_thay_hoang_anh.lessons.all()).call()
+        data_ctt3 = {
+            'email': 'testdaotao3@gmail.com',
+            'first_name': 'Lan',
+            'last_name': 'Ngọc'
+        }
+        chuathanhtoan3 = User(**data_ctt3)
+        chuathanhtoan3.set_password('truong77')
+        chuathanhtoan3.is_trainee = True
+        chuathanhtoan3.save()
+        trainee_chuathanhtoan3 = Trainee.objects.create(user=chuathanhtoan3)
+        card_ctt3 = trainee_chuathanhtoan3.cards.create(
+            yogaclass=training_class_thay_hoang_anh, card_type=training_course_card_type)
+        CardInvoiceService(card_ctt3, POSTPAID, 'Thanh toán thẻ tập', period1.amount).call()
+        RollCallService(card_ctt3, training_class_thay_hoang_anh.lessons.all()).call()
+
+
 
     def __add_basic_lectures(self, course):
         data = [
