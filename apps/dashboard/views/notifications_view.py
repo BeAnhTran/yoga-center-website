@@ -14,7 +14,6 @@ from django.db import transaction
 from django.utils import timezone
 from notifications.signals import notify
 from apps.cards.models import Card
-from django.utils import timezone
 
 
 @login_required
