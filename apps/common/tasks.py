@@ -16,7 +16,7 @@ def notify_unpaid_card():
     print("===========================================")
     print("Thông báo cho học viên chưa thanh toán thẻ")
     unpaid_cards = Card.objects.filter(
-        invoices__payment_type=POSTPAID, invoices__staff=None).distinct()
+        invoices__charge_id=None, invoices__staff=None).distinct()
     count = 0
     for card in unpaid_cards:
         count += 1

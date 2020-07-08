@@ -123,6 +123,18 @@ class Card(models.Model):
                 if temp is not None:
                     expire = temp
             else:
-                if temp is not None and expire > temp:
-                    expire = temp
+                if type(expire).__name__ == 'date':
+                    if type(temp).__name__ == 'date':
+                        if temp < expire:
+                            expire = temp
+                    else:
+                        if temp.date() < expire:
+                            expire = temp
+                else:  # expire is datetime
+                    if type(temp).__name__ == 'date':
+                        if temp < expire.date():
+                            expire = temp
+                    else:
+                        if temp < expire:
+                            expire = temp
         return expire

@@ -6,7 +6,7 @@ except ImportError:
 from django.db import transaction
 from faker import Faker
 from getenv import env
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, timedelta, time
 from django.utils import timezone
 import pytz
 import random
@@ -2793,15 +2793,16 @@ class Command(BaseCommand):
                 "start_time": t_18h,
                 "end_time": t_21h
             })
+        
         period1 = training_class_thay_hoang_anh.payment_periods.create(**{
             'name': 'Đợt thanh toán 1',
             'amount': 12000000,
-            'end_at': _saturday + timedelta(days=14)
+            'end_at': datetime.combine(_saturday + timedelta(days=14), time.max, _today.tzinfo)
         })
         period2 = training_class_thay_hoang_anh.payment_periods.create(**{
             'name': 'Đợt thanh toán 2',
             'amount': 10000000,
-            'end_at': _saturday + timedelta(days=(14 + 7*7))
+            'end_at': datetime.combine(_saturday + timedelta(days=(14 + 7*7)), time.max, _today.tzinfo)
         })
 
         ### THE CHUA THANH TOAN
