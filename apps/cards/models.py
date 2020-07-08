@@ -116,26 +116,13 @@ class Card(models.Model):
             return True
 
     def get_expire_time(self):
-        if self.card_type.form_of_using == FOR_TRAINING_COURSE:
-            if self.invoices.all().count() == 1:
-                if self.invoices.last().is_charged() is False:
-                    expire = self.created_at + timedelta(days=7)
-                    return expire
-                else:
-                    return None
+        expire = None
+        for invoice in self.invoices.all():
+            temp = invoice.get_expire_time()
+            if expire is None:
+                if temp is not None:
+                    expire = temp
             else:
-                expire = None
-                for invoice in self.invoices.all():
-                    if invoice.is_charged() is False:
-                        temp_expire = invoice.payment_period.end_at
-                        if expire is None:
-                            expire = temp_expire
-                        else:
-                            if expire > temp_expire:
-                                expire = temp_expire
-                return expire
-        else:
-            if self.invoices.first().is_charged() is False:
-                expire = self.created_at + timedelta(days=7)
-                return expire
-            return None
+                if temp is not None and expire > temp:
+                    expire = temp
+        return expire

@@ -55,6 +55,24 @@ class RollCall(models.Model):
             return False
         return True
 
+    # Note: Allow study until expire
+    def can_use(self):
+        expire = self.card.get_expire_time()
+        if expire is None:
+            return True
+        else:
+            if type(expire).__name__ == 'date':
+                if self.lesson.date < expire:
+                    return True
+            else:
+                if self.lesson.date < expire.date():
+                    return True
+                elif self.lesson.date == expire.date():
+                    if self.lesson.end_time < expire.time():
+                        return True
+                else:
+                    return False
+
 
 @receiver(post_save, sender=RollCall)
 def cards_changed(sender, instance, **kwargs):

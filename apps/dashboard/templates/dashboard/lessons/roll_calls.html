@@ -156,10 +156,10 @@
                         </li>
                         {% else %}
                         <li
-                            class="list-group-item list-group-item-action list-group-item-{% if r.card.is_paid is True %}primary{% else %}danger{% endif %} d-flex justify-content-between align-items-center">
+                            class="list-group-item list-group-item-action list-group-item-{% if r.can_use is True %}primary{% else %}danger{% endif %} d-flex justify-content-between align-items-center">
                             <span class="badge badge-secondary">{{ r.card.pk }}</span>
                             <small>{{ r.card.trainee.full_name }}</small>
-                            {% if r.card.is_paid is True %}
+                            {% if r.can_use is True %}
                             <a href="javascript:;" class="a-un-studied" data-card="{{r.card.id}}" data-roll-call="{{r.id}}">
                                 <span class="badge badge-success badge-pill">{% trans 'select' %}</span>
                             </a>
