@@ -280,6 +280,17 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="mt-3">
+                    {% for invoice in card.invoices.all %}
+                        {% if invoice.is_charged is False %}
+                            {% if invoice.payment_period is not None %}
+                            <a class="site-btn site-btn-sm btn-danger" href="javascript:;">Thanh toán {{ invoice.amount|sexy_number }}đ - {{ invoice.payment_period }}</a>
+                            {% else %}
+                            <a class="site-btn site-btn-sm btn-danger" href="javascript:;">Thanh toán thẻ tập {{ invoice.amount|sexy_number }}đ</a>
+                            {% endif%}
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
             {% if card.card_type.form_of_using == FOR_TRAINING_COURSE and card.yogaclass.payment_periods.all.count > 0 %}
             {% if paid_entire == False %}
