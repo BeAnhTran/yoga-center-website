@@ -36,8 +36,14 @@
                         <td width="12%"><small>{{ invoice.card.trainee.full_name }}</small></td>
                         <td><small>{{ invoice.card.card_type }}</small></td>
                         <td><small>{{ invoice.card.yogaclass }}</small></td>
-                        <td><small>{{ invoice.payment_period|default_if_none:'' }}</small></td>
-                        <td><small>{{ invoice.amount | sexy_number }}đ</small></td>
+                        <td>
+                            <small class="text-secondary">{{ invoice.payment_period|default_if_none:'' }}</small>
+                        </td>
+                        <td>
+                            <span class="badge badge-success">
+                                <small>{{ invoice.amount | sexy_number }}đ</small>
+                            </span>
+                        </td>
                         <td><small class="text-danger">{{ invoice.get_expire_time }}</small></td>
                         <td width="25%">
                             <a class="btn btn-sm btn-primary mb-1" href="javascript:;">
@@ -49,6 +55,7 @@
                             <a class="btn btn-sm btn-danger mb-1 delete-card" href="javascript:;">
                                 <small><i class="fas fa-fw fa-trash"></i>{% trans 'delete' %}</small>
                             </a>
+                            {% if invoice.get_expire_time == invoice.card.get_expire_time %}
                             <a class="btn btn-sm btn-success mb-1 receive-payment" href="javascript:;">
                                 <small><i class="fas fa-fw fa-coins"></i> {% trans 'receive payment' %}</small>
                             </a>
@@ -57,6 +64,7 @@
                                 {% csrf_token %}
                                 <input type="submit" value="Confirm">
                             </form>
+                            {% endif %}
                             <a class="btn btn-sm btn-warning mb-1 create-reminder" data-card="{{invoice.card.pk}}"
                                 href="javascript:;">
                                 <small><i class="fas fa-fw fa-bell"></i> tạo lời nhắc</small>
