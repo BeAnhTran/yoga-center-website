@@ -1,7 +1,7 @@
 # YOGA CENTER WEBSITE
 Website quản lý trung tâm tập Yoga
 
-## Chuẩn bị: Cài đặt Python3, Pip và Virtualenv
+## Chuẩn bị: Cài đặt Python3, Pip, Virtualenv và XAMPP
 
 ### Cài đặt Python3
 Mở file [runtime.txt](runtime.txt) để kiểm tra python version được sử dụng
@@ -36,6 +36,10 @@ Kiểm tra Virtualenv đã cài đặt thành công bằng cách gõ lệnh
 ```
 virtualenv --version
 ```
+### Cài đặt XAMPP
+```Tải và cài đặt XAMPP theo đường dẫn``` [Download XAMPP](https://www.apachefriends.org/index.html)
+
+```Sửa lỗi cài đặt Mysqlclient trong Django theo đường dẫn ``` [pip install mysqlclient returns "fatal error"](https://stackoverflow.com/questions/51294268/pip-install-mysqlclient-returns-fatal-error-c1083-cannot-open-file-mysql-h)
 
 ## Cài đặt Project
 
