@@ -23,7 +23,7 @@ class TraineeSignupForm(SignupForm):
     }
     birth_day = forms.DateField(
         widget=forms.TextInput(
-            attrs={'type': 'date', 'placeholder': 'cc'},
+            attrs={'placeholder': '01/01/1997'},
         ),
         label=_('Birth day'),
         required=False
