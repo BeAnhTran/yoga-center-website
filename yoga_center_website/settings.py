@@ -85,7 +85,6 @@ INSTALLED_APPS = [
     'apps.absence_applications',
     'apps.certificates',
     'seeds',
-    'notifications'
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,6 @@
 {% load static %}
 {% load i18n %}
 {% load settings_extras %}
-{% load notifications_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -130,32 +129,6 @@
     </a>
 </div>
 
-{#Notification#}
-
-{% if user.is_authenticated %}
-    <script src="{% static 'notifications/notify.js' %}" type="text/javascript"></script>
-    {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' fetch=5 refresh_period=5 %}
-    <div class="notifications-dropdown">
-        <a class="text-danger dropdown-toggle" href="javascript:;" id="alertsDropdown" role="button"
-           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-bell fa-fw"></i>
-            <!-- Counter - Alerts -->
-            {% live_notify_badge %}
-        </a>
-        <!-- Dropdown - Alerts -->
-        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-             aria-labelledby="alertsDropdown">
-            <h6 class="dropdown-header dropdown-header-notification">
-                Thông báo
-            </h6>
-            {% live_notify_list %}
-            <a class="dropdown-item text-center small text-gray-500" href="{% url 'notifications:all' %}">Xem tất cả thông
-                báo</a>
-        </div>
-    </div>
-{% endif %}
-
-
 <!--====== Javascripts & Jquery ======-->
 
 <script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
@@ -212,15 +185,6 @@
                 );
             });
         });
-    });
-    $('#alertsDropdown').click(function () {
-        $.ajax({
-            headers: {
-                'X-CSRFTOKEN': '{{ csrf_token }}'
-            },
-            url: "{% url 'notifications:mark_all_as_read_api' %}",
-            type: 'POST'
-        }).done(data=> console.log(data)).fail(err=>console.log(err));
     });
 </script>
 

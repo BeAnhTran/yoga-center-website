@@ -53,7 +53,6 @@ from apps.roll_calls.models import RollCall
 from apps.card_invoices.models import POSTPAID, PREPAID
 from apps.cards.models import Card
 from django.utils import timezone
-from notifications.signals import notify
 
 from django.core import mail
 from django.template.loader import render_to_string
@@ -614,7 +613,6 @@ class YogaClassPostPaidResultView(View):
             del request.session['new_card']
             admin = User.objects.filter(is_superuser=True).first()
             str = 'Đăng ký học ' + card.yogaclass.name + '. Vui lòng thanh toán thẻ tập trong vòng 7 ngày.'
-            notify.send(sender=admin, recipient=request.user, verb=str)
             return render(request, self.template_name, context=context)
         else:
             return redirect('errors:error-404')

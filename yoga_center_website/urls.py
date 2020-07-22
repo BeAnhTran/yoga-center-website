@@ -81,7 +81,6 @@ urlpatterns += i18n_patterns(
     #url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^ckeditor/upload/', login_required(views.upload), name='ckeditor_upload'),
     url(r'^ckeditor/browse/', never_cache(login_required(views.browse)), name='ckeditor_browse'),
-    url('notifications/', include(notifications.urls)),
 ) + static(settings.MEDIA_URL,
            document_root=settings.MEDIA_ROOT)
 urlpatterns += [
