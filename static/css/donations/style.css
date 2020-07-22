@@ -52,3 +52,11 @@ blockquote:after {
 .example.example5 {
 	background-color: #212529;
 }
+
+.page-top-section {
+    height: 600px;
+    position: relative;
+    padding-top: 230px;
+    text-align: center;
+    margin-top: 57px;
+}

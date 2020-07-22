@@ -11,3 +11,11 @@ div.answer ul{
 .page-top-section:after {
     background: linear-gradient(145deg, #12568861 45%, #fb3958 100%);
 }
+
+.page-top-section {
+    height: 600px;
+    position: relative;
+    padding-top: 230px;
+    text-align: center;
+    margin-top: 57px;
+}
