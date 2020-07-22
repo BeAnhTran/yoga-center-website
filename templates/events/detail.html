@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="row">
-            <h3 class="comment-title">{% trans 'Comments' %}</h3>
+            <h3 class="comment-title mb-0">{% trans 'Comments' %}</h3>
             <div class="fb-comments"
                 data-href="{% settings_value 'FACEBOOK_PRIVACY_POLICY_URL' %}{% url 'events:detail' event.slug %}"
                 data-numposts="5" data-width="100%"></div>
