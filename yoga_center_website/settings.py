@@ -128,12 +128,12 @@ WSGI_APPLICATION = 'yoga_center_website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -146,16 +146,16 @@ WSGI_APPLICATION = 'yoga_center_website.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASSWORD'),
-        'HOST': env('DATABASE_HOST'),
-        'PORT': env('DATABASE_PORT')
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': env('DATABASE_NAME'),
+#         'USER': env('DATABASE_USER'),
+#         'PASSWORD': env('DATABASE_PASSWORD'),
+#         'HOST': env('DATABASE_HOST'),
+#         'PORT': env('DATABASE_PORT')
+#     }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -333,8 +333,3 @@ MOMO_ACCESS_KEY = "aLGGNpsO3HcSPkqQ"
 MOMO_SECRET_KEY = "w84mB5zTLehWMUqPNvnWuvqg5S2DkUfH"
 MOMO_PARTNER_CODE = "MOMONZWN20200513"
 MOMO_END_POINT = "https://test-payment.momo.vn/gw_payment/transactionProcessor"
-
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://127.0.0.1:6379')
-CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://127.0.0.1:6379')
-
-MINUTES_TO_REMOVE_UNPAID_CARD = int(os.getenv('MINUTES_TO_REMOVE_UNPAID_CARD', 7 * 24 * 60))

@@ -52,7 +52,6 @@ from apps.promotions.models import PromotionCode, Promotion, PromotionType, CASH
 from apps.roll_calls.models import RollCall
 from apps.card_invoices.models import POSTPAID, PREPAID
 from apps.cards.models import Card
-from apps.common.tasks import removeCardWhenNotPayed
 from django.utils import timezone
 from notifications.signals import notify
 
