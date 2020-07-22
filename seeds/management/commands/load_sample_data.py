@@ -93,18 +93,16 @@ class Command(BaseCommand):
         co_phuong = Trainer.objects.create(user=user_cp)
         co_phuong.introduction = '''Phấn đấu là một huấn luyện viên được mọi người săn đón. Tôi không ngừng học hỏi, trau dồi kiến thức dinh dưỡng, tập luyện để áp dụng cho bản thân qua đó truyền cảm hứng, động lực cho học viên có một lối sống tích cực, khoa học, thói quen tập luyện đều đặn và đạt được kết quả sớm nhất trong việc tập luyện.'''
         co_phuong.experience = '''<ul><li>8 năm luyện tập Yoga.</li><li>5 năm giảng dạy Yoga ở nhiều trung t&acirc;m kh&aacute;c nhau.</li></ul>'''
-        co_phuong.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2015</p><p><img alt="" src="/media/seeds/achievements/chi_phuong_anh_tan.jpg" /></p>'''
+        co_phuong.achievements = '''<p>Tham gia c&aacute;c cuộc thi Yoga ở th&agrave;nh phố Hồ Ch&iacute; Minh v&agrave; đạt được nhiều th&agrave;nh t&iacute;ch.</p><p>Đạt <strong>Giải nhất&nbsp;</strong>Yoga đơn/đ&ocirc;i năm 2018</p><p><img alt="" src="/media/seeds/achievements/chi_phuong_anh_tan.jpg" /></p>'''
         co_phuong.save()
-        co_phuong.user.certificates.create(
-            name='Chứng chỉ Huấn luyện viên Yoga Quốc tế')
-        co_phuong.user.certificates.create(
+        user_cp.certificates.create(
+            name='Chứng nhận hoàn thành khóa đào tạo Hướng dẫn viên cơ bản Yoga', image='/seeds/images/trainers/chi-phuong/chung-nhan-da-hoan-thanh-khoa-dao-tao-huong-dan-vien-yoga.jpg')
+        user_cp.certificates.create(
             name='Chứng nhận đã hoàn thành khóa đào tạo Huấn luyện viên Yoga của CLB Yoga Hương Tre')
-        co_phuong.user.certificates.create(
-            name='Chứng chỉ trị liệu Yoga cấp bởi Indian Board of Alternative Medicines')
-        co_phuong.user.certificates.create(
-            name='Huy chương vàng cuộc thi Master Yoga Science & Holistic Health')
-        co_phuong.user.certificates.create(
-            name='Bằng thạc sĩ khoa học Yoga của Đại Học Haridwar, Ấn Độ năm 2012')
+        user_cp.certificates.create(
+            name='Chứng nhận Giải Nhất Festival Yoga Hồ Chí Minh mở rộng lần 1 năm 2017', image='/seeds/images/trainers/chi-phuong/festival-yoga-thanh-pho-hcm.jpg')
+        user_cp.certificates.create(
+            name='Chứng nhận Giải Nhất Festival Yoga Hồ Chí Minh mở rộng lần 2 năm 2018', image='/seeds/images/trainers/chi-phuong/giai-nhat-yoga-mo-rong-lan2-nam-2018.jpg')
 
         data_co_man = {
             'email': 'mantue1@gmail.com',

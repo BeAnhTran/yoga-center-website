@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load settings_extras %}
 
 {% block content %}
 <!-- Trainers Section -->
@@ -63,6 +64,11 @@
 					{{ trainer.achievements | safe }}
 				</div>
 			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="fb-comments"
+				data-href="{% settings_value 'FACEBOOK_PRIVACY_POLICY_URL' %}{% url 'trainers:detail' trainer.user.slug %}"
+				data-numposts="5" data-width="100%"></div>
 		</div>
 	</div>
 </section>
