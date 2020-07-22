@@ -114,7 +114,7 @@ ul{
 }
 
 .spad {
-	padding-top: 50px;
+	padding-top: 100px;
 	padding-bottom: 50px;
 }
 
@@ -664,7 +664,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	width: 100%;
 	left: 0;
 	top: 0;
-	z-index: 9999;
+	z-index: 10000;
 	overflow: hidden;
 	-webkit-transition: all 0.4s;
 	-o-transition: all 0.4s;
@@ -862,7 +862,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .hero-section {
 	position: relative;
 	height: 100%;
-	padding-top: 50px;
+	padding-top: 150px;
 	padding-bottom: 50px;
 }
 
@@ -4775,4 +4775,8 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .text-gray-500 {
     color: #b7b9cc !important;
+}
+
+#myHeader{
+	z-index: 1000;
 }
