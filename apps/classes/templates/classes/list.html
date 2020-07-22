@@ -3,6 +3,16 @@
 {% load i18n %}
 {% block specified_css %}
 <link href="{% static 'css/classes/style.css' %}" rel='stylesheet' />
+<style>
+    ul.list{
+        max-height: 275px;
+        overflow: auto !important;
+        overflow-y: scroll !important;
+    }
+    .classes-top {
+        margin-bottom: 0;
+    }
+</style>
 {% endblock %}
 {% block content %}
 <section class="classes-page-section spad">
@@ -99,7 +109,7 @@
                 {% include 'pagination.html' %}
                 {% endif %}
             </div>
-            <div class="col-lg-3 col-md-5 col-sm-8 sidebar">
+            <div class="col-lg-3 col-md-5 col-sm-8 sidebar pt-1">
                 <div class="sb-widget">
                     <h2 class="sb-title">{% trans 'Search Classes' %}</h2>
                     <form id="form_filter" action="" method="GET" class="classes-filter">
