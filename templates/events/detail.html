@@ -4,6 +4,13 @@
 {% load settings_extras %}
 
 {% block specified_css %}
+<style>
+.event-preview img {
+    border-radius: 12px;
+    margin-bottom: 40px;
+    min-width: auto;
+}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -29,14 +36,15 @@
                             <div class="ed-meta"><p><i class="material-icons">alarm_on</i>{{event.start_at}}</p></div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            {{event.content|safe}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row mb-5">
-            <div class="col">
-                {{event.content|safe}}
-            </div>
-        </div>
+        
         <div class="row">
             <h3 class="comment-title mb-0">{% trans 'Comments' %}</h3>
             <div class="fb-comments"
