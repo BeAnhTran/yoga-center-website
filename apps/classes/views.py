@@ -56,6 +56,9 @@ from apps.common.tasks import removeCardWhenNotPayed
 from django.utils import timezone
 from notifications.signals import notify
 
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 class YogaClassListView(ListView):
     model = YogaClass
@@ -523,6 +526,13 @@ class YogaClassPaymentResultView(View):
             context['paymentType'] = 'Prepaid'
             context['type'] = 'STRIPE_FREE'
             context['card'] = card
+            # Send mail
+            subject = 'Đăng ký thẻ tập'
+            html_message = render_to_string('classes/mails/result.html', {'card': context['card'], 'host': request.get_host})
+            plain_message = strip_tags(html_message)
+            from_email = 'YogaHuongTre.com <huongtre.yoga@gmail.com>'
+            to = request.user.email
+            mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
             del request.session['new_card']
             return render(request, self.template_name, context=context)
         else:

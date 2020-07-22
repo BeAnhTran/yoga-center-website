@@ -1,0 +1,98 @@
+{% load sexify %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div class="container">
+        <h3 style="color:red;">Cảm ơn bạn đã đăng ký thẻ tập tại Trung tâm Yoga Hương Tre</h3>
+        <h5>Thông tin thanh toán của bạn</h5>
+        <div class="row">
+            <table style="font-family: arial, sans-serif; border-collapse: collapse; width: 100%;">
+                <thead style="display: table-header-group; border-color: inherit;">
+                    <tr class="d-flex">
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{% trans 'Id' %}</small></th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{% trans 'Payment Type' %}</small></th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{% trans 'State' %}</small></th>
+                        {% if card.yogaclass.payment_periods.count > 1 %}
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{% trans 'Payment period' %}</small></th>
+                        {% endif %}
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{% trans 'Promotion' %}</small></th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{% trans 'Amount' %}</small></th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{% trans 'Description' %}</small></th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{% trans 'Online Payment Id' %}</small></th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{% trans 'Staff' %}</small></th>
+                        <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{% trans 'Create at' %}</small></th>
+                    </tr>
+                </thead>
+                <tr style="display: table-row; vertical-align: inherit; border-color: inherit; ">
+                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">#</th>
+                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                        <small>Hình thức thanh toán</small></th>
+                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                        <small>Số tiền</small></th>
+                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                        <small>Trạng thái</small></th>
+                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                        <small>Khuyến mãi</small></th>
+                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><small>Số
+                            lượng</small></th>
+                    <th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                        <small>Ngày tạo</small></th>
+                </tr>
+                <tbody style="display: table-row-group; border-color: inherit;">
+                    {% for invoice in card.invoices.all %}
+                    <tr style="display: table-row; vertical-align: inherit; border-color: inherit; ">
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{{ invoice.pk }}</small></td>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <span class="badge badge-pill badge-info">{{ invoice.get_payment_type_display }}</span>
+                        </td>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            {% if invoice.is_charged %}
+                            <span class="badge badge-pill badge-success">{% trans 'Charged' %}</span>
+                            {% else %}
+                            <span class="badge badge-pill badge-danger">{% trans 'Not charged' %}</span>
+                            {% endif %}
+                        </td>
+                        {% if card.yogaclass.payment_periods.count > 1 %}
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <span class="badge badge-pill badge-primary">{{ invoice.payment_period.name }}</span>
+                        </td>
+                        {% endif %}
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><small>
+                                {% if invoice.apply_promotion_codes.count > 0 %}
+                                {{ invoice.apply_promotion_codes.first.promotion_code.promotion_type.full_title }}
+                                {% else %}
+                                không
+                                {% endif  %}
+                            </small></td>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{{ invoice.amount | sexy_number }}đ</small></td>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{{ invoice.description }}</small></td>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{{ invoice.charge_id|default_if_none:'' }}</small></td>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{{ invoice.staff|default_if_none:'' }}</small></td>
+                        <td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">
+                            <small>{{ invoice.created_at }}</small></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
