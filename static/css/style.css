@@ -394,15 +394,14 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	position: relative;
     z-index: 9;
     font-size: 28px;
-    color: white;
+    color: #00ff08;
 	/* font-family: 'Clicker Script', cursive; */
 	font-family: 'Lobster', cursive;
     transition: 0.5s;
 }
 
 .site-logo:hover{
-	/* color: #fb3958; */
-	color: #00ff08;
+	color: #fb3958;
 }
 
 .header-bottom {
