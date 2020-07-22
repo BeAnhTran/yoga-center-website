@@ -213,7 +213,7 @@
           <div class="ti-text">
             <a href="{% url 'trainers:detail' trainer.slug %}"><h4>{{ trainer }}</h4></a>
             <h6>{% trans 'Yoga Trainer' %}</h6>
-            <p>{{ trainer.user.certificates.first }}</p>
+            <p>{{ trainer.user.certificates.first|truncatechars:68 }}</p>
             <div class="ti-social">
               <a href="javascript:;"><i class="fab fa-facebook"></i></a>
               <a href="javascript:;"><i class="fab fa-instagram"></i></a>
