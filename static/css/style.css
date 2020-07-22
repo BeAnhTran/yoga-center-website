@@ -401,7 +401,8 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .site-logo:hover{
-    color: #fb3958;
+	/* color: #fb3958; */
+	color: #00ff08;
 }
 
 .header-bottom {

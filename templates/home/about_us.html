@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block specified_css %}
+<style>
+    .page-top-section {
+        height: 658px;
+    }
+
+    #video_header {
+        position: relative;
+        background-color: black;
+        height: 100vh;
+        min-height: 25rem;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #video_header video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: 0;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    #video_header .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    #video_header .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #140223;
+        opacity: 0.8;
+        z-index: 1;
+    }
+
+    @media (pointer: coarse) and (hover: none) {
+        #video_header {
+            background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+        }
+
+        #video_header video {
+            display: none;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div id="video_header">
+        <div class="overlay"></div>
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <source src="{% static 'video/intro.mp4' %}" type="video/mp4">
+        </video>
+        <div class="container h-100">
+            <div class="d-flex h-100 text-center align-items-center">
+                <div class="w-100 text-white">
+                    <h1 style="font-family: 'Lobster', cursive;color:#00ff08;">Yoga Hương Tre</h1>
+                    <p class="lead mb-0" style="font-family: 'Lobster', cursive;">Tâm An Vạn Sự An</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Contact Section -->
+<section class="contact-page-section mt-5">
+    <div class="container mb-5">
+        <div class="row mb-3">
+            <img class="img img-fluid img-thumbnail m-auto" src="{% static 'img/about-us/1.jpg' %}" alt="">
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <img class="img img-fluid img-thumbnail" src="{% static 'img/about-us/2.jpg' %}" alt="">
+            </div>
+            <div class="col-6">
+                <img class="img img-fluid img-thumbnail" src="{% static 'img/about-us/3.jpg' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="con-info">
+                    <h3>{% trans 'Visit the Yoga Hương Tre' %}</h3>
+                    <ul>
+                        <li><i class="material-icons">map</i>140 Đường A4 - Tân Bình - Hồ Chí Minh</li>
+                    </ul>
+                </div>
+                <div class="con-info">
+                    <h3>{% trans 'Message Us' %}</h3>
+                    <ul>
+                        <li><i class="material-icons">map</i>0932 190 999</li>
+                        <li><i class="material-icons">map</i>huongtre.yoga@gmail.com</li>
+                    </ul>
+                </div>
+                <div class="con-info">
+                    <h3>{% trans 'Opening Hours' %}</h3>
+                    <ul>
+                        {% trans 'monday'  as t_monday%}
+                        {% trans 'friday' as t_friday %}
+                        {% trans 'saturday' as t_saturday %}
+                        {% trans 'sunday' as t_sunday %}
+                        <li><i class="material-icons">map</i>{{ t_monday|capfirst }} - {{ t_saturday|capfirst }}: 05:30
+                            - 22:00</li>
+                    </ul>
+                </div>
+                <div class="contact-social">
+                    <a href="javascript:;"><i class="fab fa-facebook"></i></a>
+                    <a href="javascript:;"><i class="fab fa-instagram"></i></a>
+                    <a href="javascript:;"><i class="fab fa-twitter"></i></a>
+                    <a href="javascript:;"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="contact-map"><iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.178959406025!2d106.64720731517487!3d10.797601692307127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752eb145a4272f%3A0x699b408604809254!2zWW9nYSBIxrDGoW5nIFRyZQ!5e0!3m2!1svi!2s!4v1587483332861!5m2!1svi!2s"
+                    style="border:0;" allowfullscreen=""></iframe></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+{% include 'gallery.html' %}
+<!-- Gallery Section end -->
+
+{% endblock %}
