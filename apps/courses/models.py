@@ -88,3 +88,7 @@ class Course(models.Model):
             return sexify.sexy_number(self.price_for_training_class) + 'đ'
         else:
             return _('have not updated yet')
+
+    def get_price_for_some_lessons_cardtype(self):
+        card_type = self.card_types.filter(form_of_using=1).first()
+        return self.price_per_lesson * card_type.multiplier

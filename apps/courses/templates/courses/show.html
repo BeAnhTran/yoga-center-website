@@ -2,6 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% load settings_extras %}
+{% load sexify %}
 
 {% block specified_css %}
 <link href="{% static 'css/courses/show.css' %}" rel='stylesheet' />
@@ -124,7 +125,15 @@
                         <ul>
                             <li><i class="material-icons">more</i><b class="text-danger" style='font-family: "Playfair Display", serif;'>Đăng kí theo khoảng thời gian</b></li>
                             <li><i class="material-icons">attach_money</i>Giá 1 buổi: <span class="text-danger">{{ course.get_price_per_lesson }}</span></li>
-                            <li><i class="material-icons">notes</i>Đăng kí học các buổi trong một khoảng thời gian với giá tiền 1 buổi là {{ course.get_price_per_lesson }}</li>
+                            <li><i class="material-icons">notes</i>Đăng kí học các buổi liên tục trong một khoảng thời gian với giá tiền 1 buổi là {{ course.get_price_per_lesson }}</li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="classes-info">
+                        <ul>
+                            <li><i class="material-icons">more</i><b class="text-danger" style='font-family: "Playfair Display", serif;'>Đăng kí học theo buổi</b></li>
+                            <li><i class="material-icons">attach_money</i>Giá 1 buổi: <span class="text-danger">{{ course.get_price_for_some_lessons_cardtype|sexy_number }}đ</span></li>
+                            <li><i class="material-icons">notes</i>Đăng kí học một số buổi với giá mỗi buổi là {{ course.get_price_for_some_lessons_cardtype|sexy_number }}đ</li>
                             <li></li>
                         </ul>
                     </div>
