@@ -395,7 +395,8 @@ only screen and (min-width: 576px) and (max-width: 767px),
     z-index: 9;
     font-size: 28px;
     color: white;
-    font-family: 'Clicker Script', cursive;
+	/* font-family: 'Clicker Script', cursive; */
+	font-family: 'Lobster', cursive;
     transition: 0.5s;
 }
 
@@ -428,7 +429,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 .header-bottom .hb-switch {
 	display: inline-block;
-	margin-left: 20px;
+	/* margin-left: 20px; */
 	cursor: pointer;
 }
 
@@ -4779,4 +4780,12 @@ only screen and (min-width: 576px) and (max-width: 767px),
 
 #myHeader{
 	z-index: 1000;
+}
+
+.bg-dark-custom{
+	background-color: #140223 !important;
+}
+
+.bg-dark-custom-hover{
+	background-color: #140223ab !important;
 }

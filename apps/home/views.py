@@ -59,6 +59,7 @@ class ContactView(View):
         form = FeedbackForm()
         context = {
             'form': form,
+            'active_nav': 'about-us'
         }
         return render(request, 'home/contact.html', context=context)
 
