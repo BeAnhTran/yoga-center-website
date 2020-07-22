@@ -34,7 +34,6 @@ from random import randint
 import uuid
 from apps.card_invoices.models import PREPAID, POSTPAID, NOT_SPECIFIED
 from dateutil.relativedelta import relativedelta
-from notifications.signals import notify
 from django.db.models import Q
 
 
@@ -2978,12 +2977,10 @@ class Command(BaseCommand):
         admin = User.objects.filter(is_superuser=True).first()
         list_staff_recipent = User.objects.filter(Q(is_superuser=True) | Q(is_staff=True))
         new_trainee_str = 'Học viên mới: ' + trainee.full_name()
-        notify.send(sender=admin, recipient=list_staff_recipent, verb=new_trainee_str)
         card = trainee.cards.create(
             yogaclass=yoga_class, card_type=card_type, created_at=lesson_arr[0].date)
         # Notify new card
         new_card_str = 'Học viên ' + trainee.full_name() + ' đã đăng ký thẻ tập mới.'
-        notify.send(sender=admin, recipient=list_staff_recipent, verb=new_card_str)
         if card_type.form_of_using == FOR_SOME_LESSONS:
             amount = lesson_arr.__len__() * yoga_class.price_per_lesson * card_type.multiplier
         elif card_type.form_of_using == FOR_PERIOD_TIME_LESSONS:

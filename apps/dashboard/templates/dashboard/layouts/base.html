@@ -91,18 +91,6 @@
 
 <script src="{% static 'js/dashboard/admin.js' %}"></script>
 
-<script type="text/javascript">
-    $('#alertsDropdown').click(function () {
-        $.ajax({
-            headers: {
-                'X-CSRFTOKEN': '{{ csrf_token }}'
-            },
-            url: "{% url 'notifications:mark_all_as_read_api' %}",
-            type: 'POST'
-        });
-    });
-</script>
-
 {% block specified_js %} {% endblock %}
 </body>
 

@@ -104,26 +104,6 @@
             }
         })
     });
-
-    $('.create-reminder').click(function () {
-        var _url = '{% url "dashboard:notifications-create-for-unpaid-card" 0 %}';
-        var id = $(this).attr('data-card');
-        var url = _url.replace('0', id);
-        $.ajax({
-            headers: {
-                'X-CSRFTOKEN': '{{ csrf_token }}'
-            },
-            url: url,
-            method: 'POST'
-        }).done(function (data) {
-            console.log(data);
-            Swal.fire(
-                'Hoàn thành',
-                'Tạo thông báo thành công',
-                'success'
-            )
-        }).fail(err => console.log(err));
-    });
 </script>
 
 {% endblock %}
