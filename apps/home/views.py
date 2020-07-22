@@ -54,6 +54,14 @@ class HomeIndexView(View):
             return render(request, 'home/index.html', context=context)
 
 
+class AboutUsView(View):
+    def get(self, request):
+        context = {
+            'active_nav': 'about-us'
+        }
+        return render(request, 'home/about_us.html', context=context)
+
+
 class ContactView(View):
     def get(self, request):
         form = FeedbackForm()
