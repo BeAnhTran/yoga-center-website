@@ -1,5 +1,6 @@
 {% load static %}
 {% load i18n %}
+{% load settings_extras %}
 
 <hr>
 <footer class="footer-section">
@@ -22,7 +23,8 @@
                 <div class="footer-widget pl-0 pl-lg-5">
                     <h2 class="fw-title">{% trans 'Connect & Sharing' %}</h2>
                     <ul>
-                        <li><a href="javascript:;">{% trans 'Community Event' %}</a></li>
+                        <li><a href='{% settings_value "YOGA_CENTER_FACEBOOK_URL" %}'>Facebook</a></li>
+                        <li><a href='{% settings_value "YOGA_CENTER_YOUTUBE_URL" %}'>Youtube</a></li>
                     </ul>
                 </div>
             </div>
@@ -31,7 +33,6 @@
                     <h2 class="fw-title">{% trans 'About Us' %}</h2>
                     <ul>
                         <li><a href="javascript:;">{% trans 'Introduce' %}</a></li>
-                        <li><a href="javascript:;">{% trans 'Our Mission' %}</a></li>
                         <li><a href="{% url 'home:contact' %}">{% trans 'Contact Us' %}</a></li>
                     </ul>
                 </div>
