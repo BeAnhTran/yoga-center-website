@@ -4,25 +4,31 @@
 {% block specified_css %}
 {% endblock %}
 {% block content %}
-    <section class="blog-details-section spad">
-        <div class="container">
-            <div class="row mb-3">
-                    <div class="col">
-                        <a class="text-danger"><span class="flaticon-lotus"></span> &raquo; </a>
-                        <a class="text-danger" href="javascript:;">Thông báo</a>
-                    </div>
-                </div>
-            <div class="row">
-                <div class="col">
-                    <ul class="notifications">
-                        {% for notice in notifications %}
-                            {% include 'notifications/notice.html' %}
-                        {% endfor %}
-                    </ul>
-                </div>
+<section class="blog-details-section spad">
+    <div class="container content">
+        <div class="row mb-3">
+            <div class="col">
+                <a class="text-danger"><span class="flaticon-lotus"></span> &raquo; </a>
+                <a class="text-danger" href="javascript:;">Thông báo</a>
             </div>
         </div>
-    </section>
+        <div class="row">
+            <div class="col">
+                {% if notifications %}
+                <ul class="notifications">
+                    {% for notice in notifications %}
+                    {% include 'notifications/notice.html' %}
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <h3 class="text-secondary">
+                    Không có thông báo
+                </h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
 
 {% block specified_js %}

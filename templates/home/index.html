@@ -302,7 +302,7 @@
             {% endif %}
           </div>
           <div class="ei-text">
-            <h4><a href="javascript:;">{{ event.name }}</a></h4>
+            <h4><a href="{% url 'events:detail' event.slug %}">{{ event.name }}</a></h4>
             <ul>
               <li><i class="material-icons">event_available</i>{{ event.start_at }}</li>
               <li><i class="material-icons">map</i>{{ event.location }}</li>
