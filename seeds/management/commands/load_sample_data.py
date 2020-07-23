@@ -46,7 +46,8 @@ class Command(BaseCommand):
         this_month = today.date().month
         last_month = this_month - 1
         last_date = datetime(today.date().year, last_month, 1)
-        start_of_week = last_date - timedelta(days=last_date.weekday())  # Monday
+        start_of_week = last_date - \
+            timedelta(days=last_date.weekday())  # Monday
         end_of_week = start_of_week + timedelta(days=6)  # Sunday
 
         ############# DAY IN CURRENT WEEK ###########
@@ -858,9 +859,12 @@ class Command(BaseCommand):
         trainee_chuathanhtoan1 = Trainee.objects.create(user=chuathanhtoan1)
         card_ctt1 = trainee_chuathanhtoan1.cards.create(
             yogaclass=basic_yoga_class_co_man_5h30_t246, card_type=period_lessons_card_type)
-        amount_ctt1 = arr_lessons_basic_yoga_class_co_man_5h30_246[:36].__len__() * basic_yoga_class_co_man_5h30_t246.price_per_lesson
-        CardInvoiceService(card_ctt1, POSTPAID, 'Thanh toán thẻ tập', amount_ctt1).call()
-        RollCallService(card_ctt1, arr_lessons_basic_yoga_class_co_man_5h30_246[:36]).call()
+        amount_ctt1 = arr_lessons_basic_yoga_class_co_man_5h30_246[:36].__len__(
+        ) * basic_yoga_class_co_man_5h30_t246.price_per_lesson
+        CardInvoiceService(card_ctt1, POSTPAID,
+                           'Thanh toán thẻ tập', amount_ctt1).call()
+        RollCallService(
+            card_ctt1, arr_lessons_basic_yoga_class_co_man_5h30_246[:36]).call()
         data_ctt2 = {
             'email': 'chuathanhtoan2@gmail.com',
             'first_name': 'Lam',
@@ -873,9 +877,12 @@ class Command(BaseCommand):
         trainee_chuathanhtoan2 = Trainee.objects.create(user=chuathanhtoan2)
         card_ctt2 = trainee_chuathanhtoan2.cards.create(
             yogaclass=basic_yoga_class_co_man_5h30_t246, card_type=period_lessons_card_type)
-        amount_ctt2 = arr_lessons_basic_yoga_class_co_man_5h30_246[:36].__len__() * basic_yoga_class_co_man_5h30_t246.price_per_lesson
-        CardInvoiceService(card_ctt2, POSTPAID, 'Thanh toán thẻ tập', amount_ctt2).call()
-        RollCallService(card_ctt2, arr_lessons_basic_yoga_class_co_man_5h30_246[:36]).call()
+        amount_ctt2 = arr_lessons_basic_yoga_class_co_man_5h30_246[:36].__len__(
+        ) * basic_yoga_class_co_man_5h30_t246.price_per_lesson
+        CardInvoiceService(card_ctt2, POSTPAID,
+                           'Thanh toán thẻ tập', amount_ctt2).call()
+        RollCallService(
+            card_ctt2, arr_lessons_basic_yoga_class_co_man_5h30_246[:36]).call()
 
         # end add-trainees
         basic_yoga_class_co_hang_nga_5h30_246 = basic_yoga_course.classes.create(
@@ -2739,7 +2746,7 @@ class Command(BaseCommand):
         last_4_months_training_class_thay_hoang_anh = training_yoga_trainer_course.classes.create(
             name='Lớp đào tạo thầy Hoàng Anh 18h tối thứ 7 - KDT1',
             price_for_training_class=20000000,
-            start_at= last_4months_saturday,
+            start_at=last_4months_saturday,
             end_at=last_4months_saturday + timedelta(days=28*3),
             trainer=thay_hoang_anh,
         )
@@ -2773,7 +2780,6 @@ class Command(BaseCommand):
                       training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all(), True)
         self.__enroll('Vương', 'Trần Minh', 'tranminhvuong1812@gmail.com', last_4_months_training_class_thay_hoang_anh,
                       training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all(), True)
-        
 
         # new class in the future
         training_class_thay_hoang_anh = training_yoga_trainer_course.classes.create(
@@ -2791,7 +2797,7 @@ class Command(BaseCommand):
                 "start_time": t_18h,
                 "end_time": t_21h
             })
-        
+
         period1 = training_class_thay_hoang_anh.payment_periods.create(**{
             'name': 'Đợt thanh toán 1',
             'amount': 12000000,
@@ -2816,8 +2822,10 @@ class Command(BaseCommand):
         trainee_chuathanhtoan1 = Trainee.objects.create(user=chuathanhtoan1)
         card_ctt1 = trainee_chuathanhtoan1.cards.create(
             yogaclass=training_class_thay_hoang_anh, card_type=training_course_card_type)
-        CardInvoiceService(card_ctt1, POSTPAID, 'Thanh toán thẻ tập', training_class_thay_hoang_anh.get_price_for_training_course()).call()
-        RollCallService(card_ctt1, training_class_thay_hoang_anh.lessons.all()).call()
+        CardInvoiceService(card_ctt1, POSTPAID, 'Thanh toán thẻ tập',
+                           training_class_thay_hoang_anh.get_price_for_training_course()).call()
+        RollCallService(
+            card_ctt1, training_class_thay_hoang_anh.lessons.all()).call()
         # da thanh toan dot 1
         data_ctt2 = {
             'email': 'testdaotao2@gmail.com',
@@ -2831,13 +2839,16 @@ class Command(BaseCommand):
         trainee_chuathanhtoan2 = Trainee.objects.create(user=chuathanhtoan2)
         card_ctt2 = trainee_chuathanhtoan2.cards.create(
             yogaclass=training_class_thay_hoang_anh, card_type=training_course_card_type)
-        invoice1 = CardInvoiceService(card_ctt2, PREPAID, 'Thanh toán thẻ tập', period1.amount, 'test1axvdjjsasbxbasasas').call()
+        invoice1 = CardInvoiceService(
+            card_ctt2, PREPAID, 'Thanh toán thẻ tập', period1.amount, 'test1axvdjjsasbxbasasas').call()
         invoice1.payment_period = period1
         invoice1.save()
-        invoice2 = CardInvoiceService(card_ctt2, NOT_SPECIFIED, 'Thanh toán thẻ tập', period2.amount).call()
+        invoice2 = CardInvoiceService(
+            card_ctt2, NOT_SPECIFIED, 'Thanh toán thẻ tập', period2.amount).call()
         invoice2.payment_period = period2
         invoice2.save()
-        RollCallService(card_ctt2, training_class_thay_hoang_anh.lessons.all()).call()
+        RollCallService(
+            card_ctt2, training_class_thay_hoang_anh.lessons.all()).call()
         data_ctt3 = {
             'email': 'testdaotao3@gmail.com',
             'first_name': 'Lan',
@@ -2850,15 +2861,16 @@ class Command(BaseCommand):
         trainee_chuathanhtoan3 = Trainee.objects.create(user=chuathanhtoan3)
         card_ctt3 = trainee_chuathanhtoan3.cards.create(
             yogaclass=training_class_thay_hoang_anh, card_type=training_course_card_type)
-        invoice11 = CardInvoiceService(card_ctt3, POSTPAID, 'Thanh toán thẻ tập', period1.amount).call()
+        invoice11 = CardInvoiceService(
+            card_ctt3, POSTPAID, 'Thanh toán thẻ tập', period1.amount).call()
         invoice11.payment_period = period1
         invoice11.save()
-        invoice12 = CardInvoiceService(card_ctt3, NOT_SPECIFIED, 'Thanh toán thẻ tập', period2.amount).call()
+        invoice12 = CardInvoiceService(
+            card_ctt3, NOT_SPECIFIED, 'Thanh toán thẻ tập', period2.amount).call()
         invoice12.payment_period = period2
         invoice12.save()
-        RollCallService(card_ctt3, training_class_thay_hoang_anh.lessons.all()).call()
-
-
+        RollCallService(
+            card_ctt3, training_class_thay_hoang_anh.lessons.all()).call()
 
     def __add_basic_lectures(self, course):
         data = [
@@ -2976,14 +2988,17 @@ class Command(BaseCommand):
         trainee = Trainee.objects.create(user=u)
         # Notify new trainee
         admin = User.objects.filter(is_superuser=True).first()
-        list_staff_recipent = User.objects.filter(Q(is_superuser=True) | Q(is_staff=True))
+        list_staff_recipent = User.objects.filter(
+            Q(is_superuser=True) | Q(is_staff=True))
         new_trainee_str = 'Học viên mới: ' + trainee.full_name()
-        notify.send(sender=admin, recipient=list_staff_recipent, verb=new_trainee_str)
+        notify.send(sender=admin, recipient=list_staff_recipent,
+                    verb=new_trainee_str)
         card = trainee.cards.create(
             yogaclass=yoga_class, card_type=card_type, created_at=lesson_arr[0].date)
         # Notify new card
         new_card_str = 'Học viên ' + trainee.full_name() + ' đã đăng ký thẻ tập mới.'
-        notify.send(sender=admin, recipient=list_staff_recipent, verb=new_card_str)
+        notify.send(sender=admin, recipient=list_staff_recipent,
+                    verb=new_card_str)
         if card_type.form_of_using == FOR_SOME_LESSONS:
             amount = lesson_arr.__len__() * yoga_class.price_per_lesson * card_type.multiplier
         elif card_type.form_of_using == FOR_PERIOD_TIME_LESSONS:
@@ -2994,7 +3009,8 @@ class Command(BaseCommand):
                            amount, str(uuid.uuid4())).call()
         RollCallService(card, lesson_arr).call()
         if training is True:
-            u.certificates.create(name='Chứng nhận đã hoàn thành khóa đào tạo Huấn luyện viên Yoga của CLB Yoga Hương Tre', yoga_class=yoga_class)
+            u.certificates.create(
+                name='Chứng nhận đã hoàn thành khóa đào tạo Huấn luyện viên Yoga của CLB Yoga Hương Tre', yoga_class=yoga_class)
 
     def __create_admin(self):
         data = {
@@ -3028,6 +3044,7 @@ class Command(BaseCommand):
         category2 = PostCategory.objects.create(name='Yêu thương và chia sẻ')
         print("Create posts")
         data = {
+            'status': 'published',
             'category': category1,
             'image': 'seeds/blog/yoga-mang-lai-su-tinh-tam.jpg',
             'title': 'Yoga mang lại sự tịnh tâm, cân bằng',
@@ -3037,6 +3054,7 @@ class Command(BaseCommand):
         Post.objects.create(**data)
 
         data2 = {
+            'status': 'published',
             'category': category2,
             'image': 'seeds/blog/ngay-chu-nhat-tuyet-voi-tran-ngap-yeu-thuong.jpg',
             'title': 'Ngày chủ nhật yêu thương',
@@ -3046,6 +3064,7 @@ class Command(BaseCommand):
         Post.objects.create(**data2)
 
         data3 = {
+            'status': 'published',
             'category': category1,
             'image': 'seeds/blog/thuat_ngu_trong_yoga.jpg',
             'title': 'Thuật ngữ trong Yoga',

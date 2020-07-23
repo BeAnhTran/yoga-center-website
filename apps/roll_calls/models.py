@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import date, datetime, timedelta
 from django.conf import settings
+from apps.card_types.models import FOR_TRAINING_COURSE
 
 
 class RollCall(models.Model):
@@ -58,20 +59,26 @@ class RollCall(models.Model):
     # Note: Allow study until expire
     def can_use(self):
         expire = self.card.get_expire_time()
-        if expire is None:
-            return True
-        else:
-            if type(expire).__name__ == 'date':
-                if self.lesson.date < expire:
-                    return True
+        if self.card.card_type.form_of_using == FOR_TRAINING_COURSE:
+            if expire is None:
+                return True
             else:
-                if self.lesson.date < expire.date():
-                    return True
-                elif self.lesson.date == expire.date():
-                    if self.lesson.end_time < expire.time():
+                if type(expire).__name__ == 'date':
+                    if self.lesson.date < expire:
                         return True
                 else:
-                    return False
+                    if self.lesson.date < expire.date():
+                        return True
+                    elif self.lesson.date == expire.date():
+                        if self.lesson.end_time < expire.time():
+                            return True
+                    else:
+                        return False
+        else:
+            if self.card.is_paid() is False:
+                return False
+            return True
+
 
 
 @receiver(post_save, sender=RollCall)

@@ -222,11 +222,11 @@
         $('#payment_form').submit(function (e) {
             e.preventDefault();
             var billing_details = {
-                name: $('input[name=name]').val(),
-                email: $('input[name=email]').val(),
-                phone: $('input[name=phone]').val(),
-                address_line1: $('input[name=address]').val(),
-                address_city: $('input[name=city]').val()
+                name: $('#id_name').val(),
+                email: $('id_email').val(),
+                phone: $('#id_phone').val(),
+                address_line1: $('#id_address').val(),
+                address_city: $('#id_id_city').val()
             };
 
             data = $('form#payment_form').serialize();

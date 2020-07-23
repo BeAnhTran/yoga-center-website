@@ -60,12 +60,20 @@
                 <h2 class="sb-title">Hình thức ủng hộ</h2>
                 <div class="classes-info">
                     <ul>
-                        <li><a href="javascript:;" class="text-danger"><i class="fas fa-heart"></i> Quyên góp trực tiếp tại trung tâm</a></li>
-                        <li><a href="javascript:;" class="text-danger"><i class="fas fa-heart"></i> Thông qua tài khoản ngân hàng</a>
+                        <li>
+                            <a href="javascript:;" class="text-danger"><i class="fas fa-heart"></i> Quyên góp trực tiếp
+                                tại trung tâm</a>
+                            <p><small>Gửi trực tiếp tại bàn lễ tân của trung tâm</small></p>
+                        </li>
+                        <li><a href="javascript:;" class="text-danger"><i class="fas fa-heart"></i> Thông qua tài khoản
+                                ngân hàng</a>
+                            <p>Chuyển khoản về TK Vietcombank TPHCM:</p>
+                            <p>0251002709139 - Trần Thị Phấn</p>
                             <p><small>(nội dung ghi rõ: 'Quyên góp ủng hộ tùy tâm')</small></p>
                         </li>
                         <li>
-                            <a href="javascript:;" class="text-danger"><i class="fas fa-heart"></i> Thông qua cổng quyên góp trực tuyến</a>
+                            <a href="javascript:;" class="text-danger"><i class="fas fa-heart"></i> Thông qua cổng quyên
+                                góp trực tuyến</a>
                             <p><small>(nội dung ghi rõ: 'Quyên góp ủng hộ tùy tâm')</small></p>
                         </li>
                     </ul>
@@ -81,7 +89,8 @@
                                 <legend class="card-only">{% trans 'Please enter information below' %}</legend>
                                 <div class="row">
                                     <div class="field">
-                                        <label for="example5-name">{% trans 'name' as t_name %} {{ t_name|capfirst }}</label>
+                                        <label for="example5-name">{% trans 'name' as t_name %}
+                                            {{ t_name|capfirst }}</label>
                                         {{ form.name }}
                                     </div>
                                 </div>
