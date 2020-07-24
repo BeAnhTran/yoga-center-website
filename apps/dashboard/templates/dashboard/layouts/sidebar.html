@@ -21,10 +21,35 @@
             <span>{% trans 'roll call' as t_roll_call %}{{ t_roll_call|capfirst}}</span></a>
     </li>
     <hr class="sidebar-divider my-0">
-    <li class="nav-item {% if active_nav == 'salary' %}active{% endif %}">
-        <a class="nav-link" href="{% url 'dashboard:salary-trainers-index' %}">
-            <i class="fas fa-fw fa-file-invoice-dollar"></i>
-            <span>{% trans 'Salary of trainer '%}</span></a>
+    <!-- THONG KE -->
+    <li class="nav-item {% if show_statistic == True %}active{% endif %}">
+        <a class="nav-link collapsed" href="javascript:;" data-toggle="collapse" data-target="#collapseStatistic" aria-expanded="true"
+            aria-controls="collapseUtilities">
+            <i class="fas fa-chart-line"></i>
+            <span>Thống kê</span>
+        </a>
+        <div id="collapseStatistic" class="collapse {% if show_statistic == True %}show{% endif %}"
+            aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-secondary pb-2 collapse-inner rounded">
+                <a class="collapse-item {% if active_nav == 'salary' %}active{% endif %}"
+                    href="{% url 'dashboard:salary-trainers-index' %}">
+                    <i class="fas fa-fw fa-file-invoice-dollar"></i>
+                    <span>
+                        {% trans 'Salary of trainer '%}
+                    </span>
+                </a>
+                <a class="collapse-item {% if active_nav == 'new-trainees-statistic' %}active{% endif %}"
+                    href="javascript:;">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Học viên mới</span>
+                </a>
+                <a class="collapse-item {% if active_nav == 'new-cards-statistic' %}active{% endif %}"
+                    href="javascript:;">
+                    <i class="far fa-fw fa-id-card"></i>
+                    <span>Thẻ tập mới</span>
+                </a>
+            </div>
+        </div>
     </li>
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Users -->

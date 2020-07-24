@@ -31,7 +31,6 @@
                         <th>#</th>
                         <th><small>{% trans 'name' as t_name %}{{ t_name|capfirst }}</small></th>
                         <th><small>{% trans 'email' as t_email %}{{ t_email|capfirst }}</small></th>
-                        <th><small>{% trans 'birth day' as t_birth_day %}{{ t_birth_day|capfirst }}</small></th>
                         <th><small>{% trans 'gender' as t_gender %}{{ t_gender|capfirst }}</small></th>
                         <th><small>{% trans 'image' as t_image %}{{ t_image|capfirst }}</small></th>
                         <th><small>{% trans 'action' as t_action %}{{ t_action|capfirst }}</small></th>
@@ -43,7 +42,6 @@
                         <td>{{ trainee.user.id }}</td>
                         <td>{{ trainee.user }}</td>
                         <td>{{ trainee.user.email }}</td>
-                        <td>{{ trainee.user.birth_day|default_if_none:'' }}</td>
                         <td>{{ trainee.user.get_gender_display }}</td>
                         <td>
                             {% if trainee.image %}

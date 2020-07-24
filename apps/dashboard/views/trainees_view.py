@@ -25,8 +25,8 @@ class TraineeListView(ListView):
     model = Trainee
     template_name = 'dashboard/trainees/list.html'
     context_object_name = 'trainees'
-    ordering = ['-user__date_joined']
-    paginate_by = 10
+    ordering = ['user__date_joined']
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(TraineeListView, self).get_context_data(**kwargs)

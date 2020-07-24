@@ -37,13 +37,20 @@
                 </thead>
                 <tbody>
                     {% for class in classes %}
+                    {% if class.is_happened_training_class %}
+                    <tr class="table-secondary">
+                    {% else %}
                     <tr>
+                    {% endif %}
                         <td>{{ class.id }}</td>
                         <td>{{ class.name }}</td>
                         <td>
                             <span class="badge badge-pill badge-primary">
                                 {{ class.course }}
                             </span>
+                            {% if class.is_happened_training_class %}
+                            <span class="badge badge-pill badge-danger">đã hoàn thành</span>
+                            {% endif %}
                         </td>
                         <td><span class="badge badge-pill badge-warning">{{ class.start_at }}</span></td>
                         <td><span class="badge badge-pill badge-warning">{{ class.end_at }}</span></td>
