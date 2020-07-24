@@ -22,13 +22,13 @@
     </li>
     <hr class="sidebar-divider my-0">
     <!-- THONG KE -->
-    <li class="nav-item {% if show_statistic == True %}active{% endif %}">
+    <li class="nav-item {% if show_statistics == True %}active{% endif %}">
         <a class="nav-link collapsed" href="javascript:;" data-toggle="collapse" data-target="#collapseStatistic" aria-expanded="true"
             aria-controls="collapseUtilities">
             <i class="fas fa-chart-line"></i>
             <span>Thống kê</span>
         </a>
-        <div id="collapseStatistic" class="collapse {% if show_statistic == True %}show{% endif %}"
+        <div id="collapseStatistic" class="collapse {% if show_statistics == True %}show{% endif %}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-secondary pb-2 collapse-inner rounded">
                 <a class="collapse-item {% if active_nav == 'salary' %}active{% endif %}"
@@ -39,12 +39,12 @@
                     </span>
                 </a>
                 <a class="collapse-item {% if active_nav == 'new-trainees-statistic' %}active{% endif %}"
-                    href="javascript:;">
+                    href="{% url 'dashboard:statistics-new-trainees'%}">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Học viên mới</span>
                 </a>
                 <a class="collapse-item {% if active_nav == 'new-cards-statistic' %}active{% endif %}"
-                    href="javascript:;">
+                    href="{% url 'dashboard:statistics-new-cards' %}">
                     <i class="far fa-fw fa-id-card"></i>
                     <span>Thẻ tập mới</span>
                 </a>
@@ -140,7 +140,7 @@
                     href="{% url 'dashboard:cards-list' %}">
                     <i class="fas fa-fw fa-id-card-alt"></i>
                     <span>
-                        {{ t_cards|capfirst }}
+                        Tất cả thẻ tập
                     </span>
                 </a>
                 <a class="collapse-item {% if active_nav == 'card_types' %}active{% endif %}"

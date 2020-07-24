@@ -58,7 +58,7 @@ class IndexView(View):
             total += total_of_trainer
         context = {
             'active_nav': 'salary',
-            'show_statistic': True,
+            'show_statistics': True,
             'data': data,
             'month': month,
             'year': year,
@@ -122,7 +122,7 @@ class DetailListYogaClassView(View):
 
         context = {
             'active_nav': 'salary',
-            'show_statistic': True,
+            'show_statistics': True,
             'data': data,
             'month': month,
             'year': year,
@@ -157,7 +157,7 @@ class DetailYogaClassSalaryView(View):
             yoga_class.get_wages_per_lesson()
         context = {
             'active_nav': 'salary',
-            'show_statistic': True,
+            'show_statistics': True,
             'month': month,
             'year': year,
             'trainer': trainer,

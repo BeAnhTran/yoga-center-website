@@ -5,7 +5,7 @@ from .views import (
     dashboard_view, courses_view, rooms_view,
     lessons_view, classes_view, cards_view,
     card_types_view, trainees_view, trainers_view, staffs_view,
-    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view, taught_view, events_view, faq_view, questions_view, feedback_view, trainers_salary_view, notifications_view)
+    admins_view, roll_calls_view, blog_view, make_up_lessons_view, shop_view, promotions_view, taught_view, events_view, faq_view, questions_view, feedback_view, trainers_salary_view, notifications_view, statistics_view)
 
 from .views.requests import refund_requests_view
 
@@ -257,6 +257,15 @@ notifications_urlpatterns = [
          name='notifications-create-for-unpaid-card'),
 ]
 
+# Statistics
+statistics_urlpatterns = [
+    path('new-cards/', statistics_view.NewCardListView.as_view(),
+         name='statistics-new-cards'),
+    path('new-trainees/', statistics_view.NewTraineeListView.as_view(),
+         name='statistics-new-trainees'),
+]
+
+
 # DASHBOARD
 urlpatterns = [
     path('', dashboard_view.index, name='index'),
@@ -282,4 +291,5 @@ urlpatterns = [
     path('feedback/', include(feedback_urlpatterns)),
     path('salary/', include(salary_urlpatterns)),
     path('notifications/', include(notifications_urlpatterns)),
+    path('statistics/', include(statistics_urlpatterns)),
 ]
