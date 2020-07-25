@@ -263,6 +263,8 @@ statistics_urlpatterns = [
          name='statistics-new-cards'),
     path('new-trainees/', statistics_view.NewTraineeListView.as_view(),
          name='statistics-new-trainees'),
+    path('revenue/', statistics_view.RevenueView.as_view(),
+         name='statistics-revenue'),
 ]
 
 

@@ -31,8 +31,8 @@
         <div id="collapseStatistic" class="collapse {% if show_statistics == True %}show{% endif %}"
             aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-secondary pb-2 collapse-inner rounded">
-                <a class="collapse-item {% if active_nav == 'revenue' %}active{% endif %}"
-                    href="javascript:;">
+                <a class="collapse-item {% if active_nav == 'statistics-revenue' %}active{% endif %}"
+                    href="{% url 'dashboard:statistics-revenue'%}">
                     <i class="fas fa-fw fa-dollar-sign"></i>
                     <span>Doanh thu</span>
                 </a>

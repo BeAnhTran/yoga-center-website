@@ -28,6 +28,9 @@ from services.roll_call_service import RollCallService
 from apps.card_invoices.models import POSTPAID, PREPAID
 from services.card_invoice_service import CardInvoiceService
 from django.utils.formats import date_format
+from apps.classes.models import YogaClass
+from datetime import datetime, timedelta, date
+import pytz
 
 
 def last_day_of_month(any_day):
@@ -53,7 +56,8 @@ class NewCardListView(ListView):
             year = int(self.request.GET.get('year'))
         first_day_of_month = datetime(year, month, 1).date()
         last_day_of_this_month = last_day_of_month(first_day_of_month)
-        query_set = Card.objects.filter(created_at__gte=first_day_of_month, created_at__lte=last_day_of_this_month)
+        query_set = Card.objects.filter(
+            created_at__gte=first_day_of_month, created_at__lte=last_day_of_this_month)
         return query_set
 
     def get_context_data(self, **kwargs):
@@ -88,7 +92,8 @@ class NewTraineeListView(ListView):
             year = int(self.request.GET.get('year'))
         first_day_of_month = datetime(year, month, 1).date()
         last_day_of_this_month = last_day_of_month(first_day_of_month)
-        query_set = Trainee.objects.filter(user__date_joined__gte=first_day_of_month, user__date_joined__lte=last_day_of_this_month)
+        query_set = Trainee.objects.filter(
+            user__date_joined__gte=first_day_of_month, user__date_joined__lte=last_day_of_this_month)
         return query_set
 
     def get_context_data(self, **kwargs):
@@ -104,3 +109,45 @@ class NewTraineeListView(ListView):
         context['month'] = month
         context['year'] = year
         return context
+
+
+@method_decorator([login_required, staff_required], name='dispatch')
+class RevenueView(View):
+    template_name = 'dashboard/statistics/revenue.html'
+
+    def get(self, request):
+        now = datetime.now().date()
+        month = now.month
+        year = now.year
+        if self.request.GET.get('month') and self.request.GET.get('year'):
+            month = int(self.request.GET.get('month'))
+            year = int(self.request.GET.get('year'))
+        context = {}
+
+        first_day_of_month = datetime(year, month, 1, 0, 0, 0, 0, tzinfo=pytz.UTC).date()
+        last_day_of_this_month = last_day_of_month(first_day_of_month)
+        
+        revenues = []
+        total_revenue = 0
+        for yoga_class in YogaClass.objects.all():
+            if yoga_class.end_at is not None and yoga_class.end_at <= first_day_of_month or yoga_class.start_at is not None and yoga_class.start_at >= last_day_of_this_month:
+                continue
+            d = {}
+            d['yoga_class'] = yoga_class
+            query_set = CardInvoice.objects.filter(
+                created_at__gte=first_day_of_month, created_at__lte=last_day_of_this_month, card__yogaclass=yoga_class)
+            total = 0
+            for invoice in query_set:
+                if invoice.is_charged() is True:
+                    total += invoice.amount
+            total_revenue += total
+            d['revenue'] = total
+            revenues.append(d)
+
+        context['active_nav'] = 'statistics-revenue'
+        context['show_statistics'] = True
+        context['revenues'] = revenues
+        context['total_revenue'] = total_revenue
+        context['month'] = month
+        context['year'] = year
+        return render(request, self.template_name, context=context)

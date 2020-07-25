@@ -35,12 +35,12 @@ def index(request):
     earning = 0
     unpaid_card_count = 0
     now = datetime.now().date()
-    month = 7
+    month = now.month
     year = now.year
     first_day_of_month = datetime(year, month, 1, 0, 0, 0, 0, tzinfo=pytz.UTC).date()
-    first_day_of_next_month = datetime(year, month + 1, 1, 0, 0, 0, 0, tzinfo=pytz.UTC).date()
+    last_day_of_this_month = last_day_of_month(first_day_of_month)
     query_set = CardInvoice.objects.filter(
-        created_at__gte=first_day_of_month, created_at__lt=first_day_of_next_month)
+        created_at__gte=first_day_of_month, created_at__lte=last_day_of_this_month)
     for invoice in query_set:
         if invoice.is_charged():
             earning += invoice.amount
