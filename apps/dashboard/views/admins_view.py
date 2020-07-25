@@ -12,7 +12,7 @@ class AdminListView(ListView):
     template_name = 'dashboard/admins/list.html'
     context_object_name = 'admins'
     ordering = ['user__date_joined']
-    paginate_by = 5
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(AdminListView, self).get_context_data(**kwargs)

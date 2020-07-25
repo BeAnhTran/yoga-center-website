@@ -12,7 +12,7 @@ class TrainerListView(ListView):
     template_name = 'dashboard/trainers/list.html'
     context_object_name = 'trainers'
     ordering = ['-user__date_joined']
-    paginate_by = 10
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(TrainerListView, self).get_context_data(**kwargs)

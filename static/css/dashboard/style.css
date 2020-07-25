@@ -1395,3 +1395,64 @@ h1.title, h5.title{
 .invalid-feedback {
   display: block;
 }
+
+
+.site-pagination {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+.site-pagination a {
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	height: 34px;
+	min-width: 34px;
+	color: #666666;
+	border: 1px solid #e8e8e8;
+	border-radius: 50px;
+	margin-right: 10px;
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+.site-pagination a:hover {
+	color: #fff;
+}
+
+.site-pagination a i {
+	font-size: 18px;
+}
+
+.site-pagination a.active {
+	border-color: transparent;
+	color: #fff;
+}
+
+.site-pagination a:last-child {
+	margin-right: 0;
+}
+
+.site-pagination a.active {
+	background: -o-linear-gradient(305deg, #fb3958 0%, #fdb07d 100%);
+	background: linear-gradient(145deg, #125688 0%, #fb3958 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fb3958", endColorstr="#fdb07d", GradientType=1);
+}
+
+.site-pagination a.active,
+.site-pagination a:hover
+{
+	background: -o-linear-gradient(305deg, #fb3958 0%, #fdb07d 100%);
+	background: linear-gradient(145deg, #125688 0%, #fb3958 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fb3958", endColorstr="#fdb07d", GradientType=1);
+}

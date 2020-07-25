@@ -12,7 +12,7 @@ class StaffListView(ListView):
     template_name = 'dashboard/staffs/list.html'
     context_object_name = 'staffs'
     ordering = ['user__date_joined']
-    paginate_by = 5
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(StaffListView, self).get_context_data(**kwargs)

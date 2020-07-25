@@ -52,8 +52,8 @@ class NewCardListView(ListView):
             month = int(self.request.GET.get('month'))
             year = int(self.request.GET.get('year'))
         first_day_of_month = datetime(year, month, 1).date()
-        first_day_of_next_month = datetime(year, month + 1, 1).date()
-        query_set = Card.objects.filter(created_at__gte=first_day_of_month, created_at__lt=first_day_of_next_month)
+        last_day_of_this_month = last_day_of_month(first_day_of_month)
+        query_set = Card.objects.filter(created_at__gte=first_day_of_month, created_at__lte=last_day_of_this_month)
         return query_set
 
     def get_context_data(self, **kwargs):
@@ -86,10 +86,9 @@ class NewTraineeListView(ListView):
         if self.request.GET.get('month') and self.request.GET.get('year'):
             month = int(self.request.GET.get('month'))
             year = int(self.request.GET.get('year'))
-        first_day_of_month = datetime(year, month, 1)
-        first_day_of_next_month = datetime(year, month + 1, 1)
-        query_set = Trainee.objects.filter(user__date_joined__gte=first_day_of_month.date(
-        ), user__date_joined__lt=first_day_of_next_month.date())
+        first_day_of_month = datetime(year, month, 1).date()
+        last_day_of_this_month = last_day_of_month(first_day_of_month)
+        query_set = Trainee.objects.filter(user__date_joined__gte=first_day_of_month, user__date_joined__lte=last_day_of_this_month)
         return query_set
 
     def get_context_data(self, **kwargs):

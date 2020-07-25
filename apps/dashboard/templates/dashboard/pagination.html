@@ -1,24 +1,20 @@
-<ul class="pagination">
+{% load params_extras %}
+
+<div class="site-pagination m-auto">
+
     {% if page_obj.has_previous %}
-
-    {% if page_obj.previous_page_number != 1 %}
-    <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+        {% if page_obj.previous_page_number != 1 %}
+        <a href="?{% param_replace page=1 %}"><i class="fas fa-angle-double-left"></i></a>
+        {% endif %}
+        <a href="?{% param_replace page=page_obj.previous_page_number %}">{{page_obj.previous_page_number}}</a>
     {% endif %}
-
-    <li class="page-item"><a class="page-link"
-            href="?page={{ page_obj.previous_page_number }}">{{page_obj.previous_page_number}}</a>
-    </li>
-    {% endif %}
-
-    <li class="page-item active"><span><a class="page-link" href="javascript:;">{{ page_obj.number }}</a></span></li>
-
+    
+    <a class="active" href="javascript:;">{{ page_obj.number }}</a>
+    
     {% if page_obj.has_next %}
-    <li class="page-item"><a class="page-link"
-            href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
-
-    {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
-    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a></li>
+        <a href="?{% param_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+        {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
+            <a href="?{% param_replace page=paginator.num_pages %}"><i class="fas fa-angle-double-right"></i></a>
+        {% endif %}
     {% endif %}
-
-    {% endif %}
-</ul>
+</div>
