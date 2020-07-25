@@ -47,6 +47,7 @@ def index(request):
         if invoice.is_charged() is False:
             unpaid_card_count += 1
     revenue = []
+    total_revenue = 0
     for i in range(1, 13):
         first_day_of_month = datetime(year, i, 1).date()
         last_day_of_this_month = last_day_of_month(first_day_of_month)
@@ -54,6 +55,7 @@ def index(request):
         for invoice in CardInvoice.objects.filter(created_at__gte=first_day_of_month, created_at__lte=last_day_of_this_month):
             if invoice.is_charged():
                 temp += invoice.amount
+        total_revenue += temp
         revenue.append(temp)
     context = {
         'active_nav': 'dashboard',
@@ -65,6 +67,7 @@ def index(request):
         'courses_colors': courses_colors,
         'earning': earning,
         'unpaid_card_count': unpaid_card_count,
-        'revenue': revenue
+        'revenue': revenue,
+        'total_revenue': total_revenue
     }
     return render(request, 'dashboard/index.html', context=context)
