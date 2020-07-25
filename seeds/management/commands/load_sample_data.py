@@ -2651,7 +2651,7 @@ class Command(BaseCommand):
         _start_of_week = _today - timedelta(days=_today.weekday())  # Monday
         t_21h = '21:00'
         _saturday = (_start_of_week + timedelta(days=5)).date()
-        last_4months_saturday = _saturday - timedelta(days=28*4)
+        last_4months_saturday = _saturday - timedelta(days=28*3)
         last_4_months_training_class_thay_hoang_anh = training_yoga_trainer_course.classes.create(
             name='Lớp đào tạo thầy Hoàng Anh 18h tối thứ 7 - KDT1',
             price_for_training_class=20000000,
@@ -2886,7 +2886,6 @@ class Command(BaseCommand):
 
     def __enroll(self, first_name, last_name, email, yoga_class, card_type, lesson_arr, training=False):
         temp_date = datetime(lesson_arr[0].date.year, lesson_arr[0].date.month, lesson_arr[0].date.day, 0, 0, 0, 0, tzinfo=pytz.UTC)
-        print(temp_date)
         u = User.objects.filter(email=email).last()
         if u is not None:
             trainee = u.trainee

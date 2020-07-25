@@ -12,6 +12,12 @@ from apps.card_invoices.models import CardInvoice
 from datetime import datetime, timedelta, date
 
 
+def last_day_of_month(any_day):
+    next_month = any_day.replace(
+        day=28) + timedelta(days=4)  # this will never fail
+    return next_month - timedelta(days=next_month.day)
+
+
 @login_required
 @staff_required
 def index(request):
@@ -28,7 +34,7 @@ def index(request):
     earning = 0
     unpaid_card_count = 0
     now = datetime.now().date()
-    month = now.month
+    month = 7
     year = now.year
     first_day_of_month = datetime(year, month, 1).date()
     first_day_of_next_month = datetime(year, month + 1, 1).date()
@@ -37,9 +43,18 @@ def index(request):
     for invoice in query_set:
         if invoice.is_charged():
             earning += invoice.amount
-    for c in CardInvoice.objects.all():
-        if c.is_charged() is False:
+    for invoice in CardInvoice.objects.all():
+        if invoice.is_charged() is False:
             unpaid_card_count += 1
+    revenue = []
+    for i in range(1, 13):
+        first_day_of_month = datetime(year, i, 1).date()
+        last_day_of_this_month = last_day_of_month(first_day_of_month)
+        temp = 0
+        for invoice in CardInvoice.objects.filter(created_at__gte=first_day_of_month, created_at__lte=last_day_of_this_month):
+            if invoice.is_charged():
+                temp += invoice.amount
+        revenue.append(temp)
     context = {
         'active_nav': 'dashboard',
         'trainees': trainees,
@@ -49,6 +64,7 @@ def index(request):
         'course_colors': course_colors,
         'courses_colors': courses_colors,
         'earning': earning,
-        'unpaid_card_count': unpaid_card_count
+        'unpaid_card_count': unpaid_card_count,
+        'revenue': revenue
     }
     return render(request, 'dashboard/index.html', context=context)
