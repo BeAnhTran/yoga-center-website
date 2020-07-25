@@ -130,8 +130,8 @@ class RevenueView(View):
         revenues = []
         total_revenue = 0
         for yoga_class in YogaClass.objects.all():
-            if yoga_class.end_at is not None and yoga_class.end_at <= first_day_of_month or yoga_class.start_at is not None and yoga_class.start_at >= last_day_of_this_month:
-                continue
+            # if yoga_class.end_at is not None and yoga_class.end_at <= first_day_of_month or yoga_class.start_at is not None and yoga_class.start_at >= last_day_of_this_month:
+            #     continue
             d = {}
             d['yoga_class'] = yoga_class
             query_set = CardInvoice.objects.filter(

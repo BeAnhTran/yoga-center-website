@@ -50,7 +50,7 @@ def index(request):
     revenue = []
     total_revenue = 0
     for i in range(1, 13):
-        first_day_of_month = datetime(year, i, 1, 0, 0, 0, 0, tzinfo=pytz.UTC)
+        first_day_of_month = datetime(year, i, 1, 0, 0, 0, 0, tzinfo=pytz.UTC).date()
         last_day_of_this_month = last_day_of_month(first_day_of_month)
         temp = 0
         for invoice in CardInvoice.objects.filter(created_at__gte=first_day_of_month, created_at__lte=last_day_of_this_month):
