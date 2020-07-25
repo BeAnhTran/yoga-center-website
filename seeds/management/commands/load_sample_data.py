@@ -22,20 +22,43 @@ from apps.card_types.models import (CardType, FOR_FULL_MONTH,
                                     FOR_SOME_LESSONS, FOR_TRIAL, FOR_TRAINING_COURSE, FOR_PERIOD_TIME_LESSONS)
 from apps.cards.models import Card
 from apps.roll_calls.models import RollCall
-from services.card_invoice_service import CardInvoiceService
 from services.roll_call_service import RollCallService
 from apps.blog.models import PostCategory, Post
 from apps.events.models import Event
 from apps.faq.models import FAQ
 from services.roll_call_service import RollCallService
-from services.card_invoice_service import CardInvoiceService
 from apps.shop.models import ProductCategory, Product
 from random import randint
 import uuid
-from apps.card_invoices.models import PREPAID, POSTPAID, NOT_SPECIFIED
+from apps.card_invoices.models import PREPAID, POSTPAID, NOT_SPECIFIED, CardInvoice
 from dateutil.relativedelta import relativedelta
 from notifications.signals import notify
 from django.db.models import Q
+from datetime import datetime
+
+
+class CustomCardInvoiceService:
+    def __init__(self, card, payment_type, description, amount, created_at, charge_id=None):
+        self.card = card
+        self.description = description
+        self.amount = amount
+        self.charge_id = charge_id
+        self.payment_type = payment_type
+        self.created_at = created_at
+
+    @transaction.atomic
+    def call(self):
+        card_invoice = CardInvoice.objects.create(**{
+            'card': self.card,
+            'payment_type': self.payment_type,
+            'description': self.description,
+            'amount': self.amount,
+            'created_at': str(self.created_at)[:10],
+            'charge_id': self.charge_id
+        })
+        card_invoice.created_at = self.created_at
+        card_invoice.save()
+        return card_invoice
 
 
 class Command(BaseCommand):
@@ -57,11 +80,9 @@ class Command(BaseCommand):
         thursday = (start_of_week + timedelta(days=3)).date()
         friday = (start_of_week + timedelta(days=4)).date()
         saturday = (start_of_week + timedelta(days=5)).date()
-        sunday = end_of_week.date()
         ############# =================== ###########
 
         default_range_time_for_practice_lesson = 60
-        default_range_time_for_training_lesson = 120
 
         print("Create ADMIN")
         self.__create_admin()
@@ -499,72 +520,7 @@ class Command(BaseCommand):
             'name': 'Yoga cơ bản',
             'description': '''Hiểu cách hoạt động của Hơi thở, cách thức vận hành các tư thế an toàn và bảo toàn năng lượng. Lần đầu tiên bạn nhập môn Yoga thì đây là lớp tối ưu để bạn lựa chọn.''',
             'level': BASIC_LEVEL,
-            'content': '''<h3>Nhập m&ocirc;n Yoga:</h3>
-
-<p>Khi bạn tham gia v&agrave;o&nbsp;<strong>lớp Yoga căn bản</strong>, bạn sẽ được t&igrave;m hiểu những kh&aacute;i niệm cơ bản v&agrave; c&ocirc; đọng nhất về: Lịch sử Yoga, trường ph&aacute;i của Yoga, triết l&yacute; trong Yoga. Hiểu c&aacute;ch hoạt động của Hơi thở, c&aacute;ch thức vận h&agrave;nh c&aacute;c tư thế an to&agrave;n v&agrave; bảo to&agrave;n năng lượng. Lần đầu ti&ecirc;n bạn nhập m&ocirc;n Yoga th&igrave; đ&acirc;y l&agrave; lớp tối ưu để bạn lựa chọn, nếu bạn l&agrave; người đ&atilde; học Yoga rồi th&igrave; cũng l&agrave; dịp để bạn tiếp cận một trường ph&aacute;i Yoga mới, một chế độ tập luyện mới rồi sau đ&oacute; bạn sẽ chọn lớp ph&ugrave; hợp với thực trạng sức khỏe v&agrave; mong muốn của bạn.</p>
-
-<h3>Nội dung tiếp cận:</h3>
-
-<ol>
-	<li>Gi&uacute;p bạn x&aacute;c định r&otilde; mục ti&ecirc;u đến lớp, x&aacute;c định lớp học ph&ugrave; hợp với t&igrave;nh trạng sức khỏe, mục đ&iacute;ch &nbsp;nhu cầu của bạn.</li>
-	<li>Ph&acirc;n biệt lớp Yoga căn bản, Yoga trung cấp, Yoga n&acirc;ng cao.</li>
-	<li>L&agrave;m r&otilde;: Hatha Yoga, Astanga Yoga, Vinyasa Yoga.</li>
-	<li>Nguy&ecirc;n tắc tập luyện Yoga cần phải tu&acirc;n thủ.</li>
-	<li>Những ch&uacute; &yacute; trong tập luyện để đạt hiệu quả cao v&agrave; hạn chế chứng thương.</li>
-	<li>C&aacute;ch h&iacute;t thở đ&uacute;ng v&agrave; nguy&ecirc;n l&yacute; vận h&agrave;nh hơi thở đ&uacute;ng.</li>
-	<li>C&aacute;ch vận h&agrave;nh c&aacute;c Asana (tư thế Yoga)</li>
-	<li>Học c&aacute;ch thư gi&atilde;n v&agrave; nghĩ ngơi trong tập luyện, ứng dụng v&agrave;o c&ocirc;ng việc v&agrave; đời sống.</li>
-	<li>Được tư vấn chế độ dinh dưỡng hợp l&yacute;.</li>
-	<li>Tiếp cận những triết l&yacute; Yoga để &aacute;p dụng v&agrave;o cuộc sống tốt đẹp hơn.</li>
-	<li>Tiếp cận v&agrave; thực h&agrave;nh c&aacute;c tư thế Yoga căn bản, nhẹ nh&agrave;ng theo mức độ tăng dần để cơ thể th&iacute;ch nghi.</li>
-</ol>
-
-<h3>Lợi &iacute;ch cơ bản của tập Yoga:</h3>
-
-<ol>
-	<li>Học c&aacute;ch nghỉ ngơi để xoa dịu thần kinh v&agrave; c&acirc;n n&atilde;o.</li>
-	<li>Tĩnh tọa để tập trung &yacute; ch&iacute;.</li>
-	<li>Điều tức để tẩy uế th&acirc;n thể, khu trục c&aacute;c chất cặn b&atilde;.</li>
-	<li>Điều kh&iacute; để kiểm so&aacute;t hơi thở.</li>
-	<li>Điều th&acirc;n: kiểm so&aacute;t th&acirc;n thể.</li>
-</ol>
-
-<p>Ngo&agrave;i ra, khi vận h&agrave;nh đ&uacute;ng, Yoga t&aacute;c đ&ocirc;ng l&ecirc;n c&aacute;c b&iacute; huyệt l&agrave;m mạnh c&aacute;c mạch m&aacute;u. Yoga c&ograve;n t&aacute;c động đến c&aacute;c hệ v&agrave; mở lối v&agrave;o t&acirc;m linh.</p>
-
-<h3>Những ch&uacute; &yacute; trong tập luyện:</h3>
-
-<ol>
-	<li>Tập tr&ecirc;n nền phẳng để giữ cho cột sống thẳng.</li>
-	<li>Ph&ograve;ng tập y&ecirc;n tĩnh, tho&aacute;ng m&aacute;t (thi&ecirc;n nhi&ecirc;n c&agrave;ng tốt), hạn chế gi&oacute; l&ugrave;a.</li>
-	<li>N&ecirc;n c&oacute; một tấm thảm ri&ecirc;ng v&agrave; khăn để tăng khả năng tập trung.</li>
-	<li>Kh&ocirc;ng ăn no trước giờ tập (ăn no &iacute;t nhất l&agrave; 3 tiếng), v&agrave; kh&ocirc;ng ăn liền sau sau khi tập (ăn uống b&igrave;nh thường sau 15 ph&uacute;t)</li>
-	<li>N&ecirc;n uống nước trước khi tập Yoga để cơ thể dẽo dai, hạn chế uống nhiều nước trong l&uacute;c tập.</li>
-	<li>Tắm sau khi tập &iacute;t nhất l&agrave; 30 ph&uacute;t.</li>
-	<li>Quần &aacute;o phải c&oacute; độ co gi&atilde;n v&agrave; thấm h&uacute;t mồ h&ocirc;i, gọn g&agrave;ng để kh&ocirc;ng l&agrave;m vướng l&uacute;c tập.</li>
-	<li>Phụ n&ecirc;n tập nhẹ hoặc nghĩ &iacute;t ng&agrave;y trong chu k&igrave; kinh nguyệt.</li>
-	<li>Một số trường hợp như: Huyết &aacute;p, tim mạch, cột sống,&hellip;.cần th&ocirc;ng b&aacute;o kĩ c&agrave;ng với nh&acirc;n vi&ecirc;n tư vấn hoặc người hướng dẫn để c&oacute; những lưu &yacute; ph&ugrave; hợp.</li>
-	<li>Phải đặt mục ti&ecirc;u tập luyện ph&ugrave; hợp với t&igrave;nh trạng sức khỏe, nhu cầu để duy tr&igrave; v&agrave; đặt kỉ luật tập luyện cho bản th&acirc;n.</li>
-	<li>Phải tập luyện với sự cảm nhận v&agrave; duy tr&igrave; &iacute;t nhất 3 th&aacute;ng mới c&oacute; kết quả.</li>
-	<li>Trong qu&aacute; tr&igrave;nh tập phải tập trung tư tưởng, &nbsp;giờ n&agrave;o việc đ&oacute;, hướng v&agrave;o cơ thể m&igrave;nh để quan s&aacute;t v&agrave; cảm nhận.</li>
-	<li>H&iacute;t v&agrave;o v&agrave; thở ra bằng mũi (những trường hợp cụ thể th&igrave; gi&aacute;o vi&ecirc;n sẽ nhắc nhở)</li>
-	<li>Khi giữ thế trong Yoga phải h&iacute;t thở thật chậm để d&ugrave;ng &yacute; vận kh&iacute;.</li>
-	<li>Hảy để tinh thần yoga sống kh&ocirc;ng chỉ tr&ecirc;n chiếu tập m&agrave; trong cả cuộc sống h&agrave;ng ng&agrave;y.</li>
-</ol>
-
-<h3>H&igrave;nh ảnh ph&ograve;ng tập:</h3>
-
-<p><img alt="ảnh phòng tập" src="/media/seeds/2020/07/03/main-4.jpg" style="height:657px; width:876px" /></p>
-
-<p><img alt="" src="/media/seeds/2020/07/03/main-2.jpg" style="height:657px; width:876px" /></p>
-
-<h3>Một số h&igrave;nh ảnh của lớp học:</h3>
-
-<p><img alt="" src="/media/seeds/2020/07/03/4.jpg" style="height:657px; width:876px" /></p>
-
-<p><img alt="" src="/media/seeds/2020/07/03/5.jpg" style="height:657px; width:876px" /></p>
-
-<p>&nbsp;</p>
-''',
+            'content': '''<h3>Nhập m&ocirc;n Yoga:</h3> <p>Khi bạn tham gia v&agrave;o&nbsp;<strong>lớp Yoga căn bản</strong>, bạn sẽ được t&igrave;m hiểu những kh&aacute;i niệm cơ bản v&agrave; c&ocirc; đọng nhất về: Lịch sử Yoga, trường ph&aacute;i của Yoga, triết l&yacute; trong Yoga. Hiểu c&aacute;ch hoạt động của Hơi thở, c&aacute;ch thức vận h&agrave;nh c&aacute;c tư thế an to&agrave;n v&agrave; bảo to&agrave;n năng lượng. Lần đầu ti&ecirc;n bạn nhập m&ocirc;n Yoga th&igrave; đ&acirc;y l&agrave; lớp tối ưu để bạn lựa chọn, nếu bạn l&agrave; người đ&atilde; học Yoga rồi th&igrave; cũng l&agrave; dịp để bạn tiếp cận một trường ph&aacute;i Yoga mới, một chế độ tập luyện mới rồi sau đ&oacute; bạn sẽ chọn lớp ph&ugrave; hợp với thực trạng sức khỏe v&agrave; mong muốn của bạn.</p> <h3>Nội dung tiếp cận:</h3> <ol> <li>Gi&uacute;p bạn x&aacute;c định r&otilde; mục ti&ecirc;u đến lớp, x&aacute;c định lớp học ph&ugrave; hợp với t&igrave;nh trạng sức khỏe, mục đ&iacute;ch &nbsp;nhu cầu của bạn.</li> <li>Ph&acirc;n biệt lớp Yoga căn bản, Yoga trung cấp, Yoga n&acirc;ng cao.</li> <li>L&agrave;m r&otilde;: Hatha Yoga, Astanga Yoga, Vinyasa Yoga.</li> <li>Nguy&ecirc;n tắc tập luyện Yoga cần phải tu&acirc;n thủ.</li> <li>Những ch&uacute; &yacute; trong tập luyện để đạt hiệu quả cao v&agrave; hạn chế chứng thương.</li> <li>C&aacute;ch h&iacute;t thở đ&uacute;ng v&agrave; nguy&ecirc;n l&yacute; vận h&agrave;nh hơi thở đ&uacute;ng.</li> <li>C&aacute;ch vận h&agrave;nh c&aacute;c Asana (tư thế Yoga)</li> <li>Học c&aacute;ch thư gi&atilde;n v&agrave; nghĩ ngơi trong tập luyện, ứng dụng v&agrave;o c&ocirc;ng việc v&agrave; đời sống.</li> <li>Được tư vấn chế độ dinh dưỡng hợp l&yacute;.</li> <li>Tiếp cận những triết l&yacute; Yoga để &aacute;p dụng v&agrave;o cuộc sống tốt đẹp hơn.</li> <li>Tiếp cận v&agrave; thực h&agrave;nh c&aacute;c tư thế Yoga căn bản, nhẹ nh&agrave;ng theo mức độ tăng dần để cơ thể th&iacute;ch nghi.</li> </ol> <h3>Lợi &iacute;ch cơ bản của tập Yoga:</h3> <ol> <li>Học c&aacute;ch nghỉ ngơi để xoa dịu thần kinh v&agrave; c&acirc;n n&atilde;o.</li> <li>Tĩnh tọa để tập trung &yacute; ch&iacute;.</li> <li>Điều tức để tẩy uế th&acirc;n thể, khu trục c&aacute;c chất cặn b&atilde;.</li> <li>Điều kh&iacute; để kiểm so&aacute;t hơi thở.</li> <li>Điều th&acirc;n: kiểm so&aacute;t th&acirc;n thể.</li> </ol> <p>Ngo&agrave;i ra, khi vận h&agrave;nh đ&uacute;ng, Yoga t&aacute;c đ&ocirc;ng l&ecirc;n c&aacute;c b&iacute; huyệt l&agrave;m mạnh c&aacute;c mạch m&aacute;u. Yoga c&ograve;n t&aacute;c động đến c&aacute;c hệ v&agrave; mở lối v&agrave;o t&acirc;m linh.</p> <h3>Những ch&uacute; &yacute; trong tập luyện:</h3> <ol> <li>Tập tr&ecirc;n nền phẳng để giữ cho cột sống thẳng.</li> <li>Ph&ograve;ng tập y&ecirc;n tĩnh, tho&aacute;ng m&aacute;t (thi&ecirc;n nhi&ecirc;n c&agrave;ng tốt), hạn chế gi&oacute; l&ugrave;a.</li> <li>N&ecirc;n c&oacute; một tấm thảm ri&ecirc;ng v&agrave; khăn để tăng khả năng tập trung.</li> <li>Kh&ocirc;ng ăn no trước giờ tập (ăn no &iacute;t nhất l&agrave; 3 tiếng), v&agrave; kh&ocirc;ng ăn liền sau sau khi tập (ăn uống b&igrave;nh thường sau 15 ph&uacute;t)</li> <li>N&ecirc;n uống nước trước khi tập Yoga để cơ thể dẽo dai, hạn chế uống nhiều nước trong l&uacute;c tập.</li> <li>Tắm sau khi tập &iacute;t nhất l&agrave; 30 ph&uacute;t.</li> <li>Quần &aacute;o phải c&oacute; độ co gi&atilde;n v&agrave; thấm h&uacute;t mồ h&ocirc;i, gọn g&agrave;ng để kh&ocirc;ng l&agrave;m vướng l&uacute;c tập.</li> <li>Phụ n&ecirc;n tập nhẹ hoặc nghĩ &iacute;t ng&agrave;y trong chu k&igrave; kinh nguyệt.</li> <li>Một số trường hợp như: Huyết &aacute;p, tim mạch, cột sống,&hellip;.cần th&ocirc;ng b&aacute;o kĩ c&agrave;ng với nh&acirc;n vi&ecirc;n tư vấn hoặc người hướng dẫn để c&oacute; những lưu &yacute; ph&ugrave; hợp.</li> <li>Phải đặt mục ti&ecirc;u tập luyện ph&ugrave; hợp với t&igrave;nh trạng sức khỏe, nhu cầu để duy tr&igrave; v&agrave; đặt kỉ luật tập luyện cho bản th&acirc;n.</li> <li>Phải tập luyện với sự cảm nhận v&agrave; duy tr&igrave; &iacute;t nhất 3 th&aacute;ng mới c&oacute; kết quả.</li> <li>Trong qu&aacute; tr&igrave;nh tập phải tập trung tư tưởng, &nbsp;giờ n&agrave;o việc đ&oacute;, hướng v&agrave;o cơ thể m&igrave;nh để quan s&aacute;t v&agrave; cảm nhận.</li> <li>H&iacute;t v&agrave;o v&agrave; thở ra bằng mũi (những trường hợp cụ thể th&igrave; gi&aacute;o vi&ecirc;n sẽ nhắc nhở)</li> <li>Khi giữ thế trong Yoga phải h&iacute;t thở thật chậm để d&ugrave;ng &yacute; vận kh&iacute;.</li> <li>Hảy để tinh thần yoga sống kh&ocirc;ng chỉ tr&ecirc;n chiếu tập m&agrave; trong cả cuộc sống h&agrave;ng ng&agrave;y.</li> </ol> <h3>H&igrave;nh ảnh ph&ograve;ng tập:</h3> <p><img alt="ảnh phòng tập" src="/media/seeds/2020/07/03/main-4.jpg" style="height:657px; width:876px" /></p> <p><img alt="" src="/media/seeds/2020/07/03/main-2.jpg" style="height:657px; width:876px" /></p> <h3>Một số h&igrave;nh ảnh của lớp học:</h3> <p><img alt="" src="/media/seeds/2020/07/03/4.jpg" style="height:657px; width:876px" /></p> <p><img alt="" src="/media/seeds/2020/07/03/5.jpg" style="height:657px; width:876px" /></p> <p>&nbsp;</p>''',
             'image': 'seeds/images/courses/yoga_co_ban.jpg',
             'price_per_lesson': 50000,
             'price_per_month': 600000,
@@ -649,64 +605,7 @@ class Command(BaseCommand):
         training_yoga_trainer_course_data = {
             'name': 'Đào tạo huấn luyện viên',
             'description': '''Yoga Hương Tre mang đến những kiến thức từ cơ bản đến nâng cao, từ đạo đức, triết lý nghề nghiệp. Đạo tạo ra một người giáo viên Yoga chân chính, tâm huyết với nghề. Chứ không phải chỉ là một người huấn luyện viên chỉ biết đưa các bài học động tác cho học''',
-            'content': '''<p>⭐️&nbsp;Đội ngũ&nbsp;Gi&aacute;o vi&ecirc;n đ&agrave;o tạo nhiều năm kinh nghiệm.</p>
-
-<p>⭐️&nbsp;Gi&aacute;o tr&igrave;nh b&agrave;i bản khoa học, đảm bảo kỹ năng đứng lớp, chất lượng giảng dạy ưu ti&ecirc;n h&agrave;ng đầu.</p>
-
-<p>⭐️&nbsp;Được nhận <strong>GIẤY CHỨNG NHẬN</strong> sau khi ho&agrave;n th&agrave;nh kh&oacute;a học từ Trung T&acirc;m Yoga Hương Tre.</p>
-
-<p>⭐️&nbsp;Học vi&ecirc;n sau khi tốt nghiệp được giới thiệu việc l&agrave;m&nbsp;hoặc được&nbsp;giảng dạy tại Trung T&acirc;m Yoga Hương Tre.</p>
-
-<p>⭐️ Hỗ trợ về kỹ thuật, định hướng, thương hiệu, x&acirc;y dựng ph&ograve;ng tập yoga nếu mở trung t&acirc;m ri&ecirc;ng.</p>
-
-<p>⭐️ Hỗ trợ học vi&ecirc;n đủ điều kiện tham gia học, nhận chứng chỉ Li&ecirc;n Đo&agrave;n Yoga Việt Nam.</p>
-
-<p><img alt="💥" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t99/1.5/16/1f4a5.png" style="height:16px; width:16px" />&nbsp;Lựa chọn Nghề HLV YOGA bạn kh&ocirc;ng chỉ bảo vệ cho ch&iacute;nh sức khỏe của bản th&acirc;n bạn m&agrave; c&ograve;n cho ch&iacute;nh những người th&acirc;n v&agrave; cộng đồng xung quanh bạn.</p>
-
-<p><img alt="💯" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t4a/1.5/16/1f4af.png" style="height:16px; width:16px" />&nbsp;KH&Ocirc;NG NHỮNG MANG LẠI GI&Aacute; TRỊ VỀ SỨC KHỎE, NGHỀ HLV YOGA C&Ograve;N GI&Uacute;P BẠN C&Oacute; THU NHẬP CAO.</p>
-
-<p><img alt="‼" src="https://static.xx.fbcdn.net/images/emoji.php/v9/tfe/1.5/16/203c.png" style="height:16px; width:16px" />&nbsp;Đ&acirc;y l&agrave; việc hiếm hoi m&agrave; bạn vừa c&oacute; thể kiếm tiền vừa c&oacute; thể gi&uacute;p người kh&aacute;c khỏe mạnh, sống t&iacute;ch cực hơn.</p>
-
-<p><img alt="‼" src="https://static.xx.fbcdn.net/images/emoji.php/v9/tfe/1.5/16/203c.png" style="height:16px; width:16px" />&nbsp;Việc trở th&agrave;nh một gi&aacute;o vi&ecirc;n Yoga sẽ khiến bạn c&oacute; thể l&agrave;m việc ở khắp mọi nơi. V&igrave; sau khi học xong bạn sẽ được Bằng Yoga c&oacute; gi&aacute; trị to&agrave;n quốc</p>
-
-<p>===================</p>
-
-<p>Giấy chứng nhận ho&agrave;n th&agrave;nh kh&oacute;a học</p>
-
-<p><img alt="" src="/media/seeds/2020/07/03/hlv/giay-chung-nhan-hlv-2.jpg" style="height:526px; width:870px" /></p>
-
-<p>===================</p>
-
-<p><img alt="⚡" src="https://static.xx.fbcdn.net/images/emoji.php/v9/te4/1.5/16/26a1.png" style="height:16px; width:16px" /><img alt="⚡" src="https://static.xx.fbcdn.net/images/emoji.php/v9/te4/1.5/16/26a1.png" style="height:16px; width:16px" /><img alt="⚡" src="https://static.xx.fbcdn.net/images/emoji.php/v9/te4/1.5/16/26a1.png" style="height:16px; width:16px" />&nbsp;NHANH TAY&nbsp;ĐĂNG K&Yacute; NGAY KH&Oacute;A HỌC HUẤN LUYỆN VI&Ecirc;N YOGA ĐỂ TRỞ TH&Agrave;NH HUẤN LUYỆN VI&Ecirc;N YOGA TRONG TƯƠNG LAI</p>
-
-<p>===================</p>
-
-<p>Kh&oacute;a Đ&agrave;o tạo&nbsp;Huấn luyện vi&ecirc;n&nbsp;Yoga l&agrave; kh&oacute;a học d&agrave;nh cho những ai muốn theo đuổi sự nghiệp giảng dạy&nbsp;Yoga chuy&ecirc;n nghiệp.&nbsp;</p>
-
-<p>Kh&oacute;a học l&agrave; một khởi đầu vững chắc cho bạn tr&ecirc;n con đường tiếp theo trong sự nghiệp giảng dạy Yoga sau n&agrave;y.</p>
-
-<p>Nghề gi&aacute;o vi&ecirc;n Yoga cho bạn một sức khỏe, một tinh thần thoải m&aacute;i. Biết lắng nghe, hiểu cơ thể m&igrave;nh đang muốn g&igrave;. Bạn sẽ lu&ocirc;n thấy một sức khỏe dồi d&agrave;o, một cơ thể dẻo dai ở mỗi người huấn luyện vi&ecirc;n Yoga. Người tập sẽ được hướng dẫn chi tiết, cẩn thận để từng động t&aacute;c lu&ocirc;n ch&iacute;nh x&aacute;c. Cơ thể từ người tập đến người hướng dẫn đều được cải thiện.</p>
-
-<p>CLB Yoga Hương Tre mang đến những kiến thức từ cơ bản đến n&acirc;ng cao, từ đạo đức, triết l&yacute; nghề nghiệp. Đạo tạo ra một người gi&aacute;o vi&ecirc;n Yoga ch&acirc;n ch&iacute;nh, t&acirc;m huyết với nghề. Chứ kh&ocirc;ng phải chỉ l&agrave; một người huấn luyện vi&ecirc;n chỉ biết đưa c&aacute;c b&agrave;i học động t&aacute;c cho học vi&ecirc;n. Đ&atilde; c&oacute; rất nhiều học vi&ecirc;n t&igrave;m đến nơi đ&acirc;y tr&ecirc;n cả nước với mong muốn thay đổi bản th&acirc;n, muốn c&oacute; một nghề nghiệp mới v&agrave; đ&atilde; th&agrave;nh c&ocirc;ng.</p>
-
-<p>Vậy th&igrave; c&ograve;n bạn, bạn đ&atilde; thực sự sẵn s&agrave;ng để trở th&agrave;nh một gi&aacute;o vi&ecirc;n Yoga hay chưa?</p>
-
-<p><img alt="" src="/media/seeds/2020/07/03/hlv/trung-tam-dao-tao-huan-luyen-vien-yoga-uy-tin-2.jpg" style="height:716px; width:960px" /></p>
-
-<h3>Một số h&igrave;nh ảnh về lớp huấn luyện vi&ecirc;n Yoga</h3>
-
-<p><img alt="" src="/media/seeds/2020/07/03/hlv/phong-dao-tao-hlv.jpg" style="height:656px; width:875px" /></p>
-
-<p><img alt="" src="/media/seeds/2020/07/03/hlv/1.jpg" style="height:656px; width:875px" /></p>
-
-<h3>Trao chứng nhận ho&agrave;n th&agrave;nh kh&oacute;a học</h3>
-
-<p><img alt="" src="/media/seeds/2020/07/03/hlv/le-trao-chung-nhan-2.jpg" style="height:720px; width:960px" /></p>
-
-<p><img alt="" src="/media/seeds/2020/07/03/hlv/le-trao-chung-nhan-4.jpg" style="height:720px; width:960px" /></p>
-
-<p><img alt="" src="/media/seeds/2020/07/03/hlv/trao-chung-nhan-1.jpg" style="height:686px; width:960px" /></p>
-''',
+            'content': '''<p>⭐️&nbsp;Đội ngũ&nbsp;Gi&aacute;o vi&ecirc;n đ&agrave;o tạo nhiều năm kinh nghiệm.</p> <p>⭐️&nbsp;Gi&aacute;o tr&igrave;nh b&agrave;i bản khoa học, đảm bảo kỹ năng đứng lớp, chất lượng giảng dạy ưu ti&ecirc;n h&agrave;ng đầu.</p> <p>⭐️&nbsp;Được nhận <strong>GIẤY CHỨNG NHẬN</strong> sau khi ho&agrave;n th&agrave;nh kh&oacute;a học từ Trung T&acirc;m Yoga Hương Tre.</p> <p>⭐️&nbsp;Học vi&ecirc;n sau khi tốt nghiệp được giới thiệu việc l&agrave;m&nbsp;hoặc được&nbsp;giảng dạy tại Trung T&acirc;m Yoga Hương Tre.</p> <p>⭐️ Hỗ trợ về kỹ thuật, định hướng, thương hiệu, x&acirc;y dựng ph&ograve;ng tập yoga nếu mở trung t&acirc;m ri&ecirc;ng.</p> <p>⭐️ Hỗ trợ học vi&ecirc;n đủ điều kiện tham gia học, nhận chứng chỉ Li&ecirc;n Đo&agrave;n Yoga Việt Nam.</p> <p><img alt="💥" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t99/1.5/16/1f4a5.png" style="height:16px; width:16px" />&nbsp;Lựa chọn Nghề HLV YOGA bạn kh&ocirc;ng chỉ bảo vệ cho ch&iacute;nh sức khỏe của bản th&acirc;n bạn m&agrave; c&ograve;n cho ch&iacute;nh những người th&acirc;n v&agrave; cộng đồng xung quanh bạn.</p> <p><img alt="💯" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t4a/1.5/16/1f4af.png" style="height:16px; width:16px" />&nbsp;KH&Ocirc;NG NHỮNG MANG LẠI GI&Aacute; TRỊ VỀ SỨC KHỎE, NGHỀ HLV YOGA C&Ograve;N GI&Uacute;P BẠN C&Oacute; THU NHẬP CAO.</p> <p><img alt="‼" src="https://static.xx.fbcdn.net/images/emoji.php/v9/tfe/1.5/16/203c.png" style="height:16px; width:16px" />&nbsp;Đ&acirc;y l&agrave; việc hiếm hoi m&agrave; bạn vừa c&oacute; thể kiếm tiền vừa c&oacute; thể gi&uacute;p người kh&aacute;c khỏe mạnh, sống t&iacute;ch cực hơn.</p> <p><img alt="‼" src="https://static.xx.fbcdn.net/images/emoji.php/v9/tfe/1.5/16/203c.png" style="height:16px; width:16px" />&nbsp;Việc trở th&agrave;nh một gi&aacute;o vi&ecirc;n Yoga sẽ khiến bạn c&oacute; thể l&agrave;m việc ở khắp mọi nơi. V&igrave; sau khi học xong bạn sẽ được Bằng Yoga c&oacute; gi&aacute; trị to&agrave;n quốc</p> <p>===================</p> <p>Giấy chứng nhận ho&agrave;n th&agrave;nh kh&oacute;a học</p> <p><img alt="" src="/media/seeds/2020/07/03/hlv/giay-chung-nhan-hlv-2.jpg" style="height:526px; width:870px" /></p> <p>===================</p> <p><img alt="⚡" src="https://static.xx.fbcdn.net/images/emoji.php/v9/te4/1.5/16/26a1.png" style="height:16px; width:16px" /><img alt="⚡" src="https://static.xx.fbcdn.net/images/emoji.php/v9/te4/1.5/16/26a1.png" style="height:16px; width:16px" /><img alt="⚡" src="https://static.xx.fbcdn.net/images/emoji.php/v9/te4/1.5/16/26a1.png" style="height:16px; width:16px" />&nbsp;NHANH TAY&nbsp;ĐĂNG K&Yacute; NGAY KH&Oacute;A HỌC HUẤN LUYỆN VI&Ecirc;N YOGA ĐỂ TRỞ TH&Agrave;NH HUẤN LUYỆN VI&Ecirc;N YOGA TRONG TƯƠNG LAI</p> <p>===================</p> <p>Kh&oacute;a Đ&agrave;o tạo&nbsp;Huấn luyện vi&ecirc;n&nbsp;Yoga l&agrave; kh&oacute;a học d&agrave;nh cho những ai muốn theo đuổi sự nghiệp giảng dạy&nbsp;Yoga chuy&ecirc;n nghiệp.&nbsp;</p> <p>Kh&oacute;a học l&agrave; một khởi đầu vững chắc cho bạn tr&ecirc;n con đường tiếp theo trong sự nghiệp giảng dạy Yoga sau n&agrave;y.</p> <p>Nghề gi&aacute;o vi&ecirc;n Yoga cho bạn một sức khỏe, một tinh thần thoải m&aacute;i. Biết lắng nghe, hiểu cơ thể m&igrave;nh đang muốn g&igrave;. Bạn sẽ lu&ocirc;n thấy một sức khỏe dồi d&agrave;o, một cơ thể dẻo dai ở mỗi người huấn luyện vi&ecirc;n Yoga. Người tập sẽ được hướng dẫn chi tiết, cẩn thận để từng động t&aacute;c lu&ocirc;n ch&iacute;nh x&aacute;c. Cơ thể từ người tập đến người hướng dẫn đều được cải thiện.</p> <p>CLB Yoga Hương Tre mang đến những kiến thức từ cơ bản đến n&acirc;ng cao, từ đạo đức, triết l&yacute; nghề nghiệp. Đạo tạo ra một người gi&aacute;o vi&ecirc;n Yoga ch&acirc;n ch&iacute;nh, t&acirc;m huyết với nghề. Chứ kh&ocirc;ng phải chỉ l&agrave; một người huấn luyện vi&ecirc;n chỉ biết đưa c&aacute;c b&agrave;i học động t&aacute;c cho học vi&ecirc;n. Đ&atilde; c&oacute; rất nhiều học vi&ecirc;n t&igrave;m đến nơi đ&acirc;y tr&ecirc;n cả nước với mong muốn thay đổi bản th&acirc;n, muốn c&oacute; một nghề nghiệp mới v&agrave; đ&atilde; th&agrave;nh c&ocirc;ng.</p> <p>Vậy th&igrave; c&ograve;n bạn, bạn đ&atilde; thực sự sẵn s&agrave;ng để trở th&agrave;nh một gi&aacute;o vi&ecirc;n Yoga hay chưa?</p> <p><img alt="" src="/media/seeds/2020/07/03/hlv/trung-tam-dao-tao-huan-luyen-vien-yoga-uy-tin-2.jpg" style="height:716px; width:960px" /></p> <h3>Một số h&igrave;nh ảnh về lớp huấn luyện vi&ecirc;n Yoga</h3> <p><img alt="" src="/media/seeds/2020/07/03/hlv/phong-dao-tao-hlv.jpg" style="height:656px; width:875px" /></p> <p><img alt="" src="/media/seeds/2020/07/03/hlv/1.jpg" style="height:656px; width:875px" /></p> <h3>Trao chứng nhận ho&agrave;n th&agrave;nh kh&oacute;a học</h3> <p><img alt="" src="/media/seeds/2020/07/03/hlv/le-trao-chung-nhan-2.jpg" style="height:720px; width:960px" /></p> <p><img alt="" src="/media/seeds/2020/07/03/hlv/le-trao-chung-nhan-4.jpg" style="height:720px; width:960px" /></p> <p><img alt="" src="/media/seeds/2020/07/03/hlv/trao-chung-nhan-1.jpg" style="height:686px; width:960px" /></p>''',
             'course_type': TRAINING_COURSE,
             'image': 'seeds/images/courses/huan_luyen_vien_yoga.jpg',
             'price_for_training_class': 20000000,
@@ -825,9 +724,19 @@ class Command(BaseCommand):
                 l3.taught.create(trainer=co_man)
         # add-trainees
         self.__enroll('Dung', 'Lê Thị Hoàng', 'lethihoangdung1@gmail.com', basic_yoga_class_co_man_5h30_t246,
-                      period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[0:36])
+                      period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[0:11])
+        self.__enroll('Dung', 'Lê Thị Hoàng', 'lethihoangdung1@gmail.com', basic_yoga_class_co_man_5h30_t246,
+                      period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[12:23])
+        self.__enroll('Dung', 'Lê Thị Hoàng', 'lethihoangdung1@gmail.com', basic_yoga_class_co_man_5h30_t246,
+                      period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[24:36])
+        
         self.__enroll('Thùy', 'Ngô Bích', 'ngobichthuy1@gmail.com', basic_yoga_class_co_man_5h30_t246,
-                      period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[0:36])
+                      period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[0:11])
+        self.__enroll('Thùy', 'Ngô Bích', 'ngobichthuy1@gmail.com', basic_yoga_class_co_man_5h30_t246,
+                      period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[12:23])
+        self.__enroll('Thùy', 'Ngô Bích', 'ngobichthuy1@gmail.com', basic_yoga_class_co_man_5h30_t246,
+                      period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[23:36])
+
         self.__enroll('Oanh', 'Đinh Thị Hoàng', 'dinhthihoangoanh1@gmail.com', basic_yoga_class_co_man_5h30_t246,
                       period_lessons_card_type, arr_lessons_basic_yoga_class_co_man_5h30_246[0:36])
         self.__enroll('Giang', 'Mai Thị Cẩm', 'maithicamgiang1@gmail.com', basic_yoga_class_co_man_5h30_t246,
@@ -861,8 +770,8 @@ class Command(BaseCommand):
             yogaclass=basic_yoga_class_co_man_5h30_t246, card_type=period_lessons_card_type)
         amount_ctt1 = arr_lessons_basic_yoga_class_co_man_5h30_246[:36].__len__(
         ) * basic_yoga_class_co_man_5h30_t246.price_per_lesson
-        CardInvoiceService(card_ctt1, POSTPAID,
-                           'Thanh toán thẻ tập', amount_ctt1).call()
+        CustomCardInvoiceService(card_ctt1, POSTPAID,
+                           'Thanh toán thẻ tập', amount_ctt1, arr_lessons_basic_yoga_class_co_man_5h30_246[0].date, None).call()
         RollCallService(
             card_ctt1, arr_lessons_basic_yoga_class_co_man_5h30_246[:36]).call()
         data_ctt2 = {
@@ -879,8 +788,8 @@ class Command(BaseCommand):
             yogaclass=basic_yoga_class_co_man_5h30_t246, card_type=period_lessons_card_type)
         amount_ctt2 = arr_lessons_basic_yoga_class_co_man_5h30_246[:36].__len__(
         ) * basic_yoga_class_co_man_5h30_t246.price_per_lesson
-        CardInvoiceService(card_ctt2, POSTPAID,
-                           'Thanh toán thẻ tập', amount_ctt2).call()
+        CustomCardInvoiceService(card_ctt2, POSTPAID,
+                           'Thanh toán thẻ tập', amount_ctt2, arr_lessons_basic_yoga_class_co_man_5h30_246[0].date, None).call()
         RollCallService(
             card_ctt2, arr_lessons_basic_yoga_class_co_man_5h30_246[:36]).call()
 
@@ -2822,8 +2731,8 @@ class Command(BaseCommand):
         trainee_chuathanhtoan1 = Trainee.objects.create(user=chuathanhtoan1)
         card_ctt1 = trainee_chuathanhtoan1.cards.create(
             yogaclass=training_class_thay_hoang_anh, card_type=training_course_card_type)
-        CardInvoiceService(card_ctt1, POSTPAID, 'Thanh toán thẻ tập',
-                           training_class_thay_hoang_anh.get_price_for_training_course()).call()
+        CustomCardInvoiceService(card_ctt1, POSTPAID, 'Thanh toán thẻ tập',
+                           training_class_thay_hoang_anh.get_price_for_training_course(), training_class_thay_hoang_anh.lessons.first().date, None).call()
         RollCallService(
             card_ctt1, training_class_thay_hoang_anh.lessons.all()).call()
         # da thanh toan dot 1
@@ -2839,12 +2748,12 @@ class Command(BaseCommand):
         trainee_chuathanhtoan2 = Trainee.objects.create(user=chuathanhtoan2)
         card_ctt2 = trainee_chuathanhtoan2.cards.create(
             yogaclass=training_class_thay_hoang_anh, card_type=training_course_card_type)
-        invoice1 = CardInvoiceService(
-            card_ctt2, PREPAID, 'Thanh toán thẻ tập', period1.amount, 'test1axvdjjsasbxbasasas').call()
+        invoice1 = CustomCardInvoiceService(
+            card_ctt2, PREPAID, 'Thanh toán thẻ tập', period1.amount, training_class_thay_hoang_anh.lessons.first().date, 'test1axvdjjsasbxbasasas').call()
         invoice1.payment_period = period1
         invoice1.save()
-        invoice2 = CardInvoiceService(
-            card_ctt2, NOT_SPECIFIED, 'Thanh toán thẻ tập', period2.amount).call()
+        invoice2 = CustomCardInvoiceService(
+            card_ctt2, NOT_SPECIFIED, 'Thanh toán thẻ tập', period2.amount, training_class_thay_hoang_anh.lessons.first().date, None).call()
         invoice2.payment_period = period2
         invoice2.save()
         RollCallService(
@@ -2861,12 +2770,12 @@ class Command(BaseCommand):
         trainee_chuathanhtoan3 = Trainee.objects.create(user=chuathanhtoan3)
         card_ctt3 = trainee_chuathanhtoan3.cards.create(
             yogaclass=training_class_thay_hoang_anh, card_type=training_course_card_type)
-        invoice11 = CardInvoiceService(
-            card_ctt3, POSTPAID, 'Thanh toán thẻ tập', period1.amount).call()
+        invoice11 = CustomCardInvoiceService(
+            card_ctt3, POSTPAID, 'Thanh toán thẻ tập', period1.amount, training_class_thay_hoang_anh.lessons.first().date, None).call()
         invoice11.payment_period = period1
         invoice11.save()
-        invoice12 = CardInvoiceService(
-            card_ctt3, NOT_SPECIFIED, 'Thanh toán thẻ tập', period2.amount).call()
+        invoice12 = CustomCardInvoiceService(
+            card_ctt3, NOT_SPECIFIED, 'Thanh toán thẻ tập', period2.amount, training_class_thay_hoang_anh.lessons.first().date, None).call()
         invoice12.payment_period = period2
         invoice12.save()
         RollCallService(
@@ -2976,16 +2885,24 @@ class Command(BaseCommand):
             course.lectures.create(**d)
 
     def __enroll(self, first_name, last_name, email, yoga_class, card_type, lesson_arr, training=False):
-        data = {
-            'email': email,
-            'first_name': first_name,
-            'last_name': last_name
-        }
-        u = User(**data)
-        u.set_password('truong77')
-        u.is_trainee = True
-        u.save()
-        trainee = Trainee.objects.create(user=u)
+        temp_date = datetime(lesson_arr[0].date.year, lesson_arr[0].date.month, lesson_arr[0].date.day, 0, 0, 0, 0, tzinfo=pytz.UTC)
+        print(temp_date)
+        u = User.objects.filter(email=email).last()
+        if u is not None:
+            trainee = u.trainee
+        else:
+            data = {
+                'email': email,
+                'first_name': first_name,
+                'last_name': last_name,
+                'date_joined': temp_date
+            }
+            u = User(**data)
+            u.set_password('truong77')
+            u.is_trainee = True
+            u.save()
+            trainee = Trainee.objects.create(user=u)
+    
         # Notify new trainee
         admin = User.objects.filter(is_superuser=True).first()
         list_staff_recipent = User.objects.filter(
@@ -2993,8 +2910,9 @@ class Command(BaseCommand):
         new_trainee_str = 'Học viên mới: ' + trainee.full_name()
         notify.send(sender=admin, recipient=list_staff_recipent,
                     verb=new_trainee_str)
-        card = trainee.cards.create(
-            yogaclass=yoga_class, card_type=card_type, created_at=lesson_arr[0].date)
+        card = trainee.cards.create(yogaclass=yoga_class, card_type=card_type, created_at=temp_date)
+        card.created_at = temp_date
+        card.save()
         # Notify new card
         new_card_str = 'Học viên ' + trainee.full_name() + ' đã đăng ký thẻ tập mới.'
         notify.send(sender=admin, recipient=list_staff_recipent,
@@ -3005,8 +2923,8 @@ class Command(BaseCommand):
             amount = lesson_arr.__len__() * yoga_class.price_per_lesson
         elif card_type.form_of_using == FOR_TRAINING_COURSE:
             amount = yoga_class.get_price_for_training_course()
-        CardInvoiceService(card, PREPAID, 'Thanh toán thẻ tập',
-                           amount, str(uuid.uuid4())).call()
+        CustomCardInvoiceService(card, PREPAID, 'Thanh toán thẻ tập',
+                           amount, temp_date, str(uuid.uuid4())).call()
         RollCallService(card, lesson_arr).call()
         if training is True:
             u.certificates.create(
