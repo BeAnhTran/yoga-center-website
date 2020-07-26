@@ -3909,7 +3909,7 @@ class Command(BaseCommand):
                       training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all(), True)
         self.__enroll('Lanh', 'Nguyễn', 'nguyenlanh145@gmail.com', last_4_months_training_class_thay_hoang_anh,
                       training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all(), True)
-        self.__enroll('Lãm', 'Trần', 'tranlam3004@gmail.com', last_4_months_training_class_thay_hoang_anh,
+        self.__enroll('Hội', 'Bích', 'bichhoi1@gmail.com', last_4_months_training_class_thay_hoang_anh,
                       training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all(), True)
         self.__enroll('Vương', 'Trần Minh', 'tranminhvuong1812@gmail.com', last_4_months_training_class_thay_hoang_anh,
                       training_course_card_type, last_4_months_training_class_thay_hoang_anh.lessons.all(), True)
