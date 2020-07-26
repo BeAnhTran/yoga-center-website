@@ -29,7 +29,7 @@ class TraineeCardsView(View):
 
     def get(self, request):
         context = {}
-        cards = request.user.trainee.cards.all()
+        cards = request.user.trainee.cards.all().order_by('-created_at')
         context['cards'] = cards
         context['sidebar_profile'] = 'cards'
         return render(request, self.template_name, context=context)

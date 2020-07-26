@@ -5,6 +5,28 @@
 
 {% block additional_css %}
 <link rel="stylesheet" href="{% static 'css/profile/trainees/cards/style.css' %}">
+
+<style>
+  .event-item.expired {
+    position: relative;
+    background-color: #bba9a9;
+}
+.event-item.expired::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: 'Thẻ đã hết hạn';
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #140223, transparent);
+    text-align: center;
+    padding: 100px;
+    color: #ffffff9c;
+    font-size: 34px;
+    font-family: serif;
+    font-weight: 700;
+}
+</style>
 {% endblock %}
 
 
@@ -17,7 +39,7 @@
 {% block profile_content %}
 {% if cards %}
     {% for card in cards %}
-    <div class="event-item">
+    <div class="event-item {% if card.is_expired %}expired{%endif%}">
         <div class="ei-img">
           {% if card.yogaclass.image %}
           <img src="{{ card.yogaclass.image.url }}" height="280" alt="{{ card }}">

@@ -138,3 +138,15 @@ class Card(models.Model):
                         if temp < expire:
                             expire = temp
         return expire
+
+    def is_expired(self):
+        now = datetime.now()
+        if type(self.end_at()).__name__ == 'date':
+            if self.end_at() < now.date():
+                return True
+            else:
+                return False
+        else:
+            if self.end_at().date() < now:
+                return True
+            return False
