@@ -14,6 +14,7 @@ from django.db import transaction
 from django.utils import timezone
 from notifications.signals import notify
 from apps.cards.models import Card
+from services.sms_service import send_twilio_message
 
 
 @login_required
@@ -29,6 +30,7 @@ def createNotificationForUnpaidCard(request, pk):
             '. Vui lòng thanh toán để không bị gián đoạn.'
         notify.send(sender=request.user,
                     recipient=card.trainee.user, verb=mess)
+        send_twilio_message(mess)
         return HttpResponse('Tạo thông báo thành công', status=status.HTTP_200_OK)
     except Exception as e:
         return HttpResponse(e, status=status.HTTP_400_BAD_REQUEST)
