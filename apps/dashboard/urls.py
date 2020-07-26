@@ -265,6 +265,8 @@ statistics_urlpatterns = [
          name='statistics-new-trainees'),
     path('revenue/', statistics_view.RevenueView.as_view(),
          name='statistics-revenue'),
+    path('revenue/class-detail/<int:pk>/', statistics_view.RevenueDetailView.as_view(),
+         name='statistics-revenue-class-detail'),
 ]
 
 

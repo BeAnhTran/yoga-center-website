@@ -29,7 +29,7 @@
 <!-- Page Heading -->
 <div class="row mb-3">
     <div class="col">
-        <h1 class="h3 mb-0 title text-danger">Doanh thu</h1>
+        <h1 class="h3 mb-0 title text-danger">Doanh thu lớp {{ yoga_class }}</h1>
     </div>
 </div>
 <div class="row mb-3">
@@ -71,105 +71,38 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th><small>Tên</small></th>
-                    <th><small>Số thẻ tập</small></th>
-                    <th><small>Doanh thu</small></th>
-                    <th></th>
+                    <th><small>Học viên</small></th>
+                    <th><small>Email</small></th>
+                    <th><small>Loại thẻ</small></th>
+                    <th><small>Ngày đăng ký</small></th>
+                    <th><small>Trạng thái</small></th>
+                    <th><small>Số tiền</small></th>
                 </tr>
             </thead>
             <tbody>
-                {% for r in revenues %}
+                {% for invoice in invoices %}
                 <tr>
                     <td><small>{{ forloop.counter }}</small></td>
-                    <td><small>{{ r.yoga_class }}</small></td>
-                    <td><small>{{ r.number_of_cards }}</small></td>
-                    <td><small>{{ r.revenue | sexy_number }}đ</small></td>
-                    <td><a href="{% url 'dashboard:statistics-revenue-class-detail' r.yoga_class.pk %}" class="badge badge-primary badge-pill"><small>chi tiết</small></a></td>
+                    <td><small>{{ invoice.card.trainee.full_name }}</small></td>
+                    <td><small>{{ invoice.card.trainee.user.email }}</small></td>
+                    <td><small>{{ invoice.card.card_type }}</small></td>
+                    <td><small>{{ invoice.card.created_at.date }}</small></td>
+                    <td>
+                        {% if invoice.is_charged %}
+                        <a href="javascript::" class="badge badge-success badge-pill"><small>đã thanh toán</small></a>
+                        {% else %}
+                        <a href="javascript::" class="badge badge-danger badge-pill"><small>chưa thanh toán</small></a>
+                        {% endif %}
+                    </td>
+                    <td><small>{{ invoice.amount | sexy_number }}đ</small></td>
                 </tr>
                 {% endfor %}
                 <tr>
-                    <td colspan="3"><span class="text-danger">Tổng cộng</span></td>
+                    <td colspan="6"><span class="text-danger">Tổng cộng</span></td>
                     <td><span class="text-danger">{{ total_revenue | sexy_number }}đ</span></td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="row">
-        <!-- Pie Chart -->
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header pb-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">{% trans 'Course Registration Times Analysis' %}</h6>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                </div>
-                <div class="mt-4 text-center small">
-                    {% for course, color in courses_colors %}
-                    <span class="mr-2">
-                        <i class="fas fa-circle" style="color: {{color}};"></i> {{course}}
-                    </span>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-
-{% endblock %}
-
-{% block specified_js %}
-<!-- Page level plugins -->
-<script src="{% static 'js/chart.js/Chart.min.js' %}"></script>
-
-<!-- CHART PIE -->
-<script>
-    var course_names = "{% for r in revenues %} {{r.yoga_class}}, {% endfor %}";
-    var course_regiters = "{% for r in revenues %} {{r.number_of_cards}}, {% endfor %}";
-    var course_colors = "{% for color in course_colors %} {{color}}, {% endfor %}";
-    console.log(course_names)
-    console.log(course_regiters)
-    var lables_data = course_names.split(",");
-    var colors_data = course_colors.split(",");
-    var datas_data = course_regiters.split(",").map(x => +x)
-    console.log(datas_data)
-    // course_regiters.split(`,`).map(x=>+x)
-    // console.log(datas_data)
-    // Set new default font family and font color to mimic Bootstrap's default styling
-    Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-    Chart.defaults.global.defaultFontColor = '#858796';
-    // Pie Chart Example
-    var ctx = document.getElementById("myPieChart");
-    var myPieChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: lables_data,
-            datasets: [{
-                data: datas_data,
-                backgroundColor: colors_data,
-                hoverBorderColor: "rgba(234, 236, 244, 1)",
-            }],
-        },
-        options: {
-            maintainAspectRatio: false,
-            tooltips: {
-                backgroundColor: "rgb(255,255,255)",
-                bodyFontColor: "#858796",
-                borderColor: '#dddfeb',
-                borderWidth: 1,
-                xPadding: 15,
-                yPadding: 15,
-                displayColors: false,
-                caretPadding: 10,
-            },
-            legend: {
-                display: false
-            },
-            cutoutPercentage: 80,
-        },
-    });
-
-</script>
 {% endblock %}

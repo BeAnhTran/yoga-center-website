@@ -31,6 +31,7 @@ from django.utils.formats import date_format
 from apps.classes.models import YogaClass
 from datetime import datetime, timedelta, date
 import pytz
+import random
 
 
 def last_day_of_month(any_day):
@@ -111,6 +112,9 @@ class NewTraineeListView(ListView):
         return context
 
 
+def r(): return random.randint(0, 255)
+
+
 @method_decorator([login_required, staff_required], name='dispatch')
 class RevenueView(View):
     template_name = 'dashboard/statistics/revenue/list.html'
@@ -124,11 +128,14 @@ class RevenueView(View):
             year = int(self.request.GET.get('year'))
         context = {}
 
-        first_day_of_month = datetime(year, month, 1, 0, 0, 0, 0, tzinfo=pytz.UTC).date()
+        first_day_of_month = datetime(
+            year, month, 1, 0, 0, 0, 0, tzinfo=pytz.UTC).date()
         last_day_of_this_month = last_day_of_month(first_day_of_month)
-        
+
         revenues = []
         total_revenue = 0
+        course_colors = []
+
         for yoga_class in YogaClass.objects.all():
             # if yoga_class.end_at is not None and yoga_class.end_at <= first_day_of_month or yoga_class.start_at is not None and yoga_class.start_at >= last_day_of_this_month:
             #     continue
@@ -146,6 +153,9 @@ class RevenueView(View):
             d['revenue'] = total
             d['number_of_cards'] = number_of_cards
             revenues.append(d)
+            course_colors.append('#%02X%02X%02X' % (r(), r(), r()))
+
+        courses_colors = zip(YogaClass.objects.all(), course_colors)
 
         context['active_nav'] = 'statistics-revenue'
         context['show_statistics'] = True
@@ -153,4 +163,42 @@ class RevenueView(View):
         context['total_revenue'] = total_revenue
         context['month'] = month
         context['year'] = year
+        context['course_colors'] = course_colors
+        context['courses_colors'] = courses_colors
+        return render(request, self.template_name, context=context)
+
+
+@method_decorator([login_required, staff_required], name='dispatch')
+class RevenueDetailView(View):
+    template_name = 'dashboard/statistics/revenue/detail.html'
+
+    def get(self, request, pk):
+        now = datetime.now().date()
+        month = now.month
+        year = now.year
+        if self.request.GET.get('month') and self.request.GET.get('year'):
+            month = int(self.request.GET.get('month'))
+            year = int(self.request.GET.get('year'))
+        context = {}
+
+        first_day_of_month = datetime(
+            year, month, 1, 0, 0, 0, 0, tzinfo=pytz.UTC).date()
+        last_day_of_this_month = last_day_of_month(first_day_of_month)
+
+        total_revenue = 0
+
+        yoga_class = get_object_or_404(YogaClass, pk=pk)
+        invoices = CardInvoice.objects.filter(
+            created_at__gte=first_day_of_month, created_at__lte=last_day_of_this_month, card__yogaclass=yoga_class)
+        for invoice in invoices:
+            if invoice.is_charged() is True:
+                total_revenue += invoice.amount
+
+        context['active_nav'] = 'statistics-revenue'
+        context['show_statistics'] = True
+        context['month'] = month
+        context['year'] = year
+        context['yoga_class'] = yoga_class
+        context['total_revenue'] = total_revenue
+        context['invoices'] = invoices
         return render(request, self.template_name, context=context)
