@@ -72,7 +72,9 @@
                 <tr>
                     <th>#</th>
                     <th><small>Tên</small></th>
+                    <th><small>Số thẻ tập</small></th>
                     <th><small>Doanh thu</small></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -80,7 +82,9 @@
                 <tr>
                     <td><small>{{ forloop.counter }}</small></td>
                     <td><small>{{ r.yoga_class }}</small></td>
+                    <td><small>{{ r.number_of_cards }}</small></td>
                     <td><small>{{ r.revenue | sexy_number }}đ</small></td>
+                    <td><a href="javascript:;" class="badge badge-primary badge-pill"><small>chi tiết</small></a></td>
                 </tr>
                 {% endfor %}
                 <tr>

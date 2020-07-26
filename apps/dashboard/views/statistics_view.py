@@ -113,7 +113,7 @@ class NewTraineeListView(ListView):
 
 @method_decorator([login_required, staff_required], name='dispatch')
 class RevenueView(View):
-    template_name = 'dashboard/statistics/revenue.html'
+    template_name = 'dashboard/statistics/revenue/list.html'
 
     def get(self, request):
         now = datetime.now().date()
@@ -137,11 +137,14 @@ class RevenueView(View):
             query_set = CardInvoice.objects.filter(
                 created_at__gte=first_day_of_month, created_at__lte=last_day_of_this_month, card__yogaclass=yoga_class)
             total = 0
+            number_of_cards = 0
             for invoice in query_set:
                 if invoice.is_charged() is True:
                     total += invoice.amount
+                    number_of_cards += 1
             total_revenue += total
             d['revenue'] = total
+            d['number_of_cards'] = number_of_cards
             revenues.append(d)
 
         context['active_nav'] = 'statistics-revenue'
