@@ -4352,7 +4352,7 @@ class Command(BaseCommand):
         data = {
             'email': 'nguyenthithaotrang@gmail.com',
             'first_name': 'Trang',
-            'last_name': 'Nguyễn Thị Thảo Trang'
+            'last_name': 'Nguyễn Thị Thảo'
         }
         u = User(**data)
         u.set_password('truong77')
@@ -4364,7 +4364,7 @@ class Command(BaseCommand):
         data = {
             'email': 'tranvanhoi@gmail.com',
             'first_name': 'Hội',
-            'last_name': 'Trần Văn Hội'
+            'last_name': 'Trần Văn'
         }
         u = User(**data)
         u.set_password('truong77')
