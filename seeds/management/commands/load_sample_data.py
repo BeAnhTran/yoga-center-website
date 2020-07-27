@@ -90,6 +90,8 @@ class Command(BaseCommand):
         print("Create STAFF")
         self.__create_staffs()
 
+        self.__create_longtime_trainee()
+
         print("Create BLOG")
         self.__create_blog()
 
@@ -4321,3 +4323,136 @@ class Command(BaseCommand):
             'image': 'seeds/shop/tham-yoga-hong.jpg'
         }
         Product.objects.create(**data)
+
+    def __create_longtime_trainee(self):
+        data = {
+            'email': 'nguyenthidinh1@gmail.com',
+            'first_name': 'Định',
+            'last_name': 'Nguyễn Thị'
+        }
+        u = User(**data)
+        u.set_password('truong77')
+        u.is_staff = True
+        u.date_joined = '2015-02-01 00:00'
+        u.save()
+        trainee = Trainee.objects.create(user=u, is_longtime_trainee=True)
+        
+        data = {
+            'email': 'tranvanon1@gmail.com',
+            'first_name': 'Ơn',
+            'last_name': 'Trần Văn'
+        }
+        u = User(**data)
+        u.set_password('truong77')
+        u.is_staff = True
+        u.date_joined = '2014-03-12 00:00'
+        u.save()
+        trainee = Trainee.objects.create(user=u, is_longtime_trainee=True)
+        
+        data = {
+            'email': 'nguyenthithaotrang@gmail.com',
+            'first_name': 'Trang',
+            'last_name': 'Nguyễn Thị Thảo Trang'
+        }
+        u = User(**data)
+        u.set_password('truong77')
+        u.is_staff = True
+        u.date_joined = '2017-05-12 00:00'
+        u.save()
+        trainee = Trainee.objects.create(user=u, is_longtime_trainee=True)
+        
+        data = {
+            'email': 'tranvanhoi@gmail.com',
+            'first_name': 'Hội',
+            'last_name': 'Trần Văn Hội'
+        }
+        u = User(**data)
+        u.set_password('truong77')
+        u.is_staff = True
+        u.date_joined = '2016-05-30 00:00'
+        u.save()
+        trainee = Trainee.objects.create(user=u, is_longtime_trainee=True)
+        
+        data = {
+            'email': 'nguyenminhnhan1@gmail.com',
+            'first_name': 'Nhân',
+            'last_name': 'Nguyễn Minh'
+        }
+        u = User(**data)
+        u.set_password('truong77')
+        u.is_staff = True
+        u.date_joined = '2016-06-30 00:00'
+        u.save()
+        trainee = Trainee.objects.create(user=u, is_longtime_trainee=True)
+        
+        data = {
+            'email': 'daothihuyen1@gmail.com',
+            'first_name': 'Huyền',
+            'last_name': 'Đào Thị'
+        }
+        u = User(**data)
+        u.set_password('truong77')
+        u.is_staff = True
+        u.date_joined = '2015-08-30 00:00'
+        u.save()
+        trainee = Trainee.objects.create(user=u, is_longtime_trainee=True)
+        
+        data = {
+            'email': 'caothithanh@gmail.com',
+            'first_name': 'Thanh',
+            'last_name': 'Cao Thị'
+        }
+        u = User(**data)
+        u.set_password('truong77')
+        u.is_staff = True
+        u.date_joined = '2016-04-24 00:00'
+        u.save()
+        trainee = Trainee.objects.create(user=u, is_longtime_trainee=True)
+        
+        data = {
+            'email': 'daobanhat1@gmail.com',
+            'first_name': 'Nhật',
+            'last_name': 'Đào Bá'
+        }
+        u = User(**data)
+        u.set_password('truong77')
+        u.is_staff = True
+        u.date_joined = '2017-05-25 00:00'
+        u.save()
+        trainee = Trainee.objects.create(user=u, is_longtime_trainee=True)
+        
+        data = {
+            'email': 'chungnguyenminh1@gmail.com',
+            'first_name': 'Chung',
+            'last_name': 'Nguyễn Minh'
+        }
+        u = User(**data)
+        u.set_password('truong77')
+        u.is_staff = True
+        u.date_joined = '2016-07-28 00:00'
+        u.save()
+        trainee = Trainee.objects.create(user=u, is_longtime_trainee=True)
+        
+        data = {
+            'email': 'nguyencongthanh1@gmail.com',
+            'first_name': 'Thành',
+            'last_name': 'Nguyễn Công'
+        }
+        u = User(**data)
+        u.set_password('truong77')
+        u.is_staff = True
+        u.date_joined = '2015-07-27 00:00'
+        u.save()
+        trainee = Trainee.objects.create(user=u, is_longtime_trainee=True)
+        
+        data = {
+            'email': 'dothinhunguyet1@gmail.com',
+            'first_name': 'Nguyệt',
+            'last_name': 'Đỗ Thị Như'
+        }
+        u = User(**data)
+        u.set_password('truong77')
+        u.is_staff = True
+        u.date_joined = '2016-10-27 00:00'
+        u.save()
+        trainee = Trainee.objects.create(user=u, is_longtime_trainee=True)

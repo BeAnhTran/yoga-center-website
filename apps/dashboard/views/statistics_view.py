@@ -202,3 +202,21 @@ class RevenueDetailView(View):
         context['total_revenue'] = total_revenue
         context['invoices'] = invoices
         return render(request, self.template_name, context=context)
+
+
+class LongTimeTraineeListView(ListView):
+    model = Trainee
+    template_name = 'dashboard/statistics/longtime_trainees.html'
+    context_object_name = 'trainees'
+    ordering = ['user__date_joined']
+    paginate_by = 20
+
+    def get_queryset(self):
+        query_set = Trainee.objects.filter(is_longtime_trainee=True).order_by('user__date_joined')
+        return query_set
+
+    def get_context_data(self, **kwargs):
+        context = super(LongTimeTraineeListView, self).get_context_data(**kwargs)
+        context['active_nav'] = 'longtime-trainees-statistic'
+        context['show_statistics'] = True
+        return context

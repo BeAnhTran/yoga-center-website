@@ -1,0 +1,53 @@
+{% extends 'dashboard/layouts/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<!-- Page Heading -->
+<div class="row mb-3">
+    <div class="col">
+        <h1 class="h3 mb-0 title text-danger">Danh sách học viên lâu năm</h1>
+    </div>
+</div>
+{% if not trainees %}
+<p class="text-danger">
+    {% blocktrans with value=t_trainee trimmed %}No {{ value }} yet{% endblocktrans %}
+</p>
+{% else %}
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th><small>{% trans 'name' as t_name %}{{ t_name|capfirst }}</small></th>
+                        <th><small>{% trans 'email' as t_email %}{{ t_email|capfirst }}</small></th>
+                        <th><small>Ngày đăng ký</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trainee in trainees %}
+                    <tr>
+                        <td>{{ trainee.user.id }}</td>
+                        <td>{{ trainee.user }}</td>
+                        <td>{{ trainee.user.email }}</td>
+                        <td>{{ trainee.user.date_joined.date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row">
+        {% include 'dashboard/pagination.html' %}
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
+
+{% block specified_js %}
+{% endblock %}

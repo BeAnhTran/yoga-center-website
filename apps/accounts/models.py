@@ -122,6 +122,8 @@ class Trainee(models.Model):
         User, on_delete=models.CASCADE, primary_key=True, related_name='trainee')
     health_condition = models.TextField(
         blank=True, verbose_name=_('health condition'))
+    is_longtime_trainee = models.BooleanField(
+        default=False, verbose_name=_('is longtime trainee'))
 
     def __str__(self):
         result = str(self.pk) + ' - ' + self.full_name() + \

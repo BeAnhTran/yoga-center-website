@@ -43,6 +43,11 @@
                         {% trans 'Salary of trainer '%}
                     </span>
                 </a>
+                <a class="collapse-item {% if active_nav == 'longtime-trainees-statistic' %}active{% endif %}"
+                    href="{% url 'dashboard:statistics-longtime-trainees' %}">
+                    <i class="fas fa-fw fa-leaf"></i>
+                    <span>Học viên lâu năm</span>
+                </a>
                 <a class="collapse-item {% if active_nav == 'new-trainees-statistic' %}active{% endif %}"
                     href="{% url 'dashboard:statistics-new-trainees'%}">
                     <i class="fas fa-fw fa-users"></i>
