@@ -1938,7 +1938,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 .trainer-item {
 	display: block;
 	position: relative;
-	padding: 70px 40px 40px;
+	padding: 70px 30px 40px;
 	-webkit-box-shadow: 0px 5px 6px rgba(72, 105, 114, 0.15);
 	box-shadow: 0px 5px 6px rgba(72, 105, 114);
 	border-radius: 14px;
@@ -2011,7 +2011,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .trainer-item .ti-text {
-	max-width: 250px;
+	max-width: 285px;
 	position: relative;
 	z-index: 99;
 	background: #fff;

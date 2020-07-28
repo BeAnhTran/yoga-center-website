@@ -107,7 +107,7 @@ class Command(BaseCommand):
         data_co_phuong = {
             'email': 'phuongnguyen1@gmail.com',
             'first_name': 'Phượng',
-            'last_name': 'Nguyễn',
+            'last_name': 'Nguyễn Thị Ngọc',
             'image': '/seeds/images/trainers/chi_phuong.jpg'
         }
         user_cp = User(**data_co_phuong)
@@ -179,7 +179,7 @@ class Command(BaseCommand):
         data_hai_tan = {
             'email': 'duonghaitan1@gmail.com',
             'first_name': 'Tân',
-            'last_name': 'Dương',
+            'last_name': 'Dương Hải',
             'image': '/seeds/images/trainers/anh_tan.jpg'
         }
         user_tan = User(**data_hai_tan)
@@ -203,7 +203,7 @@ class Command(BaseCommand):
         data_thay_tien = {
             'email': 'thanhtien1@gmail.com',
             'first_name': 'Tiến',
-            'last_name': 'Thanh',
+            'last_name': 'Nguyễn Thanh',
             'image': '/seeds/images/trainers/anh_tien.jpg'
         }
         user_thay_tien = User(**data_thay_tien)
@@ -227,7 +227,7 @@ class Command(BaseCommand):
         data_kieu_linh = {
             'email': 'kieulinh1@gmail.com',
             'first_name': 'Linh',
-            'last_name': 'Kiều',
+            'last_name': 'Nguyễn Thị Kiều',
             'image': '/seeds/images/trainers/em_linh.jpg'
         }
         user_kieu_linh = User(**data_kieu_linh)
@@ -269,7 +269,7 @@ class Command(BaseCommand):
         data_co_ngung = {
             'email': 'ngungnguyen1@gmail.com',
             'first_name': 'Ngừng',
-            'last_name': 'Nguyễn',
+            'last_name': 'Nguyễn Thị',
             'image': '/seeds/images/trainers/co_ngung.jpg'
         }
         user_co_ngung = User(**data_co_ngung)
@@ -287,7 +287,7 @@ class Command(BaseCommand):
         data_co_nhu = {
             'email': 'nhunguyen1@gmail.com',
             'first_name': 'Như',
-            'last_name': 'Huỳnh',
+            'last_name': 'Huỳnh Thị',
             'image': '/seeds/images/trainers/co_nhu.jpg'
         }
         user_co_nhu = User(**data_co_nhu)
@@ -305,7 +305,7 @@ class Command(BaseCommand):
         data_co_kieu = {
             'email': 'kieutran1@gmail.com',
             'first_name': 'Kiều',
-            'last_name': 'Trần',
+            'last_name': 'Trần Lệ',
             'image': '/seeds/images/trainers/co_kieu.jpg'
         }
         user_co_kieu = User(**data_co_kieu)
@@ -323,7 +323,7 @@ class Command(BaseCommand):
         data_co_xuan = {
             'email': 'xuannguyen1@gmail.com',
             'first_name': 'Xuân',
-            'last_name': 'Nguyễn',
+            'last_name': 'Nguyễn Thị Cẩm',
             'image': '/seeds/images/trainers/co_xuan.jpg'
         }
         user_co_xuan = User(**data_co_xuan)
@@ -341,7 +341,7 @@ class Command(BaseCommand):
         data_co_thuy = {
             'email': 'thuynguyen1@gmail.com',
             'first_name': 'Thùy',
-            'last_name': 'Nguyễn',
+            'last_name': 'Nguyễn Minh',
             'image': '/seeds/images/trainers/co_thuy.jpg'
         }
         user_co_thuy = User(**data_co_thuy)
@@ -359,7 +359,7 @@ class Command(BaseCommand):
         data_co_tra_my = {
             'email': 'tramy1@gmail.com',
             'first_name': 'My',
-            'last_name': 'Trà',
+            'last_name': 'Đỗ Thị Trà',
             'image': '/seeds/images/trainers/co_tra_my.jpg'
         }
         user_co_tra_my = User(**data_co_tra_my)
@@ -377,7 +377,7 @@ class Command(BaseCommand):
         data_co_nhan = {
             'email': 'nhannguyen1@gmail.com',
             'first_name': 'Nhàn',
-            'last_name': 'Nguyễn',
+            'last_name': 'Nguyễn Thị',
             'image': '/seeds/images/trainers/co_nhan.jpg'
         }
         user_co_nhan = User(**data_co_nhan)
@@ -395,7 +395,7 @@ class Command(BaseCommand):
         data_co_quyen = {
             'email': 'quyennguyen1@gmail.com',
             'first_name': 'Quyên',
-            'last_name': 'Nguyễn',
+            'last_name': 'Nguyễn Thị',
             'image': '/seeds/images/trainers/co_quyen.jpg'
         }
         user_co_quyen = User(**data_co_quyen)
@@ -413,7 +413,7 @@ class Command(BaseCommand):
         data_thay_thien = {
             'email': 'thiennguyen1@gmail.com',
             'first_name': 'Thiên',
-            'last_name': 'Nguyễn',
+            'last_name': 'Nguyễn Thị',
             'image': '/seeds/images/trainers/thay_thien.jpg'
         }
         user_thay_thien = User(**data_thay_thien)
@@ -431,7 +431,7 @@ class Command(BaseCommand):
         data_co_vo_hanh = {
             'email': 'hanhvo1@gmail.com',
             'first_name': 'Hạnh',
-            'last_name': 'Võ',
+            'last_name': 'Võ Thị',
             'image': '/seeds/images/trainers/co_vo_hanh.jpg'
         }
         user_co_vo_hanh = User(**data_co_vo_hanh)
@@ -449,7 +449,7 @@ class Command(BaseCommand):
         data_co_hong = {
             'email': 'hongnguyen1@gmail.com',
             'first_name': 'Hồng',
-            'last_name': 'Nguyễn',
+            'last_name': 'Nguyễn Thị Thu',
             'image': '/seeds/images/trainers/co_hong.jpg'
         }
         user_co_hong = User(**data_co_hong)
