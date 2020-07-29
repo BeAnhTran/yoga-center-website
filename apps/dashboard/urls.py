@@ -269,6 +269,8 @@ statistics_urlpatterns = [
          name='statistics-revenue-class-detail'),
     path('revenue/longtime-trainees/', statistics_view.LongTimeTraineeListView.as_view(),
          name='statistics-longtime-trainees'),
+    path('revenue/room-use/', statistics_view.RoomUseView.as_view(),
+         name='statistics-room-use'),
 ]
 
 

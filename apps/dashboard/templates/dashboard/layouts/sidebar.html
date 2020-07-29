@@ -43,6 +43,11 @@
                         {% trans 'Salary of trainer '%}
                     </span>
                 </a>
+                <a class="collapse-item {% if active_nav == 'room-use-statistic' %}active{% endif %}"
+                    href="{% url 'dashboard:statistics-room-use' %}">
+                    <i class="fab fa-fw fa-buromobelexperte"></i>
+                    <span>Lượt dùng phòng tập</span>
+                </a>
                 <a class="collapse-item {% if active_nav == 'longtime-trainees-statistic' %}active{% endif %}"
                     href="{% url 'dashboard:statistics-longtime-trainees' %}">
                     <i class="fas fa-fw fa-leaf"></i>

@@ -32,6 +32,7 @@ from apps.classes.models import YogaClass
 from datetime import datetime, timedelta, date
 import pytz
 import random
+from apps.rooms.models import Room
 
 
 def last_day_of_month(any_day):
@@ -212,11 +213,46 @@ class LongTimeTraineeListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        query_set = Trainee.objects.filter(is_longtime_trainee=True).order_by('user__date_joined')
+        query_set = Trainee.objects.filter(
+            is_longtime_trainee=True).order_by('user__date_joined')
         return query_set
 
     def get_context_data(self, **kwargs):
-        context = super(LongTimeTraineeListView, self).get_context_data(**kwargs)
+        context = super(LongTimeTraineeListView,
+                        self).get_context_data(**kwargs)
         context['active_nav'] = 'longtime-trainees-statistic'
         context['show_statistics'] = True
         return context
+
+import json
+class RoomUseView(View):
+    template_name = 'dashboard/statistics/rooms/index.html'
+
+    def get(self, request):
+        now = datetime.now().date()
+        month = now.month
+        year = now.year
+        if self.request.GET.get('month') and self.request.GET.get('year'):
+            month = int(self.request.GET.get('month'))
+            year = int(self.request.GET.get('year'))
+        first_day_of_month = datetime(
+            year, month, 1, 0, 0, 0, 0, tzinfo=pytz.UTC).date()
+        last_day_of_this_month = last_day_of_month(first_day_of_month)
+        rooms = Room.objects.all()
+        data = []
+        for room in rooms:
+            lessons = room.lessons.filter(
+                date__gte=first_day_of_month, date__lte=last_day_of_this_month)
+            d = {
+                'room': room.name,
+                'count': lessons.count()
+            }
+            data.append(d)
+        context = {}
+        context['active_nav'] = 'room-use-statistic'
+        context['show_statistics'] = True
+        context['data'] = data
+        context['len'] = data.__len__()
+        context['month'] = month
+        context['year'] = year
+        return render(request, self.template_name, context=context)
