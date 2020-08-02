@@ -91,7 +91,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" style="font-family: serif;">Thông tin chi tiết</h4>
+				<h5 class="modal-title" style="font-family: serif;">Thông tin chi tiết</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
@@ -111,7 +111,7 @@
 			$('.modal-body').append('<p>Chưa cập nhật</p>');
 		}else{
 			var img = '';
-			img += `<img src="`+ img_url +`">`;
+			img += `<img width="500" height="485" src="`+ img_url +`">`;
 			$('.modal-body').append(img);
 		}
 		$('#btn_modal').click();
