@@ -332,7 +332,7 @@ ul{
 }
 
 .header-top {
-	padding: 0 80px;
+	padding: 0 40px;
 	background: #fff;
 }
 
@@ -405,7 +405,7 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .header-bottom {
-	padding: 10px 80px 0;
+	padding: 10px 40px 0;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
@@ -1145,12 +1145,12 @@ only screen and (min-width: 576px) and (max-width: 767px),
 }
 
 .hs-style-2 .hs-text {
-	max-width: 610px;
+	max-width: 415px;
 }
 
-.hs-style-2 .hs-text h2 {
+/* .hs-style-2 .hs-text h2 {
 	padding-right: 76px;
-}
+} */
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
 only screen and (min-width: 576px) and (max-width: 767px),
@@ -1939,8 +1939,8 @@ only screen and (min-width: 576px) and (max-width: 767px),
 	display: block;
 	position: relative;
 	padding: 70px 30px 40px;
-	-webkit-box-shadow: 0px 5px 6px rgba(72, 105, 114, 0.15);
-	box-shadow: 0px 5px 6px rgba(72, 105, 114);
+	-webkit-box-shadow: 1px 1px 5px 6px rgb(21 12 35 / 30%);
+	box-shadow: 1px 1px 5px 6px rgb(21 12 35 / 30%);
 	border-radius: 14px;
 	-webkit-transition: all 0.4s;
 	-o-transition: all 0.4s;

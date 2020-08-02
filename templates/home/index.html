@@ -64,6 +64,20 @@
       }
     }
 
+    .trainer-item .ti-text {
+      max-width: 255px;
+    }
+
+    .trainer-item .ti-text h4 {
+      font-size: 18px;
+    }
+
+    .trainer-item .ti-img img {
+    width: 250px;
+    height: 288px;
+    border-radius: 0 14px 14px 0;
+}
+    
 </style>
 {% endblock %}
 
@@ -279,9 +293,9 @@
         <div class="trainer-item">
           <div class="ti-img">
             {% if trainer.user.image %}
-            <img class="img img-thumbnail" src="{{ trainer.user.image.url }}" alt="{{ trainer }}">
+            <img class="img" src="{{ trainer.user.image.url }}" alt="{{ trainer }}">
             {% else %}
-            <img class="img img-thumbnail" src="{% static 'img/user/default.png'%}" alt="{{ trainer }}">
+            <img class="img" src="{% static 'img/user/default.png'%}" alt="{{ trainer }}">
             {% endif %}
           </div>
           <div class="ti-text">
