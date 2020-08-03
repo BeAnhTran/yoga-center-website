@@ -12,11 +12,13 @@ app = Celery('yoga_center_website')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
+seconds = 60 * 60 * 1 
+
 app.conf.beat_schedule = {
     # Calls test every 30 seconds
     'test-notify-unpaid-card-every-30-seconds': {
         'task': 'apps.common.tasks.notify_unpaid_card',
-        'schedule': 30.0,
+        'schedule': seconds,
     },
     # Executes every Monday morning at 10:00 a.m.
     'notify-unpaid-card-every-10am-morning': {

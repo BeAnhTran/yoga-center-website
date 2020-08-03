@@ -58,4 +58,3 @@ class IndexView(View):
                 return HttpResponse(e, status=status.HTTP_400_BAD_REQUEST)
         else:
             return HttpResponse(donate_form.errors.as_json(), status=status.HTTP_400_BAD_REQUEST)
-

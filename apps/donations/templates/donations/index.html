@@ -148,6 +148,15 @@
                         <!--  -->
                     </div>
                 </div>
+                <div class="card mt-1">
+                    <div class="card-header pay-with-momo">
+                      <form action="javascript:;" method="POST">
+                        {% csrf_token %}
+                        <input class="form-control" style="width: 33% !important;display: inline-block;" type="text" name="amount" placeholder="số tiền">
+                        <input type="submit" class="pl-3 card-link" value="Ủng hộ qua MoMo">
+                      </form>
+                    </div>
+                  </div>
             </div>
         </div>
     </div>
